@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\DBController;
-
+use App\Http\Controllers\api\uploadImagesContoller;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,3 +27,5 @@ Route::post("/database/update",[DBController::class,'update']);
 
 
 Route::post('/login',[App\Http\Controllers\api\LoginController::class,"login"]);
+
+Route::post('/upload-site-images/{model}/{id}',[uploadImagesContoller::class,"uploadImages"]);
