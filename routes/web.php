@@ -28,9 +28,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::view('/map', 'map.index');
 
 
 
 require __DIR__ . '/auth.php';
 
- 
