@@ -420,7 +420,8 @@
                     $("#cabel_length").val(mapLenght)
 
                 }
-             
+                console.log(JSON.stringify(data.geometry))
+
             })
 
 
