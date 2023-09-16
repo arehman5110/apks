@@ -28,7 +28,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::view('/map', 'map.index');
+Route::get('/map-1', function(){
+    return view('map.index');
+});
 
 
 

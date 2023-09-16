@@ -20,6 +20,7 @@
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
         <link rel="stylesheet" href="{{ URL::asset('assets/lib/window-engine.css')}}" />
         <script src="{{ URL::asset('assets/lib/window-engine.js')}}"></script>
+        <link href="{{ asset('assets/libs/ladda/ladda.min.css') }}" rel="stylesheet" type="text/css" />
 
 <style>
      .content-wrapper ,  .main-header{margin-left: 0px !important}
@@ -295,6 +296,7 @@
                         <li ><input type="checkbox" name="" id="cable_c"> <label for="cable_c">Report</label> </li>
                          </ul>
                       </details>
+                      <input type="text" name="" id="cabel_length">
 
 
                     <!-- <div id="my_data"></div> -->
@@ -332,7 +334,30 @@
 
 @section('script')
 
-<script src="./assets/lib/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js"></script>
+{{-- <script src="./assets/lib/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js"></script> --}}
+<script src="{{ asset('assets/libs/ladda/ladda.min.js') }}"></script>
+<!-- third party js ends -->
+
+<!-- demo app -->
+<script src="{{ asset('assets/js/pages/loading-btn.init.js') }}"></script>
+<!-- end demo js-->
+
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
+<link rel="stylesheet" href="{{ URL::asset('map/draw/leaflet.draw.css') }}" />
+{{-- <link rel="stylesheet" href="{{ URL::asset('assets/src/leaflet.draw.css')}}"/>  --}}
+
+
+
+
+<script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+
+<script src="{{ URL::asset('map/draw/leaflet.draw-custom.js')}}"></script>
+<<script src="{{ URL::asset('assets/js/leaflet.draw.js') }}"></script>
+
+<script src="{{ URL::asset('map/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js') }}"></script>
+
+{{-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDBid44NzY6_Olyxu10cpexi_bO0F5bMI&libraries=places"> --}}
 
 <script type="text/javascript">
     var baseLayers
@@ -350,6 +375,79 @@
         "Satellite": st1,
         "Street": street
     };
+
+    var drawnItems = new L.FeatureGroup();
+            map.addLayer(drawnItems);
+            var drawControl = new L.Control.Draw({
+                draw: {
+                    circle: false,
+                    marker: true,
+                    polygon: true,
+                    polyline: {
+                        shapeOptions: {
+                            color: '#f357a1',
+                            weight: 10
+                        }
+                    },
+                    rectangle: true
+                },
+                edit: {
+                    featureGroup: drawnItems
+                }
+            });
+
+            map.addControl(drawControl);
+
+            map.on('draw:created', function(e) {
+                var type = e.layerType;
+                layer = e.layer;
+                drawnItems.addLayer(layer);
+                // console.log(type);
+                var data = layer.toGeoJSON();
+                //  console.log(JSON.stringify(data.geometry));
+
+
+                if (e.layerType = 'polyline') {
+                    var coords = layer.getLatLngs();
+                    var length = 0;
+                    for (var i = 0; i < coords.length - 1; i++) {
+                        length += coords[i].distanceTo(coords[i + 1]);
+                    }
+                    mapLenght = parseInt(length)
+                    $("#cabel_length").val(mapLenght)
+
+                }
+             
+            })
+
+
+            map.on('draw:edited', function(e) {
+                var layers = e.layers;
+                layers.eachLayer(function(data) {
+                    let layer_d = data.toGeoJSON();
+                    let layer = JSON.stringify(layer_d.geometry);
+                    // console.log(layer);
+
+                    $('#geomID').val(layer);
+
+                });
+            });
+
+
+            map.on('draw:deleted', function(e) {
+                var layers = e.layers;
+                layers.eachLayer(function(layer) {
+                    $('#geomID').val('');
+                });
+                for (let index = 0; index < 11; index++) {
+                if(index <= 9){
+                    $(`#0${index}_check`).prop('checked', false);
+                }else{
+                    $(`#${index}_check`).prop('checked', false);
+                }
+
+            }
+            });
 
 
 
@@ -464,6 +562,7 @@
     })
     map.addLayer(boundary3)
     map.setView([2.59340882301331, 101.07054901123], 8);
+
 
 
 
