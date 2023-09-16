@@ -49,6 +49,9 @@
             height: 400px;
         }
         input{min-width: 16px !important;}
+        div#lightbox {
+    display: none;
+}
 </style>
 @endsection
 @section('content')
@@ -723,11 +726,11 @@ map.addLayer(customer)
                                 'image_4' || key == 'image_5' || key == 'image_6' || key ==
                                 'image_7' || key == 'image_8' || key == 'image_9' || key ==
                                 'image_10') {
-                                str = str + '<tr><td>' + key + '</td><td><a href="' + data.features[
-                                        0].properties[key] +
-                                    '" class=\'example-image-link\' data-lightbox=\'example-set\' title=\'&lt;button class=&quot;primary &quot; onclick= rotate_img(&quot;pic1&quot)  &gt;Rotate image&lt;/button&gt;\'><img src="' +
-                                    data.features[0].properties[key] +
-                                    '" width="20px" height="20px"></a></td></tr>'
+                                // str = str + '<tr><td>' + key + '</td><td><a href="' + data.features[
+                                //         0].properties[key] +
+                                //     '" class=\'example-image-link\' data-lightbox=\'example-set\' title=\'&lt;button class=&quot;primary &quot; onclick= rotate_img(&quot;pic1&quot)  &gt;Rotate image&lt;/button&gt;\'><img src="' +
+                                //     data.features[0].properties[key] +
+                                //     '" width="20px" height="20px"></a></td></tr>'
 
                             } else {
                                 str = str + '<tr><td>' + key + '</td><td>' + data.features[0]

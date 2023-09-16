@@ -25,9 +25,9 @@
         {{-- @include('layouts.shared.side-bar') --}}
         <div class="content-wrapper">
 
-            <div id="overlay">
+            {{-- <div id="overlay">
                 <div class="loading-spinner"></div>
-            </div>
+            </div> --}}
 
             @yield('content')
         </div>
