@@ -516,6 +516,7 @@
                 $('#geom').val(JSON.stringify(data.geometry));
                 
             } else {
+                
              
                 $('#geomModal').modal('show');
                 $('#geom').val(JSON.stringify(data.geometry));
