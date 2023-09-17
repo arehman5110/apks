@@ -22,16 +22,10 @@ class MapController extends Controller
       try {
         $data = DB::insert($sql);
         // DB::disconnect();
-    } catch (Exception $e) {
-        return response()->json(
-            [
-                'success' => false,
-                'message' => 'failed',
-                'error' => $e->getMessage(),
-            ],
-            500,
-        );
+    } catch (\Throwable $th ) {
+    return $th->getMessage();
     }
+    return redirect()->back();
     
     }
 }

@@ -32,7 +32,7 @@ Route::get('/map-1', function(){
     return view('map.index');
 });
 
-Route::post('/login',[App\Http\Controllers\web\map\MapController::class,"saveWorkPackage"]);
+Route::post('/save-work-package',[App\Http\Controllers\web\map\MapController::class,"saveWorkPackage"]);
 
 
 require __DIR__ . '/auth.php';

@@ -386,7 +386,10 @@
                     <h5 class="modal-title" id="exampleModalLabel">Add new W.P</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <form action="/save-work-package" method="post">
+                    @csrf
                 <div class="modal-body ">
+                   
 
                     <label for="">P.W</label>
                     <input type="text" name="name" id="pw-name" class="form-control">
@@ -407,9 +410,11 @@
                     <input type="hidden" name="geom" id="geom">
                 </div>
                 <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Submit</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 
                 </div>
+            </form>
             </div>
         </div>
     </div>
