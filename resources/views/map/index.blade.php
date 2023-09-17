@@ -266,7 +266,8 @@
                             <summary><strong>Patrolling 3rd Party Digging Activities</strong> </summary>
                             <ul>
                                 <li> <input type="checkbox" name="" id="petroling_a" onclick="addpanolayer()">
-                                    <label for="petroling_a">Pemeriksaan di Jalan</label> </li>
+                                    <label for="petroling_a">Pemeriksaan di Jalan</label>
+                                </li>
                                 <li><input type="checkbox" name="" id="petroling_b"> <label
                                         for="petroling_b">Mengeluarkan notis</label> </li>
                                 <li><input type="checkbox" name="" id="petroling_c"> <label
@@ -386,24 +387,51 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body ">
-                   
+
 
                     <label for="zone">Zone</label>
-                    <select name="zone" id="zone">
+                    <select name="zone" id="zone" class="form-control">
                         <option value="" hidden>select zone</option>
                         <option value="W1">W1</option>
                         <option value="B1">B1</option>
                         <option value="B2">B2</option>
                         <option value="B4">B4</option>
                     </select>
-<br>
+       
                     <label for="ba">Select ba</label>
                     <select name="ba" id="ba" class="form-control">
                         <option value="" hidden>Select zone</option>
-                        {{-- <option value="KLB">KLB</option>
-                        <option value="KLS">KLS</option>
-                        <option value="KLP">KLP</option>
-                        <option value="KLT">KLT</option> --}}
+                    </select>
+
+                    <input type="hidden" name="geom" id="geom">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal fade" id="polyLineModal" tabindex="-1" aria-labelledby="polyLineModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Identify Roads</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body ">
+                    <label for="polyline-zone">Zone</label>
+                    <input disabled  id="polyline-zone" class="form-control">
+                    <label for="polyline-ba">BA</label>
+                    <input disabled id="polyline-ba" class="form-control">
+                 
+                    <label for="ba">Road name</label>
+                    <select name="ba" id="ba" class="form-control">
+                        <option value="" hidden>Select zone</option>
+
                     </select>
 
                     <input type="hidden" name="geom" id="geom">
@@ -418,36 +446,21 @@
 @endsection
 
 @section('script')
-    {{-- <script src="./assets/lib/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js"></script> --}}
-    {{-- <script src="{{ asset('assets/libs/ladda/ladda.min.js') }}"></script> --}}
-    <!-- third party js ends -->
-
-    <!-- demo app -->
-    {{-- <script src="{{ asset('assets/js/pages/loading-btn.init.js') }}"></script> --}}
-    <!-- end demo js-->
-
+ 
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
     <link rel="stylesheet" href="{{ URL::asset('map/draw/leaflet.draw.css') }}" />
-    {{-- <link rel="stylesheet" href="{{ URL::asset('assets/src/leaflet.draw.css')}}"/>  --}}
-
-
-
-
+    
     <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
 
     <script src="{{ URL::asset('map/draw/leaflet.draw-custom.js') }}"></script>
-    {{-- <<script src="{{ URL::asset('assets/js/leaflet.draw.js') }}"></script> --}}
 
     <script src="{{ URL::asset('map/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js') }}"></script>
-
-    {{-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDBid44NzY6_Olyxu10cpexi_bO0F5bMI&libraries=places"> --}}
 
     <script type="text/javascript">
         var baseLayers
         var identifyme = '';
         map = L.map('map').setView([3.016603, 101.858382], 5);
-        // check =  document.getElementById('map').style.cursor = 'pointer'
 
         var st1 = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
             maxZoom: 20,
@@ -499,10 +512,15 @@
                 }
                 mapLenght = parseInt(length)
                 $("#cabel_length").val(mapLenght)
-
+                $('#polyLineModal').modal('show');
+                $('#geom').val(JSON.stringify(data.geometry));
+                
+            } else {
+             
+                $('#geomModal').modal('show');
+                $('#geom').val(JSON.stringify(data.geometry));
             }
-            $('#geomModal').modal('show');
-            $('#geom').val(JSON.stringify(data.geometry));
+
             console.log(JSON.stringify(data.geometry))
 
         })
@@ -936,10 +954,9 @@
     </script>
 
 
-<script>
- 
-        $(document).ready(function(){
-            $('#zone').on('change', function(){
+    <script>
+        $(document).ready(function() {
+            $('#zone').on('change', function() {
                 const selectedValue = this.value;
                 const areaSelect = $('#ba');
 
@@ -974,6 +991,6 @@
                 }
             });
 
-    })
-</script>
+        })
+    </script>
 @endsection
