@@ -19,7 +19,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
     <link rel="stylesheet" href="{{ URL::asset('assets/lib/window-engine.css') }}" />
     <script src="{{ URL::asset('assets/lib/window-engine.js') }}"></script>
-    <link href="{{ asset('assets/libs/ladda/ladda.min.css') }}" rel="stylesheet" type="text/css" />
+    {{-- <link href="{{ asset('assets/libs/ladda/ladda.min.css') }}" rel="stylesheet" type="text/css" /> --}}
 
     <style>
         .content-wrapper,
@@ -380,11 +380,11 @@
 
 @section('script')
     {{-- <script src="./assets/lib/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js"></script> --}}
-    <script src="{{ asset('assets/libs/ladda/ladda.min.js') }}"></script>
+    {{-- <script src="{{ asset('assets/libs/ladda/ladda.min.js') }}"></script> --}}
     <!-- third party js ends -->
 
     <!-- demo app -->
-    <script src="{{ asset('assets/js/pages/loading-btn.init.js') }}"></script>
+    {{-- <script src="{{ asset('assets/js/pages/loading-btn.init.js') }}"></script> --}}
     <!-- end demo js-->
 
 
@@ -398,7 +398,7 @@
     <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
 
     <script src="{{ URL::asset('map/draw/leaflet.draw-custom.js') }}"></script>
-    <<script src="{{ URL::asset('assets/js/leaflet.draw.js') }}"></script>
+    {{-- <<script src="{{ URL::asset('assets/js/leaflet.draw.js') }}"></script> --}}
 
     <script src="{{ URL::asset('map/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js') }}"></script>
 
