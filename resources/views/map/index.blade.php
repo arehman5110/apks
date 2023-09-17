@@ -388,7 +388,8 @@
                 </div>
                 <div class="modal-body ">
 
-
+                    <label for="">P.W</label>
+                    <input type="text" name="name" id="pw-name" class="form-control">
                     <label for="zone">Zone</label>
                     <select name="zone" id="zone" class="form-control">
                         <option value="" hidden>select zone</option>
@@ -429,10 +430,8 @@
                     <input disabled id="polyline-ba" class="form-control">
                  
                     <label for="ba">Road name</label>
-                    <select name="ba" id="ba" class="form-control">
-                        <option value="" hidden>Select zone</option>
-
-                    </select>
+                    <input name="ba" id="ba" class="form-control">
+                      
 
                     <input type="hidden" name="geom" id="geom">
                 </div>
@@ -516,7 +515,7 @@
                 $('#geom').val(JSON.stringify(data.geometry));
                 
             } else {
-                
+
              
                 $('#geomModal').modal('show');
                 $('#geom').val(JSON.stringify(data.geometry));
