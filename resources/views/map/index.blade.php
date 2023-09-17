@@ -376,6 +376,45 @@
 
         </div>
     </div>
+
+
+    <div class="modal fade" id="geomModal" tabindex="-1" aria-labelledby="geomModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add new W.P</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body ">
+                   
+
+                    <label for="zone">Zone</label>
+                    <select name="zone" id="zone">
+                        <option value="" hidden>select zone</option>
+                        <option value="W1">W1</option>
+                        <option value="B1">B1</option>
+                        <option value="B2">B2</option>
+                        <option value="B4">B4</option>
+                    </select>
+
+                    <label for="ba">Select ba</label>
+                    <select name="ba" id="ba" class="form-control">
+                        <option value="" hidden>Select zone</option>
+                        {{-- <option value="KLB">KLB</option>
+                        <option value="KLS">KLS</option>
+                        <option value="KLP">KLP</option>
+                        <option value="KLT">KLT</option> --}}
+                    </select>
+
+                    <input type="hidden" name="geom" id="geom">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('script')
@@ -462,6 +501,8 @@
                 $("#cabel_length").val(mapLenght)
 
             }
+            $('#geomModal').modal('show');
+            $('#geom').val(JSON.stringify(data.geometry));
             console.log(JSON.stringify(data.geometry))
 
         })
@@ -893,4 +934,46 @@
 
         }
     </script>
+
+
+<script>
+ 
+        $(document).ready(function(){
+            $('#zone').on('change', function(){
+                const selectedValue = this.value;
+                const areaSelect = $('#ba');
+
+                // Clear previous options
+                areaSelect.empty();
+                areaSelect.append(`<option value="" hidden>Select ba</option>`)
+
+                if (selectedValue === 'W1') {
+                    const w1Options = ['KL PUSAT'];
+
+                    w1Options.forEach((data) => {
+                        areaSelect.append(`<option value="${data}">${data}</option>`);
+                    });
+                } else if (selectedValue === 'B1') {
+                    const b1Options = ['PJ', 'RWANG', 'K.SELANGOR'];
+
+                    b1Options.forEach((data) => {
+                        areaSelect.append(`<option value="${data}">${data}</option>`);
+                    });
+                } else if (selectedValue === 'B2') {
+                    const b2Options = ['KLANG', 'PORT KLANG'];
+
+                    b2Options.forEach((data) => {
+                        areaSelect.append(`<option value="${data}">${data}</option>`);
+                    });
+                } else if (selectedValue === 'B4') {
+                    const b4Options = ['CHERAS', 'BANTING/SEPANG', 'BANGI', 'PUTRAJAYA/CYBERJAYA/PUCHONG'];
+
+                    b4Options.forEach((data) => {
+                        areaSelect.append(`<option value="${data}">${data}</option>`);
+                    });
+                }
+            });
+
+    })
+</script>
 @endsection
