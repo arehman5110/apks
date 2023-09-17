@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\WorkPackage;
 use Illuminate\Support\Facades\DB;
 
-class MapController extends Controller
+class WPController extends Controller
 {
  public  function saveWorkPackage(Request $req){
  
@@ -28,4 +28,14 @@ class MapController extends Controller
     return redirect()->back();
     
     }
+
+
+    public function selectWP(){
+      $wp = DB::table('tbl_workpackage')
+            ->select('id','package_name')
+            ->get();
+
+        return response()->json($wp);    
+    }
+
 }
