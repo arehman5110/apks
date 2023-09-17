@@ -504,7 +504,7 @@
             //  console.log(JSON.stringify(data.geometry));
 
 
-            if (e.layerType = 'polyline') {
+            if (e.layerType == 'polyline') {
                 var coords = layer.getLatLngs();
                 var length = 0;
                 for (var i = 0; i < coords.length - 1; i++) {
