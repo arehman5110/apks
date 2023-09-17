@@ -428,10 +428,11 @@
                     <h5 class="modal-title" id="exampleModalLabel">Identify Roads</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="" method="post"></form>
+                <form action="/save-road" method="post">
+                    @csrf
                 <div class="modal-body ">
                     <label for="">Select P.W</label>
-                    <select name="wp" id="raod-wp-id" class="form-control">
+                    <select name="id_wp" id="raod-wp-id" class="form-control">
                         <option value="">select wp</option>
                         @foreach ($wps as $wp)
                             <option value="{{$wp->id}}">{{$wp->package_name}}</option>
@@ -443,15 +444,17 @@
                     <input disabled id="polyline-ba" class="form-control">
                  
                     <label for="ba">Road name</label>
-                    <input name="ba" id="ba" class="form-control">
+                    <input name="road_name" id="road_name" class="form-control">
                       
 
-                    <input type="hidden" name="geom" id="geom">
+                    <input type="hidden" name="geom" id="road-geom">
                 </div>
                 <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Submit</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 
                 </div>
+            </form>
             </div>
         </div>
     </div>
@@ -525,7 +528,7 @@
                 mapLenght = parseInt(length)
                 $("#cabel_length").val(mapLenght)
                 $('#polyLineModal').modal('show');
-                $('#geom').val(JSON.stringify(data.geometry));
+                $('#road-geom').val(JSON.stringify(data.geometry));
                 
             } else {
 

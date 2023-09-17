@@ -25,7 +25,7 @@ class WPController extends Controller
         } catch (\Throwable $th) {
             return $th->getMessage();
         }
-        return redirect()->back();
+        return redirect('map-1');
     }
 
 
