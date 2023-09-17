@@ -432,7 +432,7 @@
                     @csrf
                 <div class="modal-body ">
                     <label for="">Select P.W</label>
-                    <select name="id_wp" id="raod-wp-id" class="form-control">
+                    <select name="id_wp" id="raod-wp-id" class="form-control" onchange="getWorkPackage(this)">
                         <option value="">select wp</option>
                         @foreach ($wps as $wp)
                             <option value="{{$wp->id}}">{{$wp->package_name}}</option>
@@ -1008,5 +1008,18 @@
             });
 
         })
+
+
+        function getWorkPackage(param) {
+            $.ajax({
+                        url: `/get-work-package/${param.value}`,
+                        dataType: 'JSON',
+                        method: 'GET',
+                        async: false,
+                        success: function callback(data) {
+                            $('#polyline-zone').val(data.zone)
+                            $('#polyline-ba').val(data.ba)
+                        }})
+        }
     </script>
 @endsection

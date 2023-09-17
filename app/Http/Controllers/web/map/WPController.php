@@ -30,10 +30,8 @@ class WPController extends Controller
     }
 
 
-    public function selectWP(){
-      $wp = DB::table('tbl_workpackage')
-            ->select('id','package_name')
-            ->get();
+    public function selectWP($id){
+      $wp = WorkPackage::find($id);
 
         return response()->json($wp);    
     }
