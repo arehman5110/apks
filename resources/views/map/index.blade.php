@@ -430,6 +430,13 @@
                 </div>
                 <form action="" method="post"></form>
                 <div class="modal-body ">
+                    <label for="">Select P.W</label>
+                    <select name="wp" id="raod-wp-id" class="form-control">
+                        <option value="">select wp</option>
+                        @foreach ($wps as $wp)
+                            <option value="{{$wp->id}}">{{$wp->package_name}}</option>
+                        @endforeach
+                    </select>
                     <label for="polyline-zone">Zone</label>
                     <input disabled  id="polyline-zone" class="form-control">
                     <label for="polyline-ba">BA</label>

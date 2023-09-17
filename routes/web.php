@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\updateSiteDataImages;
 use App\Http\Controllers\web\adminOrderController;
 use App\Http\Controllers\web\estimationWork;
+use App\Http\Controllers\web\map\MapController;
 use App\Http\Controllers\web\OrderController;
 use App\Http\Controllers\web\requisitionController;
 use App\Http\Controllers\web\scrapController;
@@ -28,9 +29,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/map-1', function(){
-    return view('map.index');
-});
+Route::get('/map-1',[MapController::class,'index']);
 
 Route::post('/save-work-package',[App\Http\Controllers\web\map\WPController::class,"saveWorkPackage"]);
 Route::get('/getWP',[App\Http\Controllers\web\map\WPController::class,"selectWP"]);
