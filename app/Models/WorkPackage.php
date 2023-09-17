@@ -9,5 +9,5 @@ class WorkPackage extends Model
 {
     use HasFactory;
     public $table = 'tbl_workpackage';
-    protected $fillable = ['package_name', 'geom', 'zone', 'ba', 'created_at', 'updated_at', 'created_by' ];
+    protected $fillable = ['package_name', 'geom', 'zone', 'ba', 'created_at', 'updated_at', 'created_by','wp_status' ];
 }

@@ -17,8 +17,8 @@ class WPController extends Controller
       $geom=$req->geom;
       
       $sql="INSERT INTO public.tbl_workpackage(
-        package_name, geom, zone, ba)
-        VALUES ('$name', st_geomfromgeojson('$geom'), '$zone', '$ba'); ";
+        package_name, geom, zone, ba,wp_status)
+        VALUES ('$name', st_geomfromgeojson('$geom'), '$zone', '$ba','pending'); ";
       try {
         $data = DB::insert($sql);
         // DB::disconnect();
