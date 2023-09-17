@@ -33,6 +33,8 @@ Route::get('/map-1', function(){
 });
 
 Route::post('/save-work-package',[App\Http\Controllers\web\map\WPController::class,"saveWorkPackage"]);
+Route::post('/save-road',[App\Http\Controllers\web\map\RoadController::class,"saveRoad"]);
+
 Route::get('/getWP',[App\Http\Controllers\web\map\WPController::class,"selectWP"]);
 
 
