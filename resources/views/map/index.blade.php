@@ -428,6 +428,7 @@
                     <h5 class="modal-title" id="exampleModalLabel">Identify Roads</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <form action="" method="post"></form>
                 <div class="modal-body ">
                     <label for="polyline-zone">Zone</label>
                     <input disabled  id="polyline-zone" class="form-control">
