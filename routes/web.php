@@ -32,7 +32,7 @@ Route::get('/', function () {
 Route::get('/map-1',[MapController::class,'index']);
 
 Route::post('/save-work-package',[App\Http\Controllers\web\map\WPController::class,"saveWorkPackage"]);
-Route::post('/save-road',[App\Http\Controllers\web\map\RoadController::class,"saveRoad"]);
+Route::post('/save-road',[App\Http\Controllers\web\map\MapController::class,"saveRoad"]);
 
 Route::get('/get-work-package/{id}',[App\Http\Controllers\web\map\WPController::class,"selectWP"]);
 
