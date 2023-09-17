@@ -396,7 +396,7 @@
                         <option value="B2">B2</option>
                         <option value="B4">B4</option>
                     </select>
-
+<br>
                     <label for="ba">Select ba</label>
                     <select name="ba" id="ba" class="form-control">
                         <option value="" hidden>Select zone</option>
