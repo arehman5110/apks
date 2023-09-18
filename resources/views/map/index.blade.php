@@ -22,9 +22,16 @@
     {{-- <link href="{{ asset('assets/libs/ladda/ladda.min.css') }}" rel="stylesheet" type="text/css" /> --}}
 
     <style>
-        .content-wrapper,
-        .main-header {
-            margin-left: 0px !important
+        .sidebar-mini.sidebar-collapse .content-wrapper,
+        .sidebar-mini.sidebar-collapse .main-footer,
+        .sidebar-mini.sidebar-collapse .main-header {
+            margin-left: 0rem !important;
+        }
+
+        .sidebar-mini.sidebar-collapse .main-sidebar,
+        .sidebar-mini.sidebar-collapse .main-sidebar::before {
+            margin-left: 0;
+            width: 0rem !important;
         }
 
         .card-header {
@@ -367,7 +374,7 @@
                                         for="cable_c">Report</label> </li>
                             </ul>
                         </details>
-                        <input type="text" name="" id="cabel_length">
+                        {{-- <input type="text" name="" id="cabel_length"> --}}
 
 
                         <!-- <div id="my_data"></div> -->
@@ -406,38 +413,39 @@
                     <h5 class="modal-title" id="exampleModalLabel">Add new W.P</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="/save-work-package" method="post">
+                <form action="/save-work-package" method="post" onsubmit="return submitFoam()">
                     @csrf
-                <div class="modal-body ">
-                   
+                    <div class="modal-body ">
 
-                    <label for="">Work Package Name</label>
-                    <input type="text" name="name" id="pw-name" class="form-control">
-                    <label for="zone">Zone</label>
-                    
-                    <input type="text" name="zone" id="pw-zone" class="form-control">
-                    {{-- <select name="zone" id="pw-zone" class="form-control">
+
+                        <label for="">Work Package Name</label>
+                        <span class="text-danger" id="er-pw-name"></span> <br>
+                        <input type="text" name="name" id="pw-name" class="form-control">
+                        <label for="zone">Zone</label>
+
+                        <input type="text" name="zone" id="pw-zone" class="form-control">
+                        {{-- <select name="zone" id="pw-zone" class="form-control">
                         <option value="" hidden>select zone</option>
                         <option value="W1">W1</option>
                         <option value="B1">B1</option>
                         <option value="B2">B2</option>
                         <option value="B4">B4</option>
                     </select> --}}
-       
-                    <label for="ba">Select ba</label>
-                    <input type="text" name="ba" id="pw-ba" class="form-control">
-                    {{-- <select name="ba" id="pw-ba" class="form-control">
+
+                        <label for="ba">Select ba</label>
+                        <input type="text" name="ba" id="pw-ba" class="form-control">
+                        {{-- <select name="ba" id="pw-ba" class="form-control">
                         <option value="" hidden>Select zone</option>
                     </select> --}}
 
-                    <input type="hidden" name="geom" id="geom">
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">Submit</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <input type="hidden" name="geom" id="geom">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Submit</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 
-                </div>
-            </form>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -451,46 +459,47 @@
                     <h5 class="modal-title" id="exampleModalLabel">Identify Roads</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="/save-road" method="post">
+                <form action="/save-road" method="post" onsubmit="return submitFoam2()">
                     @csrf
-                <div class="modal-body ">
-                    <label for="">Select P.W</label>
-                    <input type="text" disabled name="" id="raod-d-wp-id" class="form-control disabled" disabled>
-                    <input type="hidden" name="id_wp" id="raod-wp-id">
-                    {{-- <select name="id_wp" id="raod-wp-id" class="form-control" onchange="getWorkPackage(this)">
+                    <div class="modal-body ">
+                        <label for="ba">Road name</label>
+                        <span class="text-center" id="er_raod_name"></span>
+                        <input name="road_name" id="road_name" class="form-control">
+                        <label for="">Select P.W</label>
+                        <input type="text" disabled name="" id="raod-d-wp-id" class="form-control disabled"
+                            disabled>
+                        <input type="hidden" name="id_wp" id="raod-wp-id">
+                        {{-- <select name="id_wp" id="raod-wp-id" class="form-control" onchange="getWorkPackage(this)">
                         <option value="">select wp</option>
                         @foreach ($wps as $wp)
                             <option value="{{$wp->id}}">{{$wp->package_name}}</option>
                         @endforeach
                     </select> --}}
-                    <label for="polyline-zone">Zone</label>
-                    <input disabled  id="polyline-zone" class="form-control">
-                    <label for="polyline-ba">BA</label>
-                    <input disabled id="polyline-ba" class="form-control">
-                 
-                    <label for="ba">Road name</label>
-                    <input name="road_name" id="road_name" class="form-control">
-                      
+                        <label for="polyline-zone">Zone</label>
+                        <input disabled id="polyline-zone" class="form-control">
+                        <label for="polyline-ba">BA</label>
+                        <input disabled id="polyline-ba" class="form-control">
 
-                    <input type="hidden" name="geom" id="road-geom">
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">Submit</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                       
 
-                </div>
-            </form>
+
+                        <input type="hidden" name="geom" id="road-geom">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Submit</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 @endsection
 
 @section('script')
- 
-
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
     <link rel="stylesheet" href="{{ URL::asset('map/draw/leaflet.draw.css') }}" />
-    
+
     <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
 
     <script src="{{ URL::asset('map/draw/leaflet.draw-custom.js') }}"></script>
@@ -551,17 +560,17 @@
                     length += coords[i].distanceTo(coords[i + 1]);
                 }
                 mapLenght = parseInt(length)
-                $("#cabel_length").val(mapLenght)
+                // $("#cabel_length").val(mapLenght)
                 $('#polyLineModal').modal('show');
                 $('#road-geom').val(JSON.stringify(data.geometry));
 
                 getRoadInfo(JSON.stringify(data.geometry));
-                
+
             } else {
 
                 getBaInfo(JSON.stringify(data.geometry));
 
-             
+
                 $('#geomModal').modal('show');
                 $('#geom').val(JSON.stringify(data.geometry));
             }
@@ -1001,6 +1010,9 @@
 
     <script>
         $(document).ready(function() {
+
+            $('body').addClass('sidebar-collapse');
+
             $('#zone').on('change', function() {
                 const selectedValue = this.value;
                 const areaSelect = $('#ba');
@@ -1038,49 +1050,52 @@
             });
 
             $('#ba').on('change', function() {
-                    $('#pw-ba').val(this.value)
-             })  
+                $('#pw-ba').val(this.value)
+            })
 
 
         })
 
-        
+
 
         function getWorkPackage(param) {
             $.ajax({
-                        url: `/get-work-package/${param.value}`,
-                        dataType: 'JSON',
-                        method: 'GET',
-                        async: false,
-                        success: function callback(data) {
-                            $('#polyline-zone').val(data.zone)
-                            $('#polyline-ba').val(data.ba)
-                        }})
+                url: `/get-work-package/${param.value}`,
+                dataType: 'JSON',
+                method: 'GET',
+                async: false,
+                success: function callback(data) {
+                    $('#polyline-zone').val(data.zone)
+                    $('#polyline-ba').val(data.ba)
+                }
+            })
         }
 
 
         function getBaInfo(param) {
             // console.log(param);
             $.ajax({
-                        url: `/get-ba-info`,
-                        dataType: 'JSON',
-                        method: 'POST',
-                        async: false,
-                        data : {'geom':param},
-                        headers: {
-      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-    },
-                        success: function callback(data) {
-                        
-                           $('#pw-zone').val(data[0].ppb_zone)
-                            $('#pw-ba').val(data[0].station)
+                url: `/get-ba-info`,
+                dataType: 'JSON',
+                method: 'POST',
+                async: false,
+                data: {
+                    'geom': param
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                },
+                success: function callback(data) {
 
-                        },
-                    
-                        error: function errorCallback(xhr, status, error) {
-      console.log(error);
-    },
-                    })
+                    $('#pw-zone').val(data[0].ppb_zone)
+                    $('#pw-ba').val(data[0].station)
+
+                },
+
+                error: function errorCallback(xhr, status, error) {
+                    console.log(error);
+                },
+            })
         }
 
 
@@ -1088,27 +1103,46 @@
         function getRoadInfo(param) {
             console.log(param);
             $.ajax({
-                        url: `/get-raod-info`,
-                        dataType: 'JSON',
-                        method: 'POST',
-                        async: false,
-                        data : {'geom':param},
-                        headers: {
-      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-    },
-                        success: function callback(data) {
-                           console.log(data);
-                           $('#polyline-zone').val(data.data[0].zone)
-                            $('#polyline-ba').val(data.data[0].ba)
-                            $('#raod-wp-id').val(data.data[0].id)
-                            $('#raod-d-wp-id').val(data.data[0].package_name)
+                url: `/get-raod-info`,
+                dataType: 'JSON',
+                method: 'POST',
+                async: false,
+                data: {
+                    'geom': param
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                },
+                success: function callback(data) {
+                    console.log(data);
+                    $('#polyline-zone').val(data.data[0].zone)
+                    $('#polyline-ba').val(data.data[0].ba)
+                    $('#raod-wp-id').val(data.data[0].id)
+                    $('#raod-d-wp-id').val(data.data[0].package_name)
 
-                        },
-                    
-                        error: function errorCallback(xhr, status, error) {
-      console.log(error);
-    },
-                    })
+                },
+
+                error: function errorCallback(xhr, status, error) {
+                    console.log(error);
+                },
+            })
+        }
+
+
+        function submitFoam(){
+            if ($('#pw-name').val() == '') {
+                $('#er-pw-name').html("This feild is required");
+                return false;
+            }
+            $('#er-pw-name').html("");
+        }
+
+        function submitFoam2(){
+            if ($('#road_name').val() == '') {
+                $('#er_raod_name').html("This feild is required");
+                return false;
+            }
+            $('#er_raod_name').html("");
         }
     </script>
 @endsection

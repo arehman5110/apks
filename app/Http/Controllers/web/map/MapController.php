@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\web\map;
 
 use App\Http\Controllers\Controller;
+use App\Models\WorkPackage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -16,5 +17,11 @@ class MapController extends Controller
         ->get();
 
     return view('map.index',['wps'=>$wp]) ;
+    }
+
+
+
+    public function allWP(){
+       return  view('map.detail',['datas'=>WorkPackage::all()]);
     }
 }

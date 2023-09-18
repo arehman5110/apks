@@ -22,7 +22,7 @@
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
         @include('layouts.shared.nav-bar')
-        {{-- @include('layouts.shared.side-bar') --}}
+        @include('layouts.shared.side-bar')
         <div class="content-wrapper">
 
             {{-- <div id="overlay">
