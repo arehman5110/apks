@@ -15,6 +15,7 @@ class MapController extends Controller
         ->select('id','package_name')
         ->get();
 
+       // return response()->json($wp);
     return view('map.index',['wps'=>$wp]) ;
     }
 }
