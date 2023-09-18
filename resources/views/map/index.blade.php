@@ -2,9 +2,9 @@
 
 @section('css')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-    </script>
+    </script> --}}
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
@@ -19,7 +19,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
     <link rel="stylesheet" href="{{ URL::asset('assets/lib/window-engine.css') }}" />
     <script src="{{ URL::asset('assets/lib/window-engine.js') }}"></script>
-   
+
     <style>
         .sidebar-mini.sidebar-collapse .content-wrapper,
         .sidebar-mini.sidebar-collapse .main-footer,
@@ -239,6 +239,82 @@
 
     </div> <!--  END TOP TABS  -->
 
+    <div class=" p-1 col-12 m-2">
+        <div class="card p-0 mb-3">
+            <div class="card-body row">
+
+                <div class="col-md-2">
+                    <label for="search_zone">Zone</label>
+                    <select name="search_zone" id="search_zone" class="form-control">
+                       
+                            <option value="" hidden>select zone</option>
+                            <option value="W1">W1</option>
+                            <option value="B1">B1</option>
+                            <option value="B2">B2</option>
+                            <option value="B4">B4</option>
+                    
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label for="search_ba">Ba</label>
+                    <select name="search_ba" id="search_ba"  class="form-control" onchange="getWorkPackage(this)">
+                        <option value="">Select zone</option>
+                    </select>
+                </div>
+
+               
+
+                <div class="col-md-2">
+                    <label for="search_wp">Work Package</label>
+                    <select name="search_wp" id="search_wp"  class="form-control"></select>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- MAP DASHBOARD -->
+
+
+    <div class=" p-1 col-12 m-2">
+        <div class="card p-0 mb-3">
+            <div class="card-body row">
+
+                <div class="col-md-4 text-center" style="cursor: pointer;">
+
+                    <div class=" mx-1   p-1 t" style="background-color:  #92C400 !important;color:white">
+                        <p style="font-weight: 600;">Total Km</p>
+                        <span id="total"></span>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-4 text-center" style="cursor: pointer;">
+
+                    <div class=" mx-1   p-1 t" style="background-color:  #92C400 !important;color:white">
+                        <p style="font-weight: 600;">Total Notice</p>
+
+                    </div>
+
+                </div>
+                <div class="col-md-4 text-center" style="cursor: pointer;">
+
+                    <div class=" mx-1   p-1 t" style="background-color:  #92C400 !important;color:white">
+                        <p style="font-weight: 600;">Total Supervision</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+    <!-- END MAP DASHBOARD -->
+
 
 
     <!--  START MAP CARD DIV -->
@@ -382,7 +458,7 @@
         </div>
 
     </div><!--  END MAP CARD DIV -->
-    
+
 
     <div class="modal fade" id="geomModal" tabindex="-1" aria-labelledby="geomModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -462,8 +538,7 @@
                         <span class="text-center" id="er_raod_name"></span>
                         <input name="road_name" id="road_name" class="form-control">
                         <label for="">Work Package Name</label>
-                        <input type="text"  name="" id="raod-d-wp-id" class="form-control disabled"
-                            >
+                        <input type="text" name="" id="raod-d-wp-id" class="form-control disabled">
                         <input type="hidden" name="id_wp" id="raod-wp-id">
                         {{-- <select name="id_wp" id="raod-wp-id" class="form-control" onchange="getWorkPackage(this)">
                         <option value="">select wp</option>
@@ -472,9 +547,9 @@
                         @endforeach
                     </select> --}}
                         <label for="polyline-zone">Zone</label>
-                        <input  id="polyline-zone" name ="zone" class="form-control">
+                        <input id="polyline-zone" name="zone" class="form-control">
                         <label for="polyline-ba">BA</label>
-                        <input  id="polyline-ba" name="ba" class="form-control">
+                        <input id="polyline-ba" name="ba" class="form-control">
 
 
 
@@ -503,7 +578,6 @@
     <script src="{{ URL::asset('map/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js') }}"></script>
 
     <script type="text/javascript">
-
         var baseLayers
         var identifyme = '';
         map = L.map('map').setView([3.016603, 101.858382], 5);
@@ -545,10 +619,10 @@
 
         map.addControl(drawControl);
 
-            // END DRAW TOOLS
+        // END DRAW TOOLS
 
 
-            // DRAW TOOL ON CREATED EVENT
+        // DRAW TOOL ON CREATED EVENT
         map.on('draw:created', function(e) {
             var type = e.layerType;
             layer = e.layer;
@@ -577,10 +651,10 @@
             }
 
         })
-         // END DRAW TOOL ON CREATED EVENT
+        // END DRAW TOOL ON CREATED EVENT
 
-        
-         // DRAW TOOL ON EDIT EVENT
+
+        // DRAW TOOL ON EDIT EVENT
         map.on('draw:edited', function(e) {
             var layers = e.layers;
             layers.eachLayer(function(data) {
@@ -697,21 +771,21 @@
             buffer: 10
         })
 
-       
 
 
 
-         // ADD LAYERS GROUPED OVER LAYS
+
+        // ADD LAYERS GROUPED OVER LAYS
         groupedOverlays = {
             "POI": {
-                'BA':boundary3,
+                'BA': boundary3,
                 "boundary_bangi_east": boundary,
                 "lv fuse": lf,
                 "lvdb_fp": lvdb,
                 "lv_ug_conductor": ugc,
                 "street_light": street_light,
                 "pole": pole
-              //  "workpackage":wp
+                //  "workpackage":wp
 
             }
         };
@@ -721,14 +795,14 @@
             position: 'topright'
             // groupCheckboxes: true
         }).addTo(map);
-      
+
 
         var bangi_status = false;
         var addTOmap = false;
         var boundary2 = '';
-        var wp='';
+        var wp = '';
 
-        
+
         map.addLayer(boundary3)
         map.setView([2.59340882301331, 101.07054901123], 8);
 
@@ -1014,11 +1088,11 @@
             map.setView([parseFloat(paramY), parseFloat(paramX)], 11);
 
             wp = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-            layers: 'cite:tbl_workpackage',
-            format: 'image/png',
-            cql_filter: "ba='" + param + "'",
-            maxZoom: 21,
-            transparent: true
+                layers: 'cite:tbl_workpackage',
+                format: 'image/png',
+                cql_filter: "ba='" + param + "'",
+                maxZoom: 21,
+                transparent: true
             }, {
                 buffer: 10
             })
@@ -1037,9 +1111,9 @@
 
             $('body').addClass('sidebar-collapse');
 
-            $('#zone').on('change', function() {
+            $('#search_zone').on('change', function() {
                 const selectedValue = this.value;
-                const areaSelect = $('#ba');
+                const areaSelect = $('#search_ba');
 
                 // Clear previous options
                 areaSelect.empty();
@@ -1070,7 +1144,7 @@
                         areaSelect.append(`<option value="${data}">${data}</option>`);
                     });
                 }
-                $('#pw-zone').val(this.value);
+                // $('#pw-zone').val(this.value);
             });
 
             $('#ba').on('change', function() {
@@ -1083,14 +1157,17 @@
 
 
         function getWorkPackage(param) {
+            var zone = $('#search_zone').val();
             $.ajax({
-                url: `/get-work-package/${param.value}`,
+                url: `/get-work-package/${param.value}/${zone}`,
                 dataType: 'JSON',
                 method: 'GET',
                 async: false,
                 success: function callback(data) {
-                    $('#polyline-zone').val(data.zone)
-                    $('#polyline-ba').val(data.ba)
+                  
+                    data.forEach((val) => {
+                        $('#package_name').append(`<option value="${val.id}">${val.package_name}</option>`);
+                    });
                 }
             })
         }

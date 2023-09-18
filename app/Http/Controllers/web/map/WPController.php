@@ -30,8 +30,8 @@ class WPController extends Controller
     }
 
 
-    public function selectWP($id){
-      $wp = WorkPackage::find($id);
+    public function selectWP($ba , $zone){
+      $wp = WorkPackage::where('ba',$ba)->where('zone',$zone)->get();
 
         return response()->json($wp);    
     }

@@ -31,7 +31,7 @@ Route::post('/save-road',[App\Http\Controllers\web\map\RoadController::class,"sa
 
 Route::post('/get-raod-info',[App\Http\Controllers\web\map\WPController::class,"getRoadInfo"]);
 Route::post('/get-ba-info',[App\Http\Controllers\web\map\WPController::class,"getBaInfo"]);
-Route::get('/get-work-package/{id}',[App\Http\Controllers\web\map\WPController::class,"selectWP"]);
+Route::get('/get-work-package/{ba}/{zone}',[App\Http\Controllers\web\map\WPController::class,"selectWP"]);
 
 
 
