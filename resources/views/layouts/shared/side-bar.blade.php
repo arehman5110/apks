@@ -23,22 +23,18 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                 data-accordion="false">
                 <li class="nav-item">
-                    <a href="/get-all-work-packages"
-                        class="nav-link ">
+                    <a href="/get-all-work-packages" class="nav-link ">
                         <i class="fa fa-book"></i>
-                        <p>Work Permit</p>
+                        <p>Work Package</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a href="/map-1"
-                        class="nav-link ">
+                    <a href="/map-1" class="nav-link ">
                         <i class="fa fa-map"></i>
                         <p>Map</p>
                     </a>
                 </li>
-                
-                           
 
             </ul>
         </nav>

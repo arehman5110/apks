@@ -72,6 +72,17 @@
     </style>
 @endsection
 @section('content')
+
+@if (Session::has('failed'))
+<div class="alert {{ Session::get('alert-class', 'alert-secondary') }}" role="alert">
+    {{ Session::get('failed') }}
+
+    <button type="button" class="close border-0 bg-transparent" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+
+</div>
+@endif
     <h5 class="m-1">PEMERIKSAAN KEJANGGALAN PEPASANGAN TNB &
         SENGGARAAN BUKAN ELEKTRIK TALIAN ATAS DI SELANGOR UNTUK DISTRIBUTION NETWORK
         DIVISION, TNB</h5>
@@ -268,7 +279,11 @@
                     <label for="search_wp">Work Package</label>
                     <select name="search_wp" id="search_wp" class="form-control"></select>
                 </div>
+                <div class="col-md-2 p-2 text-center pt-4" id="for-excel">
+            </div>
 
+            
+                
             </div>
         </div>
     </div>
@@ -1163,6 +1178,9 @@
                         areaSelect.append(`<option value="${data}">${data}</option>`);
                     });
                 }
+                $('#search_wp').empty();
+                $('#search_wp').append(`<option value="" hidden>Select Work Package</option>`);
+                $('#for-excel').html('')
                 // $('#pw-zone').val(this.value);
             });
 
@@ -1184,6 +1202,7 @@
                 async: false,
                 success: function callback(data) {
                     console.log(data);
+                    $('#search_wp').empty();
                     $('#search_wp').append(`<option value="" hidden>Select Work Package</option>`);
                     data.forEach((val) => {
 
@@ -1191,9 +1210,11 @@
                             `<option value="${val.id} ,${val.x} ,${val.y}">${val.package_name}</option>`
                             );
                     });
+                    $('#for-excel').html('')
 
                 }
             })
+           
         }
 
 
@@ -1201,6 +1222,9 @@
             const selectedValue = this.value;
             var spiltVal = selectedValue.split(',');
             zoomToxy(parseFloat([2]), parseFloat([1]))
+
+            $('#for-excel').html(`<a class="mt-4" href="/generate-third-party-diging-excel/${spiltVal[0]}"><button class="btn-sm
+                btn btn-primary">Download Excel</button></a>`)
         })
 
 
@@ -1280,4 +1304,5 @@
             $('#er_raod_name').html("");
         }
     </script>
+  
 @endsection

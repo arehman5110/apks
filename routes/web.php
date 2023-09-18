@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\web\excel\DigingExcelController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\web\map\MapController;
+use App\Http\Controllers\web\tnbes\StatusController;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Gd\Commands\RotateCommand;
 
@@ -32,6 +34,9 @@ Route::post('/save-road',[App\Http\Controllers\web\map\RoadController::class,"sa
 Route::post('/get-raod-info',[App\Http\Controllers\web\map\WPController::class,"getRoadInfo"]);
 Route::post('/get-ba-info',[App\Http\Controllers\web\map\WPController::class,"getBaInfo"]);
 Route::get('/get-work-package/{ba}/{zone}',[App\Http\Controllers\web\map\WPController::class,"selectWP"]);
+
+Route::get('/send-to-tnbes/{id}',[StatusController::class,'sendToTnbes']);
+Route::get('/generate-third-party-diging-excel/{id}',[DigingExcelController::class,'generateDigingExcel']);
 
 
 

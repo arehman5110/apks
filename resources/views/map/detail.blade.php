@@ -104,8 +104,10 @@
 
                                                     @elseif($data->wp_status  == 'rejected')
                                                     <span class="badge badge-danger">Rejected</span>
-                                                    @else
+                                                    @elseif($data->wp_status  == 'pending')
                                                     <span class="badge badge-secondary">Pending </span>
+                                                    @else
+                                                    <a href="/send-to-tnbes/{{$data->id}}"><button class="btn btn-sm btn-primary">Send to TNBES</button></a>
 
                                                         
                                                     @endif
