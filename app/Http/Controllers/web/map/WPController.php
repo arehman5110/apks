@@ -44,4 +44,12 @@ class WPController extends Controller
     
    }
 
+
+   public function getBaInfo(Request $req) {
+    $geom = $req->geom;
+    $result = DB::select("SELECT ppb_zone, station  FROM ba WHERE ST_Intersects(geom, ST_GeomFromGeoJSON('$geom'))");
+    return response()->json([ $result[0]],200);
+    
+   }
+
 }

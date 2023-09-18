@@ -244,7 +244,7 @@
         </div>
     </div>
 
-    <div class="row p-2 bg-white m-2 shadow">
+    {{-- <div class="row p-2 bg-white m-2 shadow">
         <div class="col-md-2">
             <label for="zone">Zone</label>
             <select name="zone" id="zone" class="form-control">
@@ -261,7 +261,7 @@
                 <option value="" hidden>Select zone</option>
             </select>
         </div>
-    </div>
+    </div> --}}
 
     <div class="row m-2">
         <div class="col-2 p-0">
@@ -411,7 +411,7 @@
                 <div class="modal-body ">
                    
 
-                    <label for="">P.W Name</label>
+                    <label for="">Work Package Name</label>
                     <input type="text" name="name" id="pw-name" class="form-control">
                     <label for="zone">Zone</label>
                     
@@ -559,12 +559,14 @@
                 
             } else {
 
+                getBaInfo(JSON.stringify(data.geometry));
+
              
                 $('#geomModal').modal('show');
                 $('#geom').val(JSON.stringify(data.geometry));
             }
 
-            console.log(JSON.stringify(data.geometry))
+            // console.log(JSON.stringify(data.geometry))
 
         })
 
@@ -1055,6 +1057,32 @@
                             $('#polyline-ba').val(data.ba)
                         }})
         }
+
+
+        function getBaInfo(param) {
+            // console.log(param);
+            $.ajax({
+                        url: `/get-ba-info`,
+                        dataType: 'JSON',
+                        method: 'POST',
+                        async: false,
+                        data : {'geom':param},
+                        headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+    },
+                        success: function callback(data) {
+                        
+                           $('#pw-zone').val(data[0].ppb_zone)
+                            $('#pw-ba').val(data[0].station)
+
+                        },
+                    
+                        error: function errorCallback(xhr, status, error) {
+      console.log(error);
+    },
+                    })
+        }
+
 
 
         function getRoadInfo(param) {
