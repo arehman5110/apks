@@ -25,4 +25,11 @@ class MapController extends Controller
     public function allWP(){
        return  view('map.detail',['datas'=>WorkPackage::all()]);
     }
+
+
+    public function proxy($url){
+       return 'The URL is: '.rawurldecode($url);;
+    //    $result =  file_get_contents( $req->url);/
+    //    return response()->json($result);
+    }
 }

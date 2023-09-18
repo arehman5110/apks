@@ -749,13 +749,13 @@
                         }
                     );
                     $.ajax({
-                        url: 'services/proxy.php?url=' + encodeURIComponent(url),
+                        url: '/proxy/' + encodeURIComponent(url),
                         dataType: 'JSON',
                         //data: data,
                         method: 'GET',
                         async: false,
                         success: function callback(data) {
-
+                            console.log(data);
                             //  alert(data
                             var str = '<div id="window1" class="window">' +
                                 '<div class="green">' +
@@ -879,8 +879,9 @@
                         'propertyName': 'NAME,AREA_CODE,DESCRIPTIO'
                     }
                 );
+                var secondUrl = encodeURIComponent(url)
                 $.ajax({
-                    url: 'services/proxy.php?url=' + encodeURIComponent(url),
+                    url: '/proxy/' + encodeURIComponent(secondUrl),
                     dataType: 'JSON',
                     //data: data,
                     method: 'GET',
