@@ -261,6 +261,7 @@
                                 <option value="lvdb_fp">lvdb_fp</option>
                                 <option value="street_light">street_light</option>
                                 <option value="pole">pole</option>
+                                <option value="wp">wp</option>
 
                             </select>
                         </div>
@@ -725,6 +726,7 @@
         var bangi_status = false;
         var addTOmap = false;
         var boundary2 = '';
+        var wp='';
 
         
         map.addLayer(boundary3)
@@ -873,6 +875,9 @@
             }
             if (val == 'street_light') {
                 sel_lyr = street_light;
+            }
+            if (val == 'wp') {
+                sel_lyr = wp;
             }
 
             map.off('click');
