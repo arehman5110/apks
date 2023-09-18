@@ -1104,11 +1104,22 @@
 
 
         }
+
+
+        function zoomToxy(x , y){
+            map.setView([y, x], 8)
+        }
     </script>
 
 
     <script>
+
+        const baJson = [ ['PUTRAJAYA & CYBERJAYA' , 2.92875032271019 , 101.675338316575],['BANTING' , 2.82111390453244 , 101.505890775541],['CHERAS' , 3.14197346621987, 101.849883983416]
+    ,['PELABUHAN KLANG' , 2.98188527916042, 101.324234779569] , ['KLANG' , 3.08428642705789, 101.436185279023] , ['KUALA SELANGOR' , 3.40703209426401, 101.317426926947] , ['RAWANG' , 3.47839445121726, 101.622905486475] ,
+['PETALING JAYA', 3.1128074178475 , 101.605270457169], ['KUALA LUMPUR PUSAT' , 3.14925905877391 , 101.754098819705] ]
         $(document).ready(function() {
+
+
 
             $('body').addClass('sidebar-collapse');
 
@@ -1165,14 +1176,27 @@
                 method: 'GET',
                 async: false,
                 success: function callback(data) {
-                  
+                    console.log(data);
+                    $('#search_wp').append(`<option value="" hidden>Select Work Package</option>`);
                     data.forEach((val) => {
-                        $('#package_name').append(`<option value="${val.id}">${val.package_name}</option>`);
+                      
+                        $('#search_wp').append(`<option value="${val.id} ,${val.x} ,${val.y}">${val.package_name}</option>`);
                     });
+                
                 }
             })
         }
 
+
+        $('#search_wp').on('change', function() {
+                const selectedValue = this.value;
+                var spiltVal = selectedValue.split(',');
+                zoomToxy(parseFloat([2]), parseFloat([1]))
+            })
+
+
+
+       
 
         function getBaInfo(param) {
             // console.log(param);
