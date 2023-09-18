@@ -22,12 +22,14 @@ Route::get('/', function () {
 });
 
 Route::get('/map-1',[MapController::class,'index']);
+Route::get('/get-all-work-packages',[MapController::class,'allWP']);
 
 Route::post('/save-work-package',[App\Http\Controllers\web\map\WPController::class,"saveWorkPackage"]);
 Route::post('/save-road',[App\Http\Controllers\web\map\MapController::class,"saveRoad"]);
 
 
 Route::post('/get-raod-info',[App\Http\Controllers\web\map\WPController::class,"getRoadInfo"]);
+Route::post('/get-ba-info',[App\Http\Controllers\web\map\WPController::class,"getBaInfo"]);
 Route::get('/get-work-package/{id}',[App\Http\Controllers\web\map\WPController::class,"selectWP"]);
 
 
