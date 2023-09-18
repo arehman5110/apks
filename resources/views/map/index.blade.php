@@ -246,27 +246,27 @@
                 <div class="col-md-2">
                     <label for="search_zone">Zone</label>
                     <select name="search_zone" id="search_zone" class="form-control">
-                       
-                            <option value="" hidden>select zone</option>
-                            <option value="W1">W1</option>
-                            <option value="B1">B1</option>
-                            <option value="B2">B2</option>
-                            <option value="B4">B4</option>
-                    
+
+                        <option value="" hidden>select zone</option>
+                        <option value="W1">W1</option>
+                        <option value="B1">B1</option>
+                        <option value="B2">B2</option>
+                        <option value="B4">B4</option>
+
                     </select>
                 </div>
                 <div class="col-md-2">
                     <label for="search_ba">Ba</label>
-                    <select name="search_ba" id="search_ba"  class="form-control" onchange="getWorkPackage(this)">
+                    <select name="search_ba" id="search_ba" class="form-control" onchange="getWorkPackage(this)">
                         <option value="">Select zone</option>
                     </select>
                 </div>
 
-               
+
 
                 <div class="col-md-2">
                     <label for="search_wp">Work Package</label>
-                    <select name="search_wp" id="search_wp"  class="form-control"></select>
+                    <select name="search_wp" id="search_wp" class="form-control"></select>
                 </div>
 
             </div>
@@ -973,7 +973,7 @@
                     async: false,
                     success: function callback(data1) {
                         console.log(data1)
-                        data=JSON.parse(data1)
+                        data = JSON.parse(data1)
                         if (data.features.length != 0) {
                             var str = '';
                             for (key in data.features[0].properties) {
@@ -1106,17 +1106,24 @@
         }
 
 
-        function zoomToxy(x , y){
+        function zoomToxy(x, y) {
             map.setView([y, x], 8)
         }
     </script>
 
 
     <script>
-
-        const baJson = [ ['PUTRAJAYA & CYBERJAYA' , 2.92875032271019 , 101.675338316575],['BANTING' , 2.82111390453244 , 101.505890775541],['CHERAS' , 3.14197346621987, 101.849883983416]
-    ,['PELABUHAN KLANG' , 2.98188527916042, 101.324234779569] , ['KLANG' , 3.08428642705789, 101.436185279023] , ['KUALA SELANGOR' , 3.40703209426401, 101.317426926947] , ['RAWANG' , 3.47839445121726, 101.622905486475] ,
-['PETALING JAYA', 3.1128074178475 , 101.605270457169], ['KUALA LUMPUR PUSAT' , 3.14925905877391 , 101.754098819705] ]
+        const baJson = [
+            ['PUTRAJAYA & CYBERJAYA', 2.92875032271019, 101.675338316575],
+            ['BANTING', 2.82111390453244, 101.505890775541],
+            ['CHERAS', 3.14197346621987, 101.849883983416],
+            ['PELABUHAN KLANG', 2.98188527916042, 101.324234779569],
+            ['KLANG', 3.08428642705789, 101.436185279023],
+            ['KUALA SELANGOR', 3.40703209426401, 101.317426926947],
+            ['RAWANG', 3.47839445121726, 101.622905486475],
+            ['PETALING JAYA', 3.1128074178475, 101.605270457169],
+            ['KUALA LUMPUR PUSAT', 3.14925905877391, 101.754098819705]
+        ]
         $(document).ready(function() {
 
 
@@ -1179,24 +1186,26 @@
                     console.log(data);
                     $('#search_wp').append(`<option value="" hidden>Select Work Package</option>`);
                     data.forEach((val) => {
-                      
-                        $('#search_wp').append(`<option value="${val.id} ,${val.x} ,${val.y}">${val.package_name}</option>`);
+
+                        $('#search_wp').append(
+                            `<option value="${val.id} ,${val.x} ,${val.y}">${val.package_name}</option>`
+                            );
                     });
-                
+
                 }
             })
         }
 
 
         $('#search_wp').on('change', function() {
-                const selectedValue = this.value;
-                var spiltVal = selectedValue.split(',');
-                zoomToxy(parseFloat([2]), parseFloat([1]))
-            })
+            const selectedValue = this.value;
+            var spiltVal = selectedValue.split(',');
+            zoomToxy(parseFloat([2]), parseFloat([1]))
+        })
 
 
 
-       
+
 
         function getBaInfo(param) {
             // console.log(param);
