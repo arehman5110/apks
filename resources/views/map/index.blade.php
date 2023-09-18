@@ -243,6 +243,26 @@
             </div>
         </div>
     </div>
+
+    <div class="row p-2 bg-white m-2 shadow">
+        <div class="col-md-2">
+            <label for="zone">Zone</label>
+            <select name="zone" id="zone" class="form-control">
+                <option value="" hidden>select zone</option>
+                <option value="W1">W1</option>
+                <option value="B1">B1</option>
+                <option value="B2">B2</option>
+                <option value="B4">B4</option>
+            </select>
+        </div>
+            <div class="col-md-2">
+            <label for="ba">Select ba</label>
+            <select name="ba" id="ba" class="form-control">
+                <option value="" hidden>Select zone</option>
+            </select>
+        </div>
+    </div>
+
     <div class="row m-2">
         <div class="col-2 p-0">
             <div class="card p-0 m-0"
@@ -391,21 +411,24 @@
                 <div class="modal-body ">
                    
 
-                    <label for="">P.W</label>
+                    <label for="">P.W Name</label>
                     <input type="text" name="name" id="pw-name" class="form-control">
                     <label for="zone">Zone</label>
-                    <select name="zone" id="zone" class="form-control">
+                    
+                    <input type="text" name="zone" id="pw-zone" class="form-control">
+                    {{-- <select name="zone" id="pw-zone" class="form-control">
                         <option value="" hidden>select zone</option>
                         <option value="W1">W1</option>
                         <option value="B1">B1</option>
                         <option value="B2">B2</option>
                         <option value="B4">B4</option>
-                    </select>
+                    </select> --}}
        
                     <label for="ba">Select ba</label>
-                    <select name="ba" id="ba" class="form-control">
+                    <input type="text" name="ba" id="pw-ba" class="form-control">
+                    {{-- <select name="ba" id="pw-ba" class="form-control">
                         <option value="" hidden>Select zone</option>
-                    </select>
+                    </select> --}}
 
                     <input type="hidden" name="geom" id="geom">
                 </div>
@@ -432,12 +455,14 @@
                     @csrf
                 <div class="modal-body ">
                     <label for="">Select P.W</label>
-                    <select name="id_wp" id="raod-wp-id" class="form-control" onchange="getWorkPackage(this)">
+                    <input type="text" disabled name="" id="raod-d-wp-id" class="form-control disabled" disabled>
+                    <input type="hidden" name="id_wp" id="raod-wp-id">
+                    {{-- <select name="id_wp" id="raod-wp-id" class="form-control" onchange="getWorkPackage(this)">
                         <option value="">select wp</option>
                         @foreach ($wps as $wp)
                             <option value="{{$wp->id}}">{{$wp->package_name}}</option>
                         @endforeach
-                    </select>
+                    </select> --}}
                     <label for="polyline-zone">Zone</label>
                     <input disabled  id="polyline-zone" class="form-control">
                     <label for="polyline-ba">BA</label>
@@ -529,6 +554,8 @@
                 $("#cabel_length").val(mapLenght)
                 $('#polyLineModal').modal('show');
                 $('#road-geom').val(JSON.stringify(data.geometry));
+
+                getRoadInfo(JSON.stringify(data.geometry));
                 
             } else {
 
@@ -1005,10 +1032,17 @@
                         areaSelect.append(`<option value="${data}">${data}</option>`);
                     });
                 }
+                $('#pw-zone').val(this.value);
             });
+
+            $('#ba').on('change', function() {
+                    $('#pw-ba').val(this.value)
+             })  
+
 
         })
 
+        
 
         function getWorkPackage(param) {
             $.ajax({
@@ -1020,6 +1054,33 @@
                             $('#polyline-zone').val(data.zone)
                             $('#polyline-ba').val(data.ba)
                         }})
+        }
+
+
+        function getRoadInfo(param) {
+            console.log(param);
+            $.ajax({
+                        url: `/get-raod-info`,
+                        dataType: 'JSON',
+                        method: 'POST',
+                        async: false,
+                        data : {'geom':param},
+                        headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+    },
+                        success: function callback(data) {
+                           console.log(data);
+                           $('#polyline-zone').val(data.data[0].zone)
+                            $('#polyline-ba').val(data.data[0].ba)
+                            $('#raod-wp-id').val(data.data[0].id)
+                            $('#raod-d-wp-id').val(data.data[0].package_name)
+
+                        },
+                    
+                        error: function errorCallback(xhr, status, error) {
+      console.log(error);
+    },
+                    })
         }
     </script>
 @endsection
