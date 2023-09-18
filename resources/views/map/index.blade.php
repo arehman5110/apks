@@ -261,6 +261,7 @@
                                 <option value="lvdb_fp">lvdb_fp</option>
                                 <option value="street_light">street_light</option>
                                 <option value="pole">pole</option>
+                                <option value="wp">wp</option>
 
                             </select>
                         </div>
@@ -687,17 +688,30 @@
             buffer: 10
         });
 
+        boundary3 = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+            layers: 'cite:aero_apks',
+            format: 'image/png',
+            maxZoom: 21,
+            transparent: true
+        }, {
+            buffer: 10
+        })
+
+       
+
 
 
          // ADD LAYERS GROUPED OVER LAYS
         groupedOverlays = {
             "POI": {
+                'BA':boundary3,
                 "boundary_bangi_east": boundary,
                 "lv fuse": lf,
                 "lvdb_fp": lvdb,
                 "lv_ug_conductor": ugc,
                 "street_light": street_light,
                 "pole": pole
+              //  "workpackage":wp
 
             }
         };
@@ -712,15 +726,9 @@
         var bangi_status = false;
         var addTOmap = false;
         var boundary2 = '';
+        var wp='';
 
-        boundary3 = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-            layers: 'cite:aero_apks',
-            format: 'image/png',
-            maxZoom: 21,
-            transparent: true
-        }, {
-            buffer: 10
-        })
+        
         map.addLayer(boundary3)
         map.setView([2.59340882301331, 101.07054901123], 8);
 
@@ -868,6 +876,9 @@
             if (val == 'street_light') {
                 sel_lyr = street_light;
             }
+            if (val == 'wp') {
+                sel_lyr = wp;
+            }
 
             map.off('click');
             map.on('click', function(e) {
@@ -989,7 +1000,7 @@
                 map.removeLayer(boundary2)
             }
             boundary2 = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-                layers: 'cite:aero_apks',
+                layers: 'cite:ba',
                 format: 'image/png',
                 cql_filter: "station='" + param + "'",
                 maxZoom: 21,
@@ -998,9 +1009,21 @@
                 buffer: 10
             })
             map.addLayer(boundary2)
+            boundary2.bringToFront()
 
             map.setView([parseFloat(paramY), parseFloat(paramX)], 11);
 
+            wp = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+            layers: 'cite:tbl_workpackage',
+            format: 'image/png',
+            cql_filter: "ba='" + param + "'",
+            maxZoom: 21,
+            transparent: true
+            }, {
+                buffer: 10
+            })
+            map.addLayer(wp)
+            wp.bringToFront()
 
 
 
