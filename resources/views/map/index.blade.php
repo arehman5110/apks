@@ -897,8 +897,9 @@
                     //data: data,
                     method: 'GET',
                     async: false,
-                    success: function callback(data) {
-                        console.log(data)
+                    success: function callback(data1) {
+                        console.log(data1)
+                        data=JSON.parse(data1)
                         if (data.features.length != 0) {
                             var str = '';
                             for (key in data.features[0].properties) {
