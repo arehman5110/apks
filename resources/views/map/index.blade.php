@@ -19,8 +19,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
     <link rel="stylesheet" href="{{ URL::asset('assets/lib/window-engine.css') }}" />
     <script src="{{ URL::asset('assets/lib/window-engine.js') }}"></script>
-    {{-- <link href="{{ asset('assets/libs/ladda/ladda.min.css') }}" rel="stylesheet" type="text/css" /> --}}
-
+   
     <style>
         .sidebar-mini.sidebar-collapse .content-wrapper,
         .sidebar-mini.sidebar-collapse .main-footer,
@@ -77,16 +76,19 @@
         SENGGARAAN BUKAN ELEKTRIK TALIAN ATAS DI SELANGOR UNTUK DISTRIBUTION NETWORK
         DIVISION, TNB</h5>
 
+
+
+    <!--  START TOP TABS -->
+
     <div class="row text-center m-2">
+
+        <!--  START TAB W1 -->
 
         <div class="col-md-4 p-1">
 
             <div class="card p-0 mb-3" style="height: 90%;">
                 <div class="card-header ">W1</div>
                 <div class="card-body row">
-
-
-
                     <div class="col-md-12 "
                         onclick="addRemoveBundary('KUALA LUMPUR PUSAT' , 3.14925905877391 , 101.754098819705)"
                         style="cursor: pointer;">
@@ -100,7 +102,11 @@
                 </div>
             </div>
 
-        </div>
+        </div> <!--  END TAB w1 -->
+
+
+        <!--  START TAB B1 -->
+
         <div class="col-md-4 p-1">
             <div class="card p-0 mb-3 ">
                 <div class="card-header ">B1</div>
@@ -139,7 +145,10 @@
                 </div>
             </div>
 
-        </div>
+        </div> <!--  END TAB B1 -->
+
+
+        <!--  START TAB B2 -->
         <div class="col-md-4 p-1">
             <div class="card p-0 mb-3 ">
                 <div class="card-header ">B2</div>
@@ -171,7 +180,10 @@
                 </div>
             </div>
 
-        </div>
+        </div> <!--  END TAB B2 -->
+
+
+        <!-- START TAB B4 -->
         <div class=" p-1 col-12">
             <div class="card p-0 mb-3">
                 <div class="card-header ">B4</div>
@@ -223,59 +235,22 @@
 
                 </div>
             </div>
-        </div>
+        </div> <!--  END TAB B4 -->
+
+    </div> <!--  END TOP TABS  -->
 
 
 
-    </div>
-
-
-
-    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Site Data Info</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body ">
-                    <table class="table table-bordered">
-                        <tbody id="my_data"></tbody>
-                    </table>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {{-- <div class="row p-2 bg-white m-2 shadow">
-        <div class="col-md-2">
-            <label for="zone">Zone</label>
-            <select name="zone" id="zone" class="form-control">
-                <option value="" hidden>select zone</option>
-                <option value="W1">W1</option>
-                <option value="B1">B1</option>
-                <option value="B2">B2</option>
-                <option value="B4">B4</option>
-            </select>
-        </div>
-            <div class="col-md-2">
-            <label for="ba">Select ba</label>
-            <select name="ba" id="ba" class="form-control">
-                <option value="" hidden>Select zone</option>
-            </select>
-        </div>
-    </div> --}}
-
+    <!--  START MAP CARD DIV -->
     <div class="row m-2">
+
+        <!-- START MAP SIDEBAR DIV -->
         <div class="col-2 p-0">
             <div class="card p-0 m-0"
                 style="border: 1px solid rgb(177, 175, 175) !important; border-radius: 0px !important">
                 <div class="card-header"><strong> NAVIGATION</strong></div>
                 <div class="card-body">
+                    <!-- MAP SIDEBAR LAYERS SELECTOR -->
                     <div class="side-bar" style="height: 569px !important; overflow-y: scroll;">
                         <div class="col-md-12 mb-2" class="form-group">
                             <label>Select Info Layer :</label>
@@ -289,6 +264,8 @@
 
                             </select>
                         </div>
+
+                        <!-- START MAP SIDEBAR DETAILS -->
                         <details class="mb-3">
                             <summary><strong>Patrolling 3rd Party Digging Activities</strong> </summary>
                             <ul>
@@ -374,14 +351,14 @@
                                         for="cable_c">Report</label> </li>
                             </ul>
                         </details>
-                        {{-- <input type="text" name="" id="cabel_length"> --}}
-
-
-                        <!-- <div id="my_data"></div> -->
+                        <!-- END MAP SIDEBAR DETAILS -->
                     </div>
                 </div>
             </div>
         </div>
+        <!-- END MAP SIDEBAR DIV -->
+
+        <!-- START MAP  DIV -->
         <div class="col-10 p-0 ">
             <div class="card p-0 m-0"
                 style="border: 1px solid rgb(177, 175, 175) !important; border-radius: 0px !important;">
@@ -389,13 +366,12 @@
                 <div class="card-body p-0">
                     <div id="map">
 
-
                     </div>
                 </div>
             </div>
 
-
         </div>
+        <!-- END MAP  DIV -->
         <div id="wg" class="windowGroup">
 
         </div>
@@ -403,8 +379,9 @@
         <div id="wg1" class="windowGroup">
 
         </div>
-    </div>
 
+    </div><!--  END MAP CARD DIV -->
+    
 
     <div class="modal fade" id="geomModal" tabindex="-1" aria-labelledby="geomModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -450,7 +427,25 @@
         </div>
     </div>
 
+    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Site Data Info</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body ">
+                    <table class="table table-bordered">
+                        <tbody id="my_data"></tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="modal fade" id="polyLineModal" tabindex="-1" aria-labelledby="polyLineModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -462,12 +457,12 @@
                 <form action="/save-road" method="post" onsubmit="return submitFoam2()">
                     @csrf
                     <div class="modal-body ">
-                        <label for="ba">Road name</label>
+                        <label for="ba">Road Name</label>
                         <span class="text-center" id="er_raod_name"></span>
                         <input name="road_name" id="road_name" class="form-control">
-                        <label for="">Select P.W</label>
-                        <input type="text" disabled name="" id="raod-d-wp-id" class="form-control disabled"
-                            disabled>
+                        <label for="">Work Package Name</label>
+                        <input type="text"  name="" id="raod-d-wp-id" class="form-control disabled"
+                            >
                         <input type="hidden" name="id_wp" id="raod-wp-id">
                         {{-- <select name="id_wp" id="raod-wp-id" class="form-control" onchange="getWorkPackage(this)">
                         <option value="">select wp</option>
@@ -476,11 +471,11 @@
                         @endforeach
                     </select> --}}
                         <label for="polyline-zone">Zone</label>
-                        <input disabled id="polyline-zone" class="form-control">
+                        <input  id="polyline-zone" name ="zone" class="form-control">
                         <label for="polyline-ba">BA</label>
-                        <input disabled id="polyline-ba" class="form-control">
+                        <input  id="polyline-ba" name="ba" class="form-control">
 
-                       
+
 
 
                         <input type="hidden" name="geom" id="road-geom">
@@ -507,6 +502,7 @@
     <script src="{{ URL::asset('map/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js') }}"></script>
 
     <script type="text/javascript">
+
         var baseLayers
         var identifyme = '';
         map = L.map('map').setView([3.016603, 101.858382], 5);
@@ -517,10 +513,14 @@
         }).addTo(map);
         var street = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
 
+        // ADD MAPS
         baseLayers = {
             "Satellite": st1,
             "Street": street
         };
+
+
+        // ADD DRAW TOOLS
 
         var drawnItems = new L.FeatureGroup();
         map.addLayer(drawnItems);
@@ -544,14 +544,15 @@
 
         map.addControl(drawControl);
 
+            // END DRAW TOOLS
+
+
+            // DRAW TOOL ON CREATED EVENT
         map.on('draw:created', function(e) {
             var type = e.layerType;
             layer = e.layer;
             drawnItems.addLayer(layer);
-            // console.log(type);
             var data = layer.toGeoJSON();
-            //  console.log(JSON.stringify(data.geometry));
-
 
             if (e.layerType == 'polyline') {
                 var coords = layer.getLatLngs();
@@ -560,10 +561,9 @@
                     length += coords[i].distanceTo(coords[i + 1]);
                 }
                 mapLenght = parseInt(length)
-                // $("#cabel_length").val(mapLenght)
+
                 $('#polyLineModal').modal('show');
                 $('#road-geom').val(JSON.stringify(data.geometry));
-
                 getRoadInfo(JSON.stringify(data.geometry));
 
             } else {
@@ -575,11 +575,11 @@
                 $('#geom').val(JSON.stringify(data.geometry));
             }
 
-            // console.log(JSON.stringify(data.geometry))
-
         })
+         // END DRAW TOOL ON CREATED EVENT
 
-
+        
+         // DRAW TOOL ON EDIT EVENT
         map.on('draw:edited', function(e) {
             var layers = e.layers;
             layers.eachLayer(function(data) {
@@ -591,7 +591,7 @@
 
             });
         });
-
+        // END DRAW TOOL ON EDIT EVENT
 
         map.on('draw:deleted', function(e) {
             var layers = e.layers;
@@ -609,7 +609,7 @@
         });
 
 
-
+        // ADD LAYERS
         customer = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
             layers: 'cite:pano_layer',
             format: 'image/png',
@@ -699,6 +699,8 @@
        
 
 
+
+         // ADD LAYERS GROUPED OVER LAYS
         groupedOverlays = {
             "POI": {
                 'BA':boundary3,
@@ -718,9 +720,7 @@
             position: 'topright'
             // groupCheckboxes: true
         }).addTo(map);
-        //  var lc = document.getElementsByClassName('leaflet-control-layers')
-        //  lc[0].style.display = "none";
-
+      
 
         var bangi_status = false;
         var addTOmap = false;
@@ -1147,7 +1147,7 @@
         }
 
 
-        function submitFoam(){
+        function submitFoam() {
             if ($('#pw-name').val() == '') {
                 $('#er-pw-name').html("This feild is required");
                 return false;
@@ -1155,7 +1155,7 @@
             $('#er-pw-name').html("");
         }
 
-        function submitFoam2(){
+        function submitFoam2() {
             if ($('#road_name').val() == '') {
                 $('#er_raod_name').html("This feild is required");
                 return false;
