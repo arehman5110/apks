@@ -1223,7 +1223,7 @@
             var spiltVal = selectedValue.split(',');
             zoomToxy(parseFloat([2]), parseFloat([1]))
 
-            $('#for-excel').html(`<a class="mt-4" href="/generate-third-party-diging-excel/${spiltVal[0]}"><button class="btn-sm
+            $('#for-excel').html(`<a class="mt-4" href="/generate-third-party-diging-excel/${spiltVal[0]}"><button class="btn-sm mt-2
                 btn btn-primary">Download Excel</button></a>`)
         })
 
