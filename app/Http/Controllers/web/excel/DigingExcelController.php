@@ -17,27 +17,30 @@ class DigingExcelController extends Controller
     public function generateDigingExcel($id)
     {
         $recored = ThirdPartyDiging::where('workpackage_id', $id)->get();
-        // return sizeof($recored);
+        // return $recored;
         if (sizeof($recored) > 0) {
-            // return "sdfsd";
+            
 
             $work = WorkPackage::find($id);
 
-            $excelFile = public_path('assets/excel-template/QR Aero APKS.xlsx');
+            $excelFile = public_path('assets/excel-template/test.xlsx');
 
             $spreadsheet = IOFactory::load($excelFile);
 
             $worksheet = $spreadsheet->getActiveSheet();
+            $cs = $worksheet->getCell('C3')->getValue();
+           
 
             $i = 3;
             foreach ($recored as $rec) {
+          
                 if ($rec->image1 != '' || $rec->image2 != '' || $rec->image3 != '') {
                     $worksheet->setCellValue('A' . $i, $i - 2);
                     $worksheet->setCellValue('B' . $i, $work->package_name);
                     $worksheet->setCellValue('C' . $i, $work->zone);
                     $worksheet->setCellValue('D' . $i, $work->ba);
 
-                    if ($work->road->id != '') {
+                    if ($work->road_id != '') {
                         $road = Road::find($id);
                         if ($road) {
                             $worksheet->setCellValue('H' . $i, $work->ba);
@@ -47,6 +50,7 @@ class DigingExcelController extends Controller
                 $i++;
             }
             $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+        
             $writer->save(public_path('assets/updated-excels/') . $work->package_name . '.xlsx');
 
             return response()->download(public_path('assets/updated-excels/') . $work->package_name . '.xlsx');

@@ -72,17 +72,16 @@
     </style>
 @endsection
 @section('content')
+    @if (Session::has('failed'))
+        <div class="alert {{ Session::get('alert-class', 'alert-secondary') }}" role="alert">
+            {{ Session::get('failed') }}
 
-@if (Session::has('failed'))
-<div class="alert {{ Session::get('alert-class', 'alert-secondary') }}" role="alert">
-    {{ Session::get('failed') }}
+            <button type="button" class="close border-0 bg-transparent" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
 
-    <button type="button" class="close border-0 bg-transparent" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-
-</div>
-@endif
+        </div>
+    @endif
     <h5 class="m-1">PEMERIKSAAN KEJANGGALAN PEPASANGAN TNB &
         SENGGARAAN BUKAN ELEKTRIK TALIAN ATAS DI SELANGOR UNTUK DISTRIBUTION NETWORK
         DIVISION, TNB</h5>
@@ -280,10 +279,10 @@
                     <select name="search_wp" id="search_wp" class="form-control"></select>
                 </div>
                 <div class="col-md-2 p-2 text-center pt-4" id="for-excel">
-            </div>
+                </div>
 
-            
-                
+
+
             </div>
         </div>
     </div>
@@ -480,7 +479,9 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Add new W.P</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 <form action="/save-work-package" method="post" onsubmit="return submitFoam()">
                     @csrf
@@ -511,7 +512,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-success">Submit</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 
                     </div>
                 </form>
@@ -524,7 +525,9 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Site Data Info</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 <div class="modal-body ">
                     <table class="table table-bordered">
@@ -532,7 +535,7 @@
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 
                 </div>
             </div>
@@ -544,7 +547,9 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Identify Roads</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 <form action="/save-road" method="post" onsubmit="return submitFoam2()">
                     @csrf
@@ -573,7 +578,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-success">Submit</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 
                     </div>
                 </form>
@@ -1129,15 +1134,15 @@
 
     <script>
         const baJson = [
-            ['PUTRAJAYA & CYBERJAYA', 2.92875032271019, 101.675338316575],
-            ['BANTING', 2.82111390453244, 101.505890775541],
-            ['CHERAS', 3.14197346621987, 101.849883983416],
-            ['PELABUHAN KLANG', 2.98188527916042, 101.324234779569],
-            ['KLANG', 3.08428642705789, 101.436185279023],
-            ['KUALA SELANGOR', 3.40703209426401, 101.317426926947],
-            ['RAWANG', 3.47839445121726, 101.622905486475],
-            ['PETALING JAYA', 3.1128074178475, 101.605270457169],
-            ['KUALA LUMPUR PUSAT', 3.14925905877391, 101.754098819705]
+            // ['PUTRAJAYA & CYBERJAYA', 2.92875032271019, 101.675338316575],
+            // ['BANTING', 2.82111390453244, 101.505890775541],
+            // ['CHERAS', 3.14197346621987, 101.849883983416],
+            // ['PELABUHAN KLANG', 2.98188527916042, 101.324234779569],
+            // ['KLANG', 3.08428642705789, 101.436185279023],
+            // ['KUALA SELANGOR', 3.40703209426401, 101.317426926947],
+            // ['RAWANG', 3.47839445121726, 101.622905486475],
+            // ['PETALING JAYA', 3.1128074178475, 101.605270457169],
+            // ['KUALA LUMPUR PUSAT', 3.14925905877391, 101.754098819705]
         ]
         $(document).ready(function() {
 
@@ -1154,28 +1159,44 @@
                 areaSelect.append(`<option value="" hidden>Select ba</option>`)
 
                 if (selectedValue === 'W1') {
-                    const w1Options = ['KL PUSAT'];
+                    const w1Options = [
+                        ['KL PUSAT', 'KUALA LUMPUR PUSAT', 3.14925905877391, 101.754098819705]
+                    ];
 
                     w1Options.forEach((data) => {
-                        areaSelect.append(`<option value="${data}">${data}</option>`);
+                        areaSelect.append(`<option value="${data}">${data[0]}</option>`);
                     });
                 } else if (selectedValue === 'B1') {
-                    const b1Options = ['PJ', 'RWANG', 'K.SELANGOR'];
+                    const b1Options = [
+                        ['PJ', 'PETALING JAYA', 3.1128074178475, 101.605270457169],
+                        ['RWANG', 'RAWANG', 3.47839445121726, 101.622905486475],
+                        ['K.SELANGOR', 'KUALA SELANGOR', 3.40703209426401, 101.317426926947]
+                    ];
 
                     b1Options.forEach((data) => {
-                        areaSelect.append(`<option value="${data}">${data}</option>`);
+                        areaSelect.append(`<option value="${data}">${data[0]}</option>`);
                     });
                 } else if (selectedValue === 'B2') {
-                    const b2Options = ['KLANG', 'PORT KLANG'];
+                    const b2Options = [
+                        ['KLANG', 'KLANG', 3.08428642705789, 101.436185279023],
+                        ['PORT KLANG', 'PELABUHAN KLANG', 2.98188527916042, 101.324234779569]
+                    ];
 
                     b2Options.forEach((data) => {
-                        areaSelect.append(`<option value="${data}">${data}</option>`);
+                        areaSelect.append(`<option value="${data}">${data[0]}</option>`);
                     });
                 } else if (selectedValue === 'B4') {
-                    const b4Options = ['CHERAS', 'BANTING/SEPANG', 'BANGI', 'PUTRAJAYA/CYBERJAYA/PUCHONG'];
+                    const b4Options = [
+                        ['CHERAS', 'CHERAS', 3.14197346621987, 101.849883983416],
+                        ['BANTING/SEPANG', 'BANTING', 2.82111390453244, 101.505890775541],
+                        ['BANGI', 'BANGI'],
+                        ['PUTRAJAYA/CYBERJAYA/PUCHONG', 'PUTRAJAYA & CYBERJAYA', 2.92875032271019,
+                            101.675338316575
+                        ]
+                    ];
 
                     b4Options.forEach((data) => {
-                        areaSelect.append(`<option value="${data}">${data}</option>`);
+                        areaSelect.append(`<option value="${data}">${data[0]}</option>`);
                     });
                 }
                 $('#search_wp').empty();
@@ -1194,9 +1215,11 @@
 
 
         function getWorkPackage(param) {
+            var splitVal = param.value.split(',');
+            addRemoveBundary(splitVal[1], splitVal[2], splitVal[3])
             var zone = $('#search_zone').val();
             $.ajax({
-                url: `/get-work-package/${param.value}/${zone}`,
+                url: `/get-work-package/${splitVal[0]}/${zone}`,
                 dataType: 'JSON',
                 method: 'GET',
                 async: false,
@@ -1208,23 +1231,23 @@
 
                         $('#search_wp').append(
                             `<option value="${val.id} ,${val.x} ,${val.y}">${val.package_name}</option>`
-                            );
+                        );
                     });
                     $('#for-excel').html('')
 
                 }
             })
-           
+
         }
 
 
         $('#search_wp').on('change', function() {
             const selectedValue = this.value;
             var spiltVal = selectedValue.split(',');
-            zoomToxy(parseFloat([2]), parseFloat([1]))
+            zoomToxy(parseFloat(spiltVal[1]), parseFloat(spiltVal[2]))
 
             $('#for-excel').html(`<a class="mt-4" href="/generate-third-party-diging-excel/${spiltVal[0]}"><button class="btn-sm mt-2
-                btn btn-primary">Download Excel</button></a>`)
+                btn btn-primary">Download Qr</button></a>`)
         })
 
 
@@ -1304,5 +1327,4 @@
             $('#er_raod_name').html("");
         }
     </script>
-  
 @endsection
