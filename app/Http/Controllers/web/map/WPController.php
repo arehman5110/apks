@@ -55,7 +55,7 @@ class WPController extends Controller
 
    public function getStats($wp) {
     $wp_id = $wp;
-    $result = DB::select("SELECT (st_length(geom::geography))/1000 as distance FROM tbl_roads where id_workpackage='$wp_id'");
+    $result = DB::select("SELECT (sum(st_length(geom::geography)))/1000 as distance FROM tbl_roads where id_workpackage='$wp_id'");
     return response()->json([ $result[0]],200);
     
    }
