@@ -74,6 +74,10 @@
         div#lightbox {
             display: none;
         }
+
+        .side-bar > .table td {
+   padding: 0.5rem !important
+}
     </style>
 @endsection
 @section('content')
@@ -357,6 +361,8 @@
                                 <option value="street_light">street_light</option>
                                 <option value="pole">pole</option>
                                 <option value="wp">wp</option>
+                                <option value="notice">notice</option>
+                                <option value="supervise">supervise</option>
 
                             </select>
                         </div>
@@ -364,88 +370,105 @@
                         <!-- START MAP SIDEBAR DETAILS -->
                         <details class="mb-3">
                             <summary><strong>Patrolling 3rd Party Digging Activities</strong> </summary>
-                            <ul>
-                                <li> <input type="checkbox" name="" id="petroling_a" onclick="addpanolayer()">
+                            <table class="table table-bordered" style="cursor: pointer">
+                                <tr>
+                                    <td onclick="addNotice(this)">Mengeluarkan notis</td>
+                                </tr>
+                                <tr>
+                                    <td onclick="addSupervise(this)">Menyelia kerja-kerja korekan</td>
+                                </tr>
+                            </table>
+                            {{-- <ul>
+                               <li> <input type="checkbox" name="" id="petroling_a" onclick="addpanolayer()">
                                     <label for="petroling_a">Pemeriksaan di Jalan</label>
-                                </li>
+                                </li> 
                                 <li><input type="checkbox" name="" id="petroling_b"> <label
-                                        for="petroling_b">Mengeluarkan notis</label> </li>
+                                        for="petroling_b" onclick="addNotice()">Mengeluarkan notis</label> </li>
                                 <li><input type="checkbox" name="" id="petroling_c"> <label
-                                        for="petroling_c">Menyelia kerja-kerja korekan</label> </li>
+                                        for="petroling_c" onclick="addSupervise()">Menyelia kerja-kerja korekan</label> </li>
                                 <li><input type="checkbox" name="" id="petroling_d"> <label
                                         for="petroling_d">Report</label> </li>
-                            </ul>
+                            </ul> --}}
                         </details>
 
                         <details class="mb-3">
                             <summary><strong>Pencawang</strong> </summary>
-                            <ul>
-                                <li> <input type="checkbox" name="" id="pencawang_a"> <label
-                                        for="pencawang_a">Pemeriksaan visual dan pelaporan </label> </li>
-                                <li><input type="checkbox" name="" id="pencawang_b"> <label
-                                        for="pencawang_b">Pembersihan iklan haram/banner </label> </li>
-
-                                <li><input type="checkbox" name="" id="pencawang_c"> <label
-                                        for="pencawang_c">Report</label> </li>
-                            </ul>
+                            <table class="table table-bordered">
+                                <tr>
+                                    <td>Pemeriksaan visual dan pelaporan</td>
+                                </tr>
+                                <tr>
+                                    <td>Pembersihan iklan haram/banner </td>
+                                </tr>
+                                <tr>
+                                    <td>Report</td>
+                                </tr>
+                            </table>
+                    
                         </details>
 
 
                         <details class="mb-3">
                             <summary><strong>Feeder Pillar</strong> </summary>
-                            <ul>
-                                <li> <input type="checkbox" name="" id="feeder_a"> <label
-                                        for="feeder_a">Pemeriksaan visual</label> </li>
-                                <li><input type="checkbox" name="" id="feeder_b"> <label
-                                        for="feeder_b">Pembersihan iklan haram/banner</label> </li>
-
-                                <li><input type="checkbox" name="" id="feeder_c"> <label
-                                        for="feeder_c">Report</label> </li>
-                            </ul>
+                            <table class="table table-bordered">
+                                <tr>
+                                    <td>Pemeriksaan visual</td>
+                                </tr>
+                                <tr>
+                                    <td>Pembersihan iklan haram/banner</td>
+                                </tr>
+                                <tr>
+                                    <td>Report</td>
+                                </tr>
+                            </table>
+                          
                         </details>
 
                         <details class="mb-3">
                             <summary><strong> Tiang + Talian VT & VR</strong> </summary>
-                            <ul>
-                                <li> <input type="checkbox" name="" id="tiang_a"> <label
-                                        for="tiang_a">Pendaftaran aset, pemeriksaan visual </label> </li>
-                                <li><input type="checkbox" name="" id="tiang_b"> <label
-                                        for="tiang_b">Pembersihan iklan haram/banner</label> </li>
-                                <li><input type="checkbox" name="" id="tiang_c"> <label
-                                        for="tiang_c">Pembersihan creepers</label> </li>
-                                <li><input type="checkbox" name="" id="tiang_d"> <label
-                                        for="tiang_d">Pemeriksaan kebocoran arus pada tiang</label></li>
-                                <li><input type="checkbox" name="" id="tiang_e"> <label
-                                        for="tiang_e">Report</label> </li>
-                            </ul>
+                            <table class="table table-bordered">
+                                <tr>
+                                    <td>Pendaftaran aset, pemeriksaan visual</td>
+                                </tr>
+                                <tr>
+                                    <td>Pembersihan iklan haram/banner</td>
+                                </tr>
+                                <tr>
+                                    <td>Pembersihan creepers</td>
+                                </tr>
+                                <tr>
+                                    <td>Pemeriksaan kebocoran arus pada tiang</td>
+                                </tr>
+                                <tr><td>Report</td></tr>
+                            </table>
+                
                         </details>
 
 
                         <details class="mb-3">
                             <summary><strong> Link Box Pelbagai Voltan</strong> </summary>
-                            <ul>
-                                <li> <input type="checkbox" name="" id="tiang_a"> <label for="tiang_a">
-                                        Pemeriksaan visual</label> </li>
-                                <li><input type="checkbox" name="" id="tiang_b"> <label for="tiang_b">
-                                        Pembersihan iklan haram/banner</label> </li>
-                                <li><input type="checkbox" name="" id="tiang_c"> <label
-                                        for="tiang_c">Pembersihan semak samun / creepers/sampah/ rumput</label> </li>
-                                <li><input type="checkbox" name="" id="tiang_d"> <label
-                                        for="tiang_d">Report</label> </li>
-                            </ul>
+                            <table class="table table-bordered">
+                                <tr>
+                                    <td>Pemeriksaan visual</td>
+                                </tr>
+                                <tr>
+                                    <td>Pembersihan iklan haram/banner</td>
+                                </tr>
+                                <tr><td>Pembersihan semak samun / creepers/sampah/ rumput</td></tr>
+                                <table><td>Report</td></table>
+                            </table>
+                          
                         </details>
 
 
                         <details class="mb-3">
                             <summary><strong> Cable bridge</strong> </summary>
-                            <ul>
-                                <li> <input type="checkbox" name="" id="cable_a"> <label for="cable_a">
-                                        Pemeriksaan visual</label> </li>
-                                <li><input type="checkbox" name="" id="cable_b"> <label for="cable_b">
-                                        Pembersihan semak samun / creepers/sampah/ rumput</label> </li>
-                                <li><input type="checkbox" name="" id="cable_c"> <label
-                                        for="cable_c">Report</label> </li>
-                            </ul>
+                            <table class="table table-bordered">
+                                <tr><td>Pemeriksaan visual</td></tr>
+                                <tr><td>Pembersihan semak samun / creepers/sampah/ rumput</td></tr>
+                                <tr><td>Report</td></tr>
+                            </table>
+    
                         </details>
                         <!-- END MAP SIDEBAR DETAILS -->
                     </div>
@@ -982,6 +1005,13 @@
             if (val == 'rd') {
                 sel_lyr = rd;
             }
+            if (val == 'notice') {
+                sel_lyr = notice;
+            }
+
+            if (val == 'supervise') {
+                sel_lyr = supervise;
+            }
 
 
             map.off('click');
@@ -1145,6 +1175,54 @@
 
 
 
+        }
+
+        var notice  = '';
+        var supervise = '';
+        
+        function addNotice(event) {
+            if (notice == '') {
+                notice = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:diging_notice',
+                format: 'image/png',
+                // cql_filter: "ba='" + param + "'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+            map.addLayer(notice)
+            notice.bringToFront()
+            $(event).css('background','#c9def2');
+            }else{
+                map.removeLayer(notice);
+                notice = '';
+                $(event).css('background','white');
+            }
+          
+        }
+
+
+        function addSupervise(event) {
+            if (supervise == '') {
+                supervise = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:diging_supervise',
+                format: 'image/png',
+                // cql_filter: "ba='" + param + "'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+            map.addLayer(supervise)
+            supervise.bringToFront()
+            $(event).css('background','#c9def2');
+            }else{
+                map.removeLayer(supervise);
+                supervise ='';
+                $(event).css('background','white');
+            }
+          
         }
 
 
