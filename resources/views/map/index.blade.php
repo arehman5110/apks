@@ -1127,7 +1127,7 @@
 
 
         function zoomToxy(x, y) {
-            map.setView([y, x], 8)
+            map.setView([y, x], 16)
         }
     </script>
 
@@ -1219,7 +1219,7 @@
             addRemoveBundary(splitVal[1], splitVal[2], splitVal[3])
             var zone = $('#search_zone').val();
             $.ajax({
-                url: `/get-work-package/${splitVal[0]}/${zone}`,
+                url: `/get-work-package/${splitVal[1]}/${zone}`,
                 dataType: 'JSON',
                 method: 'GET',
                 async: false,
