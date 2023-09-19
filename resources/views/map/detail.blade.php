@@ -84,6 +84,7 @@
                                             <th>BA</th>
                                             <th>Status</th>
                                             <th>Created AT</th>
+                                            <th>Action</th>
                                           
                                         </tr>
                                     </thead>
@@ -121,7 +122,8 @@
                                                     @endphp
                                                     {{ $datePortion }}
                                                 </td>
-                                                <td class="text-center"><button></button></td>
+                                                <td class="text-center">
+                                                   <a href="/get-work-package-detail/{{$data->id}}"> <button class="btn btn-sm btn-secondary">Detail</button></a></td>
                                                 {{-- <td class="align-middle">{{ $data->type_feeder ? $data->type_feeder : '-' }}</td> --}}
                                                 
                                             </tr>

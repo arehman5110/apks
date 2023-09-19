@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\web\excel\DigingExcelController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\web\map\MapController;
+use App\Http\Controllers\web\map\WPController;
 use App\Http\Controllers\web\tnbes\StatusController;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Gd\Commands\RotateCommand;
@@ -37,6 +38,7 @@ Route::get('/get-work-package/{ba}/{zone}',[App\Http\Controllers\web\map\WPContr
 
 Route::get('/send-to-tnbes/{id}',[StatusController::class,'sendToTnbes']);
 Route::get('/generate-third-party-diging-excel/{id}',[DigingExcelController::class,'generateDigingExcel']);
+Route::get("/get-work-package-detail/{id}",[WPController::class,'detail']);
 
 
 

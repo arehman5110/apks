@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\WorkPackage;
 use Illuminate\Support\Facades\DB;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx\Rels;
 
 class WPController extends Controller
 {
@@ -51,6 +52,21 @@ class WPController extends Controller
     $result = DB::select("SELECT ppb_zone, station  FROM ba WHERE ST_Intersects(geom, ST_GeomFromGeoJSON('$geom'))");
     return response()->json([ $result[0]],200);
     
+   }
+
+ 
+
+
+   public function detail($id){
+  $rec=WorkPackage::withCount('diging')->find($id);
+
+    $wp = WorkPackage::selectRaw('ST_X(ST_Centroid(geom)) as x')
+    ->selectRaw('ST_Y(ST_Centroid(geom)) as y')
+    ->where('ba', $rec->ba)
+    ->where('zone', $rec->zone)
+    ->first();
+
+      return $rec != ''? view('map.show',['rec'=>$rec , 'wp'=>$wp]) : abort(404) ;
    }
 
 }
