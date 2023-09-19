@@ -44,8 +44,9 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <div class="card-title">
+                            <div class="card-title text-right">
                                 Work Package Detail
+                              
                             </div>
 
                         </div>

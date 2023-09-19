@@ -1,14 +1,13 @@
 @extends('layouts.app', ['page_title' => 'Index'])
 
 @section('css')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script> 
-<script src="https://malsup.github.io/jquery.form.js"></script>
-<script>var $jq= $.noConflict(true);</script>    
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    
-    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-    </script> --}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
+    <script src="https://malsup.github.io/jquery.form.js"></script>
+    <script>
+        var $jq = $.noConflict(true);
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
@@ -23,7 +22,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
     <link rel="stylesheet" href="{{ URL::asset('assets/lib/window-engine.css') }}" />
     <script src="{{ URL::asset('assets/lib/window-engine.js') }}"></script>
-    
+
 
     <style>
         .sidebar-mini.sidebar-collapse .content-wrapper,
@@ -75,9 +74,9 @@
             display: none;
         }
 
-        .side-bar > .table td {
-   padding: 0.5rem !important
-}
+        .side-bar>.table td {
+            padding: 0.5rem !important
+        }
     </style>
 @endsection
 @section('content')
@@ -404,7 +403,7 @@
                                     <td>Report</td>
                                 </tr>
                             </table>
-                    
+
                         </details>
 
 
@@ -421,7 +420,7 @@
                                     <td>Report</td>
                                 </tr>
                             </table>
-                          
+
                         </details>
 
                         <details class="mb-3">
@@ -439,9 +438,11 @@
                                 <tr>
                                     <td>Pemeriksaan kebocoran arus pada tiang</td>
                                 </tr>
-                                <tr><td>Report</td></tr>
+                                <tr>
+                                    <td>Report</td>
+                                </tr>
                             </table>
-                
+
                         </details>
 
 
@@ -454,21 +455,31 @@
                                 <tr>
                                     <td>Pembersihan iklan haram/banner</td>
                                 </tr>
-                                <tr><td>Pembersihan semak samun / creepers/sampah/ rumput</td></tr>
-                                <table><td>Report</td></table>
+                                <tr>
+                                    <td>Pembersihan semak samun / creepers/sampah/ rumput</td>
+                                </tr>
+                                <table>
+                                    <td>Report</td>
+                                </table>
                             </table>
-                          
+
                         </details>
 
 
                         <details class="mb-3">
                             <summary><strong> Cable bridge</strong> </summary>
                             <table class="table table-bordered">
-                                <tr><td>Pemeriksaan visual</td></tr>
-                                <tr><td>Pembersihan semak samun / creepers/sampah/ rumput</td></tr>
-                                <tr><td>Report</td></tr>
+                                <tr>
+                                    <td>Pemeriksaan visual</td>
+                                </tr>
+                                <tr>
+                                    <td>Pembersihan semak samun / creepers/sampah/ rumput</td>
+                                </tr>
+                                <tr>
+                                    <td>Report</td>
+                                </tr>
                             </table>
-    
+
                         </details>
                         <!-- END MAP SIDEBAR DETAILS -->
                     </div>
@@ -849,7 +860,7 @@
         var addTOmap = false;
         var boundary2 = '';
         var wp = '';
-        var rd='';
+        var rd = '';
 
 
         map.addLayer(boundary3)
@@ -1053,7 +1064,14 @@
                                     str = str + '<tr><td>' + key + '</td><td>' + data.features[0]
                                         .properties[key] + '</td></tr>'
                                 }
+
+
                             }
+                            if ($('#tableLayer').val() == 'supervise' || $('#tableLayer').val() == 'notice') {
+                                str = str + `<tr><td> Report</td><td> <a href="/generate-third-party-pdf/${data.features[0].properties.id}" target="_blank"><button class="btn btn-sm btn-success">Download</button></a></td></tr>`
+
+                            }
+
                             $("#my_data").html(str);
                             $('#myModal').modal('show');
                             if (identifyme != '') {
@@ -1177,52 +1195,52 @@
 
         }
 
-        var notice  = '';
+        var notice = '';
         var supervise = '';
-        
+
         function addNotice(event) {
             if (notice == '') {
                 notice = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-                layers: 'cite:diging_notice',
-                format: 'image/png',
-                // cql_filter: "ba='" + param + "'",
-                maxZoom: 21,
-                transparent: true
-            }, {
-                buffer: 10
-            })
-            map.addLayer(notice)
-            notice.bringToFront()
-            $(event).css('background','#c9def2');
-            }else{
+                    layers: 'cite:diging_notice',
+                    format: 'image/png',
+                    // cql_filter: "ba='" + param + "'",
+                    maxZoom: 21,
+                    transparent: true
+                }, {
+                    buffer: 10
+                })
+                map.addLayer(notice)
+                notice.bringToFront()
+                $(event).css('background', '#c9def2');
+            } else {
                 map.removeLayer(notice);
                 notice = '';
-                $(event).css('background','white');
+                $(event).css('background', 'white');
             }
-          
+
         }
 
 
         function addSupervise(event) {
             if (supervise == '') {
                 supervise = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-                layers: 'cite:diging_supervise',
-                format: 'image/png',
-                // cql_filter: "ba='" + param + "'",
-                maxZoom: 21,
-                transparent: true
-            }, {
-                buffer: 10
-            })
-            map.addLayer(supervise)
-            supervise.bringToFront()
-            $(event).css('background','#c9def2');
-            }else{
+                    layers: 'cite:diging_supervise',
+                    format: 'image/png',
+                    // cql_filter: "ba='" + param + "'",
+                    maxZoom: 21,
+                    transparent: true
+                }, {
+                    buffer: 10
+                })
+                map.addLayer(supervise)
+                supervise.bringToFront()
+                $(event).css('background', '#c9def2');
+            } else {
                 map.removeLayer(supervise);
-                supervise ='';
-                $(event).css('background','white');
+                supervise = '';
+                $(event).css('background', 'white');
             }
-          
+
         }
 
 
@@ -1247,17 +1265,17 @@
         $(document).ready(function() {
 
 
-            $jq('#save_wp').ajaxForm(function() { 
-                alert("Thank you for your comment!"); 
+            $jq('#save_wp').ajaxForm(function() {
+                alert("Thank you for your comment!");
                 $('#geomModal').modal('hide');
                 map.removeLayer(drawnItems);
-            }); 
+            });
 
-            $jq('#road-form').ajaxForm(function() { 
-                alert("Thank you for your comment!"); 
+            $jq('#road-form').ajaxForm(function() {
+                alert("Thank you for your comment!");
                 $('#polyLineModal').modal('hide');
                 map.removeLayer(drawnItems);
-            }); 
+            });
 
 
             $('body').addClass('sidebar-collapse');
@@ -1360,8 +1378,8 @@
 
             $('#for-excel').html(`<a class="mt-4" href="/generate-third-party-diging-excel/${spiltVal[0]}"><button class="btn-sm mt-2
                 btn btn-primary">Download Qr</button></a>`)
-            
-                $.ajax({
+
+            $.ajax({
                 url: `/getStats/${spiltVal[0]}`,
                 dataType: 'JSON',
                 method: 'GET',
@@ -1369,12 +1387,12 @@
                 success: function callback(data) {
                     console.log(data);
                     $("#total").html(Number((data[0].distance)).toFixed(1))
-                    
+
 
                 }
-            })    
+            })
 
-                          
+
         })
 
 

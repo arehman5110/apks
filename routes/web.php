@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\web\excel\DigingExcelController;
+use App\Http\Controllers\web\map\GeneratePDFController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\web\map\MapController;
 use App\Http\Controllers\web\map\RoadController;
@@ -46,6 +47,8 @@ Route::get("/get-work-package-detail/{id}",[WPController::class,'detail']);
 
 Route::get('/remove-road/{id}',[RoadController::class,'removeRoad']);
 Route::get('/remove-work-package/{id}',[WPController::class,'removeWP']);
+
+Route::get('/generate-third-party-pdf/{id}',[GeneratePDFController::class,'generatePDF']);
 
 
 
