@@ -1282,6 +1282,21 @@
 
             $('#for-excel').html(`<a class="mt-4" href="/generate-third-party-diging-excel/${spiltVal[0]}"><button class="btn-sm mt-2
                 btn btn-primary">Download Qr</button></a>`)
+            
+                $.ajax({
+                url: `/getStats/${spiltVal[0]}`,
+                dataType: 'JSON',
+                method: 'GET',
+                async: false,
+                success: function callback(data) {
+                    console.log(data);
+                    $("#total").html(Number((data[0].distance)).toFixed(1))
+                    
+
+                }
+            })    
+
+                          
         })
 
 

@@ -68,5 +68,11 @@ class WPController extends Controller
 
       return $rec != ''? view('map.show',['rec'=>$rec , 'wp'=>$wp]) : abort(404) ;
    }
+   public function getStats($wp) {
+    $wp_id = $wp;
+    $result = DB::select("SELECT (st_length(geom::geography))/1000 as distance FROM tbl_roads where id_workpackage='$wp_id'");
+    return response()->json([ $result[0]],200);
+    
+   }
 
 }
