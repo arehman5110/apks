@@ -317,6 +317,7 @@
 
                     <div class=" mx-1   p-1 t" style="background-color:  #92C400 !important;color:white">
                         <p style="font-weight: 600;">Total Notice</p>
+                        <span id="total_notice"></span>
 
                     </div>
 
@@ -325,6 +326,7 @@
 
                     <div class=" mx-1   p-1 t" style="background-color:  #92C400 !important;color:white">
                         <p style="font-weight: 600;">Total Supervision</p>
+                        <span id="total_supervise"></span>
 
                     </div>
 
@@ -1386,8 +1388,10 @@
                 async: false,
                 success: function callback(data) {
                     console.log(data);
-                    $("#total").html(Number((data[0].distance)).toFixed(1))
-
+                    $("#total").html(Number((data[0].distance)).toFixed(1));
+                    $("#total_notice").html((data[1].count))
+                    $("#total_supervise").html((data[2].count))
+                    
 
                 }
             })
