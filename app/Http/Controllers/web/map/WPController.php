@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\web\map;
 
 use App\Http\Controllers\Controller;
+use App\Models\Road;
 use Illuminate\Http\Request;
 use App\Models\WorkPackage;
 use Illuminate\Support\Facades\DB;
@@ -66,13 +67,30 @@ class WPController extends Controller
     ->where('zone', $rec->zone)
     ->first();
 
-      return $rec != ''? view('map.show',['rec'=>$rec , 'wp'=>$wp]) : abort(404) ;
+ $road = Road::selectRaw('(ST_Length(geom::geography))/1000 as distance')
+   ->where('id_workpackage', $id)
+   ->get();
+   
+    return $rec != ''? view('map.show',['rec'=>$rec , 'wp'=>$wp , 'distance'=>$road->sum('distance')]) : abort(404) ;
    }
    public function getStats($wp) {
     $wp_id = $wp;
     $result = DB::select("SELECT (st_length(geom::geography))/1000 as distance FROM tbl_roads where id_workpackage='$wp_id'");
     return response()->json([ $result[0]],200);
     
+   }
+
+   public function removeWP($id){
+
+    try {
+      $wp = WorkPackage::find($id);
+      if ($wp) {
+      $wp->delete();
+      }
+      return redirect()->back()->with('success','Remove records successfully');
+    } catch (\Throwable $th) {
+      return redirect()->back()->with('failed','try again later');
+    }
    }
 
 }

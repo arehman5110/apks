@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\web\map;
 
 use App\Http\Controllers\Controller;
+use App\Models\Road;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -26,4 +27,17 @@ class RoadController extends Controller
       return redirect('map-1');
       
       }
+
+      public function removeRoad($id){
+
+        try {
+          $wp = Road::find($id);
+          if ($wp) {
+          $wp->delete();
+          }
+          return redirect()->back()->with('success','Remove records successfully');
+        } catch (\Throwable $th) {
+          return redirect()->back()->with('failed','try again later');
+        }
+       }
 }

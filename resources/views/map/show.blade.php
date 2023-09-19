@@ -81,6 +81,12 @@
                                 </div>
                             </div>
 
+                            <div class="row">
+                                <div class="col-md-4"><label for="">Total Distance</label></div>
+                                <div class="col-md-4"><input disabled class="form-control" value="{{ $distance }}">
+                                </div>
+                            </div>
+
 
                             <h4 class="text-center mt-3">Road Details</h4>
                             <div id="map"></div>

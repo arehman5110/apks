@@ -4,8 +4,10 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\web\excel\DigingExcelController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\web\map\MapController;
+use App\Http\Controllers\web\map\RoadController;
 use App\Http\Controllers\web\map\WPController;
 use App\Http\Controllers\web\tnbes\StatusController;
+use App\Models\Road;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Gd\Commands\RotateCommand;
 
@@ -41,6 +43,9 @@ Route::get('/getStats/{wp}',[App\Http\Controllers\web\map\WPController::class,"g
 Route::get('/send-to-tnbes/{id}',[StatusController::class,'sendToTnbes']);
 Route::get('/generate-third-party-diging-excel/{id}',[DigingExcelController::class,'generateDigingExcel']);
 Route::get("/get-work-package-detail/{id}",[WPController::class,'detail']);
+
+Route::get('/remove-road/{id}',[RoadController::class,'removeRoad']);
+Route::get('/remove-work-package/{id}',[WPController::class,'removeWP']);
 
 
 
