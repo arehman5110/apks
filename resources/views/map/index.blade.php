@@ -1,7 +1,11 @@
 @extends('layouts.app', ['page_title' => 'Index'])
 
 @section('css')
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script> 
+<script src="https://malsup.github.io/jquery.form.js"></script>
+<script>var $jq= $.noConflict(true);</script>    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    
     {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script> --}}
@@ -19,6 +23,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
     <link rel="stylesheet" href="{{ URL::asset('assets/lib/window-engine.css') }}" />
     <script src="{{ URL::asset('assets/lib/window-engine.js') }}"></script>
+    
 
     <style>
         .sidebar-mini.sidebar-collapse .content-wrapper,
@@ -483,7 +488,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="/save-work-package" method="post" onsubmit="return submitFoam()">
+                <form action="/save-work-package" method="post" id="save_wp" onsubmit="return submitFoam()">
                     @csrf
                     <div class="modal-body ">
 
@@ -821,6 +826,7 @@
         var addTOmap = false;
         var boundary2 = '';
         var wp = '';
+        var rd='';
 
 
         map.addLayer(boundary3)
@@ -973,6 +979,10 @@
             if (val == 'wp') {
                 sel_lyr = wp;
             }
+            if (val == 'rd') {
+                sel_lyr = rd;
+            }
+
 
             map.off('click');
             map.on('click', function(e) {
@@ -1120,6 +1130,18 @@
             map.addLayer(wp)
             wp.bringToFront()
 
+            rd = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:tbl_roads',
+                format: 'image/png',
+                cql_filter: "ba='" + param + "'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+            map.addLayer(rd)
+            rd.bringToFront()
+
 
 
 
@@ -1146,6 +1168,12 @@
         ]
         $(document).ready(function() {
 
+
+            $jq('#save_wp').ajaxForm(function() { 
+                alert("Thank you for your comment!"); 
+                $('#geomModal').modal('hide');
+                map.removeLayer(drawnItems);
+            }); 
 
 
             $('body').addClass('sidebar-collapse');
