@@ -76,7 +76,10 @@ class WPController extends Controller
    public function getStats($wp) {
     $wp_id = $wp;
     $result = DB::select("SELECT (sum(st_length(geom::geography)))/1000 as distance FROM tbl_roads where id_workpackage='$wp_id'");
-    return response()->json([ $result[0]],200);
+    $result1 = DB::select("SELECT count(*)  FROM tbl_third_party_diging_patroling where workpackage_id='$wp_id' and service_status='notice'");
+    $result2 = DB::select("SELECT count(*)  FROM tbl_third_party_diging_patroling where workpackage_id='$wp_id' and service_status='supervise'");
+
+    return response()->json([$result[0],$result1[0],$result2[0]],200);
     
    }
 
