@@ -121,6 +121,7 @@
                                                     @endphp
                                                     {{ $datePortion }}
                                                 </td>
+                                                <td class="text-center"><button></button></td>
                                                 {{-- <td class="align-middle">{{ $data->type_feeder ? $data->type_feeder : '-' }}</td> --}}
                                                 
                                             </tr>
