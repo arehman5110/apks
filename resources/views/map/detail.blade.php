@@ -9,9 +9,10 @@
 <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
 
 <style>
-    div#myTable_length {
+    div#myTable_length ,div#roads_length {
     display: none;
 }
+
 </style>
 @endsection
 
@@ -64,6 +65,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="card-title">
+                                Work Package
                              </div>
 
                         </div>
@@ -123,14 +125,121 @@
                                                     {{ $datePortion }}
                                                 </td>
                                                 <td class="text-center">
-                                                   <a href="/get-work-package-detail/{{$data->id}}"> <button class="btn btn-sm btn-secondary">Detail</button></a></td>
-                                                {{-- <td class="align-middle">{{ $data->type_feeder ? $data->type_feeder : '-' }}</td> --}}
+
+                                                    <button type="button" class="btn  " data-toggle="dropdown">
+                                                        <img
+                                                            src="{{ URL::asset('assets/web-images/three-dots-vertical.svg') }}">
+                                                    </button>
+                                                    <div class="dropdown-menu" role="menu">
+                                                  
+                                                        <a class="dropdown-item"
+                                                            href="/get-work-package-detail/{{$data->id}}">Detail</a>
+
+
+                                                            <a class="dropdown-item"
+                                                            href="/remove-work-package/{{$data->id}}" onclick="return confirm('Are you sure?')">Remove</a>
+
+                        
+                                                   </a>
+                                                </td>
+                                               
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+
+
+                            
+
+                        </div>
+                    </div>
+
+
+
+
+
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                Roads
+                             </div>
+
+                        </div>
+                    
+                        <div class="card-body">
+                            <div class="text-right mb-4">
+
+                            </div>
+                            <div class="table-responsive">
+                                <table id="roads" class="table table-bordered table-hover">
+
+
+                                    <thead style="background-color: #E4E3E3 !important">
+                                        <tr>
+                                            <th>Package Name</th>
+                                            <th>Road Name</th>
+                                            <th>Zone</th>
+                                            <th>BA</th>
+                
+                                            <th>Created AT</th>
+                                            <th>Action</th>
+                                          
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @foreach ($roads as $road)
+                                            <tr>
+                                                <td class="align-middle">{{ $road->workPackage->package_name }}</td>
+                                                <td class="align-middle">{{ $road->road_name }}</td>
+                                                <td class="align-middle">
+                                                    {{ $road->zone }}</td>
+
+                                                <td class="align-middle ">
+                                                    {{ $road->ba }}
+                                                </td>
+                                               
+                                                <td class="align-middle text-center">
+                                                    @php 
+                                                    $date = new DateTime($road->created_at );
+                                                        $datePortion = $date->format("Y-m-d");
+ 
+                                                        
+                                                    @endphp
+                                                    {{ $datePortion }}
+                                                </td>
+                                                <td class="text-center">
+
+                                                    <button type="button" class="btn  " data-toggle="dropdown">
+                                                        <img
+                                                            src="{{ URL::asset('assets/web-images/three-dots-vertical.svg') }}">
+                                                    </button>
+                                                    <div class="dropdown-menu" role="menu">
+                                                  
+                                                    
+
+
+                                                            <a class="dropdown-item"
+                                                            href="/remove-road/{{$road->id}}" onclick="return confirm('Are you sure?')">Remove</a>
+
+                        
+                                                   </a>
+                                                </td>
                                                 
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
                             </div>
+
+
+
+
+                            
 
                         </div>
                     </div>
@@ -155,6 +264,7 @@
     <script>
         $(document).ready(function() {
             $('#myTable').DataTable();
+            $('#roads').DataTable();
         });
 
             </script>

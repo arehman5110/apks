@@ -95,7 +95,7 @@
 
     <!--  START TOP TABS -->
 
-    <div class="row text-center m-2">
+    {{-- <div class="row text-center m-2">
 
         <!--  START TAB W1 -->
 
@@ -252,13 +252,13 @@
             </div>
         </div> <!--  END TAB B4 -->
 
-    </div> <!--  END TOP TABS  -->
+    </div> <!--  END TOP TABS  --> --}}
 
     <div class=" p-1 col-12 m-2">
         <div class="card p-0 mb-3">
             <div class="card-body row">
 
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <label for="search_zone">Zone</label>
                     <select name="search_zone" id="search_zone" class="form-control">
 
@@ -270,7 +270,7 @@
 
                     </select>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <label for="search_ba">Ba</label>
                     <select name="search_ba" id="search_ba" class="form-control" onchange="getWorkPackage(this)">
                         <option value="">Select zone</option>
@@ -279,7 +279,7 @@
 
 
 
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <label for="search_wp">Work Package</label>
                     <select name="search_wp" id="search_wp" class="form-control"></select>
                 </div>
@@ -556,7 +556,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="/save-road" method="post" onsubmit="return submitFoam2()">
+                <form action="/save-road" method="post" id="road-form" onsubmit="return submitFoam2()">
                     @csrf
                     <div class="modal-body ">
                         <label for="ba">Road Name</label>
@@ -1172,6 +1172,12 @@
             $jq('#save_wp').ajaxForm(function() { 
                 alert("Thank you for your comment!"); 
                 $('#geomModal').modal('hide');
+                map.removeLayer(drawnItems);
+            }); 
+
+            $jq('#road-form').ajaxForm(function() { 
+                alert("Thank you for your comment!"); 
+                $('#polyLineModal').modal('hide');
                 map.removeLayer(drawnItems);
             }); 
 

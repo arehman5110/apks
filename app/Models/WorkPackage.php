@@ -15,4 +15,9 @@ class WorkPackage extends Model
         return $this->hasMany(ThirdPartyDiging::class, 'workpackage_id');
     }
 
+
+    public function Roads() {
+        return $this->hasMany(Road::class, 'id_workpackage');
+    }
+
 }
