@@ -90,9 +90,36 @@
 
         </div>
     @endif
+
+    <section class="content-header">
+        <div class="container-  ">
+            <div class="row  " style="flex-wrap:nowrap">
+                <div class="col-sm-6">
+                    <h3>3rd Party Digging</h3>
+                </div>
+                <div class="col-sm-6 text-right">
+                    <ol class="breadcrumb float-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">map</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="container-fluid bg-white pt-2">
     <h5 class="m-1">PEMERIKSAAN KEJANGGALAN PEPASANGAN TNB &
         SENGGARAAN BUKAN ELEKTRIK TALIAN ATAS DI SELANGOR UNTUK DISTRIBUTION NETWORK
         DIVISION, TNB</h5>
+        {{-- <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item w-50 text-center">
+              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Map</a>
+            </li>
+            <li class="nav-item w-50 text-center">
+              <a class="nav-link" href="/get-all-work-packages" role="tab" >All Work Packages</a>
+            </li>
+          
+          </ul> --}}
+         
 
 
 
@@ -257,7 +284,7 @@
 
     </div> <!--  END TOP TABS  --> --}}
 
-    <div class=" p-1 col-12 m-2">
+    <div class=" p-1  col-12 m-2 ">
         <div class="card p-0 mb-3">
             <div class="card-body row">
 
@@ -369,7 +396,7 @@
                         </div>
 
                         <!-- START MAP SIDEBAR DETAILS -->
-                        <details class="mb-3">
+                        <details class="mb-3" open>
                             <summary><strong>Patrolling 3rd Party Digging Activities</strong> </summary>
                             <table class="table table-bordered" style="cursor: pointer">
                                 <tr>
@@ -378,111 +405,16 @@
                                 <tr>
                                     <td onclick="addSupervise(this)">Menyelia kerja-kerja korekan</td>
                                 </tr>
-                            </table>
-                            {{-- <ul>
-                               <li> <input type="checkbox" name="" id="petroling_a" onclick="addpanolayer()">
-                                    <label for="petroling_a">Pemeriksaan di Jalan</label>
-                                </li> 
-                                <li><input type="checkbox" name="" id="petroling_b"> <label
-                                        for="petroling_b" onclick="addNotice()">Mengeluarkan notis</label> </li>
-                                <li><input type="checkbox" name="" id="petroling_c"> <label
-                                        for="petroling_c" onclick="addSupervise()">Menyelia kerja-kerja korekan</label> </li>
-                                <li><input type="checkbox" name="" id="petroling_d"> <label
-                                        for="petroling_d">Report</label> </li>
-                            </ul> --}}
-                        </details>
-
-                        <details class="mb-3">
-                            <summary><strong>Pencawang</strong> </summary>
-                            <table class="table table-bordered">
                                 <tr>
-                                    <td>Pemeriksaan visual dan pelaporan</td>
-                                </tr>
-                                <tr>
-                                    <td>Pembersihan iklan haram/banner </td>
-                                </tr>
-                                <tr>
-                                    <td>Report</td>
+                                    <td onclick="addpanolayer(this)">Pemeriksaan di Jalan</td>
                                 </tr>
                             </table>
-
+                          
                         </details>
 
-
-                        <details class="mb-3">
-                            <summary><strong>Feeder Pillar</strong> </summary>
-                            <table class="table table-bordered">
-                                <tr>
-                                    <td>Pemeriksaan visual</td>
-                                </tr>
-                                <tr>
-                                    <td>Pembersihan iklan haram/banner</td>
-                                </tr>
-                                <tr>
-                                    <td>Report</td>
-                                </tr>
-                            </table>
-
-                        </details>
-
-                        <details class="mb-3">
-                            <summary><strong> Tiang + Talian VT & VR</strong> </summary>
-                            <table class="table table-bordered">
-                                <tr>
-                                    <td>Pendaftaran aset, pemeriksaan visual</td>
-                                </tr>
-                                <tr>
-                                    <td>Pembersihan iklan haram/banner</td>
-                                </tr>
-                                <tr>
-                                    <td>Pembersihan creepers</td>
-                                </tr>
-                                <tr>
-                                    <td>Pemeriksaan kebocoran arus pada tiang</td>
-                                </tr>
-                                <tr>
-                                    <td>Report</td>
-                                </tr>
-                            </table>
-
-                        </details>
+                                          
 
 
-                        <details class="mb-3">
-                            <summary><strong> Link Box Pelbagai Voltan</strong> </summary>
-                            <table class="table table-bordered">
-                                <tr>
-                                    <td>Pemeriksaan visual</td>
-                                </tr>
-                                <tr>
-                                    <td>Pembersihan iklan haram/banner</td>
-                                </tr>
-                                <tr>
-                                    <td>Pembersihan semak samun / creepers/sampah/ rumput</td>
-                                </tr>
-                                <table>
-                                    <td>Report</td>
-                                </table>
-                            </table>
-
-                        </details>
-
-
-                        <details class="mb-3">
-                            <summary><strong> Cable bridge</strong> </summary>
-                            <table class="table table-bordered">
-                                <tr>
-                                    <td>Pemeriksaan visual</td>
-                                </tr>
-                                <tr>
-                                    <td>Pembersihan semak samun / creepers/sampah/ rumput</td>
-                                </tr>
-                                <tr>
-                                    <td>Report</td>
-                                </tr>
-                            </table>
-
-                        </details>
                         <!-- END MAP SIDEBAR DETAILS -->
                     </div>
                 </div>
@@ -514,7 +446,7 @@
 
     </div><!--  END MAP CARD DIV -->
 
-
+    </div>
     <div class="modal fade" id="geomModal" tabindex="-1" aria-labelledby="geomModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -869,16 +801,23 @@
         map.setView([2.59340882301331, 101.07054901123], 8);
 
 
+        
+        var  panolayer = true; 
 
+        function addpanolayer(event) {
+         
 
-        function addpanolayer() {
-            var checkbox = document.getElementById("petroling_a");
-
-            if (checkbox.checked == false) {
+            if (panolayer == false) {
+                panolayer = true;
+                $(event).css('background', 'white');
                 map.off('click');
                 map.removeLayer(customer)
                 map.removeLayer(identifyme)
+                 
+            
             } else {
+                panolayer = false;
+                $(event).css('background', '#c9def2');
                 map.addLayer(customer)
                 map.on('click', function(e) {
                     //map.off('click');
@@ -1268,19 +1207,19 @@
 
 
             $jq('#save_wp').ajaxForm(function() {
-                alert("Thank you for your comment!");
+                alert("foam submitted!");
                 $('#geomModal').modal('hide');
                 map.removeLayer(drawnItems);
             });
 
             $jq('#road-form').ajaxForm(function() {
-                alert("Thank you for your comment!");
+                alert("foam submitted!");
                 $('#polyLineModal').modal('hide');
                 map.removeLayer(drawnItems);
             });
 
 
-            $('body').addClass('sidebar-collapse');
+            // $('body').addClass('sidebar-collapse');
 
             $('#search_zone').on('change', function() {
                 const selectedValue = this.value;

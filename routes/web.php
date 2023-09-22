@@ -50,6 +50,12 @@ Route::get('/remove-work-package/{id}',[WPController::class,'removeWP']);
 
 Route::get('/generate-third-party-pdf/{id}',[GeneratePDFController::class,'generatePDF']);
 
+Route::view('/pencawang','pencawang.create');
+Route::view('/tiang','Tiang.create');
+Route::view('/feeder-pillar','feeder-pillar.create');
+Route::view('/link-box','link-box.create');
+Route::view('/cable-bridge','cable-bridge.create');
+
 
 
 require __DIR__ . '/auth.php';
