@@ -20,14 +20,35 @@
 
         <nav class="mt-2">
 
+
+
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                 data-accordion="false">
-                <li class="nav-item">
-                    <a href="/map-1" class="nav-link ">
+
+                <li class="nav-item ">
+                    <a href="#" class="nav-link">
                         <i class="fa fa-book"></i>
-                        <p>3rd Party Digging</p>
+                        <p>
+                            3rd Party Digging
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
                     </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="/map-1" class="nav-link ">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>map</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/get-all-work-packages" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>index</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
+
 
                 <li class="nav-item">
                     <a href="/pencawang" class="nav-link ">
@@ -59,7 +80,7 @@
                         <p>Cable bridge</p>
                     </a>
                 </li>
-               
+
 
             </ul>
         </nav>
@@ -74,7 +95,8 @@
         color: #818896 !important;
     }
 
-    .nav-item:hover .nav-link , .nav-item:hover .nav-link >p{
+    .nav-item:hover .nav-link,
+    .nav-item:hover .nav-link>p {
         color: #16c7ff !important;
     }
 

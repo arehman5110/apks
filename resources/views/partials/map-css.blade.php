@@ -22,7 +22,7 @@
 
 
     <style>
-        .sidebar-mini.sidebar-collapse .content-wrapper,
+        /* .sidebar-mini.sidebar-collapse .content-wrapper,
         .sidebar-mini.sidebar-collapse .main-footer,
         .sidebar-mini.sidebar-collapse .main-header {
             margin-left: 0rem !important;
@@ -32,7 +32,7 @@
         .sidebar-mini.sidebar-collapse .main-sidebar::before {
             margin-left: 0;
             width: 0rem !important;
-        }
+        } */
 
         .card-header {
             font-weight: 700;
