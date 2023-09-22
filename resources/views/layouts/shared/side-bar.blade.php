@@ -23,18 +23,43 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                 data-accordion="false">
                 <li class="nav-item">
-                    <a href="/get-all-work-packages" class="nav-link ">
+                    <a href="/map-1" class="nav-link ">
                         <i class="fa fa-book"></i>
-                        <p>Work Package</p>
+                        <p>3rd Party Digging</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a href="/map-1" class="nav-link ">
+                    <a href="/pencawang" class="nav-link ">
                         <i class="fa fa-map"></i>
-                        <p>Map</p>
+                        <p>Pencawang</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="/feeder-pillar" class="nav-link ">
+                        <i class="fa fa-map"></i>
+                        <p>Feeder Pillar</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/tiang" class="nav-link ">
+                        <i class="fa fa-map"></i>
+                        <p>Tiang + Talian VT & VR</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/link-box" class="nav-link ">
+                        <i class="fa fa-map"></i>
+                        <p>Link Box Pelbagai Voltan</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/cable-bridge" class="nav-link ">
+                        <i class="fa fa-map"></i>
+                        <p>Cable bridge</p>
+                    </a>
+                </li>
+               
 
             </ul>
         </nav>
@@ -49,10 +74,7 @@
         color: #818896 !important;
     }
 
-    .nav-item p:hover,
-    .nav-item i:hover,
-    nav .active i,
-    nav .active p {
+    .nav-item:hover .nav-link , .nav-item:hover .nav-link >p{
         color: #16c7ff !important;
     }
 

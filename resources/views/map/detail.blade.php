@@ -34,10 +34,20 @@
             </div>
         </div>
     </section>
+
+   
     <section class="content">
         <div class="container-fluid">
 
-
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item w-50 text-center">
+                    <a class="nav-link " href="/map-1" role="tab" >All Work Packages</a>
+                </li>
+                <li class="nav-item w-50 text-center">
+                  <a class="nav-link active" href="/get-all-work-packages" role="tab" >All Work Packages</a>
+                </li>
+              
+              </ul>
 
             @if (Session::has('failed'))
                 <div class="alert {{ Session::get('alert-class', 'alert-secondary') }}" role="alert">

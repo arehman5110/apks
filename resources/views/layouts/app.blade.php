@@ -19,15 +19,13 @@
 
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-fixed sidebar-collapse">
     <div class="wrapper">
         @include('layouts.shared.nav-bar')
         @include('layouts.shared.side-bar')
         <div class="content-wrapper">
 
-            {{-- <div id="overlay">
-                <div class="loading-spinner"></div>
-            </div> --}}
+      
 
             @yield('content')
         </div>
