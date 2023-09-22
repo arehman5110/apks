@@ -110,7 +110,7 @@
     <h5 class="m-1">PEMERIKSAAN KEJANGGALAN PEPASANGAN TNB &
         SENGGARAAN BUKAN ELEKTRIK TALIAN ATAS DI SELANGOR UNTUK DISTRIBUTION NETWORK
         DIVISION, TNB</h5>
-        {{-- <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item w-50 text-center">
               <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Map</a>
             </li>
@@ -118,7 +118,7 @@
               <a class="nav-link" href="/get-all-work-packages" role="tab" >All Work Packages</a>
             </li>
           
-          </ul> --}}
+          </ul>
          
 
 
