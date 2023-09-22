@@ -25,7 +25,7 @@
 
 
     <style>
-        .sidebar-mini.sidebar-collapse .content-wrapper,
+        /* .sidebar-mini.sidebar-collapse .content-wrapper,
         .sidebar-mini.sidebar-collapse .main-footer,
         .sidebar-mini.sidebar-collapse .main-header {
             margin-left: 0rem !important;
@@ -35,7 +35,7 @@
         .sidebar-mini.sidebar-collapse .main-sidebar::before {
             margin-left: 0;
             width: 0rem !important;
-        }
+        } */
 
         .card-header {
             font-weight: 700;
@@ -79,6 +79,7 @@
         }
     </style>
 @endsection
+
 @section('content')
     @if (Session::has('failed'))
         <div class="alert {{ Session::get('alert-class', 'alert-secondary') }}" role="alert">
@@ -107,19 +108,7 @@
         </div>
     </section>
     <div class="container-fluid bg-white pt-2">
-    <h5 class="m-1">PEMERIKSAAN KEJANGGALAN PEPASANGAN TNB &
-        SENGGARAAN BUKAN ELEKTRIK TALIAN ATAS DI SELANGOR UNTUK DISTRIBUTION NETWORK
-        DIVISION, TNB</h5>
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item w-50 text-center">
-              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Map</a>
-            </li>
-            <li class="nav-item w-50 text-center">
-              <a class="nav-link" href="/get-all-work-packages" role="tab" >All Work Packages</a>
-            </li>
-          
-          </ul>
-         
+  
 
 
 
