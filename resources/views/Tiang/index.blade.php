@@ -100,7 +100,7 @@
                                                 <td class="align-middle">
                                                     {{ $data->name_contractor }}</td>
 
-                                                
+
                                                 <td class="align-middle text-center">
                                                     @php
                                                     $date = new DateTime($data->start_date );
@@ -129,6 +129,10 @@
 
                                                         <a class="dropdown-item"
                                                             href="#">Detail</a>
+
+                                                            <form action="{{route('tiang-talian-vt-and-vr.edit',$data->id)}}" method="get">
+                                                            <button type="submit" class="dropdown-list">Edit</button>
+                                                            </form>
 
 
                                                             <a class="dropdown-item"

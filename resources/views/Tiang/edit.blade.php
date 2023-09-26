@@ -12,9 +12,7 @@
             margin-right: 12px;
         }
 
-        input[type='checkbox']>.col-md-4 {
-            display: flex;
-        }
+
     </style>
 @endsection
 
@@ -43,7 +41,7 @@
                                     <div class="col-md-4"><select name="ba" id="ba" class="form-control"
                                             required>
 
-                                            <option value="" hidden>Select ba</option>
+                                            <option value="{{$data->ba}}" hidden>{{$data->ba}}</option>
                                             <optgroup label="W1">
                                                 <option value="KUALA LUMPUR PUSAT">KL PUSAT</option>
                                             </optgroup>
