@@ -79,9 +79,9 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/map" class="nav-link">
+                            <a href="{{route('tiang-talian-vt-and-vr.index')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>map</p>
+                                <p>Index</p>
                             </a>
                         </li>
                     </ul>

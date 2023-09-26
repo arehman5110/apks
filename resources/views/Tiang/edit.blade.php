@@ -12,9 +12,7 @@
             margin-right: 12px;
         }
 
-        input[type='checkbox']>.col-md-4 {
-            display: flex;
-        }
+
     </style>
 @endsection
 
@@ -43,7 +41,7 @@
                                     <div class="col-md-4"><select name="ba" id="ba" class="form-control"
                                             required>
 
-                                            <option value="" hidden>Select ba</option>
+                                            <option value="{{$data->ba}}" hidden>{{$data->ba}}</option>
                                             <optgroup label="W1">
                                                 <option value="KUALA LUMPUR PUSAT">KL PUSAT</option>
                                             </optgroup>
@@ -70,38 +68,38 @@
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="name_contractor">Contractor</label></div>
-                                    <div class="col-md-4"><input type="text" name="name_contractor" id="name_contractor"
+                                    <div class="col-md-4"><input type="text" name="name_contractor" value="{{ $data->name_contractor }}" id="name_contractor"
                                             class="form-control" required></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="po_start_date">PO Start Date</label></div>
-                                    <div class="col-md-4"><input type="date" name="start_date" id="po_sstart_date"
+                                    <div class="col-md-4"><input type="date" name="start_date" value="{{date('Y-m-d', strtotime($data->start_date))  }}" id="po_sstart_date"
                                             class="form-control" required></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="po_end_date">PO End Date</label></div>
-                                    <div class="col-md-4"><input type="date" name="end_date" id="po_end_date"
+                                    <div class="col-md-4"><input type="date" name="end_date"  value="{{ date('Y-m-d', strtotime($data->end_date)) }}" id="po_end_date"
                                             class="form-control" required></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="fp_name">Name of Substation / Name of Feeder
                                             Pillar</label></div>
-                                    <div class="col-md-4"><input type="text" name="fp_name" id="fp_name"
+                                    <div class="col-md-4"><input type="text" name="fp_name"  value="{{ $data->fp_name }}" id="fp_name"
                                             class="form-control" required></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="review_date">Review Date </label></div>
-                                    <div class="col-md-4"><input type="date" name="review_date" id="review_date"
+                                    <div class="col-md-4"><input type="date" name="review_date" value="{{ date('Y-m-d', strtotime($data->review_date)) }}"  id="review_date"
                                             class="form-control" required></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="fp_road">Feeder Name / Street Name</label></div>
-                                    <div class="col-md-4"><input type="text" name="fp_road" id="fp_road"
+                                    <div class="col-md-4"><input type="text" name="fp_road" value="{{ $data->fp_road }}"  id="fp_road"
                                             class="form-control" required></div>
                                 </div>
 
@@ -112,22 +110,22 @@
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="section_from">From </label></div>
-                                    <div class="col-md-4"><input type="text" name="section_from" id="section_from"
+                                    <div class="col-md-4"><input type="text" name="section_from" value="{{ $data->section_from }}"  id="section_from"
                                             class="form-control" required></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="section_to">To</label></div>
-                                    <div class="col-md-4"><input type="text" name="section_to" id="section_to"
+                                    <div class="col-md-4"><input type="text" name="section_to" value="{{ $data->section_to }}"  id="section_to"
                                             class="form-control" required></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="tiang_no">Tiang No</label></div>
-                                    <div class="col-md-4"><input type="text" name="tiang_no" id="tiang_no"
+                                    <div class="col-md-4"><input type="text" name="tiang_no"  value="{{ $data->tiang_no }}" id="tiang_no"
                                             class="form-control" required></div>
                                 </div>
-
+{{--
                                 <div class="row">
                                     <div class="col-md-4"><label for="loc">Location</label></div>
 
@@ -138,7 +136,7 @@
                                     <div class="col-md-4 text-center"><button type="button" class="btn btn-sm btn-secondary"
                                             onclick="getLocation()">Get Location</button></div>
 
-                                </div>
+                                </div> --}}
 
 
 
@@ -147,101 +145,103 @@
                             <h3></h3>
 
                             {{-- START Asset Register (2) --}}
+
+
                             <fieldset class="form-input">
                                 <h3>Asset Register</h3>
                                 <div class="row">
                                     <div class="col-md-4"><label for="st7">
                                             Pole Size Bill 7.5</label></div>
-                                    <div class="col-md-4"><input type="number" name="size_tiang[st7]" id="st7"
+                                    <div class="col-md-4"><input type="number" name="size_tiang[st7]" value="{{$data->size_tiang->st7}}" id="st7"
                                             class="form-control" min="0"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4"><label for="st9">Pole Size Bill 9</label></div>
-                                    <div class="col-md-4"><input type="number" name="size_tiang[st9]" id="st9"
+                                    <div class="col-md-4"><input type="number" name="size_tiang[st9]" value="{{$data->size_tiang->st9}}" id="st9"
                                             class="form-control"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4"><label for="st10">Pole Size Bill 10</label></div>
-                                    <div class="col-md-4"><input type="number" name="size_tiang[st10]" id="st10"
+                                    <div class="col-md-4"><input type="number" name="size_tiang[st10]" value="{{$data->size_tiang->st10}}" id="st10"
                                             class="form-control"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4"><label for="spun">Pole Type No Spun</label></div>
-                                    <div class="col-md-4"><input type="number" name="jenis_tiang[spun]" id="spun"
+                                    <div class="col-md-4"><input type="number" name="jenis_tiang[spun]" value="{{$data->jenis_tiang->spun}}" id="spun"
                                             class="form-control"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4"><label for="concrete">Pole Type No Concrete </label></div>
-                                    <div class="col-md-4"><input type="number" name="jenis_tiang[concrete]"
+                                    <div class="col-md-4"><input type="number" name="jenis_tiang[concrete]" value="{{$data->jenis_tiang->concrete}}"
                                             id="concrete" class="form-control"></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="iron">Pole Type No Iron</label></div>
-                                    <div class="col-md-4"><input type="number" name="jenis_tiang[iron]" id="iron"
+                                    <div class="col-md-4"><input type="number" name="jenis_tiang[iron]" id="iron" value="{{$data->jenis_tiang->iron}}"
                                             class="form-control"></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="wood">Pole Type No Wood</label></div>
-                                    <div class="col-md-4"><input type="number" name="jenis_tiang[wood]" id="wood"
+                                    <div class="col-md-4"><input type="number" name="jenis_tiang[wood]" id="wood" value="{{$data->jenis_tiang->wood}}"
                                             class="form-control"></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="section_to">ABC (Span) 3 X 185</label></div>
-                                    <div class="col-md-4"><input type="number" name="abc_span[s3_185]" id="section_to"
+                                    <div class="col-md-4"><input type="number" name="abc_span[s3_185]" id="section_to" value="{{$data->abc_span->s3_185}}"
                                             class="form-control"></div>
                                 </div>
-                                <div class="row">
+                            <div class="row">
                                     <div class="col-md-4"><label for="s3_95">ABC (Span) 3 X 95</label></div>
-                                    <div class="col-md-4"><input type="number" name="abc_span[s3_95]" id="s3_95"
+                                    <div class="col-md-4"><input type="number" name="abc_span[s3_95]" id="s3_95" value="{{$data->abc_span->s3_95}}"
                                             class="form-control"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4"><label for="s3_16">ABC (Span) 3 X 16</label></div>
-                                    <div class="col-md-4"><input type="number" name="abc_span[s3_16]" id="s3_16"
+                                    <div class="col-md-4"><input type="number" name="abc_span[s3_16]" id="s3_16" value="{{$data->abc_span->s3_16}}"
                                             class="form-control"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4"><label for="s1_16">ABC (Span) 1 X 16</label></div>
-                                    <div class="col-md-4"><input type="number" name="abc_span[s1_16]" id="s1_16"
+                                    <div class="col-md-4"><input type="number" name="abc_span[s1_16]" id="s1_16" value="{{$data->abc_span->s1_16}}"
                                             class="form-control"></div>
                                 </div>
 
-                                <div class="row">
+                                 <div class="row">
                                     <div class="col-md-4"><label for="s19_064">PVC (Span) 19/064</label></div>
-                                    <div class="col-md-4"><input type="number" name="pvc_span[s19_064]" id="s19_064"
+                                    <div class="col-md-4"><input type="number" name="pvc_span[s19_064]" id="s19_064"  value="{{$data->pvc_span->s19_064}}"
                                             class="form-control"></div>
                                 </div>
 
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="s7_083">PVC (Span) 7/083</label></div>
-                                    <div class="col-md-4"><input type="number" name="pvc_span[s7_083]" id="s7_083"
+                                    <div class="col-md-4"><input type="number" name="pvc_span[s7_083]" id="s7_083" value="{{$data->pvc_span->s7_083}}"
                                             class="form-control"></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="s7_044">PVC (Span) 7/044</label></div>
-                                    <div class="col-md-4"><input type="number" name="pvc_span[s7_044]" id="s7_044"
+                                    <div class="col-md-4"><input type="number" name="pvc_span[s7_044]" id="s7_044" value="{{$data->pvc_span->s7_044}}"
                                             class="form-control"></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="s7_173">BARE (Span) 7/173</label></div>
-                                    <div class="col-md-4"><input type="number" name="bare_span[s7_173]" id="s7_173"
+                                    <div class="col-md-4"><input type="number" name="bare_span[s7_173]" id="s7_173" value="{{$data->bare_span->s7_173}}"
                                             class="form-control"></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="s7_122">BARE (Span) 7/122</label></div>
-                                    <div class="col-md-4"><input type="number" name="bare_span[s7_122]" id="s7_122"
+                                    <div class="col-md-4"><input type="number" name="bare_span[s7_122]" id="s7_122" value="{{$data->bare_span->s7_122}}"
                                             class="form-control"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4"><label for="s3_132">BARE (Span) 3/132</label></div>
-                                    <div class="col-md-4"><input type="number" name="bare_span[s3_132]" id="s3_132"
+                                    <div class="col-md-4"><input type="number" name="bare_span[s3_132]" id="s3_132" value="{{$data->bare_span->s3_132}}"
                                             class="form-control"></div>
                                 </div>
 
@@ -259,23 +259,32 @@
                                     <div class="col-md-8">
                                         <div class="row">
                                             <div class="col-md-4 d-flex">
+                                               
                                                 <input type="checkbox" name="tiang_defect[cracked]" id="cracked"
-                                                    class="form-check"><label for="cracked"> Cracked</label>
+                                                    @if ($data->tiang_defect != null) 
+                                                        {{
+                                                     array_key_exists('cracked', $data->tiang_defect)  ? 'checked' : ''}} @endif
+                                                    class="form-check">
+                                                <label for="cracked"> Cracked</label>
                                             </div>
+                                            
 
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="tiang_defect[leaning]" id="leaning"
+                                                @if ($data->tiang_defect != null) {{ array_key_exists('leaning', $data->tiang_defect) && $data->tiang_defect != null ? 'checked' : ''  }}@endif
                                                     class="form-check"><label for="leaning"> Leaning</label>
                                             </div>
 
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="tiang_defect[dim]" id="dim"
+                                                @if ($data->tiang_defect != null)   {{array_key_exists('dim', $data->tiang_defect) && $data->tiang_defect != null ? 'checked' : '' }}@endif
                                                     class="form-check"><label for="dim"> No. Dim Post / None
                                                 </label>
                                             </div>
 
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="tiang_defect[creepers]" id="creepers"
+                                                @if ($data->tiang_defect != null)  {{array_key_exists('creepers', $data->tiang_defect) && $data->tiang_defect != null ? 'checked' : '' }}@endif
                                                     class="form-check"><label for="creepers"> Creepers
                                                 </label>
                                             </div>
@@ -291,17 +300,20 @@
                                         <div class="row">
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="talian_defect[joint]" id="joint"
+                                                {{ array_key_exists('joint', $data->talian_defect) && $data->talian_defect != null ? 'checked' : '' }}
                                                     class="form-check"><label for="joint"> Joint</label>
                                             </div>
 
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="talian_defect[need_rentis]" id="need_rentis"
+                                                {{ array_key_exists('need_rentis', $data->talian_defect) && $data->talian_defect != null  ? 'checked' : '' }}
                                                     class="form-check"><label for="need_rentis">
                                                     Need Rentis</label>
                                             </div>
 
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="talian_defect[ground]" id="ground"
+                                                {{ array_key_exists('ground', $data->talian_defect) && $data->talian_defect != null  ? 'checked' : '' }}
                                                     class="form-check"><label for="ground"> Does Not Comply With Ground
                                                     Clearance
                                                 </label>
@@ -319,18 +331,21 @@
                                         <div class="row">
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="umbang_defect[breaking]"
+                                                {{ array_key_exists('breaking', $data->umbang_defect) ? 'checked' : '' }}
                                                     id="umbang-breaking" class="form-check"><label for="umbang-breaking">
                                                     Sagging/Breaking</label>
                                             </div>
 
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="umbang_defect[creepers]"
+                                                {{ array_key_exists('creepers', $data->umbang_defect) ? 'checked' : '' }}
                                                     id="umbang-creepers" class="form-check"><label for="umbang-creepers">
                                                     Creepers</label>
                                             </div>
 
                                             <div class="col-md-4 d-flex">
-                                                <input type="checkbox" name="umbang_defect[]" id="umbang_cracked"
+                                                <input type="checkbox" name="umbang_defect['cracked']" id="umbang_cracked"
+                                                {{ array_key_exists('cracked', $data->umbang_defect) ? 'checked' : '' }}
                                                     class="form-check"><label for="umbang_cracked"> No Stay
                                                     Insulator/Damaged
                                                 </label>
@@ -338,6 +353,8 @@
 
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="umbang_defect[stay_palte]" id="stay_palte"
+
+                                                {{ array_key_exists('stay_palte', $data->umbang_defect) ? 'checked' : '' }}
                                                     class="form-check"><label for="stay_palte"> Stay Plate / Base Stay
                                                     Blocked
                                                 </label>
@@ -356,6 +373,7 @@
                                         <div class="row">
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="ipc_defect[burn]" id="ipc-burn"
+                                                {{ array_key_exists('burn', $data->ipc_defect) ? 'checked' : '' }}
                                                     class="form-check"><label for="ipc-burn"> Burn Effect</label>
                                             </div>
 
@@ -371,6 +389,7 @@
                                         <div class="row">
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="blackbox_defect[cracked]"
+                                                {{ array_key_exists('cracked', $data->blackbox_defect) ? 'checked' : '' }}
                                                     id="black-box-cracked" class="form-check"><label
                                                     for="black-box-cracked"> Kesan Bakar</label>
                                             </div>
@@ -392,17 +411,20 @@
                                         <div class="row">
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="jumper[sleeve]" id="jumper-sleeve"
+                                                {{ array_key_exists('sleeve', $data->jumper) ? 'checked' : '' }}
                                                     class="form-check"><label for="jumper-sleeve"> No UV Sleeve</label>
                                             </div>
 
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="jumper[burn]" id="jumper-burn"
+                                                {{ array_key_exists('burn', $data->jumper) ? 'checked' : '' }}
                                                     class="form-check"><label for="jumper-burn">
                                                     Burn Effect</label>
                                             </div>
 
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="jumper[damage]" id="jumper-damage"
+                                                {{ array_key_exists('damage', $data->jumper) ? 'checked' : '' }}
                                                     class="form-check"><label for="jumper-damage"> No Stay
                                                     Insulator/Damaged
                                                 </label>
@@ -410,6 +432,7 @@
 
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="jumper[blocked]" id="jumper-blocked"
+                                                {{ array_key_exists('blocked', $data->jumper) ? 'checked' : '' }}
                                                     class="form-check"><label for="jumper-blocked"> Stay Plate / Base Stay
                                                     Blocked
                                                 </label>
@@ -430,6 +453,7 @@
                                         <div class="row">
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="kilat_defect[broken]" id="lightning-broken"
+                                                {{ array_key_exists('broken', $data->kilat_defect) ? 'checked' : '' }}
                                                     class="form-check"><label for="lightning-broken"> Broken</label>
                                             </div>
 
@@ -448,12 +472,14 @@
                                         <div class="row">
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="servis_defect[roof]" id="service-roof"
+                                                {{ array_key_exists('roof', $data->servis_defect) ? 'checked' : '' }}
                                                     class="form-check"><label for="service-roof">
                                                     The service line is on the roof</label>
                                             </div>
 
                                             <div class="col-md-4 d-flex">
-                                                <input type="checkbox" name="servis_defect[won-piece]"
+                                                <input type="checkbox" name="servis_defect[won_piece]"
+                                                {{ array_key_exists('won_piece', $data->servis_defect) ? 'checked' : '' }}
                                                     id="service-won-piece" class="form-check"><label
                                                     for="service-won-piece">
                                                     Won piece Date</label>
@@ -471,7 +497,8 @@
                                     <div class="col-md-8">
                                         <div class="row">
                                             <div class="col-md-4 d-flex">
-                                                <input type="checkbox" name="Pembumian_defect[netural]"
+                                                <input type="checkbox" name="pembumian_defect[netural]"
+                                                {{ array_key_exists('netural', $data->pembumian_defect) ? 'checked' : '' }}
                                                     id="grounding-netural" class="form-check"><label
                                                     for="grounding-netural"> No Connection to Neutral</label>
                                             </div>
@@ -491,6 +518,7 @@
                                         <div class="row">
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="bekalan_dua_defect[damage]"
+                                                {{ array_key_exists('damage', $data->bekalan_dua_defect) ? 'checked' : '' }}
                                                     id="signage-damage" class="form-check"><label for="signage-damage">
                                                     Faded / Damaged / Missing Signage</label>
                                             </div>
@@ -508,12 +536,14 @@
                                         <div class="row">
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="kaki_lima_defect[date_wire]"
+                                                {{ array_key_exists('date_wire', $data->kaki_lima_defect) ? 'checked' : '' }}
                                                     id="street-date-wire" class="form-check"><label
                                                     for="street-date-wire">Date Wire</label>
                                             </div>
 
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="kaki_lima_defect[burn]" id="street-burn"
+                                                {{ array_key_exists('burn', $data->kaki_lima_defect) ? 'checked' : '' }}
                                                     class="form-check"><label for="street-burn">
                                                     Junction Box Date / Burn Effect</label>
                                             </div>
@@ -525,20 +555,20 @@
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="total_defects">Total Defects</label></div>
-                                    <div class="col-md-4"><input type="number" name="total_defects" id="total_defects"
+                                    <div class="col-md-4"><input type="number" name="total_defects" id="total_defects" value="{{$data->total_defects}}"
                                             class="form-control"></div>
                                 </div>
 
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="planed_date">Planned Repair Date</label></div>
-                                    <div class="col-md-4"><input type="date" name="planed_date" id="planed_date"
+                                    <div class="col-md-4"><input type="date" name="planed_date" id="planed_date" value="{{ date('Y-m-d', strtotime($data->planed_date)) }}"
                                             class="form-control"></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="actual_date">Date of Repair Performed</label></div>
-                                    <div class="col-md-4"><input type="date" name="actual_date" id="actual_date"
+                                    <div class="col-md-4"><input type="date" name="actual_date" id="actual_date" value="{{ date('Y-m-d', strtotime($data->actual_date)) }}"
                                             class="form-control"></div>
                                 </div>
 
@@ -546,6 +576,7 @@
                                 <div class="row">
                                     <div class="col-md-4"><label for="remarks">Remarks</label></div>
                                     <div class="col-md-4"><input type="text" name="remarks" id="remarks"
+                                        value="{{$data->remarks}}"
                                             class="form-control"></div>
                                 </div>
 
@@ -570,18 +601,21 @@
                                         <div class="row">
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="tapak_condition[road]" id="site-road"
+                                                {{ array_key_exists('road', $data->tapak_condition) ? 'checked' : '' }}
                                                     class="form-check"><label for="site-road">
                                                     Crossing the Road</label>
                                             </div>
 
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="tapak_condition[side_walk]" id="side_walk"
+                                                {{ array_key_exists('side_walk', $data->tapak_condition) ? 'checked' : '' }}
                                                     class="form-check"><label for="side_walk">
                                                     Sidewalk</label>
                                             </div>
 
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="tapak_condition[vehicle_entry]"
+                                                {{ array_key_exists('vehicle_entry', $data->tapak_condition) ? 'checked' : '' }}
                                                     id="vehicle_entry" class="form-check"><label for="vehicle_entry">No
                                                     vehicle entry area
                                                 </label>
@@ -599,24 +633,28 @@
                                         <div class="row">
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="kawasan[bend]" id="area-bend"
+                                                {{ array_key_exists('bend', $data->kawasan) ? 'checked' : '' }}
                                                     class="form-check"><label for="area-bend">
                                                     Bend</label>
                                             </div>
 
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="kawasan[raod]" id="area-raod"
+                                                {{ array_key_exists('raod', $data->kawasan) ? 'checked' : '' }}
                                                     class="form-check"><label for="area-raod">
                                                     Road</label>
                                             </div>
 
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="kawasan[forest]" id="area-forest"
+                                                {{ array_key_exists('forest', $data->kawasan) ? 'checked' : '' }}
                                                     class="form-check"><label for="area-forest">Forest
                                                 </label>
                                             </div>
 
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="kawasan[other]" id="area-other"
+                                                {{ array_key_exists('other', $data->kawasan) ? 'checked' : '' }}
                                                     class="form-check"><label for="area-other">others (please state)
                                                 </label>
                                             </div>
@@ -628,7 +666,7 @@
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="jarak_kelegaan">Clearance Distance</label></div>
-                                    <div class="col-md-4"><input type="text" name="jarak_kelegaan"
+                                    <div class="col-md-4"><input type="text" name="jarak_kelegaan" value="{{$data->jarak_kelegaan}}"
                                             id="jarak_kelegaan" class="form-control"></div>
                                 </div>
 
@@ -640,12 +678,14 @@
                                         <div class="row">
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="talian_spec[comply]" id="line-comply"
+                                                {{ array_key_exists('comply', $data->talian_spec) ? 'checked' : '' }}
                                                     class="form-check"><label for="line-comply">
                                                     Comply</label>
                                             </div>
 
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="talian_spec[disobedient]"
+                                                {{ array_key_exists('disobedient', $data->talian_spec) ? 'checked' : '' }}
                                                     id="line-disobedient" class="form-check"><label
                                                     for="line-disobedient">
                                                     Disobedient</label>
@@ -678,18 +718,20 @@
                                             <div class="col-md-4 d-flex">
                                                 <input type="radio" name="arus_pada_tiang" id="arus_pada_tiang_no"
                                                     class="form-check" value="no"><label for="arus_pada_tiang_no">
-
+{{$data->arus_pada_tiang == 'no' ? 'checked' : ''}}
                                                     No</label>
                                             </div>
 
                                             <div class="col-md-4 d-flex">
                                                 <input type="radio" name="arus_pada_tiang" id="arus_pada_tiang_yes"
+                                                {{$data->arus_pada_tiang == 'yes' ? 'checked' : ''}}
                                                     class="form-check" value="yes"><label for="arus_pada_tiang_yes">
                                                     Yes</label>
                                             </div>
 
                                             <div class="col-md-4 d-flex">
                                                 <input type="radio" name="arus_pada_tiang" id="arus_pada_tiang_amp"
+                                                {{$data->arus_pada_tiang == 'amp' ? 'checked' : ''}}
                                                     value="amp" class="form-check"><label for="arus_pada_tiang_amp">
                                                     (Amp)</label>
                                             </div>
