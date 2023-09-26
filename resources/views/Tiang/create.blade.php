@@ -132,6 +132,11 @@
                                     <div class="col-md-4"><label for="loc">Location</label></div>
                                     <div class="col-md-4"><input type="text" name="loc" id="loc"
                                             class="form-control"></div>
+                                            {{-- <div class="col-md-4"><input type="text" name="lat" id="lat"
+                                                class="form-control">
+                                                <input type="text" name="log" id="log"
+                                                class="form-control"></div> <div class="col-md-4 text-center"><button class="btn btn-sm btn-secondary" onclick="getLocation()">Get Location</button></div>
+                                    </div>--}}
                                 </div>
 
 
@@ -556,7 +561,7 @@
                             <h3></h3>
                             {{-- START Heigh Clearance (4) --}}
 
-                            <fieldset>
+                            <fieldset class="form-input">
                                 <h3>Heigh Clearance</h3>
                                 <div class="row">
                                     <div class="col-md-4"><label for="">Site Conditions</label></div>
@@ -756,5 +761,20 @@
                 },
                 // autoHeight: true,
             })
+
+            function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+
+        function showPosition(position) {
+
+            $('#lat').val(position.coords.latitude)
+            $('#log').val(position.coords.longitude)
+
+        }
     </script>
 @endsection
