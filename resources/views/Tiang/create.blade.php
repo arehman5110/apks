@@ -1,284 +1,713 @@
-@extends('layouts.app', ['page_title' => 'Index'])
+@extends('layouts.app')
 
 @section('css')
-    
-@include('partials.map-css')
+    <!-- Fonts and icons -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700" rel="stylesheet" />
 
+    <link rel="stylesheet" href="{{ URL::asset('assets/test/css/style.css') }}" />
+    <style>
+        input[type='checkbox'] , input[type='radio'] {
+            min-width: 16px !important;
+            margin-right: 12px;
+        }
+
+        input[type='checkbox']>.col-md-4 {
+            display: flex;
+        }
+    </style>
 @endsection
 
 
-
-
 @section('content')
-    @if (Session::has('failed'))
-        <div class="alert {{ Session::get('alert-class', 'alert-secondary') }}" role="alert">
-            {{ Session::get('failed') }}
+    <div class=" ">
 
-            <button type="button" class="close border-0 bg-transparent" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
+        <div class="container">
 
-        </div>
-    @endif
+            <div class=" ">
 
-    <section class="content-header">
-        <div class="container-  ">
-            <div class="row  " style="flex-wrap:nowrap">
-                <div class="col-sm-6">
-                    <h3>Tiang + Talian VT & VR</h3>
-                </div>
-                <div class="col-sm-6 text-right">
-                    <ol class="breadcrumb float-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">index</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </section>
-    <div class="container-fluid bg-white pt-2">
-    <h5 class="m-1">PEMERIKSAAN KEJANGGALAN PEPASANGAN TNB &
-        SENGGARAAN BUKAN ELEKTRIK TALIAN ATAS DI SELANGOR UNTUK DISTRIBUTION NETWORK
-        DIVISION, TNB</h5>
+                <div class=" card col-md-12 p-3 ">
+                    <div class=" ">
+                        <h3 class="text-center p-2">QR SAVR</h3>
+                        <form id="framework-wizard-form" action="{{route('tiang-talian-vt-and-vr.store')}}" style="display: none" method="POST">
+                            @csrf
+                            <h3></h3>
+                            <fieldset class=" form-input">
+                                <h3>Info</h3>
 
+                                <div class="row">
+                                    <div class="col-md-4"><label for="ba">Ba</label></div>
+                                    <div class="col-md-4"><input type="text" name="ba" id="ba"
+                                            class="form-control" required></div>
+                                </div>
 
-    <div class=" p-1 col-12 m-2">
-        <div class="card p-0 mb-3">
-            <div class="card-body row">
+                                <div class="row">
+                                    <div class="col-md-4"><label for="name_contractor">Contractor</label></div>
+                                    <div class="col-md-4"><input type="text" name="name_contractor" id="name_contractor"
+                                            class="form-control" required></div>
+                                </div>
 
-                <div class="col-md-3">
-                    <label for="search_zone">Zone</label>
-                    <select name="search_zone" id="search_zone" class="form-control">
+                                <div class="row">
+                                    <div class="col-md-4"><label for="po_start_date">PO Start Date</label></div>
+                                    <div class="col-md-4"><input type="date" name="start_date" id="po_sstart_date"
+                                            class="form-control" required></div>
+                                </div>
 
-                        <option value="" hidden>select zone</option>
-                        <option value="W1">W1</option>
-                        <option value="B1">B1</option>
-                        <option value="B2">B2</option>
-                        <option value="B4">B4</option>
+                                <div class="row">
+                                    <div class="col-md-4"><label for="po_end_date">PO End Date</label></div>
+                                    <div class="col-md-4"><input type="date" name="end_date" id="po_end_date"
+                                            class="form-control" required></div>
+                                </div>
 
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <label for="search_ba">Ba</label>
-                    <select name="search_ba" id="search_ba" class="form-control" onchange="getWorkPackage(this)">
-                        <option value="">Select zone</option>
-                    </select>
-                </div>
+                                <div class="row">
+                                    <div class="col-md-4"><label for="fp_name">Name of Substation / Name of Feeder
+                                            Pillar</label></div>
+                                    <div class="col-md-4"><input type="text" name="fp_name" id="fp_name"
+                                            class="form-control" required></div>
+                                </div>
 
+                                <div class="row">
+                                    <div class="col-md-4"><label for="review_date">Review Date </label></div>
+                                    <div class="col-md-4"><input type="date" name="review_date" id="review_date"
+                                            class="form-control" required></div>
+                                </div>
 
+                                <div class="row">
+                                    <div class="col-md-4"><label for="fp_road">Feeder Name / Street Name</label></div>
+                                    <div class="col-md-4"><input type="text" name="fp_road" id="fp_road"
+                                            class="form-control" required></div>
+                                </div>
 
-                <div class="col-md-3">
-                    <label for="search_wp">Work Package</label>
-                    <select name="search_wp" id="search_wp" class="form-control"></select>
-                </div>
-                <div class="col-md-2 p-2 text-center pt-4" id="for-excel">
-                </div>
+                                <div class="row">
+                                    <div class="col-md-4"><label for="">Section </label></div>
 
+                                </div>
 
+                                <div class="row">
+                                    <div class="col-md-4"><label for="section_from">From </label></div>
+                                    <div class="col-md-4"><input type="text" name="section_from" id="section_from"
+                                            class="form-control" required></div>
+                                </div>
 
-            </div>
-        </div>
-    </div>
+                                <div class="row">
+                                    <div class="col-md-4"><label for="section_to">To</label></div>
+                                    <div class="col-md-4"><input type="date" name="section_to" id="section_to"
+                                            class="form-control" required></div>
+                                </div>
 
+                                <div class="row">
+                                    <div class="col-md-4"><label for="tiang_no">Tiang No</label></div>
+                                    <div class="col-md-4"><input type="date" name="tiang_no" id="tiang_no"
+                                            class="form-control" required></div>
+                                </div>
 
-
-
-    <!--  START MAP CARD DIV -->
-    <div class="row m-2">
-
-        <!-- START MAP SIDEBAR DIV -->
-        <div class="col-2 p-0">
-            <div class="card p-0 m-0"
-                style="border: 1px solid rgb(177, 175, 175) !important; border-radius: 0px !important">
-                <div class="card-header"><strong> NAVIGATION</strong></div>
-                <div class="card-body">
-                    <!-- MAP SIDEBAR LAYERS SELECTOR -->
-                    <div class="side-bar" style="height: 569px !important; overflow-y: scroll;">
-                        <div class="col-md-12 mb-2" class="form-group">
-                            <label>Select Info Layer :</label>
-                            <select class="form-select" id="tableLayer" onchange="activeSelectedLayerOther(this.value)">
-                                <option value="" hidden>Select Layer</option>
-                                <option value="lv_fuse">lv_fuse</option>
-                                <option value="lv_ug_conductor">lv_ug_conductor</option>
-                                <option value="lvdb_fp">lvdb_fp</option>
-                                <option value="street_light">street_light</option>
-                                <option value="pole">pole</option>
-                                <option value="wp">wp</option>
-                                <option value="notice">notice</option>
-                                <option value="supervise">supervise</option>
-
-                            </select>
-                        </div>
+                                <div class="row">
+                                    <div class="col-md-4"><label for="tiang_no">Location</label></div>
+                                    <div class="col-md-4"><input type="date" name="tiang_no" id="tiang_no"
+                                            class="form-control"></div>
+                                </div>
 
 
-                        <details class="mb-3" open>
-                            <summary><strong> Tiang + Talian VT & VR</strong> </summary>
-                            <table class="table table-bordered">
-                                <tr>
-                                    <td>Pendaftaran aset, pemeriksaan visual</td>
-                                </tr>
-                                <tr>
-                                    <td>Pembersihan iklan haram/banner</td>
-                                </tr>
-                                <tr>
-                                    <td>Pembersihan creepers</td>
-                                </tr>
-                                <tr>
-                                    <td>Pemeriksaan kebocoran arus pada tiang</td>
-                                </tr>
-                                <tr>
-                                    <td>Report</td>
-                                </tr>
-                            </table>
 
-                        </details>
+                            </fieldset>
+                            <h3></h3>
+                            <fieldset class="form-input">
+                                <h3>Business Operations & Domain</h3>
+                                <div class="row">
+                                    <div class="col-md-4"><label for="st7">
+                                            Pole Size Bill 7.5</label></div>
+                                    <div class="col-md-4"><input type="number" name="size_tiang[st7]" id="st7"
+                                            class="form-control" min="0"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4"><label for="st9">Pole Size Bill 9</label></div>
+                                    <div class="col-md-4"><input type="number" name="size_tiang[st9]" id="st9"
+                                            class="form-control"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4"><label for="st10">Pole Size Bill 10</label></div>
+                                    <div class="col-md-4"><input type="number" name="size_tiang[st10]" id="st10"
+                                            class="form-control"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4"><label for="spun">Pole Type No Spun</label></div>
+                                    <div class="col-md-4"><input type="number" name="jenis_tiang[spun]" id="spun"
+                                            class="form-control"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4"><label for="concrete">Pole Type No Concrete </label></div>
+                                    <div class="col-md-4"><input type="number" name="jenis_tiang[concrete]"
+                                            id="concrete" class="form-control"></div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="iron">Pole Type No Iron</label></div>
+                                    <div class="col-md-4"><input type="number" name="jenis_tiang[iron]" id="iron"
+                                            class="form-control"></div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="wood">Pole Type No Wood</label></div>
+                                    <div class="col-md-4"><input type="number" name="jenis_tiang[wood]" id="wood"
+                                            class="form-control"></div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="section_to">ABC (Span) 3 X 185</label></div>
+                                    <div class="col-md-4"><input type="number" name="abc_span[s3_185]" id="section_to"
+                                            class="form-control"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4"><label for="s3_95">ABC (Span) 3 X 95</label></div>
+                                    <div class="col-md-4"><input type="number" name="abc_span[s3_95]" id="s3_95"
+                                            class="form-control"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4"><label for="s3_16">ABC (Span) 3 X 16</label></div>
+                                    <div class="col-md-4"><input type="number" name="abc_span[s3_16]" id="s3_16"
+                                            class="form-control"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4"><label for="s1_16">ABC (Span) 1 X 16</label></div>
+                                    <div class="col-md-4"><input type="number" name="abc_span[s1_16]" id="s1_16"
+                                            class="form-control"></div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="s19_064">PVC (Span) 19/064</label></div>
+                                    <div class="col-md-4"><input type="number" name="pvc_span[s19_064]" id="s19_064"
+                                            class="form-control"></div>
+                                </div>
 
 
-                        <!-- END MAP SIDEBAR DETAILS -->
+                                <div class="row">
+                                    <div class="col-md-4"><label for="s7_083">PVC (Span) 7/083</label></div>
+                                    <div class="col-md-4"><input type="number" name="pvc_span[s7_083]" id="s7_083"
+                                            class="form-control"></div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="s7_044">PVC (Span) 7/044</label></div>
+                                    <div class="col-md-4"><input type="number" name="pvc_span[s7_044]" id="s7_044"
+                                            class="form-control"></div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="s7_173">BARE (Span) 7/173</label></div>
+                                    <div class="col-md-4"><input type="number" name="bare_span[s7_173]" id="s7_173"
+                                            class="form-control"></div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="s7_122">BARE (Span) 7/122</label></div>
+                                    <div class="col-md-4"><input type="number" name="bare_span[s7_122]" id="s7_122"
+                                            class="form-control"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4"><label for="s3_132">BARE (Span) 3/132</label></div>
+                                    <div class="col-md-4"><input type="number" name="bare_span[s3_132]" id="s3_132"
+                                            class="form-control"></div>
+                                </div>
+
+                            </fieldset>
+
+                            <h3></h3>
+                            <fieldset class="form-input">
+
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="section_to">Pole</label></div>
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <div class="col-md-4 d-flex">
+                                                <input type="checkbox" name="tiang_defect[cracked]" id="cracked"
+                                                    class="form-check"><label for="cracked"> Cracked</label>
+                                            </div>
+
+                                            <div class="col-md-4 d-flex">
+                                                <input type="checkbox" name="tiang_defect[leaning]" id="leaning"
+                                                    class="form-check"><label for="leaning"> Leaning</label>
+                                            </div>
+
+                                            <div class="col-md-4 d-flex">
+                                                <input type="checkbox" name="tiang_defect[dim]" id="dim"
+                                                    class="form-check"><label for="dim"> No. Dim Post / None
+                                                </label>
+                                            </div>
+
+                                            <div class="col-md-4 d-flex">
+                                                <input type="checkbox" name="tiang_defect[creepers]" id="creepers"
+                                                    class="form-check"><label for="creepers"> Creepers
+                                                </label>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="">Line (Main / Service)</label></div>
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <div class="col-md-4 d-flex">
+                                                <input type="checkbox" name="talian_defect[joint]" id="joint"
+                                                    class="form-check"><label for="joint"> Joint</label>
+                                            </div>
+
+                                            <div class="col-md-4 d-flex">
+                                                <input type="checkbox" name="talian_defect[need_rentis]" id="need_rentis"
+                                                    class="form-check"><label for="need_rentis">
+                                                    Need Rentis</label>
+                                            </div>
+
+                                            <div class="col-md-4 d-flex">
+                                                <input type="checkbox" name="talian_defect[ground]" id="ground"
+                                                    class="form-check"><label for="ground"> Does Not Comply With Ground
+                                                    Clearance
+                                                </label>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="">Umbang</label></div>
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <div class="col-md-4 d-flex">
+                                                <input type="checkbox" name="umbang_defect[breaking]"
+                                                    id="umbang-breaking" class="form-check"><label for="umbang-breaking">
+                                                    Sagging/Breaking</label>
+                                            </div>
+
+                                            <div class="col-md-4 d-flex">
+                                                <input type="checkbox" name="umbang_defect[creepers]"
+                                                    id="umbang-creepers" class="form-check"><label for="umbang-creepers">
+                                                    Creepers</label>
+                                            </div>
+
+                                            <div class="col-md-4 d-flex">
+                                                <input type="checkbox" name="umbang_defect[]" id="umbang_cracked"
+                                                    class="form-check"><label for="umbang_cracked"> No Stay
+                                                    Insulator/Damaged
+                                                </label>
+                                            </div>
+
+                                            <div class="col-md-4 d-flex">
+                                                <input type="checkbox" name="umbang_defect[stay_palte]" id="stay_palte"
+                                                    class="form-check"><label for="stay_palte"> Stay Plate / Base Stay
+                                                    Blocked
+                                                </label>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="section_to">IPC</label></div>
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <div class="col-md-4 d-flex">
+                                                <input type="checkbox" name="ipc_defect[burn]" id="ipc-burn"
+                                                    class="form-check"><label for="ipc-burn"> Burn Effect</label>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="section_to">Black Box</label></div>
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <div class="col-md-4 d-flex">
+                                                <input type="checkbox" name="blackbox_defect[cracked]"
+                                                    id="black-box-cracked" class="form-check"><label
+                                                    for="black-box-cracked"> Kesan Bakar</label>
+                                            </div>
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="">Jumper</label></div>
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <div class="col-md-4 d-flex">
+                                                <input type="checkbox" name="jumper[sleeve]" id="jumper-sleeve"
+                                                    class="form-check"><label for="jumper-sleeve"> No UV Sleeve</label>
+                                            </div>
+
+                                            <div class="col-md-4 d-flex">
+                                                <input type="checkbox" name="jumper[burn]" id="jumper-burn"
+                                                    class="form-check"><label for="jumper-burn">
+                                                    Burn Effect</label>
+                                            </div>
+
+                                            <div class="col-md-4 d-flex">
+                                                <input type="checkbox" name="jumper[damage]" id="jumper-damage"
+                                                    class="form-check"><label for="jumper-damage"> No Stay
+                                                    Insulator/Damaged
+                                                </label>
+                                            </div>
+
+                                            <div class="col-md-4 d-flex">
+                                                <input type="checkbox" name="jumper[blocked]" id="jumper-blocked"
+                                                    class="form-check"><label for="jumper-blocked"> Stay Plate / Base Stay
+                                                    Blocked
+                                                </label>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="">Lightning catcher</label></div>
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <div class="col-md-4 d-flex">
+                                                <input type="checkbox" name="kilat_defect[broken]" id="lightning-broken"
+                                                    class="form-check"><label for="lightning-broken"> Broken</label>
+                                            </div>
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="">Service</label></div>
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <div class="col-md-4 d-flex">
+                                                <input type="checkbox" name="servis_defect[roof]" id="service-roof"
+                                                    class="form-check"><label for="service-roof">
+                                                    The service line is on the roof</label>
+                                            </div>
+
+                                            <div class="col-md-4 d-flex">
+                                                <input type="checkbox" name="servis_defect[won-piece]"
+                                                    id="service-won-piece" class="form-check"><label
+                                                    for="service-won-piece">
+                                                    Won piece Date</label>
+                                            </div>
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="">Grounding</label></div>
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <div class="col-md-4 d-flex">
+                                                <input type="checkbox" name="Pembumian_defect[netural]"
+                                                    id="grounding-netural" class="form-check"><label
+                                                    for="grounding-netural"> No Connection to Neutral</label>
+                                            </div>
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="">
+                                            Signage - OFF Point / Two Way Supply</label></div>
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <div class="col-md-4 d-flex">
+                                                <input type="checkbox" name="bekalan_dua_defect[damage]"
+                                                    id="signage-damage" class="form-check"><label for="signage-damage">
+                                                    Faded / Damaged / Missing Signage</label>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="">Main Street</label></div>
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <div class="col-md-4 d-flex">
+                                                <input type="checkbox" name="kaki_lima_defect[date_wire]"
+                                                    id="street-date-wire" class="form-check"><label
+                                                    for="street-date-wire">Date Wire</label>
+                                            </div>
+
+                                            <div class="col-md-4 d-flex">
+                                                <input type="checkbox" name="kaki_lima_defect[burn]" id="street-burn"
+                                                    class="form-check"><label for="street-burn">
+                                                    Junction Box Date / Burn Effect</label>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="total_defects">Total Defects</label></div>
+                                    <div class="col-md-4"><input type="number" name="total_defects" id="total_defects"
+                                            class="form-control"></div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="planed_date">Planned Repair Date</label></div>
+                                    <div class="col-md-4"><input type="date" name="planed_date" id="planed_date"
+                                            class="form-control"></div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="actual_date">Date of Repair Performed</label></div>
+                                    <div class="col-md-4"><input type="date" name="actual_date" id="actual_date"
+                                            class="form-control"></div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="remarks">Remarks</label></div>
+                                    <div class="col-md-4"><input type="text" name="remarks" id="remarks"
+                                            class="form-control"></div>
+                                </div>
+
+
+
+
+
+
+                            </fieldset>
+
+                            <h3></h3>
+
+                            <fieldset>
+                                <div class="row">
+                                    <div class="col-md-4"><label for="">Site Conditions</label></div>
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <div class="col-md-4 d-flex">
+                                                <input type="checkbox" name="tapak_condition[road]" id="site-road"
+                                                    class="form-check"><label for="site-road">
+                                                    Crossing the Road</label>
+                                            </div>
+
+                                            <div class="col-md-4 d-flex">
+                                                <input type="checkbox" name="tapak_condition[side_walk]" id="side_walk"
+                                                    class="form-check"><label for="side_walk">
+                                                    Sidewalk</label>
+                                            </div>
+
+                                            <div class="col-md-4 d-flex">
+                                                <input type="checkbox" name="tapak_condition[vehicle_entry]"
+                                                    id="vehicle_entry" class="form-check"><label for="vehicle_entry">No
+                                                    vehicle entry area
+                                                </label>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for=""> Area</label></div>
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <div class="col-md-4 d-flex">
+                                                <input type="checkbox" name="kawasan[bend]" id="area-bend"
+                                                    class="form-check"><label for="area-bend">
+                                                    Bend</label>
+                                            </div>
+
+                                            <div class="col-md-4 d-flex">
+                                                <input type="checkbox" name="kawasan[raod]" id="area-raod"
+                                                    class="form-check"><label for="area-raod">
+                                                    Road</label>
+                                            </div>
+
+                                            <div class="col-md-4 d-flex">
+                                                <input type="checkbox" name="kawasan[forest]" id="area-forest"
+                                                    class="form-check"><label for="area-forest">Forest
+                                                </label>
+                                            </div>
+
+                                            <div class="col-md-4 d-flex">
+                                                <input type="checkbox" name="kawasan[other]" id="area-other"
+                                                    class="form-check"><label for="area-other">others (please state)
+                                                </label>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="jarak_kelegaan">Clearance Distance</label></div>
+                                    <div class="col-md-4"><input type="text" name="jarak_kelegaan"
+                                            id="jarak_kelegaan" class="form-control"></div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for=""> Line clearance specifications</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <div class="col-md-4 d-flex">
+                                                <input type="checkbox" name="talian_spec[comply]" id="line-comply"
+                                                    class="form-check"><label for="line-comply">
+                                                    Comply</label>
+                                            </div>
+
+                                            <div class="col-md-4 d-flex">
+                                                <input type="checkbox" name="talian_spec[disobedient]"
+                                                    id="line-disobedient" class="form-check"><label
+                                                    for="line-disobedient">
+                                                    Disobedient</label>
+                                            </div>
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </fieldset>
+
+                            <h3></h3>
+                            <fieldset class="form-input">
+                                <h3></h3>
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="">Inspection of current leakage on the
+                                            pole</label></div>
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <div class="col-md-4 d-flex">
+                                                <input type="radio" name="  " id="arus_pada_tiang_no"
+                                                    class="form-check" value="no"><label for="arus_pada_tiang_no">
+
+                                                    No</label>
+                                            </div>
+
+                                            <div class="col-md-4 d-flex">
+                                                <input type="radio" name="arus_pada_tiang" id="arus_pada_tiang_yes"
+                                                    class="form-check" value="yes"><label for="arus_pada_tiang_yes">
+                                                    Yes</label>
+                                            </div>
+
+                                            <div class="col-md-4 d-flex">
+                                                <input type="radio" name="arus_pada_tiang" id="arus_pada_tiang_amp"
+                                                    value="amp" class="form-check"><label for="arus_pada_tiang_amp">
+                                                    (Amp)</label>
+                                            </div>
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+
+                        </form>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- END MAP SIDEBAR DIV -->
 
-        <!-- START MAP  DIV -->
-        <div class="col-10 p-0 ">
-            <div class="card p-0 m-0"
-                style="border: 1px solid rgb(177, 175, 175) !important; border-radius: 0px !important;">
-                <div class="card-header text-center"><strong> MAP</strong></div>
-                <div class="card-body p-0">
-                    <div id="map">
-
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        <!-- END MAP  DIV -->
-        <div id="wg" class="windowGroup">
-
-        </div>
-
-        <div id="wg1" class="windowGroup">
-
-        </div>
-
-    </div><!--  END MAP CARD DIV -->
-
-    </div>
-    <div class="modal fade" id="geomModal" tabindex="-1" aria-labelledby="geomModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add new W.P</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form action="/save-work-package" method="post" id="save_wp" onsubmit="return submitFoam()">
-                    @csrf
-                    <div class="modal-body ">
-
-
-                        <label for="">Work Package Name</label>
-                        <span class="text-danger" id="er-pw-name"></span> <br>
-                        <input type="text" name="name" id="pw-name" class="form-control">
-                        <label for="zone">Zone</label>
-
-                        <input type="text" name="zone" id="pw-zone" class="form-control">
-                        {{-- <select name="zone" id="pw-zone" class="form-control">
-                        <option value="" hidden>select zone</option>
-                        <option value="W1">W1</option>
-                        <option value="B1">B1</option>
-                        <option value="B2">B2</option>
-                        <option value="B4">B4</option>
-                    </select> --}}
-
-                        <label for="ba">Select ba</label>
-                        <input type="text" name="ba" id="pw-ba" class="form-control">
-                        {{-- <select name="ba" id="pw-ba" class="form-control">
-                        <option value="" hidden>Select zone</option>
-                    </select> --}}
-
-                        <input type="hidden" name="geom" id="geom">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Submit</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Site Data Info</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body ">
-                    <table class="table table-bordered">
-                        <tbody id="my_data"></tbody>
-                    </table>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="polyLineModal" tabindex="-1" aria-labelledby="polyLineModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Identify Roads</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form action="/save-road" method="post" id="road-form" onsubmit="return submitFoam2()">
-                    @csrf
-                    <div class="modal-body ">
-                        <label for="ba">Road Name</label>
-                        <span class="text-center" id="er_raod_name"></span>
-                        <input name="road_name" id="road_name" class="form-control">
-                        <label for="">Work Package Name</label>
-                        <input type="text" name="" id="raod-d-wp-id" class="form-control disabled">
-                        <input type="hidden" name="id_wp" id="raod-wp-id">
-                        {{-- <select name="id_wp" id="raod-wp-id" class="form-control" onchange="getWorkPackage(this)">
-                        <option value="">select wp</option>
-                        @foreach ($wps as $wp)
-                            <option value="{{$wp->id}}">{{$wp->package_name}}</option>
-                        @endforeach
-                    </select> --}}
-                        <label for="polyline-zone">Zone</label>
-                        <input id="polyline-zone" name="zone" class="form-control">
-                        <label for="polyline-ba">BA</label>
-                        <input id="polyline-ba" name="ba" class="form-control">
-
-
-
-
-                        <input type="hidden" name="geom" id="road-geom">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Submit</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
-                    </div>
-                </form>
-            </div>
         </div>
     </div>
 @endsection
 
 @section('script')
-   @include('partials.map-js')
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js"></script>
+    <script src="{{ URL::asset('assets/test/js/jquery.steps.js') }}"></script>
+
+
+    <script>
+        var form = $("#framework-wizard-form").show();
+        form
+            .steps({
+                headerTag: "h3",
+                bodyTag: "fieldset",
+                transitionEffect: "slideLeft",
+
+                onStepChanging: function(event, currentIndex, newIndex) {
+                    // Allways allow previous action even if the current form is not valid!
+                    if (currentIndex > newIndex) {
+                        return true;
+                    }
+
+                    // Needed in some cases if the user went back (clean up)
+                    if (currentIndex < newIndex) {
+                        // To remove error styles
+                        form.find(".body:eq(" + newIndex + ") label.error").remove();
+                        form
+                            .find(".body:eq(" + newIndex + ") .error")
+                            .removeClass("error");
+                    }
+                    form.validate().settings.ignore = ":disabled,:hidden";
+                    return form.valid();
+                },
+
+                onStepChanged: function(event, currentIndex, priorIndex) {
+                    // Used to skip the "Warning" step if the user is old enough.
+                    if (currentIndex === 2 && Number($("#age").val()) >= 18) {
+                        form.steps("next");
+                    }
+                    // Used to skip the "Warning" step if the user is old enough and wants to the previous step.
+                    if (currentIndex === 2 && priorIndex === 3) {
+                        form.steps("previous");
+                    }
+
+                },
+
+
+
+                onFinished: function(event, currentIndex) {
+                    form.submit();
+                },
+                // autoHeight: true,
+            })
+    </script>
 @endsection

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\web\map\MapController;
 use App\Http\Controllers\web\map\RoadController;
 use App\Http\Controllers\web\map\WPController;
+use App\Http\Controllers\web\TiangContoller;
 use App\Http\Controllers\web\tnbes\StatusController;
 use App\Models\Road;
 use Illuminate\Support\Facades\Auth;
@@ -51,14 +52,14 @@ Route::get('/remove-work-package/{id}',[WPController::class,'removeWP']);
 Route::get('/generate-third-party-pdf/{id}',[GeneratePDFController::class,'generatePDF']);
 
 Route::view('/pencawang','pencawang.create');
-Route::view('/tiang','Tiang.create');
+Route::view('/tiang','Tiang.map');
 Route::view('/feeder-pillar','feeder-pillar.create');
 Route::view('/link-box','link-box.create');
 Route::view('/cable-bridge','cable-bridge.create');
 
 Route::view('/savr-bridge','savr.create');
 
-
+Route::resource('tiang-talian-vt-and-vr',TiangContoller::class);
 
 require __DIR__ . '/auth.php';
 
