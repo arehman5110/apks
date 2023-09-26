@@ -1,19 +1,16 @@
 @extends('layouts.app', ['page_title' => 'Index'])
 
 @section('css')
+    <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
 
-
-
-<link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
-<link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
-<link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
-
-<style>
-    div#myTable_length ,div#roads_length {
-    display: none;
-}
-
-</style>
+    <style>
+        div#myTable_length,
+        div#roads_length {
+            display: none;
+        }
+    </style>
 @endsection
 
 
@@ -68,7 +65,7 @@
                         <div class="card-header">
                             <div class="card-title">
                                 Tiang
-                             </div>
+                            </div>
 
                         </div>
 
@@ -94,7 +91,7 @@
                                     </thead>
                                     <tbody>
 
-                                      @foreach ($datas as $data)
+                                        @foreach ($datas as $data)
                                             <tr>
                                                 <td class="align-middle">{{ $data->ba }}</td>
                                                 <td class="align-middle">
@@ -103,18 +100,16 @@
 
                                                 <td class="align-middle text-center">
                                                     @php
-                                                    $date = new DateTime($data->start_date );
-                                                        $datePortion = $date->format("Y-m-d");
-
+                                                        $date = new DateTime($data->start_date);
+                                                        $datePortion = $date->format('Y-m-d');
 
                                                     @endphp
                                                     {{ $datePortion }}
                                                 </td>
                                                 <td class="align-middle text-center">
                                                     @php
-                                                    $date = new DateTime($data->end_date );
-                                                        $datePortion = $date->format("Y-m-d");
-
+                                                        $date = new DateTime($data->end_date);
+                                                        $datePortion = $date->format('Y-m-d');
 
                                                     @endphp
                                                     {{ $datePortion }}
@@ -127,19 +122,27 @@
                                                     </button>
                                                     <div class="dropdown-menu" role="menu">
 
-                                                        <a class="dropdown-item"
-                                                            href="#">Detail</a>
+                                                        <form action="{{ route('tiang-talian-vt-and-vr.show', $data->id) }}"
+                                                            method="get">
+                                                            <button type="submit"
+                                                                class="dropdown-list pl-3 w-100 text-left">Detail</button>
+                                                        </form>
 
-                                                            <form action="{{route('tiang-talian-vt-and-vr.edit',$data->id)}}" method="get">
-                                                           <button type="submit" class="dropdown-list ml-3">Edit</button>
-                                                            </form>
+                                                        <form action="{{ route('tiang-talian-vt-and-vr.edit', $data->id) }}"
+                                                            method="get">
+                                                            <button type="submit"
+                                                                class="dropdown-list pl-3 w-100 text-left">Edit</button>
+                                                        </form>
 
 
-                                                            <a class="dropdown-item"
-                                                            href="#" onclick="return confirm('Are you sure?')">Remove</a>
+                                                        <button type="button" class="btn btn-primary dropdown-item"
+                                                        data-id="{{ $data->id }}" data-toggle="modal"
+                                                        data-target="#myModal">
+                                                        Remove
+                                                    </button>
 
 
-                                                   </a>
+                                                    </div>
                                                 </td>
 
                                             </tr>
@@ -162,7 +165,33 @@
             </div>
         </div>
     </section>
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content ">
 
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Remove Recored</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <form action="" id="remove-foam" method="POST">
+                    @method('DELETE')
+                    @csrf
+
+                    <div class="modal-body">
+                        Are You Sure ?
+                        <input type="hidden" name="id" id="modal-id">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                        <button type="submit" class="btn btn-danger">Remove</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
 @endsection
 
 
@@ -176,10 +205,13 @@
     <script>
         $(document).ready(function() {
             $('#myTable').DataTable();
-            $('#roads').DataTable();
+            $('#myModal').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget);
+                var id = button.data('id');
+                var modal = $(this);
+                $('#remove-foam').attr('action', 'tiang-talian-vt-and-vr/' + id)
+            });
+
         });
-
-            </script>
-
-            @endsection
-
+    </script>
+@endsection
