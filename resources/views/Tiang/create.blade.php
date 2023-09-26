@@ -20,6 +20,22 @@
 
 
 @section('content')
+
+<section class="content-header">
+    <div class="container-  ">
+        <div class="row  " style="flex-wrap:nowrap">
+            <div class="col-sm-6">
+                <h3>Tiang</h3>
+            </div>
+            <div class="col-sm-6 text-right">
+                <ol class="breadcrumb float-right">
+                    <li class="breadcrumb-item"><a href="{{route('tiang-talian-vt-and-vr.index')}}">index</a></li>
+                    <li class="breadcrumb-item active">create</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
     <div class=" ">
 
         <div class="container">
@@ -131,7 +147,7 @@
                                 <div class="row">
                                     <div class="col-md-4"><label for="loc">Location</label></div>
 
-                                    <div class="col-md-4"><input type="text" name="lat" id="lat"
+                                    <div class="col-md-4"><input type="text" name="lat" id="lat" required
                                             class="form-control">
                                         <input type="text" name="log" id="log" class="form-control">
                                     </div>
