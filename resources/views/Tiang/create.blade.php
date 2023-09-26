@@ -6,7 +6,8 @@
 
     <link rel="stylesheet" href="{{ URL::asset('assets/test/css/style.css') }}" />
     <style>
-        input[type='checkbox'] , input[type='radio'] {
+        input[type='checkbox'],
+        input[type='radio'] {
             min-width: 16px !important;
             margin-right: 12px;
         }
@@ -28,16 +29,43 @@
                 <div class=" card col-md-12 p-3 ">
                     <div class=" ">
                         <h3 class="text-center p-2">QR SAVR</h3>
-                        <form id="framework-wizard-form" action="{{route('tiang-talian-vt-and-vr.store')}}" style="display: none" method="POST">
+                        <form id="framework-wizard-form" action="{{ route('tiang-talian-vt-and-vr.store') }}"
+                            style="display: none" method="POST">
                             @csrf
                             <h3></h3>
+
+                            {{-- START Info (1) --}}
                             <fieldset class=" form-input">
                                 <h3>Info</h3>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="ba">Ba</label></div>
-                                    <div class="col-md-4"><input type="text" name="ba" id="ba"
-                                            class="form-control" required></div>
+                                    <div class="col-md-4"><select name="ba" id="ba" class="form-control"
+                                            required>
+
+                                            <option value="" hidden>Select ba</option>
+                                            <optgroup label="W1">
+                                                <option value="KUALA LUMPUR PUSAT">KL PUSAT</option>
+                                            </optgroup>
+                                            <optgroup label="B1">
+                                                <option value="PETALING JAYA">PETALING JAYA</option>
+                                                <option value="RAWANG">RAWANG</option>
+                                                <option value="KUALA SELANGOR">KUALA SELANGOR</option>
+                                            </optgroup>
+                                            <optgroup label="B2">
+                                                <option value="KLANG">KLANG</option>
+                                                <option value="PELABUHAN KLANG">PELABUHAN KLANG</option>
+                                            </optgroup>
+                                            <optgroup label="B4">
+                                                <option value="CHERAS">CHERAS</option>
+                                                <option value="BANTING">BANTING</option>
+                                                <option value="BANGI">BANGI</option>
+                                                <option value="PUTRAJAYA & CYBERJAYA">PUTRAJAYA & CYBERJAYA</option>
+                                            </optgroup>
+
+
+                                        </select>
+                                    </div>
                                 </div>
 
                                 <div class="row">
@@ -101,17 +129,20 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-4"><label for="tiang_no">Location</label></div>
-                                    <div class="col-md-4"><input type="date" name="tiang_no" id="tiang_no"
+                                    <div class="col-md-4"><label for="loc">Location</label></div>
+                                    <div class="col-md-4"><input type="text" name="loc" id="loc"
                                             class="form-control"></div>
                                 </div>
 
 
 
                             </fieldset>
+                            {{-- END Info (1) --}}
                             <h3></h3>
+
+                            {{-- START Asset Register (2) --}}
                             <fieldset class="form-input">
-                                <h3>Business Operations & Domain</h3>
+                                <h3>Asset Register</h3>
                                 <div class="row">
                                     <div class="col-md-4"><label for="st7">
                                             Pole Size Bill 7.5</label></div>
@@ -210,10 +241,13 @@
 
                             </fieldset>
 
+                            {{-- END Asset Register (2) --}}
+
+                            {{-- START Kejanggalan (3) --}}
                             <h3></h3>
                             <fieldset class="form-input">
 
-
+                                <h3>Kejanggalan</h3>
                                 <div class="row">
                                     <div class="col-md-4"><label for="section_to">Pole</label></div>
                                     <div class="col-md-8">
@@ -516,9 +550,14 @@
 
                             </fieldset>
 
+                            {{-- END Kejanggalan (3) --}}
+
+
                             <h3></h3>
+                            {{-- START Heigh Clearance (4) --}}
 
                             <fieldset>
+                                <h3>Heigh Clearance</h3>
                                 <div class="row">
                                     <div class="col-md-4"><label for="">Site Conditions</label></div>
                                     <div class="col-md-8">
@@ -614,9 +653,16 @@
 
                             </fieldset>
 
+                            {{-- END Heigh Clearance (4) --}}
+
                             <h3></h3>
+
+
+
+                            {{-- START Kebocoran Arus (5) --}}
+
                             <fieldset class="form-input">
-                                <h3></h3>
+                                <h3>Kebocoran Arus</h3>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="">Inspection of current leakage on the
@@ -624,7 +670,7 @@
                                     <div class="col-md-8">
                                         <div class="row">
                                             <div class="col-md-4 d-flex">
-                                                <input type="radio" name="  " id="arus_pada_tiang_no"
+                                                <input type="radio" name="arus_pada_tiang" id="arus_pada_tiang_no"
                                                     class="form-check" value="no"><label for="arus_pada_tiang_no">
 
                                                     No</label>
@@ -648,6 +694,7 @@
                                     </div>
                                 </div>
                             </fieldset>
+                            {{-- END Kebocoran Arus (5) --}}
 
 
                         </form>
