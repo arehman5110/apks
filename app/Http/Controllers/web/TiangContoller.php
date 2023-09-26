@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Tiang;
 use Illuminate\Http\Request;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 class TiangContoller extends Controller
@@ -138,7 +139,23 @@ class TiangContoller extends Controller
         $data['jenis_tiang'] = json_decode($data->jenis_tiang);
         $data['bare_span'] = json_decode($data->bare_span);
         $data['pvc_span'] = json_decode($data->pvc_span);
-        // $data['abc_span'] = json_decode($data->abc_span);
+        $data['tiang_defect'] = json_decode($data->tiang_defect , true);
+        $data['talian_defect'] = json_decode($data->talian_defect , true);
+        $data['umbang_defect'] = json_decode($data->umbang_defect , true);
+        $data['blackbox_defect'] = json_decode($data->blackbox_defect , true);
+        $data['jumper'] = json_decode($data->jumper , true);
+        $data['kilat_defect'] = json_decode($data->kilat_defect , true);
+        $data['servis_defect'] = json_decode($data->servis_defect , true);
+        $data['pembumian_defect'] = json_decode($data->pembumian_defect , true);
+        $data['bekalan_dua_defect'] = json_decode($data->bekalan_dua_defect , true);
+        $data['kaki_lima_defect'] = json_decode($data->kaki_lima_defect , true);
+        $data['tapak_condition'] = json_decode($data->tapak_condition , true);
+        $data['kawasan'] = json_decode($data->kawasan , true);
+        $data['talian_spec'] = json_decode($data->talian_spec , true);
+        $data['ipc_defect'] = json_decode($data->ipc_defect , true);
+
+
+    //    return $data;
         // $data['abc_span'] = json_decode($data->abc_span);
         // $data['abc_span'] = json_decode($data->abc_span);
         // $data['abc_span'] = json_decode($data->abc_span);

@@ -259,23 +259,32 @@
                                     <div class="col-md-8">
                                         <div class="row">
                                             <div class="col-md-4 d-flex">
+                                               
                                                 <input type="checkbox" name="tiang_defect[cracked]" id="cracked"
-                                                    class="form-check"><label for="cracked"> Cracked</label>
+                                                    @if ($data->tiang_defect != null) 
+                                                        {{
+                                                     array_key_exists('cracked', $data->tiang_defect)  ? 'checked' : ''}} @endif
+                                                    class="form-check">
+                                                <label for="cracked"> Cracked</label>
                                             </div>
+                                            
 
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="tiang_defect[leaning]" id="leaning"
+                                                @if ($data->tiang_defect != null) {{ array_key_exists('leaning', $data->tiang_defect) && $data->tiang_defect != null ? 'checked' : ''  }}@endif
                                                     class="form-check"><label for="leaning"> Leaning</label>
                                             </div>
 
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="tiang_defect[dim]" id="dim"
+                                                @if ($data->tiang_defect != null)   {{array_key_exists('dim', $data->tiang_defect) && $data->tiang_defect != null ? 'checked' : '' }}@endif
                                                     class="form-check"><label for="dim"> No. Dim Post / None
                                                 </label>
                                             </div>
 
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="tiang_defect[creepers]" id="creepers"
+                                                @if ($data->tiang_defect != null)  {{array_key_exists('creepers', $data->tiang_defect) && $data->tiang_defect != null ? 'checked' : '' }}@endif
                                                     class="form-check"><label for="creepers"> Creepers
                                                 </label>
                                             </div>
@@ -291,17 +300,20 @@
                                         <div class="row">
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="talian_defect[joint]" id="joint"
+                                                {{ array_key_exists('joint', $data->talian_defect) && $data->talian_defect != null ? 'checked' : '' }}
                                                     class="form-check"><label for="joint"> Joint</label>
                                             </div>
 
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="talian_defect[need_rentis]" id="need_rentis"
+                                                {{ array_key_exists('need_rentis', $data->talian_defect) && $data->talian_defect != null  ? 'checked' : '' }}
                                                     class="form-check"><label for="need_rentis">
                                                     Need Rentis</label>
                                             </div>
 
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="talian_defect[ground]" id="ground"
+                                                {{ array_key_exists('ground', $data->talian_defect) && $data->talian_defect != null  ? 'checked' : '' }}
                                                     class="form-check"><label for="ground"> Does Not Comply With Ground
                                                     Clearance
                                                 </label>
@@ -319,18 +331,21 @@
                                         <div class="row">
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="umbang_defect[breaking]"
+                                                {{ array_key_exists('breaking', $data->umbang_defect) ? 'checked' : '' }}
                                                     id="umbang-breaking" class="form-check"><label for="umbang-breaking">
                                                     Sagging/Breaking</label>
                                             </div>
 
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="umbang_defect[creepers]"
+                                                {{ array_key_exists('creepers', $data->umbang_defect) ? 'checked' : '' }}
                                                     id="umbang-creepers" class="form-check"><label for="umbang-creepers">
                                                     Creepers</label>
                                             </div>
 
                                             <div class="col-md-4 d-flex">
-                                                <input type="checkbox" name="umbang_defect[]" id="umbang_cracked"
+                                                <input type="checkbox" name="umbang_defect['cracked']" id="umbang_cracked"
+                                                {{ array_key_exists('cracked', $data->umbang_defect) ? 'checked' : '' }}
                                                     class="form-check"><label for="umbang_cracked"> No Stay
                                                     Insulator/Damaged
                                                 </label>
@@ -338,6 +353,8 @@
 
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="umbang_defect[stay_palte]" id="stay_palte"
+
+                                                {{ array_key_exists('stay_palte', $data->umbang_defect) ? 'checked' : '' }}
                                                     class="form-check"><label for="stay_palte"> Stay Plate / Base Stay
                                                     Blocked
                                                 </label>
@@ -356,6 +373,7 @@
                                         <div class="row">
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="ipc_defect[burn]" id="ipc-burn"
+                                                {{ array_key_exists('burn', $data->ipc_defect) ? 'checked' : '' }}
                                                     class="form-check"><label for="ipc-burn"> Burn Effect</label>
                                             </div>
 
@@ -371,6 +389,7 @@
                                         <div class="row">
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="blackbox_defect[cracked]"
+                                                {{ array_key_exists('cracked', $data->blackbox_defect) ? 'checked' : '' }}
                                                     id="black-box-cracked" class="form-check"><label
                                                     for="black-box-cracked"> Kesan Bakar</label>
                                             </div>
@@ -392,17 +411,20 @@
                                         <div class="row">
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="jumper[sleeve]" id="jumper-sleeve"
+                                                {{ array_key_exists('sleeve', $data->jumper) ? 'checked' : '' }}
                                                     class="form-check"><label for="jumper-sleeve"> No UV Sleeve</label>
                                             </div>
 
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="jumper[burn]" id="jumper-burn"
+                                                {{ array_key_exists('burn', $data->jumper) ? 'checked' : '' }}
                                                     class="form-check"><label for="jumper-burn">
                                                     Burn Effect</label>
                                             </div>
 
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="jumper[damage]" id="jumper-damage"
+                                                {{ array_key_exists('damage', $data->jumper) ? 'checked' : '' }}
                                                     class="form-check"><label for="jumper-damage"> No Stay
                                                     Insulator/Damaged
                                                 </label>
@@ -410,6 +432,7 @@
 
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="jumper[blocked]" id="jumper-blocked"
+                                                {{ array_key_exists('blocked', $data->jumper) ? 'checked' : '' }}
                                                     class="form-check"><label for="jumper-blocked"> Stay Plate / Base Stay
                                                     Blocked
                                                 </label>
@@ -430,6 +453,7 @@
                                         <div class="row">
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="kilat_defect[broken]" id="lightning-broken"
+                                                {{ array_key_exists('broken', $data->kilat_defect) ? 'checked' : '' }}
                                                     class="form-check"><label for="lightning-broken"> Broken</label>
                                             </div>
 
@@ -448,12 +472,14 @@
                                         <div class="row">
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="servis_defect[roof]" id="service-roof"
+                                                {{ array_key_exists('roof', $data->servis_defect) ? 'checked' : '' }}
                                                     class="form-check"><label for="service-roof">
                                                     The service line is on the roof</label>
                                             </div>
 
                                             <div class="col-md-4 d-flex">
-                                                <input type="checkbox" name="servis_defect[won-piece]"
+                                                <input type="checkbox" name="servis_defect[won_piece]"
+                                                {{ array_key_exists('won_piece', $data->servis_defect) ? 'checked' : '' }}
                                                     id="service-won-piece" class="form-check"><label
                                                     for="service-won-piece">
                                                     Won piece Date</label>
@@ -471,7 +497,8 @@
                                     <div class="col-md-8">
                                         <div class="row">
                                             <div class="col-md-4 d-flex">
-                                                <input type="checkbox" name="Pembumian_defect[netural]"
+                                                <input type="checkbox" name="pembumian_defect[netural]"
+                                                {{ array_key_exists('netural', $data->pembumian_defect) ? 'checked' : '' }}
                                                     id="grounding-netural" class="form-check"><label
                                                     for="grounding-netural"> No Connection to Neutral</label>
                                             </div>
@@ -491,6 +518,7 @@
                                         <div class="row">
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="bekalan_dua_defect[damage]"
+                                                {{ array_key_exists('damage', $data->bekalan_dua_defect) ? 'checked' : '' }}
                                                     id="signage-damage" class="form-check"><label for="signage-damage">
                                                     Faded / Damaged / Missing Signage</label>
                                             </div>
@@ -508,12 +536,14 @@
                                         <div class="row">
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="kaki_lima_defect[date_wire]"
+                                                {{ array_key_exists('date_wire', $data->kaki_lima_defect) ? 'checked' : '' }}
                                                     id="street-date-wire" class="form-check"><label
                                                     for="street-date-wire">Date Wire</label>
                                             </div>
 
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="kaki_lima_defect[burn]" id="street-burn"
+                                                {{ array_key_exists('burn', $data->kaki_lima_defect) ? 'checked' : '' }}
                                                     class="form-check"><label for="street-burn">
                                                     Junction Box Date / Burn Effect</label>
                                             </div>
@@ -525,20 +555,20 @@
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="total_defects">Total Defects</label></div>
-                                    <div class="col-md-4"><input type="number" name="total_defects" id="total_defects"
+                                    <div class="col-md-4"><input type="number" name="total_defects" id="total_defects" value="{{$data->total_defects}}"
                                             class="form-control"></div>
                                 </div>
 
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="planed_date">Planned Repair Date</label></div>
-                                    <div class="col-md-4"><input type="date" name="planed_date" id="planed_date"
+                                    <div class="col-md-4"><input type="date" name="planed_date" id="planed_date" value="{{ date('Y-m-d', strtotime($data->planed_date)) }}"
                                             class="form-control"></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="actual_date">Date of Repair Performed</label></div>
-                                    <div class="col-md-4"><input type="date" name="actual_date" id="actual_date"
+                                    <div class="col-md-4"><input type="date" name="actual_date" id="actual_date" value="{{ date('Y-m-d', strtotime($data->actual_date)) }}"
                                             class="form-control"></div>
                                 </div>
 
@@ -546,6 +576,7 @@
                                 <div class="row">
                                     <div class="col-md-4"><label for="remarks">Remarks</label></div>
                                     <div class="col-md-4"><input type="text" name="remarks" id="remarks"
+                                        value="{{$data->remarks}}"
                                             class="form-control"></div>
                                 </div>
 
@@ -570,18 +601,21 @@
                                         <div class="row">
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="tapak_condition[road]" id="site-road"
+                                                {{ array_key_exists('road', $data->tapak_condition) ? 'checked' : '' }}
                                                     class="form-check"><label for="site-road">
                                                     Crossing the Road</label>
                                             </div>
 
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="tapak_condition[side_walk]" id="side_walk"
+                                                {{ array_key_exists('side_walk', $data->tapak_condition) ? 'checked' : '' }}
                                                     class="form-check"><label for="side_walk">
                                                     Sidewalk</label>
                                             </div>
 
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="tapak_condition[vehicle_entry]"
+                                                {{ array_key_exists('vehicle_entry', $data->tapak_condition) ? 'checked' : '' }}
                                                     id="vehicle_entry" class="form-check"><label for="vehicle_entry">No
                                                     vehicle entry area
                                                 </label>
@@ -599,24 +633,28 @@
                                         <div class="row">
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="kawasan[bend]" id="area-bend"
+                                                {{ array_key_exists('bend', $data->kawasan) ? 'checked' : '' }}
                                                     class="form-check"><label for="area-bend">
                                                     Bend</label>
                                             </div>
 
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="kawasan[raod]" id="area-raod"
+                                                {{ array_key_exists('raod', $data->kawasan) ? 'checked' : '' }}
                                                     class="form-check"><label for="area-raod">
                                                     Road</label>
                                             </div>
 
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="kawasan[forest]" id="area-forest"
+                                                {{ array_key_exists('forest', $data->kawasan) ? 'checked' : '' }}
                                                     class="form-check"><label for="area-forest">Forest
                                                 </label>
                                             </div>
 
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="kawasan[other]" id="area-other"
+                                                {{ array_key_exists('other', $data->kawasan) ? 'checked' : '' }}
                                                     class="form-check"><label for="area-other">others (please state)
                                                 </label>
                                             </div>
@@ -628,7 +666,7 @@
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="jarak_kelegaan">Clearance Distance</label></div>
-                                    <div class="col-md-4"><input type="text" name="jarak_kelegaan"
+                                    <div class="col-md-4"><input type="text" name="jarak_kelegaan" value="{{$data->jarak_kelegaan}}"
                                             id="jarak_kelegaan" class="form-control"></div>
                                 </div>
 
@@ -640,12 +678,14 @@
                                         <div class="row">
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="talian_spec[comply]" id="line-comply"
+                                                {{ array_key_exists('comply', $data->talian_spec) ? 'checked' : '' }}
                                                     class="form-check"><label for="line-comply">
                                                     Comply</label>
                                             </div>
 
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="talian_spec[disobedient]"
+                                                {{ array_key_exists('disobedient', $data->talian_spec) ? 'checked' : '' }}
                                                     id="line-disobedient" class="form-check"><label
                                                     for="line-disobedient">
                                                     Disobedient</label>
@@ -678,18 +718,20 @@
                                             <div class="col-md-4 d-flex">
                                                 <input type="radio" name="arus_pada_tiang" id="arus_pada_tiang_no"
                                                     class="form-check" value="no"><label for="arus_pada_tiang_no">
-
+{{$data->arus_pada_tiang == 'no' ? 'checked' : ''}}
                                                     No</label>
                                             </div>
 
                                             <div class="col-md-4 d-flex">
                                                 <input type="radio" name="arus_pada_tiang" id="arus_pada_tiang_yes"
+                                                {{$data->arus_pada_tiang == 'yes' ? 'checked' : ''}}
                                                     class="form-check" value="yes"><label for="arus_pada_tiang_yes">
                                                     Yes</label>
                                             </div>
 
                                             <div class="col-md-4 d-flex">
                                                 <input type="radio" name="arus_pada_tiang" id="arus_pada_tiang_amp"
+                                                {{$data->arus_pada_tiang == 'amp' ? 'checked' : ''}}
                                                     value="amp" class="form-check"><label for="arus_pada_tiang_amp">
                                                     (Amp)</label>
                                             </div>

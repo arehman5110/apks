@@ -131,7 +131,7 @@
                                                             href="#">Detail</a>
 
                                                             <form action="{{route('tiang-talian-vt-and-vr.edit',$data->id)}}" method="get">
-                                                            <a href="#"><button type="submit" class="dropdown-list">Edit</button></a>
+                                                           <button type="submit" class="dropdown-list ml-3">Edit</button>
                                                             </form>
 
 
