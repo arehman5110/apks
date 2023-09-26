@@ -356,6 +356,7 @@ html, body{
     -moz-border-radius:5px;
     border-radius:5px
 }
+.wizard > .content > .body {position:relative !important;}
 .wizard.vertical>.content{
     display:inline;
     float:left;
@@ -392,10 +393,10 @@ html, body{
     border:1px solid #fbe3e4;
     color:#8a1f11
 }
-.wizard>.content>.body label{
+.wizard>.content>.body label.error{
     display:inline-block;
-    margin-bottom: 10px;
-	/* font-size: 13px; */
+    /* margin-bottom: 10px; */
+	font-size: 13px;
 	font-weight: 400;
 }
 .wizard>.content>.body label.error{

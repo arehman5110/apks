@@ -62,12 +62,32 @@
                         <p>Feeder Pillar</p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="/tiang" class="nav-link ">
-                        <i class="fa fa-map"></i>
-                        <p>Tiang + Talian VT & VR</p>
+
+                <li class="nav-item ">
+                    <a href="#" class="nav-link">
+                        <i class="fa fa-book"></i>
+                        <p>
+                            Tiang + Talian VT & VR
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
                     </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('tiang-talian-vt-and-vr.create')}}" class="nav-link ">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Form</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/map" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>map</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
+
+
                 <li class="nav-item">
                     <a href="/link-box" class="nav-link ">
                         <i class="fa fa-map"></i>
