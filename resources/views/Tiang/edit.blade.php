@@ -68,38 +68,38 @@
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="name_contractor">Contractor</label></div>
-                                    <div class="col-md-4"><input type="text" name="name_contractor" id="name_contractor"
+                                    <div class="col-md-4"><input type="text" name="name_contractor" value="{{ $data->name_contractor }}" id="name_contractor"
                                             class="form-control" required></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="po_start_date">PO Start Date</label></div>
-                                    <div class="col-md-4"><input type="date" name="start_date" id="po_sstart_date"
+                                    <div class="col-md-4"><input type="date" name="start_date" value="{{ $data->start_date }}" id="po_sstart_date"
                                             class="form-control" required></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="po_end_date">PO End Date</label></div>
-                                    <div class="col-md-4"><input type="date" name="end_date" id="po_end_date"
+                                    <div class="col-md-4"><input type="date" name="end_date"  value="{{ $data->end_date }}" id="po_end_date"
                                             class="form-control" required></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="fp_name">Name of Substation / Name of Feeder
                                             Pillar</label></div>
-                                    <div class="col-md-4"><input type="text" name="fp_name" id="fp_name"
+                                    <div class="col-md-4"><input type="text" name="fp_name"  value="{{ $data->fp_name }}" id="fp_name"
                                             class="form-control" required></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="review_date">Review Date </label></div>
-                                    <div class="col-md-4"><input type="date" name="review_date" id="review_date"
+                                    <div class="col-md-4"><input type="date" name="review_date" value="{{ $data->review_date }}"  id="review_date"
                                             class="form-control" required></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="fp_road">Feeder Name / Street Name</label></div>
-                                    <div class="col-md-4"><input type="text" name="fp_road" id="fp_road"
+                                    <div class="col-md-4"><input type="text" name="fp_road" value="{{ $data->fp_road }}"  id="fp_road"
                                             class="form-control" required></div>
                                 </div>
 
@@ -110,22 +110,22 @@
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="section_from">From </label></div>
-                                    <div class="col-md-4"><input type="text" name="section_from" id="section_from"
+                                    <div class="col-md-4"><input type="text" name="section_from" value="{{ $data->section_from }}"  id="section_from"
                                             class="form-control" required></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="section_to">To</label></div>
-                                    <div class="col-md-4"><input type="date" name="section_to" id="section_to"
+                                    <div class="col-md-4"><input type="date" name="section_to" value="{{ $data->section_to }}"  id="section_to"
                                             class="form-control" required></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="tiang_no">Tiang No</label></div>
-                                    <div class="col-md-4"><input type="date" name="tiang_no" id="tiang_no"
+                                    <div class="col-md-4"><input type="date" name="tiang_no"  value="{{ $data->tiang_no }}" id="tiang_no"
                                             class="form-control" required></div>
                                 </div>
-
+{{--
                                 <div class="row">
                                     <div class="col-md-4"><label for="loc">Location</label></div>
 
@@ -136,7 +136,7 @@
                                     <div class="col-md-4 text-center"><button type="button" class="btn btn-sm btn-secondary"
                                             onclick="getLocation()">Get Location</button></div>
 
-                                </div>
+                                </div> --}}
 
 
 
