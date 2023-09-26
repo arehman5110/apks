@@ -118,13 +118,13 @@
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="section_to">To</label></div>
-                                    <div class="col-md-4"><input type="date" name="section_to" id="section_to"
+                                    <div class="col-md-4"><input type="text" name="section_to" id="section_to"
                                             class="form-control" required></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="tiang_no">Tiang No</label></div>
-                                    <div class="col-md-4"><input type="date" name="tiang_no" id="tiang_no"
+                                    <div class="col-md-4"><input type="text" name="tiang_no" id="tiang_no"
                                             class="form-control" required></div>
                                 </div>
 
