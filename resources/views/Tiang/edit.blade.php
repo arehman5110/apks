@@ -146,105 +146,102 @@
 
                             {{-- START Asset Register (2) --}}
 
-                            @php
-                                $size_tiang = json_decode($data->size_tiang);
-                                $jenis_tiang = json_decode($data->jenis_tiang)
-                            @endphp
+
                             <fieldset class="form-input">
                                 <h3>Asset Register</h3>
                                 <div class="row">
                                     <div class="col-md-4"><label for="st7">
                                             Pole Size Bill 7.5</label></div>
-                                    <div class="col-md-4"><input type="number" name="size_tiang[st7]" value="{{$size_tiang->st7}}" id="st7"
+                                    <div class="col-md-4"><input type="number" name="size_tiang[st7]" value="{{$data->size_tiang->st7}}" id="st7"
                                             class="form-control" min="0"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4"><label for="st9">Pole Size Bill 9</label></div>
-                                    <div class="col-md-4"><input type="number" name="size_tiang[st9]" value="{{$size_tiang->st9}}" id="st9"
+                                    <div class="col-md-4"><input type="number" name="size_tiang[st9]" value="{{$data->size_tiang->st9}}" id="st9"
                                             class="form-control"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4"><label for="st10">Pole Size Bill 10</label></div>
-                                    <div class="col-md-4"><input type="number" name="size_tiang[st10]" value="{{$size_tiang->st10}}" id="st10"
+                                    <div class="col-md-4"><input type="number" name="size_tiang[st10]" value="{{$data->size_tiang->st10}}" id="st10"
                                             class="form-control"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4"><label for="spun">Pole Type No Spun</label></div>
-                                    <div class="col-md-4"><input type="number" name="jenis_tiang[spun]" value="{{$jenis_tiang->spun}}" id="spun"
+                                    <div class="col-md-4"><input type="number" name="jenis_tiang[spun]" value="{{$data->jenis_tiang->spun}}" id="spun"
                                             class="form-control"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4"><label for="concrete">Pole Type No Concrete </label></div>
-                                    <div class="col-md-4"><input type="number" name="jenis_tiang[concrete]" value="{{$jenis_tiang->concrete}}"
+                                    <div class="col-md-4"><input type="number" name="jenis_tiang[concrete]" value="{{$data->jenis_tiang->concrete}}"
                                             id="concrete" class="form-control"></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="iron">Pole Type No Iron</label></div>
-                                    <div class="col-md-4"><input type="number" name="jenis_tiang[iron]" id="iron" value="{{$jenis_tiang->iron}}"
+                                    <div class="col-md-4"><input type="number" name="jenis_tiang[iron]" id="iron" value="{{$data->jenis_tiang->iron}}"
                                             class="form-control"></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="wood">Pole Type No Wood</label></div>
-                                    <div class="col-md-4"><input type="number" name="jenis_tiang[wood]" id="wood" value="{{$jenis_tiang->wood}}"
+                                    <div class="col-md-4"><input type="number" name="jenis_tiang[wood]" id="wood" value="{{$data->jenis_tiang->wood}}"
                                             class="form-control"></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="section_to">ABC (Span) 3 X 185</label></div>
-                                    <div class="col-md-4"><input type="number" name="abc_span[s3_185]" id="section_to"
+                                    <div class="col-md-4"><input type="number" name="abc_span[s3_185]" id="section_to" value="{{$data->abc_span->s3_185}}"
                                             class="form-control"></div>
                                 </div>
-                                <div class="row">
+                            <div class="row">
                                     <div class="col-md-4"><label for="s3_95">ABC (Span) 3 X 95</label></div>
-                                    <div class="col-md-4"><input type="number" name="abc_span[s3_95]" id="s3_95"
+                                    <div class="col-md-4"><input type="number" name="abc_span[s3_95]" id="s3_95" value="{{$data->abc_span->s3_95}}"
                                             class="form-control"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4"><label for="s3_16">ABC (Span) 3 X 16</label></div>
-                                    <div class="col-md-4"><input type="number" name="abc_span[s3_16]" id="s3_16"
+                                    <div class="col-md-4"><input type="number" name="abc_span[s3_16]" id="s3_16" value="{{$data->abc_span->s3_16}}"
                                             class="form-control"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4"><label for="s1_16">ABC (Span) 1 X 16</label></div>
-                                    <div class="col-md-4"><input type="number" name="abc_span[s1_16]" id="s1_16"
+                                    <div class="col-md-4"><input type="number" name="abc_span[s1_16]" id="s1_16" value="{{$data->abc_span->s1_16}}"
                                             class="form-control"></div>
                                 </div>
 
-                                <div class="row">
+                                 <div class="row">
                                     <div class="col-md-4"><label for="s19_064">PVC (Span) 19/064</label></div>
-                                    <div class="col-md-4"><input type="number" name="pvc_span[s19_064]" id="s19_064"
+                                    <div class="col-md-4"><input type="number" name="pvc_span[s19_064]" id="s19_064"  value="{{$data->pvc_span->s19_064}}"
                                             class="form-control"></div>
                                 </div>
 
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="s7_083">PVC (Span) 7/083</label></div>
-                                    <div class="col-md-4"><input type="number" name="pvc_span[s7_083]" id="s7_083"
+                                    <div class="col-md-4"><input type="number" name="pvc_span[s7_083]" id="s7_083" value="{{$data->pvc_span->s7_083}}"
                                             class="form-control"></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="s7_044">PVC (Span) 7/044</label></div>
-                                    <div class="col-md-4"><input type="number" name="pvc_span[s7_044]" id="s7_044"
+                                    <div class="col-md-4"><input type="number" name="pvc_span[s7_044]" id="s7_044" value="{{$data->pvc_span->s7_044}}"
                                             class="form-control"></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="s7_173">BARE (Span) 7/173</label></div>
-                                    <div class="col-md-4"><input type="number" name="bare_span[s7_173]" id="s7_173"
+                                    <div class="col-md-4"><input type="number" name="bare_span[s7_173]" id="s7_173" value="{{$data->bare_span->s7_173}}"
                                             class="form-control"></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="s7_122">BARE (Span) 7/122</label></div>
-                                    <div class="col-md-4"><input type="number" name="bare_span[s7_122]" id="s7_122"
+                                    <div class="col-md-4"><input type="number" name="bare_span[s7_122]" id="s7_122" value="{{$data->bare_span->s7_122}}"
                                             class="form-control"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4"><label for="s3_132">BARE (Span) 3/132</label></div>
-                                    <div class="col-md-4"><input type="number" name="bare_span[s3_132]" id="s3_132"
+                                    <div class="col-md-4"><input type="number" name="bare_span[s3_132]" id="s3_132" value="{{$data->bare_span->s3_132}}"
                                             class="form-control"></div>
                                 </div>
 

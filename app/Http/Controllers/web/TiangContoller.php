@@ -19,6 +19,7 @@ class TiangContoller extends Controller
     {
         //
         $datas = Tiang::all();
+
         return view('Tiang.index', ['datas' => $datas]);
     }
 
@@ -132,6 +133,18 @@ class TiangContoller extends Controller
     {
         //
         $data = Tiang::find($id);
+        $data['abc_span'] = json_decode($data->abc_span);
+        $data['size_tiang'] = json_decode($data->size_tiang);
+        $data['jenis_tiang'] = json_decode($data->jenis_tiang);
+        $data['bare_span'] = json_decode($data->bare_span);
+        $data['pvc_span'] = json_decode($data->pvc_span);
+        // $data['abc_span'] = json_decode($data->abc_span);
+        // $data['abc_span'] = json_decode($data->abc_span);
+        // $data['abc_span'] = json_decode($data->abc_span);
+        // $data['abc_span'] = json_decode($data->abc_span);
+        // $data['abc_span'] = json_decode($data->abc_span);
+
+
         return view('Tiang.edit',['data'=>$data]);
     }
 
