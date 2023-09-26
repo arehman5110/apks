@@ -74,13 +74,13 @@
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="po_start_date">PO Start Date</label></div>
-                                    <div class="col-md-4"><input type="date" name="start_date" value="{{ $data->start_date }}" id="po_sstart_date"
+                                    <div class="col-md-4"><input type="date" name="start_date" value="{{date('Y-m-d', strtotime($data->start_date))  }}" id="po_sstart_date"
                                             class="form-control" required></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="po_end_date">PO End Date</label></div>
-                                    <div class="col-md-4"><input type="date" name="end_date"  value="{{ $data->end_date }}" id="po_end_date"
+                                    <div class="col-md-4"><input type="date" name="end_date"  value="{{ date('Y-m-d', strtotime($data->end_date)) }}" id="po_end_date"
                                             class="form-control" required></div>
                                 </div>
 
@@ -93,7 +93,7 @@
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="review_date">Review Date </label></div>
-                                    <div class="col-md-4"><input type="date" name="review_date" value="{{ $data->review_date }}"  id="review_date"
+                                    <div class="col-md-4"><input type="date" name="review_date" value="{{ date('Y-m-d', strtotime($data->review_date)) }}"  id="review_date"
                                             class="form-control" required></div>
                                 </div>
 
@@ -116,13 +116,13 @@
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="section_to">To</label></div>
-                                    <div class="col-md-4"><input type="date" name="section_to" value="{{ $data->section_to }}"  id="section_to"
+                                    <div class="col-md-4"><input type="text" name="section_to" value="{{ $data->section_to }}"  id="section_to"
                                             class="form-control" required></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="tiang_no">Tiang No</label></div>
-                                    <div class="col-md-4"><input type="date" name="tiang_no"  value="{{ $data->tiang_no }}" id="tiang_no"
+                                    <div class="col-md-4"><input type="text" name="tiang_no"  value="{{ $data->tiang_no }}" id="tiang_no"
                                             class="form-control" required></div>
                                 </div>
 {{--
@@ -145,44 +145,49 @@
                             <h3></h3>
 
                             {{-- START Asset Register (2) --}}
+
+                            @php
+                                $size_tiang = json_decode($data->size_tiang);
+                                $jenis_tiang = json_decode($data->jenis_tiang)
+                            @endphp
                             <fieldset class="form-input">
                                 <h3>Asset Register</h3>
                                 <div class="row">
                                     <div class="col-md-4"><label for="st7">
                                             Pole Size Bill 7.5</label></div>
-                                    <div class="col-md-4"><input type="number" name="size_tiang[st7]" id="st7"
+                                    <div class="col-md-4"><input type="number" name="size_tiang[st7]" value="{{$size_tiang->st7}}" id="st7"
                                             class="form-control" min="0"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4"><label for="st9">Pole Size Bill 9</label></div>
-                                    <div class="col-md-4"><input type="number" name="size_tiang[st9]" id="st9"
+                                    <div class="col-md-4"><input type="number" name="size_tiang[st9]" value="{{$size_tiang->st9}}" id="st9"
                                             class="form-control"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4"><label for="st10">Pole Size Bill 10</label></div>
-                                    <div class="col-md-4"><input type="number" name="size_tiang[st10]" id="st10"
+                                    <div class="col-md-4"><input type="number" name="size_tiang[st10]" value="{{$size_tiang->st10}}" id="st10"
                                             class="form-control"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4"><label for="spun">Pole Type No Spun</label></div>
-                                    <div class="col-md-4"><input type="number" name="jenis_tiang[spun]" id="spun"
+                                    <div class="col-md-4"><input type="number" name="jenis_tiang[spun]" value="{{$jenis_tiang->spun}}" id="spun"
                                             class="form-control"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4"><label for="concrete">Pole Type No Concrete </label></div>
-                                    <div class="col-md-4"><input type="number" name="jenis_tiang[concrete]"
+                                    <div class="col-md-4"><input type="number" name="jenis_tiang[concrete]" value="{{$jenis_tiang->concrete}}"
                                             id="concrete" class="form-control"></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="iron">Pole Type No Iron</label></div>
-                                    <div class="col-md-4"><input type="number" name="jenis_tiang[iron]" id="iron"
+                                    <div class="col-md-4"><input type="number" name="jenis_tiang[iron]" id="iron" value="{{$jenis_tiang->iron}}"
                                             class="form-control"></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="wood">Pole Type No Wood</label></div>
-                                    <div class="col-md-4"><input type="number" name="jenis_tiang[wood]" id="wood"
+                                    <div class="col-md-4"><input type="number" name="jenis_tiang[wood]" id="wood" value="{{$jenis_tiang->wood}}"
                                             class="form-control"></div>
                                 </div>
 
