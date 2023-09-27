@@ -4,6 +4,8 @@ namespace App\Http\Controllers\web;
 
 use App\Http\Controllers\Controller;
 use App\Models\ThirdPartyDiging;
+use App\Models\Team;
+use App\Models\WorkPackage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -27,9 +29,14 @@ class ThirdPartyDiggingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        return view('third-party.create');    }
+    public function create(){
+     
+        $team_id = auth()->user()->id_team;
+        $team=Team::find($team_id)->team_name;
+        $wp=WorkPackage::all();
+      //  return  $wp;
+        return view('third-party.create',['team'=>$team,'wp'=>$wp]);    
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -204,12 +211,12 @@ class ThirdPartyDiggingController extends Controller
             ThirdPartyDiging::find($id)->delete();
 
          return redirect()
-                ->route('third-party.index')
+                ->route('third-party-digging.index')
                 ->with('success', 'Recored Removed');
         } catch (\Throwable $th) {
             // return $th->getMessage();
             return redirect()
-                ->route('third-party.index')
+                ->route('third-party-digging.index')
                 ->with('failed', 'Request Failed');
         }
     }
