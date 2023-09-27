@@ -88,7 +88,7 @@ class ThirdPartyDiggingController extends Controller
                 }
             }
 
-            $data->geom = DB::raw("ST_GeomFromText('POINT($request->log $request->lat),4326')");
+            $data->geom = DB::raw("ST_GeomFromText('POINT(".$request->log." ".$request->lat.")',4326)");
 
             $data->save();
 
