@@ -9,7 +9,6 @@ use App\Models\WorkPackage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-
 class ThirdPartyDiggingController extends Controller
 {
     /**
@@ -29,13 +28,13 @@ class ThirdPartyDiggingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(){
-     
+    public function create()
+    {
         $team_id = auth()->user()->id_team;
-        $team=Team::find($team_id)->team_name;
-        $wp=WorkPackage::all();
-      //  return  $wp;
-        return view('third-party.create',['team'=>$team,'wp'=>$wp]);    
+        $team = Team::find($team_id)->team_name;
+        $wp = WorkPackage::all();
+
+        return view('third-party.create', ['team' => $team, 'wp' => $wp]);
     }
 
     /**
@@ -46,9 +45,8 @@ class ThirdPartyDiggingController extends Controller
      */
     public function store(Request $request)
     {
-        
         try {
-            $data= new ThirdPartyDiging();
+            $data = new ThirdPartyDiging();
             $data->wp_name = $request->wp_name;
             $data->zone = $request->zone;
             $data->ba = $request->ba;
@@ -79,7 +77,6 @@ class ThirdPartyDiggingController extends Controller
 
             $destinationPath = 'assets/images/';
 
-
             foreach ($request->all() as $key => $file) {
                 // Check if the input is a file and it is valid
                 if ($request->hasFile($key) && $request->file($key)->isValid()) {
@@ -90,18 +87,20 @@ class ThirdPartyDiggingController extends Controller
                     $data->{$key} = $destinationPath . $filename;
                 }
             }
-        
+
             $data->geom = DB::raw("ST_GeomFromText('POINT($request->log $request->lat),4326')");
 
             $data->save();
 
             return redirect()
-                ->route('third-party.index')
+                ->route('third-party-digging.index')
                 ->with('success', 'Form Intserted');
         } catch (\Throwable $th) {
+            return $th->getMessage();
             return redirect()
-            ->route('third-party.index')
-            ->with('failed', 'Form Intserted Failed');        }
+                ->route('third-party-digging.index')
+                ->with('failed', 'Form Intserted Failed');
+        }
     }
 
     /**
@@ -112,11 +111,9 @@ class ThirdPartyDiggingController extends Controller
      */
     public function show($id)
     {
-        $data= ThirdPartyDiging::find($id);
-        
+        $data = ThirdPartyDiging::find($id);
 
-        return view('third-party.detail',['data'=>$data]);
-
+        return view('third-party.detail', ['data' => $data]);
     }
 
     /**
@@ -127,10 +124,9 @@ class ThirdPartyDiggingController extends Controller
      */
     public function edit($id)
     {
-        $data= ThirdPartyDiging::find($id);
-        
+        $data = ThirdPartyDiging::find($id);
 
-        return view('third-party.edit',['data'=>$data]);
+        return view('third-party.edit', ['data' => $data]);
     }
 
     /**
@@ -143,7 +139,7 @@ class ThirdPartyDiggingController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $data= ThirdPartyDiging::find($id);
+            $data = ThirdPartyDiging::find($id);
             $data->wp_name = $request->wp_name;
             $data->zone = $request->zone;
             $data->ba = $request->ba;
@@ -174,7 +170,6 @@ class ThirdPartyDiggingController extends Controller
 
             $destinationPath = 'assets/images/';
 
-
             foreach ($request->all() as $key => $file) {
                 // Check if the input is a file and it is valid
                 if ($request->hasFile($key) && $request->file($key)->isValid()) {
@@ -185,7 +180,7 @@ class ThirdPartyDiggingController extends Controller
                     $data->{$key} = $destinationPath . $filename;
                 }
             }
-        
+
             $data->geom = DB::raw("ST_GeomFromText('POINT($request->log $request->lat),4326')");
 
             $data->update();
@@ -195,8 +190,9 @@ class ThirdPartyDiggingController extends Controller
                 ->with('success', 'Form Intserted');
         } catch (\Throwable $th) {
             return redirect()
-            ->route('third-party.index')
-            ->with('failed', 'Form Intserted Failed');        }
+                ->route('third-party.index')
+                ->with('failed', 'Form Intserted Failed');
+        }
     }
 
     /**
@@ -207,10 +203,10 @@ class ThirdPartyDiggingController extends Controller
      */
     public function destroy($id)
     {
-        try{
+        try {
             ThirdPartyDiging::find($id)->delete();
 
-         return redirect()
+            return redirect()
                 ->route('third-party-digging.index')
                 ->with('success', 'Recored Removed');
         } catch (\Throwable $th) {

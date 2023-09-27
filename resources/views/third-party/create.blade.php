@@ -46,7 +46,7 @@
                     <div class=" ">
                         <h3 class="text-center p-2">QR SAVR</h3>
 
-                        <form action="{{ route('third-party-digging.create') }} " method="POST"
+                        <form action="{{ route('third-party-digging.store') }} " method="POST"
                             enctype="multipart/form-data">
                             @csrf
 
@@ -68,7 +68,7 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="ba">ba</label></div>
                                 <div class="col-md-4"><select  name="ba" id="ba"
-                                        class="form-control" required>
+                                        class="form-control" required onchange="getWp(this)">
                                         <option value="" hidden>select zone</option>
 
                                     </select></div>
@@ -76,8 +76,15 @@
 
                             <div class="row">
                                 <div class="col-md-4"><label for="wp_name">Work Package Name</label></div>
-                                <div class="col-md-4"><input type="text" name="wp_name" id="wp_name"
-                                        class="form-control" required></div>
+                                <div class="col-md-4"><select   name="wp_name" id="wp_name"
+                                        class="form-control"   >
+                                        <option value="" hidden>select ba</option>
+
+                                        @foreach ($wp as $p)
+                                            <option value="">{{$p->ba}}</option>
+                                        @endforeach
+                                    
+                                    </select></div>
                             </div>
                             
 
@@ -92,13 +99,13 @@
 
                             <div class="row">
                                 <div class="col-md-4"><label for="survey_date">Survey Date</label></div>
-                                <div class="col-md-4"><input type="text" name="survey_date" id="survey_date"
+                                <div class="col-md-4"><input type="date" name="survey_date" id="survey_date"
                                         class="form-control" required></div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-4"><label for="patrolling_time">Patrolling Time</label></div>
-                                <div class="col-md-4"><input type="text" name="patrolling_time" id="patrolling_time"
+                                <div class="col-md-4"><input type="date" name="patrolling_time" id="patrolling_time"
                                         class="form-control" required></div>
                             </div>
                             <div class="row">
@@ -200,7 +207,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="workpackage_id">Workpackage Id</label></div>
-                                <div class="col-md-4"><input type="text" name="workpackage_id" id="workpackage_id"
+                                <div class="col-md-4"><input type="number" name="workpackage_id" id="workpackage_id"
                                         class="form-control" required></div>
                             </div>
                             <div class="row">
@@ -308,45 +315,47 @@
                 areaSelect.append(`<option value="" hidden>Select ba</option>`)
 
                 if (selectedValue === 'W1') {
-                    baValues = [
-                        ['KL PUSAT', 'KUALA LUMPUR PUSAT', 3.14925905877391, 101.754098819705]
-                    ];
+                    baValues = [ 'KUALA LUMPUR PUSAT'];
 
                 } else if (selectedValue === 'B1') {
-                    baValues = [
-                        ['PJ', 'PETALING JAYA', 3.1128074178475, 101.605270457169],
-                        ['RWANG', 'RAWANG', 3.47839445121726, 101.622905486475],
-                        ['K.SELANGOR', 'KUALA SELANGOR', 3.40703209426401, 101.317426926947]
-                    ];
+                    baValues = [ 'PETALING JAYA','RAWANG', 'KUALA SELANGOR' ];
                 } else if (selectedValue === 'B2') {
-                    baValues = [
-                        ['KLANG', 'KLANG', 3.08428642705789, 101.436185279023],
-                        ['PORT KLANG', 'PELABUHAN KLANG', 2.98188527916042, 101.324234779569]
-                    ];
+                    baValues = ['KLANG',  'PELABUHAN KLANG'];
+                  
 
                 } else if (selectedValue === 'B4') {
-                    baValues = [
-                        ['CHERAS', 'CHERAS', 3.14197346621987, 101.849883983416],
-                        ['BANTING/SEPANG', 'BANTING', 2.82111390453244, 101.505890775541],
-                        ['BANGI', 'BANGI'],
-                        ['PUTRAJAYA/CYBERJAYA/PUCHONG', 'PUTRAJAYA & CYBERJAYA', 2.92875032271019,
-                            101.675338316575
-                        ]
-                    ];
+                    baValues = [ 'CHERAS', 'BANTING', 'BANGI', 'PUTRAJAYA & CYBERJAYA'];
                 }
 
 
                 baValues.forEach((data) => {
-                    areaSelect.append(`<option value="${data}">${data[0]}</option>`);
+                    areaSelect.append(`<option value="${data}">${data}</option>`);
                 });
-                // $('#search_wp').empty();
-                // $('#search_wp').append(`<option value="" hidden>Select Work Package</option>`);
+                $('#wp_name').empty();
+                $('#search_wp').append(`<option value="" hidden>select wp</option>`);
                 // $('#for-excel').html('')
                 // $('#pw-zone').val(this.value);
             });
 
 
         });
+
+       
+
+function getWp(event) {
+    var wp = @json($wp);
+    console.log(event.value);
+    const wpSelect = $('#wp_name');
+    wpSelect.empty();
+    wpSelect.append(`<option value="" hidden>select wp</option>`)
+    wp.forEach((data) => {
+        if(event.value == data.ba ){
+                    wpSelect.append(`<option value="${data.package_name}">${data.package_name}</option>`);
+        }
+                });
+ 
+}
+
 
 
 
