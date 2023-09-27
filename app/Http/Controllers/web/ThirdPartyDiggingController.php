@@ -54,7 +54,8 @@ class ThirdPartyDiggingController extends Controller
             $data->survey_date = $request->survey_date;
             $data->patrolling_time = $request->patrolling_time;
             $data->project_name = $request->project_name;
-            $data->feeder_involved = $request->feeder_involved;
+            $data->road_id = $request->road_id;
+
             $data->km_plan = $request->km_plan;
             $data->km_actual = $request->km_actual;
 
@@ -63,7 +64,7 @@ class ThirdPartyDiggingController extends Controller
             $data->supervision = $request->supervision;
             $data->company_name = $request->company_name;
             $data->main_contractor = $request->main_contractor;
-
+            $data->office_phone_no = $request->office_phone_no;
             $data->developer_phone_no = $request->developer_phone_no;
             $data->contractor_company_name = $request->contractor_company_name;
             $data->site_supervisor_name = $request->site_supervisor_name;
@@ -113,7 +114,7 @@ class ThirdPartyDiggingController extends Controller
     {
         $data = ThirdPartyDiging::find($id);
 
-        return view('third-party.detail', ['data' => $data]);
+        return view('third-party.show', ['data' => $data]);
     }
 
     /**
@@ -124,9 +125,12 @@ class ThirdPartyDiggingController extends Controller
      */
     public function edit($id)
     {
+
+
+        $wp = WorkPackage::all();
         $data = ThirdPartyDiging::find($id);
 
-        return view('third-party.edit', ['data' => $data]);
+        return view('third-party.edit', ['data' => $data,'wp'=>$wp]);
     }
 
     /**
@@ -143,13 +147,13 @@ class ThirdPartyDiggingController extends Controller
             $data->wp_name = $request->wp_name;
             $data->zone = $request->zone;
             $data->ba = $request->ba;
-            $data->team_name = $request->team_name;
             $data->survey_date = $request->survey_date;
             $data->patrolling_time = $request->patrolling_time;
             $data->project_name = $request->project_name;
             $data->feeder_involved = $request->feeder_involved;
             $data->km_plan = $request->km_plan;
             $data->km_actual = $request->km_actual;
+            $data->road_id = $request->road_id;
 
             $data->digging = $request->digging;
             $data->notice = $request->notice;
@@ -181,16 +185,17 @@ class ThirdPartyDiggingController extends Controller
                 }
             }
 
-            $data->geom = DB::raw("ST_GeomFromText('POINT($request->log $request->lat),4326')");
+
 
             $data->update();
 
             return redirect()
-                ->route('third-party.index')
+                ->route('third-party-digging.index')
                 ->with('success', 'Form Intserted');
         } catch (\Throwable $th) {
+            return $th->getMessage();
             return redirect()
-                ->route('third-party.index')
+                ->route('third-party-digging.index')
                 ->with('failed', 'Form Intserted Failed');
         }
     }

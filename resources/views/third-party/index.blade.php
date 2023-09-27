@@ -82,7 +82,7 @@
                                                     @php
                                                         $date = new DateTime($data->survey_date);
                                                         $datePortion = $date->format('Y-m-d');
-                                                        
+
                                                     @endphp
                                                     {{ $datePortion }}
                                                 </td>
@@ -94,17 +94,17 @@
                                                     </button>
                                                     <div class="dropdown-menu" role="menu">
 
-                                                        <form action="{{ route('tiang-talian-vt-and-vr.show', $data->id) }}"
+                                                        <form action="{{ route('third-party-digging.show', $data->id) }}"
                                                             method="get">
                                                             <button type="submit"
-                                                                class="dropdown-list pl-3 w-100 text-left">Detail</button>
+                                                                class="dropdown-item pl-3 w-100 text-left">Detail</button>
                                                         </form>
 
                                                         <form
-                                                            action="{{ route('tiang-talian-vt-and-vr.edit', $data->id) }}"
+                                                            action="{{ route('third-party-digging.edit', $data->id) }}"
                                                             method="get">
                                                             <button type="submit"
-                                                                class="dropdown-list pl-3 w-100 text-left">Edit</button>
+                                                                class="dropdown-item pl-3 w-100 text-left">Edit</button>
                                                         </form>
 
 
