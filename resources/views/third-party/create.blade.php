@@ -46,25 +46,42 @@
                     <div class=" ">
                         <h3 class="text-center p-2">QR SAVR</h3>
 
-                        <form action="{{ route('third-party-digging.create') }} " method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('third-party-digging.create') }} " method="POST"
+                            enctype="multipart/form-data">
                             @csrf
+
+                            <div class="row">
+                                <div class="col-md-4"><label for="zone">Zone</label></div>
+                                <div class="col-md-4">
+                                    <select name="zone" id="search_zone" class="form-control">
+
+                                        <option value="" hidden>select zone</option>
+                                        <option value="W1">W1</option>
+                                        <option value="B1">B1</option>
+                                        <option value="B2">B2</option>
+                                        <option value="B4">B4</option>
+
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4"><label for="ba">ba</label></div>
+                                <div class="col-md-4"><select  name="ba" id="ba"
+                                        class="form-control" required>
+                                        <option value="" hidden>select zone</option>
+
+                                    </select></div>
+                            </div>
 
                             <div class="row">
                                 <div class="col-md-4"><label for="wp_name">Work Package Name</label></div>
                                 <div class="col-md-4"><input type="text" name="wp_name" id="wp_name"
-                                        class="form-control" ></div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4"><label for="name_contractor">Contractor</label></div>
-                                <div class="col-md-4"><input type="text" name="name_contractor" id="name_contractor"
                                         class="form-control" required></div>
                             </div>
+                            
 
-                            <div class="row">
-                                <div class="col-md-4"><label for="zone">Zone</label></div>
-                                <div class="col-md-4"><input type="text" name="zone" id="zone"
-                                        class="form-control" required></div>
-                            </div>
+                            
                             <div class="row">
                                 <div class="col-md-4"><label for="team_name">Team Name</label></div>
                                 <div class="col-md-4"><input type="text" name="team_name" id="team_name"
@@ -73,190 +90,195 @@
 
 
 
-                              <div class="row">
-                                    <div class="col-md-4"><label for="survey_date">Survey Date</label></div>
-                                    <div class="col-md-4"><input type="text" name="survey_date" id="survey_date"
-                                            class="form-control" required></div>
-                                </div>
-                                 
-                                  <div class="row">
-                                    <div class="col-md-4"><label for="patrolling_time">Patrolling Time</label></div>
-                                    <div class="col-md-4"><input type="text" name="patrolling_time" id="patrolling_time"
-                                            class="form-control" required></div>
-                                </div>
-                                  <div class="row">
-                                    <div class="col-md-4"><label for="road_id">Road Id</label></div>
-                                    <div class="col-md-4"><input type="text" name="road_id" id="road_id"
-                                            class="form-control" required></div>
-                                </div>
-                                  <div class="row">
-                                    <div class="col-md-4"><label for="project_name">Project Name</label></div>
-                                    <div class="col-md-4"><input type="text" name="project_name" id="project_name"
-                                            class="form-control" required></div>
-                                </div>
-                                  <div class="row">
-                                    <div class="col-md-4"><label for="feeder_involved">Feeder Involved</label></div>
-                                    <div class="col-md-4"><input type="text" name="feeder_involved" id="feeder_involved"
-                                            class="form-control" required></div>
-                                </div>
-                                  <div class="row">
-                                    <div class="col-md-4"><label for="km_plan">Km Plan</label></div>
-                                    <div class="col-md-4"><input type="text" name="km_plan" id="km_plan"
-                                            class="form-control" required></div>
-                                </div>
-                                  <div class="row">
-                                    <div class="col-md-4"><label for="km_actual">Km Actual</label></div>
-                                    <div class="col-md-4"><input type="text" name="km_actual" id="km_actual"
-                                            class="form-control" required></div>
-                                </div>
-                                  <div class="row">
-                                    <div class="col-md-4"><label for="digging">Digging</label></div>
-                                    <div class="col-md-4"><input type="text" name="digging" id="digging"
-                                            class="form-control" required></div>
-                                </div>
-                                  <div class="row">
-                                    <div class="col-md-4"><label for="notice">Notice</label></div>
-                                    <div class="col-md-4"><input type="text" name="notice" id="notice"
-                                            class="form-control" required></div>
-                                </div>
-                                  <div class="row">
-                                    <div class="col-md-4"><label for="supervision">Supervision</label></div>
-                                    <div class="col-md-4"><input type="text" name="supervision" id="supervision"
-                                            class="form-control" required></div>
-                                </div>
+                            <div class="row">
+                                <div class="col-md-4"><label for="survey_date">Survey Date</label></div>
+                                <div class="col-md-4"><input type="text" name="survey_date" id="survey_date"
+                                        class="form-control" required></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4"><label for="patrolling_time">Patrolling Time</label></div>
+                                <div class="col-md-4"><input type="text" name="patrolling_time" id="patrolling_time"
+                                        class="form-control" required></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"><label for="road_id">Road Id</label></div>
+                                <div class="col-md-4"><input type="text" name="road_id" id="road_id"
+                                        class="form-control" required></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"><label for="project_name">Project Name</label></div>
+                                <div class="col-md-4"><input type="text" name="project_name" id="project_name"
+                                        class="form-control" required></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"><label for="feeder_involved">Feeder Involved</label></div>
+                                <div class="col-md-4"><input type="text" name="feeder_involved" id="feeder_involved"
+                                        class="form-control" required></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"><label for="km_plan">Km Plan</label></div>
+                                <div class="col-md-4"><input type="text" name="km_plan" id="km_plan"
+                                        class="form-control" required></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"><label for="km_actual">Km Actual</label></div>
+                                <div class="col-md-4"><input type="text" name="km_actual" id="km_actual"
+                                        class="form-control" required></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"><label for="digging">Digging</label></div>
+                                <div class="col-md-4"><input type="text" name="digging" id="digging"
+                                        class="form-control" required></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"><label for="notice">Notice</label></div>
+                                <div class="col-md-4"><input type="text" name="notice" id="notice"
+                                        class="form-control" required></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"><label for="supervision">Supervision</label></div>
+                                <div class="col-md-4"><input type="text" name="supervision" id="supervision"
+                                        class="form-control" required></div>
+                            </div>
 
 
 
 
-                                <div class="row">
-                                    <div class="col-md-4"><label for="company_name">Company Name</label></div>
-                                    <div class="col-md-4"><input type="text" name="company_name" id="company_name"
-                                            class="form-control" required></div>
+                            <div class="row">
+                                <div class="col-md-4"><label for="company_name">Company Name</label></div>
+                                <div class="col-md-4"><input type="text" name="company_name" id="company_name"
+                                        class="form-control" required></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"><label for="office_phone_no">Office Phone No</label></div>
+                                <div class="col-md-4"><input type="text" name="office_phone_no" id="office_phone_no"
+                                        class="form-control" required></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"><label for="main_contractor">Main Contractor</label></div>
+                                <div class="col-md-4"><input type="text" name="main_contractor" id="main_contractor"
+                                        class="form-control" required></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"><label for="developer_phone_no">Developer Phone No</label></div>
+                                <div class="col-md-4"><input type="text" name="developer_phone_no"
+                                        id="developer_phone_no" class="form-control" required></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"><label for="contractor_company_name">Contractor Company Name</label>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-4"><label for="office_phone_no">Office Phone No</label></div>
-                                    <div class="col-md-4"><input type="text" name="office_phone_no" id="office_phone_no"
-                                            class="form-control" required></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-4"><label for="main_contractor">Main Contractor</label></div>
-                                    <div class="col-md-4"><input type="text" name="main_contractor" id="main_contractor"
-                                            class="form-control" required></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-4"><label for="developer_phone_no">Developer Phone No</label></div>
-                                    <div class="col-md-4"><input type="text" name="developer_phone_no" id="developer_phone_no"
-                                            class="form-control" required></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-4"><label for="contractor_company_name">Contractor Company Name</label></div>
-                                    <div class="col-md-4"><input type="text" name="contractor_company_name" id="contractor_company_name"
-                                            class="form-control" required></div>
-                                </div>
+                                <div class="col-md-4"><input type="text" name="contractor_company_name"
+                                        id="contractor_company_name" class="form-control" required></div>
+                            </div>
 
-                                <div class="row">
-                                    <div class="col-md-4"><label for="site_supervisor_name">Site Supervisor Name</label></div>
-                                    <div class="col-md-4"><input type="text" name="site_supervisor_name" id="site_supervisor_name"
-                                            class="form-control" required></div>
+                            <div class="row">
+                                <div class="col-md-4"><label for="site_supervisor_name">Site Supervisor Name</label></div>
+                                <div class="col-md-4"><input type="text" name="site_supervisor_name"
+                                        id="site_supervisor_name" class="form-control" required></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"><label for="site_supervisor_phone_no">Site Supervisor Phone
+                                        No</label></div>
+                                <div class="col-md-4"><input type="text" name="site_supervisor_phone_no"
+                                        id="site_supervisor_phone_no" class="form-control" required></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"><label for="excavator_operator_name">Excavator Operator Name</label>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-4"><label for="site_supervisor_phone_no">Site Supervisor Phone No</label></div>
-                                    <div class="col-md-4"><input type="text" name="site_supervisor_phone_no" id="site_supervisor_phone_no"
-                                            class="form-control" required></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-4"><label for="excavator_operator_name">Excavator Operator Name</label></div>
-                                    <div class="col-md-4"><input type="text" name="excavator_operator_name" id="excavator_operator_name"
-                                            class="form-control" required></div>
-                                </div>
+                                <div class="col-md-4"><input type="text" name="excavator_operator_name"
+                                        id="excavator_operator_name" class="form-control" required></div>
+                            </div>
 
 
 
-                                <div class="row">
-                                    <div class="col-md-4"><label for="excavator_machinery_reg_no">Excavator Machinery Reg No</label></div>
-                                    <div class="col-md-4"><input type="text" name="excavator_machinery_reg_no" id="excavator_machinery_reg_no"
-                                            class="form-control" required></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-4"><label for="workpackage_id">Workpackage Id</label></div>
-                                    <div class="col-md-4"><input type="text" name="workpackage_id" id="workpackage_id"
-                                            class="form-control" required></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-4"><label for="department_diging">Department Diging</label></div>
-                                    <div class="col-md-4"><input type="text" name="department_diging" id="department_diging"
-                                            class="form-control" required></div>
-                                </div>
+                            <div class="row">
+                                <div class="col-md-4"><label for="excavator_machinery_reg_no">Excavator Machinery Reg
+                                        No</label></div>
+                                <div class="col-md-4"><input type="text" name="excavator_machinery_reg_no"
+                                        id="excavator_machinery_reg_no" class="form-control" required></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"><label for="workpackage_id">Workpackage Id</label></div>
+                                <div class="col-md-4"><input type="text" name="workpackage_id" id="workpackage_id"
+                                        class="form-control" required></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"><label for="department_diging">Department Diging</label></div>
+                                <div class="col-md-4"><input type="text" name="department_diging"
+                                        id="department_diging" class="form-control" required></div>
+                            </div>
 
-                                <div class="row">
-                                    <div class="col-md-4"><label for="survey_status">Survey Status</label></div>
-                                    <div class="col-md-4"><input type="text" name="survey_status" id="survey_status"
-                                            class="form-control" required></div>
-                                </div><div class="row">
-                                    <div class="col-md-4"><label for="before_image1">Before Image 1</label></div>
-                                    <div class="col-md-4"><input type="file" name="before_image1" id="before_image1"
-                                            class="form-control" ></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-4"><label for="before_image2">Before Image 2</label></div>
-                                    <div class="col-md-4"><input type="file" name="before_image2" id="before_image2"
-                                            class="form-control" ></div>
-                                </div>
+                            <div class="row">
+                                <div class="col-md-4"><label for="survey_status">Survey Status</label></div>
+                                <div class="col-md-4"><input type="text" name="survey_status" id="survey_status"
+                                        class="form-control" required></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"><label for="before_image1">Before Image 1</label></div>
+                                <div class="col-md-4"><input type="file" name="before_image1" id="before_image1"
+                                        class="form-control"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"><label for="before_image2">Before Image 2</label></div>
+                                <div class="col-md-4"><input type="file" name="before_image2" id="before_image2"
+                                        class="form-control"></div>
+                            </div>
 
-                                <div class="row">
-                                    <div class="col-md-4"><label for="before_image3">Before Image 3</label></div>
-                                    <div class="col-md-4"><input type="file" name="before_image3" id="before_image3"
-                                            class="form-control" ></div>
-                                </div>
+                            <div class="row">
+                                <div class="col-md-4"><label for="before_image3">Before Image 3</label></div>
+                                <div class="col-md-4"><input type="file" name="before_image3" id="before_image3"
+                                        class="form-control"></div>
+                            </div>
 
-                                <div class="row">
-                                    <div class="col-md-4"><label for="during_image1">During Image 1</label></div>
-                                    <div class="col-md-4"><input type="file" name="during_image1" id="during_image1"
-                                            class="form-control" ></div>
-                                </div>
+                            <div class="row">
+                                <div class="col-md-4"><label for="during_image1">During Image 1</label></div>
+                                <div class="col-md-4"><input type="file" name="during_image1" id="during_image1"
+                                        class="form-control"></div>
+                            </div>
 
-                                <div class="row">
-                                    <div class="col-md-4"><label for="during_image1">During Image 2</label></div>
-                                    <div class="col-md-4"><input type="file" name="during_image2" id="during_image2"
-                                            class="form-control" ></div>
-                                </div>
+                            <div class="row">
+                                <div class="col-md-4"><label for="during_image1">During Image 2</label></div>
+                                <div class="col-md-4"><input type="file" name="during_image2" id="during_image2"
+                                        class="form-control"></div>
+                            </div>
 
-                                <div class="row">
-                                    <div class="col-md-4"><label for="during_image1">During Image 3</label></div>
-                                    <div class="col-md-4"><input type="file" name="during_image3" id="during_image3"
-                                            class="form-control" ></div>
-                                </div>
+                            <div class="row">
+                                <div class="col-md-4"><label for="during_image1">During Image 3</label></div>
+                                <div class="col-md-4"><input type="file" name="during_image3" id="during_image3"
+                                        class="form-control"></div>
+                            </div>
 
-                                <div class="row">
-                                    <div class="col-md-4"><label for="after_image1">After Image 1</label></div>
-                                    <div class="col-md-4"><input type="file" name="after_image1" id="after_image1"
-                                            class="form-control" ></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-4"><label for="after_image2">After Image 2</label></div>
-                                    <div class="col-md-4"><input type="file" name="after_image2" id="after_image2"
-                                            class="form-control" ></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-4"><label for="after_image3">After Image 3</label></div>
-                                    <div class="col-md-4"><input type="file" name="after_image3" id="after_image3"
-                                            class="form-control" ></div>
-                                </div>
-                                
-                                
-                                <div class="row">
-                                    <div class="col-md-4"><label for="loc">Location</label></div>
+                            <div class="row">
+                                <div class="col-md-4"><label for="after_image1">After Image 1</label></div>
+                                <div class="col-md-4"><input type="file" name="after_image1" id="after_image1"
+                                        class="form-control"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"><label for="after_image2">After Image 2</label></div>
+                                <div class="col-md-4"><input type="file" name="after_image2" id="after_image2"
+                                        class="form-control"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"><label for="after_image3">After Image 3</label></div>
+                                <div class="col-md-4"><input type="file" name="after_image3" id="after_image3"
+                                        class="form-control"></div>
+                            </div>
 
-                                    <div class="col-md-4"><input type="text" name="lat" id="lat" required
-                                            class="form-control">
-                                        <input type="text" name="log" id="log" class="form-control">
-                                    </div>
-                                    <div class="col-md-4 text-center"><button type="button" class="btn btn-sm btn-secondary"
-                                            onclick="getLocation()">Get Location</button></div>
 
+                            <div class="row">
+                                <div class="col-md-4"><label for="loc">Location</label></div>
+
+                                <div class="col-md-4"><input type="text" name="lat" id="lat" required
+                                        class="form-control">
+                                    <input type="text" name="log" id="log" class="form-control">
                                 </div>
+                                <div class="col-md-4 text-center"><button type="button" class="btn btn-sm btn-secondary"
+                                        onclick="getLocation()">Get Location</button></div>
 
-                                <div class="text-center p-4"><button class="btn btn-sm btn-success">Submit</button></div>
+                            </div>
+
+                            <div class="text-center p-4"><button class="btn btn-sm btn-success">Submit</button></div>
 
 
                         </form>
@@ -269,30 +291,86 @@
 @endsection
 
 @section('script')
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js"></script>
+    <script>
+        $(document).ready(function() {
+            // $('form').validate();
 
-<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js"></script>
-<script>
-    
-    // $(document).ready(function () {
-    //     $('form').validate().settings.ignore = ":disabled,:hidden";
-    // });
 
-function getLocation() {
 
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-    } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
-    }
-}
+            $('#search_zone').on('change', function() {
+                const selectedValue = this.value;
+                const areaSelect = $('#ba');
+                var baValues = '';
 
-function showPosition(position) {
+                // Clear previous options
+                areaSelect.empty();
+                areaSelect.append(`<option value="" hidden>Select ba</option>`)
 
-    $('#lat').val(position.coords.latitude)
-    $('#log').val(position.coords.longitude)
+                if (selectedValue === 'W1') {
+                    baValues = [
+                        ['KL PUSAT', 'KUALA LUMPUR PUSAT', 3.14925905877391, 101.754098819705]
+                    ];
 
-}
+                } else if (selectedValue === 'B1') {
+                    baValues = [
+                        ['PJ', 'PETALING JAYA', 3.1128074178475, 101.605270457169],
+                        ['RWANG', 'RAWANG', 3.47839445121726, 101.622905486475],
+                        ['K.SELANGOR', 'KUALA SELANGOR', 3.40703209426401, 101.317426926947]
+                    ];
+                } else if (selectedValue === 'B2') {
+                    baValues = [
+                        ['KLANG', 'KLANG', 3.08428642705789, 101.436185279023],
+                        ['PORT KLANG', 'PELABUHAN KLANG', 2.98188527916042, 101.324234779569]
+                    ];
 
-</script>
+                } else if (selectedValue === 'B4') {
+                    baValues = [
+                        ['CHERAS', 'CHERAS', 3.14197346621987, 101.849883983416],
+                        ['BANTING/SEPANG', 'BANTING', 2.82111390453244, 101.505890775541],
+                        ['BANGI', 'BANGI'],
+                        ['PUTRAJAYA/CYBERJAYA/PUCHONG', 'PUTRAJAYA & CYBERJAYA', 2.92875032271019,
+                            101.675338316575
+                        ]
+                    ];
+                }
 
+
+                baValues.forEach((data) => {
+                    areaSelect.append(`<option value="${data}">${data[0]}</option>`);
+                });
+                // $('#search_wp').empty();
+                // $('#search_wp').append(`<option value="" hidden>Select Work Package</option>`);
+                // $('#for-excel').html('')
+                // $('#pw-zone').val(this.value);
+            });
+
+
+        });
+
+
+
+
+
+
+
+
+        //get current location
+
+        function getLocation() {
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+
+        function showPosition(position) {
+
+            $('#lat').val(position.coords.latitude)
+            $('#log').val(position.coords.longitude)
+
+        }
+    </script>
 @endsection

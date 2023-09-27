@@ -1181,25 +1181,17 @@
 
 
     <script>
-        const baJson = [
-            // ['PUTRAJAYA & CYBERJAYA', 2.92875032271019, 101.675338316575],
-            // ['BANTING', 2.82111390453244, 101.505890775541],
-            // ['CHERAS', 3.14197346621987, 101.849883983416],
-            // ['PELABUHAN KLANG', 2.98188527916042, 101.324234779569],
-            // ['KLANG', 3.08428642705789, 101.436185279023],
-            // ['KUALA SELANGOR', 3.40703209426401, 101.317426926947],
-            // ['RAWANG', 3.47839445121726, 101.622905486475],
-            // ['PETALING JAYA', 3.1128074178475, 101.605270457169],
-            // ['KUALA LUMPUR PUSAT', 3.14925905877391, 101.754098819705]
-        ]
+ 
         $(document).ready(function() {
 
-
+//submit foam using ajax
             $jq('#save_wp').ajaxForm(function() {
                 alert("foam submitted!");
                 $('#geomModal').modal('hide');
                 map.removeLayer(drawnItems);
             });
+
+//submit foam 2 using ajax
 
             $jq('#road-form').ajaxForm(function() {
                 alert("foam submitted!");
@@ -1208,7 +1200,8 @@
             });
 
 
-            // $('body').addClass('sidebar-collapse');
+
+// search ba on ba change
 
             $('#search_zone').on('change', function() {
                 const selectedValue = this.value;
