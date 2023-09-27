@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\web;
 
 use App\Http\Controllers\Controller;
-use App\Models\LinkBox;
+use App\Models\CableBridge;
 use App\Models\Team;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class LinkBoxController extends Controller
+class CableBridgeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +18,8 @@ class LinkBoxController extends Controller
     public function index()
     {
         //
-        $data = LinkBox::all();
-        return view('link-box.index',['datas'=>$data]);
+        $data = CableBridge::all();
+        return view('cable-bridge.index',['datas'=>$data]);
     }
 
     /**
@@ -29,10 +29,11 @@ class LinkBoxController extends Controller
      */
     public function create()
     {
-        $team_id = auth()->user()->id_team;
-        $team = Team::find($team_id)->team_name;
-        return view('link-box.create',['team'=>$team]);
+        //
 
+         $team_id = auth()->user()->id_team;
+        $team = Team::find($team_id)->team_name;
+        return view('cable-bridge.create',['team'=>$team]);
     }
 
     /**
@@ -43,10 +44,9 @@ class LinkBoxController extends Controller
      */
     public function store(Request $request)
     {
-        //
-
         try {
-            $data = new LinkBox();
+
+            $data = new CableBridge();
             $data->zone = $request->zone;
             $data->ba = $request->ba;
             $data->team = $request->team;
@@ -56,13 +56,14 @@ class LinkBoxController extends Controller
             $data->area = $request->area;
             $data->start_date = $request->start_date;
             $data->end_date = $request->end_date;
-            $data->type = $request->type;
+
+            $data->voltage = $request->voltage;
             $data->coordinate = $request->coordinate;
-            $data->gate_status = $request->gate_status;
+            $data->pipe_staus = $request->pipe_staus;
+            $data->collapsed_status = $request->collapsed_status;
             $data->vandalism_status = $request->vandalism_status;
-            $data->leaning_staus = $request->leaning_staus;
+
             $data->rust_status = $request->rust_status;
-            $data->advertise_poster_status = $request->advertise_poster_status;
             $data->bushes_status = $request->bushes_status;
             $destinationPath = 'assets/images/';
 
@@ -82,12 +83,12 @@ class LinkBoxController extends Controller
             $data->save();
 
             return redirect()
-                ->route('link-box-pelbagai-voltan.index')
+                ->route('cable-bridge.index')
                 ->with('success', 'Form Intserted');
         } catch (\Throwable $th) {
             return $th->getMessage();
             return redirect()
-                ->route('link-box-pelbagai-voltan.index')
+                ->route('cable-bridge.index')
                 ->with('failed', 'Form Intserted Failed');
         }
     }
@@ -101,8 +102,8 @@ class LinkBoxController extends Controller
     public function show($id)
     {
         //
-        $data = LinkBox::find($id);
-        return view('link-box.show',['data'=>$data]);
+        $data = CableBridge::find($id);
+        return view('cable-bridge.show',['data'=>$data]);
     }
 
     /**
@@ -114,8 +115,8 @@ class LinkBoxController extends Controller
     public function edit($id)
     {
         //
-         $data = LinkBox::find($id);
-        return view('link-box.edit',['data'=>$data]);
+        $data = CableBridge::find($id);
+        return view('cable-bridge.edit',['data'=>$data]);
     }
 
     /**
@@ -130,7 +131,8 @@ class LinkBoxController extends Controller
         //
 
         try {
-            $data = LinkBox::find($id);
+
+            $data = CableBridge::find($id);
             $data->zone = $request->zone;
             $data->ba = $request->ba;
             $data->team = $request->team;
@@ -140,13 +142,14 @@ class LinkBoxController extends Controller
             $data->area = $request->area;
             $data->start_date = $request->start_date;
             $data->end_date = $request->end_date;
-            $data->type = $request->type;
+
+            $data->voltage = $request->voltage;
             $data->coordinate = $request->coordinate;
-            $data->gate_status = $request->gate_status;
+            $data->pipe_staus = $request->pipe_staus;
+            $data->collapsed_status = $request->collapsed_status;
             $data->vandalism_status = $request->vandalism_status;
-            $data->leaning_staus = $request->leaning_staus;
+
             $data->rust_status = $request->rust_status;
-            $data->advertise_poster_status = $request->advertise_poster_status;
             $data->bushes_status = $request->bushes_status;
             $destinationPath = 'assets/images/';
 
@@ -165,13 +168,13 @@ class LinkBoxController extends Controller
             $data->save();
 
             return redirect()
-                ->route('link-box-pelbagai-voltan.index')
+                ->route('cable-bridge.index')
                 ->with('success', 'Form Update');
         } catch (\Throwable $th) {
             return $th->getMessage();
             return redirect()
-                ->route('link-box-pelbagai-voltan.index')
-                ->with('failed', 'Request Failed');
+                ->route('cable-bridge.index')
+                ->with('failed', 'Form Intserted Failed');
         }
     }
 
@@ -183,17 +186,16 @@ class LinkBoxController extends Controller
      */
     public function destroy($id)
     {
-        //
         try {
-            LinkBox::find($id)->delete();
+            CableBridge::find($id)->delete();
 
             return redirect()
-                ->route('link-box-pelbagai-voltan.index')
+                ->route('cable-bridge.index')
                 ->with('success', 'Recored Removed');
         } catch (\Throwable $th) {
             // return $th->getMessage();
             return redirect()
-                ->route('link-box-pelbagai-voltan.index')
+                ->route('cable-bridge.index')
                 ->with('failed', 'Request Failed');
         }
     }

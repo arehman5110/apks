@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\web\admin\TeamController;
 use App\Http\Controllers\web\admin\TeamUsersController;
+use App\Http\Controllers\web\CableBridgeController;
 use App\Http\Controllers\web\excel\DigingExcelController;
 use App\Http\Controllers\web\LinkBoxController;
 use App\Http\Controllers\web\map\GeneratePDFController;
@@ -81,6 +82,9 @@ Route::prefix('admin')->group(function () {
 //// Link Box
 Route::resource('link-box-pelbagai-voltan',LinkBoxController::class);
 
+//// Cable Bridge
+
+Route::resource('cable-bridge',CableBridgeController::class);
 
 ////third party digging routes
 Route::resource('third-party-digging',ThirdPartyDiggingController::class);

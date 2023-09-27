@@ -128,13 +128,30 @@
                     </ul>
                 </li>
 
-
-                <li class="nav-item">
-                    <a href="/cable-bridge" class="nav-link ">
-                        <i class="fa fa-map"></i>
-                        <p>Cable bridge</p>
+                <li class="nav-item ">
+                    <a href="#" class="nav-link">
+                        <i class="fa fa-book"></i>
+                        <p>
+                            Cable Bridge
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
                     </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('cable-bridge.create')}}" class="nav-link ">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Form</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('cable-bridge.index')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Index</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
+
 
                 @else
                 <li class="nav-item">

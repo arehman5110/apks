@@ -138,13 +138,7 @@
                                         class="form-control" required>
                                     </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-4"><label for="visit_date">Visit Date</label></div>
-                                <div class="col-md-4">
-                                    <input type="date" name="visit_date" id="visit_date"
-                                        class="form-control" required>
-                                    </div>
-                            </div>
+                             
                             <div class="row">
                                 <div class="col-md-4"><label for="end_date">End Date</label></div>
                                 <div class="col-md-4">
