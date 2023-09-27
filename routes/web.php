@@ -11,6 +11,7 @@ use App\Http\Controllers\web\map\RoadController;
 use App\Http\Controllers\web\map\WPController;
 use App\Http\Controllers\web\TiangContoller;
 use App\Http\Controllers\web\tnbes\StatusController;
+use App\Http\Controllers\web\ThirdPartyDiggingController;
 
 
 /*
@@ -75,7 +76,13 @@ Route::prefix('admin')->group(function () {
     Route::resource('team-users',TeamUsersController::class);
 });
 
-Route::view('third','third-party.create');
+
+////third party digging routes 
+Route::resource('third-party-digging',ThirdPartyDiggingController::class);
+
+
+
+
 });
 
 require __DIR__ . '/auth.php';
