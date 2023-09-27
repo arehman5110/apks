@@ -46,7 +46,7 @@
                     <div class=" ">
                         <h3 class="text-center p-2">QR SAVR</h3>
 
-                        <form action="#" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('third-party-digging.create') }} " method="POST" enctype="multipart/form-data">
                             @csrf
 
                             <div class="row">

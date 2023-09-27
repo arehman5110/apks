@@ -75,13 +75,9 @@
                                         @foreach ($datas as $data)
                                             <tr>
                                                 <td class="align-middle">{{ $data->wp_name }}</td>
-                                                <td class="align-middle">
-                                                    {{ $data->zone }}</td>
-
-
-                                                <td class="align-middle text-center">
-                                                   {{$data->team_name}}
-                                                </td>
+                                                <td class="align-middle">{{ $data->zone }}</td>
+                                                <td>{{ $data->ba }}</td>
+                                                <td class="align-middle text-center">{{ $data->team_name }}</td>
                                                 <td class="align-middle text-center">
                                                     @php
                                                         $date = new DateTime($data->survey_date);
@@ -104,7 +100,8 @@
                                                                 class="dropdown-list pl-3 w-100 text-left">Detail</button>
                                                         </form>
 
-                                                        <form action="{{ route('tiang-talian-vt-and-vr.edit', $data->id) }}"
+                                                        <form
+                                                            action="{{ route('tiang-talian-vt-and-vr.edit', $data->id) }}"
                                                             method="get">
                                                             <button type="submit"
                                                                 class="dropdown-list pl-3 w-100 text-left">Edit</button>
@@ -185,7 +182,7 @@
                 var button = $(event.relatedTarget);
                 var id = button.data('id');
                 var modal = $(this);
-                $('#remove-foam').attr('action', 'tiang-talian-vt-and-vr/' + id)
+                $('#remove-foam').attr('action', '/third-party-digging/' + id)
             });
 
         });

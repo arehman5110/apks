@@ -37,6 +37,20 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
+
+                        <li class="nav-item">
+                            <a href="{{ route('third-party-digging.create') }}" class="nav-link ">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>create</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('third-party-digging.index') }}" class="nav-link ">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>index</p>
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a href="/map-1" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
@@ -46,7 +60,7 @@
                         <li class="nav-item">
                             <a href="/get-all-work-packages" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>index</p>
+                                <p>tnbs approvel</p>
                             </a>
                         </li>
                     </ul>
