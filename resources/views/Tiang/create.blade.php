@@ -12,9 +12,7 @@
             margin-right: 12px;
         }
 
-        input[type='checkbox']>.col-md-4 {
-            display: flex;
-        }
+      
     </style>
 @endsection
 
@@ -755,7 +753,7 @@
                             .find(".body:eq(" + newIndex + ") .error")
                             .removeClass("error");
                     }
-                    form.validate().settings.ignore = ":disabled,:hidden";
+                    .settings.ignore = ":disabled,:hidden";
                     return form.valid();
                 },
 

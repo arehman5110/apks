@@ -30,6 +30,14 @@ Route::get('/', function () {
 });
 
 Route::middleware('auth')->group(function () {
+
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+
+
+    
 Route::get('/map-1',[MapController::class,'index']);
 Route::get('/get-all-work-packages',[MapController::class,'allWP']);
 Route::get('/proxy/{url}',[MapController::class,'proxy']);
@@ -68,8 +76,10 @@ Route::prefix('admin')->group(function () {
     Route::resource('team-users',TeamUsersController::class);
 });
 
+
 ////third party digging routes 
 Route::resource('third-party-digging',ThirdPartyDiggingController::class);
+
 
 
 
