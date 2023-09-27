@@ -6,8 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
-class TeamController extends Controller
+class TeamUsersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +18,10 @@ class TeamController extends Controller
     public function index()
     {
         //
-        $team = Team::withCount('teamUsers')->get();
-        return view('admin.team.index', ['teams' => $team]);
+     $user = User::with('userTeam')
+            ->where('type', '0')
+            ->get();
+        return view('admin.users.index', ['users' => $user, 'teams' => Team::all()]);
     }
 
     /**
@@ -41,17 +44,20 @@ class TeamController extends Controller
     {
         //
         try {
-            Team::create([
-                'team_name' => $request->team_name,
-                'team_type' => $request->team_type,
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'id_team' => $request->id_team,
+                'password' => Hash::make($request->password),
+                'type' => false,
             ]);
-
             return redirect()
-                ->route('team.index')
-                ->with('success', 'Team Added');
+                ->route('team-users.index')
+                ->with('success', 'User Added');
         } catch (\Throwable $th) {
+            return $th->getMessage();
             return redirect()
-                ->route('team.index')
+                ->route('team-users.index')
                 ->with('failed', 'Request Failed');
         }
     }
@@ -98,19 +104,16 @@ class TeamController extends Controller
      */
     public function destroy($id)
     {
-        //
-        try {
-            User::where('id_team', $id)->update(['id_team' => "0"]);
-
-            Team::find($id)->delete();
-            return redirect()
-            ->route('team.index')
-            ->with('success', 'Team Removed');
-    } catch (\Throwable $th) {
-        return $th->getMessage();
+        try{
+        User::find($id)->delete();
         return redirect()
-            ->route('team.index')
-            ->with('failed', 'Request Failed');
-    }
+        ->route('team-users.index')
+        ->with('success', 'User Removed');
+} catch (\Throwable $th) {
+    return $th->getMessage();
+    return redirect()
+        ->route('team-users.index')
+        ->with('failed', 'Request Failed');
+}
     }
 }

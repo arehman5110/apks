@@ -25,6 +25,9 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                 data-accordion="false">
 
+                @if (Auth::user()->id != '1')
+
+
                 <li class="nav-item ">
                     <a href="#" class="nav-link">
                         <i class="fa fa-book"></i>
@@ -101,7 +104,21 @@
                     </a>
                 </li>
 
+                @else
+                <li class="nav-item">
+                    <a href="{{route('team.index')}}" class="nav-link ">
+                        <i class="fa fa-team"></i>
+                        <p>Team</p>
+                    </a>
+                </li>
 
+                <li class="nav-item">
+                    <a href="{{route('team-users.index')}}" class="nav-link ">
+                        <i class="fa fa-map"></i>
+                        <p>Users</p>
+                    </a>
+                </li>
+                @endif
             </ul>
         </nav>
 

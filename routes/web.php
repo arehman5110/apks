@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\web\admin\TeamController;
+use App\Http\Controllers\web\admin\TeamUsersController;
 use App\Http\Controllers\web\excel\DigingExcelController;
 use App\Http\Controllers\web\map\GeneratePDFController;
 use Illuminate\Support\Facades\Route;
@@ -10,6 +11,7 @@ use App\Http\Controllers\web\map\RoadController;
 use App\Http\Controllers\web\map\WPController;
 use App\Http\Controllers\web\TiangContoller;
 use App\Http\Controllers\web\tnbes\StatusController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -61,6 +63,7 @@ Route::resource('tiang-talian-vt-and-vr',TiangContoller::class);
 
 Route::prefix('admin')->group(function () {
     Route::resource('/team',TeamController::class);
+    Route::resource('team-users',TeamUsersController::class);
 });
 
 require __DIR__ . '/auth.php';

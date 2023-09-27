@@ -63,23 +63,24 @@
 
                                     <thead style="background-color: #E4E3E3 !important">
                                         <tr>
+                                            <th>User Name</th>
+                                            <th>User Email</th>
                                             <th>Team Name</th>
                                             <th>Team Type</th>
-                                            <th>Total Users</th>
                                             <th>Action</th>
 
                                         </tr>
                                     </thead>
                                     <tbody>
 
-                                        @foreach ($teams as $data)
+                                        @foreach ($users as $data)
                                             <tr>
-                                                <td class="align-middle">{{ $data->team_name }}</td>
+                                                <td class="align-middle">{{ $data->name }}</td>
                                                 <td class="align-middle">
-                                                    {{ $data->team_type }}</td>
+                                                    {{ $data->email }}</td>
 
-                                                    <td>{{$data->team_users_count}}</td>
-
+                                                    <td>{{$data->userTeam->team_name}}</td>
+<td>{{$data->userTeam->team_type}}</td>
                                                 <td class="text-center">
 
                                                     <button type="button" class="btn  " data-toggle="dropdown">
@@ -156,20 +157,31 @@
 
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">Add Team</h4>
+                    <h4 class="modal-title">Add User</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <form action="{{route('team.store')}}" id="remove-foam" method="POST">
+                <form action="{{route('team-users.store')}}" id="remove-foam" method="POST">
 
                     @csrf
 
                     <div class="modal-body form-input">
-                        <label for="team-name">Team Name</label>
-                        <input type="text" name="team_name" id="team-name" class="form-control" required>
+                        <label for="name">Name</label>
+                        <input type="text" name="name" id="name" class="form-control" required>
 
-                        <label for="team-type">Team Type</label>
-                        <input type="text" name="team_type" id="team-type" class="form-control" required>
+                        <label for="email">Email</label>
+                        <input type="email" name="email" id="email" class="form-control" required>
 
+                        <label for="team-name">Team</label>
+                        <select name="id_team" id="team-id" class="form-control " required>
+                            <option value="" hidden>Select team</option>
+                            @foreach ($teams as $team)
+                            <option value="{{$team->id}}">{{$team->team_name}}</option>
+
+                            @endforeach
+                        </select>
+
+                        <label for="email">Password</label>
+                        <input type="text" name="password" id="email" class="form-control" required>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -185,6 +197,7 @@
 
 
 @section('script')
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js"></script>
     <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
 
@@ -198,7 +211,7 @@
                 var button = $(event.relatedTarget);
                 var id = button.data('id');
                 var modal = $(this);
-                $('#remove-foam').attr('action', 'team/' + id)
+                $('#remove-foam').attr('action', 'team-users/' + id)
             });
 
 
