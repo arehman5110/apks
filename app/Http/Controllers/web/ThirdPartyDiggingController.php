@@ -204,12 +204,12 @@ class ThirdPartyDiggingController extends Controller
             ThirdPartyDiging::find($id)->delete();
 
          return redirect()
-                ->route('third-party.index')
+                ->route('third-party-digging.index')
                 ->with('success', 'Recored Removed');
         } catch (\Throwable $th) {
             // return $th->getMessage();
             return redirect()
-                ->route('third-party.index')
+                ->route('third-party-digging.index')
                 ->with('failed', 'Request Failed');
         }
     }
