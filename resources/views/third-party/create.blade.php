@@ -46,7 +46,7 @@
                     <div class=" ">
                         <h3 class="text-center p-2">QR SAVR</h3>
 
-                        <form action="#" method="POST">
+                        <form action="#" method="POST" enctype="multipart/form-data">
                             @csrf
 
                             <div class="row">
@@ -129,7 +129,7 @@
 
 
                                 <div class="row">
-                                    <div class="col-md-4"><label for="company_name">Company_name</label></div>
+                                    <div class="col-md-4"><label for="company_name">Company Name</label></div>
                                     <div class="col-md-4"><input type="text" name="company_name" id="company_name"
                                             class="form-control" required></div>
                                 </div>
@@ -194,53 +194,53 @@
                                             class="form-control" required></div>
                                 </div><div class="row">
                                     <div class="col-md-4"><label for="before_image1">Before Image 1</label></div>
-                                    <div class="col-md-4"><input type="before_image1" name="before_image1" id="before_image1"
-                                            class="form-control" required></div>
+                                    <div class="col-md-4"><input type="file" name="before_image1" id="before_image1"
+                                            class="form-control" ></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4"><label for="before_image2">Before Image 2</label></div>
-                                    <div class="col-md-4"><input type="text" name="before_image2" id="before_image2"
-                                            class="form-control" required></div>
+                                    <div class="col-md-4"><input type="file" name="before_image2" id="before_image2"
+                                            class="form-control" ></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="before_image3">Before Image 3</label></div>
-                                    <div class="col-md-4"><input type="text" name="before_image3" id="before_image3"
-                                            class="form-control" required></div>
+                                    <div class="col-md-4"><input type="file" name="before_image3" id="before_image3"
+                                            class="form-control" ></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="during_image1">During Image 1</label></div>
-                                    <div class="col-md-4"><input type="text" name="during_image1" id="during_image1"
-                                            class="form-control" required></div>
+                                    <div class="col-md-4"><input type="file" name="during_image1" id="during_image1"
+                                            class="form-control" ></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="during_image1">During Image 2</label></div>
-                                    <div class="col-md-4"><input type="text" name="during_image2" id="during_image2"
-                                            class="form-control" required></div>
+                                    <div class="col-md-4"><input type="file" name="during_image2" id="during_image2"
+                                            class="form-control" ></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="during_image1">During Image 3</label></div>
-                                    <div class="col-md-4"><input type="text" name="during_image3" id="during_image3"
-                                            class="form-control" required></div>
+                                    <div class="col-md-4"><input type="file" name="during_image3" id="during_image3"
+                                            class="form-control" ></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="after_image1">After Image 1</label></div>
-                                    <div class="col-md-4"><input type="text" name="after_image1" id="after_image1"
-                                            class="form-control" required></div>
+                                    <div class="col-md-4"><input type="file" name="after_image1" id="after_image1"
+                                            class="form-control" ></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4"><label for="after_image2">After Image 2</label></div>
-                                    <div class="col-md-4"><input type="text" name="after_image2" id="after_image2"
-                                            class="form-control" required></div>
+                                    <div class="col-md-4"><input type="file" name="after_image2" id="after_image2"
+                                            class="form-control" ></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4"><label for="after_image3">After Image 3</label></div>
-                                    <div class="col-md-4"><input type="text" name="after_image3" id="after_image3"
-                                            class="form-control" required></div>
+                                    <div class="col-md-4"><input type="file" name="after_image3" id="after_image3"
+                                            class="form-control" ></div>
                                 </div>
                                 
                                 
