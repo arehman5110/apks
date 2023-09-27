@@ -104,13 +104,31 @@
                     </ul>
                 </li>
 
-
-                <li class="nav-item">
-                    <a href="/link-box" class="nav-link ">
-                        <i class="fa fa-map"></i>
-                        <p>Link Box Pelbagai Voltan</p>
+                <li class="nav-item ">
+                    <a href="#" class="nav-link">
+                        <i class="fa fa-book"></i>
+                        <p>
+                            Link Box Pelbagai Voltan
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
                     </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('link-box-pelbagai-voltan.create')}}" class="nav-link ">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Form</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('link-box-pelbagai-voltan.index')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Index</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
+
+
                 <li class="nav-item">
                     <a href="/cable-bridge" class="nav-link ">
                         <i class="fa fa-map"></i>

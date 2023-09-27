@@ -6,11 +6,6 @@
 
     {{-- <link rel="stylesheet" href="{{ URL::asset('assets/test/css/style.css') }}" /> --}}
     <style>
-        input[type='checkbox'],
-        input[type='radio'] {
-            min-width: 16px !important;
-            margin-right: 12px;
-        }
 
         .error {
             color: red;
@@ -78,7 +73,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="ba">ba</label></div>
+                                <div class="col-md-4"><label for="ba">Ba</label></div>
                                 <div class="col-md-4"><select name="ba" id="ba" class="form-control" required
                                         onchange="getWp(this)">
                                         <option value="" hidden>select zone</option>

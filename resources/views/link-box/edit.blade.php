@@ -27,6 +27,10 @@
             margin-bottom: 0px !important;
             margin-top: 1rem;
         }
+
+        .adjust-height {
+            height: 70px;
+        }
     </style>
 @endsection
 
@@ -41,7 +45,7 @@
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
                         <li class="breadcrumb-item"><a href="{{route('link-box-pelbagai-voltan.index')}}">index</a></li>
-                        <li class="breadcrumb-item active">edit</li>
+                        <li class="breadcrumb-item active">create</li>
                     </ol>
                 </div>
             </div>
@@ -58,8 +62,9 @@
                     <div class=" ">
                         <h3 class="text-center p-2"></h3>
 
-                        <form action="{{ route('link-box-pelbagai-voltan.store') }} " id="myForm" method="POST"
+                        <form action="{{ route('link-box-pelbagai-voltan.update', $data->id) }} " id="myForm" method="POST"
                             enctype="multipart/form-data">
+                            @method('PATCH')
                             @csrf
 
 
@@ -68,7 +73,7 @@
                                 <div class="col-md-4">
                                     <select name="zone" id="search_zone" class="form-control" required>
 
-                                        <option value="" hidden>select zone</option>
+                                        <option value="{{ $data->zone }}" hidden>{{ $data->zone }}</option>
                                         <option value="W1">W1</option>
                                         <option value="B1">B1</option>
                                         <option value="B2">B2</option>
@@ -91,7 +96,7 @@
                                 <div class="col-md-4"><label for="visit_date">Visit Date</label></div>
                                 <div class="col-md-4">
                                     <input type="date" name="visit_date" id="visit_date"
-                                        class="form-control" required>
+                                        class="form-control" value="{{ date('Y-m-d', strtotime($data->visit_date)) }}" required>
                                     </div>
                             </div>
 
@@ -102,7 +107,7 @@
                                 <div class="col-md-4"><label for="patrol_time">Patrol Time</label></div>
                                 <div class="col-md-4">
                                     <input type="time" name="patrol_time" id="patrol_time"
-                                        class="form-control" required>
+                                        class="form-control" value="{{ $data->patrol_time }}"  required>
                                     </div>
                             </div>
 
@@ -111,15 +116,15 @@
                                 <div class="col-md-4"><label for="feeder_involved">Feeder Involved</label></div>
                                 <div class="col-md-4">
                                     <input type="text" name="feeder_involved" id="feeder_involved"
-                                        class="form-control" required>
+                                        class="form-control" value="{{ $data->feeder_involved }}" required>
                                     </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-4"><label for="team">Team</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="team" id="team" value="{{$team}}"
-                                        class="form-control"  readonly>
+                                    <input type="text" name="team" id="team"
+                                        class="form-control" value="{{ $data->team }}"  readonly>
                                     </div>
                             </div>
 
@@ -127,28 +132,22 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="area">Area</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="area" id="area"
+                                    <input type="text" name="area" id="area" value="{{ $data->area }}"
                                         class="form-control" >
                                     </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="start_date">Start Date</label></div>
                                 <div class="col-md-4">
-                                    <input type="date" name="start_date" id="start_date"
+                                    <input type="date" name="start_date" id="start_date" value="{{ $data->start_date }}"
                                         class="form-control" required>
                                     </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-4"><label for="visit_date">Visit Date</label></div>
-                                <div class="col-md-4">
-                                    <input type="date" name="visit_date" id="visit_date"
-                                        class="form-control" required>
-                                    </div>
-                            </div>
+
                             <div class="row">
                                 <div class="col-md-4"><label for="end_date">End Date</label></div>
                                 <div class="col-md-4">
-                                    <input type="date" name="end_date" id="end_date"
+                                    <input type="date" name="end_date" id="end_date" value="{{ $data->end_date }}"
                                         class="form-control" required>
                                     </div>
                             </div>
@@ -156,56 +155,56 @@
                               <div class="row">
                                 <div class="col-md-4"><label for="type">Type</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="type" id="type"
+                                    <input type="text" name="type" id="type" value="{{ $data->type }}"
                                         class="form-control" required>
                                     </div>
                             </div>
                               <div class="row">
                                 <div class="col-md-4"><label for="coordinate">Coordinate</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="coordinate" id="coordinate"
+                                    <input type="text" name="coordinate" id="coordinate" value="{{ $data->coordinate }}"
                                         class="form-control" required>
                                     </div>
                             </div>
                               <div class="row">
                                 <div class="col-md-4"><label for="gate_status">Gate Status</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="gate_status" id="gate_status"
+                                    <input type="text" name="gate_status" id="gate_status" value="{{ $data->gate_status }}"
                                         class="form-control" required>
                                     </div>
                             </div>
                               <div class="row">
                                 <div class="col-md-4"><label for="vandalism_status">Vandalism Status</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="vandalism_status" id="vandalism_status"
+                                    <input type="text" name="vandalism_status" id="vandalism_status" value="{{ $data->vandalism_status }}"
                                         class="form-control" required>
                                     </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="leaning_staus">Leaning Staus</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="leaning_staus" id="leaning_staus"
+                                    <input type="text" name="leaning_staus" id="leaning_staus" value="{{ $data->leaning_staus }}"
                                         class="form-control" required>
                                     </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="rust_status">Rust Status</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="rust_status" id="rust_status"
+                                    <input type="text" name="rust_status" id="rust_status" value="{{ $data->rust_status }}"
                                         class="form-control" required>
                                     </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="advertise_poster_status">Advertise Poster Status</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="advertise_poster_status" id="advertise_poster_status"
+                                    <input type="text" name="advertise_poster_status" id="advertise_poster_status" value="{{ $data->advertise_poster_status }}"
                                         class="form-control" required>
                                     </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="bushes_status">Bushes Status</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="bushes_status" id="bushes_status"
+                                    <input type="text" name="bushes_status" id="bushes_status" value="{{ $data->bushes_status }}"
                                         class="form-control" required>
                                     </div>
                             </div>
@@ -215,6 +214,15 @@
                                     <input type="file" name="image_gate" id="image_gate"
                                         class="form-control" >
                                     </div>
+                                    <div class="col-md-4 text-center mb-3">
+                                        @if (file_exists(public_path($data->image_gate)) && $data->image_gate != '')
+                                            <a href="{{ URL::asset($data->image_gate) }}" data-lightbox="roadtrip">
+                                                <img src="{{ URL::asset($data->image_gate) }}" alt=""
+                                                    height="70" class="adjust-height ml-5  "></a>
+                                                    @else
+                                                    <strong>No image found</strong>
+   @endif
+                                    </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="image_vandalism">Image vandalism</label></div>
@@ -222,12 +230,30 @@
                                     <input type="file" name="image_vandalism" id="image_vandalism"
                                         class="form-control" >
                                     </div>
+                                    <div class="col-md-4 text-center mb-3">
+                                        @if (file_exists(public_path($data->image_vandalism)) && $data->image_vandalism != '')
+                                            <a href="{{ URL::asset($data->image_vandalism) }}" data-lightbox="roadtrip">
+                                                <img src="{{ URL::asset($data->image_vandalism) }}" alt=""
+                                                    height="70" class="adjust-height ml-5  "></a>
+                                                    @else
+                                                    <strong>No image found</strong>
+     @endif
+                                    </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="image_leaning">Image Leaning</label></div>
                                 <div class="col-md-4">
                                     <input type="file" name="image_leaning" id="image_leaning"
                                         class="form-control" >
+                                    </div>
+                                    <div class="col-md-4 text-center mb-3">
+                                        @if (file_exists(public_path($data->image_leaning)) && $data->image_leaning != '')
+                                            <a href="{{ URL::asset($data->image_leaning) }}" data-lightbox="roadtrip">
+                                                <img src="{{ URL::asset($data->image_leaning) }}" alt=""
+                                                    height="70" class="adjust-height ml-5  "></a>
+                                                    @else
+                                                    <strong>No image found</strong>
+   @endif
                                     </div>
                             </div>
 
@@ -237,6 +263,15 @@
                                     <input type="file" name="image_rust" id="image_rust"
                                         class="form-control" >
                                     </div>
+                                    <div class="col-md-4 text-center mb-3">
+                                        @if (file_exists(public_path($data->image_rust)) && $data->image_rust != '')
+                                            <a href="{{ URL::asset($data->image_rust) }}" data-lightbox="roadtrip">
+                                                <img src="{{ URL::asset($data->image_rust) }}" alt=""
+                                                    height="70" class="adjust-height ml-5  "></a>
+                                                    @else
+                                                    <strong>No image found</strong>
+    @endif
+                                    </div>
                             </div>
 
                             <div class="row">
@@ -244,6 +279,15 @@
                                 <div class="col-md-4">
                                     <input type="file" name="images_advertise_poster" id="images_advertise_poster"
                                         class="form-control" >
+                                    </div>
+                                    <div class="col-md-4 text-center mb-3">
+                                        @if (file_exists(public_path($data->images_advertise_poster)) && $data->images_advertise_poster != '')
+                                            <a href="{{ URL::asset($data->images_advertise_poster) }}" data-lightbox="roadtrip">
+                                                <img src="{{ URL::asset($data->images_advertise_poster) }}" alt=""
+                                                    height="70" class="adjust-height ml-5  "></a>
+                                                    @else
+                                                    <strong>No image found</strong>
+   @endif
                                     </div>
                             </div>
 
@@ -253,6 +297,15 @@
                                     <input type="file" name="images_bushes" id="images_bushes"
                                         class="form-control" >
                                     </div>
+                                    <div class="col-md-4 text-center mb-3">
+                                        @if (file_exists(public_path($data->images_bushes)) && $data->images_bushes != '')
+                                            <a href="{{ URL::asset($data->images_bushes) }}" data-lightbox="roadtrip">
+                                                <img src="{{ URL::asset($data->images_bushes) }}" alt=""
+                                                    height="70" class="adjust-height ml-5  "></a>
+                                                    @else
+                                                    <strong>No image found</strong>
+    @endif
+                                    </div>
                             </div>
 
                              <div class="row">
@@ -261,22 +314,19 @@
                                     <input type="file" name="other_image" id="other_image"
                                         class="form-control" >
                                     </div>
+                                    <div class="col-md-4 text-center mb-3">
+                                        @if (file_exists(public_path($data->other_image)) && $data->other_image != '')
+                                            <a href="{{ URL::asset($data->other_image) }}" data-lightbox="roadtrip">
+                                                <img src="{{ URL::asset($data->other_image) }}" alt=""
+                                                    height="70" class="adjust-height ml-5  "></a>@else
+                                                    <strong>No image found</strong>
+
+                                        @endif
+                                    </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col-md-4"><label for="loc">Location</label></div>
 
-                                <div class="col-md-4"><input type="text" name="lat" id="lat" required
-                                        class="form-control">
-                                    <input type="text" name="log" id="log" class="form-control">
-                                </div>
-                                <div class="col-md-4 text-center"><button type="button" class="btn btn-sm btn-secondary"
-                                        onclick="getLocation()">Get Location</button>
-                                </div>
-
-                            </div>
-
-                            <div class="text-center p-4"><button class="btn btn-sm btn-success">Submit</button></div>
+                            <div class="text-center p-4"><button class="btn btn-sm btn-success">Update</button></div>
                         </form>
                     </div>
                 </div>
@@ -287,7 +337,7 @@
 
 @endsection
 
-@section('script')
+
 @section('script')
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js"></script>
     <script>
@@ -296,56 +346,47 @@
 
             $("#myForm").validate();
 
-            $('#search_zone').on('change', function() {
-                const selectedValue = this.value;
-                const areaSelect = $('#ba');
-                var baValues = '';
 
-                // Clear previous options
-                areaSelect.empty();
-                areaSelect.append(`<option value="" hidden>Select ba</option>`)
-
-                if (selectedValue === 'W1') {
-                    baValues = ['KUALA LUMPUR PUSAT'];
-
-                } else if (selectedValue === 'B1') {
-                    baValues = ['PETALING JAYA', 'RAWANG', 'KUALA SELANGOR'];
-                } else if (selectedValue === 'B2') {
-                    baValues = ['KLANG', 'PELABUHAN KLANG'];
-
-
-                } else if (selectedValue === 'B4') {
-                    baValues = ['CHERAS', 'BANTING', 'BANGI', 'PUTRAJAYA & CYBERJAYA'];
-                }
-
-
-                baValues.forEach((data) => {
-                    areaSelect.append(`<option value="${data}">${data}</option>`);
-                });
-                $('#wp_name').empty();
-                $('#search_wp').append(`<option value="" hidden>select wp</option>`);
-
-            });
-
-
+            getBa();
         });
 
-        //get current location
+        function getBa() {
+            const selectedValue = $('#search_zone').val()
+            const zone = "{{ $data->zone }}";
+            const areaSelect = $('#ba');
+            var baValues = '';
+            const ba = "{{ $data->ba }}";
+            // Clear previous options
+            areaSelect.empty();
+            if (selectedValue === zone) {
+                areaSelect.append(`<option value="${ba}" hidden>${ba}</option>`)
+            } else {
+                areaSelect.append(`<option value="" hidden>select ba</option>`)
 
-        function getLocation() {
+            }
 
-if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition);
-} else {
-    x.innerHTML = "Geolocation is not supported by this browser.";
-}
-}
 
-function showPosition(position) {
+            if (selectedValue === 'W1') {
+                baValues = ['KUALA LUMPUR PUSAT'];
 
-$('#lat').val(position.coords.latitude)
-$('#log').val(position.coords.longitude)
+            } else if (selectedValue === 'B1') {
+                baValues = ['PETALING JAYA', 'RAWANG', 'KUALA SELANGOR'];
+            } else if (selectedValue === 'B2') {
+                baValues = ['KLANG', 'PELABUHAN KLANG'];
 
-}
+
+            } else if (selectedValue === 'B4') {
+                baValues = ['CHERAS', 'BANTING', 'BANGI', 'PUTRAJAYA & CYBERJAYA'];
+            }
+
+
+            baValues.forEach((data) => {
+                areaSelect.append(`<option value="${data}">${data}</option>`);
+            });
+
+        }
+
+
+
     </script>
 @endsection
