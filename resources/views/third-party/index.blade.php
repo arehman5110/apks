@@ -20,7 +20,7 @@
         <div class="container-  ">
             <div class="row mb-2" style="flex-wrap:nowrap">
                 <div class="col-sm-6">
-                    <h3>Tiang</h3>
+                    <h3>Third Party Digging</h3>
                 </div>
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
@@ -38,7 +38,7 @@
 
 
 
-           @include('components.message')
+            @include('components.message')
 
 
             <div class="row">
@@ -46,7 +46,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="card-title">
-                                Tiang
+                                Third Party Digging
                             </div>
 
                         </div>
@@ -61,12 +61,11 @@
 
                                     <thead style="background-color: #E4E3E3 !important">
                                         <tr>
+                                            <th>Wp Name</th>
+                                            <th>zone</th>
                                             <th>Ba</th>
-                                            <th>Contractor</th>
-
-                                            <th>PO Start Date</th>
-                                            <th>PO End Date</th>
-
+                                            <th>Team Name</th>
+                                            <th>Survey Date</th>
                                             <th>Action</th>
 
                                         </tr>
@@ -75,24 +74,19 @@
 
                                         @foreach ($datas as $data)
                                             <tr>
-                                                <td class="align-middle">{{ $data->ba }}</td>
+                                                <td class="align-middle">{{ $data->wp_name }}</td>
                                                 <td class="align-middle">
-                                                    {{ $data->name_contractor }}</td>
+                                                    {{ $data->zone }}</td>
 
 
                                                 <td class="align-middle text-center">
-                                                    @php
-                                                        $date = new DateTime($data->start_date);
-                                                        $datePortion = $date->format('Y-m-d');
-
-                                                    @endphp
-                                                    {{ $datePortion }}
+                                                   {{$data->team_name}}
                                                 </td>
                                                 <td class="align-middle text-center">
                                                     @php
-                                                        $date = new DateTime($data->end_date);
+                                                        $date = new DateTime($data->survey_date);
                                                         $datePortion = $date->format('Y-m-d');
-
+                                                        
                                                     @endphp
                                                     {{ $datePortion }}
                                                 </td>
@@ -118,10 +112,10 @@
 
 
                                                         <button type="button" class="btn btn-primary dropdown-item"
-                                                        data-id="{{ $data->id }}" data-toggle="modal"
-                                                        data-target="#myModal">
-                                                        Remove
-                                                    </button>
+                                                            data-id="{{ $data->id }}" data-toggle="modal"
+                                                            data-target="#myModal">
+                                                            Remove
+                                                        </button>
 
 
                                                     </div>

@@ -273,7 +273,9 @@
 <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js"></script>
 <script>
     
-    $('foam').validate().settings.ignore = ":disabled,:hidden";
+    // $(document).ready(function () {
+    //     $('form').validate().settings.ignore = ":disabled,:hidden";
+    // });
 
 function getLocation() {
 
