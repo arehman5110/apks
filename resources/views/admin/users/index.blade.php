@@ -48,7 +48,7 @@
                         <div class="card-header">
                             <div class="card-title  ">
                                 <div class="text-right"><button class="btn btn-sm btn-success" data-toggle="modal"
-                                    data-target="#teamModal" type="button">Add team</button></div>
+                                        data-target="#teamModal" type="button">Add team</button></div>
                             </div>
 
                         </div>
@@ -76,11 +76,10 @@
                                         @foreach ($users as $data)
                                             <tr>
                                                 <td class="align-middle">{{ $data->name }}</td>
-                                                <td class="align-middle">
-                                                    {{ $data->email }}</td>
+                                                <td class="align-middle">{{ $data->email }}</td>
 
-                                                    <td>{{$data->userTeam->team_name}}</td>
-<td>{{$data->userTeam->team_type}}</td>
+                                                <td>{{ $data->userTeam->team_name }}</td>
+                                                <td>{{ $data->userTeam->team_type }}</td>
                                                 <td class="text-center">
 
                                                     <button type="button" class="btn  " data-toggle="dropdown">
@@ -93,10 +92,10 @@
 
 
                                                         <button type="button" class="btn btn-primary dropdown-item"
-                                                        data-id="{{ $data->id }}" data-toggle="modal"
-                                                        data-target="#myModal">
-                                                        Remove
-                                                    </button>
+                                                            data-id="{{ $data->id }}" data-toggle="modal"
+                                                            data-target="#myModal">
+                                                            Remove
+                                                        </button>
 
 
                                                     </div>
@@ -160,12 +159,12 @@
                     <h4 class="modal-title">Add User</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <form action="{{route('team-users.store')}}" id="remove-foam" method="POST">
+                <form action="{{ route('team-users.store') }}" id="remove-foam" method="POST">
 
                     @csrf
 
                     <div class="modal-body form-input">
-                        <label for="name">Name</label>
+                        <label for="name">Username</label>
                         <input type="text" name="name" id="name" class="form-control" required>
 
                         <label for="email">Email</label>
@@ -175,8 +174,7 @@
                         <select name="id_team" id="team-id" class="form-control " required>
                             <option value="" hidden>Select team</option>
                             @foreach ($teams as $team)
-                            <option value="{{$team->id}}">{{$team->team_name}}</option>
-
+                                <option value="{{ $team->id }}">{{ $team->team_name }}</option>
                             @endforeach
                         </select>
 
@@ -197,7 +195,7 @@
 
 
 @section('script')
-<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js"></script>
     <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
 

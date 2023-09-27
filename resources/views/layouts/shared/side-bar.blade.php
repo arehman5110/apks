@@ -25,7 +25,7 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                 data-accordion="false">
 
-                @if (Auth::user()->id != '1')
+                @if (Auth::user()->is_admin != '1')
 
 
                 <li class="nav-item ">
@@ -107,14 +107,14 @@
                 @else
                 <li class="nav-item">
                     <a href="{{route('team.index')}}" class="nav-link ">
-                        <i class="fa fa-team"></i>
+                        <i class="fa fa-map"></i>
                         <p>Team</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a href="{{route('team-users.index')}}" class="nav-link ">
-                        <i class="fa fa-map"></i>
+                        <i class="fa fa-user"></i>
                         <p>Users</p>
                     </a>
                 </li>

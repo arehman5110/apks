@@ -18,8 +18,8 @@ class TeamUsersController extends Controller
     public function index()
     {
         //
-     $user = User::with('userTeam')
-            ->where('type', '0')
+        $user = User::with('userTeam')
+            ->where('is_admin', '0')
             ->get();
         return view('admin.users.index', ['users' => $user, 'teams' => Team::all()]);
     }
@@ -44,12 +44,18 @@ class TeamUsersController extends Controller
     {
         //
         try {
+            $email = User::where('email',$request->email)->orWhere('name',$request->name)->first();
+            if ($email) {
+                return redirect()
+                ->route('team-users.index')
+                ->with('failed', 'Request Failed ! Email or Username is already in use');
+            }
             $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
                 'id_team' => $request->id_team,
                 'password' => Hash::make($request->password),
-                'type' => false,
+                'is_admin' => false,
             ]);
             return redirect()
                 ->route('team-users.index')
@@ -104,16 +110,16 @@ class TeamUsersController extends Controller
      */
     public function destroy($id)
     {
-        try{
-        User::find($id)->delete();
-        return redirect()
-        ->route('team-users.index')
-        ->with('success', 'User Removed');
-} catch (\Throwable $th) {
-    return $th->getMessage();
-    return redirect()
-        ->route('team-users.index')
-        ->with('failed', 'Request Failed');
-}
+        try {
+            User::find($id)->delete();
+            return redirect()
+                ->route('team-users.index')
+                ->with('success', 'User Removed');
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+            return redirect()
+                ->route('team-users.index')
+                ->with('failed', 'Request Failed');
+        }
     }
 }

@@ -28,6 +28,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::middleware('auth')->group(function () {
 Route::get('/map-1',[MapController::class,'index']);
 Route::get('/get-all-work-packages',[MapController::class,'allWP']);
 Route::get('/proxy/{url}',[MapController::class,'proxy']);
@@ -64,6 +65,7 @@ Route::resource('tiang-talian-vt-and-vr',TiangContoller::class);
 Route::prefix('admin')->group(function () {
     Route::resource('/team',TeamController::class);
     Route::resource('team-users',TeamUsersController::class);
+});
 });
 
 require __DIR__ . '/auth.php';

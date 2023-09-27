@@ -16,7 +16,7 @@
       <a href="#" class="nav-link">Contact</a>
     </li> --}}
     </ul>
-{{--
+
     <div class="ms-auto ">
         <x-dropdown align="right" width="48">
             <x-slot name="trigger">
@@ -35,9 +35,9 @@
             </x-slot>
 
             <x-slot name="content">
-                <x-dropdown-link :href="route('profile.edit')">
+                {{-- <x-dropdown-link :href="route('profile.edit')">
                     {{ __('Profile') }}
-                </x-dropdown-link>
+                </x-dropdown-link> --}}
 
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
@@ -52,7 +52,7 @@
             </x-slot>
         </x-dropdown>
     </div>
- --}}
+ 
 
 
 </nav>

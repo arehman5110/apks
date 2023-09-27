@@ -99,7 +99,7 @@ class TiangContoller extends Controller
             $data->arus_pada_tiang = $request->arus_pada_tiang;
 
 
-            $data->geom  = DB::raw("ST_GeomFromText('POINT($request->log $request->lat)')");
+            $data->geom  = DB::raw("ST_GeomFromText('POINT($request->log $request->lat),4326')");
 
 
             $data->save();
