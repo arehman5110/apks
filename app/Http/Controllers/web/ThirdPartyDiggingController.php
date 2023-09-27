@@ -105,7 +105,11 @@ class ThirdPartyDiggingController extends Controller
      */
     public function show($id)
     {
-        //
+        $data= ThirdPartyDiging::find($id);
+        
+
+        return view('third-party.detail',['data'=>$data]);
+
     }
 
     /**
@@ -116,7 +120,10 @@ class ThirdPartyDiggingController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data= ThirdPartyDiging::find($id);
+        
+
+        return view('third-party.edit',['data'=>$data]);
     }
 
     /**
@@ -128,7 +135,61 @@ class ThirdPartyDiggingController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $data= ThirdPartyDiging::find($id);
+            $data->wp_name = $request->wp_name;
+            $data->zone = $request->zone;
+            $data->ba = $request->ba;
+            $data->team_name = $request->team_name;
+            $data->survey_date = $request->survey_date;
+            $data->patrolling_time = $request->patrolling_time;
+            $data->project_name = $request->project_name;
+            $data->feeder_involved = $request->feeder_involved;
+            $data->km_plan = $request->km_plan;
+            $data->km_actual = $request->km_actual;
+
+            $data->digging = $request->digging;
+            $data->notice = $request->notice;
+            $data->supervision = $request->supervision;
+            $data->company_name = $request->company_name;
+            $data->main_contractor = $request->main_contractor;
+
+            $data->developer_phone_no = $request->developer_phone_no;
+            $data->contractor_company_name = $request->contractor_company_name;
+            $data->site_supervisor_name = $request->site_supervisor_name;
+            $data->site_supervisor_phone_no = $request->site_supervisor_phone_no;
+            $data->excavator_operator_name = $request->excavator_operator_name;
+
+            $data->excavator_machinery_reg_no = $request->excavator_machinery_reg_no;
+            $data->workpackage_id = $request->workpackage_id;
+            $data->department_diging = $request->department_diging;
+            $data->survey_status = $request->survey_status;
+
+            $destinationPath = 'assets/images/';
+
+
+            foreach ($request->all() as $key => $file) {
+                // Check if the input is a file and it is valid
+                if ($request->hasFile($key) && $request->file($key)->isValid()) {
+                    $uploadedFile = $request->file($key);
+                    $img_ext = $uploadedFile->getClientOriginalExtension();
+                    $filename = $key . '-' . strtotime(now()) . '.' . $img_ext;
+                    $uploadedFile->move($destinationPath, $filename);
+                    $data->{$key} = $destinationPath . $filename;
+                }
+            }
+        
+            $data->geom = DB::raw("ST_GeomFromText('POINT($request->log $request->lat),4326')");
+
+            $data->update();
+
+            return redirect()
+                ->route('third-party.index')
+                ->with('success', 'Form Intserted');
+        } catch (\Throwable $th) {
+            return redirect()
+            ->route('third-party.index')
+            ->with('failed', 'Form Intserted Failed');        }
     }
 
     /**
@@ -139,6 +200,17 @@ class ThirdPartyDiggingController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+            ThirdPartyDiging::find($id)->delete();
+
+         return redirect()
+                ->route('third-party.index')
+                ->with('success', 'Recored Removed');
+        } catch (\Throwable $th) {
+            // return $th->getMessage();
+            return redirect()
+                ->route('third-party.index')
+                ->with('failed', 'Request Failed');
+        }
     }
 }
