@@ -91,7 +91,8 @@
                             
                             <div class="row">
                                 <div class="col-md-4"><label for="team_name">Team Name</label></div>
-                                <div class="col-md-4"><input type="text" name="team_name" id="team_name"
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" value="{{$team}}" disabled id=""><input type="hidden" name="team_name" id="team_name"
                                         class="form-control" required></div>
                             </div>
 
