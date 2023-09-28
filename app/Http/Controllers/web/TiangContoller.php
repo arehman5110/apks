@@ -12,6 +12,7 @@ class TiangContoller extends Controller
 {
 
     private $tiangRepository;
+  
 
     public function __construct(TiangRepository $tiaRepository)
     {
@@ -137,28 +138,7 @@ class TiangContoller extends Controller
     public function show($id)
     {
 
-        $data = Tiang::find($id);
-        $data['abc_span'] = json_decode($data->abc_span);
-        $data['size_tiang'] = json_decode($data->size_tiang);
-        $data['jenis_tiang'] = json_decode($data->jenis_tiang);
-        $data['bare_span'] = json_decode($data->bare_span);
-        $data['pvc_span'] = json_decode($data->pvc_span);
-        $data['tiang_defect'] = json_decode($data->tiang_defect , true);
-        $data['talian_defect'] = json_decode($data->talian_defect , true);
-        $data['umbang_defect'] = json_decode($data->umbang_defect , true);
-        $data['blackbox_defect'] = json_decode($data->blackbox_defect , true);
-        $data['jumper'] = json_decode($data->jumper , true);
-        $data['kilat_defect'] = json_decode($data->kilat_defect , true);
-        $data['servis_defect'] = json_decode($data->servis_defect , true);
-        $data['pembumian_defect'] = json_decode($data->pembumian_defect , true);
-        $data['bekalan_dua_defect'] = json_decode($data->bekalan_dua_defect , true);
-        $data['kaki_lima_defect'] = json_decode($data->kaki_lima_defect , true);
-        $data['tapak_condition'] = json_decode($data->tapak_condition , true);
-        $data['kawasan'] = json_decode($data->kawasan , true);
-        $data['talian_spec'] = json_decode($data->talian_spec , true);
-        $data['ipc_defect'] = json_decode($data->ipc_defect , true);
-
-
+        $data =  $this->tiangRepository->getRecoreds($id);
 
         return view('Tiang.detail',['data'=>$data]);
     }
@@ -172,31 +152,11 @@ class TiangContoller extends Controller
     public function edit($id)
     {
 
-        $data = Tiang::find($id);
-        $data['abc_span'] = json_decode($data->abc_span);
-        $data['size_tiang'] = json_decode($data->size_tiang);
-        $data['jenis_tiang'] = json_decode($data->jenis_tiang);
-        $data['bare_span'] = json_decode($data->bare_span);
-        $data['pvc_span'] = json_decode($data->pvc_span);
-        $data['tiang_defect'] = json_decode($data->tiang_defect , true);
-        $data['talian_defect'] = json_decode($data->talian_defect , true);
-        $data['umbang_defect'] = json_decode($data->umbang_defect , true);
-        $data['blackbox_defect'] = json_decode($data->blackbox_defect , true);
-        $data['jumper'] = json_decode($data->jumper , true);
-        $data['kilat_defect'] = json_decode($data->kilat_defect , true);
-        $data['servis_defect'] = json_decode($data->servis_defect , true);
-        $data['pembumian_defect'] = json_decode($data->pembumian_defect , true);
-        $data['bekalan_dua_defect'] = json_decode($data->bekalan_dua_defect , true);
-        $data['kaki_lima_defect'] = json_decode($data->kaki_lima_defect , true);
-        $data['tapak_condition'] = json_decode($data->tapak_condition , true);
-        $data['kawasan'] = json_decode($data->kawasan , true);
-        $data['talian_spec'] = json_decode($data->talian_spec , true);
-        $data['ipc_defect'] = json_decode($data->ipc_defect , true);
 
 
+        $data =  $this->tiangRepository->getRecoreds($id);
 
-
-        return view('Tiang.edit',['data'=>$data]);
+        return $data ?  view('Tiang.edit',['data'=>$data]) : abort(404);
     }
 
     /**
