@@ -76,7 +76,7 @@ class ThirdPartyDiggingController extends Controller
             $data->department_diging = $request->department_diging;
             $data->survey_status = $request->survey_status;
 
-            $destinationPath = 'assets/images/';
+            $destinationPath = 'assets/images/third-party-digging/';
 
             foreach ($request->all() as $key => $file) {
                 // Check if the input is a file and it is valid
@@ -172,7 +172,7 @@ class ThirdPartyDiggingController extends Controller
             $data->department_diging = $request->department_diging;
             $data->survey_status = $request->survey_status;
 
-            $destinationPath = 'assets/images/';
+            $destinationPath = 'assets/images/third-party-digging/';
 
             foreach ($request->all() as $key => $file) {
                 // Check if the input is a file and it is valid

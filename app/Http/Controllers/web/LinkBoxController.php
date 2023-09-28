@@ -64,7 +64,7 @@ class LinkBoxController extends Controller
             $data->rust_status = $request->rust_status;
             $data->advertise_poster_status = $request->advertise_poster_status;
             $data->bushes_status = $request->bushes_status;
-            $destinationPath = 'assets/images/';
+            $destinationPath = 'assets/images/link-box/';
 
             foreach ($request->all() as $key => $file) {
                 // Check if the input is a file and it is valid
@@ -148,7 +148,7 @@ class LinkBoxController extends Controller
             $data->rust_status = $request->rust_status;
             $data->advertise_poster_status = $request->advertise_poster_status;
             $data->bushes_status = $request->bushes_status;
-            $destinationPath = 'assets/images/';
+            $destinationPath = 'assets/images/link-box/';
 
             foreach ($request->all() as $key => $file) {
                 // Check if the input is a file and it is valid

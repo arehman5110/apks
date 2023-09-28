@@ -16,22 +16,21 @@
 
 
 @section('content')
-
-<section class="content-header">
-    <div class="container-  ">
-        <div class="row " style="flex-wrap:nowrap">
-            <div class="col-sm-6">
-                <h3>Tiang</h3>
-            </div>
-            <div class="col-sm-6 text-right">
-                <ol class="breadcrumb float-right">
-                    <li class="breadcrumb-item"><a href="{{route('tiang-talian-vt-and-vr.index')}}">index</a></li>
-                    <li class="breadcrumb-item active">detail</li>
-                </ol>
+    <section class="content-header">
+        <div class="container-  ">
+            <div class="row " style="flex-wrap:nowrap">
+                <div class="col-sm-6">
+                    <h3>Tiang</h3>
+                </div>
+                <div class="col-sm-6 text-right">
+                    <ol class="breadcrumb float-right">
+                        <li class="breadcrumb-item"><a href="{{ route('tiang-talian-vt-and-vr.index') }}">index</a></li>
+                        <li class="breadcrumb-item active">detail</li>
+                    </ol>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
     <div class=" ">
 
         <div class="container">
@@ -41,8 +40,7 @@
                 <div class=" card col-md-12 p-3 ">
                     <div class=" ">
                         <h3 class="text-center p-2">QR SAVR</h3>
-                        <form id="framework-wizard-form" action="#"
-                            style="display: none"  >
+                        <form id="framework-wizard-form" action="#" style="display: none">
 
                             <h3></h3>
 
@@ -59,43 +57,42 @@
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="name_contractor">Contractor</label></div>
-                                    <div class="col-md-4"><input    disabled
-                                            value="{{ $data->name_contractor }}"   class="form-control"
-                                            ></div>
+                                    <div class="col-md-4"><input disabled value="{{ $data->name_contractor }}"
+                                            class="form-control"></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="po_start_date">PO Start Date</label></div>
                                     <div class="col-md-4"><input type="date"
                                             value="{{ date('Y-m-d', strtotime($data->start_date)) }}" disabled
-                                            class="form-control"  ></div>
+                                            class="form-control"></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="po_end_date">PO End Date</label></div>
                                     <div class="col-md-4"><input type="date"
                                             value="{{ date('Y-m-d', strtotime($data->end_date)) }}" disabled
-                                            class="form-control"  ></div>
+                                            class="form-control"></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="fp_name">Name of Substation / Name of Feeder
                                             Pillar</label></div>
-                                    <div class="col-md-4"><input  disabled  value="{{ $data->fp_name }}"
-                                            id="fp_name" class="form-control"  ></div>
+                                    <div class="col-md-4"><input disabled value="{{ $data->fp_name }}" id="fp_name"
+                                            class="form-control"></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="review_date">Review Date </label></div>
                                     <div class="col-md-4"><input type="date" disabled
-                                            value="{{ date('Y-m-d', strtotime($data->review_date)) }}"
-                                            class="form-control"  ></div>
+                                            value="{{ date('Y-m-d', strtotime($data->review_date)) }}" class="form-control">
+                                    </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="fp_road">Feeder Name / Street Name</label></div>
-                                    <div class="col-md-4"><input  value="{{ $data->fp_road }}"
-                                             disabled class="form-control"  ></div>
+                                    <div class="col-md-4"><input value="{{ $data->fp_road }}" disabled class="form-control">
+                                    </div>
                                 </div>
 
                                 <div class="row">
@@ -105,22 +102,20 @@
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="section_from">From </label></div>
-                                    <div class="col-md-4"><input disabled
-                                            value="{{ $data->section_from }}"  class="form-control"
-                                             ></div>
+                                    <div class="col-md-4"><input disabled value="{{ $data->section_from }}"
+                                            class="form-control"></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="section_to">To</label></div>
-                                    <div class="col-md-4"><input  disabled
-                                            value="{{ $data->section_to }}"  class="form-control"
-                                             ></div>
+                                    <div class="col-md-4"><input disabled value="{{ $data->section_to }}"
+                                            class="form-control"></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="tiang_no">Tiang No</label></div>
-                                    <div class="col-md-4"><input disabled
-                                            value="{{ $data->tiang_no }}"  class="form-control"  >
+                                    <div class="col-md-4"><input disabled value="{{ $data->tiang_no }}"
+                                            class="form-control">
                                     </div>
                                 </div>
 
@@ -138,102 +133,100 @@
                                 <div class="row">
                                     <div class="col-md-4"><label for="st7">
                                             Pole Size Bill 7.5</label></div>
-                                    <div class="col-md-4"><input   disabled
-                                            value="{{ $data->size_tiang->st7 }}"   class="form-control"
-                                             ></div>
+                                    <div class="col-md-4"><input disabled value="{{ $data->size_tiang->st7 }}"
+                                            class="form-control"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4"><label for="st9">Pole Size Bill 9</label></div>
-                                    <div class="col-md-4"><input
-                                            value="{{ $data->size_tiang->st9 }}"  disabled class="form-control">
+                                    <div class="col-md-4"><input value="{{ $data->size_tiang->st9 }}" disabled
+                                            class="form-control">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4"><label for="st10">Pole Size Bill 10</label></div>
-                                    <div class="col-md-4"><input
-                                            value="{{ $data->size_tiang->st10 }}" disabled class="form-control">
+                                    <div class="col-md-4"><input value="{{ $data->size_tiang->st10 }}" disabled
+                                            class="form-control">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4"><label for="spun">Pole Type No Spun</label></div>
-                                    <div class="col-md-4"><input disabled
-                                            value="{{ $data->jenis_tiang->spun }}"   class="form-control">
+                                    <div class="col-md-4"><input disabled value="{{ $data->jenis_tiang->spun }}"
+                                            class="form-control">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4"><label for="concrete">Pole Type No Concrete </label></div>
-                                    <div class="col-md-4"><input disabled
-                                            value="{{ $data->jenis_tiang->concrete }}"
+                                    <div class="col-md-4"><input disabled value="{{ $data->jenis_tiang->concrete }}"
                                             class="form-control"></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="iron">Pole Type No Iron</label></div>
-                                    <div class="col-md-4"><input disabled
-                                            value="{{ $data->jenis_tiang->iron }}" class="form-control"></div>
+                                    <div class="col-md-4"><input disabled value="{{ $data->jenis_tiang->iron }}"
+                                            class="form-control"></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="wood">Pole Type No Wood</label></div>
-                                    <div class="col-md-4"><input disabled
-                                            value="{{ $data->jenis_tiang->wood }}" class="form-control"></div>
+                                    <div class="col-md-4"><input disabled value="{{ $data->jenis_tiang->wood }}"
+                                            class="form-control"></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="section_to">ABC (Span) 3 X 185</label></div>
-                                    <div class="col-md-4"><input disabled
-                                            value="{{ $data->abc_span->s3_185 }}" class="form-control"></div>
+                                    <div class="col-md-4"><input disabled value="{{ $data->abc_span->s3_185 }}"
+                                            class="form-control"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4"><label for="s3_95">ABC (Span) 3 X 95</label></div>
-                                    <div class="col-md-4"><input disabled
-                                            value="{{ $data->abc_span->s3_95 }}" class="form-control"></div>
+                                    <div class="col-md-4"><input disabled value="{{ $data->abc_span->s3_95 }}"
+                                            class="form-control"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4"><label for="s3_16">ABC (Span) 3 X 16</label></div>
-                                    <div class="col-md-4"><input disabled
-                                            value="{{ $data->abc_span->s3_16 }}" class="form-control"></div>
+                                    <div class="col-md-4"><input disabled value="{{ $data->abc_span->s3_16 }}"
+                                            class="form-control"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4"><label for="s1_16">ABC (Span) 1 X 16</label></div>
-                                    <div class="col-md-4"><input disabled
-                                            value="{{ $data->abc_span->s1_16 }}" class="form-control"></div>
+                                    <div class="col-md-4"><input disabled value="{{ $data->abc_span->s1_16 }}"
+                                            class="form-control"></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="s19_064">PVC (Span) 19/064</label></div>
-                                    <div class="col-md-4"><input disabled
-                                            value="{{ $data->pvc_span->s19_064 }}" class="form-control"></div>
+                                    <div class="col-md-4"><input disabled value="{{ $data->pvc_span->s19_064 }}"
+                                            class="form-control"></div>
                                 </div>
 
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="s7_083">PVC (Span) 7/083</label></div>
-                                    <div class="col-md-4"><input disabled
-                                            value="{{ $data->pvc_span->s7_083 }}" class="form-control"></div>
+                                    <div class="col-md-4"><input disabled value="{{ $data->pvc_span->s7_083 }}"
+                                            class="form-control"></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="s7_044">PVC (Span) 7/044</label></div>
-                                    <div class="col-md-4"><input disabled
-                                            value="{{ $data->pvc_span->s7_044 }}" class="form-control"></div>
+                                    <div class="col-md-4"><input disabled value="{{ $data->pvc_span->s7_044 }}"
+                                            class="form-control"></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="s7_173">BARE (Span) 7/173</label></div>
-                                    <div class="col-md-4"><input disabled
-                                            value="{{ $data->bare_span->s7_173 }}" class="form-control"></div>
+                                    <div class="col-md-4"><input disabled value="{{ $data->bare_span->s7_173 }}"
+                                            class="form-control"></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="s7_122">BARE (Span) 7/122</label></div>
-                                    <div class="col-md-4"><input disabled
-                                            value="{{ $data->bare_span->s7_122 }}" class="form-control"></div>
+                                    <div class="col-md-4"><input disabled value="{{ $data->bare_span->s7_122 }}"
+                                            class="form-control"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4"><label for="s3_132">BARE (Span) 3/132</label></div>
-                                    <div class="col-md-4"><input disabled
-                                            value="{{ $data->bare_span->s3_132 }}" class="form-control"></div>
+                                    <div class="col-md-4"><input disabled value="{{ $data->bare_span->s3_132 }}"
+                                            class="form-control"></div>
                                 </div>
 
                             </fieldset>
@@ -320,30 +313,30 @@
                                         <div class="row">
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" disabled
-                                                    {{ checkCheckBox('breaking', $data->umbang_defect) }}
-                                                   ><label for="umbang-breaking">
+                                                    {{ checkCheckBox('breaking', $data->umbang_defect) }}><label
+                                                    for="umbang-breaking">
                                                     Sagging/Breaking</label>
                                             </div>
 
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" disabled
-                                                    {{ checkCheckBox('creepers', $data->umbang_defect) }}
-                                                   ><label for="umbang-creepers">
+                                                    {{ checkCheckBox('creepers', $data->umbang_defect) }}><label
+                                                    for="umbang-creepers">
                                                     Creepers</label>
                                             </div>
 
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" disabled
-                                                    {{ checkCheckBox('cracked', $data->umbang_defect) }}
-                                                    ><label for="umbang_cracked"> No Stay
+                                                    {{ checkCheckBox('cracked', $data->umbang_defect) }}><label
+                                                    for="umbang_cracked"> No Stay
                                                     Insulator/Damaged
                                                 </label>
                                             </div>
 
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" disabled
-                                                    {{ checkCheckBox('stay_palte', $data->umbang_defect) }}
-                                                     ><label for="stay_palte"> Stay Plate / Base Stay
+                                                    {{ checkCheckBox('stay_palte', $data->umbang_defect) }}><label
+                                                    for="stay_palte"> Stay Plate / Base Stay
                                                     Blocked
                                                 </label>
                                             </div>
@@ -399,29 +392,28 @@
                                         <div class="row">
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" disabled
-                                                    {{ checkCheckBox('sleeve', $data->jumper) }}
-                                                    class="form-check"><label for="jumper-sleeve"> No UV Sleeve</label>
+                                                    {{ checkCheckBox('sleeve', $data->jumper) }} class="form-check"><label
+                                                    for="jumper-sleeve"> No UV Sleeve</label>
                                             </div>
 
                                             <div class="col-md-4 d-flex">
-                                                <input type="checkbox" disabled
-                                                    {{ checkCheckBox('burn', $data->jumper) }} class="form-check"><label
-                                                    for="jumper-burn">
+                                                <input type="checkbox" disabled {{ checkCheckBox('burn', $data->jumper) }}
+                                                    class="form-check"><label for="jumper-burn">
                                                     Burn Effect</label>
                                             </div>
 
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" disabled
-                                                    {{ checkCheckBox('damage', $data->jumper) }}
-                                                    class="form-check"><label for="jumper-damage"> No Stay
+                                                    {{ checkCheckBox('damage', $data->jumper) }} class="form-check"><label
+                                                    for="jumper-damage"> No Stay
                                                     Insulator/Damaged
                                                 </label>
                                             </div>
 
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" disabled
-                                                    {{ checkCheckBox('damage', $data->jumper) }}
-                                                    class="form-check"><label for="jumper-blocked"> Stay Plate / Base Stay
+                                                    {{ checkCheckBox('damage', $data->jumper) }} class="form-check"><label
+                                                    for="jumper-blocked"> Stay Plate / Base Stay
                                                     Blocked
                                                 </label>
                                             </div>
@@ -467,8 +459,7 @@
 
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" disabled
-                                                    {{ checkCheckBox('won_piece', $data->servis_defect) }}
-                                                     ><label
+                                                    {{ checkCheckBox('won_piece', $data->servis_defect) }}><label
                                                     for="service-won-piece">
                                                     Won piece Date</label>
                                             </div>
@@ -565,8 +556,8 @@
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="remarks">Remarks</label></div>
-                                    <div class="col-md-4"><input type="text" disabled
-                                            value="{{ $data->remarks }}" class="form-control"></div>
+                                    <div class="col-md-4"><input type="text" disabled value="{{ $data->remarks }}"
+                                            class="form-control"></div>
                                 </div>
 
 
@@ -602,9 +593,9 @@
                                                     Sidewalk</label>
                                             </div>
 
-                                            <div class="col-md-4 d-flex" ><input disabled type="checkbox"
-                                                    {{ checkCheckBox('vehicle_entry', $data->tapak_condition) }}
-                                                    ><label for="vehicle_entry">No
+                                            <div class="col-md-4 d-flex"><input disabled type="checkbox"
+                                                    {{ checkCheckBox('vehicle_entry', $data->tapak_condition) }}><label
+                                                    for="vehicle_entry">No
                                                     vehicle entry area
                                                 </label>
                                             </div>
@@ -642,8 +633,8 @@
 
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" disabled
-                                                    {{ checkCheckBox('other', $data->kawasan) }}
-                                                    class="form-check"><label for="area-other">others (please state)
+                                                    {{ checkCheckBox('other', $data->kawasan) }} class="form-check"><label
+                                                    for="area-other">others (please state)
                                                 </label>
                                             </div>
 
@@ -654,8 +645,7 @@
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="jarak_kelegaan">Clearance Distance</label></div>
-                                    <div class="col-md-4"><input   disabled
-                                            value="{{ $data->jarak_kelegaan }}"
+                                    <div class="col-md-4"><input disabled value="{{ $data->jarak_kelegaan }}"
                                             class="form-control"></div>
                                 </div>
 
@@ -675,8 +665,7 @@
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" disabled
                                                     {{ checkCheckBox('disobedient', $data->talian_spec) }}
-                                                     class="form-check"><label
-                                                    for="line-disobedient">
+                                                    class="form-check"><label for="line-disobedient">
                                                     Disobedient</label>
                                             </div>
 
@@ -699,12 +688,12 @@
 
 
                                 <div class="row">
-                                    <div class="col-md-4"><label for="tapak_road_img">Crossing the Road Image</label></div>
-                                     
+                                    <div class="col-md-4"><label for="tapak_road_img">Crossing the Road Image</label>
+                                    </div>
+
                                     <div class="col-md-4 text-center mb-3">
                                         @if (file_exists(public_path($data->tapak_road_img)) && $data->tapak_road_img != '')
-                                            <a href="{{ URL::asset($data->tapak_road_img) }}"
-                                                data-lightbox="roadtrip">
+                                            <a href="{{ URL::asset($data->tapak_road_img) }}" data-lightbox="roadtrip">
                                                 <img src="{{ URL::asset($data->tapak_road_img) }}" alt=""
                                                     height="70" class="adjust-height ml-5  "></a>
                                         @else
@@ -737,15 +726,15 @@
 
 
                                 <div class="row">
-                                    <div class="col-md-4"><label
-                                            for="tapak_no_vehicle_entry_img">No Vehicle Entry Area Image</label></div>
+                                    <div class="col-md-4"><label for="tapak_no_vehicle_entry_img">No Vehicle Entry Area
+                                            Image</label></div>
 
                                     <div class="col-md-4 text-center mb-3">
                                         @if (file_exists(public_path($data->tapak_no_vehicle_entry_img)) && $data->tapak_no_vehicle_entry_img != '')
                                             <a href="{{ URL::asset($data->tapak_no_vehicle_entry_img) }}"
                                                 data-lightbox="roadtrip">
-                                                <img src="{{ URL::asset($data->tapak_no_vehicle_entry_img) }}" alt=""
-                                                    height="70" class="adjust-height ml-5  "></a>
+                                                <img src="{{ URL::asset($data->tapak_no_vehicle_entry_img) }}"
+                                                    alt="" height="70" class="adjust-height ml-5  "></a>
                                         @else
                                             <strong>No image found</strong>
                                         @endif
@@ -761,8 +750,7 @@
 
                                     <div class="col-md-4 text-center mb-3">
                                         @if (file_exists(public_path($data->kawasan_bend_img)) && $data->kawasan_bend_img != '')
-                                            <a href="{{ URL::asset($data->kawasan_bend_img) }}"
-                                                data-lightbox="roadtrip">
+                                            <a href="{{ URL::asset($data->kawasan_bend_img) }}" data-lightbox="roadtrip">
                                                 <img src="{{ URL::asset($data->kawasan_bend_img) }}" alt=""
                                                     height="70" class="adjust-height ml-5  "></a>
                                         @else
@@ -780,8 +768,7 @@
 
                                     <div class="col-md-4 text-center mb-3">
                                         @if (file_exists(public_path($data->kawasan_road_img)) && $data->kawasan_road_img != '')
-                                            <a href="{{ URL::asset($data->kawasan_road_img) }}"
-                                                data-lightbox="roadtrip">
+                                            <a href="{{ URL::asset($data->kawasan_road_img) }}" data-lightbox="roadtrip">
                                                 <img src="{{ URL::asset($data->kawasan_road_img) }}" alt=""
                                                     height="70" class="adjust-height ml-5  "></a>
                                         @else
@@ -844,30 +831,28 @@
                                     <div class="col-md-8">
                                         <div class="row">
                                             <div class="col-md-4 d-flex">
-                                                <input type="radio" disabled
-                                                    class="form-check" value="no"><label for="arus_pada_tiang_no">
-                                                    {{ $data->arus_pada_tiang == 'no' ? 'checked' : '' }}
-                                                    No</label>
+                                                <input type="radio" name="arus_pada_tiang" id="arus_pada_tiang_no"
+                                                    class="form-check" value="no"
+                                                    {{ $data->arus_pada_tiang === 'no' ? 'checked' : '' }}>
+                                                <label for="arus_pada_tiang_no">No</label>
                                             </div>
 
                                             <div class="col-md-4 d-flex">
-                                                <input type="radio" disabled
-                                                    {{ $data->arus_pada_tiang == 'yes' ? 'checked' : '' }}
-                                                    class="form-check" value="yes"><label for="arus_pada_tiang_yes">
-                                                    Yes</label>
+                                                <input type="radio" name="arus_pada_tiang" id="arus_pada_tiang_yes"
+                                                    class="form-check" value="yes"
+                                                    {{ $data->arus_pada_tiang === 'yes' ? 'checked' : '' }}>
+                                                <label for="arus_pada_tiang_yes">Yes</label>
                                             </div>
 
                                             <div class="col-md-4 d-flex">
-                                                <input type="radio" disabled
-                                                    {{ $data->arus_pada_tiang == 'amp' ? 'checked' : '' }} value="amp"
-                                                    class="form-check"><label for="arus_pada_tiang_amp">
-                                                    (Amp)</label>
+                                                <input type="radio" name="arus_pada_tiang" id="arus_pada_tiang_amp"
+                                                    class="form-check" value="amp"
+                                                    {{ $data->arus_pada_tiang === 'amp' ? 'checked' : '' }}>
+                                                <label for="arus_pada_tiang_amp">(Amp)</label>
                                             </div>
-
-
-
                                         </div>
                                     </div>
+
                                 </div>
                             </fieldset>
                             {{-- END Kebocoran Arus (5) --}}
@@ -932,7 +917,5 @@
                 },
 
             })
-
-
     </script>
 @endsection

@@ -891,33 +891,28 @@
                                 <div class="row">
                                     <div class="col-md-4"><label for="">Inspection of current leakage on the
                                             pole</label></div>
-                                    <div class="col-md-8">
-                                        <div class="row">
-                                            <div class="col-md-4 d-flex">
-                                                <input type="radio" name="arus_pada_tiang" id="arus_pada_tiang_no"
-                                                    class="form-check" value="no"><label for="arus_pada_tiang_no">
-                                                    {{ $data->arus_pada_tiang == 'no' ? 'checked' : '' }}
-                                                    No</label>
+                                            <div class="col-md-8">
+                                                <div class="row">
+                                                    <div class="col-md-4 d-flex">
+                                                        <input type="radio" name="arus_pada_tiang" id="arus_pada_tiang_no" class="form-check" value="no"
+                                                            {{ $data->arus_pada_tiang === 'no' ? 'checked' : '' }}>
+                                                        <label for="arus_pada_tiang_no">No</label>
+                                                    </div>
+
+                                                    <div class="col-md-4 d-flex">
+                                                        <input type="radio" name="arus_pada_tiang" id="arus_pada_tiang_yes" class="form-check" value="yes"
+                                                            {{ $data->arus_pada_tiang === 'yes' ? 'checked' : '' }}>
+                                                        <label for="arus_pada_tiang_yes">Yes</label>
+                                                    </div>
+
+                                                    <div class="col-md-4 d-flex">
+                                                        <input type="radio" name="arus_pada_tiang" id="arus_pada_tiang_amp" class="form-check" value="amp"
+                                                            {{ $data->arus_pada_tiang === 'amp' ? 'checked' : '' }}>
+                                                        <label for="arus_pada_tiang_amp">(Amp)</label>
+                                                    </div>
+                                                </div>
                                             </div>
 
-                                            <div class="col-md-4 d-flex">
-                                                <input type="radio" name="arus_pada_tiang" id="arus_pada_tiang_yes"
-                                                    {{ $data->arus_pada_tiang == 'yes' ? 'checked' : '' }}
-                                                    class="form-check" value="yes"><label for="arus_pada_tiang_yes">
-                                                    Yes</label>
-                                            </div>
-
-                                            <div class="col-md-4 d-flex">
-                                                <input type="radio" name="arus_pada_tiang" id="arus_pada_tiang_amp"
-                                                    {{ $data->arus_pada_tiang == 'amp' ? 'checked' : '' }} value="amp"
-                                                    class="form-check"><label for="arus_pada_tiang_amp">
-                                                    (Amp)</label>
-                                            </div>
-
-
-
-                                        </div>
-                                    </div>
                                 </div>
                             </fieldset>
                             {{-- END Kebocoran Arus (5) --}}

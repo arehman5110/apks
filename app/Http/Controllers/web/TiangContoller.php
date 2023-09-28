@@ -12,7 +12,7 @@ class TiangContoller extends Controller
 {
 
     private $tiangRepository;
-  
+
 
     public function __construct(TiangRepository $tiaRepository)
     {
@@ -99,7 +99,7 @@ class TiangContoller extends Controller
 
             $data->arus_pada_tiang = $request->arus_pada_tiang;
 
-            $destinationPath = 'assets/images/';
+            $destinationPath = 'assets/images/tiang/';
             foreach ($request->all() as $key => $file) {
                 // Check if the input is a file and it is valid
                 if ($request->hasFile($key) && $request->file($key)->isValid()) {
@@ -215,7 +215,7 @@ class TiangContoller extends Controller
             $data->talian_spec = $request->has('talian_spec') ? json_encode($request->talian_spec) : null;
 
             $data->arus_pada_tiang = $request->arus_pada_tiang;
-            $destinationPath = 'assets/images/';
+            $destinationPath = 'assets/images/tiang/';
             foreach ($request->all() as $key => $file) {
                 // Check if the input is a file and it is valid
                 if ($request->hasFile($key) && $request->file($key)->isValid()) {
