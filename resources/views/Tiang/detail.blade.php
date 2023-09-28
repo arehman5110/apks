@@ -690,6 +690,145 @@
 
                             {{-- END Heigh Clearance (4) --}}
 
+
+                            <h3></h3>
+                            {{-- START Kejanggalan Images --}}
+                            <fieldset class="form-input">
+                                <h3>Kejanggalan Images</h3>
+
+
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="tapak_road_img">Crossing the Road Image</label></div>
+                                     
+                                    <div class="col-md-4 text-center mb-3">
+                                        @if (file_exists(public_path($data->tapak_road_img)) && $data->tapak_road_img != '')
+                                            <a href="{{ URL::asset($data->tapak_road_img) }}"
+                                                data-lightbox="roadtrip">
+                                                <img src="{{ URL::asset($data->tapak_road_img) }}" alt=""
+                                                    height="70" class="adjust-height ml-5  "></a>
+                                        @else
+                                            <strong>No image found</strong>
+                                        @endif
+                                    </div>
+                                </div>
+
+
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="tapak_sidewalk_img">Sidewalk Image</label></div>
+
+
+                                    <div class="col-md-4 text-center mb-3">
+                                        @if (file_exists(public_path($data->tapak_sidewalk_img)) && $data->tapak_sidewalk_img != '')
+                                            <a href="{{ URL::asset($data->tapak_sidewalk_img) }}"
+                                                data-lightbox="roadtrip">
+                                                <img src="{{ URL::asset($data->tapak_sidewalk_img) }}" alt=""
+                                                    height="70" class="adjust-height ml-5  "></a>
+                                        @else
+                                            <strong>No image found</strong>
+                                        @endif
+                                    </div>
+                                </div>
+
+
+
+
+
+
+                                <div class="row">
+                                    <div class="col-md-4"><label
+                                            for="tapak_no_vehicle_entry_img">No Vehicle Entry Area Image</label></div>
+
+                                    <div class="col-md-4 text-center mb-3">
+                                        @if (file_exists(public_path($data->tapak_no_vehicle_entry_img)) && $data->tapak_no_vehicle_entry_img != '')
+                                            <a href="{{ URL::asset($data->tapak_no_vehicle_entry_img) }}"
+                                                data-lightbox="roadtrip">
+                                                <img src="{{ URL::asset($data->tapak_no_vehicle_entry_img) }}" alt=""
+                                                    height="70" class="adjust-height ml-5  "></a>
+                                        @else
+                                            <strong>No image found</strong>
+                                        @endif
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="kawasan_bend_img">Bend Area Image</label></div>
+
+
+                                    <div class="col-md-4 text-center mb-3">
+                                        @if (file_exists(public_path($data->kawasan_bend_img)) && $data->kawasan_bend_img != '')
+                                            <a href="{{ URL::asset($data->kawasan_bend_img) }}"
+                                                data-lightbox="roadtrip">
+                                                <img src="{{ URL::asset($data->kawasan_bend_img) }}" alt=""
+                                                    height="70" class="adjust-height ml-5  "></a>
+                                        @else
+                                            <strong>No image found</strong>
+                                        @endif
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="kawasan_road_img">Road Area Image</label></div>
+
+
+                                    <div class="col-md-4 text-center mb-3">
+                                        @if (file_exists(public_path($data->kawasan_road_img)) && $data->kawasan_road_img != '')
+                                            <a href="{{ URL::asset($data->kawasan_road_img) }}"
+                                                data-lightbox="roadtrip">
+                                                <img src="{{ URL::asset($data->kawasan_road_img) }}" alt=""
+                                                    height="70" class="adjust-height ml-5  "></a>
+                                        @else
+                                            <strong>No image found</strong>
+                                        @endif
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="kawasan_forest_img">Forest Area Image</label></div>
+
+
+                                    <div class="col-md-4 text-center mb-3">
+                                        @if (file_exists(public_path($data->kawasan_forest_img)) && $data->kawasan_forest_img != '')
+                                            <a href="{{ URL::asset($data->kawasan_forest_img) }}"
+                                                data-lightbox="roadtrip">
+                                                <img src="{{ URL::asset($data->kawasan_forest_img) }}" alt=""
+                                                    height="70" class="adjust-height ml-5  "></a>
+                                        @else
+                                            <strong>No image found</strong>
+                                        @endif
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="kawasan_other_img">Other Area Image</label></div>
+
+                                    <div class="col-md-4 text-center mb-3">
+                                        @if (file_exists(public_path($data->kawasan_other_img)) && $data->kawasan_other_img != '')
+                                            <a href="{{ URL::asset($data->kawasan_other_img) }}"
+                                                data-lightbox="roadtrip">
+                                                <img src="{{ URL::asset($data->kawasan_other_img) }}" alt=""
+                                                    height="70" class="adjust-height ml-5  "></a>
+                                        @else
+                                            <strong>No image found</strong>
+                                        @endif
+                                    </div>
+                                </div>
+
+                            </fieldset>
+                            {{-- END Kejanggalan Images --}}
+
+
                             <h3></h3>
 
 

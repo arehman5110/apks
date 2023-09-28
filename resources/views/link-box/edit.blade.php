@@ -44,7 +44,7 @@
                 </div>
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
-                        <li class="breadcrumb-item"><a href="{{route('link-box-pelbagai-voltan.index')}}">index</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('link-box-pelbagai-voltan.index') }}">index</a></li>
                         <li class="breadcrumb-item active">create</li>
                     </ol>
                 </div>
@@ -62,8 +62,8 @@
                     <div class=" ">
                         <h3 class="text-center p-2"></h3>
 
-                        <form action="{{ route('link-box-pelbagai-voltan.update', $data->id) }} " id="myForm" method="POST"
-                            enctype="multipart/form-data">
+                        <form action="{{ route('link-box-pelbagai-voltan.update', $data->id) }} " id="myForm"
+                            method="POST" enctype="multipart/form-data">
                             @method('PATCH')
                             @csrf
 
@@ -95,9 +95,9 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="visit_date">Visit Date</label></div>
                                 <div class="col-md-4">
-                                    <input type="date" name="visit_date" id="visit_date"
-                                        class="form-control" value="{{ date('Y-m-d', strtotime($data->visit_date)) }}" required>
-                                    </div>
+                                    <input type="date" name="visit_date" id="visit_date" class="form-control"
+                                        value="{{ date('Y-m-d', strtotime($data->visit_date)) }}" required>
+                                </div>
                             </div>
 
 
@@ -106,26 +106,26 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="patrol_time">Patrol Time</label></div>
                                 <div class="col-md-4">
-                                    <input type="time" name="patrol_time" id="patrol_time"
-                                        class="form-control" value="{{ $data->patrol_time }}"  required>
-                                    </div>
+                                    <input type="time" name="patrol_time" id="patrol_time" class="form-control"
+                                        value="{{ $data->patrol_time }}" required>
+                                </div>
                             </div>
 
 
                             <div class="row">
                                 <div class="col-md-4"><label for="feeder_involved">Feeder Involved</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="feeder_involved" id="feeder_involved"
-                                        class="form-control" value="{{ $data->feeder_involved }}" required>
-                                    </div>
+                                    <input type="text" name="feeder_involved" id="feeder_involved" class="form-control"
+                                        value="{{ $data->feeder_involved }}" required>
+                                </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-4"><label for="team">Team</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="team" id="team"
-                                        class="form-control" value="{{ $data->team }}"  readonly>
-                                    </div>
+                                    <input type="text" name="team" id="team" class="form-control"
+                                        value="{{ $data->team }}" readonly>
+                                </div>
                             </div>
 
 
@@ -133,15 +133,15 @@
                                 <div class="col-md-4"><label for="area">Area</label></div>
                                 <div class="col-md-4">
                                     <input type="text" name="area" id="area" value="{{ $data->area }}"
-                                        class="form-control" >
-                                    </div>
+                                        class="form-control">
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="start_date">Start Date</label></div>
                                 <div class="col-md-4">
                                     <input type="date" name="start_date" id="start_date" value="{{ $data->start_date }}"
                                         class="form-control" required>
-                                    </div>
+                                </div>
                             </div>
 
                             <div class="row">
@@ -149,180 +149,178 @@
                                 <div class="col-md-4">
                                     <input type="date" name="end_date" id="end_date" value="{{ $data->end_date }}"
                                         class="form-control" required>
-                                    </div>
+                                </div>
                             </div>
 
-                              <div class="row">
+                            <div class="row">
                                 <div class="col-md-4"><label for="type">Type</label></div>
                                 <div class="col-md-4">
                                     <input type="text" name="type" id="type" value="{{ $data->type }}"
                                         class="form-control" required>
-                                    </div>
+                                </div>
                             </div>
-                              <div class="row">
+                            <div class="row">
                                 <div class="col-md-4"><label for="coordinate">Coordinate</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="coordinate" id="coordinate" value="{{ $data->coordinate }}"
-                                        class="form-control" required>
-                                    </div>
+                                    <input type="text" name="coordinate" id="coordinate"
+                                        value="{{ $data->coordinate }}" class="form-control" required>
+                                </div>
                             </div>
-                              <div class="row">
+                            <div class="row">
                                 <div class="col-md-4"><label for="gate_status">Gate Status</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="gate_status" id="gate_status" value="{{ $data->gate_status }}"
-                                        class="form-control" required>
-                                    </div>
+                                    <input type="text" name="gate_status" id="gate_status"
+                                        value="{{ $data->gate_status }}" class="form-control" required>
+                                </div>
                             </div>
-                              <div class="row">
+                            <div class="row">
                                 <div class="col-md-4"><label for="vandalism_status">Vandalism Status</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="vandalism_status" id="vandalism_status" value="{{ $data->vandalism_status }}"
-                                        class="form-control" required>
-                                    </div>
+                                    <input type="text" name="vandalism_status" id="vandalism_status"
+                                        value="{{ $data->vandalism_status }}" class="form-control" required>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="leaning_staus">Leaning Staus</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="leaning_staus" id="leaning_staus" value="{{ $data->leaning_staus }}"
-                                        class="form-control" required>
-                                    </div>
+                                    <input type="text" name="leaning_staus" id="leaning_staus"
+                                        value="{{ $data->leaning_staus }}" class="form-control" required>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="rust_status">Rust Status</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="rust_status" id="rust_status" value="{{ $data->rust_status }}"
-                                        class="form-control" required>
-                                    </div>
+                                    <input type="text" name="rust_status" id="rust_status"
+                                        value="{{ $data->rust_status }}" class="form-control" required>
+                                </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label for="advertise_poster_status">Advertise Poster Status</label></div>
+                                <div class="col-md-4"><label for="advertise_poster_status">Advertise Poster Status</label>
+                                </div>
                                 <div class="col-md-4">
-                                    <input type="text" name="advertise_poster_status" id="advertise_poster_status" value="{{ $data->advertise_poster_status }}"
-                                        class="form-control" required>
-                                    </div>
+                                    <input type="text" name="advertise_poster_status" id="advertise_poster_status"
+                                        value="{{ $data->advertise_poster_status }}" class="form-control" required>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="bushes_status">Bushes Status</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="bushes_status" id="bushes_status" value="{{ $data->bushes_status }}"
-                                        class="form-control" required>
-                                    </div>
+                                    <input type="text" name="bushes_status" id="bushes_status"
+                                        value="{{ $data->bushes_status }}" class="form-control" required>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="image_gate">Image Gate</label></div>
                                 <div class="col-md-4">
-                                    <input type="file" name="image_gate" id="image_gate"
-                                        class="form-control" >
-                                    </div>
-                                    <div class="col-md-4 text-center mb-3">
-                                        @if (file_exists(public_path($data->image_gate)) && $data->image_gate != '')
-                                            <a href="{{ URL::asset($data->image_gate) }}" data-lightbox="roadtrip">
-                                                <img src="{{ URL::asset($data->image_gate) }}" alt=""
-                                                    height="70" class="adjust-height ml-5  "></a>
-                                                    @else
-                                                    <strong>No image found</strong>
-   @endif
-                                    </div>
+                                    <input type="file" name="image_gate" id="image_gate" class="form-control">
+                                </div>
+                                <div class="col-md-4 text-center mb-3">
+                                    @if (file_exists(public_path($data->image_gate)) && $data->image_gate != '')
+                                        <a href="{{ URL::asset($data->image_gate) }}" data-lightbox="roadtrip">
+                                            <img src="{{ URL::asset($data->image_gate) }}" alt="" height="70"
+                                                class="adjust-height ml-5  "></a>
+                                    @else
+                                        <strong>No image found</strong>
+                                    @endif
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="image_vandalism">Image vandalism</label></div>
                                 <div class="col-md-4">
                                     <input type="file" name="image_vandalism" id="image_vandalism"
-                                        class="form-control" >
-                                    </div>
-                                    <div class="col-md-4 text-center mb-3">
-                                        @if (file_exists(public_path($data->image_vandalism)) && $data->image_vandalism != '')
-                                            <a href="{{ URL::asset($data->image_vandalism) }}" data-lightbox="roadtrip">
-                                                <img src="{{ URL::asset($data->image_vandalism) }}" alt=""
-                                                    height="70" class="adjust-height ml-5  "></a>
-                                                    @else
-                                                    <strong>No image found</strong>
-     @endif
-                                    </div>
+                                        class="form-control">
+                                </div>
+                                <div class="col-md-4 text-center mb-3">
+                                    @if (file_exists(public_path($data->image_vandalism)) && $data->image_vandalism != '')
+                                        <a href="{{ URL::asset($data->image_vandalism) }}" data-lightbox="roadtrip">
+                                            <img src="{{ URL::asset($data->image_vandalism) }}" alt=""
+                                                height="70" class="adjust-height ml-5  "></a>
+                                    @else
+                                        <strong>No image found</strong>
+                                    @endif
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="image_leaning">Image Leaning</label></div>
                                 <div class="col-md-4">
-                                    <input type="file" name="image_leaning" id="image_leaning"
-                                        class="form-control" >
-                                    </div>
-                                    <div class="col-md-4 text-center mb-3">
-                                        @if (file_exists(public_path($data->image_leaning)) && $data->image_leaning != '')
-                                            <a href="{{ URL::asset($data->image_leaning) }}" data-lightbox="roadtrip">
-                                                <img src="{{ URL::asset($data->image_leaning) }}" alt=""
-                                                    height="70" class="adjust-height ml-5  "></a>
-                                                    @else
-                                                    <strong>No image found</strong>
-   @endif
-                                    </div>
+                                    <input type="file" name="image_leaning" id="image_leaning" class="form-control">
+                                </div>
+                                <div class="col-md-4 text-center mb-3">
+                                    @if (file_exists(public_path($data->image_leaning)) && $data->image_leaning != '')
+                                        <a href="{{ URL::asset($data->image_leaning) }}" data-lightbox="roadtrip">
+                                            <img src="{{ URL::asset($data->image_leaning) }}" alt=""
+                                                height="70" class="adjust-height ml-5  "></a>
+                                    @else
+                                        <strong>No image found</strong>
+                                    @endif
+                                </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-4"><label for="image_rust">Image Rust</label></div>
                                 <div class="col-md-4">
-                                    <input type="file" name="image_rust" id="image_rust"
-                                        class="form-control" >
-                                    </div>
-                                    <div class="col-md-4 text-center mb-3">
-                                        @if (file_exists(public_path($data->image_rust)) && $data->image_rust != '')
-                                            <a href="{{ URL::asset($data->image_rust) }}" data-lightbox="roadtrip">
-                                                <img src="{{ URL::asset($data->image_rust) }}" alt=""
-                                                    height="70" class="adjust-height ml-5  "></a>
-                                                    @else
-                                                    <strong>No image found</strong>
-    @endif
-                                    </div>
+                                    <input type="file" name="image_rust" id="image_rust" class="form-control">
+                                </div>
+                                <div class="col-md-4 text-center mb-3">
+                                    @if (file_exists(public_path($data->image_rust)) && $data->image_rust != '')
+                                        <a href="{{ URL::asset($data->image_rust) }}" data-lightbox="roadtrip">
+                                            <img src="{{ URL::asset($data->image_rust) }}" alt="" height="70"
+                                                class="adjust-height ml-5  "></a>
+                                    @else
+                                        <strong>No image found</strong>
+                                    @endif
+                                </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="images_advertise_poster">Images Advertise Poster</label></div>
+                                <div class="col-md-4"><label for="images_advertise_poster">Images Advertise Poster</label>
+                                </div>
                                 <div class="col-md-4">
                                     <input type="file" name="images_advertise_poster" id="images_advertise_poster"
-                                        class="form-control" >
-                                    </div>
-                                    <div class="col-md-4 text-center mb-3">
-                                        @if (file_exists(public_path($data->images_advertise_poster)) && $data->images_advertise_poster != '')
-                                            <a href="{{ URL::asset($data->images_advertise_poster) }}" data-lightbox="roadtrip">
-                                                <img src="{{ URL::asset($data->images_advertise_poster) }}" alt=""
-                                                    height="70" class="adjust-height ml-5  "></a>
-                                                    @else
-                                                    <strong>No image found</strong>
-   @endif
-                                    </div>
+                                        class="form-control">
+                                </div>
+                                <div class="col-md-4 text-center mb-3">
+                                    @if (file_exists(public_path($data->images_advertise_poster)) && $data->images_advertise_poster != '')
+                                        <a href="{{ URL::asset($data->images_advertise_poster) }}"
+                                            data-lightbox="roadtrip">
+                                            <img src="{{ URL::asset($data->images_advertise_poster) }}" alt=""
+                                                height="70" class="adjust-height ml-5  "></a>
+                                    @else
+                                        <strong>No image found</strong>
+                                    @endif
+                                </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-4"><label for="images_bushes">Images Bushes</label></div>
                                 <div class="col-md-4">
-                                    <input type="file" name="images_bushes" id="images_bushes"
-                                        class="form-control" >
-                                    </div>
-                                    <div class="col-md-4 text-center mb-3">
-                                        @if (file_exists(public_path($data->images_bushes)) && $data->images_bushes != '')
-                                            <a href="{{ URL::asset($data->images_bushes) }}" data-lightbox="roadtrip">
-                                                <img src="{{ URL::asset($data->images_bushes) }}" alt=""
-                                                    height="70" class="adjust-height ml-5  "></a>
-                                                    @else
-                                                    <strong>No image found</strong>
-    @endif
-                                    </div>
+                                    <input type="file" name="images_bushes" id="images_bushes" class="form-control">
+                                </div>
+                                <div class="col-md-4 text-center mb-3">
+                                    @if (file_exists(public_path($data->images_bushes)) && $data->images_bushes != '')
+                                        <a href="{{ URL::asset($data->images_bushes) }}" data-lightbox="roadtrip">
+                                            <img src="{{ URL::asset($data->images_bushes) }}" alt=""
+                                                height="70" class="adjust-height ml-5  "></a>
+                                    @else
+                                        <strong>No image found</strong>
+                                    @endif
+                                </div>
                             </div>
 
-                             <div class="row">
+                            <div class="row">
                                 <div class="col-md-4"><label for="other_image">Other Image</label></div>
                                 <div class="col-md-4">
-                                    <input type="file" name="other_image" id="other_image"
-                                        class="form-control" >
-                                    </div>
-                                    <div class="col-md-4 text-center mb-3">
-                                        @if (file_exists(public_path($data->other_image)) && $data->other_image != '')
-                                            <a href="{{ URL::asset($data->other_image) }}" data-lightbox="roadtrip">
-                                                <img src="{{ URL::asset($data->other_image) }}" alt=""
-                                                    height="70" class="adjust-height ml-5  "></a>@else
-                                                    <strong>No image found</strong>
-
-                                        @endif
-                                    </div>
+                                    <input type="file" name="other_image" id="other_image" class="form-control">
+                                </div>
+                                <div class="col-md-4 text-center mb-3">
+                                    @if (file_exists(public_path($data->other_image)) && $data->other_image != '')
+                                        <a href="{{ URL::asset($data->other_image) }}" data-lightbox="roadtrip">
+                                            <img src="{{ URL::asset($data->other_image) }}" alt=""
+                                                height="70" class="adjust-height ml-5  "></a>
+                                    @else
+                                        <strong>No image found</strong>
+                                    @endif
+                                </div>
                             </div>
 
 
@@ -333,8 +331,6 @@
             </div>
         </div>
     </div>
-
-
 @endsection
 
 
@@ -385,8 +381,5 @@
             });
 
         }
-
-
-
     </script>
 @endsection

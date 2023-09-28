@@ -98,6 +98,19 @@ class TiangContoller extends Controller
 
             $data->arus_pada_tiang = $request->arus_pada_tiang;
 
+            $destinationPath = 'assets/images/';
+            foreach ($request->all() as $key => $file) {
+                // Check if the input is a file and it is valid
+                if ($request->hasFile($key) && $request->file($key)->isValid()) {
+                    $uploadedFile = $request->file($key);
+                    $img_ext = $uploadedFile->getClientOriginalExtension();
+                    $filename = $key . '-' . strtotime(now()) . '.' . $img_ext;
+                    $uploadedFile->move($destinationPath, $filename);
+                    $data->{$key} = $destinationPath . $filename;
+                }
+            }
+
+
 
             $data->geom = DB::raw("ST_GeomFromText('POINT(".$request->log." ".$request->lat.")',4326)");
 
@@ -242,14 +255,17 @@ class TiangContoller extends Controller
             $data->talian_spec = $request->has('talian_spec') ? json_encode($request->talian_spec) : null;
 
             $data->arus_pada_tiang = $request->arus_pada_tiang;
-
-            //         $latitude =  $request->lat;
-
-            // $longitude = $request->log;
-
-            // $pointSql = DB::raw("ST_GeomFromText('POINT($longitude $latitude)')");
-
-            // $data->geom = $pointSql;
+            $destinationPath = 'assets/images/';
+            foreach ($request->all() as $key => $file) {
+                // Check if the input is a file and it is valid
+                if ($request->hasFile($key) && $request->file($key)->isValid()) {
+                    $uploadedFile = $request->file($key);
+                    $img_ext = $uploadedFile->getClientOriginalExtension();
+                    $filename = $key . '-' . strtotime(now()) . '.' . $img_ext;
+                    $uploadedFile->move($destinationPath, $filename);
+                    $data->{$key} = $destinationPath . $filename;
+                }
+            }
 
             $data->update();
 

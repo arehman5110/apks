@@ -40,7 +40,7 @@
                 <div class=" card col-md-12 p-3 ">
                     <div class=" ">
                         <h3 class="text-center p-2">QR SAVR</h3>
-                        <form id="framework-wizard-form" action="{{ route('tiang-talian-vt-and-vr.update',$data->id) }}"
+                        <form id="framework-wizard-form" action="{{ route('tiang-talian-vt-and-vr.update',$data->id) }}" enctype="multipart/form-data"
                             style="display: none" method="POST">
                             @method('PATCH')
                             @csrf
@@ -146,18 +146,7 @@
                                             value="{{ $data->tiang_no }}" id="tiang_no" class="form-control" required>
                                     </div>
                                 </div>
-                                {{--
-                                <div class="row">
-                                    <div class="col-md-4"><label for="loc">Location</label></div>
 
-                                    <div class="col-md-4"><input type="text" name="lat" id="lat"
-                                            class="form-control">
-                                        <input type="text" name="log" id="log" class="form-control">
-                                    </div>
-                                    <div class="col-md-4 text-center"><button type="button" class="btn btn-sm btn-secondary"
-                                            onclick="getLocation()">Get Location</button></div>
-
-                                </div> --}}
 
 
 
@@ -726,6 +715,169 @@
                             </fieldset>
 
                             {{-- END Heigh Clearance (4) --}}
+
+
+                            <h3></h3>
+                            {{-- START Kejanggalan Images --}}
+                            <fieldset class="form-input">
+                                <h3>Kejanggalan Images</h3>
+
+
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="tapak_road_img">Crossing the Road Image</label></div>
+                                    <div class="col-md-4">
+                                        <input type="file" name="tapak_road_img" id="tapak_road_img"
+                                            class="form-control">
+                                    </div>
+
+                                    <div class="col-md-4 text-center mb-3">
+                                        @if (file_exists(public_path($data->tapak_road_img)) && $data->tapak_road_img != '')
+                                            <a href="{{ URL::asset($data->tapak_road_img) }}"
+                                                data-lightbox="roadtrip">
+                                                <img src="{{ URL::asset($data->tapak_road_img) }}" alt=""
+                                                    height="70" class="adjust-height ml-5  "></a>
+                                        @else
+                                            <strong>No image found</strong>
+                                        @endif
+                                    </div>
+                                </div>
+
+
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="tapak_sidewalk_img">Sidewalk Image</label></div>
+                                    <div class="col-md-4">
+                                        <input type="file" name="tapak_sidewalk_img" id="tapak_sidewalk_img"
+                                            class="form-control">
+                                    </div>
+
+                                    <div class="col-md-4 text-center mb-3">
+                                        @if (file_exists(public_path($data->tapak_sidewalk_img)) && $data->tapak_sidewalk_img != '')
+                                            <a href="{{ URL::asset($data->tapak_sidewalk_img) }}"
+                                                data-lightbox="roadtrip">
+                                                <img src="{{ URL::asset($data->tapak_sidewalk_img) }}" alt=""
+                                                    height="70" class="adjust-height ml-5  "></a>
+                                        @else
+                                            <strong>No image found</strong>
+                                        @endif
+                                    </div>
+                                </div>
+
+
+
+
+
+
+                                <div class="row">
+                                    <div class="col-md-4"><label
+                                            for="tapak_no_vehicle_entry_img">No Vehicle Entry Area Image</label></div>
+                                    <div class="col-md-4">
+                                        <input type="file" name="tapak_no_vehicle_entry_img"
+                                            id="tapak_no_vehicle_entry_img" class="form-control">
+                                    </div>
+
+                                    <div class="col-md-4 text-center mb-3">
+                                        @if (file_exists(public_path($data->tapak_no_vehicle_entry_img)) && $data->tapak_no_vehicle_entry_img != '')
+                                            <a href="{{ URL::asset($data->tapak_no_vehicle_entry_img) }}"
+                                                data-lightbox="roadtrip">
+                                                <img src="{{ URL::asset($data->tapak_no_vehicle_entry_img) }}" alt=""
+                                                    height="70" class="adjust-height ml-5  "></a>
+                                        @else
+                                            <strong>No image found</strong>
+                                        @endif
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="kawasan_bend_img">Bend Area Image</label></div>
+                                    <div class="col-md-4">
+                                        <input type="file" name="kawasan_bend_img" id="kawasan_bend_img"
+                                            class="form-control">
+                                    </div>
+
+                                    <div class="col-md-4 text-center mb-3">
+                                        @if (file_exists(public_path($data->kawasan_bend_img)) && $data->kawasan_bend_img != '')
+                                            <a href="{{ URL::asset($data->kawasan_bend_img) }}"
+                                                data-lightbox="roadtrip">
+                                                <img src="{{ URL::asset($data->kawasan_bend_img) }}" alt=""
+                                                    height="70" class="adjust-height ml-5  "></a>
+                                        @else
+                                            <strong>No image found</strong>
+                                        @endif
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="kawasan_road_img">Road Area Image</label></div>
+                                    <div class="col-md-4">
+                                        <input type="file" name="kawasan_road_img" id="kawasan_road_img"
+                                            class="form-control">
+                                    </div>
+
+                                    <div class="col-md-4 text-center mb-3">
+                                        @if (file_exists(public_path($data->kawasan_road_img)) && $data->kawasan_road_img != '')
+                                            <a href="{{ URL::asset($data->kawasan_road_img) }}"
+                                                data-lightbox="roadtrip">
+                                                <img src="{{ URL::asset($data->kawasan_road_img) }}" alt=""
+                                                    height="70" class="adjust-height ml-5  "></a>
+                                        @else
+                                            <strong>No image found</strong>
+                                        @endif
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="kawasan_forest_img">Forest Area Image</label></div>
+                                    <div class="col-md-4">
+                                        <input type="file" name="kawasan_forest_img" id="kawasan_forest_img"
+                                            class="form-control">
+                                    </div>
+
+                                    <div class="col-md-4 text-center mb-3">
+                                        @if (file_exists(public_path($data->kawasan_forest_img)) && $data->kawasan_forest_img != '')
+                                            <a href="{{ URL::asset($data->kawasan_forest_img) }}"
+                                                data-lightbox="roadtrip">
+                                                <img src="{{ URL::asset($data->kawasan_forest_img) }}" alt=""
+                                                    height="70" class="adjust-height ml-5  "></a>
+                                        @else
+                                            <strong>No image found</strong>
+                                        @endif
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="kawasan_other_img">Other Area Image</label></div>
+                                    <div class="col-md-4">
+                                        <input type="file" name="kawasan_other_img" id="kawasan_other_img"
+                                            class="form-control">
+                                    </div>
+
+                                    <div class="col-md-4 text-center mb-3">
+                                        @if (file_exists(public_path($data->kawasan_other_img)) && $data->kawasan_other_img != '')
+                                            <a href="{{ URL::asset($data->kawasan_other_img) }}"
+                                                data-lightbox="roadtrip">
+                                                <img src="{{ URL::asset($data->kawasan_other_img) }}" alt=""
+                                                    height="70" class="adjust-height ml-5  "></a>
+                                        @else
+                                            <strong>No image found</strong>
+                                        @endif
+                                    </div>
+                                </div>
+
+                            </fieldset>
+                            {{-- END Kejanggalan Images --}}
+
 
                             <h3></h3>
 
