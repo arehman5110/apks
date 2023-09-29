@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Team;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class LoginController extends Controller
@@ -12,6 +14,7 @@ class LoginController extends Controller
 
     public function login(Request $req){
 
+        try {
 
         $validator = Validator::make($req->all(), [
             'username' => 'required|string',
@@ -30,11 +33,14 @@ class LoginController extends Controller
 
 
         if (  auth()->attempt(['name' => $input['username'], 'password' => $input['password']])) {
-            // DB::disconnect();
+            $id = Auth::user()->id_team;
+            $team = Team::find($id);
+
             return response()
                     ->json([
                         'statusCode' => 200,
                         'success'=>true,
+                        'data'=>['team'=>$team ? $team->team_name : ''],
                         'message' => 'login success',
 
                     ],200);
@@ -45,6 +51,17 @@ class LoginController extends Controller
                         'statusCode' => 404,
                         'success'=>false,
                         'message' => 'user not found',
+                    ]);
+        }
+
+
+        } catch (\Throwable $th) {
+            return response()
+                    ->json([
+                        'statusCode' => 500,
+                        'success'=>false,
+                        'message' => 'Server error',
+                        'error'=>$th->getMessage()
                     ]);
         }
     }
