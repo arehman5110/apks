@@ -20,7 +20,7 @@
         <div class="container-  ">
             <div class="row mb-2" style="flex-wrap:nowrap">
                 <div class="col-sm-6">
-                    <h3>Third Party Digging</h3>
+                    <h3>Link Box</h3>
                 </div>
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
@@ -44,12 +44,20 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header">
-                            <div class="card-title">
-                                Third Party Digging
+
+                            <div class="card-header d-flex justify-content-between ">
+                                <div class="card-title">
+                                    Link Box
+                                </div>
+                                <div class="d-flex ml-auto">
+                                <a href="{{route('link-box-pelbagai-voltan.create')}}"><button class="btn text-white btn-success  btn-sm mr-4"  >Add new</button></a>
+
+                               <a href="{{route('generate-link-box-excel')}}"> <button class="btn text-white  btn-sm mr-4" style="background-color: #708090">Download</button></a>
+                            </div>
                             </div>
 
-                        </div>
+
+
 
                         <div class="card-body">
                             <div class="text-right mb-4">

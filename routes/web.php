@@ -4,7 +4,9 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\web\admin\TeamController;
 use App\Http\Controllers\web\admin\TeamUsersController;
 use App\Http\Controllers\web\CableBridgeController;
+use App\Http\Controllers\web\excel\CableBridgeExcelController;
 use App\Http\Controllers\web\excel\DigingExcelController;
+use App\Http\Controllers\web\excel\TiangExcelController;
 use App\Http\Controllers\web\LinkBoxController;
 use App\Http\Controllers\web\map\GeneratePDFController;
 use Illuminate\Support\Facades\Route;
@@ -15,7 +17,6 @@ use App\Http\Controllers\web\TiangContoller;
 use App\Http\Controllers\web\tnbes\StatusController;
 use App\Http\Controllers\web\ThirdPartyDiggingController;
 use App\Http\Controllers\web\SubstationController;
-
 
 
 /*
@@ -73,20 +74,22 @@ Route::view('/cable-bridge','cable-bridge.create');
 
 Route::view('/savr-bridge','savr.create');
 
-Route::resource('tiang-talian-vt-and-vr',TiangContoller::class);
+/// tiang
 
-Route::prefix('admin')->group(function () {
-    Route::resource('/team',TeamController::class);
-    Route::resource('team-users',TeamUsersController::class);
-});
+Route::resource('tiang-talian-vt-and-vr',TiangContoller::class);
+Route::get('tiang-test',[TiangExcelController::class,'generateDigingExcel']);
+
 
 
 //// Link Box
 Route::resource('link-box-pelbagai-voltan',LinkBoxController::class);
+Route::get('generate-link-box-excel',[CableBridgeExcelController::class,'generateCableBridgeExcel'])->name('generate-link-box-excel');
 
 //// Cable Bridge
 
 Route::resource('cable-bridge',CableBridgeController::class);
+Route::get('generate-cable-bridge-excel',[CableBridgeExcelController::class,'generateCableBridgeExcel'])->name('generate-cable-bridge-excel');
+
 
 ////third party digging routes
 Route::resource('third-party-digging',ThirdPartyDiggingController::class);
@@ -94,6 +97,11 @@ Route::resource('third-party-digging',ThirdPartyDiggingController::class);
 ////substation routes
 Route::resource('substation',SubstationController::class);
 
+//// Admin side
+Route::prefix('admin')->group(function () {
+    Route::resource('/team',TeamController::class);
+    Route::resource('team-users',TeamUsersController::class);
+});
 
 
 

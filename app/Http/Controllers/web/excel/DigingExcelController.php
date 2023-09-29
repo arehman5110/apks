@@ -19,7 +19,7 @@ class DigingExcelController extends Controller
         $recored = ThirdPartyDiging::where('workpackage_id', $id)->get();
         // return $recored;
         if (sizeof($recored) > 0) {
-            
+            ob_end_clean(); // this
 
             $work = WorkPackage::find($id);
 
@@ -29,11 +29,11 @@ class DigingExcelController extends Controller
 
             $worksheet = $spreadsheet->getActiveSheet();
             $cs = $worksheet->getCell('C3')->getValue();
-           
+
 
             $i = 3;
             foreach ($recored as $rec) {
-          
+
               //  if ($rec->image1 != '' || $rec->image2 != '' || $rec->image3 != '') {
                     $worksheet->setCellValue('A' . $i, $i - 2);
                     $worksheet->setCellValue('B' . $i, $work->package_name);
@@ -50,9 +50,10 @@ class DigingExcelController extends Controller
                 $i++;
             }
             $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
-        
-            $writer->save(public_path('assets/updated-excels/') . $work->package_name . '.xlsx');
 
+
+            $writer->save(public_path('assets/updated-excels/') . $work->package_name . '.xlsx');
+ ob_start();
             return response()->download(public_path('assets/updated-excels/') . $work->package_name . '.xlsx');
         }else{
             return redirect()->back()->with('failed','No records found ');

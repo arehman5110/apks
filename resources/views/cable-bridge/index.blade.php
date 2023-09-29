@@ -44,13 +44,14 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header">
-                            <div class="card-title">
-                                Third Party Digging
-                            </div>
+                        <div class="card-header d-flex justify-content-between ">
+                            <p class="mb-0">Cable Bridge</p>
+                            <div class="d-flex ml-auto">
+                            <a href="{{route('cable-bridge.create')}}"><button class="btn text-white btn-success  btn-sm mr-4"  >Add new</button></a>
 
+                           <a href="{{route('generate-cable-bridge-excel')}}"> <button class="btn text-white  btn-sm mr-4" style="background-color: #708090">Download</button></a>
                         </div>
-
+                        </div>
                         <div class="card-body">
                             <div class="text-right mb-4">
 
