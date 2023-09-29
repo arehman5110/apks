@@ -34,7 +34,7 @@ class DigingExcelController extends Controller
             $i = 3;
             foreach ($recored as $rec) {
           
-                if ($rec->image1 != '' || $rec->image2 != '' || $rec->image3 != '') {
+              //  if ($rec->image1 != '' || $rec->image2 != '' || $rec->image3 != '') {
                     $worksheet->setCellValue('A' . $i, $i - 2);
                     $worksheet->setCellValue('B' . $i, $work->package_name);
                     $worksheet->setCellValue('C' . $i, $work->zone);
@@ -46,7 +46,7 @@ class DigingExcelController extends Controller
                             $worksheet->setCellValue('H' . $i, $work->ba);
                         }
                     }
-                }
+                //}
                 $i++;
             }
             $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');

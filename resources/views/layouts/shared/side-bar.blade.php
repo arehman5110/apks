@@ -71,7 +71,23 @@
                     <a href="/pencawang" class="nav-link ">
                         <i class="fa fa-map"></i>
                         <p>Pencawang</p>
+                        <i class="right fas fa-angle-left"></i>
                     </a>
+                    <ul class="nav nav-treeview">
+
+                        <li class="nav-item">
+                            <a href="{{ route('substation.index') }}" class="nav-link ">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Index</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('substation.create') }}" class="nav-link ">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Create</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="nav-item">
                     <a href="/feeder-pillar" class="nav-link ">

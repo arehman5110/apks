@@ -290,7 +290,7 @@
                     </select>
                 </div>
                 <div class="col-md-3">
-                    <label for="search_ba">Ba</label>
+                    <label for="search_ba">BA</label>
                     <select name="search_ba" id="search_ba" class="form-control" onchange="getWorkPackage(this)">
                         <option value="">Select zone</option>
                     </select>
@@ -1222,7 +1222,7 @@
                 } else if (selectedValue === 'B1') {
                     const b1Options = [
                         ['PJ', 'PETALING JAYA', 3.1128074178475, 101.605270457169],
-                        ['RWANG', 'RAWANG', 3.47839445121726, 101.622905486475],
+                        ['RAWANG', 'RAWANG', 3.47839445121726, 101.622905486475],
                         ['K.SELANGOR', 'KUALA SELANGOR', 3.40703209426401, 101.317426926947]
                     ];
 
