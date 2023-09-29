@@ -92,14 +92,14 @@
                                                     </button>
                                                     <div class="dropdown-menu" role="menu">
 
-                                                        <form action="{{ route('cable-bridge.show', $data->id) }}"
+                                                        <form action="{{ route('substation.show', $data->id) }}"
                                                             method="get">
                                                             <button type="submit"
                                                                 class="dropdown-item pl-3 w-100 text-left">Detail</button>
                                                         </form>
 
                                                         <form
-                                                            action="{{ route('cable-bridge.edit', $data->id) }}"
+                                                            action="{{ route('substation.edit', $data->id) }}"
                                                             method="get">
                                                             <button type="submit"
                                                                 class="dropdown-item pl-3 w-100 text-left">Edit</button>
@@ -180,7 +180,7 @@
                 var button = $(event.relatedTarget);
                 var id = button.data('id');
                 var modal = $(this);
-                $('#remove-foam').attr('action', '/cable-bridge/' + id)
+                $('#remove-foam').attr('action', '/substation/' + id)
             });
 
         });

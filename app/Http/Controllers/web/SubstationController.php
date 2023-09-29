@@ -95,7 +95,8 @@ class SubstationController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = Substation::find($id);
+        return view('substation.show',['data'=>$data]);
     }
 
     /**
@@ -106,7 +107,8 @@ class SubstationController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = Substation::find($id);
+        return view('substation.edit',['data'=>$data]);
     }
 
     /**
@@ -118,7 +120,49 @@ class SubstationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $data = Substation::find($id);
+            $data->zone = $request->zone;
+            $data->ba = $request->ba;
+            $data->team = $request->team;
+            $data->visit_date = $request->visit_date;
+            $data->patrol_time = $request->patrol_time;
+            $data->fl = $request->fl;
+            $data->voltage = $request->voltage;
+            $data->name = $request->name;
+            $data->type = $request->type;
+            $data->coordinate = $request->coordinate;
+            $data->gate_status = $request->gate_status;
+            $data->grass_status = $request->grass_status;
+            $data->tree_branches_status = $request->tree_branches_status;
+            $data->building_status = $request->building_status;
+            $data->advertise_poster_status = $request->advertise_poster_status;
+            $destinationPath = 'assets/images/link-box/';
+
+            foreach ($request->all() as $key => $file) {
+                // Check if the input is a file and it is valid
+                if ($request->hasFile($key) && $request->file($key)->isValid()) {
+                    $uploadedFile = $request->file($key);
+                    $img_ext = $uploadedFile->getClientOriginalExtension();
+                    $filename = $key . '-' . strtotime(now()) . '.' . $img_ext;
+                    $uploadedFile->move($destinationPath, $filename);
+                    $data->{$key} = $destinationPath . $filename;
+                }
+            }
+
+          //  $data->geom = DB::raw("ST_GeomFromText('POINT(".$request->log." ".$request->lat.")',4326)");
+
+            $data->update();
+
+            return redirect()
+                ->route('substation.index')
+                ->with('success', 'Form Intserted');
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+            return redirect()
+                ->route('substation.index')
+                ->with('failed', 'Form Intserted Failed');
+        }
     }
 
     /**
@@ -129,6 +173,18 @@ class SubstationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            Substation::find($id)->delete();
+
+            return redirect()
+                ->route('substation.index')
+                ->with('success', 'Recored Removed');
+        } catch (\Throwable $th) {
+            // return $th->getMessage();
+            return redirect()
+                ->route('substation.index')
+                ->with('failed', 'Request Failed');
+        }
     }
+    
 }
