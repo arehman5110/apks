@@ -1,275 +1,332 @@
-@extends('layouts.app', ['page_title' => 'Index'])
+@extends('layouts.app')
 
 @section('css')
-    
-@include('partials.map-css')
+    <!-- Fonts and icons -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700" rel="stylesheet" />
 
+    {{-- <link rel="stylesheet" href="{{ URL::asset('assets/test/css/style.css') }}" /> --}}
+    <style>
+        input[type='checkbox'],
+        input[type='radio'] {
+            min-width: 16px !important;
+            margin-right: 12px;
+        }
+
+        .error {
+            color: red;
+        }
+
+        label {
+            margin-bottom: 0px !important;
+            margin-top: 1rem;
+        }
+
+        input,
+        select {
+            color: black !important;
+            margin-bottom: 0px !important;
+            margin-top: 1rem;
+        }
+    </style>
 @endsection
+
+
 @section('content')
-    @if (Session::has('failed'))
-        <div class="alert {{ Session::get('alert-class', 'alert-secondary') }}" role="alert">
-            {{ Session::get('failed') }}
-
-            <button type="button" class="close border-0 bg-transparent" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-
-        </div>
-    @endif
-
     <section class="content-header">
         <div class="container-  ">
             <div class="row  " style="flex-wrap:nowrap">
                 <div class="col-sm-6">
-                    <h3>Cable bridge</h3>
+                    <h3>Cable Bridge</h3>
                 </div>
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">index</li>
+                        <li class="breadcrumb-item"><a href="{{route('cable-bridge.index')}}">index</a></li>
+                        <li class="breadcrumb-item active">edit</li>
                     </ol>
                 </div>
             </div>
         </div>
     </section>
-    <div class="container-fluid bg-white pt-2">
-    <h5 class="m-1">PEMERIKSAAN KEJANGGALAN PEPASANGAN TNB &
-        SENGGARAAN BUKAN ELEKTRIK TALIAN ATAS DI SELANGOR UNTUK DISTRIBUTION NETWORK
-        DIVISION, TNB</h5>
+
+    <div class=" ">
+
+        <div class="container">
+
+            <div class=" ">
+
+                <div class=" card col-md-12 p-4 ">
+                    <div class=" ">
+                        <h3 class="text-center p-2"></h3>
+
+                        <form action="{{ route('cable-bridge.store') }} " id="myForm" method="POST"
+                            enctype="multipart/form-data">
+                            @csrf
 
 
-    <div class=" p-1 col-12 m-2">
-        <div class="card p-0 mb-3">
-            <div class="card-body row">
+                            <div class="row">
+                                <div class="col-md-4"><label for="zone">Zone</label></div>
+                                <div class="col-md-4">
+                                    <select name="zone" id="search_zone" class="form-control" required>
 
-                <div class="col-md-3">
-                    <label for="search_zone">Zone</label>
-                    <select name="search_zone" id="search_zone" class="form-control">
+                                        <option value="" hidden>select zone</option>
+                                        <option value="W1">W1</option>
+                                        <option value="B1">B1</option>
+                                        <option value="B2">B2</option>
+                                        <option value="B4">B4</option>
 
-                        <option value="" hidden>select zone</option>
-                        <option value="W1">W1</option>
-                        <option value="B1">B1</option>
-                        <option value="B2">B2</option>
-                        <option value="B4">B4</option>
+                                    </select>
+                                </div>
+                            </div>
 
-                    </select>
+                            <div class="row">
+                                <div class="col-md-4"><label for="ba">Ba</label></div>
+                                <div class="col-md-4"><select name="ba" id="ba" class="form-control" required
+                                        onchange="getWp(this)">
+                                        <option value="" hidden>select zone</option>
+
+                                    </select></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4"><label for="visit_date">Visit Date</label></div>
+                                <div class="col-md-4">
+                                    <input type="date" name="visit_date" id="visit_date"
+                                        class="form-control" required>
+                                    </div>
+                            </div>
+
+
+
+
+                            <div class="row">
+                                <div class="col-md-4"><label for="patrol_time">Patrol Time</label></div>
+                                <div class="col-md-4">
+                                    <input type="time" name="patrol_time" id="patrol_time"
+                                        class="form-control" required>
+                                    </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-4"><label for="feeder_involved">Feeder Involved</label></div>
+                                <div class="col-md-4">
+                                    <input type="text" name="feeder_involved" id="feeder_involved"
+                                        class="form-control" required>
+                                    </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4"><label for="team">Team</label></div>
+                                <div class="col-md-4">
+                                    <input type="text" name="team" id="team" value="{{$team}}"
+                                        class="form-control"  readonly>
+                                    </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-4"><label for="area">Area</label></div>
+                                <div class="col-md-4">
+                                    <input type="text" name="area" id="area"
+                                        class="form-control" >
+                                    </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"><label for="start_date">Start Date</label></div>
+                                <div class="col-md-4">
+                                    <input type="date" name="start_date" id="start_date"
+                                        class="form-control" required>
+                                    </div>
+                            </div>
+                           
+                            <div class="row">
+                                <div class="col-md-4"><label for="end_date">End Date</label></div>
+                                <div class="col-md-4">
+                                    <input type="date" name="end_date" id="end_date"
+                                        class="form-control" required>
+                                    </div>
+                            </div>
+
+                              <div class="row">
+                                <div class="col-md-4"><label for="voltage">Voltage</label></div>
+                                <div class="col-md-4">
+                                    <input type="text" name="voltage" id="voltage"
+                                        class="form-control" required>
+                                    </div>
+                            </div>
+                              <div class="row">
+                                <div class="col-md-4"><label for="coordinate">Coordinate</label></div>
+                                <div class="col-md-4">
+                                    <input type="text" name="coordinate" id="coordinate"
+                                        class="form-control" required>
+                                    </div>
+                            </div>
+                              <div class="row">
+                                <div class="col-md-4"><label for="pipe_staus">Pipe Status</label></div>
+                                <div class="col-md-4">
+                                    <input type="text" name="pipe_staus" id="pipe_staus"
+                                        class="form-control" required>
+                                    </div>
+                            </div>
+                              <div class="row">
+                                <div class="col-md-4"><label for="vandalism_status">Vandalism Status</label></div>
+                                <div class="col-md-4">
+                                    <input type="text" name="vandalism_status" id="vandalism_status"
+                                        class="form-control" required>
+                                    </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"><label for="collapsed_status">Collapsed Status</label></div>
+                                <div class="col-md-4">
+                                    <input type="text" name="collapsed_status" id="collapsed_status"
+                                        class="form-control" required>
+                                    </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"><label for="rust_status">Rust Status</label></div>
+                                <div class="col-md-4">
+                                    <input type="text" name="rust_status" id="rust_status"
+                                        class="form-control" required>
+                                    </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4"><label for="bushes_status">Bushes Status</label></div>
+                                <div class="col-md-4">
+                                    <input type="text" name="bushes_status" id="bushes_status"
+                                        class="form-control" required>
+                                    </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"><label for="image_pipe">Image Pipe</label></div>
+                                <div class="col-md-4">
+                                    <input type="file" name="image_pipe" id="image_pipe"
+                                        class="form-control" >
+                                    </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"><label for="image_vandalism">Image vandalism</label></div>
+                                <div class="col-md-4">
+                                    <input type="file" name="image_vandalism" id="image_vandalism"
+                                        class="form-control" >
+                                    </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"><label for="image_collapsed">Image Collapsed</label></div>
+                                <div class="col-md-4">
+                                    <input type="file" name="image_collapsed" id="image_collapsed"
+                                        class="form-control" >
+                                    </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4"><label for="image_rust">Image Rust</label></div>
+                                <div class="col-md-4">
+                                    <input type="file" name="image_rust" id="image_rust"
+                                        class="form-control" >
+                                    </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-4"><label for="images_bushes">Images Bushes</label></div>
+                                <div class="col-md-4">
+                                    <input type="file" name="images_bushes" id="images_bushes"
+                                        class="form-control" >
+                                    </div>
+                            </div>
+
+                             <div class="row">
+                                <div class="col-md-4"><label for="other_image">Other Image</label></div>
+                                <div class="col-md-4">
+                                    <input type="file" name="other_image" id="other_image"
+                                        class="form-control" >
+                                    </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4"><label for="loc">Location</label></div>
+
+                                <div class="col-md-4"><input type="text" name="lat" id="lat" required
+                                        class="form-control">
+                                    <input type="text" name="log" id="log" class="form-control">
+                                </div>
+                                <div class="col-md-4 text-center"><button type="button" class="btn btn-sm btn-secondary"
+                                        onclick="getLocation()">Get Location</button>
+                                </div>
+
+                            </div>
+
+                            <div class="text-center p-4"><button class="btn btn-sm btn-success">Submit</button></div>
+                        </form>
+                    </div>
                 </div>
-                <div class="col-md-3">
-                    <label for="search_ba">Ba</label>
-                    <select name="search_ba" id="search_ba" class="form-control" onchange="getWorkPackage(this)">
-                        <option value="">Select zone</option>
-                    </select>
-                </div>
-
-
-
-                <div class="col-md-3">
-                    <label for="search_wp">Work Package</label>
-                    <select name="search_wp" id="search_wp" class="form-control"></select>
-                </div>
-                <div class="col-md-2 p-2 text-center pt-4" id="for-excel">
-                </div>
-
-
-
             </div>
         </div>
     </div>
 
 
-
-
-    <!--  START MAP CARD DIV -->
-    <div class="row m-2">
-
-        <!-- START MAP SIDEBAR DIV -->
-        <div class="col-2 p-0">
-            <div class="card p-0 m-0"
-                style="border: 1px solid rgb(177, 175, 175) !important; border-radius: 0px !important">
-                <div class="card-header"><strong> NAVIGATION</strong></div>
-                <div class="card-body">
-                    <!-- MAP SIDEBAR LAYERS SELECTOR -->
-                    <div class="side-bar" style="height: 569px !important; overflow-y: scroll;">
-                        <div class="col-md-12 mb-2" class="form-group">
-                            <label>Select Info Layer :</label>
-                            <select class="form-select" id="tableLayer" onchange="activeSelectedLayerOther(this.value)">
-                                <option value="" hidden>Select Layer</option>
-                                <option value="lv_fuse">lv_fuse</option>
-                                <option value="lv_ug_conductor">lv_ug_conductor</option>
-                                <option value="lvdb_fp">lvdb_fp</option>
-                                <option value="street_light">street_light</option>
-                                <option value="pole">pole</option>
-                                <option value="wp">wp</option>
-                                <option value="notice">notice</option>
-                                <option value="supervise">supervise</option>
-
-                            </select>
-                        </div>
-
-                        <!-- START MAP SIDEBAR DETAILS -->
-                      
-
-
-                        <details class="mb-3" open>
-                            <summary><strong> Cable bridge</strong> </summary>
-                            <table class="table table-bordered">
-                                <tr>
-                                    <td>Pemeriksaan visual</td>
-                                </tr>
-                                <tr>
-                                    <td>Pembersihan semak samun / creepers/sampah/ rumput</td>
-                                </tr>
-                                <tr>
-                                    <td>Report</td>
-                                </tr>
-                            </table>
-
-                        </details>
-                        <!-- END MAP SIDEBAR DETAILS -->
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- END MAP SIDEBAR DIV -->
-
-        <!-- START MAP  DIV -->
-        <div class="col-10 p-0 ">
-            <div class="card p-0 m-0"
-                style="border: 1px solid rgb(177, 175, 175) !important; border-radius: 0px !important;">
-                <div class="card-header text-center"><strong> MAP</strong></div>
-                <div class="card-body p-0">
-                    <div id="map">
-
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        <!-- END MAP  DIV -->
-        <div id="wg" class="windowGroup">
-
-        </div>
-
-        <div id="wg1" class="windowGroup">
-
-        </div>
-
-    </div><!--  END MAP CARD DIV -->
-    </div>
-
-    <div class="modal fade" id="geomModal" tabindex="-1" aria-labelledby="geomModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add new W.P</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form action="/save-work-package" method="post" id="save_wp" onsubmit="return submitFoam()">
-                    @csrf
-                    <div class="modal-body ">
-
-
-                        <label for="">Work Package Name</label>
-                        <span class="text-danger" id="er-pw-name"></span> <br>
-                        <input type="text" name="name" id="pw-name" class="form-control">
-                        <label for="zone">Zone</label>
-
-                        <input type="text" name="zone" id="pw-zone" class="form-control">
-                        {{-- <select name="zone" id="pw-zone" class="form-control">
-                        <option value="" hidden>select zone</option>
-                        <option value="W1">W1</option>
-                        <option value="B1">B1</option>
-                        <option value="B2">B2</option>
-                        <option value="B4">B4</option>
-                    </select> --}}
-
-                        <label for="ba">Select ba</label>
-                        <input type="text" name="ba" id="pw-ba" class="form-control">
-                        {{-- <select name="ba" id="pw-ba" class="form-control">
-                        <option value="" hidden>Select zone</option>
-                    </select> --}}
-
-                        <input type="hidden" name="geom" id="geom">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Submit</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Site Data Info</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body ">
-                    <table class="table table-bordered">
-                        <tbody id="my_data"></tbody>
-                    </table>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="polyLineModal" tabindex="-1" aria-labelledby="polyLineModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Identify Roads</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form action="/save-road" method="post" id="road-form" onsubmit="return submitFoam2()">
-                    @csrf
-                    <div class="modal-body ">
-                        <label for="ba">Road Name</label>
-                        <span class="text-center" id="er_raod_name"></span>
-                        <input name="road_name" id="road_name" class="form-control">
-                        <label for="">Work Package Name</label>
-                        <input type="text" name="" id="raod-d-wp-id" class="form-control disabled">
-                        <input type="hidden" name="id_wp" id="raod-wp-id">
-                        {{-- <select name="id_wp" id="raod-wp-id" class="form-control" onchange="getWorkPackage(this)">
-                        <option value="">select wp</option>
-                        @foreach ($wps as $wp)
-                            <option value="{{$wp->id}}">{{$wp->package_name}}</option>
-                        @endforeach
-                    </select> --}}
-                        <label for="polyline-zone">Zone</label>
-                        <input id="polyline-zone" name="zone" class="form-control">
-                        <label for="polyline-ba">BA</label>
-                        <input id="polyline-ba" name="ba" class="form-control">
-
-
-
-
-                        <input type="hidden" name="geom" id="road-geom">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Submit</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 @endsection
 
 @section('script')
-   @include('partials.map-js')
+@section('script')
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js"></script>
+    <script>
+        $(document).ready(function() {
+
+
+            $("#myForm").validate();
+
+            $('#search_zone').on('change', function() {
+                const selectedValue = this.value;
+                const areaSelect = $('#ba');
+                var baValues = '';
+
+                // Clear previous options
+                areaSelect.empty();
+                areaSelect.append(`<option value="" hidden>Select ba</option>`)
+
+                if (selectedValue === 'W1') {
+                    baValues = ['KUALA LUMPUR PUSAT'];
+
+                } else if (selectedValue === 'B1') {
+                    baValues = ['PETALING JAYA', 'RAWANG', 'KUALA SELANGOR'];
+                } else if (selectedValue === 'B2') {
+                    baValues = ['KLANG', 'PELABUHAN KLANG'];
+
+
+                } else if (selectedValue === 'B4') {
+                    baValues = ['CHERAS', 'BANTING', 'BANGI', 'PUTRAJAYA & CYBERJAYA'];
+                }
+
+
+                baValues.forEach((data) => {
+                    areaSelect.append(`<option value="${data}">${data}</option>`);
+                });
+                $('#wp_name').empty();
+                $('#search_wp').append(`<option value="" hidden>select wp</option>`);
+
+            });
+
+
+        });
+
+        //get current location
+
+        function getLocation() {
+
+if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+} else {
+    x.innerHTML = "Geolocation is not supported by this browser.";
+}
+}
+
+function showPosition(position) {
+
+$('#lat').val(position.coords.latitude)
+$('#log').val(position.coords.longitude)
+
+}
+    </script>
 @endsection

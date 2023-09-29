@@ -125,13 +125,13 @@
                                                         <form action="{{ route('tiang-talian-vt-and-vr.show', $data->id) }}"
                                                             method="get">
                                                             <button type="submit"
-                                                                class="dropdown-list pl-3 w-100 text-left">Detail</button>
+                                                                class="dropdown-item pl-3 w-100 text-left">Detail</button>
                                                         </form>
 
                                                         <form action="{{ route('tiang-talian-vt-and-vr.edit', $data->id) }}"
                                                             method="get">
                                                             <button type="submit"
-                                                                class="dropdown-list pl-3 w-100 text-left">Edit</button>
+                                                                class="dropdown-item pl-3 w-100 text-left">Edit</button>
                                                         </form>
 
 

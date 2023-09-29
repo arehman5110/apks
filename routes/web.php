@@ -1,7 +1,11 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\web\admin\TeamController;
+use App\Http\Controllers\web\admin\TeamUsersController;
+use App\Http\Controllers\web\CableBridgeController;
 use App\Http\Controllers\web\excel\DigingExcelController;
+use App\Http\Controllers\web\LinkBoxController;
 use App\Http\Controllers\web\map\GeneratePDFController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\web\map\MapController;
@@ -9,9 +13,8 @@ use App\Http\Controllers\web\map\RoadController;
 use App\Http\Controllers\web\map\WPController;
 use App\Http\Controllers\web\TiangContoller;
 use App\Http\Controllers\web\tnbes\StatusController;
-use App\Models\Road;
-use Illuminate\Support\Facades\Auth;
-use Intervention\Image\Gd\Commands\RotateCommand;
+use App\Http\Controllers\web\ThirdPartyDiggingController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +30,15 @@ use Intervention\Image\Gd\Commands\RotateCommand;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::middleware('auth')->group(function () {
+
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+
+
 
 Route::get('/map-1',[MapController::class,'index']);
 Route::get('/get-all-work-packages',[MapController::class,'allWP']);
@@ -60,6 +72,27 @@ Route::view('/cable-bridge','cable-bridge.create');
 Route::view('/savr-bridge','savr.create');
 
 Route::resource('tiang-talian-vt-and-vr',TiangContoller::class);
+
+Route::prefix('admin')->group(function () {
+    Route::resource('/team',TeamController::class);
+    Route::resource('team-users',TeamUsersController::class);
+});
+
+
+//// Link Box
+Route::resource('link-box-pelbagai-voltan',LinkBoxController::class);
+
+//// Cable Bridge
+
+Route::resource('cable-bridge',CableBridgeController::class);
+
+////third party digging routes
+Route::resource('third-party-digging',ThirdPartyDiggingController::class);
+
+
+
+
+});
 
 require __DIR__ . '/auth.php';
 

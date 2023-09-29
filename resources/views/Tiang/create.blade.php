@@ -11,31 +11,26 @@
             min-width: 16px !important;
             margin-right: 12px;
         }
-
-        input[type='checkbox']>.col-md-4 {
-            display: flex;
-        }
     </style>
 @endsection
 
 
 @section('content')
-
-<section class="content-header">
-    <div class="container-  ">
-        <div class="row  " style="flex-wrap:nowrap">
-            <div class="col-sm-6">
-                <h3>Tiang</h3>
-            </div>
-            <div class="col-sm-6 text-right">
-                <ol class="breadcrumb float-right">
-                    <li class="breadcrumb-item"><a href="{{route('tiang-talian-vt-and-vr.index')}}">index</a></li>
-                    <li class="breadcrumb-item active">create</li>
-                </ol>
+    <section class="content-header">
+        <div class="container-  ">
+            <div class="row  " style="flex-wrap:nowrap">
+                <div class="col-sm-6">
+                    <h3>Tiang</h3>
+                </div>
+                <div class="col-sm-6 text-right">
+                    <ol class="breadcrumb float-right">
+                        <li class="breadcrumb-item"><a href="{{ route('tiang-talian-vt-and-vr.index') }}">index</a></li>
+                        <li class="breadcrumb-item active">create</li>
+                    </ol>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
     <div class=" ">
 
         <div class="container">
@@ -45,7 +40,7 @@
                 <div class=" card col-md-12 p-3 ">
                     <div class=" ">
                         <h3 class="text-center p-2">QR SAVR</h3>
-                        <form id="framework-wizard-form" action="{{ route('tiang-talian-vt-and-vr.store') }}"
+                        <form id="framework-wizard-form" action="{{ route('tiang-talian-vt-and-vr.store') }}"  enctype="multipart/form-data"
                             style="display: none" method="POST">
                             @csrf
                             <h3></h3>
@@ -151,8 +146,9 @@
                                             class="form-control">
                                         <input type="text" name="log" id="log" class="form-control">
                                     </div>
-                                    <div class="col-md-4 text-center"><button type="button" class="btn btn-sm btn-secondary"
-                                            onclick="getLocation()">Get Location</button></div>
+                                    <div class="col-md-4 text-center"><button type="button"
+                                            class="btn btn-sm btn-secondary" onclick="getLocation()">Get Location</button>
+                                    </div>
 
                                 </div>
 
@@ -677,6 +673,89 @@
 
                             {{-- END Heigh Clearance (4) --}}
 
+                            <h3></h3>
+                            {{-- START Kejanggalan Images --}}
+                            <fieldset class="form-input">
+                                <h3>Kejanggalan Images</h3>
+
+
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="tapak_road_img">Crossing the Road Image</label></div>
+                                    <div class="col-md-4">
+                                        <input type="file" name="tapak_road_img" id="tapak_road_img"
+                                            class="form-control">
+                                    </div>
+                                </div>
+
+
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="tapak_sidewalk_img">Sidewalk Image</label></div>
+                                    <div class="col-md-4">
+                                        <input type="file" name="tapak_sidewalk_img" id="tapak_sidewalk_img"
+                                            class="form-control">
+                                    </div>
+                                </div>
+
+
+
+
+
+
+                                <div class="row">
+                                    <div class="col-md-4"><label
+                                            for="tapak_no_vehicle_entry_img">No Vehicle Entry Area Image</label></div>
+                                    <div class="col-md-4">
+                                        <input type="file" name="tapak_no_vehicle_entry_img"
+                                            id="tapak_no_vehicle_entry_img" class="form-control">
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="kawasan_bend_img">Bend Area Image</label></div>
+                                    <div class="col-md-4">
+                                        <input type="file" name="kawasan_bend_img" id="kawasan_bend_img"
+                                            class="form-control">
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="kawasan_road_img">Road Area Image</label></div>
+                                    <div class="col-md-4">
+                                        <input type="file" name="kawasan_road_img" id="kawasan_road_img"
+                                            class="form-control">
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="kawasan_forest_img">Forest Area Image</label></div>
+                                    <div class="col-md-4">
+                                        <input type="file" name="kawasan_forest_img" id="kawasan_forest_img"
+                                            class="form-control">
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="kawasan_other_img">Other Area Image</label></div>
+                                    <div class="col-md-4">
+                                        <input type="file" name="kawasan_other_img" id="kawasan_other_img"
+                                            class="form-control">
+                                    </div>
+                                </div>
+
+                            </fieldset>
+                            {{-- END Kejanggalan Images --}}
                             <h3></h3>
 
 

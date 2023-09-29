@@ -25,6 +25,9 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                 data-accordion="false">
 
+                @if (Auth::user()->is_admin != '1')
+
+
                 <li class="nav-item ">
                     <a href="#" class="nav-link">
                         <i class="fa fa-book"></i>
@@ -34,6 +37,20 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
+
+                        <li class="nav-item">
+                            <a href="{{ route('third-party-digging.create') }}" class="nav-link ">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>create</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('third-party-digging.index') }}" class="nav-link ">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>index</p>
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a href="/map-1" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
@@ -43,7 +60,7 @@
                         <li class="nav-item">
                             <a href="/get-all-work-packages" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>index</p>
+                                <p>tnbs approvel</p>
                             </a>
                         </li>
                     </ul>
@@ -87,21 +104,70 @@
                     </ul>
                 </li>
 
+                <li class="nav-item ">
+                    <a href="#" class="nav-link">
+                        <i class="fa fa-book"></i>
+                        <p>
+                            Link Box Pelbagai Voltan
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('link-box-pelbagai-voltan.create')}}" class="nav-link ">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Form</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('link-box-pelbagai-voltan.index')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Index</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
 
+                <li class="nav-item ">
+                    <a href="#" class="nav-link">
+                        <i class="fa fa-book"></i>
+                        <p>
+                            Cable Bridge
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('cable-bridge.create')}}" class="nav-link ">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Form</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('cable-bridge.index')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Index</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+
+                @else
                 <li class="nav-item">
-                    <a href="/link-box" class="nav-link ">
+                    <a href="{{route('team.index')}}" class="nav-link ">
                         <i class="fa fa-map"></i>
-                        <p>Link Box Pelbagai Voltan</p>
+                        <p>Team</p>
                     </a>
                 </li>
+
                 <li class="nav-item">
-                    <a href="/cable-bridge" class="nav-link ">
-                        <i class="fa fa-map"></i>
-                        <p>Cable bridge</p>
+                    <a href="{{route('team-users.index')}}" class="nav-link ">
+                        <i class="fa fa-user"></i>
+                        <p>Users</p>
                     </a>
                 </li>
-
-
+                @endif
             </ul>
         </nav>
 
