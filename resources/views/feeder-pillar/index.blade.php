@@ -20,11 +20,11 @@
         <div class="container-  ">
             <div class="row mb-2" style="flex-wrap:nowrap">
                 <div class="col-sm-6">
-                    <h3>Substation</h3>
+                    <h3>Cable Bridge</h3>
                 </div>
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
-                        <li class="breadcrumb-item"><a href="{{route('substation.index')}}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('feeder-pillar.index')}}">Home</a></li>
                         <li class="breadcrumb-item active">index</li>
                     </ol>
                 </div>
@@ -46,7 +46,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="card-title">
-                                Substation
+                                Feeder-Pillar
                             </div>
 
                         </div>
@@ -92,14 +92,14 @@
                                                     </button>
                                                     <div class="dropdown-menu" role="menu">
 
-                                                        <form action="{{ route('substation.show', $data->id) }}"
+                                                        <form action="{{ route('feeder-pillar.show', $data->id) }}"
                                                             method="get">
                                                             <button type="submit"
                                                                 class="dropdown-item pl-3 w-100 text-left">Detail</button>
                                                         </form>
 
                                                         <form
-                                                            action="{{ route('substation.edit', $data->id) }}"
+                                                            action="{{ route('feeder-pillar.edit', $data->id) }}"
                                                             method="get">
                                                             <button type="submit"
                                                                 class="dropdown-item pl-3 w-100 text-left">Edit</button>
@@ -180,7 +180,7 @@
                 var button = $(event.relatedTarget);
                 var id = button.data('id');
                 var modal = $(this);
-                $('#remove-foam').attr('action', '/substation/' + id)
+                $('#remove-foam').attr('action', '/feeder-pillar/' + id)
             });
 
         });

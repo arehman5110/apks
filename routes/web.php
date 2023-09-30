@@ -17,6 +17,8 @@ use App\Http\Controllers\web\TiangContoller;
 use App\Http\Controllers\web\tnbes\StatusController;
 use App\Http\Controllers\web\ThirdPartyDiggingController;
 use App\Http\Controllers\web\SubstationController;
+use App\Http\Controllers\web\FPController;
+
 
 
 /*
@@ -96,6 +98,10 @@ Route::resource('third-party-digging',ThirdPartyDiggingController::class);
 
 ////substation routes
 Route::resource('substation',SubstationController::class);
+
+////feeder-piller routes
+Route::resource('feeder-pillar',FPController::class);
+
 
 //// Admin side
 Route::prefix('admin')->group(function () {

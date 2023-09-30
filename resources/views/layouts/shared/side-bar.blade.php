@@ -93,7 +93,24 @@
                     <a href="/feeder-pillar" class="nav-link ">
                         <i class="fa fa-map"></i>
                         <p>Feeder Pillar</p>
+                        <i class="right fas fa-angle-left"></i>
                     </a>
+
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('feeder-pillar.index') }}" class="nav-link ">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Index</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('feeder-pillar.create') }}" class="nav-link ">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Create</p>
+                            </a>
+                        </li>
+                    </ul>
+
                 </li>
 
                 <li class="nav-item ">
