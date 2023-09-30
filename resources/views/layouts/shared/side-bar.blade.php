@@ -76,17 +76,18 @@
                     <ul class="nav nav-treeview">
 
                         <li class="nav-item">
-                            <a href="{{ route('substation.index') }}" class="nav-link ">
+                            <a href="{{ route('substation.create') }}" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Index</p>
+                                <p>create</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('substation.create') }}" class="nav-link ">
+                            <a href="{{ route('substation.index') }}" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Create</p>
+                                <p>index</p>
                             </a>
                         </li>
+                       
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -108,13 +109,13 @@
                         <li class="nav-item">
                             <a href="{{route('tiang-talian-vt-and-vr.create')}}" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Form</p>
+                                <p>create</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{route('tiang-talian-vt-and-vr.index')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Index</p>
+                                <p>index</p>
                             </a>
                         </li>
                     </ul>
@@ -132,13 +133,13 @@
                         <li class="nav-item">
                             <a href="{{route('link-box-pelbagai-voltan.create')}}" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Form</p>
+                                <p>form</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{route('link-box-pelbagai-voltan.index')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Index</p>
+                                <p>index</p>
                             </a>
                         </li>
                     </ul>
@@ -156,16 +157,24 @@
                         <li class="nav-item">
                             <a href="{{route('cable-bridge.create')}}" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Form</p>
+                                <p>create</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{route('cable-bridge.index')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Index</p>
+                                <p>index</p>
                             </a>
                         </li>
                     </ul>
+                </li>
+
+
+                <li class="nav-item">
+                    <a href="/map-2" class="nav-link ">
+                        <i class="fa fa-map"></i>
+                        <p>Map</p>
+                    </a>
                 </li>
 
 

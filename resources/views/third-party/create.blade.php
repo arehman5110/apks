@@ -112,12 +112,12 @@
 
                             <div class="row">
                                 <div class="col-md-4"><label for="patrolling_time">Patrolling Time</label></div>
-                                <div class="col-md-4"><input type="date" name="patrolling_time" id="patrolling_time"
+                                <div class="col-md-4"><input type="time" name="patrolling_time" id="patrolling_time"
                                         class="form-control" required></div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="road_id">Road Id</label></div>
-                                <div class="col-md-4"><input type="text" name="road_id" id="road_id"
+                                <div class="col-md-4"><input type="number" name="road_id" id="road_id"
                                         class="form-control"></div>
                             </div>
                             <div class="row">
@@ -247,7 +247,7 @@
                                 <div class="col-md-4"><label for="survey_status">Survey Status</label></div>
                                 <div class="col-md-4">
                                     <select name="survey_status" id="survey_status" class="form-control" required>
-                                        <option value="">select ba</option>
+                                        <option value="">select status</option>
                                         <option value="Inprogress">Inprogress</option>
                                         <option value="Complete">Complete</option>
                                     </select>

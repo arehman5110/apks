@@ -7,6 +7,7 @@ use App\Models\CableBridge;
 use App\Models\Team;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
 
 class CableBridgeController extends Controller
 {
@@ -19,7 +20,7 @@ class CableBridgeController extends Controller
     {
         //
         $data = CableBridge::all();
-        return view('cable-bridge.index',['datas'=>$data]);
+        return view('cable-bridge.index', ['datas' => $data]);
     }
 
     /**
@@ -31,9 +32,9 @@ class CableBridgeController extends Controller
     {
         //
 
-         $team_id = auth()->user()->id_team;
+        $team_id = auth()->user()->id_team;
         $team = Team::find($team_id)->team_name;
-        return view('cable-bridge.create',['team'=>$team]);
+        return view('cable-bridge.create', ['team' => $team]);
     }
 
     /**
@@ -45,13 +46,15 @@ class CableBridgeController extends Controller
     public function store(Request $request)
     {
         try {
+            $currentDate = Carbon::now()->toDateString();
+            $combinedDateTime = $currentDate . ' ' . $request->patrol_time;
 
             $data = new CableBridge();
             $data->zone = $request->zone;
             $data->ba = $request->ba;
             $data->team = $request->team;
             $data->visit_date = $request->visit_date;
-            $data->patrol_time = $request->patrol_time;
+            $data->patrol_time = $combinedDateTime;
             $data->feeder_involved = $request->feeder_involved;
             $data->area = $request->area;
             $data->start_date = $request->start_date;
@@ -78,7 +81,7 @@ class CableBridgeController extends Controller
                 }
             }
 
-            $data->geom = DB::raw("ST_GeomFromText('POINT(".$request->log." ".$request->lat.")',4326)");
+            $data->geom = DB::raw("ST_GeomFromText('POINT(" . $request->log . ' ' . $request->lat . ")',4326)");
 
             $data->save();
 
@@ -103,7 +106,7 @@ class CableBridgeController extends Controller
     {
         //
         $data = CableBridge::find($id);
-        return view('cable-bridge.show',['data'=>$data]);
+        return view('cable-bridge.show', ['data' => $data]);
     }
 
     /**
@@ -116,7 +119,7 @@ class CableBridgeController extends Controller
     {
         //
         $data = CableBridge::find($id);
-        return view('cable-bridge.edit',['data'=>$data]);
+        return view('cable-bridge.edit', ['data' => $data]);
     }
 
     /**
@@ -131,13 +134,15 @@ class CableBridgeController extends Controller
         //
 
         try {
+            $currentDate = Carbon::now()->toDateString();
+            $combinedDateTime = $currentDate . ' ' . $request->patrol_time;
 
             $data = CableBridge::find($id);
             $data->zone = $request->zone;
             $data->ba = $request->ba;
             $data->team = $request->team;
             $data->visit_date = $request->visit_date;
-            $data->patrol_time = $request->patrol_time;
+            $data->patrol_time = $combinedDateTime;
             $data->feeder_involved = $request->feeder_involved;
             $data->area = $request->area;
             $data->start_date = $request->start_date;
@@ -163,7 +168,6 @@ class CableBridgeController extends Controller
                     $data->{$key} = $destinationPath . $filename;
                 }
             }
-
 
             $data->save();
 

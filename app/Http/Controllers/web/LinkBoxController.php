@@ -7,6 +7,7 @@ use App\Models\LinkBox;
 use App\Models\Team;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
 
 class LinkBoxController extends Controller
 {
@@ -19,7 +20,7 @@ class LinkBoxController extends Controller
     {
         //
         $data = LinkBox::all();
-        return view('link-box.index',['datas'=>$data]);
+        return view('link-box.index', ['datas' => $data]);
     }
 
     /**
@@ -31,8 +32,7 @@ class LinkBoxController extends Controller
     {
         $team_id = auth()->user()->id_team;
         $team = Team::find($team_id)->team_name;
-        return view('link-box.create',['team'=>$team]);
-
+        return view('link-box.create', ['team' => $team]);
     }
 
     /**
@@ -43,7 +43,8 @@ class LinkBoxController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $currentDate = Carbon::now()->toDateString();
+        $combinedDateTime = $currentDate . ' ' . $request->patrol_time;
 
         try {
             $data = new LinkBox();
@@ -51,7 +52,7 @@ class LinkBoxController extends Controller
             $data->ba = $request->ba;
             $data->team = $request->team;
             $data->visit_date = $request->visit_date;
-            $data->patrol_time = $request->patrol_time;
+            $data->patrol_time = $combinedDateTime;
             $data->feeder_involved = $request->feeder_involved;
             $data->area = $request->area;
             $data->start_date = $request->start_date;
@@ -77,7 +78,7 @@ class LinkBoxController extends Controller
                 }
             }
 
-            $data->geom = DB::raw("ST_GeomFromText('POINT(".$request->log." ".$request->lat.")',4326)");
+            $data->geom = DB::raw("ST_GeomFromText('POINT(" . $request->log . ' ' . $request->lat . ")',4326)");
 
             $data->save();
 
@@ -102,7 +103,7 @@ class LinkBoxController extends Controller
     {
         //
         $data = LinkBox::find($id);
-        return view('link-box.show',['data'=>$data]);
+        return view('link-box.show', ['data' => $data]);
     }
 
     /**
@@ -114,8 +115,8 @@ class LinkBoxController extends Controller
     public function edit($id)
     {
         //
-         $data = LinkBox::find($id);
-        return view('link-box.edit',['data'=>$data]);
+        $data = LinkBox::find($id);
+        return view('link-box.edit', ['data' => $data]);
     }
 
     /**
@@ -129,13 +130,15 @@ class LinkBoxController extends Controller
     {
         //
 
+        $currentDate = Carbon::now()->toDateString();
+        $combinedDateTime = $currentDate . ' ' . $request->patrol_time;
         try {
             $data = LinkBox::find($id);
             $data->zone = $request->zone;
             $data->ba = $request->ba;
             $data->team = $request->team;
             $data->visit_date = $request->visit_date;
-            $data->patrol_time = $request->patrol_time;
+            $data->patrol_time = $combinedDateTime;
             $data->feeder_involved = $request->feeder_involved;
             $data->area = $request->area;
             $data->start_date = $request->start_date;
@@ -160,7 +163,6 @@ class LinkBoxController extends Controller
                     $data->{$key} = $destinationPath . $filename;
                 }
             }
-
 
             $data->save();
 

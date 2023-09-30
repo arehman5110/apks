@@ -93,6 +93,8 @@ Route::get('generate-cable-bridge-excel',[CableBridgeExcelController::class,'gen
 
 ////third party digging routes
 Route::resource('third-party-digging',ThirdPartyDiggingController::class);
+Route::get('generate-third-party-digging-excel',[CableBridgeExcelController::class,'generateCableBridgeExcel'])->name('generate-third-party-digging-excel');
+
 
 ////substation routes
 Route::resource('substation',SubstationController::class);
@@ -102,6 +104,9 @@ Route::prefix('admin')->group(function () {
     Route::resource('/team',TeamController::class);
     Route::resource('team-users',TeamUsersController::class);
 });
+
+
+Route::view('/map-2','map');
 
 
 

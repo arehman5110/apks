@@ -116,7 +116,7 @@
                                 <div class="col-md-4"><label for="feeder_involved">Feeder Involved</label></div>
                                 <div class="col-md-4">
                                     <input type="text" name="feeder_involved" id="feeder_involved" class="form-control"
-                                        value="{{ $data->feeder_involved }}" required>
+                                        value="{{ date('H:i:s', strtotime($data->patrol_time)) }}" required>
                                 </div>
                             </div>
 
