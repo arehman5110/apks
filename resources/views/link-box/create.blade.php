@@ -102,7 +102,7 @@
                                 <div class="col-md-4"><label for="patrol_time">Patrol Time</label></div>
                                 <div class="col-md-4">
                                     <input type="time" name="patrol_time" id="patrol_time"
-                                        class="form-control" required>
+                                        class="form-control"  required>
                                     </div>
                             </div>
 

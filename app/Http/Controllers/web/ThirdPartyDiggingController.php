@@ -8,6 +8,7 @@ use App\Models\Team;
 use App\Models\WorkPackage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
 
 class ThirdPartyDiggingController extends Controller
 {
@@ -46,13 +47,16 @@ class ThirdPartyDiggingController extends Controller
     public function store(Request $request)
     {
         try {
+            $currentDate = Carbon::now()->toDateString();
+            $combinedDateTime = $currentDate . ' ' . $request->patrolling_time;
+
             $data = new ThirdPartyDiging();
             $data->wp_name = $request->wp_name;
             $data->zone = $request->zone;
             $data->ba = $request->ba;
             $data->team_name = $request->team_name;
             $data->survey_date = $request->survey_date;
-            $data->patrolling_time = $request->patrolling_time;
+            $data->patrolling_time = $combinedDateTime;
             $data->project_name = $request->project_name;
             $data->road_id = $request->road_id;
 
@@ -143,12 +147,16 @@ class ThirdPartyDiggingController extends Controller
     public function update(Request $request, $id)
     {
         try {
+
+            $currentDate = Carbon::now()->toDateString();
+            $combinedDateTime = $currentDate . ' ' . $request->patrolling_time;
+            
             $data = ThirdPartyDiging::find($id);
             $data->wp_name = $request->wp_name;
             $data->zone = $request->zone;
             $data->ba = $request->ba;
             $data->survey_date = $request->survey_date;
-            $data->patrolling_time = $request->patrolling_time;
+            $data->patrolling_time = $combinedDateTime;
             $data->project_name = $request->project_name;
             $data->feeder_involved = $request->feeder_involved;
             $data->km_plan = $request->km_plan;

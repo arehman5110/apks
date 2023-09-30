@@ -55,6 +55,7 @@ class TiangContoller extends Controller
 
             // $this->tiangRepository->store($request->all());
 
+            
             $data = new Tiang();
             $data->ba = $request->ba;
             $data->name_contractor = $request->name_contractor;

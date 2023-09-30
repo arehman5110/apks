@@ -33,7 +33,9 @@
             margin-left: 0;
             width: 0rem !important;
         } */
-
+        .leaflet-control-attribution.leaflet-control {
+    display: none;
+}
         .card-header {
             font-weight: 700;
         }

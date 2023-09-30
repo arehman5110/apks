@@ -131,7 +131,7 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="patrolling_time">Patrolling Time</label></div>
                                 <div class="col-md-4">
-                                    <input type="date" name="patrolling_time" id="patrolling_time" value="{{ date('Y-m-d', strtotime($data->patrolling_time)) }}"
+                                    <input type="time" name="patrolling_time" id="patrolling_time" value="{{ date('H:i:s', strtotime($data->patrolling_time)) }}"
                                     class="form-control" required>
                                 </div>
                             </div>
@@ -139,7 +139,7 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="road_id">Road Id</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="road_id" id="road_id" value="{{ $data->road_id }}" class="form-control">
+                                    <input type="number" name="road_id" id="road_id" value="{{ $data->road_id }}" class="form-control">
                                 </div>
                             </div>
 
@@ -387,7 +387,7 @@
                                             @if (file_exists(public_path($data->during_image3)) && $data->during_image3 != '')
                                                 <a href="{{ URL::asset($data->during_image3) }}" data-lightbox="roadtrip">
                                                     <img src="{{ URL::asset($data->during_image3) }}" alt=""
-                                                        height="70" class="adjust-heigh ml-5  "></a>
+                                                        height="70" class="adjust-height ml-5  "></a>
                                             @endif
                                         </div>
                             </div>
