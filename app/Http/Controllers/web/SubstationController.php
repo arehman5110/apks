@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Substation;
 use App\Models\Team;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
 
 class SubstationController extends Controller
 {
@@ -43,12 +44,14 @@ class SubstationController extends Controller
     public function store(Request $request)
     {
         try {
+            $currentDate = Carbon::now()->toDateString();
+            $combinedDateTime = $currentDate . ' ' . $request->patrol_time;
             $data = new Substation();
             $data->zone = $request->zone;
             $data->ba = $request->ba;
             $data->team = $request->team;
             $data->visit_date = $request->visit_date;
-            $data->patrol_time = $request->patrol_time;
+            $data->patrol_time =$combinedDateTime;
             $data->fl = $request->fl;
             $data->voltage = $request->voltage;
             $data->name = $request->name;
@@ -121,12 +124,15 @@ class SubstationController extends Controller
     public function update(Request $request, $id)
     {
         try {
+            $currentDate = Carbon::now()->toDateString();
+            $combinedDateTime = $currentDate . ' ' . $request->patrol_time;
+
             $data = Substation::find($id);
             $data->zone = $request->zone;
             $data->ba = $request->ba;
             $data->team = $request->team;
             $data->visit_date = $request->visit_date;
-            $data->patrol_time = $request->patrol_time;
+            $data->patrol_time =$combinedDateTime;
             $data->fl = $request->fl;
             $data->voltage = $request->voltage;
             $data->name = $request->name;

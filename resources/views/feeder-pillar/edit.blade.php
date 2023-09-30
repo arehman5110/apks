@@ -62,7 +62,7 @@
                     <div class=" ">
                         <h3 class="text-center p-2"></h3>
 
-                        <form action="{{ route('substation.update', $data->id) }} " id="myForm" method="POST"
+                        <form action="{{ route('feeder-pillar.update', $data->id) }} " id="myForm" method="POST"
                             enctype="multipart/form-data">
                             @method('PATCH')
                             @csrf

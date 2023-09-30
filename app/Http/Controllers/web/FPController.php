@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\FeederPillar;
 use App\Models\Team;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
 
 class FPController extends Controller
 {
@@ -41,7 +42,8 @@ class FPController extends Controller
      */
     public function store(Request $request)
     {
-    
+        $currentDate = Carbon::now()->toDateString();
+        $combinedDateTime = $currentDate . ' ' . $request->patrol_time;
 
             try {
 
@@ -50,7 +52,7 @@ class FPController extends Controller
                 $data->ba = $request->ba;
                 $data->team = $request->team;
                 $data->visit_date = $request->visit_date;
-                $data->patrol_time = $request->patrol_time;
+                $data->patrol_time = $combinedDateTime;
                 $data->feeder_involved = $request->feeder_involved;
                 $data->area = $request->area;
                 $data->size = $request->size;
@@ -131,13 +133,15 @@ class FPController extends Controller
     {
         try {
 
-           
+            $currentDate = Carbon::now()->toDateString();
+            $combinedDateTime = $currentDate . ' ' . $request->patrol_time;
+
             $data = FeederPillar::find($id);
             $data->zone = $request->zone;
             $data->ba = $request->ba;
             $data->team = $request->team;
             $data->visit_date = $request->visit_date;
-            $data->patrol_time = $request->patrol_time;
+            $data->patrol_time =  $combinedDateTime;
             $data->feeder_involved = $request->feeder_involved;
             $data->area = $request->area;
             $data->size = $request->size;
@@ -165,7 +169,7 @@ class FPController extends Controller
                 }
             }
 
-            $data->geom = DB::raw("ST_GeomFromText('POINT(".$request->log." ".$request->lat.")',4326)");
+          //  $data->geom = DB::raw("ST_GeomFromText('POINT(".$request->log." ".$request->lat.")',4326)");
 
             $data->update();
 
