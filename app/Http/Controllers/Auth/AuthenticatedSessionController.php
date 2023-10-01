@@ -31,7 +31,7 @@ class AuthenticatedSessionController extends Controller
         if (Auth::user()->is_admin == '1') {
             return redirect()->route('team.index');
         } else {
-            return redirect('/map-1');
+            return redirect('/dashboard');
         }
     }
 
