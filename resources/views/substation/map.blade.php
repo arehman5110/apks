@@ -1,10 +1,8 @@
 @extends('layouts.app', ['page_title' => 'Index'])
 
 @section('css')
-
-@include('partials.map-css')
-<style>#map{height: 600px;}</style>
-
+    @include('partials.map-css')
+    <style>#map{height: 600px;}</style>
 @endsection
 
 
@@ -26,7 +24,7 @@
         <div class="container-  ">
             <div class="row  " style="flex-wrap:nowrap">
                 <div class="col-sm-6">
-                    <h3>Tiang + Talian VT & VR</h3>
+                    <h3>Substation</h3>
                 </div>
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
@@ -40,123 +38,117 @@
     <div class="container-fluid bg-white pt-2">
 
 
-    <div class=" p-1 col-12 m-2">
-        <div class="card p-0 mb-3">
-            <div class="card-body row">
 
-                <div class="col-md-3">
-                    <label for="search_zone">Zone</label>
-                    <select name="search_zone" id="search_zone" class="form-control">
+        <div class=" p-1 col-12 m-2">
+            <div class="card p-0 mb-3">
+                <div class="card-body row">
 
-                        <option value="" hidden>select zone</option>
-                        <option value="W1">W1</option>
-                        <option value="B1">B1</option>
-                        <option value="B2">B2</option>
-                        <option value="B4">B4</option>
+                    <div class="col-md-3">
+                        <label for="search_zone">Zone</label>
+                        <select name="search_zone" id="search_zone" class="form-control">
 
-                    </select>
+                            <option value="" hidden>select zone</option>
+                            <option value="W1">W1</option>
+                            <option value="B1">B1</option>
+                            <option value="B2">B2</option>
+                            <option value="B4">B4</option>
+
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="search_ba">Ba</label>
+                        <select name="search_ba" id="search_ba" class="form-control" onchange="getWorkPackage(this)">
+                            <option value="">Select zone</option>
+                        </select>
+                    </div>
+
+
+
+
+
                 </div>
-                <div class="col-md-3">
-                    <label for="search_ba">Ba</label>
-                    <select name="search_ba" id="search_ba" class="form-control" onchange="getWorkPackage(this)">
-                        <option value="">Select zone</option>
-                    </select>
-                </div>
-
-
-
-
-
             </div>
         </div>
-    </div>
 
 
 
 
-    <!--  START MAP CARD DIV -->
-    <div class="row m-2">
+        <!--  START MAP CARD DIV -->
+        <div class="row m-2">
 
-        <!-- START MAP SIDEBAR DIV -->
-        <div class="col-2 p-0">
-            <div class="card p-0 m-0"
-                style="border: 1px solid rgb(177, 175, 175) !important; border-radius: 0px !important">
-                <div class="card-header"><strong> NAVIGATION</strong></div>
-                <div class="card-body">
-                    <!-- MAP SIDEBAR LAYERS SELECTOR -->
-                    <div class="side-bar" style="height: 569px !important; overflow-y: scroll;">
-                        <div class="col-md-12 mb-2" class="form-group">
-                            <label>Select Info Layer :</label>
-                            <select class="form-select" id="tableLayer" onchange="activeSelectedLayerOther(this.value)">
-                                <option value="" hidden>Select Layer</option>
-                                <option value="lv_fuse">lv_fuse</option>
-                                <option value="lv_ug_conductor">lv_ug_conductor</option>
-                                <option value="lvdb_fp">lvdb_fp</option>
-                                <option value="street_light">street_light</option>
-                                <option value="pole">pole</option>
-                                <option value="wp">wp</option>
-                                <option value="notice">notice</option>
-                                <option value="supervise">supervise</option>
+            <!-- START MAP SIDEBAR DIV -->
+            <div class="col-2 p-0">
+                <div class="card p-0 m-0"
+                    style="border: 1px solid rgb(177, 175, 175) !important; border-radius: 0px !important">
+                    <div class="card-header"><strong> NAVIGATION</strong></div>
+                    <div class="card-body">
+                        <!-- MAP SIDEBAR LAYERS SELECTOR -->
+                        <div class="side-bar" style="height: 569px !important; overflow-y: scroll;">
+                            <div class="col-md-12 mb-2" class="form-group">
+                                <label>Select Info Layer :</label>
+                                <select class="form-select" id="tableLayer" onchange="activeSelectedLayerOther(this.value)">
+                                    <option value="" hidden>Select Layer</option>
+                                    <option value="lv_fuse">lv_fuse</option>
+                                    <option value="lv_ug_conductor">lv_ug_conductor</option>
+                                    <option value="lvdb_fp">lvdb_fp</option>
+                                    <option value="street_light">street_light</option>
+                                    <option value="pole">pole</option>
+                                    <option value="wp">wp</option>
+                                    <option value="notice">notice</option>
+                                    <option value="supervise">supervise</option>
 
-                            </select>
+                                </select>
+                            </div>
+
+                            <details class="mb-3" open>
+                                <summary><strong>Substation</strong> </summary>
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td>Pemeriksaan visual dan pelaporan</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Pembersihan iklan haram/banner </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Report</td>
+                                    </tr>
+                                </table>
+
+                            </details>
+
+
+                            <!-- END MAP SIDEBAR DETAILS -->
                         </div>
-
-
-                        <details class="mb-3" open>
-                            <summary><strong> Tiang + Talian VT & VR</strong> </summary>
-                            <table class="table table-bordered">
-                                <tr>
-                                    <td>Pendaftaran aset, pemeriksaan visual</td>
-                                </tr>
-                                <tr>
-                                    <td>Pembersihan iklan haram/banner</td>
-                                </tr>
-                                <tr>
-                                    <td>Pembersihan creepers</td>
-                                </tr>
-                                <tr>
-                                    <td>Pemeriksaan kebocoran arus pada tiang</td>
-                                </tr>
-                                <tr>
-                                    <td>Report</td>
-                                </tr>
-                            </table>
-
-                        </details>
-
-
-                        <!-- END MAP SIDEBAR DETAILS -->
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- END MAP SIDEBAR DIV -->
+            <!-- END MAP SIDEBAR DIV -->
 
-        <!-- START MAP  DIV -->
-        <div class="col-10 p-0 ">
-            <div class="card p-0 m-0"
-                style="border: 1px solid rgb(177, 175, 175) !important; border-radius: 0px !important;">
-                <div class="card-header text-center"><strong> MAP</strong></div>
-                <div class="card-body p-0">
-                    <div id="map">
+            <!-- START MAP  DIV -->
+            <div class="col-10 p-0 ">
+                <div class="card p-0 m-0"
+                    style="border: 1px solid rgb(177, 175, 175) !important; border-radius: 0px !important;">
+                    <div class="card-header text-center"><strong> MAP</strong></div>
+                    <div class="card-body p-0">
+                        <div id="map">
 
+                        </div>
                     </div>
                 </div>
+
+            </div>
+            <!-- END MAP  DIV -->
+            <div id="wg" class="windowGroup">
+
             </div>
 
-        </div>
-        <!-- END MAP  DIV -->
-        <div id="wg" class="windowGroup">
+            <div id="wg1" class="windowGroup">
 
-        </div>
+            </div>
 
-        <div id="wg1" class="windowGroup">
-
-        </div>
-
-    </div><!--  END MAP CARD DIV -->
-
+        </div><!--  END MAP CARD DIV -->
     </div>
+
     <div class="modal fade" id="geomModal" tabindex="-1" aria-labelledby="geomModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -271,5 +263,5 @@
 @endsection
 
 @section('script')
-   @include('partials.map-js')
+    @include('partials.map-js')
 @endsection

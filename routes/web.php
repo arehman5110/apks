@@ -68,30 +68,30 @@ Route::get('/remove-work-package/{id}',[WPController::class,'removeWP']);
 
 Route::get('/generate-third-party-pdf/{id}',[GeneratePDFController::class,'generatePDF']);
 
-Route::view('/pencawang','pencawang.create');
-Route::view('/tiang','Tiang.map');
-Route::view('/feeder-pillar','feeder-pillar.create');
-Route::view('/link-box','link-box.create');
-Route::view('/cable-bridge','cable-bridge.create');
 
-Route::view('/savr-bridge','savr.create');
+
+
+
+
+
 
 /// tiang
 
 Route::resource('tiang-talian-vt-and-vr',TiangContoller::class);
 Route::get('tiang-test',[TiangExcelController::class,'generateDigingExcel']);
-
+Route::view('/tiang-talian-vt-and-vr-tiang','Tiang.map');
 
 
 //// Link Box
 Route::resource('link-box-pelbagai-voltan',LinkBoxController::class);
 Route::get('generate-link-box-excel',[CableBridgeExcelController::class,'generateCableBridgeExcel'])->name('generate-link-box-excel');
+Route::view('/link-box-pelbagai-voltan-map','link-box.map');
 
 //// Cable Bridge
 
 Route::resource('cable-bridge',CableBridgeController::class);
 Route::get('generate-cable-bridge-excel',[CableBridgeExcelController::class,'generateCableBridgeExcel'])->name('generate-cable-bridge-excel');
-
+Route::view('/cable-bridge-map','cable-bridge.map');
 
 ////third party digging routes
 Route::resource('third-party-digging',ThirdPartyDiggingController::class);
@@ -100,10 +100,11 @@ Route::get('generate-third-party-digging-excel',[CableBridgeExcelController::cla
 
 ////substation routes
 Route::resource('substation',SubstationController::class);
+Route::view('/substation-map','substation.map');
 
 ////feeder-piller routes
 Route::resource('feeder-pillar',FPController::class);
-
+Route::view('/feeder-pillar-map','feeder-pillar.map');
 
 //// Admin side
 Route::prefix('admin')->group(function () {

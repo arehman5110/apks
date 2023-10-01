@@ -2,6 +2,7 @@
 
 @section('css')
     @include('partials.map-css')
+    <style>#map{height: 600px;}</style>
 @endsection
 
 
@@ -23,7 +24,7 @@
         <div class="container-  ">
             <div class="row  " style="flex-wrap:nowrap">
                 <div class="col-sm-6">
-                    <h3>Pencawang</h3>
+                    <h3>Cable Bridge</h3>
                 </div>
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
@@ -35,9 +36,7 @@
         </div>
     </section>
     <div class="container-fluid bg-white pt-2">
-        <h5 class="m-1">PEMERIKSAAN KEJANGGALAN PEPASANGAN TNB &
-            SENGGARAAN BUKAN ELEKTRIK TALIAN ATAS DI SELANGOR UNTUK DISTRIBUTION NETWORK
-            DIVISION, TNB</h5>
+
 
 
         <div class=" p-1 col-12 m-2">
@@ -64,13 +63,6 @@
                     </div>
 
 
-
-                    <div class="col-md-3">
-                        <label for="search_wp">Work Package</label>
-                        <select name="search_wp" id="search_wp" class="form-control"></select>
-                    </div>
-                    <div class="col-md-2 p-2 text-center pt-4" id="for-excel">
-                    </div>
 
 
 
@@ -109,13 +101,13 @@
                             </div>
 
                             <details class="mb-3" open>
-                                <summary><strong>Pencawang</strong> </summary>
+                                <summary><strong>Cable Bridge</strong> </summary>
                                 <table class="table table-bordered">
                                     <tr>
-                                        <td>Pemeriksaan visual dan pelaporan</td>
+                                        <td>Pemeriksaan visual</td>
                                     </tr>
                                     <tr>
-                                        <td>Pembersihan iklan haram/banner </td>
+                                        <td>Pembersihan semak samun / creepers/sampah/ rumput </td>
                                     </tr>
                                     <tr>
                                         <td>Report</td>

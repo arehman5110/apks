@@ -76,7 +76,7 @@
                 <li class="nav-item">
                     <a href="/pencawang" class="nav-link ">
                         <i class="fas fa-building"></i>
-                        <p>Pencawang</p>
+                        <p>Substation</p>
                         <i class="right fas fa-angle-left"></i>
                     </a>
                     <ul class="nav nav-treeview">
@@ -91,6 +91,13 @@
                             <a href="{{ route('substation.index') }}" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>index</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="/substation-map" class="nav-link ">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>map</p>
                             </a>
                         </li>
 
@@ -115,6 +122,12 @@
                             <a href="{{ route('feeder-pillar.index') }}" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>index</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/feeder-pillar-map" class="nav-link ">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>map</p>
                             </a>
                         </li>
                     </ul>
@@ -142,6 +155,12 @@
                                 <p>index</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="/tiang-talian-vt-and-vr-map" class="nav-link ">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>map</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
 
@@ -164,6 +183,13 @@
                             <a href="{{route('link-box-pelbagai-voltan.index')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>index</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="/link-box-pelbagai-voltan-map" class="nav-link ">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>map</p>
                             </a>
                         </li>
                     </ul>
@@ -190,16 +216,23 @@
                                 <p>index</p>
                             </a>
                         </li>
+
+                        <li class="nav-item">
+                            <a href="/cable-bridge-map" class="nav-link ">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>map</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
 
-
+{{--
                 <li class="nav-item">
                     <a href="/map-2" class="nav-link ">
                         <i class="fa fa-map"></i>
                         <p>Map</p>
                     </a>
-                </li>
+                </li> --}}
 
 
                 @else

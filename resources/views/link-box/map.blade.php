@@ -3,13 +3,10 @@
 @section('css')
 
 @include('partials.map-css')
+
 <style>#map{height: 600px;}</style>
 
 @endsection
-
-
-
-
 @section('content')
     @if (Session::has('failed'))
         <div class="alert {{ Session::get('alert-class', 'alert-secondary') }}" role="alert">
@@ -22,11 +19,12 @@
         </div>
     @endif
 
+
     <section class="content-header">
         <div class="container-  ">
             <div class="row  " style="flex-wrap:nowrap">
                 <div class="col-sm-6">
-                    <h3>Tiang + Talian VT & VR</h3>
+                    <h3>Link box</h3>
                 </div>
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
@@ -38,6 +36,7 @@
         </div>
     </section>
     <div class="container-fluid bg-white pt-2">
+
 
 
     <div class=" p-1 col-12 m-2">
@@ -62,7 +61,6 @@
                         <option value="">Select zone</option>
                     </select>
                 </div>
-
 
 
 
@@ -101,28 +99,30 @@
                             </select>
                         </div>
 
+                        <!-- START MAP SIDEBAR DETAILS -->
+
+
+
 
                         <details class="mb-3" open>
-                            <summary><strong> Tiang + Talian VT & VR</strong> </summary>
+                            <summary><strong>Link Box</strong> </summary>
                             <table class="table table-bordered">
                                 <tr>
-                                    <td>Pendaftaran aset, pemeriksaan visual</td>
+                                    <td>Pemeriksaan visual</td>
                                 </tr>
                                 <tr>
                                     <td>Pembersihan iklan haram/banner</td>
                                 </tr>
-                                <tr>
-                                    <td>Pembersihan creepers</td>
-                                </tr>
-                                <tr>
-                                    <td>Pemeriksaan kebocoran arus pada tiang</td>
-                                </tr>
+                                <tr><td>
+                                    Pembersihan semak samun / creepers/sampah/ rumput</td></tr>
                                 <tr>
                                     <td>Report</td>
                                 </tr>
                             </table>
 
                         </details>
+
+
 
 
                         <!-- END MAP SIDEBAR DETAILS -->
@@ -155,8 +155,8 @@
         </div>
 
     </div><!--  END MAP CARD DIV -->
-
     </div>
+
     <div class="modal fade" id="geomModal" tabindex="-1" aria-labelledby="geomModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
