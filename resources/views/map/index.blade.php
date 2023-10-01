@@ -26,16 +26,16 @@
 
     <style>
         /* .sidebar-mini.sidebar-collapse .content-wrapper,
-        .sidebar-mini.sidebar-collapse .main-footer,
-        .sidebar-mini.sidebar-collapse .main-header {
-            margin-left: 0rem !important;
-        }
+            .sidebar-mini.sidebar-collapse .main-footer,
+            .sidebar-mini.sidebar-collapse .main-header {
+                margin-left: 0rem !important;
+            }
 
-        .sidebar-mini.sidebar-collapse .main-sidebar,
-        .sidebar-mini.sidebar-collapse .main-sidebar::before {
-            margin-left: 0;
-            width: 0rem !important;
-        } */
+            .sidebar-mini.sidebar-collapse .main-sidebar,
+            .sidebar-mini.sidebar-collapse .main-sidebar::before {
+                margin-left: 0;
+                width: 0rem !important;
+            } */
 
         .card-header {
             font-weight: 700;
@@ -45,6 +45,48 @@
             height: 600px;
             z-index: 1;
         }
+
+        li {
+            list-style-type: none;
+            margin-bottom: 0.5rem;
+
+        }
+
+        ul {
+            padding-left: 0.5rem;
+        }
+
+        .side-bar::-webkit-scrollbar,
+        .lb-outerContainer {
+            display: none;
+        }
+
+        #panorama {
+            width: 400px;
+            height: 400px;
+        }
+
+        input {
+            min-width: 16px !important;
+        }
+
+        div#lightbox {
+            display: none;
+        }
+
+        .side-bar>.table td {
+            padding: 0.5rem !important
+        }
+
+        #map {
+            height: 600px;
+            z-index: 1;
+        }
+
+        .card-header {
+            font-weight: 700;
+        }
+
 
         li {
             list-style-type: none;
@@ -108,13 +150,13 @@
         </div>
     </section>
     <div class="container-fluid bg-white pt-2">
-  
 
 
 
-    <!--  START TOP TABS -->
 
-    {{-- <div class="row text-center m-2">
+        <!--  START TOP TABS -->
+
+        {{-- <div class="row text-center m-2">
 
         <!--  START TAB W1 -->
 
@@ -273,167 +315,167 @@
 
     </div> <!--  END TOP TABS  --> --}}
 
-    <div class=" p-1  col-12 m-2 ">
-        <div class="card p-0 mb-3">
-            <div class="card-body row">
+        <div class=" p-1  col-12 m-2 ">
+            <div class="card p-0 mb-3">
+                <div class="card-body row">
 
-                <div class="col-md-3">
-                    <label for="search_zone">Zone</label>
-                    <select name="search_zone" id="search_zone" class="form-control">
+                    <div class="col-md-3">
+                        <label for="search_zone">Zone</label>
+                        <select name="search_zone" id="search_zone" class="form-control">
 
-                        <option value="" hidden>select zone</option>
-                        <option value="W1">W1</option>
-                        <option value="B1">B1</option>
-                        <option value="B2">B2</option>
-                        <option value="B4">B4</option>
+                            <option value="" hidden>select zone</option>
+                            <option value="W1">W1</option>
+                            <option value="B1">B1</option>
+                            <option value="B2">B2</option>
+                            <option value="B4">B4</option>
 
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <label for="search_ba">BA</label>
-                    <select name="search_ba" id="search_ba" class="form-control" onchange="getWorkPackage(this)">
-                        <option value="">Select zone</option>
-                    </select>
-                </div>
-
-
-
-                <div class="col-md-3">
-                    <label for="search_wp">Work Package</label>
-                    <select name="search_wp" id="search_wp" class="form-control"></select>
-                </div>
-                <div class="col-md-2 p-2 text-center pt-4" id="for-excel">
-                </div>
-
-
-
-            </div>
-        </div>
-    </div>
-
-
-    <!-- MAP DASHBOARD -->
-
-
-    <div class=" p-1 col-12 m-2">
-        <div class="card p-0 mb-3">
-            <div class="card-body row">
-
-                <div class="col-md-4 text-center" style="cursor: pointer;">
-
-                    <div class=" mx-1   p-1 t" style="background-color:  #92C400 !important;color:white">
-                        <p style="font-weight: 600;">Total Km</p>
-                        <span id="total"></span>
-
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="search_ba">BA</label>
+                        <select name="search_ba" id="search_ba" class="form-control" onchange="getWorkPackage(this)">
+                            <option value="">Select zone</option>
+                        </select>
                     </div>
 
-                </div>
 
-                <div class="col-md-4 text-center" style="cursor: pointer;">
 
-                    <div class=" mx-1   p-1 t" style="background-color:  #92C400 !important;color:white">
-                        <p style="font-weight: 600;">Total Notice</p>
-                        <span id="total_notice"></span>
-
+                    <div class="col-md-3">
+                        <label for="search_wp">Work Package</label>
+                        <select name="search_wp" id="search_wp" class="form-control"></select>
+                    </div>
+                    <div class="col-md-2 p-2 text-center pt-4" id="for-excel">
                     </div>
 
-                </div>
-                <div class="col-md-4 text-center" style="cursor: pointer;">
 
-                    <div class=" mx-1   p-1 t" style="background-color:  #92C400 !important;color:white">
-                        <p style="font-weight: 600;">Total Supervision</p>
-                        <span id="total_supervise"></span>
-
-                    </div>
 
                 </div>
-
             </div>
         </div>
 
 
-    </div>
-    <!-- END MAP DASHBOARD -->
+        <!-- MAP DASHBOARD -->
 
 
+        <div class=" p-1 col-12 m-2">
+            <div class="card p-0 mb-3">
+                <div class="card-body row">
 
-    <!--  START MAP CARD DIV -->
-    <div class="row m-2">
+                    <div class="col-md-4 text-center" style="cursor: pointer;">
 
-        <!-- START MAP SIDEBAR DIV -->
-        <div class="col-2 p-0">
-            <div class="card p-0 m-0"
-                style="border: 1px solid rgb(177, 175, 175) !important; border-radius: 0px !important">
-                <div class="card-header"><strong> NAVIGATION</strong></div>
-                <div class="card-body">
-                    <!-- MAP SIDEBAR LAYERS SELECTOR -->
-                    <div class="side-bar" style="height: 569px !important; overflow-y: scroll;">
-                        <div class="col-md-12 mb-2" class="form-group">
-                            <label>Select Info Layer :</label>
-                            <select class="form-select" id="tableLayer" onchange="activeSelectedLayerOther(this.value)">
-                                <option value="" hidden>Select Layer</option>
-                                <option value="lv_fuse">lv_fuse</option>
-                                <option value="lv_ug_conductor">lv_ug_conductor</option>
-                                <option value="lvdb_fp">lvdb_fp</option>
-                                <option value="street_light">street_light</option>
-                                <option value="pole">pole</option>
-                                <option value="wp">wp</option>
-                                <option value="notice">notice</option>
-                                <option value="supervise">supervise</option>
+                        <div class=" mx-1   p-1 t" style="background-color:  #92C400 !important;color:white">
+                            <p style="font-weight: 600;">Total Km</p>
+                            <span id="total"></span>
 
-                            </select>
                         </div>
 
-                        <!-- START MAP SIDEBAR DETAILS -->
-                        <details class="mb-3" open>
-                            <summary><strong>Patrolling 3rd Party Digging Activities</strong> </summary>
-                            <table class="table table-bordered" style="cursor: pointer">
-                                <tr>
-                                    <td onclick="addNotice(this)">Mengeluarkan notis</td>
-                                </tr>
-                                <tr>
-                                    <td onclick="addSupervise(this)">Menyelia kerja-kerja korekan</td>
-                                </tr>
-                                <tr>
-                                    <td onclick="addpanolayer(this)">Pemeriksaan di Jalan</td>
-                                </tr>
-                            </table>
-                          
-                        </details>
-
-                                          
-
-
-                        <!-- END MAP SIDEBAR DETAILS -->
                     </div>
-                </div>
-            </div>
-        </div>
-        <!-- END MAP SIDEBAR DIV -->
 
-        <!-- START MAP  DIV -->
-        <div class="col-10 p-0 ">
-            <div class="card p-0 m-0"
-                style="border: 1px solid rgb(177, 175, 175) !important; border-radius: 0px !important;">
-                <div class="card-header text-center"><strong> MAP</strong></div>
-                <div class="card-body p-0">
-                    <div id="map">
+                    <div class="col-md-4 text-center" style="cursor: pointer;">
+
+                        <div class=" mx-1   p-1 t" style="background-color:  #92C400 !important;color:white">
+                            <p style="font-weight: 600;">Total Notice</p>
+                            <span id="total_notice"></span>
+
+                        </div>
 
                     </div>
+                    <div class="col-md-4 text-center" style="cursor: pointer;">
+
+                        <div class=" mx-1   p-1 t" style="background-color:  #92C400 !important;color:white">
+                            <p style="font-weight: 600;">Total Supervision</p>
+                            <span id="total_supervise"></span>
+
+                        </div>
+
+                    </div>
+
                 </div>
             </div>
 
-        </div>
-        <!-- END MAP  DIV -->
-        <div id="wg" class="windowGroup">
 
         </div>
+        <!-- END MAP DASHBOARD -->
 
-        <div id="wg1" class="windowGroup">
 
-        </div>
 
-    </div><!--  END MAP CARD DIV -->
+        <!--  START MAP CARD DIV -->
+        <div class="row m-2">
+
+            <!-- START MAP SIDEBAR DIV -->
+            <div class="col-2 p-0">
+                <div class="card p-0 m-0"
+                    style="border: 1px solid rgb(177, 175, 175) !important; border-radius: 0px !important">
+                    <div class="card-header"><strong> NAVIGATION</strong></div>
+                    <div class="card-body">
+                        <!-- MAP SIDEBAR LAYERS SELECTOR -->
+                        <div class="side-bar" style="height: 569px !important; overflow-y: scroll;">
+                            <div class="col-md-12 mb-2" class="form-group">
+                                <label>Select Info Layer :</label>
+                                <select class="form-select" id="tableLayer" onchange="activeSelectedLayerOther(this.value)">
+                                    <option value="" hidden>Select Layer</option>
+                                    <option value="lv_fuse">lv_fuse</option>
+                                    <option value="lv_ug_conductor">lv_ug_conductor</option>
+                                    <option value="lvdb_fp">lvdb_fp</option>
+                                    <option value="street_light">street_light</option>
+                                    <option value="pole">pole</option>
+                                    <option value="wp">wp</option>
+                                    <option value="notice">notice</option>
+                                    <option value="supervise">supervise</option>
+
+                                </select>
+                            </div>
+
+                            <!-- START MAP SIDEBAR DETAILS -->
+                            <details class="mb-3" open>
+                                <summary><strong>Patrolling 3rd Party Digging Activities</strong> </summary>
+                                <table class="table table-bordered" style="cursor: pointer">
+                                    <tr>
+                                        <td onclick="addNotice(this)">Mengeluarkan notis</td>
+                                    </tr>
+                                    <tr>
+                                        <td onclick="addSupervise(this)">Menyelia kerja-kerja korekan</td>
+                                    </tr>
+                                    <tr>
+                                        <td onclick="addpanolayer(this)">Pemeriksaan di Jalan</td>
+                                    </tr>
+                                </table>
+
+                            </details>
+
+
+
+
+                            <!-- END MAP SIDEBAR DETAILS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END MAP SIDEBAR DIV -->
+
+            <!-- START MAP  DIV -->
+            <div class="col-10 p-0 ">
+                <div class="card p-0 m-0"
+                    style="border: 1px solid rgb(177, 175, 175) !important; border-radius: 0px !important;">
+                    <div class="card-header text-center"><strong> MAP</strong></div>
+                    <div class="card-body p-0">
+                        <div id="map">
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- END MAP  DIV -->
+            <div id="wg" class="windowGroup">
+
+            </div>
+
+            <div id="wg1" class="windowGroup">
+
+            </div>
+
+        </div><!--  END MAP CARD DIV -->
 
     </div>
     <div class="modal fade" id="geomModal" tabindex="-1" aria-labelledby="geomModalLabel" aria-hidden="true">
@@ -790,11 +832,11 @@
         map.setView([2.59340882301331, 101.07054901123], 8);
 
 
-        
-        var  panolayer = true; 
+
+        var panolayer = true;
 
         function addpanolayer(event) {
-         
+
 
             if (panolayer == false) {
                 panolayer = true;
@@ -802,8 +844,8 @@
                 map.off('click');
                 map.removeLayer(customer)
                 map.removeLayer(identifyme)
-                 
-            
+
+
             } else {
                 panolayer = false;
                 $(event).css('background', '#c9def2');
@@ -997,8 +1039,10 @@
 
 
                             }
-                            if ($('#tableLayer').val() == 'supervise' || $('#tableLayer').val() == 'notice') {
-                                str = str + `<tr><td> Report</td><td> <a href="/generate-third-party-pdf/${data.features[0].properties.id}" target="_blank"><button class="btn btn-sm btn-success">Download</button></a></td></tr>`
+                            if ($('#tableLayer').val() == 'supervise' || $('#tableLayer').val() ==
+                                'notice') {
+                                str = str +
+                                    `<tr><td> Report</td><td> <a href="/generate-third-party-pdf/${data.features[0].properties.id}" target="_blank"><button class="btn btn-sm btn-success">Download</button></a></td></tr>`
 
                             }
 
@@ -1181,17 +1225,16 @@
 
 
     <script>
- 
         $(document).ready(function() {
 
-//submit foam using ajax
+            //submit foam using ajax
             $jq('#save_wp').ajaxForm(function() {
                 alert("foam submitted!");
                 $('#geomModal').modal('hide');
                 map.removeLayer(drawnItems);
             });
 
-//submit foam 2 using ajax
+            //submit foam 2 using ajax
 
             $jq('#road-form').ajaxForm(function() {
                 alert("foam submitted!");
@@ -1201,7 +1244,7 @@
 
 
 
-// search ba on ba change
+            // search ba on ba change
 
             $('#search_zone').on('change', function() {
                 const selectedValue = this.value;
@@ -1312,7 +1355,7 @@
                     $("#total").html(Number((data[0].distance)).toFixed(1));
                     $("#total_notice").html((data[1].count))
                     $("#total_supervise").html((data[2].count))
-                    
+
 
                 }
             })

@@ -36,35 +36,7 @@
         .leaflet-control-attribution.leaflet-control {
     display: none;
 }
-        .card-header {
-            font-weight: 700;
-        }
-
-        #map {
-            height: 600px;
-            z-index: 1;
-        }
-
-        li {
-            list-style-type: none;
-            margin-bottom: 0.5rem;
-
-        }
-
-        ul {
-            padding-left: 0.5rem;
-        }
-
-        .side-bar::-webkit-scrollbar,
-        .lb-outerContainer {
-            display: none;
-        }
-
-        #panorama {
-            width: 400px;
-            height: 400px;
-        }
-
+     
         input {
             min-width: 16px !important;
         }
@@ -73,7 +45,5 @@
             display: none;
         }
 
-        .side-bar>.table td {
-            padding: 0.5rem !important
-        }
+
     </style>

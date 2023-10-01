@@ -4,9 +4,8 @@
     <!-- Fonts and icons -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700" rel="stylesheet" />
 
-    {{-- <link rel="stylesheet" href="{{ URL::asset('assets/test/css/style.css') }}" /> --}}
+    @include('partials.map-css')
     <style>
-
         .error {
             color: red;
         }
@@ -21,6 +20,12 @@
             color: black !important;
             margin-bottom: 0px !important;
             margin-top: 1rem;
+        }
+
+        #map {
+            margin: 30px;
+            height: 400px;
+            padding: 20px;
         }
     </style>
 @endsection
@@ -54,7 +59,7 @@
                         <h3 class="text-center p-2"></h3>
 
                         <form action="{{ route('third-party-digging.store') }} " id="myForm" method="POST"
-                            enctype="multipart/form-data">
+                            enctype="multipart/form-data" onsubmit="return submitFoam()">
                             @csrf
 
                             <div class="row">
@@ -74,17 +79,20 @@
 
                             <div class="row">
                                 <div class="col-md-4"><label for="ba">Ba</label></div>
-                                <div class="col-md-4"><select name="ba" id="ba" class="form-control" required
-                                        onchange="getWp(this)">
+                                <div class="col-md-4"><select name="ba_s" id="ba_s" class="form-control" required
+                                        onchange="getWpTh(this)">
                                         <option value="" hidden>select zone</option>
 
-                                    </select></div>
+                                    </select>
+                                    <input type="hidden" name="ba" id="ba">
+                                </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-4"><label for="wp_name">Work Package Name</label></div>
                                 <div class="col-md-4">
-                                    <select name="wp_name" id="wp_name" class="form-control" onchange="getWpId(this)" required>
+                                    <select name="wp_name" id="wp_name" class="form-control" onchange="getWpId(this)"
+                                        required>
                                         <option value="" hidden>select ba</option>
 
                                     </select>
@@ -115,11 +123,11 @@
                                 <div class="col-md-4"><input type="time" name="patrolling_time" id="patrolling_time"
                                         class="form-control" required></div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-4"><label for="road_id">Road Id</label></div>
-                                <div class="col-md-4"><input type="number" name="road_id" id="road_id"
-                                        class="form-control"></div>
+                            {{-- <div class="row">
+                                <div class="col-md-4"><label for="road_id">Road Id</label></div> --}}
+                            <div class="col-md-4"><input type="hidden" name="road_id" id="road_id" class="form-control">
                             </div>
+                            {{-- </div> --}}
                             <div class="row">
                                 <div class="col-md-4"><label for="project_name">Project Name</label></div>
                                 <div class="col-md-4"><input type="text" name="project_name" id="project_name"
@@ -247,11 +255,11 @@
                                 <div class="col-md-4"><label for="survey_status">Survey Status</label></div>
                                 <div class="col-md-4">
                                     <select name="survey_status" id="survey_status" class="form-control" required>
-                                        <option value="">select status</option>
+                                        <option value="" hidden>select status</option>
                                         <option value="Inprogress">Inprogress</option>
                                         <option value="Complete">Complete</option>
                                     </select>
-                                    </div>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="before_image1">Before Image 1</label></div>
@@ -305,16 +313,15 @@
                             </div>
 
 
-                            <div class="row">
-                                <div class="col-md-4"><label for="loc">Location</label></div>
 
-                                <div class="col-md-4"><input type="text" name="lat" id="lat" required
-                                        class="form-control">
-                                    <input type="text" name="log" id="log" class="form-control">
-                                </div>
-                                <div class="col-md-4 text-center"><button type="button" class="btn btn-sm btn-secondary"
-                                        onclick="getLocation()">Get Location</button>
-                                </div>
+
+                            <input type="hidden" name="lat" id="lat"  class="form-control">
+                            <input type="hidden" name="log" id="log" class="form-control">
+<div class="text-center">
+                          <strong>  <span class="text-danger map-error"  ></span></strong>
+                        </div>
+
+                            <div id="map">
 
                             </div>
 
@@ -331,63 +338,30 @@
 @endsection
 
 @section('script')
-    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js"></script>
+<script src="{{ URL::asset('map/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js') }}"></script>
+
+@include('partials.form-map-js')
     <script>
-        $(document).ready(function() {
 
-
-            $("#myForm").validate();
-
-            $('#search_zone').on('change', function() {
-                const selectedValue = this.value;
-                const areaSelect = $('#ba');
-                var baValues = '';
-
-                // Clear previous options
-                areaSelect.empty();
-                areaSelect.append(`<option value="" hidden>Select ba</option>`)
-
-                if (selectedValue === 'W1') {
-                    baValues = ['KUALA LUMPUR PUSAT'];
-
-                } else if (selectedValue === 'B1') {
-                    baValues = ['PETALING JAYA', 'RAWANG', 'KUALA SELANGOR'];
-                } else if (selectedValue === 'B2') {
-                    baValues = ['KLANG', 'PELABUHAN KLANG'];
-
-
-                } else if (selectedValue === 'B4') {
-                    baValues = ['CHERAS', 'BANTING', 'BANGI', 'PUTRAJAYA & CYBERJAYA'];
-                }
-
-
-                baValues.forEach((data) => {
-                    areaSelect.append(`<option value="${data}">${data}</option>`);
-                });
-                $('#wp_name').empty();
-                $('#search_wp').append(`<option value="" hidden>select wp</option>`);
-
-            });
-
-
-        });
-
-
-        function getWp(event) {
+        function getWpTh(param) {
+            var splitVal = param.value.split(',');
+            addRemoveBundary(splitVal[1], splitVal[2], splitVal[3])
             var wp = @json($wp);
             const wpSelect = $('#wp_name');
             wpSelect.empty();
             wpSelect.append(`<option value="" hidden>select wp</option>`)
             wp.forEach((data) => {
-                if (event.value == data.ba) {
+                if (splitVal[1] == data.ba) {
                     wpSelect.append(`<option value="${data.package_name}">${data.package_name}</option>`);
+                    $('#ba').val(splitVal[1])
                 }
             });
 
         }
 
 
-        function getWpId(event){
+        function getWpId(event) {
             var wp = @json($wp);
 
             wp.forEach((data) => {
@@ -399,24 +373,6 @@
 
         }
 
-
-
-        //get current location
-
-        function getLocation() {
-
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition);
-            } else {
-                x.innerHTML = "Geolocation is not supported by this browser.";
-            }
-        }
-
-        function showPosition(position) {
-
-            $('#lat').val(position.coords.latitude)
-            $('#log').val(position.coords.longitude)
-
-        }
+       
     </script>
 @endsection

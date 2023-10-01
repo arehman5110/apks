@@ -4,12 +4,19 @@
     <!-- Fonts and icons -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700" rel="stylesheet" />
 
+
     <link rel="stylesheet" href="{{ URL::asset('assets/test/css/style.css') }}" />
+    @include('partials.map-css')
     <style>
         input[type='checkbox'],
         input[type='radio'] {
             min-width: 16px !important;
             margin-right: 12px;
+        }
+        #map {
+            margin: 30px;
+            height: 400px;
+            padding: 20px;
         }
     </style>
 @endsection
@@ -41,7 +48,7 @@
                     <div class=" ">
                         <h3 class="text-center p-2">QR SAVR</h3>
                         <form id="framework-wizard-form" action="{{ route('tiang-talian-vt-and-vr.store') }}"  enctype="multipart/form-data"
-                            style="display: none" method="POST">
+                            style="display: none" method="POST"  onsubmit="return submitFoam()">
                             @csrf
                             <h3></h3>
 
@@ -51,31 +58,32 @@
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="ba">Ba</label></div>
-                                    <div class="col-md-4"><select name="ba" id="ba" class="form-control"
+                                    <div class="col-md-4"><select name="ba_s" id="ba_s" class="form-control" onchange="getWp(this)"
                                             required>
 
                                             <option value="" hidden>Select ba</option>
                                             <optgroup label="W1">
-                                                <option value="KUALA LUMPUR PUSAT">KL PUSAT</option>
+                                                <option value="KL PUSAT, KUALA LUMPUR PUSAT, 3.14925905877391, 101.754098819705">KL PUSAT</option>
                                             </optgroup>
                                             <optgroup label="B1">
-                                                <option value="PETALING JAYA">PETALING JAYA</option>
-                                                <option value="RAWANG">RAWANG</option>
-                                                <option value="KUALA SELANGOR">KUALA SELANGOR</option>
+                                                <option value="PJ, PETALING JAYA, 3.1128074178475, 101.605270457169">PETALING JAYA</option>
+                                                <option value="RAWANG, RAWANG, 3.47839445121726, 101.622905486475">RAWANG</option>
+                                                <option value="K.SELANGOR, KUALA SELANGOR, 3.40703209426401, 101.317426926947">KUALA SELANGOR</option>
                                             </optgroup>
                                             <optgroup label="B2">
-                                                <option value="KLANG">KLANG</option>
-                                                <option value="PELABUHAN KLANG">PELABUHAN KLANG</option>
+                                                <option value="KLANG, KLANG, 3.08428642705789, 101.436185279023">KLANG</option>
+                                                <option value="PORT KLANG, PELABUHAN KLANG, 2.98188527916042, 101.324234779569">PELABUHAN KLANG</option>
                                             </optgroup>
                                             <optgroup label="B4">
-                                                <option value="CHERAS">CHERAS</option>
-                                                <option value="BANTING">BANTING</option>
-                                                <option value="BANGI">BANGI</option>
-                                                <option value="PUTRAJAYA & CYBERJAYA">PUTRAJAYA & CYBERJAYA</option>
+                                                <option value="CHERAS, CHERAS, 3.14197346621987, 101.849883983416">CHERAS</option>
+                                                <option value="BANTING/SEPANG,BANTING, 2.82111390453244, 101.505890775541">BANTING</option>
+                                                <option value="BANGI, BANGI">BANGI</option>
+                                                <option value="PUTRAJAYA/CYBERJAYA/PUCHONG, PUTRAJAYA & CYBERJAYA, 2.92875032271019, 101.675338316575">PUTRAJAYA & CYBERJAYA</option>
                                             </optgroup>
 
 
                                         </select>
+                                        <input type="hidden" name="ba" id="ba">
                                     </div>
                                 </div>
 
@@ -139,18 +147,17 @@
                                             class="form-control" required></div>
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-md-4"><label for="loc">Location</label></div>
+                                <input type="hidden" name="lat" id="lat" required class="form-control">
+                                <input type="hidden" name="log" id="log" class="form-control">
 
-                                    <div class="col-md-4"><input type="text" name="lat" id="lat" required
-                                            class="form-control">
-                                        <input type="text" name="log" id="log" class="form-control">
-                                    </div>
-                                    <div class="col-md-4 text-center"><button type="button"
-                                            class="btn btn-sm btn-secondary" onclick="getLocation()">Get Location</button>
-                                    </div>
+                                <div class="text-center">
+                                    <strong>  <span class="text-danger map-error"  ></span></strong>
+                                  </div>
+
+                                <div id="map">
 
                                 </div>
+
 
 
 
@@ -811,6 +818,8 @@
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js"></script>
     <script src="{{ URL::asset('assets/test/js/jquery.steps.js') }}"></script>
 
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js"></script>
+    <script src="{{ URL::asset('map/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js') }}"></script>
 
     <script>
         var form = $("#framework-wizard-form").show();
@@ -858,19 +867,128 @@
                 // autoHeight: true,
             })
 
-        function getLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition);
-            } else {
-                x.innerHTML = "Geolocation is not supported by this browser.";
+            function getWp(param) {
+        var splitVal = param.value.split(',');
+        addRemoveBundary(splitVal[1], splitVal[2], splitVal[3])
+
+        $('#ba').val(splitVal[1])
+
+
+    }
+    function submitFoam(){
+            if ($('#lat').val() == '' || $('#log').val() == '') {
+                $('.map-error').html('Please select location')
+                return false;
+            }else{
+                $('.map-error').html(' ')
             }
         }
 
-        function showPosition(position) {
+    </script>
+    <script type="text/javascript">
+        var baseLayers
+        var identifyme = '';
+        var boundary3 = '';
+        var marker = '';
+        var boundary2 = '';
+        map = L.map('map').setView([3.016603, 101.858382], 5);
 
-            $('#lat').val(position.coords.latitude)
-            $('#log').val(position.coords.longitude)
+
+
+        var st1 = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+            maxZoom: 20,
+            subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+        }).addTo(map); // satlite map
+
+        var street = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'); // street map
+
+        // ADD MAPS
+        baseLayers = {
+            "Satellite": st1,
+            "Street": street
+        };
+
+
+        boundary3 = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+            layers: 'cite:aero_apks',
+            format: 'image/png',
+            maxZoom: 21,
+            transparent: true
+        }, {
+            buffer: 10
+        })
+
+
+
+        // ADD LAYERS GROUPED OVER LAYS
+        groupedOverlays = {
+            "POI": {
+                'BA': boundary3,
+            }
+        };
+
+        var layerControl = L.control.groupedLayers(baseLayers, groupedOverlays, {
+            collapsed: true,
+            position: 'topright'
+            // groupCheckboxes: true
+        }).addTo(map);
+
+
+
+        // add boundary layer on page load
+        map.addLayer(boundary3)
+        map.setView([2.59340882301331, 101.07054901123], 8);
+
+
+        // change layer and view when ba change
+        function addRemoveBundary(param, paramY, paramX) {
+
+            map.removeLayer(boundary3) // Remove on page load boundary
+
+            if (boundary2 !== '') { // boundary if eesixts then first reomve from map
+                map.removeLayer(boundary2)
+            }
+
+            boundary2 = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:ba',
+                format: 'image/png',
+                cql_filter: "station='" + param + "'", // add ba name for filter boundary
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+
+            map.addLayer(boundary2) // add filtered boundary
+            boundary2.bringToFront()
+
+            map.setView([parseFloat(paramY), parseFloat(paramX)], 10); // set view
+
+
+
+
+
 
         }
+
+        // on click map add marker and bind popup
+        function onMapClick(e) {
+            if (marker) {
+                map.removeLayer(marker);
+            }
+            marker = L.marker(e.latlng);
+            map.addLayer(marker);
+            marker.bindPopup("<b>You clicked the map at " + e.latlng.toString()).openPopup();
+
+            var lat = e.latlng.lat;
+            var lng = e.latlng.lng;
+
+            $('#lat').val(lat);
+            $('#log').val(lng);
+        }
+
+        map.on('click', onMapClick);
     </script>
+
+
 @endsection

@@ -68,7 +68,7 @@
 <body>
     <div class="container">
         <img src="{{ URL::asset('assets/web-images/main-logo.png') }}" alt="" height="265">
-        <a href="/map-1">
+        <a href="/dashboard">
             <button class="btn  btn-success mt-4"> GOTO MAIN</button>
         </a>
     </div>

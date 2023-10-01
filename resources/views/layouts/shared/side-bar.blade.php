@@ -26,14 +26,20 @@
                 data-accordion="false">
 
                 @if (Auth::user()->is_admin != '1')
-
+                <li class="nav-item">
+                    <a href="/dashboard" class="nav-link ">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
 
                 <li class="nav-item ">
                     <a href="#" class="nav-link">
-                        <i class="fa fa-book"></i>
+                        <i class="fas fa-tools"></i>
                         <p>
                             3rd Party Digging
                             <i class="right fas fa-angle-left"></i>
+
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
@@ -69,7 +75,7 @@
 
                 <li class="nav-item">
                     <a href="/pencawang" class="nav-link ">
-                        <i class="fa fa-map"></i>
+                        <i class="fas fa-building"></i>
                         <p>Pencawang</p>
                         <i class="right fas fa-angle-left"></i>
                     </a>
@@ -87,27 +93,28 @@
                                 <p>index</p>
                             </a>
                         </li>
-                       
+
                     </ul>
                 </li>
                 <li class="nav-item">
                     <a href="/feeder-pillar" class="nav-link ">
-                        <i class="fa fa-map"></i>
+                        <i class="fas fa-cube"></i>
                         <p>Feeder Pillar</p>
                         <i class="right fas fa-angle-left"></i>
                     </a>
 
                     <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('feeder-pillar.index') }}" class="nav-link ">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Index</p>
-                            </a>
-                        </li>
+
                         <li class="nav-item">
                             <a href="{{ route('feeder-pillar.create') }}" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Create</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('feeder-pillar.index') }}" class="nav-link ">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>index</p>
                             </a>
                         </li>
                     </ul>
@@ -116,7 +123,7 @@
 
                 <li class="nav-item ">
                     <a href="#" class="nav-link">
-                        <i class="fa fa-book"></i>
+                        <i class="fas fa-bolt"></i>
                         <p>
                             Tiang + Talian VT & VR
                             <i class="right fas fa-angle-left"></i>
@@ -140,7 +147,7 @@
 
                 <li class="nav-item ">
                     <a href="#" class="nav-link">
-                        <i class="fa fa-book"></i>
+                        <i class="fas fa-link"></i>
                         <p>
                             Link Box Pelbagai Voltan
                             <i class="right fas fa-angle-left"></i>
@@ -150,7 +157,7 @@
                         <li class="nav-item">
                             <a href="{{route('link-box-pelbagai-voltan.create')}}" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>form</p>
+                                <p>create</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -164,7 +171,7 @@
 
                 <li class="nav-item ">
                     <a href="#" class="nav-link">
-                        <i class="fa fa-book"></i>
+                        <i class="fas fa-road"></i>
                         <p>
                             Cable Bridge
                             <i class="right fas fa-angle-left"></i>

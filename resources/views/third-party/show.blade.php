@@ -264,6 +264,9 @@
                                         <a href="{{ URL::asset($data->before_image1) }}" data-lightbox="roadtrip">
                                             <img src="{{ URL::asset($data->before_image1) }}" alt=""
                                                 height="70" class="adjust-height ml-5  "></a>
+                                                @else
+                                                <strong>No image found</strong>
+
                                     @endif
                                 </div>
 
@@ -277,6 +280,8 @@
                                                 <a href="{{ URL::asset($data->before_image2) }}" data-lightbox="roadtrip">
                                                     <img src="{{ URL::asset($data->before_image2) }}" alt=""
                                                         height="70" class="adjust-height ml-5  "></a>
+                                                        @else
+                                                        <strong>No image found</strong>
                                             @endif
                                         </div>
                             </div>
@@ -289,6 +294,8 @@
                                                 <a href="{{ URL::asset($data->before_image3) }}" data-lightbox="roadtrip">
                                                     <img src="{{ URL::asset($data->before_image3) }}" alt=""
                                                         height="70" class="adjust-height ml-5  "></a>
+                                                        @else
+                                                        <strong>No image found</strong>
                                             @endif
                                         </div>
                             </div>
@@ -302,6 +309,8 @@
                                                 <a href="{{ URL::asset($data->during_image1) }}" data-lightbox="roadtrip">
                                                     <img src="{{ URL::asset($data->during_image1) }}" alt=""
                                                         height="70" class="adjust-height ml-5  "></a>
+                                                        @else
+                                                        <strong>No image found</strong>
                                             @endif
                                         </div>
                             </div>
@@ -315,6 +324,8 @@
                                                 <a href="{{ URL::asset($data->during_image2) }}" data-lightbox="roadtrip">
                                                     <img src="{{ URL::asset($data->during_image2) }}" alt=""
                                                         height="70" class="adjust-height ml-5  "></a>
+                                                        @else
+                                                        <strong>No image found</strong>
                                             @endif
                                         </div>
                             </div>
@@ -328,6 +339,8 @@
                                                 <a href="{{ URL::asset($data->during_image3) }}" data-lightbox="roadtrip">
                                                     <img src="{{ URL::asset($data->during_image3) }}" alt=""
                                                         height="70" class="adjust-heigh ml-5  "></a>
+                                                        @else
+                                                        <strong>No image found</strong>
                                             @endif
                                         </div>
                             </div>
@@ -341,6 +354,8 @@
                                                 <a href="{{ URL::asset($data->after_image1) }}" data-lightbox="roadtrip">
                                                     <img src="{{ URL::asset($data->after_image1) }}" alt=""
                                                         height="70" class="adjust-height ml-5  "></a>
+                                                         @else
+                                                        <strong>No image found</strong>
                                             @endif
                                         </div>
                             </div>
@@ -352,6 +367,8 @@
                                                 <a href="{{ URL::asset($data->after_image2) }}" data-lightbox="roadtrip">
                                                     <img src="{{ URL::asset($data->after_image2) }}" alt=""
                                                         height="70" class="adjust-height ml-5  "></a>
+                                                        @else
+                                                        <strong>No image found</strong>
                                             @endif
                                         </div>
                             </div>
@@ -365,6 +382,8 @@
                                                 <a href="{{ URL::asset($data->after_image3) }}" data-lightbox="roadtrip">
                                                     <img src="{{ URL::asset($data->after_image3) }}" alt=""
                                                         height="70" class="adjust-height ml-5  "></a>
+                                                        @else
+                                                        <strong>No image found</strong>
                                             @endif
                                         </div>
                             </div>

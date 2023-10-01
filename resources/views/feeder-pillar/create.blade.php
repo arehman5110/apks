@@ -3,7 +3,7 @@
 @section('css')
     <!-- Fonts and icons -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700" rel="stylesheet" />
-
+    @include('partials.map-css')
     {{-- <link rel="stylesheet" href="{{ URL::asset('assets/test/css/style.css') }}" /> --}}
     <style>
         input[type='checkbox'],
@@ -26,6 +26,11 @@
             color: black !important;
             margin-bottom: 0px !important;
             margin-top: 1rem;
+        }
+        #map {
+            margin: 30px;
+            height: 400px;
+            padding: 20px;
         }
     </style>
 @endsection
@@ -59,7 +64,7 @@
                         <h3 class="text-center p-2"></h3>
 
                         <form action="{{ route('feeder-pillar.store') }} " id="myForm" method="POST"
-                            enctype="multipart/form-data">
+                            enctype="multipart/form-data"  onsubmit="return submitFoam()">
                             @csrf
 
 
@@ -80,11 +85,13 @@
 
                             <div class="row">
                                 <div class="col-md-4"><label for="ba">Ba</label></div>
-                                <div class="col-md-4"><select name="ba" id="ba" class="form-control" required
+                                <div class="col-md-4"><select name="ba_s" id="ba_s" class="form-control" required
                                         onchange="getWp(this)">
                                         <option value="" hidden>select zone</option>
 
-                                    </select></div>
+                                    </select>
+                                    <input type="hidden" name="ba" id="ba">
+                                </div>
                             </div>
 
                             <div class="row">
@@ -123,14 +130,14 @@
                                     </div>
                             </div>
 
-                           
+
 
 
                             <div class="row">
                                 <div class="col-md-4"><label for="voltage">Area</label></div>
                                 <div class="col-md-4">
                                     <input type="text" name="area" id="area"
-                                        class="form-control" >
+                                        class="form-control" required >
                                     </div>
                             </div>
                             <div class="row">
@@ -156,7 +163,7 @@
                                     class="form-control" required>
                                 </div>
                             </div>
-                           
+
                             <div class="row">
                                 <div class="col-md-4"><label for="vandalism_status">Vandalism Status</label></div>
                                 <div class="col-md-4">
@@ -165,10 +172,10 @@
                                     </div>
                             </div>
 
-                           
 
 
-                              
+
+
                               <div class="row">
                                 <div class="col-md-4"><label for="leaning_staus">Leaning Staus</label></div>
                                 <div class="col-md-4">
@@ -214,7 +221,7 @@
                                     </div>
                             </div>
 
-                        
+
 
 
                             <div class="row">
@@ -241,17 +248,12 @@
                                     </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col-md-4"><label for="loc">Location</label></div>
-
-                                <div class="col-md-4"><input type="text" name="lat" id="lat" required
-                                        class="form-control">
-                                    <input type="text" name="log" id="log" class="form-control">
-                                </div>
-                                <div class="col-md-4 text-center"><button type="button" class="btn btn-sm btn-secondary"
-                                        onclick="getLocation()">Get Location</button>
-                                </div>
-                            </div>
+                            <input type="hidden" name="lat" id="lat" required class="form-control">
+                            <input type="hidden" name="log" id="log" class="form-control">
+                            <div class="text-center">
+                                <strong>  <span class="text-danger map-error"  ></span></strong>
+                              </div>
+                              <div id="map"></div>
 
                             <div class="text-center p-4"><button class="btn btn-sm btn-success">Submit</button></div>
                         </form>
@@ -263,66 +265,9 @@
 
 
 @endsection
-
 @section('script')
-@section('script')
-    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js"></script>
-    <script>
-        $(document).ready(function() {
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js"></script>
+<script src="{{ URL::asset('map/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js') }}"></script>
 
-
-            $("#myForm").validate();
-
-            $('#search_zone').on('change', function() {
-                const selectedValue = this.value;
-                const areaSelect = $('#ba');
-                var baValues = '';
-
-                // Clear previous options
-                areaSelect.empty();
-                areaSelect.append(`<option value="" hidden>Select ba</option>`)
-
-                if (selectedValue === 'W1') {
-                    baValues = ['KUALA LUMPUR PUSAT'];
-
-                } else if (selectedValue === 'B1') {
-                    baValues = ['PETALING JAYA', 'RAWANG', 'KUALA SELANGOR'];
-                } else if (selectedValue === 'B2') {
-                    baValues = ['KLANG', 'PELABUHAN KLANG'];
-
-
-                } else if (selectedValue === 'B4') {
-                    baValues = ['CHERAS', 'BANTING', 'BANGI', 'PUTRAJAYA & CYBERJAYA'];
-                }
-
-
-                baValues.forEach((data) => {
-                    areaSelect.append(`<option value="${data}">${data}</option>`);
-                });
-                $('#wp_name').empty();
-                $('#search_wp').append(`<option value="" hidden>select wp</option>`);
-
-            });
-
-
-        });
-
-        //get current location
-
-        function getLocation() {
-
-if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition);
-} else {
-    x.innerHTML = "Geolocation is not supported by this browser.";
-}
-}
-
-function showPosition(position) {
-
-$('#lat').val(position.coords.latitude)
-$('#log').val(position.coords.longitude)
-
-}
-    </script>
+   @include('partials.form-map-js')
 @endsection

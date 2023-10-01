@@ -112,6 +112,8 @@ Route::prefix('admin')->group(function () {
 });
 
 
+Route::view('/dashboard', 'dashboard');
+
 Route::view('/map-2','map');
 
 
