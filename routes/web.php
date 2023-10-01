@@ -79,7 +79,7 @@ Route::get('/generate-third-party-pdf/{id}',[GeneratePDFController::class,'gener
 
 Route::resource('tiang-talian-vt-and-vr',TiangContoller::class);
 Route::get('tiang-test',[TiangExcelController::class,'generateDigingExcel']);
-Route::view('/tiang-talian-vt-and-vr-tiang-map','Tiang.map');
+Route::view('/tiang-talian-vt-and-vr-map','Tiang.map');
 
 
 //// Link Box
