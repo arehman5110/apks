@@ -34,11 +34,11 @@
         </div>
         <div class="col-md-4">
             <a href="{{route('link-box-pelbagai-voltan.index')}}">
-            <div class="card p-3 bg-light"><h3><i class="fas fa-link"></i>Link Box Pelbagai Voltan</h3></div></a>
+            <div class="card p-3 bg-light"><h3><i class="fas fa-link"></i> Link Box Pelbagai Voltan</h3></div></a>
         </div>
         <div class="col-md-4">
             <a href="{{route('cable-bridge.create')}}">
-            <div class="card p-3 bg-light"><h3><i class="fas fa-road"></i>Cable Bridge</h3> </div></a>
+            <div class="card p-3 bg-light"><h3><i class="fas fa-road"></i> Cable Bridge</h3> </div></a>
         </div>
     </div>
 </div>

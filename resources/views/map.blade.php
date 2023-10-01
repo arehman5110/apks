@@ -1,8 +1,12 @@
 @extends('layouts.app', ['page_title' => 'Index'])
 
 @section('css')
-    
+
 @include('partials.map-css')
+<style>#map{
+    height: 600px ;
+}
+    </style>
 
 @endsection
 @section('content')
@@ -34,7 +38,7 @@
         </div>
     </section>
     <div class="container-fluid bg-white pt-2">
-   
+
 
     <div class=" p-1 col-12 m-2">
         <div class="card p-0 mb-3">
@@ -105,8 +109,8 @@
                         </div>
 
                         <!-- START MAP SIDEBAR DETAILS -->
-                    
-                       
+
+
 
 
                         <details class="mb-3" open>
@@ -125,9 +129,9 @@
 
                         </details>
 
-                    
 
-                     
+
+
                         <!-- END MAP SIDEBAR DETAILS -->
                     </div>
                 </div>
@@ -274,7 +278,7 @@
 @endsection
 
 @section('script')
-  
+
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
 <link rel="stylesheet" href="{{ URL::asset('map/draw/leaflet.draw.css') }}" />
 
@@ -304,7 +308,7 @@
 
     // ADD DRAW TOOLS
 
-    
+
 
 
     // ADD LAYERS GROUPED OVER LAYS
@@ -323,7 +327,7 @@
 
 
 
- 
+
 </script>
 
 
