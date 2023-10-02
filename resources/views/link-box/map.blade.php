@@ -314,7 +314,7 @@
         map.addLayer(link_box)
         link_box.bringToFront()
 
-
+        sel_lyr = link_box;
     }
 </script>
 @endsection

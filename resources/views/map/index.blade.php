@@ -56,10 +56,6 @@
             padding-left: 0.5rem;
         }
 
-        .side-bar::-webkit-scrollbar,
-        .lb-outerContainer {
-            display: none;
-        }
 
         #panorama {
             width: 400px;

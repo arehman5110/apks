@@ -313,7 +313,7 @@
         map.addLayer(feeder_pillar)
         feeder_pillar.bringToFront()
 
-
+        sel_lyr = feeder_pillar;
     }
 </script>
 @endsection

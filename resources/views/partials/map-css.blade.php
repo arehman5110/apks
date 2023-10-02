@@ -36,7 +36,7 @@
         .leaflet-control-attribution.leaflet-control {
     display: none;
 }
-     
+
         input {
             min-width: 16px !important;
         }
@@ -46,4 +46,8 @@
         }
 
 
+        .side-bar::-webkit-scrollbar,
+        .lb-outerContainer {
+            display: none;
+        }
     </style>

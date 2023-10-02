@@ -315,6 +315,8 @@
         map.addLayer(tbl_savr)
         tbl_savr.bringToFront()
 
+        sel_lyr = tbl_savr;
+
 
     }
 </script>

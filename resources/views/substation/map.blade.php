@@ -306,7 +306,7 @@
 
         map.addLayer(substation)
         substation.bringToFront()
-
+        sel_lyr = substation;
 
     }
 </script>

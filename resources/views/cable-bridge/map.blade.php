@@ -307,6 +307,7 @@
             cable_bridge.bringToFront()
 
 
+            sel_lyr = cable_bridge;
         }
     </script>
 @endsection
