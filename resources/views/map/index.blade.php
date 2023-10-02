@@ -1226,13 +1226,24 @@
 
     <script>
         $(document).ready(function() {
-
+           option={
+             success:callbackSuccess
+           }
             //submit foam using ajax
-            $jq('#save_wp').ajaxForm(function() {
+            $jq('#save_wp').ajaxForm(option
+            //     function() {
+            //     alert("foam submitted!");
+            //     $('#geomModal').modal('hide');
+            //     map.removeLayer(drawnItems);
+            // }
+            );
+
+            function callbackSuccess(rs){
+                console.log(rs);
                 alert("foam submitted!");
                 $('#geomModal').modal('hide');
                 map.removeLayer(drawnItems);
-            });
+            }
 
             //submit foam 2 using ajax
 

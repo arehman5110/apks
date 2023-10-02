@@ -13,21 +13,40 @@ class WPController extends Controller
 {
     public function saveWorkPackage(Request $req)
     {
-        $zone = $req->zone;
-        $ba = $req->ba;
-        $name = $req->name;
-        $geom = $req->geom;
+        // $zone = $req->zone;
+        // $ba = $req->ba;
+        // $name = $req->name;
+        // $geom = $req->geom;
 
-        $sql = "INSERT INTO public.tbl_workpackage(
-        package_name, geom, zone, ba,wp_status)
-        VALUES ('$name', st_geomfromgeojson('$geom'), '$zone', '$ba',''); ";
+        // $sql = "WITH inserted_rows as (INSERT INTO public.tbl_workpackage(
+        // package_name, geom, zone, ba,wp_status)
+        // VALUES ('$name', st_geomfromgeojson('$geom'), '$zone', '$ba','') RETURNING  id) 
+        // SELECT row(id) FROM inserted_rows";
+      
         try {
-            $data = DB::insert($sql);
+        $data = new WorkPackage();
+            $data->zone = $req->zone;
+            $data->ba = $req->ba;
+            $data->package_name = $req->name;
+            $data->geom = DB::raw("st_geomfromgeojson('$req->geom')");
+            $data->save();
+        
+   
+          //  $data = DB::raw($sql);
+            // $getRoads=DB::raw("select *,st_intersection(st_geomfromgeojson('$req->geom'),geom)
+            // from road_layer where st_intersects(st_geomfromgeojson('$req->geom'),geom)");
+            
+            $add_roads=DB::insert("INSERT INTO public.tbl_roads(
+                 road_name, geom, id_workpackage, ba, zone, km)
+                select street,geom,'$data->id','$req->ba', '$req->zone',km from road_layer where st_intersects(st_geomfromgeojson('$req->geom'),geom)");
+
+
+            return  $data;
             // DB::disconnect();
         } catch (\Throwable $th) {
             return $th->getMessage();
         }
-        return redirect('map-1');
+      //  return redirect('map-1');
     }
 
     public function selectWP($ba, $zone)
