@@ -1,5 +1,3 @@
-
-
 <script type="text/javascript">
     var baseLayers
     var identifyme = '';
@@ -100,9 +98,24 @@
 
         $('#lat').val(lat);
         $('#log').val(lng);
+
+        $.ajax({
+            url: '/get-road-name/' + parseFloat(lat) + '/' +parseFloat( lng),
+            dataType: 'JSON',
+            //data: data,
+            method: 'GET',
+            async: false,
+            success: function callback(data) {
+
+                console.log(data);
+
+            }
+        })
     }
 
     map.on('click', onMapClick);
+
+
 </script>
 
 
@@ -179,12 +192,13 @@
 
 
     }
-    function submitFoam(){
-            if ($('#lat').val() == '' || $('#log').val() == '') {
-                $('.map-error').html('Please select location')
-                return false;
-            }else{
-                $('.map-error').html(' ')
-            }
+
+    function submitFoam() {
+        if ($('#lat').val() == '' || $('#log').val() == '') {
+            $('.map-error').html('Please select location')
+            return false;
+        } else {
+            $('.map-error').html(' ')
         }
+    }
 </script>

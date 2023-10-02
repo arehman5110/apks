@@ -26,16 +26,16 @@
 
     <style>
         /* .sidebar-mini.sidebar-collapse .content-wrapper,
-            .sidebar-mini.sidebar-collapse .main-footer,
-            .sidebar-mini.sidebar-collapse .main-header {
-                margin-left: 0rem !important;
-            }
+                .sidebar-mini.sidebar-collapse .main-footer,
+                .sidebar-mini.sidebar-collapse .main-header {
+                    margin-left: 0rem !important;
+                }
 
-            .sidebar-mini.sidebar-collapse .main-sidebar,
-            .sidebar-mini.sidebar-collapse .main-sidebar::before {
-                margin-left: 0;
-                width: 0rem !important;
-            } */
+                .sidebar-mini.sidebar-collapse .main-sidebar,
+                .sidebar-mini.sidebar-collapse .main-sidebar::before {
+                    margin-left: 0;
+                    width: 0rem !important;
+                } */
 
         .card-header {
             font-weight: 700;
@@ -414,14 +414,11 @@
                                 <label>Select Info Layer :</label>
                                 <select class="form-select" id="tableLayer" onchange="activeSelectedLayerOther(this.value)">
                                     <option value="" hidden>Select Layer</option>
-                                    <option value="lv_fuse">lv_fuse</option>
-                                    <option value="lv_ug_conductor">lv_ug_conductor</option>
-                                    <option value="lvdb_fp">lvdb_fp</option>
-                                    <option value="street_light">street_light</option>
-                                    <option value="pole">pole</option>
-                                    <option value="wp">wp</option>
-                                    <option value="notice">notice</option>
-                                    <option value="supervise">supervise</option>
+                                    <option value="wp">Work Package</option>
+                                    <option value="rd">Road</option>
+                                    <option value="notice">Notice</option>
+                                    <option value="supervise">Supervise</option>
+
 
                                 </select>
                             </div>
@@ -709,82 +706,27 @@
 
 
         // ADD LAYERS
-        customer = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-            layers: 'cite:pano_layer',
-            format: 'image/png',
-            maxZoom: 21,
-            transparent: true
-        }, {
-            buffer: 10
-        });
 
 
-        boundary = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-            layers: 'cite:boundary_bangi_east',
-            format: 'image/png',
-            maxZoom: 21,
-            transparent: true
-        }, {
-            buffer: 10
-        });
-
-        ugc = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-            layers: 'cite:lv_ug_conductor',
-            format: 'image/png',
-            maxZoom: 21,
-            transparent: true
-        }, {
-            buffer: 10
-        });
+        wp = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:tbl_workpackage',
+                format: 'image/png',
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
 
 
-        lvdb = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-            layers: 'cite:lvdb_fp',
-            format: 'image/png',
-            maxZoom: 21,
-            transparent: true
-        }, {
-            buffer: 10
-        });
+            rd = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:tbl_roads',
+                format: 'image/png',
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
 
-
-        manhole = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-            layers: 'cite:manhole',
-            format: 'image/png',
-            maxZoom: 21,
-            transparent: true
-        }, {
-            buffer: 10
-        });
-        manhole;
-
-        street_light = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-            layers: 'cite:street_light',
-            format: 'image/png',
-            maxZoom: 21,
-            transparent: true
-        }, {
-            buffer: 10
-        });
-
-        pole = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-            layers: 'cite:pole',
-            format: 'image/png',
-            maxZoom: 21,
-            transparent: true
-        }, {
-            buffer: 10
-        });
-
-
-        lf = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-            layers: 'cite:lv_fuse',
-            format: 'image/png',
-            maxZoom: 21,
-            transparent: true
-        }, {
-            buffer: 10
-        });
 
         boundary3 = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
             layers: 'cite:aero_apks',
@@ -803,13 +745,8 @@
         groupedOverlays = {
             "POI": {
                 'BA': boundary3,
-                "boundary_bangi_east": boundary,
-                "lv fuse": lf,
-                "lvdb_fp": lvdb,
-                "lv_ug_conductor": ugc,
-                "street_light": street_light,
-                "pole": pole
-                //  "workpackage":wp
+                "Work Package": wp,
+                "Roads": rd,
 
             }
         };
@@ -925,78 +862,20 @@
         }
 
 
-        function bangi() {
-            map.removeLayer(boundary3)
-            if (boundary2 !== '') {
-                map.removeLayer(boundary2)
-            }
-            if (bangi_status == false) {
-
-                map.addLayer(boundary);
-                map.addLayer(lf);
-                map.addLayer(lvdb);
-                map.addLayer(ugc);
-                map.addLayer(street_light);
-                map.addLayer(pole);
-
-
-
-                map.setView([3.016603, 101.858382], 11);
-                bangi_status = true
-                //  lc[0].style.display = 'block';
-
-            } else {
-                map.removeLayer(boundary);
-                map.removeLayer(lf);
-                map.removeLayer(lvdb);
-                map.removeLayer(ugc);
-                map.removeLayer(street_light);
-                map.removeLayer(pole);
-
-                map.setView([3.016603, 101.858382], 5);
-                bangi_status = false
-                //   lc[0].style.display = 'none';
-            }
-        }
 
         function activeSelectedLayerOther(val) {
 
 
             var sel_lyr = ''
 
-            if (val == 'lv_fuse') {
-                sel_lyr = lf;
-            }
-            if (val == 'lv_ug_conductor') {
-                sel_lyr = ugc;
-            }
-            if (val == 'lvdb_fp') {
-                sel_lyr = lvdb;
-            }
-            if (val == 'pole') {
-                sel_lyr = pole;
-            }
-            if (val == 'manhole') {
-                sel_lyr = manhole;
-            }
-            if (val == 'street_light') {
-                sel_lyr = street_light;
-            }
-            if (val == 'wp') {
-                sel_lyr = wp;
-            }
-            if (val == 'rd') {
-                sel_lyr = rd;
-            }
-            if (val == 'notice') {
-                sel_lyr = notice;
-            }
+        if (val == 'rd') {
+            sel_lyr = rd;
 
-            if (val == 'supervise') {
-                sel_lyr = supervise;
-            }
+        }
+        if (val == 'wp') {
+            sel_lyr = wp;
 
-
+        }
             map.off('click');
             map.on('click', function(e) {
                 var url = getFeatureInfoUrl(
@@ -1139,7 +1018,9 @@
             boundary2.bringToFront()
 
             map.setView([parseFloat(paramY), parseFloat(paramX)], 11);
-
+            if(wp != ''){
+                map.removeLayer(wp)
+            }
             wp = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
                 layers: 'cite:tbl_workpackage',
                 format: 'image/png',
@@ -1152,6 +1033,9 @@
             map.addLayer(wp)
             wp.bringToFront()
 
+            if (rd != '') {
+                map.removeLayer(rd)
+            }
             rd = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
                 layers: 'cite:tbl_roads',
                 format: 'image/png',
@@ -1226,19 +1110,19 @@
 
     <script>
         $(document).ready(function() {
-           option={
-             success:callbackSuccess
-           }
+            option = {
+                success: callbackSuccess
+            }
             //submit foam using ajax
             $jq('#save_wp').ajaxForm(option
-            //     function() {
-            //     alert("foam submitted!");
-            //     $('#geomModal').modal('hide');
-            //     map.removeLayer(drawnItems);
-            // }
+                //     function() {
+                //     alert("foam submitted!");
+                //     $('#geomModal').modal('hide');
+                //     map.removeLayer(drawnItems);
+                // }
             );
 
-            function callbackSuccess(rs){
+            function callbackSuccess(rs) {
                 console.log(rs);
                 alert("foam submitted!");
                 $('#geomModal').modal('hide');
@@ -1323,6 +1207,7 @@
 
         function getWorkPackage(param) {
             var splitVal = param.value.split(',');
+
             addRemoveBundary(splitVal[1], splitVal[2], splitVal[3])
             var zone = $('#search_zone').val();
             $.ajax({

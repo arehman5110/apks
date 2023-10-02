@@ -59,6 +59,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/remove-work-package/{id}', [WPController::class, 'removeWP']);
 
     Route::get('/generate-third-party-pdf/{id}', [GeneratePDFController::class, 'generatePDF']);
+    Route::get('/get-road-name/{lat}/{lng}',[RoadController::class,'getRoadName']);
 
     /// tiang
 
