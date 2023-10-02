@@ -48,7 +48,7 @@
                         <div class="card-header">
                             <div class="card-title  ">
                                 <div class="text-right"><button class="btn btn-sm btn-success" data-toggle="modal"
-                                        data-target="#teamModal" type="button">Add team</button></div>
+                                        data-target="#teamModal" type="button">Add User</button></div>
                             </div>
 
                         </div>
