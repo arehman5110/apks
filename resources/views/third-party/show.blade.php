@@ -44,7 +44,7 @@
                 </div>
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
-                        <li class="breadcrumb-item"><a href="#">index</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('third-party-digging.index')}}">index</a></li>
                         <li class="breadcrumb-item active">show</li>
                     </ol>
                 </div>
@@ -111,12 +111,7 @@
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col-md-4"><label for="road_id">Road Id</label></div>
-                                <div class="col-md-4">
-                                    <input readonly  value="{{ $data->road_id }}" class="form-control">
-                                </div>
-                            </div>
+
 
                             <div class="row">
                                 <div class="col-md-4"><label for="project_name">Project Name</label></div>
@@ -253,6 +248,13 @@
                                 <div class="col-md-4"><label for="survey_status">Survey Status</label></div>
                                 <div class="col-md-4">
                                     <input readonly  value="{{ $data->survey_status }}" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4"><label for="road_id">Road Name</label></div>
+                                <div class="col-md-4">
+                                    <input readonly  value="{{ $data->road_name }}" class="form-control">
                                 </div>
                             </div>
 

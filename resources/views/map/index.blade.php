@@ -876,6 +876,14 @@
             sel_lyr = wp;
 
         }
+        if (val == 'notice') {
+            sel_lyr = notice;
+
+        }
+        if (val == 'supervise') {
+            sel_lyr = supervise;
+
+        }
             map.off('click');
             map.on('click', function(e) {
                 var url = getFeatureInfoUrl(
@@ -898,13 +906,25 @@
                         data = JSON.parse(data1)
                         if (data.features.length != 0) {
                             var str = '';
+                            var splitKey = '';
                             for (key in data.features[0].properties) {
-                                //console.log(key);
-                                //console.log(data.features[0].properties[key]);
-                                if (key == 'image_1' || key == 'image_2' || key == 'image_3' || key ==
-                                    'image_4' || key == 'image_5' || key == 'image_6' || key ==
-                                    'image_7' || key == 'image_8' || key == 'image_9' || key ==
-                                    'image_10') {
+
+                                splitKey = key.split("_");
+                                str += '<tr>';
+
+
+                            str += `<th class="text-capitalize">${splitKey.map(part => part.charAt(0).toUpperCase() + part.slice(1)).join(' ')}</th>`;
+                                if (key == 'during_image1' || key == 'during_image2' || key == 'during_image3' || key ==
+                                    'before_image1' || key == 'before_image2' || key == 'before_image3' || key ==
+                                    'after_image1' || key == 'after_image2' || key == 'after_image3' ) {
+
+                                        if (data.features[0].properties[key] =='') {
+                                            str = str + `<td>no image found</td></tr>`;
+                                        }else{
+                                         str = str + `<td><a href="${data.features[0].properties[key]}" data-lightbox="roadtrip">
+                                                    <img src="${data.features[0].properties[key]}" alt=""
+                                                    width="20px" height="20px" class="adjust-height ml-5  "></a></td></tr>`;
+                                              }
                                     // str = str + '<tr><td>' + key + '</td><td><a href="' + data.features[
                                     //         0].properties[key] +
                                     //     '" class=\'example-image-link\' data-lightbox=\'example-set\' title=\'&lt;button class=&quot;primary &quot; onclick= rotate_img(&quot;pic1&quot)  &gt;Rotate image&lt;/button&gt;\'><img src="' +
@@ -912,14 +932,12 @@
                                     //     '" width="20px" height="20px"></a></td></tr>'
 
                                 } else {
-                                    str = str + '<tr><td>' + key + '</td><td>' + data.features[0]
-                                        .properties[key] + '</td></tr>'
+                                    str = str  +`<td>${data.features[0].properties[key]}</td></tr>`;
                                 }
 
 
                             }
-                            if ($('#tableLayer').val() == 'supervise' || $('#tableLayer').val() ==
-                                'notice') {
+                            if ($('#tableLayer').val() == 'supervise' || $('#tableLayer').val() =='notice') {
                                 str = str +
                                     `<tr><td> Report</td><td> <a href="/generate-third-party-pdf/${data.features[0].properties.id}" target="_blank"><button class="btn btn-sm btn-success">Download</button></a></td></tr>`
 

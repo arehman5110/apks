@@ -51,14 +51,14 @@ class ThirdPartyDiggingController extends Controller
             $combinedDateTime = $currentDate . ' ' . $request->patrolling_time;
 
             $data = new ThirdPartyDiging();
-            $data->wp_name = $request->wp_name;
+            $data->wp_name = $request->search_wp;
             $data->zone = $request->zone;
             $data->ba = $request->ba;
             $data->team_name = $request->team_name;
             $data->survey_date = $request->survey_date;
             $data->patrolling_time = $combinedDateTime;
             $data->project_name = $request->project_name;
-            $data->road_id = $request->road_id;
+            $data->road_name = $request->road_name;
 
             $data->km_plan = $request->km_plan;
             $data->km_actual = $request->km_actual;
@@ -101,7 +101,7 @@ class ThirdPartyDiggingController extends Controller
                 ->route('third-party-digging.index')
                 ->with('success', 'Form Intserted');
         } catch (\Throwable $th) {
-            return $th->getMessage();
+            // return $th->getMessage();
             return redirect()
                 ->route('third-party-digging.index')
                 ->with('failed', 'Form Intserted Failed');
@@ -150,7 +150,7 @@ class ThirdPartyDiggingController extends Controller
 
             $currentDate = Carbon::now()->toDateString();
             $combinedDateTime = $currentDate . ' ' . $request->patrolling_time;
-            
+
             $data = ThirdPartyDiging::find($id);
             $data->wp_name = $request->wp_name;
             $data->zone = $request->zone;
@@ -161,7 +161,7 @@ class ThirdPartyDiggingController extends Controller
             $data->feeder_involved = $request->feeder_involved;
             $data->km_plan = $request->km_plan;
             $data->km_actual = $request->km_actual;
-            $data->road_id = $request->road_id;
+            $data->road_name = $request->road_name;
 
             $data->digging = $request->digging;
             $data->notice = $request->notice;
@@ -201,7 +201,7 @@ class ThirdPartyDiggingController extends Controller
                 ->route('third-party-digging.index')
                 ->with('success', 'Form Intserted');
         } catch (\Throwable $th) {
-            return $th->getMessage();
+            // return $th->getMessage();
             return redirect()
                 ->route('third-party-digging.index')
                 ->with('failed', 'Form Intserted Failed');

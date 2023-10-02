@@ -63,22 +63,22 @@
 
                                             <option value="" hidden>Select ba</option>
                                             <optgroup label="W1">
-                                                <option value="KL PUSAT, KUALA LUMPUR PUSAT, 3.14925905877391, 101.754098819705">KL PUSAT</option>
+                                                <option value="KL PUSAT,KUALA LUMPUR PUSAT, 3.14925905877391, 101.754098819705">KL PUSAT</option>
                                             </optgroup>
                                             <optgroup label="B1">
-                                                <option value="PJ, PETALING JAYA, 3.1128074178475, 101.605270457169">PETALING JAYA</option>
-                                                <option value="RAWANG, RAWANG, 3.47839445121726, 101.622905486475">RAWANG</option>
-                                                <option value="K.SELANGOR, KUALA SELANGOR, 3.40703209426401, 101.317426926947">KUALA SELANGOR</option>
+                                                <option value="PJ,PETALING JAYA, 3.1128074178475, 101.605270457169">PETALING JAYA</option>
+                                                <option value="RAWANG,RAWANG, 3.47839445121726, 101.622905486475">RAWANG</option>
+                                                <option value="K.SELANGOR,KUALA SELANGOR, 3.40703209426401, 101.317426926947">KUALA SELANGOR</option>
                                             </optgroup>
                                             <optgroup label="B2">
-                                                <option value="KLANG, KLANG, 3.08428642705789, 101.436185279023">KLANG</option>
-                                                <option value="PORT KLANG, PELABUHAN KLANG, 2.98188527916042, 101.324234779569">PELABUHAN KLANG</option>
+                                                <option value="KLANG,KLANG, 3.08428642705789, 101.436185279023">KLANG</option>
+                                                <option value="PORT KLANG,PELABUHAN KLANG, 2.98188527916042, 101.324234779569">PELABUHAN KLANG</option>
                                             </optgroup>
                                             <optgroup label="B4">
-                                                <option value="CHERAS, CHERAS, 3.14197346621987, 101.849883983416">CHERAS</option>
+                                                <option value="CHERAS,CHERAS, 3.14197346621987, 101.849883983416">CHERAS</option>
                                                 <option value="BANTING/SEPANG,BANTING, 2.82111390453244, 101.505890775541">BANTING</option>
-                                                <option value="BANGI, BANGI">BANGI</option>
-                                                <option value="PUTRAJAYA/CYBERJAYA/PUCHONG, PUTRAJAYA & CYBERJAYA, 2.92875032271019, 101.675338316575">PUTRAJAYA & CYBERJAYA</option>
+                                                <option value="BANGI,BANGI">BANGI</option>
+                                                <option value="PUTRAJAYA/CYBERJAYA/PUCHONG,PUTRAJAYA & CYBERJAYA, 2.92875032271019, 101.675338316575">PUTRAJAYA & CYBERJAYA</option>
                                             </optgroup>
 
 
@@ -943,7 +943,10 @@
         // change layer and view when ba change
         function addRemoveBundary(param, paramY, paramX) {
 
-            map.removeLayer(boundary3) // Remove on page load boundary
+            if (boundary3 != '') {
+                map.removeLayer(boundary3) // Remove on page load boundary
+            }
+
 
             if (boundary2 !== '') { // boundary if eesixts then first reomve from map
                 map.removeLayer(boundary2)

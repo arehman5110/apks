@@ -24,7 +24,7 @@
                 </div>
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
                         <li class="breadcrumb-item active">index</li>
                     </ol>
                 </div>
@@ -44,7 +44,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                      
+
                             <div class="card-header d-flex justify-content-between ">
                                 <div class="card-title">
                                     Third Party Digging
@@ -52,12 +52,12 @@
                                 <div class="d-flex ml-auto">
                                 <a href="{{route('third-party-digging.create')}}"><button class="btn text-white btn-success  btn-sm mr-4"  >Add new</button></a>
 
-                               {{-- <a href="{{route('generate-link-box-excel')}}"> <button class="btn text-white  btn-sm mr-4" style="background-color: #708090">Download</button></a> --}}
+                               <a href="{{route('generate-third-party-digging-excel')}}"> <button class="btn text-white  btn-sm mr-4" style="background-color: #708090">Download</button></a>
                             </div>
                             </div>
 
 
-                      
+
 
                         <div class="card-body">
                             <div class="text-right mb-4">

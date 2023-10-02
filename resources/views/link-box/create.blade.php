@@ -65,7 +65,7 @@
                         <h3 class="text-center p-2"></h3>
 
                         <form action="{{ route('link-box-pelbagai-voltan.store') }} " id="myForm" method="POST"
-                            enctype="multipart/form-data">
+                            enctype="multipart/form-data" onsubmit="return submitFoam()">
                             @csrf
 
 
@@ -263,6 +263,8 @@
                                         class="form-control" >
                                     </div>
                             </div>
+
+
 
                             <input type="hidden" name="lat" id="lat" required class="form-control">
                             <input type="hidden" name="log" id="log" class="form-control">

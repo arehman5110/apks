@@ -24,7 +24,7 @@
                 </div>
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
-                        <li class="breadcrumb-item"><a href="{{route('substation.index')}}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
                         <li class="breadcrumb-item active">index</li>
                     </ol>
                 </div>
@@ -44,12 +44,16 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header">
-                            <div class="card-title">
-                                Substation
+
+                            <div class="card-header d-flex justify-content-between ">
+                                <p class="mb-0">Cable Bridge</p>
+                                <div class="d-flex ml-auto">
+                                <a href="{{route('substation.create')}}"><button class="btn text-white btn-success  btn-sm mr-4"  >Add new</button></a>
+
+                               <a href="{{route('generate-substation-excel')}}"> <button class="btn text-white  btn-sm mr-4" style="background-color: #708090">Download</button></a>
+                            </div>
                             </div>
 
-                        </div>
 
                         <div class="card-body">
                             <div class="text-right mb-4">

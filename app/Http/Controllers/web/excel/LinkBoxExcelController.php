@@ -7,6 +7,7 @@ use App\Models\LinkBox;
 use Illuminate\Http\Request;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
+
 class LinkBoxExcelController extends Controller
 {
     //
@@ -28,8 +29,8 @@ class LinkBoxExcelController extends Controller
                     $worksheet->setCellValue('B' . $i, $rec->zone);
                     $worksheet->setCellValue('C' . $i, $rec->ba);
                     $worksheet->setCellValue('D' . $i, $rec->team);
-                    $worksheet->setCellValue('E' . $i, $rec->visit_date);
-                    $worksheet->setCellValue('F' . $i, $rec->patrol_time);
+                    $worksheet->setCellValue('E' . $i, date('Y-m-d', strtotime($rec->visit_date)) );
+                    $worksheet->setCellValue('F' . $i,date('H:i:s', strtotime($rec->patrol_time)) );
                     $worksheet->setCellValue('G' . $i, $rec->feeder_involved);
                     $worksheet->setCellValue('H' . $i, $rec->aera);
                     $worksheet->setCellValue('I' . $i, $rec->start_date);

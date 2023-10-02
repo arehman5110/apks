@@ -44,7 +44,7 @@
                 </div>
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
-                        <li class="breadcrumb-item"><a href="#">index</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('third-party-digging.index')}}">index</a></li>
                         <li class="breadcrumb-item active">edit</li>
                     </ol>
                 </div>
@@ -136,12 +136,6 @@
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col-md-4"><label for="road_id">Road Id</label></div>
-                                <div class="col-md-4">
-                                    <input type="number" name="road_id" id="road_id" value="{{ $data->road_id }}" class="form-control">
-                                </div>
-                            </div>
 
                             <div class="row">
                                 <div class="col-md-4"><label for="project_name">Project Name</label></div>
@@ -153,14 +147,14 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="km_plan">Km Plan</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="km_plan" id="km_plan" value="{{ $data->km_plan }}" class="form-control" required>
+                                    <input type="number" name="km_plan" id="km_plan" value="{{ $data->km_plan }}" class="form-control" required>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-4"><label for="km_actual">Km Actual</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="km_actual" id="km_actual" value="{{ $data->km_actual }}" class="form-control" required>
+                                    <input type="number" name="km_actual" id="km_actual" value="{{ $data->km_actual }}" class="form-control" required>
                                 </div>
                             </div>
 
@@ -309,6 +303,13 @@
                                     </select>
                                 </div>
                             </div>
+
+                            <div class="row">
+                                <div class="col-md-4"><label for="road_name">Road Name</label></div>
+                                <div class="col-md-4"><input type="text" name="road_name"
+                                        value="{{ $data->road_name }}" id="road_name"
+                                        class="form-control" required readonly></div>
+                            </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="before_image1">Before Image 1</label></div>
                                 <div class="col-md-4"><input type="file" name="before_image1" id="before_image1"
@@ -431,6 +432,8 @@
                                             @endif
                                         </div>
                             </div>
+
+
 
 
 

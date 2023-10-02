@@ -48,19 +48,32 @@ class RoadController extends Controller
     public function getRoadName($lat, $lng)
     {
         try {
-            $data = DB::select("SELECT road_name
+            $data = DB::select("SELECT road_name,
+                ST_Distance(
+                    ST_Transform(ST_GeomFromText('POINT($lng $lat)', 4326), 32647),
+                    ST_Transform(geom, 32647)
+                ) AS distance
             FROM tbl_roads
-            WHERE st_intersects(
-                st_buffer(
-                    st_transform(st_geomfromtext('POINT($lng $lat)', 4326), 32647),
+            WHERE ST_Intersects(
+                ST_Buffer(
+                    ST_Transform(ST_GeomFromText('POINT($lng $lat)', 4326), 32647),
                     100, 2
                 ),
-                    st_transform(geom, 32647)
-                )
-            ");
-            return $data;
+                ST_Transform(geom, 32647)
+            )
+            ORDER BY distance
+            LIMIT 1;");
+
+            if (count($data) > 0) {
+                // Return the record with the shortest distance
+                return $data[0];
+            } else {
+                // Handle the case where no matching records were found
+                return response()->json(['Success' => false, 'error' => 'No matching records found'], 404);
+            }
         } catch (\Throwable $th) {
             return response()->json(['Success' => false, 'error' => $th->getMessage()], 500);
         }
+
     }
 }

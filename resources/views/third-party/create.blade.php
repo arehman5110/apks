@@ -40,7 +40,7 @@
                 </div>
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
-                        <li class="breadcrumb-item"><a href="#">index</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('third-party-digging.index')}}">index</a></li>
                         <li class="breadcrumb-item active">create</li>
                     </ol>
                 </div>
@@ -80,7 +80,7 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="ba">Ba</label></div>
                                 <div class="col-md-4"><select name="ba_s" id="ba_s" class="form-control" required
-                                        onchange="getWpTh(this)">
+                                        onchange="getWorkPackage(this)">
                                         <option value="" hidden>select zone</option>
 
                                     </select>
@@ -89,10 +89,9 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="wp_name">Work Package Name</label></div>
+                                <div class="col-md-4"><label for="search_wp">Work Package Name</label></div>
                                 <div class="col-md-4">
-                                    <select name="wp_name" id="wp_name" class="form-control" onchange="getWpId(this)"
-                                        required>
+                                    <select name="search_wp" id="search_wp" class="form-control" required>
                                         <option value="" hidden>select ba</option>
 
                                     </select>
@@ -136,12 +135,12 @@
 
                             <div class="row">
                                 <div class="col-md-4"><label for="km_plan">Km Plan</label></div>
-                                <div class="col-md-4"><input type="text" name="km_plan" id="km_plan"
+                                <div class="col-md-4"><input type="number" name="km_plan" id="km_plan"
                                         class="form-control" required></div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="km_actual">Km Actual</label></div>
-                                <div class="col-md-4"><input type="text" name="km_actual" id="km_actual"
+                                <div class="col-md-4"><input type="number" name="km_actual" id="km_actual"
                                         class="form-control" required></div>
                             </div>
                             <div class="row">
@@ -312,14 +311,26 @@
                                         class="form-control"></div>
                             </div>
 
+                            <div class="row   road-d">
+                                <div class="col-md-4"><label for="road_name">Road Name</label></div>
+                                <div class="col-md-4">
+                                    <span id="road_name_check" class="text-danger"></span>
+                                    <input type="text" name="road_name" id="road_name"
+                                        class="form-control" required></div>
+                            </div>
 
 
 
-                            <input type="hidden" name="lat" id="lat"  class="form-control">
+
+
+
+
+
+                            <input type="hidden" name="lat" id="lat" class="form-control">
                             <input type="hidden" name="log" id="log" class="form-control">
-<div class="text-center">
-                          <strong>  <span class="text-danger map-error"  ></span></strong>
-                        </div>
+                            <div class="text-center">
+                                <strong> <span class="text-danger map-error"></span></strong>
+                            </div>
 
                             <div id="map">
 
@@ -338,41 +349,83 @@
 @endsection
 
 @section('script')
-<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js"></script>
-<script src="{{ URL::asset('map/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js') }}"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js"></script>
+    <script src="{{ URL::asset('map/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js') }}"></script>
 
-@include('partials.form-map-js')
+    @include('partials.form-map-js')
     <script>
+        var wp = '';
+        var rd = '';
 
-        function getWpTh(param) {
+
+        function getWorkPackage(param) {
             var splitVal = param.value.split(',');
             addRemoveBundary(splitVal[1], splitVal[2], splitVal[3])
-            var wp = @json($wp);
-            const wpSelect = $('#wp_name');
-            wpSelect.empty();
-            wpSelect.append(`<option value="" hidden>select wp</option>`)
-            wp.forEach((data) => {
-                if (splitVal[1] == data.ba) {
-                    wpSelect.append(`<option value="${data.package_name}">${data.package_name}</option>`);
-                    $('#ba').val(splitVal[1])
+                $('#ba').val(splitVal[1]);
+            if (wp != '') {
+                map.removeLayer(wp)
+            }
+            wp = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:tbl_workpackage',
+                format: 'image/png',
+                cql_filter: "ba='" + splitVal[1] + "'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+            map.addLayer(wp)
+            wp.bringToFront()
+            if (rd != '') {
+                map.removeLayer(rd)
+            }
+            rd = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:tbl_roads',
+                format: 'image/png',
+                cql_filter: "ba='" + splitVal[1] + "'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+            map.addLayer(rd)
+            rd.bringToFront()
+            var zone = $('#search_zone').val();
+            $.ajax({
+                url: `/get-work-package/${splitVal[1]}/${zone}`,
+                dataType: 'JSON',
+                method: 'GET',
+                async: false,
+                success: function callback(data) {
+                    console.log(data);
+                    $('#search_wp').empty();
+                    $('#search_wp').append(`<option value="" hidden>Select Work Package</option>`);
+                    data.forEach((val) => {
+                        if (val.wp_status == 'approved') {
+
+
+                        $('#search_wp').append(
+                            `<option value="${val.id} ,${val.x} ,${val.y}">${val.package_name}</option>`
+                        );
+                    }
+                    });
+
+
                 }
-            });
+            })
 
         }
 
 
-        function getWpId(event) {
-            var wp = @json($wp);
+        $('#search_wp').on('change', function() {
+            const selectedValue = this.value;
+            var spiltVal = selectedValue.split(',');
 
-            wp.forEach((data) => {
-                if (event.value == data.package_name) {
-                    $('#workpackage_id').val(data.id)
-                }
-            });
+            map.setView([parseFloat(spiltVal[2]), parseFloat(spiltVal[1])], 16)
+            $('#for-excel').html(`<a class="mt-4" href="/generate-third-party-diging-excel/${spiltVal[0]}"><button class="btn-sm mt-2
+                btn btn-primary">Download Qr</button></a>`)
+            $('#workpackage_id').val(spiltVal[0])
 
-
-        }
-
-       
+        })
     </script>
 @endsection

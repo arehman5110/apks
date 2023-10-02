@@ -6,6 +6,10 @@ use App\Http\Controllers\web\admin\TeamUsersController;
 use App\Http\Controllers\web\CableBridgeController;
 use App\Http\Controllers\web\excel\CableBridgeExcelController;
 use App\Http\Controllers\web\excel\DigingExcelController;
+use App\Http\Controllers\web\excel\FeederPillarExcelController;
+use App\Http\Controllers\web\excel\LinkBoxExcelController;
+use App\Http\Controllers\web\excel\SubstationExcelController;
+use App\Http\Controllers\web\excel\ThirdPartyExcelController;
 use App\Http\Controllers\web\excel\TiangExcelController;
 use App\Http\Controllers\web\LinkBoxController;
 use App\Http\Controllers\web\map\GeneratePDFController;
@@ -69,7 +73,7 @@ Route::middleware('auth')->group(function () {
 
     //// Link Box
     Route::resource('link-box-pelbagai-voltan', LinkBoxController::class);
-    Route::get('generate-link-box-excel', [CableBridgeExcelController::class, 'generateCableBridgeExcel'])->name('generate-link-box-excel');
+    Route::get('generate-link-box-excel', [LinkBoxExcelController::class, 'generateLinkBoxExcel'])->name('generate-link-box-excel');
     Route::view('/link-box-pelbagai-voltan-map', 'link-box.map');
 
     //// Cable Bridge
@@ -80,15 +84,17 @@ Route::middleware('auth')->group(function () {
 
     ////third party digging routes
     Route::resource('third-party-digging', ThirdPartyDiggingController::class);
-    Route::get('generate-third-party-digging-excel', [CableBridgeExcelController::class, 'generateCableBridgeExcel'])->name('generate-third-party-digging-excel');
+    Route::get('generate-third-party-digging-excel', [ThirdPartyExcelController::class, 'generateThirdPartExcel'])->name('generate-third-party-digging-excel');
 
     ////substation routes
     Route::resource('substation', SubstationController::class);
     Route::view('/substation-map', 'substation.map');
+    Route::get('generate-substation-excel', [SubstationExcelController::class, 'generateSubstationExcel'])->name('generate-substation-excel');
 
     ////feeder-piller routes
     Route::resource('feeder-pillar', FPController::class);
     Route::view('/feeder-pillar-map', 'feeder-pillar.map');
+    Route::get('generate-feeder-pillar-excel', [FeederPillarExcelController::class, 'generateFeederPillarExcel'])->name('generate-feeder-pillar-excel');
 
     //// Admin side
     Route::prefix('admin')->group(function () {

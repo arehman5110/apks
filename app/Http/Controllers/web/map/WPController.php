@@ -52,7 +52,7 @@ class WPController extends Controller
     public function selectWP($ba, $zone)
     {
         // return  "select id, package_name ,st_x(st_centroid(geom)) as x  ,st_y(st_centroid(geom)) as y from tbl_workpackage  where ba= '$ba' and zone = '$zone'";
-        $wp = DB::select("select id, package_name ,st_x(st_centroid(geom)) as x  ,st_y(st_centroid(geom)) as y from tbl_workpackage  where ba= '$ba' and zone = '$zone'");
+        $wp = DB::select("select id, package_name ,st_x(st_centroid(geom)) as x  ,st_y(st_centroid(geom)) as y ,wp_status from tbl_workpackage  where ba= '$ba' and zone = '$zone' ");
 
         return response()->json($wp);
     }

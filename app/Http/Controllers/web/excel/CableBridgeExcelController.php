@@ -6,60 +6,63 @@ use App\Http\Controllers\Controller;
 use App\Models\CableBridge;
 use Illuminate\Http\Request;
 use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
 class CableBridgeExcelController extends Controller
 {
-    public function generateCableBridgeExcel()
-    {
-        try {
-            $recored = CableBridge::all();
-            // return $recored;
-            if (sizeof($recored) > 0) {
-                $excelFile = public_path('assets/excel-template/cable-bridge.xlsx');
 
-                $spreadsheet = IOFactory::load($excelFile);
+        public function generateCableBridgeExcel()
+        {
+            try {
+                $recored = CableBridge::all();
+                // return $recored;
+                if (sizeof($recored) > 0) {
+                    $excelFile = public_path('assets/excel-template/cable-bridge.xlsx');
 
-                $worksheet = $spreadsheet->getActiveSheet();
+                    $spreadsheet = IOFactory::load($excelFile);
 
-                $i = 4;
-                foreach ($recored as $rec) {
-                    $worksheet->setCellValue('A' . $i, $i - 3);
-                    $worksheet->setCellValue('B' . $i, $rec->zone);
-                    $worksheet->setCellValue('C' . $i, $rec->ba);
-                    $worksheet->setCellValue('D' . $i, $rec->team);
-                    $worksheet->setCellValue('E' . $i, $rec->visit_date);
-                    $worksheet->setCellValue('F' . $i, $rec->patrol_time);
-                    $worksheet->setCellValue('G' . $i, $rec->feeder_involved);
-                    $worksheet->setCellValue('H' . $i, $rec->aera);
-                    $worksheet->setCellValue('I' . $i, $rec->start_date);
-                    $worksheet->setCellValue('J' . $i, $rec->end_date);
-                    $worksheet->setCellValue('K' . $i, $rec->voltage);
-                    $worksheet->setCellValue('L' . $i, $rec->coordinate);
-                    $worksheet->setCellValue('M' . $i, $rec->vandalism_status);
-                    $worksheet->setCellValue('N' . $i, $rec->pipe_staus);
+                    $worksheet = $spreadsheet->getActiveSheet();
 
-                    $worksheet->setCellValue('O' . $i, $rec->collapsed_status);
-                    $worksheet->setCellValue('P' . $i, $rec->rust_status);
-                    $worksheet->setCellValue('Q' . $i, $rec->bushes_status);
+                    $i = 4;
+                    foreach ($recored as $rec) {
+                        $worksheet->setCellValue('A' . $i, $i - 3);
+                        $worksheet->setCellValue('B' . $i, $rec->zone);
+                        $worksheet->setCellValue('C' . $i, $rec->ba);
+                        $worksheet->setCellValue('D' . $i, $rec->team);
+                        $worksheet->setCellValue('E' . $i,  date('Y-m-d', strtotime($rec->visit_date))  );
+                        $worksheet->setCellValue('F' . $i, date('H:i:s', strtotime($rec->patrol_time)) );
+                        $worksheet->setCellValue('G' . $i, $rec->feeder_involved);
+                        $worksheet->setCellValue('H' . $i, $rec->aera);
+                        $worksheet->setCellValue('I' . $i, $rec->start_date);
+                        $worksheet->setCellValue('J' . $i, $rec->end_date);
+                        $worksheet->setCellValue('K' . $i, $rec->voltage);
+                        $worksheet->setCellValue('L' . $i, $rec->coordinate);
+                        $worksheet->setCellValue('M' . $i, $rec->vandalism_status);
+                        $worksheet->setCellValue('N' . $i, $rec->pipe_staus);
 
-                    $i++;
+                        $worksheet->setCellValue('O' . $i, $rec->collapsed_status);
+                        $worksheet->setCellValue('P' . $i, $rec->rust_status);
+                        $worksheet->setCellValue('Q' . $i, $rec->bushes_status);
+
+                        $i++;
+                    }
+
+                    $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+
+                    $writer->save(public_path('assets/updated-excels/') . 'cable-bridge.xlsx');
+
+                    return response()->download(public_path('assets/updated-excels/') . 'cable-bridge.xlsx');
+                } else {
+                    return redirect()
+                        ->back()
+                        ->with('failed', 'No records found ');
                 }
 
-                $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
-
-                $writer->save(public_path('assets/updated-excels/') . 'cable-bridge.xlsx');
-
-                return response()->download(public_path('assets/updated-excels/') . 'cable-bridge.xlsx');
-            } else {
+            } catch (\Throwable $th) {
                 return redirect()
                     ->back()
-                    ->with('failed', 'No records found ');
+                    ->with('failed', 'Request Failed');
             }
-
-        } catch (\Throwable $th) {
-            return redirect()
-                ->back()
-                ->with('failed', 'Request Failed');
         }
-    }
+
 }

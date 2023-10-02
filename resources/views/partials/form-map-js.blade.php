@@ -106,8 +106,12 @@
             method: 'GET',
             async: false,
             success: function callback(data) {
-
-                console.log(data);
+                if (data.road_name == null) {
+                    $('#road_name_check').html("Road name is null Please enter road name")
+                }else{
+                    $('#road_name_check').html("")
+                }
+                $('#road_name').val(data.road_name)
 
             }
         })

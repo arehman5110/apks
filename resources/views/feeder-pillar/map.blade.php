@@ -270,4 +270,50 @@
 
 @section('script')
    @include('partials.map-js')
+
+
+   <script>
+    var  	feeder_pillar = '';
+     function addRemoveBundary(param, paramY, paramX) {
+    if(boundary3 != ''){
+        map.removeLayer(boundary3)
+    }
+        if (boundary2 !== '') {
+            map.removeLayer(boundary2)
+        }
+        boundary2 = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+            layers: 'cite:ba',
+            format: 'image/png',
+            cql_filter: "station='" + param + "'",
+            maxZoom: 21,
+            transparent: true
+        }, {
+            buffer: 10
+        })
+        map.addLayer(boundary2)
+        boundary2.bringToFront()
+
+        map.setView([parseFloat(paramY), parseFloat(paramX)], 11);
+        if (feeder_pillar != '') {
+
+            map.removeLayer(feeder_pillar)
+
+        }
+
+        feeder_pillar =    L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+            layers: 'cite:tbl_feeder_pillar',
+            format: 'image/png',
+            cql_filter: "ba='" + param + "'",
+            maxZoom: 21,
+            transparent: true
+        }, {
+            buffer: 10
+        })
+
+        map.addLayer(feeder_pillar)
+        feeder_pillar.bringToFront()
+
+
+    }
+</script>
 @endsection

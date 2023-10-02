@@ -264,4 +264,50 @@
 
 @section('script')
     @include('partials.map-js')
+
+
+   <script>
+    var  	substation = '';
+     function addRemoveBundary(param, paramY, paramX) {
+    if(boundary3 != ''){
+        map.removeLayer(boundary3)
+    }
+        if (boundary2 !== '') {
+            map.removeLayer(boundary2)
+        }
+        boundary2 = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+            layers: 'cite:ba',
+            format: 'image/png',
+            cql_filter: "station='" + param + "'",
+            maxZoom: 21,
+            transparent: true
+        }, {
+            buffer: 10
+        })
+        map.addLayer(boundary2)
+        boundary2.bringToFront()
+
+        map.setView([parseFloat(paramY), parseFloat(paramX)], 11);
+        if (substation != '') {
+
+            map.removeLayer(substation)
+
+        }
+
+        substation =    L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+            layers: 'cite:tbl_substation',
+            format: 'image/png',
+            cql_filter: "ba='" + param + "'",
+            maxZoom: 21,
+            transparent: true
+        }, {
+            buffer: 10
+        })
+
+        map.addLayer(substation)
+        substation.bringToFront()
+
+
+    }
+</script>
 @endsection
