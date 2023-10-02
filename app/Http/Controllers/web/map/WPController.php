@@ -20,9 +20,9 @@ class WPController extends Controller
 
         // $sql = "WITH inserted_rows as (INSERT INTO public.tbl_workpackage(
         // package_name, geom, zone, ba,wp_status)
-        // VALUES ('$name', st_geomfromgeojson('$geom'), '$zone', '$ba','') RETURNING  id) 
+        // VALUES ('$name', st_geomfromgeojson('$geom'), '$zone', '$ba','') RETURNING  id)
         // SELECT row(id) FROM inserted_rows";
-      
+
         try {
         $data = new WorkPackage();
             $data->zone = $req->zone;
@@ -30,12 +30,12 @@ class WPController extends Controller
             $data->package_name = $req->name;
             $data->geom = DB::raw("st_geomfromgeojson('$req->geom')");
             $data->save();
-        
-   
+
+
           //  $data = DB::raw($sql);
             // $getRoads=DB::raw("select *,st_intersection(st_geomfromgeojson('$req->geom'),geom)
             // from road_layer where st_intersects(st_geomfromgeojson('$req->geom'),geom)");
-            
+
             $add_roads=DB::insert("INSERT INTO public.tbl_roads(
                  road_name, geom, id_workpackage, ba, zone, km)
                 select street,geom,'$data->id','$req->ba', '$req->zone',km from road_layer where st_intersects(st_geomfromgeojson('$req->geom'),geom)");
@@ -91,9 +91,9 @@ class WPController extends Controller
     {
         $wp_id = $wp;
         $result = DB::select("SELECT (sum(st_length(geom::geography)))/1000 as distance FROM tbl_roads where id_workpackage='$wp_id'");
-        $result1 = DB::select("SELECT count(*)  FROM tbl_third_party_diging_patroling where workpackage_id='$wp_id' and service_status='notice'");
-        $result2 = DB::select("SELECT count(*)  FROM tbl_third_party_diging_patroling where workpackage_id='$wp_id' and service_status='supervise'");
-    
+        $result1 = DB::select("SELECT count(*)  FROM tbl_third_party_diging_patroling where workpackage_id='$wp_id' and notice='yes'");
+        $result2 = DB::select("SELECT count(*)  FROM tbl_third_party_diging_patroling where workpackage_id='$wp_id' and supervision='yes'");
+
 
         return response()->json([$result[0], $result1[0], $result2[0]], 200);
     }
