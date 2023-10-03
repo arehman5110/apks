@@ -1035,6 +1035,8 @@
             if(wp != ''){
                 map.removeLayer(wp)
             }
+
+            // workk package
             wp = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
                 layers: 'cite:tbl_workpackage',
                 format: 'image/png',
@@ -1047,20 +1049,9 @@
             map.addLayer(wp)
             wp.bringToFront()
 
-            if (rd != '') {
-                map.removeLayer(rd)
-            }
-            rd = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-                layers: 'cite:tbl_roads',
-                format: 'image/png',
-                cql_filter: "ba='" + param + "'",
-                maxZoom: 21,
-                transparent: true
-            }, {
-                buffer: 10
-            })
-            map.addLayer(rd)
-            rd.bringToFront()
+            
+
+           
 
 
 
@@ -1250,6 +1241,7 @@
         $('#search_wp').on('change', function() {
             const selectedValue = this.value;
             var spiltVal = selectedValue.split(',');
+
             zoomToxy(parseFloat(spiltVal[1]), parseFloat(spiltVal[2]))
 
             $('#for-excel').html(`<a class="mt-4" href="/generate-third-party-diging-excel/${spiltVal[0]}"><button class="btn-sm mt-2
@@ -1269,6 +1261,21 @@
 
                 }
             })
+            if (rd != '') {
+                map.removeLayer(rd)
+            }
+             //road wms layer
+             rd = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:tbl_roads',
+                format: 'image/png',
+                cql_filter: "id_workpackage='" + spiltVal[0] + "'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+            map.addLayer(rd)
+            rd.bringToFront()
 
 
         })

@@ -22,7 +22,7 @@
         </div>
         <div class="col-md-4">
             <a href="{{route('substation.index')}}">
-            <div class="card p-3 bg-light"><h3><i class="fas fa-building"></i>  Pencawang</h3></div></a>
+            <div class="card p-3 bg-light"><h3><i class="fas fa-building"></i>  Substation</h3></div></a>
         </div>
         <div class="col-md-4">
             <a href="{{route('feeder-pillar.index')}}">
