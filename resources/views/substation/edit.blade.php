@@ -139,7 +139,7 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="name">Name</label></div>
                                 <div class="col-md-4">
-                                    <input type="date" name="name" id="name" value="{{ $data->name }}"
+                                    <input type="text" name="name" id="name" value="{{ $data->name }}"
                                         class="form-control" required>
                                 </div>
                             </div>
