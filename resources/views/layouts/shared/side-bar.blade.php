@@ -9,12 +9,12 @@
 
     <div class="sidebar">
 
-        <div class="user-panel mt-2 pb-2 mb-2 d-flex">
+      {{--    <div class="user-panel mt-2 pb-2 mb-2 d-flex">
 
-            <div class="info text-center">
+           <div class="info text-center">
                 <a href="#" class=" text-center ml-4">Nav links</a>
-            </div>
-        </div>
+            </div> 
+        </div>--}}
 
 
 
