@@ -250,7 +250,7 @@
                             </div>
 
                             <input type="hidden" name="lat" id="lat" required class="form-control">
-                            <input type="hidden" name="log" id="log" class="form-control">\
+                            <input type="hidden" name="log" id="log" class="form-control">
                             <div class="text-center">
                                 <strong>  <span class="text-danger map-error"  ></span></strong>
                               </div>

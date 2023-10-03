@@ -77,7 +77,7 @@
                                             <optgroup label="B4">
                                                 <option value="CHERAS,CHERAS, 3.14197346621987, 101.849883983416">CHERAS</option>
                                                 <option value="BANTING/SEPANG,BANTING, 2.82111390453244, 101.505890775541">BANTING</option>
-                                                <option value="BANGI,BANGI">BANGI</option>
+                                                <option value="BANGI,BANGI,2.965810949933260,101.81881303103104">BANGI</option>
                                                 <option value="PUTRAJAYA/CYBERJAYA/PUCHONG,PUTRAJAYA & CYBERJAYA, 2.92875032271019, 101.675338316575">PUTRAJAYA & CYBERJAYA</option>
                                             </optgroup>
 

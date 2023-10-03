@@ -77,7 +77,7 @@
         <div class="row m-2">
 
             <!-- START MAP SIDEBAR DIV -->
-            <div class="col-2 p-0">
+            {{-- <div class="col-2 p-0">
                 <div class="card p-0 m-0"
                     style="border: 1px solid rgb(177, 175, 175) !important; border-radius: 0px !important">
                     <div class="card-header"><strong> NAVIGATION</strong></div>
@@ -107,11 +107,11 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <!-- END MAP SIDEBAR DIV -->
 
             <!-- START MAP  DIV -->
-            <div class="col-10 p-0 ">
+            <div class="col-12 p-0 ">
                 <div class="card p-0 m-0"
                     style="border: 1px solid rgb(177, 175, 175) !important; border-radius: 0px !important;">
                     <div class="card-header text-center"><strong> MAP</strong></div>
