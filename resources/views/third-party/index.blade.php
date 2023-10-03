@@ -45,19 +45,19 @@
                 <div class="col-12">
                     <div class="card">
 
-                            <div class="card-header d-flex justify-content-between ">
-                                <div class="card-title">
-                                    Third Party Digging
-                                </div>
-                                <div class="d-flex ml-auto">
-                                <a href="{{route('third-party-digging.create')}}"><button class="btn text-white btn-success  btn-sm mr-4"  >Add new</button></a>
-
-                               <a href="{{route('generate-third-party-digging-excel')}}"> <button class="btn text-white  btn-sm mr-4" style="background-color: #708090">Download</button></a>
+                        <div class="card-header d-flex justify-content-between ">
+                            <div class="card-title">
+                                Third Party Digging
                             </div>
+                            <div class="d-flex ml-auto">
+                                <a href="{{ route('third-party-digging.create') }}"><button
+                                        class="btn text-white btn-success  btn-sm mr-4">Add Third Party</button></a>
+
+                                <a href="{{ route('generate-third-party-digging-excel') }}"> <button
+                                        class="btn text-white  btn-sm mr-4" style="background-color: #708090">QR Third
+                                        Party</button></a>
                             </div>
-
-
-
+                        </div>
 
                         <div class="card-body">
                             <div class="text-right mb-4">
@@ -90,7 +90,7 @@
                                                     @php
                                                         $date = new DateTime($data->survey_date);
                                                         $datePortion = $date->format('Y-m-d');
-
+                                                        
                                                     @endphp
                                                     {{ $datePortion }}
                                                 </td>
@@ -108,8 +108,7 @@
                                                                 class="dropdown-item pl-3 w-100 text-left">Detail</button>
                                                         </form>
 
-                                                        <form
-                                                            action="{{ route('third-party-digging.edit', $data->id) }}"
+                                                        <form action="{{ route('third-party-digging.edit', $data->id) }}"
                                                             method="get">
                                                             <button type="submit"
                                                                 class="dropdown-item pl-3 w-100 text-left">Edit</button>

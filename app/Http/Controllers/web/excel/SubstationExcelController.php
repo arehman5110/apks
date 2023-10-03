@@ -16,7 +16,7 @@ class SubstationExcelController extends Controller
     {
         try {
             $recored = Substation::all();
-            // return $recored;
+         
             if (sizeof($recored) > 0) {
                 $excelFile = public_path('assets/excel-template/substation.xlsx');
 
@@ -24,9 +24,9 @@ class SubstationExcelController extends Controller
 
                 $worksheet = $spreadsheet->getActiveSheet();
 
-                $i = 4;
+                $i = 3;
                 foreach ($recored as $rec) {
-                    $worksheet->setCellValue('A' . $i, $i - 3);
+                    $worksheet->setCellValue('A' . $i, $i - 2);
                     $worksheet->setCellValue('B' . $i, $rec->zone);
                     $worksheet->setCellValue('C' . $i, $rec->ba);
                     $worksheet->setCellValue('D' . $i, $rec->team);
@@ -50,9 +50,10 @@ class SubstationExcelController extends Controller
 
                 $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
 
-                $writer->save(public_path('assets/updated-excels/') . 'substation.xlsx');
-
-                return response()->download(public_path('assets/updated-excels/') . 'substation.xlsx');
+                
+                $writer->save(public_path('assets/updated-excels/') . 'qr-substation.xlsx');
+                ob_end_clean();
+                return response()->download(public_path('assets/updated-excels/') . 'qr-substation.xlsx');
             } else {
                 return redirect()
                     ->back()

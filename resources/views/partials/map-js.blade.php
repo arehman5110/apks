@@ -89,11 +89,7 @@
 
                         str +=
                             `<th class="text-capitalize">${splitKey.map(part => part.charAt(0).toUpperCase() + part.slice(1)).join(' ')}</th>`;
-                        if (key == 'during_image1' || key == 'during_image2' || key ==
-                            'during_image3' || key ==
-                            'before_image1' || key == 'before_image2' || key == 'before_image3' ||
-                            key ==
-                            'after_image1' || key == 'after_image2' || key == 'after_image3') {
+                        if (splitKey.includes('image') || splitKey.includes('images')) {
 
                             if (data.features[0].properties[key] == '') {
                                 str = str + `<td>no image found</td></tr>`;

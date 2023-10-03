@@ -53,7 +53,7 @@ class DigingExcelController extends Controller
 
 
             $writer->save(public_path('assets/updated-excels/') . $work->package_name . '.xlsx');
- ob_start();
+            ob_end_clean();
             return response()->download(public_path('assets/updated-excels/') . $work->package_name . '.xlsx');
         }else{
             return redirect()->back()->with('failed','No records found ');
