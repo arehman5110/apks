@@ -24,8 +24,10 @@ class MapController extends Controller
 
 
     public function allWP(){
+
       // return Road::with('workPackage')->get();
-       return  view('map.detail',['datas'=>WorkPackage::all(),'roads'=>Road::with('workPackage')->get()]);
+      // return WorkPackage::all('id, ');
+       return  view('map.detail',['datas'=>WorkPackage::all('id','package_name','zone','ba','wp_status','created_at')]);
     }
 
 
