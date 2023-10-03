@@ -83,21 +83,7 @@
                 <div class="card-body">
                     <!-- MAP SIDEBAR LAYERS SELECTOR -->
                     <div class="side-bar" style="height: 569px !important; overflow-y: scroll;">
-                        <div class="col-md-12 mb-2" class="form-group">
-                            <label>Select Info Layer :</label>
-                            <select class="form-select" id="tableLayer" onchange="activeSelectedLayerOther(this.value)">
-                                <option value="" hidden>Select Layer</option>
-                                <option value="lv_fuse">lv_fuse</option>
-                                <option value="lv_ug_conductor">lv_ug_conductor</option>
-                                <option value="lvdb_fp">lvdb_fp</option>
-                                <option value="street_light">street_light</option>
-                                <option value="pole">pole</option>
-                                <option value="wp">wp</option>
-                                <option value="notice">notice</option>
-                                <option value="supervise">supervise</option>
-
-                            </select>
-                        </div>
+                        
 
                         <!-- START MAP SIDEBAR DETAILS -->
 
@@ -301,6 +287,7 @@
 
         }
 
+        // alert(param)
         link_box =    L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
             layers: 'cite:tbl_link_box',
             format: 'image/png',

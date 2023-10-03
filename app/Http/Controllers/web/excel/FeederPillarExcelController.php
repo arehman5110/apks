@@ -46,20 +46,10 @@ class FeederPillarExcelController extends Controller
                     $i++;
                 }
                 $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
-
-                $response = response()->stream(
-                    function () use ($writer) {
-                        $writer->save('php://output');
-                    },
-                    200,
-                    [
-                        'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-                        'Content-Disposition' => 'attachment; filename="feeder-pillar.xlsx"',
-                    ],
-                );
-
-                // Return the response for download
-                return $response;
+             
+            $writer->save(public_path('assets/updated-excels/') . 'qr-feeder-pillar.xlsx');
+            ob_end_clean();
+            return response()->download(public_path('assets/updated-excels/'). 'qr-feeder-pillar.xlsx');
             } else {
                 return redirect()
                     ->back()

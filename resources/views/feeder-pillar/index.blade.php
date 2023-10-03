@@ -48,9 +48,9 @@
                             <div class="card-header d-flex justify-content-between ">
                                 <p class="mb-0">Feeder Pillar</p>
                                 <div class="d-flex ml-auto">
-                                <a href="{{route('feeder-pillar.create')}}"><button class="btn text-white btn-success  btn-sm mr-4"  >Add new</button></a>
+                                <a href="{{route('feeder-pillar.create')}}"><button class="btn text-white btn-success  btn-sm mr-4"  >Add Fedder Pillar</button></a>
 
-                               <a href="{{route('generate-feeder-pillar-excel')}}"> <button class="btn text-white  btn-sm mr-4" style="background-color: #708090">Download</button></a>
+                               <a href="{{route('generate-feeder-pillar-excel')}}"> <button class="btn text-white  btn-sm mr-4" style="background-color: #708090">QR Feeder Pillar</button></a>
                             </div>
                             </div>
 

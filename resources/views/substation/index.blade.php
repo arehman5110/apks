@@ -48,9 +48,9 @@
                             <div class="card-header d-flex justify-content-between ">
                                 <p class="mb-0">Substation</p>
                                 <div class="d-flex ml-auto">
-                                <a href="{{route('substation.create')}}"><button class="btn text-white btn-success  btn-sm mr-4"  >Add new</button></a>
+                                <a href="{{route('substation.create')}}"><button class="btn text-white btn-success  btn-sm mr-4"  >Add Substation</button></a>
 
-                               <a href="{{route('generate-substation-excel')}}"> <button class="btn text-white  btn-sm mr-4" style="background-color: #708090">Download</button></a>
+                               <a href="{{route('generate-substation-excel')}}"> <button class="btn text-white  btn-sm mr-4" style="background-color: #708090">QR Substation</button></a>
                             </div>
                             </div>
 

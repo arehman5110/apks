@@ -47,9 +47,9 @@
                         <div class="card-header d-flex justify-content-between ">
                             <p class="mb-0">Cable Bridge</p>
                             <div class="d-flex ml-auto">
-                            <a href="{{route('cable-bridge.create')}}"><button class="btn text-white btn-success  btn-sm mr-4"  >Add new</button></a>
+                            <a href="{{route('cable-bridge.create')}}"><button class="btn text-white btn-success  btn-sm mr-4"  >Add Cable Bridge</button></a>
 
-                           <a href="{{route('generate-cable-bridge-excel')}}"> <button class="btn text-white  btn-sm mr-4" style="background-color: #708090">Download</button></a>
+                           <a href="{{route('generate-cable-bridge-excel')}}"> <button class="btn text-white  btn-sm mr-4" style="background-color: #708090">QR Cable Bridge</button></a>
                         </div>
                         </div>
                         <div class="card-body">

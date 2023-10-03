@@ -50,9 +50,9 @@
                                     Link Box
                                 </div>
                                 <div class="d-flex ml-auto">
-                                <a href="{{route('link-box-pelbagai-voltan.create')}}"><button class="btn text-white btn-success  btn-sm mr-4"  >Add new</button></a>
+                                <a href="{{route('link-box-pelbagai-voltan.create')}}"><button class="btn text-white btn-success  btn-sm mr-4"  >Add Link Box</button></a>
 
-                               <a href="{{route('generate-link-box-excel')}}"> <button class="btn text-white  btn-sm mr-4" style="background-color: #708090">Download</button></a>
+                               <a href="{{route('generate-link-box-excel')}}"> <button class="btn text-white  btn-sm mr-4" style="background-color: #708090">QR Link Box</button></a>
                             </div>
                             </div>
 
