@@ -123,7 +123,7 @@
                         <div class="row">
                             <div class="col-md-4"><label for="start_date">name</label></div>
                             <div class="col-md-4">
-                                <input type="date" readonly value="{{ $data->name }}" class="form-control"
+                                <input type="text" readonly value="{{ $data->name }}" class="form-control"
                                     required>
                             </div>
                         </div>
@@ -131,7 +131,7 @@
                         <div class="row">
                             <div class="col-md-4"><label for="end_date">type</label></div>
                             <div class="col-md-4">
-                                <input type="date" readonly value="{{ $data->type }}" class="form-control" required>
+                                <input type="text" readonly value="{{ $data->type }}" class="form-control" required>
                             </div>
                         </div>
 

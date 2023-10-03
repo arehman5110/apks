@@ -46,7 +46,7 @@
                     <div class="card">
 
                             <div class="card-header d-flex justify-content-between ">
-                                <p class="mb-0">Cable Bridge</p>
+                                <p class="mb-0">Substation</p>
                                 <div class="d-flex ml-auto">
                                 <a href="{{route('substation.create')}}"><button class="btn text-white btn-success  btn-sm mr-4"  >Add new</button></a>
 
