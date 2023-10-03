@@ -66,7 +66,7 @@
                         <li class="nav-item">
                             <a href="/get-all-work-packages" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>tnbs approvel</p>
+                                <p>SBUM Approval</p>
                             </a>
                         </li>
                     </ul>
