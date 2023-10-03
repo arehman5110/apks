@@ -75,6 +75,9 @@ class WPController extends Controller
     {
         $rec = WorkPackage::withCount('diging')->find($id);
 
+        if (!$rec) {
+            return abort(404);
+        }
         $wp = WorkPackage::selectRaw('ST_X(ST_Centroid(geom)) as x')
             ->selectRaw('ST_Y(ST_Centroid(geom)) as y')
             ->where('ba', $rec->ba)
@@ -85,6 +88,7 @@ class WPController extends Controller
         $road = Road::selectRaw('(ST_Length(geom::geography))/1000 as distance')
             ->where('id_workpackage', $id)
             ->get();
+
 
         return $rec != '' ? view('map.show', ['rec' => $rec, 'wp' => $wp, 'distance' => $road->sum('distance')]) : abort(404);
     }

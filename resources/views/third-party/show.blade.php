@@ -33,15 +33,6 @@
         }
     </style>
 
-@guest
-    <style>
-   body:not(.sidebar-mini-md):not(.sidebar-mini-xs):not(.layout-top-nav) .content-wrapper, body:not(.sidebar-mini-md):not(.sidebar-mini-xs):not(.layout-top-nav) .main-footer, body:not(.sidebar-mini-md):not(.sidebar-mini-xs):not(.layout-top-nav) .main-header
-     {
-        transition: margin-left .3s ease-in-out;
-        margin-left: 0px !important;
-    }
-</style>
-    @endguest
 @endsection
 
 

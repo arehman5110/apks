@@ -58,7 +58,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/send-to-tnbes/{id}', [StatusController::class, 'sendToTnbes']);
     Route::get('/generate-third-party-diging-excel/{id}', [DigingExcelController::class, 'generateDigingExcel']);
-    Route::get('/get-work-package-detail/{id}', [WPController::class, 'detail']);
+
 
     Route::get('/remove-road/{id}', [RoadController::class, 'removeRoad']);
     Route::get('/remove-work-package/{id}', [WPController::class, 'removeWP']);
@@ -108,6 +108,6 @@ Route::middleware('auth')->group(function () {
     Route::view('/map-2', 'map');
 });
 
-Route::get('/third-party-digging-mobile/{id}',[ThirdPartyDiggingController::class,'show']);
-
+// Route::get('/third-party-digging-mobile/{id}',[ThirdPartyDiggingController::class,'show']);
+Route::get('/get-work-package-detail/{id}', [WPController::class, 'detail']);
 require __DIR__ . '/auth.php';
