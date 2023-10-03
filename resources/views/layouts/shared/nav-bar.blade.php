@@ -16,7 +16,7 @@
       <a href="#" class="nav-link">Contact</a>
     </li> --}}
     </ul>
-
+    @auth
     <div class="ms-auto ">
         <x-dropdown align="right" width="48">
             <x-slot name="trigger">
@@ -52,6 +52,7 @@
             </x-slot>
         </x-dropdown>
     </div>
+    @endauth
  
 
 

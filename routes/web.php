@@ -22,6 +22,7 @@ use App\Http\Controllers\web\tnbes\StatusController;
 use App\Http\Controllers\web\ThirdPartyDiggingController;
 use App\Http\Controllers\web\SubstationController;
 use App\Http\Controllers\web\FPController;
+use App\Models\ThirdPartyDiging;
 
 /*
 |--------------------------------------------------------------------------
@@ -106,5 +107,7 @@ Route::middleware('auth')->group(function () {
 
     Route::view('/map-2', 'map');
 });
+
+Route::get('/third-party-digging-mobile/{id}',[ThirdPartyDiggingController::class,'show']);
 
 require __DIR__ . '/auth.php';

@@ -22,7 +22,10 @@
 <body class="hold-transition sidebar-mini layout-fixed ">
     <div class="wrapper">
         @include('layouts.shared.nav-bar')
+        @auth
         @include('layouts.shared.side-bar')
+        @endauth
+        
         <div class="content-wrapper">
 
       
