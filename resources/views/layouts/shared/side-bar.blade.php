@@ -47,20 +47,20 @@
                         <li class="nav-item">
                             <a href="{{ route('third-party-digging.create') }}" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>create</p>
+                                <p>Create</p>
                             </a>
                         </li>
 
                         <li class="nav-item">
                             <a href="{{ route('third-party-digging.index') }}" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>index</p>
+                                <p>Index</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="/map-1" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>map</p>
+                                <p>Map</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -84,20 +84,20 @@
                         <li class="nav-item">
                             <a href="{{ route('substation.create') }}" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>create</p>
+                                <p>Create</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('substation.index') }}" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>index</p>
+                                <p>Index</p>
                             </a>
                         </li>
 
                         <li class="nav-item">
                             <a href="/substation-map" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>map</p>
+                                <p>Map</p>
                             </a>
                         </li>
 
@@ -121,13 +121,13 @@
                         <li class="nav-item">
                             <a href="{{ route('feeder-pillar.index') }}" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>index</p>
+                                <p>Index</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="/feeder-pillar-map" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>map</p>
+                                <p>Map</p>
                             </a>
                         </li>
                     </ul>
@@ -146,19 +146,19 @@
                         <li class="nav-item">
                             <a href="{{route('tiang-talian-vt-and-vr.create')}}" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>create</p>
+                                <p>Create</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{route('tiang-talian-vt-and-vr.index')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>index</p>
+                                <p>Index</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="/tiang-talian-vt-and-vr-map" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>map</p>
+                                <p>Map</p>
                             </a>
                         </li>
                     </ul>
@@ -182,14 +182,14 @@
                         <li class="nav-item">
                             <a href="{{route('link-box-pelbagai-voltan.index')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>index</p>
+                                <p>Index</p>
                             </a>
                         </li>
 
                         <li class="nav-item">
                             <a href="/link-box-pelbagai-voltan-map" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>map</p>
+                                <p>Map</p>
                             </a>
                         </li>
                     </ul>
@@ -207,20 +207,20 @@
                         <li class="nav-item">
                             <a href="{{route('cable-bridge.create')}}" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>create</p>
+                                <p>Create</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{route('cable-bridge.index')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>index</p>
+                                <p>Index</p>
                             </a>
                         </li>
 
                         <li class="nav-item">
                             <a href="/cable-bridge-map" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>map</p>
+                                <p>Map</p>
                             </a>
                         </li>
                     </ul>
