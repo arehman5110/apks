@@ -117,8 +117,12 @@ class ThirdPartyDiggingController extends Controller
     public function show($id)
     {
         $data = ThirdPartyDiging::find($id);
+        if ($data) {
+            return view('third-party.show', ['data' => $data]);
+        }
+        return abort(404);
 
-        return view('third-party.show', ['data' => $data]);
+        
     }
 
     /**
