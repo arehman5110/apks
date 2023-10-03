@@ -227,7 +227,7 @@
                 const b4Options = [
                     ['CHERAS', 'CHERAS', 3.14197346621987, 101.849883983416],
                     ['BANTING/SEPANG', 'BANTING', 2.82111390453244, 101.505890775541],
-                    ['BANGI', 'BANGI'],
+                    ['BANGI', 'BANGI',2.965810949933260,101.81881303103104],
                     ['PUTRAJAYA/CYBERJAYA/PUCHONG', 'PUTRAJAYA & CYBERJAYA', 2.92875032271019,
                         101.675338316575
                     ]

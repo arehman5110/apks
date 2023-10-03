@@ -287,6 +287,7 @@
 
         }
 
+        // alert(param)
         link_box =    L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
             layers: 'cite:tbl_link_box',
             format: 'image/png',
