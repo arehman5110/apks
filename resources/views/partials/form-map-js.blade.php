@@ -106,13 +106,19 @@
             method: 'GET',
             async: false,
             success: function callback(data) {
-                if (data.road_name == null) {
+                console.log(data);
+                if (data.Success) {
+                    
+                
+                if (data[0].road_name == null) {
                     $('#road_name_check').html("Road name is null Please enter road name")
                 }else{
                     $('#road_name_check').html("")
                 }
-                $('#road_name').val(data.road_name)
-
+                $('#road_name').val(data[0].road_name)
+            }else{
+                $('#road_name_check').html("No Road Found Please select again")
+            }
             }
         })
     }
@@ -168,7 +174,7 @@
                 const b4Options = [
                     ['CHERAS', 'CHERAS', 3.14197346621987, 101.849883983416],
                     ['BANTING/SEPANG', 'BANTING', 2.82111390453244, 101.505890775541],
-                    ['BANGI', 'BANGI'],
+                    ['BANGI', 'BANGI',2.965810949933260,101.81881303103104 ],
                     ['PUTRAJAYA/CYBERJAYA/PUCHONG', 'PUTRAJAYA & CYBERJAYA', 2.92875032271019,
                         101.675338316575
                     ]

@@ -79,6 +79,7 @@ class WPController extends Controller
             ->selectRaw('ST_Y(ST_Centroid(geom)) as y')
             ->where('ba', $rec->ba)
             ->where('zone', $rec->zone)
+            ->where('id',$id)
             ->first();
 
         $road = Road::selectRaw('(ST_Length(geom::geography))/1000 as distance')

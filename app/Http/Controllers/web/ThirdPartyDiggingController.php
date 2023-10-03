@@ -51,7 +51,7 @@ class ThirdPartyDiggingController extends Controller
             $combinedDateTime = $currentDate . ' ' . $request->patrolling_time;
 
             $data = new ThirdPartyDiging();
-            $data->wp_name = $request->search_wp;
+            $data->wp_name = $request->wp_name;
             $data->zone = $request->zone;
             $data->ba = $request->ba;
             $data->team_name = $request->team_name;

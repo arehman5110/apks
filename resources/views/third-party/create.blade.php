@@ -96,6 +96,7 @@
 
                                     </select>
                                     <input type="hidden" name="workpackage_id" id="workpackage_id" class="form-control">
+                                    <input type="hidden" name="wp_name" id="wp_name" >
                                 </div>
                             </div>
 
@@ -379,17 +380,8 @@
             if (rd != '') {
                 map.removeLayer(rd)
             }
-            rd = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-                layers: 'cite:tbl_roads',
-                format: 'image/png',
-                cql_filter: "ba='" + splitVal[1] + "'",
-                maxZoom: 21,
-                transparent: true
-            }, {
-                buffer: 10
-            })
-            map.addLayer(rd)
-            rd.bringToFront()
+            
+         
             var zone = $('#search_zone').val();
             $.ajax({
                 url: `/get-work-package/${splitVal[1]}/${zone}`,
@@ -405,7 +397,7 @@
 
 
                         $('#search_wp').append(
-                            `<option value="${val.id} ,${val.x} ,${val.y}">${val.package_name}</option>`
+                            `<option value="${val.id},${val.package_name},${val.x} ,${val.y}">${val.package_name}</option>`
                         );
                     }
                     });
@@ -421,10 +413,40 @@
             const selectedValue = this.value;
             var spiltVal = selectedValue.split(',');
 
-            map.setView([parseFloat(spiltVal[2]), parseFloat(spiltVal[1])], 16)
+            $('#wp_name').val(spiltVal[1]);
+            map.setView([parseFloat(spiltVal[3]), parseFloat(spiltVal[2])], 16)
             $('#for-excel').html(`<a class="mt-4" href="/generate-third-party-diging-excel/${spiltVal[0]}"><button class="btn-sm mt-2
                 btn btn-primary">Download Qr</button></a>`)
             $('#workpackage_id').val(spiltVal[0])
+
+            if (wp != '') {
+                map.removeLayer(wp)
+            }
+            wp = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:tbl_workpackage',
+                format: 'image/png',
+                cql_filter: "package_name='" + spiltVal[1] + "'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+            map.addLayer(wp)
+            wp.bringToFront()
+            if (rd != '') {
+                map.removeLayer(rd)
+            }
+            rd = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:tbl_roads',
+                format: 'image/png',
+                cql_filter: "id_workpackage='" + spiltVal[0] + "'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+            map.addLayer(rd)
+            rd.bringToFront()
 
         })
     </script>

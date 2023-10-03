@@ -66,10 +66,10 @@ class RoadController extends Controller
 
             if (count($data) > 0) {
                 // Return the record with the shortest distance
-                return $data[0];
+                return response()->json(['Success' => true, $data[0]], 200);
             } else {
                 // Handle the case where no matching records were found
-                return response()->json(['Success' => false, 'error' => 'No matching records found'], 404);
+                return response()->json(['Success' => false, 'error' => 'No matching records found'], 200);
             }
         } catch (\Throwable $th) {
             return response()->json(['Success' => false, 'error' => $th->getMessage()], 500);

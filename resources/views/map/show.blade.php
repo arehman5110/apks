@@ -5,16 +5,17 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    
+
 
 <style>
     #map {
         height: 400px;
         z-index: 1;
     }
+
     .leaflet-control-attribution.leaflet-control {
-    display: none;
-}
+        display: none;
+    }
 </style>
 @section('css')
 @endsection
@@ -38,7 +39,7 @@
         </div>
     </section>
 
-  
+
 
     <section class="content">
         <div class="container-fluid">
@@ -49,7 +50,7 @@
                         <div class="card-header">
                             <div class="card-title text-right">
                                 Work Package Detail
-                              
+
                             </div>
 
                         </div>
@@ -90,7 +91,7 @@
                                 <div class="col-md-4"><input disabled class="form-control" value="{{ $distance }}">
                                 </div>
                             </div>
-
+                            
 
                             <h4 class="text-center mt-3">Road Details</h4>
                             <div id="map"></div>
@@ -165,7 +166,7 @@
         rd = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
             layers: 'cite:tbl_roads',
             format: 'image/png',
-            cql_filter: "id_workpackage='{{$rec->id}}'",
+            cql_filter: "id_workpackage='{{ $rec->id }}'",
             maxZoom: 21,
             transparent: true
         }, {
@@ -174,113 +175,113 @@
 
         rd.addTo(map)
 
-        var  sel_lyr = 'rd';
+        var sel_lyr = rd;
         map.on('click', function(e) {
-                var url = getFeatureInfoUrl(
-                    map,
-                    sel_lyr,
-                    e.latlng, {
-                        'info_format': 'application/json',
-                        'propertyName': 'NAME,AREA_CODE,DESCRIPTIO'
-                    }
-                );
+            var url = getFeatureInfoUrl(
+                map,
+                sel_lyr,
+                e.latlng, {
+                    'info_format': 'application/json',
+                    'propertyName': 'NAME,AREA_CODE,DESCRIPTIO'
+                }
+            );
 
-            
-                var secondUrl = encodeURIComponent(url)
-                $.ajax({
-                    url: '/proxy/' + encodeURIComponent(secondUrl),
-                    dataType: 'JSON',
-                    //data: data,
-                    method: 'GET',
-                    async: false,
-                    success: function callback(data1) {
-                        console.log(data1)
-                        data = JSON.parse(data1)
-                        if (data.features.length != 0) {
-                            var str = '';
-                            for (key in data.features[0].properties) {
-                                //console.log(key);
-                                //console.log(data.features[0].properties[key]);
-                                if (key == 'image_1' || key == 'image_2' || key == 'image_3' || key ==
-                                    'image_4' || key == 'image_5' || key == 'image_6' || key ==
-                                    'image_7' || key == 'image_8' || key == 'image_9' || key ==
-                                    'image_10') {
-                                    str = str + '<tr><td>' + key + '</td><td><a href="' + data.features[
-                                            0].properties[key] +
-                                        '" class=\'example-image-link\' data-lightbox=\'example-set\' title=\'&lt;button class=&quot;primary &quot; onclick= rotate_img(&quot;pic1&quot)  &gt;Rotate image&lt;/button&gt;\'><img src="' +
-                                        data.features[0].properties[key] +
-                                        '" width="20px" height="20px"></a></td></tr>'
 
-                                } else {
-                                    str = str + '<tr><td>' + key + '</td><td>' + data.features[0]
-                                        .properties[key] + '</td></tr>'
-                                }
+            var secondUrl = encodeURIComponent(url)
+            $.ajax({
+                url: '/proxy/' + encodeURIComponent(secondUrl),
+                dataType: 'JSON',
+                //data: data,
+                method: 'GET',
+                async: false,
+                success: function callback(data1) {
+                    console.log(data1)
+                    data = JSON.parse(data1)
+                    if (data.features.length != 0) {
+                        var str = '';
+                        for (key in data.features[0].properties) {
+                            //console.log(key);
+                            //console.log(data.features[0].properties[key]);
+                            if (key == 'image_1' || key == 'image_2' || key == 'image_3' || key ==
+                                'image_4' || key == 'image_5' || key == 'image_6' || key ==
+                                'image_7' || key == 'image_8' || key == 'image_9' || key ==
+                                'image_10') {
+                                str = str + '<tr><td>' + key + '</td><td><a href="' + data.features[
+                                        0].properties[key] +
+                                    '" class=\'example-image-link\' data-lightbox=\'example-set\' title=\'&lt;button class=&quot;primary &quot; onclick= rotate_img(&quot;pic1&quot)  &gt;Rotate image&lt;/button&gt;\'><img src="' +
+                                    data.features[0].properties[key] +
+                                    '" width="20px" height="20px"></a></td></tr>'
+
+                            } else {
+                                str = str + '<tr><td>' + key + '</td><td>' + data.features[0]
+                                    .properties[key] + '</td></tr>'
                             }
-                            $("#my_data").html(str);
-                            $('#myModal').modal('show');
-                            if (identifyme != '') {
-                                map.removeLayer(identifyme)
-                            }
-                            var myStyle = {
-                                "fillColor": "#ff7800"
-                            };
-                            identifyme = L.geoJSON(data.features[0].geometry, {
-                                style: myStyle
-                            }).addTo(map);
-
                         }
+                        $("#my_data").html(str);
+                        $('#myModal').modal('show');
+                        if (identifyme != '') {
+                            map.removeLayer(identifyme)
+                        }
+                        var myStyle = {
+                            "fillColor": "#ff7800"
+                        };
+                        identifyme = L.geoJSON(data.features[0].geometry, {
+                            style: myStyle
+                        }).addTo(map);
 
                     }
-                });
 
-
+                }
             });
 
-            
+
+        });
+
+
 
         function getFeatureInfoUrl(map, layer, latlng, params) {
 
-var point = map.latLngToContainerPoint(latlng, map.getZoom()),
-    size = map.getSize(),
+            var point = map.latLngToContainerPoint(latlng, map.getZoom()),
+                size = map.getSize(),
 
-    params = {
-        request: 'GetFeatureInfo',
-        service: 'WMS',
-        srs: 'EPSG:4326',
-        styles: layer.wmsParams.styles,
-        transparent: layer.wmsParams.transparent,
-        version: layer._wmsVersion,
-        format: layer.wmsParams.format,
-        bbox: map.getBounds().toBBoxString(),
-        height: size.y,
-        width: size.x,
-        layers: layer.wmsParams.layers,
-        query_layers: layer.wmsParams.layers,
-        info_format: 'application/json'
-    };
+                params = {
+                    request: 'GetFeatureInfo',
+                    service: 'WMS',
+                    srs: 'EPSG:4326',
+                    styles: layer.wmsParams.styles,
+                    transparent: layer.wmsParams.transparent,
+                    version: layer._wmsVersion,
+                    format: layer.wmsParams.format,
+                    bbox: map.getBounds().toBBoxString(),
+                    height: size.y,
+                    width: size.x,
+                    layers: layer.wmsParams.layers,
+                    query_layers: layer.wmsParams.layers,
+                    info_format: 'application/json'
+                };
 
-params[params.version === '1.3.0' ? 'i' : 'x'] = parseInt(point.x);
-params[params.version === '1.3.0' ? 'j' : 'y'] = parseInt(point.y);
+            params[params.version === '1.3.0' ? 'i' : 'x'] = parseInt(point.x);
+            params[params.version === '1.3.0' ? 'j' : 'y'] = parseInt(point.y);
 
-// return this._url + L.Util.getParamString(params, this._url, true);
+            // return this._url + L.Util.getParamString(params, this._url, true);
 
-var url = layer._url + L.Util.getParamString(params, layer._url, true);
-if (typeof layer.wmsParams.proxy !== "undefined") {
+            var url = layer._url + L.Util.getParamString(params, layer._url, true);
+            if (typeof layer.wmsParams.proxy !== "undefined") {
 
 
-    // check if proxyParamName is defined (instead, use default value)
-    if (typeof layer.wmsParams.proxyParamName !== "undefined")
-        layer.wmsParams.proxyParamName = 'url';
+                // check if proxyParamName is defined (instead, use default value)
+                if (typeof layer.wmsParams.proxyParamName !== "undefined")
+                    layer.wmsParams.proxyParamName = 'url';
 
-    // build proxy (es: "proxy.php?url=" )
-    _proxy = layer.wmsParams.proxy + '?' + layer.wmsParams.proxyParamName + '=';
+                // build proxy (es: "proxy.php?url=" )
+                _proxy = layer.wmsParams.proxy + '?' + layer.wmsParams.proxyParamName + '=';
 
-    url = _proxy + encodeURIComponent(url);
+                url = _proxy + encodeURIComponent(url);
 
-}
+            }
 
-return url.toString();
+            return url.toString();
 
-}
+        }
     </script>
 @endsection
