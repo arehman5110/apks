@@ -100,7 +100,7 @@
                                     <select name="wp_name" id="wp_name" class="form-control" onchange="getWpId(this)" required>
                                         <option value="{{ $data->wp_name }}" hidden>{{ $data->wp_name }}</option>
                                         @foreach ($wp as $p)
-                                            @if ($p->ba == $data->ba)
+                                            @if ($p->ba == $data->ba &&  $p->wp_status == 'approved')
                                                 <option value="{{ $p->package_name }}">{{ $p->package_name }}</option>
                                             @endif
                                         @endforeach
