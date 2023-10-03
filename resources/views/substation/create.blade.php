@@ -217,6 +217,12 @@
                                     </div>
                             </div>
                             <div class="row">
+                                <div class="col-md-4"><label for="image_tree_branches">Image Tree Branches</label></div>
+                                <div class="col-md-4">
+                                    <input type="file" name="image_tree_branches" id="image_tree_branches" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-md-4"><label for="images_gate_after_lock">Images Gate After Lock</label></div>
                                 <div class="col-md-4">
                                     <input type="file" name="images_gate_after_lock" id="images_gate_after_lock"

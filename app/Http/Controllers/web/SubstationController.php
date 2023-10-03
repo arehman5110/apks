@@ -162,7 +162,7 @@ class SubstationController extends Controller
 
             return redirect()
                 ->route('substation.index')
-                ->with('success', 'Form Intserted');
+                ->with('success', 'Form Update');
         } catch (\Throwable $th) {
             return $th->getMessage();
             return redirect()
