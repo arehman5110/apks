@@ -98,9 +98,15 @@
 
         $('#lat').val(lat);
         $('#log').val(lng);
+        var coordinate = $('#coordinate')
+
+        if (coordinate.length > 0) {
+           coordinate.val(`${lat} , ${lng}`)
+           return ;
+        }
 
         $.ajax({
-            url: '/get-road-name/' + parseFloat(lat) + '/' +parseFloat( lng),
+            url: '/get-road-name/' + parseFloat(lat) + '/' +parseFloat(lng),
             dataType: 'JSON',
             //data: data,
             method: 'GET',
@@ -111,7 +117,7 @@
                     
                 
                 if (data[0].road_name == null) {
-                    $('#road_name_check').html("Road name is null Please enter road name")
+                    $('#road_name_check').html("Road name is missing Please enter road name")
                 }else{
                     $('#road_name_check').html("")
                 }

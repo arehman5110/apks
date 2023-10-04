@@ -92,7 +92,7 @@
                         <div class="row">
                             <div class="col-md-4"><label for="patrol_time">Patrol Time</label></div>
                             <div class="col-md-4">
-                                <input type="time" readonly class="form-control" value="{{ $data->patrol_time }}"
+                                <input type="time" readonly class="form-control" value="{{ date('H:i:s', strtotime($data->patrol_time)) }}"
                                     required>
                             </div>
                         </div>

@@ -2,7 +2,11 @@
 
 @section('css')
     @include('partials.map-css')
-    <style>#map{height: 600px;}</style>
+    <style>
+        #map {
+            height: 600px;
+        }
+    </style>
 @endsection
 
 
@@ -135,51 +139,6 @@
         </div><!--  END MAP CARD DIV -->
     </div>
 
-    <div class="modal fade" id="geomModal" tabindex="-1" aria-labelledby="geomModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add new W.P</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form action="/save-work-package" method="post" id="save_wp" onsubmit="return submitFoam()">
-                    @csrf
-                    <div class="modal-body ">
-
-
-                        <label for="">Work Package Name</label>
-                        <span class="text-danger" id="er-pw-name"></span> <br>
-                        <input type="text" name="name" id="pw-name" class="form-control">
-                        <label for="zone">Zone</label>
-
-                        <input type="text" name="zone" id="pw-zone" class="form-control">
-                        {{-- <select name="zone" id="pw-zone" class="form-control">
-                        <option value="" hidden>select zone</option>
-                        <option value="W1">W1</option>
-                        <option value="B1">B1</option>
-                        <option value="B2">B2</option>
-                        <option value="B4">B4</option>
-                    </select> --}}
-
-                        <label for="ba">Select ba</label>
-                        <input type="text" name="ba" id="pw-ba" class="form-control">
-                        {{-- <select name="ba" id="pw-ba" class="form-control">
-                        <option value="" hidden>Select zone</option>
-                    </select> --}}
-
-                        <input type="hidden" name="geom" id="geom">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Submit</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 
     <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -202,98 +161,76 @@
             </div>
         </div>
     </div>
-
-    <div class="modal fade" id="polyLineModal" tabindex="-1" aria-labelledby="polyLineModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Identify Roads</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form action="/save-road" method="post" id="road-form" onsubmit="return submitFoam2()">
-                    @csrf
-                    <div class="modal-body ">
-                        <label for="ba">Road Name</label>
-                        <span class="text-center" id="er_raod_name"></span>
-                        <input name="road_name" id="road_name" class="form-control">
-                        <label for="">Work Package Name</label>
-                        <input type="text" name="" id="raod-d-wp-id" class="form-control disabled">
-                        <input type="hidden" name="id_wp" id="raod-wp-id">
-                        {{-- <select name="id_wp" id="raod-wp-id" class="form-control" onchange="getWorkPackage(this)">
-                        <option value="">select wp</option>
-                        @foreach ($wps as $wp)
-                            <option value="{{$wp->id}}">{{$wp->package_name}}</option>
-                        @endforeach
-                    </select> --}}
-                        <label for="polyline-zone">Zone</label>
-                        <input id="polyline-zone" name="zone" class="form-control">
-                        <label for="polyline-ba">BA</label>
-                        <input id="polyline-ba" name="ba" class="form-control">
-
-
-
-
-                        <input type="hidden" name="geom" id="road-geom">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Submit</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 @endsection
 
 @section('script')
     @include('partials.map-js')
 
 
-   <script>
-    var  	substation = '';
-     function addRemoveBundary(param, paramY, paramX) {
-    if(boundary3 != ''){
-        map.removeLayer(boundary3)
-    }
-        if (boundary2 !== '') {
-            map.removeLayer(boundary2)
+    <script>
+        var substation = '';
+
+        function addRemoveBundary(param, paramY, paramX) {
+            if (boundary3 != '') {
+                map.removeLayer(boundary3)
+            }
+            if (boundary2 !== '') {
+                map.removeLayer(boundary2)
+            }
+            boundary2 = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:ba',
+                format: 'image/png',
+                cql_filter: "station='" + param + "'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+            map.addLayer(boundary2)
+            boundary2.bringToFront()
+
+            map.setView([parseFloat(paramY), parseFloat(paramX)], 11);
+            if (substation != '') {
+
+                map.removeLayer(substation)
+
+            }
+
+            substation = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:tbl_substation',
+                format: 'image/png',
+                cql_filter: "ba='" + param + "'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+
+            map.addLayer(substation)
+            substation.bringToFront()
+            sel_lyr = substation;
+
         }
-        boundary2 = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-            layers: 'cite:ba',
-            format: 'image/png',
-            cql_filter: "station='" + param + "'",
-            maxZoom: 21,
-            transparent: true
-        }, {
-            buffer: 10
-        })
-        map.addLayer(boundary2)
-        boundary2.bringToFront()
 
-        map.setView([parseFloat(paramY), parseFloat(paramX)], 11);
-        if (substation != '') {
 
-            map.removeLayer(substation)
+        function showModalData(data , id) {
+            var str = '';
+            var idSp = id.split('.');
+        
+            $('#exampleModalLabel').html("Substation Info")
+            str = ` <tr><th>Zone</th><td>${data.zone}</td> </tr>
+        <tr><th>Ba</th><td>${data.ba}</td> </tr>
+        <tr><th>Type</th><td>${data.type}</td> </tr>
+        <tr><th>Voltage</th><td>${data.voltage}</td> </tr>
+        <tr><th>Coordinate</th><td>${data.coordinate}</td> </tr>
+        <tr><th>Created At</th><td>${data.created_at}</td> </tr>
+        <tr><th>Detail</th><td class="text-center">    <a href="/substation/${idSp[1]}" target="_blank" class="btn btn-sm btn-secondary">Detail</a>
+            </td> </tr>
+        `
 
+            $("#my_data").html(str);
+            $('#myModal').modal('show');
+            console.log(data);
         }
-
-        substation =    L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-            layers: 'cite:tbl_substation',
-            format: 'image/png',
-            cql_filter: "ba='" + param + "'",
-            maxZoom: 21,
-            transparent: true
-        }, {
-            buffer: 10
-        })
-
-        map.addLayer(substation)
-        substation.bringToFront()
-        sel_lyr = substation;
-
-    }
-</script>
+    </script>
 @endsection

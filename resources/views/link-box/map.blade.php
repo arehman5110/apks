@@ -303,5 +303,43 @@
 
         sel_lyr = link_box;
     }
+
+    function showModalData(data , id) {
+            var str = '';
+            var idSp = id.split('.');
+            var vDS ='';
+            if (data.visit_date != '') {
+                 var sDate = data.visit_date.split('T');
+                 console.log(sDate[0]);
+                 vDS = sDate[0]
+            }
+            var vTM ='';
+            if (data.visit_date != '') {
+                 var VTime = data.patrol_time.split('T');
+
+                 vTM = VTime[1]
+            }
+            
+        
+            $('#exampleModalLabel').html("Link Box Info")
+            str = ` <tr>
+                <tr><th>Zone</th><td>${data.zone}</td> </tr>
+        <tr><th>Ba</th><td>${data.ba}</td> </tr>
+        <tr><th>Area</th><td>${data.area}</td> </tr>
+
+        <tr><th>Visit Date</th><td>${vDS}</td> </tr>
+        <th>Patrol TIme</th><td>${vTM}</td> </tr>
+   
+        <tr><th>Coordinate</th><td>${data.coordinate}</td> </tr>
+        <tr><th>Created At</th><td>${data.created_at}</td> </tr>
+        <tr><th>Detail</th><td class="text-center">    <a href="/tiang-talian-vt-and-vr/${idSp[1]}" target="_blank" class="btn btn-sm btn-secondary">Detail</a>
+            </td> </tr>
+
+        `
+
+            $("#my_data").html(str);
+            $('#myModal').modal('show');
+       
+        }
 </script>
 @endsection

@@ -305,5 +305,27 @@
 
 
     }
+
+
+    function showModalData(data , id) {
+            var str = '';
+        
+            $('#exampleModalLabel').html("Substation Info")
+            str = ` <tr>
+        <tr><th>Ba</th><td>${data.ba}</td> </tr>
+        <tr><th>Section From</th><td>${data.section_from}</td> </tr>
+        <tr><th>Section To</th><td>${data.section_to}</td> </tr>
+        <th>Actual Date</th><td>${data.actual_date}</td> </tr>
+        <th>Planed Date</th><td>${data.planed_date}</td> </tr>
+   
+        <tr><th>Coordinate</th><td>${data.coordinate}</td> </tr>
+        <tr><th>Created At</th><td>${data.created_at}</td> </tr>
+        <tr><th>Detail</th><td class="text-center">    <a href="/tiang-talian-vt-and-vr/${data.id}" target="_blank" class="btn btn-sm btn-secondary">Detail</a>
+            </td> </tr>
+        `
+            $("#my_data").html(str);
+            $('#myModal').modal('show');
+
+        }
 </script>
 @endsection

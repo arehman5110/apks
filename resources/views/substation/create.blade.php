@@ -157,13 +157,7 @@
                                     </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col-md-4"><label for="coordinate">Coordinate</label></div>
-                                <div class="col-md-4">
-                                    <input type="text" name="coordinate" id="coordinate"
-                                        class="form-control" required>
-                                    </div>
-                            </div>
+                            
 
                             <div class="row">
                                 <div class="col-md-4"><label for="gate_status">Gate Status</label></div>
@@ -246,6 +240,14 @@
                                 <div class="col-md-4">
                                     <input type="file" name="other_image" id="other_image"
                                         class="form-control" >
+                                    </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4"><label for="coordinate">Coordinate</label></div>
+                                <div class="col-md-4">
+                                    <input type="text" name="coordinate" id="coordinate"
+                                        class="form-control" required>
                                     </div>
                             </div>
 

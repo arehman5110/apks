@@ -117,7 +117,7 @@
         <!-- END MAP SIDEBAR DIV -->
 
         <!-- START MAP  DIV -->
-        <div class="col-10 p-0 ">
+        <div class="col-12 p-0 ">
             <div class="card p-0 m-0"
                 style="border: 1px solid rgb(177, 175, 175) !important; border-radius: 0px !important;">
                 <div class="card-header text-center"><strong> MAP</strong></div>
@@ -301,5 +301,27 @@
 
         sel_lyr = feeder_pillar;
     }
+
+    function showModalData(data , id) {
+            var str = '';
+            // console.log(id);
+            var idSp = id.split('.');
+        
+            $('#exampleModalLabel').html("FeederPillar Info")
+            str = ` <tr><th>Zone</th><td>${data.zone}</td> </tr>
+        <tr><th>Ba</th><td>${data.ba}</td> </tr>
+        <tr><th>Area</th><td>${data.area}</td> </tr>
+        <tr><th>Feeder Involved</th><td>${data.feeder_involved}</td> </tr>
+        <tr><th>Coordinate</th><td>${data.coordinate}</td> </tr>
+        <tr><th>Created At</th><td>${data.created_at}</td> </tr>
+        <tr><th>Detail</th><td class="text-center">    <a href="/feeder-pillar/${idSp[1]}" target="_blank" class="btn btn-sm btn-secondary">Detail</a>
+            </td> </tr>
+
+        `
+
+            $("#my_data").html(str);
+            $('#myModal').modal('show');
+            // console.log(data);
+        }
 </script>
 @endsection

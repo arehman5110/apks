@@ -62,11 +62,18 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header">
+                       
+                        <div class="card-header d-flex justify-content-between ">
                             <div class="card-title">
-                                Tiang
+                                Third Party Digging
                             </div>
+                            <div class="d-flex ml-auto">
+                                <a href="{{ route('tiang-talian-vt-and-vr.create') }}"><button
+                                        class="btn text-white btn-success  btn-sm mr-4">Add Tiang</button></a>
 
+                                <a href="{{ route('generate-tiang-talian-vt-and-vr-excel') }}"> <button
+                                        class="btn text-white  btn-sm mr-4" style="background-color: #708090">QR Tiang Talian</button></a>
+                            </div>
                         </div>
 
                         <div class="card-body">

@@ -163,7 +163,7 @@
                                 <div class="col-md-4"><label for="coordinate">Coordinate</label></div>
                                 <div class="col-md-4">
                                     <input type="text" name="coordinate" id="coordinate"
-                                        value="{{ $data->coordinate }}" class="form-control" required>
+                                        value="{{ $data->coordinate }}" class="form-control" required readonly>
                                 </div>
                             </div>
                             <div class="row">

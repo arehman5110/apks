@@ -420,7 +420,7 @@
                                                     Burn Effect</label>
                                             </div>
 
-                                            <div class="col-md-4 d-flex">
+                                            {{-- <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="jumper[damage]" id="jumper-damage"
                                                     class="form-check"><label for="jumper-damage"> No Stay
                                                     Insulator/Damaged
@@ -432,7 +432,7 @@
                                                     class="form-check"><label for="jumper-blocked"> Stay Plate / Base Stay
                                                     Blocked
                                                 </label>
-                                            </div>
+                                            </div> --}}
 
                                         </div>
                                     </div>

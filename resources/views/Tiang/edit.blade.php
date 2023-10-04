@@ -186,7 +186,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4"><label for="concrete">Pole Type No Concrete </label></div>
-                                    <div class="col-md-4"><input type="number" name="jenis_tiang[concrete]"
+                                    <div class="col-md-4"><input type="number" name="   [concrete]"
                                             value="{{ $data->jenis_tiang->concrete }}" id="concrete"
                                             class="form-control"></div>
                                 </div>
@@ -402,7 +402,7 @@
                                         <div class="row">
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="blackbox_defect[cracked]"
-                                                    {{ checkCheckBox('cracked', $data->ipc_defect) }}
+                                                    {{ checkCheckBox('cracked', $data->blackbox_defect) }}
                                                     id="black-box-cracked" class="form-check"><label
                                                     for="black-box-cracked"> Kesan Bakar</label>
                                             </div>
@@ -435,7 +435,7 @@
                                                     Burn Effect</label>
                                             </div>
 
-                                            <div class="col-md-4 d-flex">
+                                            {{-- <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="jumper[damage]" id="jumper-damage"
                                                     {{ checkCheckBox('damage', $data->jumper) }}
                                                     class="form-check"><label for="jumper-damage"> No Stay
@@ -449,7 +449,7 @@
                                                     class="form-check"><label for="jumper-blocked"> Stay Plate / Base Stay
                                                     Blocked
                                                 </label>
-                                            </div>
+                                            </div> --}}
 
                                         </div>
                                     </div>

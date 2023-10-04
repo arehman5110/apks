@@ -76,59 +76,42 @@
             method: 'GET',
             async: false,
             success: function callback(data1) {
-                console.log(data1)
+             
                 data = JSON.parse(data1)
+
                 if (data.features.length != 0) {
-                    var str = '';
-                    var splitKey = '';
-                    for (key in data.features[0].properties) {
+                    showModalData(data.features[0].properties , data.features[0].id);
+                    // var str = '';
+                    // var splitKey = '';
+                    // for (key in data.features[0].properties) {
 
-                        splitKey = key.split("_");
-                        str += '<tr>';
-
-
-                        str +=
-                            `<th class="text-capitalize">${splitKey.map(part => part.charAt(0).toUpperCase() + part.slice(1)).join(' ')}</th>`;
-                        if (splitKey.includes('image') || splitKey.includes('images')) {
-
-                            if (data.features[0].properties[key] == '') {
-                                str = str + `<td>no image found</td></tr>`;
-                            } else {
-                                str = str +
-                                    `<td><a href="${data.features[0].properties[key]}" data-lightbox="roadtrip">
-                                                    <img src="${data.features[0].properties[key]}" alt=""
-                                                    width="20px" height="20px" class="adjust-height ml-5  "></a></td></tr>`;
-                            }
-                            // str = str + '<tr><td>' + key + '</td><td><a href="' + data.features[
-                            //         0].properties[key] +
-                            //     '" class=\'example-image-link\' data-lightbox=\'example-set\' title=\'&lt;button class=&quot;primary &quot; onclick= rotate_img(&quot;pic1&quot)  &gt;Rotate image&lt;/button&gt;\'><img src="' +
-                            //     data.features[0].properties[key] +
-                            //     '" width="20px" height="20px"></a></td></tr>'
-
-                        } else {
-                            str = str + `<td>${data.features[0].properties[key]}</td></tr>`;
-                        }
+                    //     splitKey = key.split("_");
+                    //     str += '<tr>';
 
 
-                    }
-                    if ($('#tableLayer').val() == 'supervise' || $('#tableLayer').val() ==
-                        'notice') {
-                        str = str +
-                            `<tr><td> Report</td><td> <a href="/generate-third-party-pdf/${data.features[0].properties.id}" target="_blank"><button class="btn btn-sm btn-success">Download</button></a></td></tr>`
+                    //     str +=
+                    //         `<th class="text-capitalize">${splitKey.map(part => part.charAt(0).toUpperCase() + part.slice(1)).join(' ')}</th>`;
+                    //     if (splitKey.includes('image') || splitKey.includes('images')) {
 
-                    }
+                    //         if (data.features[0].properties[key] == '') {
+                    //             str = str + `<td>no image found</td></tr>`;
+                    //         } else {
+                    //             str = str +
+                    //                 `<td><a href="${data.features[0].properties[key]}" data-lightbox="roadtrip">
+                    //                                 <img src="${data.features[0].properties[key]}" alt=""
+                    //                                 width="20px" height="20px" class="adjust-height ml-5  "></a></td></tr>`;
 
-                    $("#my_data").html(str);
-                    $('#myModal').modal('show');
-                    if (identifyme != '') {
-                        map.removeLayer(identifyme)
-                    }
-                    var myStyle = {
-                        "fillColor": "#ff7800"
-                    };
-                    identifyme = L.geoJSON(data.features[0].geometry, {
-                        style: myStyle
-                    }).addTo(map);
+                    //     } else {
+                    //         str = str + `<td>${data.features[0].properties[key]}</td></tr>`;
+                    //     }
+
+
+                    // }
+
+
+                    // $("#my_data").html(str);
+                    // $('#myModal').modal('show');
+
 
                 }
 
@@ -227,7 +210,7 @@
                 const b4Options = [
                     ['CHERAS', 'CHERAS', 3.14197346621987, 101.849883983416],
                     ['BANTING/SEPANG', 'BANTING', 2.82111390453244, 101.505890775541],
-                    ['BANGI', 'BANGI',2.965810949933260,101.81881303103104],
+                    ['BANGI', 'BANGI', 2.965810949933260, 101.81881303103104],
                     ['PUTRAJAYA/CYBERJAYA/PUCHONG', 'PUTRAJAYA & CYBERJAYA', 2.92875032271019,
                         101.675338316575
                     ]
