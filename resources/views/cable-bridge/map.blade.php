@@ -252,10 +252,44 @@
     @include('partials.map-js')
 
     <script>
+
+
+
         var  cable_bridge = '';
+        var main =    L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:tbl_cable_bridge',
+                format: 'image/png',
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+            map.addLayer(main);
+            main.bringToFront;
+
+
+         // ADD LAYERS GROUPED OVER LAYS
+    groupedOverlays = {
+        "POI": {
+            'BA': boundary3,
+            'Cable Bridge' : main,
+        }
+    };
+
+        var layerControl = L.control.groupedLayers(baseLayers, groupedOverlays, {
+        collapsed: true,
+        position: 'topright'
+        // groupCheckboxes: true
+    }).addTo(map);
+
+
+        
          function addRemoveBundary(param, paramY, paramX) {
         if(boundary3 != ''){
             map.removeLayer(boundary3)
+        }
+        if (main != '') {
+            map.removeLayer(main)
         }
             if (boundary2 !== '') {
                 map.removeLayer(boundary2)

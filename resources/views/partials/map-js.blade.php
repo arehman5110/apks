@@ -41,21 +41,12 @@
 
 
 
-    // ADD LAYERS GROUPED OVER LAYS
-    groupedOverlays = {
-        "POI": {
-            'BA': boundary3,
-        }
-    };
+   
 
     map.addLayer(boundary3)
     map.setView([2.59340882301331, 101.07054901123], 8);
 
-    var layerControl = L.control.groupedLayers(baseLayers, groupedOverlays, {
-        collapsed: true,
-        position: 'topright'
-        // groupCheckboxes: true
-    }).addTo(map);
+    
 
 
     // Map on click

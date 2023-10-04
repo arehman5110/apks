@@ -261,9 +261,38 @@
 
    <script>
     var  	link_box = '';
+    var main = '';
+    main =  L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+            layers: 'cite:tbl_link_box',
+            format: 'image/png',
+            maxZoom: 21,
+            transparent: true
+        }, {
+            buffer: 10
+        })
+
+        map.addLayer(main)
+        main.bringToFront()
+
+
+    groupedOverlays = {
+        "POI": {
+            'BA': boundary3,
+            'Link Box' : main,
+        }
+    };
+
+        var layerControl = L.control.groupedLayers(baseLayers, groupedOverlays, {
+        collapsed: true,
+        position: 'topright'
+        // groupCheckboxes: true
+    }).addTo(map);
      function addRemoveBundary(param, paramY, paramX) {
     if(boundary3 != ''){
         map.removeLayer(boundary3)
+    }
+    if(main != ''){
+        map.removeLayer(main)
     }
         if (boundary2 !== '') {
             map.removeLayer(boundary2)
@@ -332,7 +361,7 @@
    
         <tr><th>Coordinate</th><td>${data.coordinate}</td> </tr>
         <tr><th>Created At</th><td>${data.created_at}</td> </tr>
-        <tr><th>Detail</th><td class="text-center">    <a href="/tiang-talian-vt-and-vr/${idSp[1]}" target="_blank" class="btn btn-sm btn-secondary">Detail</a>
+        <tr><th>Detail</th><td class="text-center">    <a href="/link-box-pelbagai-voltan/${idSp[1]}" target="_blank" class="btn btn-sm btn-secondary">Detail</a>
             </td> </tr>
 
         `

@@ -262,9 +262,39 @@
 
    <script>
     var  	tbl_savr = '';
+
+    var main = '';
+    main =  L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+            layers: 'cite:tbl_savr',
+            format: 'image/png',
+            maxZoom: 21,
+            transparent: true
+        }, {
+            buffer: 10
+        })
+
+        map.addLayer(main)
+        main.bringToFront()
+
+
+    groupedOverlays = {
+        "POI": {
+            'BA': boundary3,
+            'Tiang Talian' : main,
+        }
+    };
+
+        var layerControl = L.control.groupedLayers(baseLayers, groupedOverlays, {
+        collapsed: true,
+        position: 'topright'
+        // groupCheckboxes: true
+    }).addTo(map);
      function addRemoveBundary(param, paramY, paramX) {
     if(boundary3 != ''){
         map.removeLayer(boundary3)
+    }
+    if(main != ''){
+        map.removeLayer(main)
     }
         if (boundary2 !== '') {
             map.removeLayer(boundary2)

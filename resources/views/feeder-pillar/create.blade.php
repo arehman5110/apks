@@ -123,7 +123,7 @@
 
 
                             <div class="row">
-                                <div class="col-md-4"><label for="fl">feeder_involved</label></div>
+                                <div class="col-md-4"><label for="fl">Feeder Involved</label></div>
                                 <div class="col-md-4">
                                     <input type="text" name="feeder_involved" id="feeder_involved"
                                         class="form-control" required>
