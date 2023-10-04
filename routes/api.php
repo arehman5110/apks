@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\DBController;
+use App\Http\Controllers\api\GenerateNoticePDFController;
 use App\Http\Controllers\api\uploadImagesContoller;
 use App\Http\Controllers\api\LoginController;
 
@@ -30,6 +31,7 @@ Route::post('/login',[LoginController::class,'login']);
 
 
 
+Route::get('/generate-pdf', [GenerateNoticePDFController::class,'generatePdf']);
 
 
 Route::post('/upload-site-images/{model}/{id}',[uploadImagesContoller::class,"uploadImages"]);
