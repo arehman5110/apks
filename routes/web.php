@@ -107,6 +107,7 @@ Route::middleware('auth')->group(function () {
 
     Route::view('/map-2', 'map');
 });
+Route::view('/generate-pdf-for-notice','PDF.notice');
 
 // Route::get('/third-party-digging-mobile/{id}',[ThirdPartyDiggingController::class,'show']);
 Route::get('/get-work-package-detail/{id}', [WPController::class, 'detail']);

@@ -32,6 +32,8 @@ Route::post('/login',[LoginController::class,'login']);
 
 
 Route::get('/generate-pdf', [GenerateNoticePDFController::class,'generatePdf']);
+Route::get('/generate-html', [GenerateNoticePDFController::class,'generateHtml']);
+
 
 
 Route::post('/upload-site-images/{model}/{id}',[uploadImagesContoller::class,"uploadImages"]);
