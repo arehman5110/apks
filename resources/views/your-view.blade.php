@@ -1,16 +1,21 @@
 @extends('layouts.app', ['page_title' => 'Index'])
 
 @section('css')
-    <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
 
-    <style>
-        span.relative.inline-flex.items-center.px-4.py-2.-ml-px.text-sm.font-medium.text-gray-500.bg-white.border.border-gray-300.cursor-default.leading-5 {
-            background: #007BFF !important;
-            color: white !important;
-        }
-    </style>
+
+
+<link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+<link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+<link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+
+<style>
+    .pagination > .active > a{
+    z-index: 1;
+    color: #fff;
+    background-color: green; //your color
+    border-color: green; //your color
+}
+</style>
 @endsection
 
 
@@ -59,13 +64,13 @@
 
 
 
-            <div class="row mb-5">
+            <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
                             <div class="card-title">
                                 Work Package
-                            </div>
+                             </div>
 
                         </div>
 
@@ -95,39 +100,36 @@
 
                                         @foreach ($datas as $data)
                                             <tr>
-                                                <td class="align-middle"><button class="dropdown-item"
-                                                        value="{{ $data->id }}" type="button"
-                                                        onclick="getRoads(this)">{{ $data->package_name }}</button></td>
+                                                <td class="align-middle">{{ $data->package_name }}</td>
                                                 <td class="align-middle">
-                                                    {{ $data->zone }}
-
-                                                </td>
+                                                    {{ $data->zone }}</td>
 
                                                 <td class="align-middle ">
                                                     {{ $data->ba }}
                                                 </td>
                                                 <td class="align-middle text-center">
-                                                    @if ($data->wp_status == 'approved')
-                                                        <span class="badge badge-success">Approved</span>
-                                                    @elseif($data->wp_status == 'rejected')
-                                                        <span class="badge badge-danger">Rejected</span>
-                                                    @elseif($data->wp_status == 'pending')
-                                                        <span class="badge badge-secondary">Pending </span>
+                                                    @if ($data->wp_status  == 'approved')
+                                                    <span class="badge badge-success">Approved</span>
+
+                                                    @elseif($data->wp_status  == 'rejected')
+                                                    <span class="badge badge-danger">Rejected</span>
+                                                    @elseif($data->wp_status  == 'pending')
+                                                    <span class="badge badge-secondary">Pending </span>
                                                     @else
-                                                        <a href="/send-to-tnbes/{{ $data->id }}"><button
-                                                                class="btn btn-sm btn-primary">Send to SBUM</button></a>
+                                                    <a href="/send-to-tnbes/{{$data->id}}"><button class="btn btn-sm btn-primary">Send to SBUM</button></a>
+
+
                                                     @endif
                                                 </td>
                                                 <td class="align-middle text-center">
                                                     @php
-                                                        $date = new DateTime($data->created_at);
-                                                        $datePortion = $date->format('Y-m-d');
+                                                        $date = new DateTime($data->created_at );
+                                                        $datePortion = $date->format("Y-m-d");
                                                     @endphp
 
                                                     {{ $datePortion }}
-
                                                 </td>
-                                                <td class="text-center">{{ $data->updated_at }} </td>
+                                                <td class="text-center">{{ $data->updated_at}}</td>
                                                 <td class="text-center">
 
                                                     <button type="button" class="btn  " data-toggle="dropdown">
@@ -137,15 +139,14 @@
                                                     <div class="dropdown-menu" role="menu">
 
                                                         <a class="dropdown-item"
-                                                            href="/get-work-package-detail/{{ $data->id }}">Detail</a>
+                                                            href="/get-work-package-detail/{{$data->id}}">Detail</a>
 
 
-                                                        <a class="dropdown-item"
-                                                            href="/remove-work-package/{{ $data->id }}"
-                                                            onclick="return confirm('Are you sure?')">Remove</a>
+                                                            <a class="dropdown-item"
+                                                            href="/remove-work-package/{{$data->id}}" onclick="return confirm('Are you sure?')">Remove</a>
 
 
-                                                        </a>
+                                                   </a>
                                                 </td>
 
                                             </tr>
@@ -153,32 +154,7 @@
                                     </tbody>
                                 </table>
                             </div>
-
-
-
-
-
-
-                        </div>
-                    </div>
-
-
-
-
-                    <div class="card my-5">
-                        <div class="card-header">
-                            <div class="card-title">
-                                Roads
-                            </div>
-
-                        </div>
-
-                        <div class="card-body">
-
-                            <div class="table-responsive" id="add-roads">
-                                @include('map.pagination.roads-pagination')
-                            </div>
-
+                            {{ $datas->links() }}
 
 
 
@@ -186,6 +162,7 @@
 
                         </div>
                     </div>
+
 
 
 
@@ -193,6 +170,7 @@
             </div>
         </div>
     </section>
+
 @endsection
 
 
@@ -204,61 +182,13 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.3/datatables.min.js"></script>
 
     <script>
-        var packName = '';
         $(document).ready(function() {
-            $('#myTable').DataTable({
-                aaSorting: [
-                    [0, 'asc']
-                ],
-                "lengthMenu": [
-                    [10, 25, 50, -1],
-                    [10, 25, 50, "All"]
-                ],
-            });
-            // $('#roads').DataTable();
+            // $('#myTable').DataTable();
 
-
-            $(document).on('click', 'span a', function(event)
-
-                {
-                    $('span a').removeClass('active')
-
-                    $(this).addClass('active');
-
-                    event.preventDefault();
-
-                    var page = $(this).attr('href').split('page=')[1];
-                    $.ajax({
-                        url: `/test-pagination/44?page=${page}`,
-                        dataType: 'html',
-                        method: 'GET',
-                        async: false,
-                    }).done(function(data) {
-
-                        $("#add-roads").empty().html(data);
-
-
-                        $('.work_pakcage_name').html(packName)
-
-                    })
-
-                })
         });
 
 
-        function getRoads(param) {
-            packName = $(param).text()
-            $.ajax({
-                url: `/test-pagination/44`,
-                dataType: 'html',
-                method: 'GET',
-                async: false,
-            }).done(function(data) {
+            </script>
 
-                $("#add-roads").empty().html(data);
-                $('.work_pakcage_name').html(packName)
+            @endsection
 
-            })
-        }
-    </script>
-@endsection

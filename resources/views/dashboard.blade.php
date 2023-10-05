@@ -11,7 +11,20 @@
     .collapse .card-body{
         padding: 0px !important
     }
-
+    h3{
+        color: #7379AE;
+        font-size: 1.5rem;
+    }
+    .accordion .card{
+        background: #d1cfcf14;
+    }
+.dashboard-counts h3{
+    font-size: 1rem !important
+}
+.dashboard-counts p{
+    font-weight: 600;
+    color: slategrey;
+}
 </style>
 @endsection
 
@@ -19,7 +32,138 @@
 
 
 <div class=" p-5">
-    
+
+    <div class="row dashboard-counts">
+    <div class="col-md-2">
+        <div class="card p-3">
+
+                <h3 class="text-center">   3rd Party Digging </h3>
+                <p class="text-center mb-0 pb-0"><span>0</span></p>
+
+          </div>
+    </div>
+
+    <div class="col-md-2">
+        <div class="card p-3">
+
+                <h3 class="text-center">   Total Patrollig Done </h3>
+                <p class="text-center mb-0 pb-0"><span>0 KM</span></p>
+
+          </div>
+    </div>
+
+    <div class="col-md-2">
+        <div class="card p-3">
+
+                <h3 class="text-center">  Total Notice Generated </h3>
+                <p class="text-center mb-0 pb-0"><span>0</span></p>
+
+          </div>
+    </div>
+
+    <div class="col-md-2">
+        <div class="card p-3">
+
+                <h3 class="text-center">   Total Supervision </h3>
+                <p class="text-center mb-0 pb-0"><span>0</span></p>
+
+          </div>
+    </div>
+
+    <div class="col-md-2">
+        <div class="card p-3">
+
+                <h3 class="text-center">   Total Substation Visited </h3>
+                <p class="text-center mb-0 pb-0"><span>0</span></p>
+
+          </div>
+    </div>
+
+    <div class="col-md-2">
+        <div class="card p-3">
+
+                <h3 class="text-center">  Total Substation Defects </h3>
+                <p class="text-center mb-0 pb-0"><span>0</span></p>
+
+          </div>
+    </div>
+
+
+    <div class="col-md-2">
+        <div class="card p-3">
+
+                <h3 class="text-center">  Total Feeder Pillar Visited </h3>
+                <p class="text-center mb-0 pb-0"><span>0</span></p>
+
+          </div>
+    </div>
+
+
+    <div class="col-md-2">
+        <div class="card p-3">
+
+                <h3 class="text-center">  Total Feeder Pillar Defects </h3>
+                <p class="text-center mb-0 pb-0"><span>0</span></p>
+
+          </div>
+    </div>
+
+    <div class="col-md-2">
+        <div class="card p-3">
+
+                <h3 class="text-center">  Total Tiang Visited </h3>
+                <p class="text-center mb-0 pb-0"><span>0</span></p>
+
+          </div>
+    </div>
+
+
+    <div class="col-md-2">
+        <div class="card p-3">
+
+                <h3 class="text-center">  Total Tiang Defects </h3>
+                <p class="text-center mb-0 pb-0"><span>0</span></p>
+
+          </div>
+    </div>
+
+    <div class="col-md-2">
+        <div class="card p-3">
+
+                <h3 class="text-center">  Total Link Box Visited </h3>
+                <p class="text-center mb-0 pb-0"><span>0</span></p>
+
+          </div>
+    </div>
+
+
+    <div class="col-md-2">
+        <div class="card p-3">
+
+                <h3 class="text-center">  Total Link Box  Defects </h3>
+                <p class="text-center mb-0 pb-0"><span>0</span></p>
+
+          </div>
+    </div>
+
+    <div class="col-md-2">
+        <div class="card p-3">
+
+                <h3 class="text-center">  Total Cable Bridge Visited </h3>
+                <p class="text-center mb-0 pb-0"><span>0</span></p>
+
+          </div>
+    </div>
+    <div class="col-md-2">
+        <div class="card p-3">
+
+                <h3 class="text-center">  Total Cable Bridge Defects </h3>
+                <p class="text-center mb-0 pb-0"><span>0</span></p>
+
+          </div>
+    </div>
+</div>
+
         <div class="accordion row" id="accordionExample">
 
             <div class="col-md-4">
@@ -31,7 +175,7 @@
                   </button>
                 </h2>
               </div>
-          
+
               <div id="thirdPartyDiging" class="collapse  " aria-labelledby="thirdPartyDigingHeading" data-parent="#accordionExample">
                 <div class="card-body">
                  <ul>
@@ -48,7 +192,7 @@
                     <li>
                       <a href="/get-all-work-packages" class="dropdown-item">SBUM Approval</a>
                   </li>
-                  
+
                  </ul>
                 </div>
               </div>
@@ -64,7 +208,7 @@
                       </button>
                     </h2>
                   </div>
-              
+
                   <div id="substation" class="collapse  " aria-labelledby="substationHeading" data-parent="#accordionExample">
                     <div class="card-body">
                         <ul>
@@ -91,7 +235,7 @@
                           </button>
                         </h2>
                       </div>
-                  
+
                       <div id="feederPillar" class="collapse  " aria-labelledby="feederPillarHeading" data-parent="#accordionExample">
                         <div class="card-body">
                             <ul>
@@ -118,7 +262,7 @@
                               </button>
                             </h2>
                           </div>
-                      
+
                           <div id="tiang" class="collapse  " aria-labelledby="tiangHeading" data-parent="#accordionExample">
                             <div class="card-body">
                                 <ul>
@@ -146,7 +290,7 @@
                                   </button>
                                 </h2>
                               </div>
-                          
+
                               <div id="linkBox" class="collapse  " aria-labelledby="linkBoxHeading" data-parent="#accordionExample">
                                 <div class="card-body">
                                     <ul>
@@ -174,7 +318,7 @@
                                       </button>
                                     </h2>
                                   </div>
-                              
+
                                   <div id="cableBridge" class="collapse  " aria-labelledby="cableBridgeHeading" data-parent="#accordionExample">
                                     <div class="card-body">
                                         <ul>
@@ -191,9 +335,9 @@
                                   </div>
                                 </div>
                                 </div>
-             
+
           </div>
-      {{-- <div class="row ">    
+      {{-- <div class="row ">
         <div class="col-md-4">
             <a href="{{route('third-party-digging.index')}}">
             <div class="card p-3 bg-light"> <h3 ><i class="fas fa-tools"></i>  3rd Party Digging</h3></div></a>

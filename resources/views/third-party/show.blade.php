@@ -72,7 +72,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="ba">Ba</label></div>
+                                <div class="col-md-4"><label for="ba">BA</label></div>
                                 <div class="col-md-4">
                                     <input readonly  value="{{$data->ba}}" class="form-control">
                                 </div>

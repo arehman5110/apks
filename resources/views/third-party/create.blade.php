@@ -78,7 +78,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="ba">Ba</label></div>
+                                <div class="col-md-4"><label for="ba">BA</label></div>
                                 <div class="col-md-4"><select name="ba_s" id="ba_s" class="form-control" required
                                         onchange="getWorkPackage(this)">
                                         <option value="" hidden>select zone</option>
@@ -380,8 +380,8 @@
             if (rd != '') {
                 map.removeLayer(rd)
             }
-            
-         
+
+
             var zone = $('#search_zone').val();
             $.ajax({
                 url: `/get-work-package/${splitVal[1]}/${zone}`,

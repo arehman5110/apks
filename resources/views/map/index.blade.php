@@ -138,7 +138,7 @@
                 </div>
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
                         <li class="breadcrumb-item active">map</li>
                     </ol>
                 </div>
@@ -1012,9 +1012,6 @@
         function addRemoveBundary(param, paramY, paramX) {
             map.removeLayer(boundary3)
 
-            if (bangi_status == true) {
-                bangi();
-            }
 
             if (boundary2 !== '') {
                 map.removeLayer(boundary2)
@@ -1048,10 +1045,24 @@
             })
             map.addLayer(wp)
             wp.bringToFront()
+            if (rd != '') {
+                map.removeLayer(rd)
+            }
 
-            
+            rd = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:tbl_roads',
+                format: 'image/png',
+                cql_filter: "ba='" + param+ "'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+            map.addLayer(rd)
+            rd.bringToFront()
 
-           
+
+
 
 
 
@@ -1149,7 +1160,7 @@
             $('#search_zone').on('change', function() {
                 const selectedValue = this.value;
                 const areaSelect = $('#search_ba');
-
+                clearFields()
                 // Clear previous options
                 areaSelect.empty();
                 areaSelect.append(`<option value="" hidden>Select ba</option>`)
@@ -1211,7 +1222,9 @@
 
 
         function getWorkPackage(param) {
+            clearFields()
             var splitVal = param.value.split(',');
+
 
             addRemoveBundary(splitVal[1], splitVal[2], splitVal[3])
             var zone = $('#search_zone').val();
@@ -1235,20 +1248,8 @@
                 }
             })
 
-        }
-
-
-        $('#search_wp').on('change', function() {
-            const selectedValue = this.value;
-            var spiltVal = selectedValue.split(',');
-
-            zoomToxy(parseFloat(spiltVal[1]), parseFloat(spiltVal[2]))
-
-            $('#for-excel').html(`<a class="mt-4" href="/generate-third-party-diging-excel/${spiltVal[0]}"><button class="btn-sm mt-2
-                btn btn-primary">Download Qr</button></a>`)
-
             $.ajax({
-                url: `/getStats/${spiltVal[0]}`,
+                url: `/getStats/${splitVal[1]}`,
                 dataType: 'JSON',
                 method: 'GET',
                 async: false,
@@ -1261,6 +1262,20 @@
 
                 }
             })
+
+        }
+
+
+        $('#search_wp').on('change', function() {
+            const selectedValue = this.value;
+            var spiltVal = selectedValue.split(',');
+
+            zoomToxy(parseFloat(spiltVal[1]), parseFloat(spiltVal[2]))
+
+            $('#for-excel').html(`<a class="mt-4" href="/generate-third-party-diging-excel/${spiltVal[0]}"><button class="btn-sm mt-2
+                btn btn-primary">Download Qr</button></a>`)
+
+
             if (rd != '') {
                 map.removeLayer(rd)
             }
@@ -1280,6 +1295,13 @@
 
         })
 
+        function clearFields()
+{
+    $("#total").html('');
+                    $("#total_notice").html('')
+                    $("#total_supervise").html('')
+                    $('#for-excel').html('')
+}
 
 
 

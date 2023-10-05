@@ -41,7 +41,7 @@
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
                         <li class="breadcrumb-item"><a href="{{ route('third-party-digging.index') }}">index</a></li>
-                        <li class="breadcrumb-item active">create</li>
+                        <li class="breadcrumb-item active">update</li>
                     </ol>
                 </div>
             </div>

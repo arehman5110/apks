@@ -80,7 +80,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="">Ba</label></div>
+                                <div class="col-md-4"><label for="">BA</label></div>
                                 <div class="col-md-4"><input disabled class="form-control" value="{{ $rec->ba }}">
                                 </div>
                             </div>
@@ -98,11 +98,11 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="">Total Distance</label></div>
-                                <div class="col-md-4"><input disabled class="form-control" value="{{ $distance }}">
+                                <div class="col-md-4"><label for="">Total Distance KM</label></div>
+                                <div class="col-md-4"><input disabled class="form-control" value="{{  number_format( $distance , 2) }}">
                                 </div>
                             </div>
-                            
+
 
                             <h4 class="text-center mt-3">Road Details</h4>
                             <div id="map"></div>

@@ -104,6 +104,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/create-patrolling',[PatrollingController::class,'create']);
     Route::post('/patrolling-update',[PatrollingController::class,'updateRoads']);
 
+
+    Route::get('/get-roads-name/{id}',[PatrollingController::class,'getRoads']);
+    Route::get('/get-roads-id/{id}',[PatrollingController::class,'getRoadsByID']);
+
+    Route::get('/get-roads-details/{wpID}',[MapController::class,'getRoadsDetails']);
+        // PATROLING VIEWS
+    Route::get('/edit-patrolling/{id}',[PatrollingController::class,'editRoad']);
+    Route::get('/patrolling-detail/{id}',[PatrollingController::class,'getRoad']);
+
+
     //// Admin side
     Route::prefix('admin')->group(function () {
         Route::resource('/team', TeamController::class);
@@ -113,6 +123,8 @@ Route::middleware('auth')->group(function () {
     Route::view('/dashboard', 'dashboard');
 
     Route::view('/map-2', 'map');
+
+    Route::get('/test-pagination/{id}',[MapController::class,'teswtpagination']);
 });
 Route::view('/generate-pdf-for-notice','PDF.notice');
 

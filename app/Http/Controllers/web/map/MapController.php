@@ -17,7 +17,8 @@ class MapController extends Controller
         ->select('id','package_name')
         ->get();
 
-       // return response()->json($wp);
+
+    //    return response()->json($wp);
     return view('map.index',['wps'=>$wp]) ;
     }
 
@@ -25,15 +26,33 @@ class MapController extends Controller
 
     public function allWP(){
 
-      // return Road::with('workPackage')->get();
-      // return WorkPackage::all('id, ');
-       return  view('map.detail',['datas'=>WorkPackage::all('id','package_name','zone','ba','wp_status','created_at')]);
+        $datas =WorkPackage::all('id','package_name','zone','ba','wp_status','created_at','updated_at');
+
+        $roads = [];
+
+
+       return  view('map.detail',['datas'=>$datas,'roads'=>$roads]);
+    }
+
+    public function getRoadsDetails($wpID){
+
+        return Road::where('id_workpackage',$wpID)->select('id', 'road_name', 'km','actual_km','fidar')->get();
+
     }
 
 
     public function proxy($url){
-    //   return 'The URL is: '.rawurldecode($url);;
+
        $result =  file_get_contents(rawurldecode($url));
        return response()->json($result);
+    }
+
+    public function teswtpagination( Request $request , $id){
+
+        $roads = Road::where('id_workpackage',$id)->select('id','road_name','actual_km','km')->with('workPackage')->paginate(10);
+
+        return view('map.pagination.roads-pagination',['roads'=>$roads])->render();
+
+
     }
 }

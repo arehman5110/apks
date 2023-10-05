@@ -85,7 +85,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="ba">Ba</label></div>
+                                <div class="col-md-4"><label for="ba">BA</label></div>
                                 <div class="col-md-4">
                                     <select name="ba" id="ba" class="form-control" required onchange="getWp(this)">
                                         <option value="" hidden>select zone</option>

@@ -92,12 +92,12 @@ class WPController extends Controller
 
         return $rec != '' ? view('map.show', ['rec' => $rec, 'wp' => $wp, 'distance' => $road->sum('distance')]) : abort(404);
     }
-    public function getStats($wp)
+    public function getStats($ba)
     {
-        $wp_id = $wp;
-        $result = DB::select("SELECT (sum(st_length(geom::geography)))/1000 as distance FROM tbl_roads where id_workpackage='$wp_id'");
-        $result1 = DB::select("SELECT count(*)  FROM tbl_third_party_diging_patroling where workpackage_id='$wp_id' and notice='yes'");
-        $result2 = DB::select("SELECT count(*)  FROM tbl_third_party_diging_patroling where workpackage_id='$wp_id' and supervision='yes'");
+        
+        $result = DB::select("SELECT (sum(st_length(geom::geography)))/1000 as distance FROM tbl_roads where ba='$ba'");
+        $result1 = DB::select("SELECT count(*)  FROM tbl_third_party_diging_patroling where ba='$ba' and notice='yes'");
+        $result2 = DB::select("SELECT count(*)  FROM tbl_third_party_diging_patroling where ba='$ba' and supervision='yes'");
 
 
         return response()->json([$result[0], $result1[0], $result2[0]], 200);

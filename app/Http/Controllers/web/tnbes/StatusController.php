@@ -12,6 +12,6 @@ class StatusController extends Controller
 
     public function sendToTnbes($id){
         WorkPackage::find($id)->update(['wp_status'=>'pending']);
-        return redirect()->back()->with('success','Successfully send to tnbes');
+        return redirect()->back()->with('success','Successfully send to SBUM');
     }
 }
