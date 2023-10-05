@@ -22,6 +22,7 @@ use App\Http\Controllers\web\tnbes\StatusController;
 use App\Http\Controllers\web\ThirdPartyDiggingController;
 use App\Http\Controllers\web\SubstationController;
 use App\Http\Controllers\web\FPController;
+use App\Http\Controllers\web\PatrollingController;
 use App\Models\ThirdPartyDiging;
 
 /*
@@ -96,6 +97,12 @@ Route::middleware('auth')->group(function () {
     Route::resource('feeder-pillar', FPController::class);
     Route::view('/feeder-pillar-map', 'feeder-pillar.map');
     Route::get('generate-feeder-pillar-excel', [FeederPillarExcelController::class, 'generateFeederPillarExcel'])->name('generate-feeder-pillar-excel');
+
+
+
+    // Patrolling
+    Route::get('/create-patrolling',[PatrollingController::class,'create']);
+    Route::post('/patrolling-update',[PatrollingController::class,'updateRoads']);
 
     //// Admin side
     Route::prefix('admin')->group(function () {

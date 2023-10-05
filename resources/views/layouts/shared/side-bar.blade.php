@@ -52,6 +52,13 @@
                         </li>
 
                         <li class="nav-item">
+                            <a href="/create-patrolling" class="nav-link ">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Patrolling</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
                             <a href="{{ route('third-party-digging.index') }}" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Index</p>
