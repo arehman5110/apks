@@ -4,7 +4,7 @@
     <!-- Fonts and icons -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700" rel="stylesheet" />
 
-    
+
 
     @include('partials.map-css')
     <style>
@@ -222,9 +222,17 @@
 @section('script')
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js"></script>
     <script src="{{ URL::asset('map/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js') }}"></script>
+    {{-- <script src="{{URL::asset('assets/lib/de-select/dselect.js')}}"></script> --}}
 
 
     <script>
+
+// var select_box_element = document.querySelector('#search_wp');
+
+// dselect(select_box_element, {
+//     search: true
+// });
+
         var wp = '';
         var rd = '';
 

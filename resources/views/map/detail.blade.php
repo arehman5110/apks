@@ -174,15 +174,17 @@
                         </div>
 
                         <div class="card-body">
-
+                            <div class="d-flex justify-content-between ">
+                                <div class="">
+                                    <h3 ><span id="raods-header">Unpatroled</span> Roads</h3>
+                                </div>
+                                <div class="dd-flex justify-content-end ">
+                                <button
+                                    class="btn-sm btn-success m-3" value="Patroled" onclick="getRoadStatus(this)">Patroled</button><button
+                                    class="btn-sm btn-success m-3"  value="Unpatroled" onclick="getRoadStatus(this)">UnPatroled</button></div></div>
                             <div class="table-responsive" id="add-roads">
                                 @include('map.pagination.roads-pagination')
                             </div>
-
-
-
-
-
 
                         </div>
                     </div>
@@ -205,6 +207,8 @@
 
     <script>
         var packName = '';
+        var patrolStatus = '';
+        var packID = '';
         $(document).ready(function() {
             $('#myTable').DataTable({
                 aaSorting: [
@@ -229,7 +233,7 @@
 
                     var page = $(this).attr('href').split('page=')[1];
                     $.ajax({
-                        url: `/test-pagination/44?page=${page}`,
+                        url: `/test-pagination/${packID}/${patrolStatus}?page=${page}`,
                         dataType: 'html',
                         method: 'GET',
                         async: false,
@@ -245,11 +249,32 @@
                 })
         });
 
+        function getRoadStatus(param){
+
+            patrolStatus = param.value;
+            $('#raods-header').html(patrolStatus)
+            $.ajax({
+                url: `/test-pagination/${packID}/${patrolStatus}`,
+                dataType: 'html',
+                method: 'GET',
+                async: false,
+            }).done(function(data) {
+
+                $("#add-roads").empty().html(data);
+                $('.work_pakcage_name').html(packName)
+
+            })
+        }
+
 
         function getRoads(param) {
+
+            packID = param.value;
+            patrolStatus = 'Unpatroled';
+
             packName = $(param).text()
             $.ajax({
-                url: `/test-pagination/44`,
+                url: `/test-pagination/${packID}/${patrolStatus}`,
                 dataType: 'html',
                 method: 'GET',
                 async: false,

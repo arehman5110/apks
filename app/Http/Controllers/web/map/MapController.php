@@ -47,9 +47,15 @@ class MapController extends Controller
        return response()->json($result);
     }
 
-    public function teswtpagination( Request $request , $id){
+    public function teswtpagination( Request $request , $id , $status){
+        if ($status == 'Patroled') {
+            $roads = Road::where('id_workpackage',$id)->where('actual_km' , '!=' , null)->select('id','road_name','actual_km','km')->paginate(10);
+        }else{
+             $roads = Road::where('id_workpackage',$id)->where('actual_km' , null)->select('id','road_name','actual_km','km')->paginate(10);
 
-        $roads = Road::where('id_workpackage',$id)->select('id','road_name','actual_km','km')->with('workPackage')->paginate(10);
+        }
+
+
 
         return view('map.pagination.roads-pagination',['roads'=>$roads])->render();
 

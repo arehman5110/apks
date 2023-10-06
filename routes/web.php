@@ -124,7 +124,7 @@ Route::middleware('auth')->group(function () {
 
     Route::view('/map-2', 'map');
 
-    Route::get('/test-pagination/{id}',[MapController::class,'teswtpagination']);
+    Route::get('/test-pagination/{id}/{status}',[MapController::class,'teswtpagination']);
 });
 Route::view('/generate-pdf-for-notice','PDF.notice');
 
