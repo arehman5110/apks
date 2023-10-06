@@ -23,6 +23,9 @@
     <link rel="stylesheet" href="{{ URL::asset('assets/lib/window-engine.css') }}" />
     <script src="{{ URL::asset('assets/lib/window-engine.js') }}"></script>
 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+
+
 
     <style>
         /* .sidebar-mini.sidebar-collapse .content-wrapper,
@@ -115,6 +118,28 @@
         .side-bar>.table td {
             padding: 0.5rem !important
         }
+           /* CSS for the Select2 dropdown to match form-control style */
+.select2-container {
+    
+    width: 100% !important;
+}
+
+.select2-container .select2-selection--single {
+    height: 38px;
+    padding: 6px 12px;
+    font-size: 16px;
+    line-height: 1.5;
+    border: 1px solid #00000063;;
+    border-radius:0;
+}
+
+/* Optionally, style the focus state */
+.select2-container .select2-selection--single:focus {
+    border-color: 1px solid #00000063;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
     </style>
 @endsection
 
@@ -593,6 +618,8 @@
     <script src="{{ URL::asset('map/draw/leaflet.draw-custom.js') }}"></script>
 
     <script src="{{ URL::asset('map/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
 
     <script type="text/javascript">
         var baseLayers
@@ -1126,6 +1153,8 @@
 
     <script>
         $(document).ready(function() {
+
+            $('#search_wp').select2();
             option = {
                 success: callbackSuccess
             }

@@ -3,6 +3,9 @@
 @section('css')
     <!-- Fonts and icons -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+
+
 
 
 
@@ -29,6 +32,28 @@
             height: 400px;
             padding: 20px;
         }
+        /* CSS for the Select2 dropdown to match form-control style */
+.select2-container {
+    margin-top: 10px;
+    width: 100% !important;
+}
+
+.select2-container .select2-selection--single {
+    height: 38px;
+    padding: 6px 12px;
+    font-size: 16px;
+    line-height: 1.5;
+    border: 1px solid #00000063;;
+    border-radius:0;
+}
+
+/* Optionally, style the focus state */
+.select2-container .select2-selection--single:focus {
+    border-color: 1px solid #00000063;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
     </style>
 @endsection
 
@@ -42,7 +67,7 @@
                 </div>
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
-                        <li class="breadcrumb-item"><a href="{{ route('third-party-digging.index') }}">index</a></li>
+                        <li class="breadcrumb-item"><a href="/get-all-work-packages">index</a></li>
                         <li class="breadcrumb-item active">create</li>
                     </ol>
                 </div>
@@ -118,7 +143,7 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="road_name">Road Name</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" class="form-control" name="road_name" id="road_name">
+                                    <input type="text" class="form-control" name="road_name" id="road_name" required>
                                 </div>
                             </div>
 
@@ -193,16 +218,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
                             <div class="text-center">
                                 <strong> <span class="text-danger map-error"></span></strong>
                             </div>
@@ -223,20 +238,24 @@
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js"></script>
     <script src="{{ URL::asset('map/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js') }}"></script>
     {{-- <script src="{{URL::asset('assets/lib/de-select/dselect.js')}}"></script> --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
 
     <script>
 
-// var select_box_element = document.querySelector('#search_wp');
-
-// dselect(select_box_element, {
-//     search: true
-// });
 
         var wp = '';
         var rd = '';
 
         $(document).ready(function() {
+//             var select_box_element = document.querySelector('#search_wp');
+
+// dselect(select_box_element, {
+//     search: true
+// });
+$('#search_wp').select2();
+$('#road_select').select2();
+
 
 
             $("#myForm").validate();
