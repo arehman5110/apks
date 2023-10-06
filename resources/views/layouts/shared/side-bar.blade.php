@@ -13,7 +13,7 @@
 
            <div class="info text-center">
                 <a href="#" class=" text-center ml-4">Nav links</a>
-            </div> 
+            </div>
         </div>--}}
 
 
@@ -73,7 +73,7 @@
                         <li class="nav-item">
                             <a href="/get-all-work-packages" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>SBUM Approval</p>
+                                <p>SBUM Approval and Deatil</p>
                             </a>
                         </li>
                     </ul>

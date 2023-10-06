@@ -194,7 +194,7 @@
                     </li>
 
                     <li>
-                      <a href="/get-all-work-packages" class="dropdown-item">SBUM Approval</a>
+                      <a href="/get-all-work-packages" class="dropdown-item">SBUM Approval and Deatil</a>
                   </li>
 
                  </ul>
