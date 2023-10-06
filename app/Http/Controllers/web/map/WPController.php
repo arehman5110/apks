@@ -78,6 +78,7 @@ class WPController extends Controller
         if (!$rec) {
             return abort(404);
         }
+        $count = Road::where('id_workpackage', $id)->count();
         $wp = WorkPackage::selectRaw('ST_X(ST_Centroid(geom)) as x')
             ->selectRaw('ST_Y(ST_Centroid(geom)) as y')
             ->where('ba', $rec->ba)
@@ -90,11 +91,11 @@ class WPController extends Controller
             ->get();
 
 
-        return $rec != '' ? view('map.show', ['rec' => $rec, 'wp' => $wp, 'distance' => $road->sum('distance')]) : abort(404);
+        return $rec != '' ? view('map.show', ['rec' => $rec, 'wp' => $wp, 'distance' => $road->sum('distance') , 'count'=>$count]) : abort(404);
     }
     public function getStats($ba)
     {
-        
+
         $result = DB::select("SELECT (sum(st_length(geom::geography)))/1000 as distance FROM tbl_roads where ba='$ba'");
         $result1 = DB::select("SELECT count(*)  FROM tbl_third_party_diging_patroling where ba='$ba' and notice='yes'");
         $result2 = DB::select("SELECT count(*)  FROM tbl_third_party_diging_patroling where ba='$ba' and supervision='yes'");

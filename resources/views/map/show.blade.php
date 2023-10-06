@@ -93,7 +93,7 @@
 
                             <div class="row">
                                 <div class="col-md-4"><label for="">No of Roads</label></div>
-                                <div class="col-md-4"><input disabled class="form-control" value="{{ $rec->diging_count }}">
+                                <div class="col-md-4"><input disabled class="form-control" value="{{ $count }}">
                                 </div>
                             </div>
 

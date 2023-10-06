@@ -185,6 +185,10 @@
                     <li>
                         <a class="dropdown-item" href="{{route('third-party-digging.index')}}">Index</a>
                     </li>
+
+                    <li>
+                        <a href="/create-patrolling" class="dropdown-item">Patrolling</a>
+                    </li>
                     <li>
                         <a href="/map-1" class="dropdown-item">Map</a>
                     </li>

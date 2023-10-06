@@ -4,6 +4,8 @@
     <!-- Fonts and icons -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700" rel="stylesheet" />
 
+    
+
     @include('partials.map-css')
     <style>
         .error {

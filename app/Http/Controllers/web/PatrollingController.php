@@ -39,12 +39,10 @@ class PatrollingController extends Controller
             $road->total_supervision = $request->total_supervision;
             $road->update();
 
-            return redirect()
-                ->route('third-party-digging.index')
+            return redirect('/get-all-work-packages')
                 ->with('success', 'Request Success');
         } catch (\Throwable $th) {
-            return redirect()
-                ->route('third-party-digging.index')
+            return redirect('/get-all-work-packages')
                 ->with('failed', 'Request Failed');
         }
     }
@@ -55,8 +53,7 @@ class PatrollingController extends Controller
             $road = Road::find($id);
             return $road ? view('patrolling.update-road', ['road' => $road]) : abort(404);
         } catch (\Throwable $th) {
-            return redirect()
-                ->route('third-party-digging.index')
+            return redirect('/get-all-work-packages')
                 ->with('failed', 'Request Failed');
         }
     }
