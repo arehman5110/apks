@@ -3,6 +3,8 @@
 @section('css')
     <!-- Fonts and icons -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+
 
     @include('partials.map-css')
     <style>
@@ -27,6 +29,29 @@
             height: 400px;
             padding: 20px;
         }
+
+           /* CSS for the Select2 dropdown to match form-control style */
+.select2-container {
+    margin-top: 10px;
+    width: 100% !important;
+}
+
+.select2-container .select2-selection--single {
+    height: 38px;
+    padding: 6px 12px;
+    font-size: 16px;
+    line-height: 1.5;
+    border: 1px solid #00000063;;
+    border-radius:0;
+}
+
+/* Optionally, style the focus state */
+.select2-container .select2-selection--single:focus {
+    border-color: 1px solid #00000063;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
     </style>
 @endsection
 
@@ -81,7 +106,7 @@
                                 <div class="col-md-4"><label for="ba">BA</label></div>
                                 <div class="col-md-4"><select name="ba_s" id="ba_s" class="form-control" required
                                         onchange="getWorkPackage(this)">
-                                        <option value="" hidden>select zone</option>
+                                        <option value="" hidden>select ba</option>
 
                                     </select>
                                     <input type="hidden" name="ba" id="ba">
@@ -92,7 +117,7 @@
                                 <div class="col-md-4"><label for="search_wp">Work Package Name</label></div>
                                 <div class="col-md-4">
                                     <select name="search_wp" id="search_wp" class="form-control" required>
-                                        <option value="" hidden>select ba</option>
+                                        <option value="" hidden>select workpackage</option>
 
                                     </select>
                                     <input type="hidden" name="workpackage_id" id="workpackage_id" class="form-control">
@@ -352,11 +377,18 @@
 @section('script')
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js"></script>
     <script src="{{ URL::asset('map/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
 
     @include('partials.form-map-js')
     <script>
         var wp = '';
         var rd = '';
+
+        $(document).ready(function() {
+
+$('#search_wp').select2();
+        })
 
 
         function getWorkPackage(param) {
