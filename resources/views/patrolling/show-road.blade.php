@@ -126,17 +126,17 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="digging">Total Digging</label></div>
-                                <div class="col-md-4"> <input type="text" readonly value="{{$road->digging}}" class="form-control"></div>
+                                <div class="col-md-4"> <input type="text" readonly value="{{$road->total_digging}}" class="form-control"></div>
 
                             </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="notice">Total Notice</label></div>
-                                <div class="col-md-4"> <input type="text" readonly value="{{$road->notice}}" class="form-control"></div>
+                                <div class="col-md-4"> <input type="text" readonly value="{{$road->total_digging}}" class="form-control"></div>
 
                             </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="supervision">Total Supervision</label></div>
-                                <div class="col-md-4"> <input type="text" readonly value="{{$road->supervision}}" class="form-control"></div>
+                                <div class="col-md-4"> <input type="text" readonly value="{{$road->total_digging}}" class="form-control"></div>
 
                             </div>
 
