@@ -271,6 +271,7 @@
 
             packID = param.value;
             patrolStatus = 'Unpatroled';
+            $('#raods-header').html(patrolStatus)
 
             packName = $(param).text()
             $.ajax({
