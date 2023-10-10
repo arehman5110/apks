@@ -28,6 +28,7 @@
         transition: margin-left .3s ease-in-out;
         margin-left: 0px !important;
     }
+    .content-header ,.fa-bars{display: none}
 </style>
     @endguest
 
@@ -54,7 +55,7 @@
 
 
 
-    <section class="content">
+    <section class="content mt-2">
         <div class="container-fluid">
 
             <div class="row">
@@ -98,6 +99,12 @@
                                 <div class="col-md-4"><input disabled class="form-control" value="{{ $count }}">
                                 </div>
                             </div>
+
+                            {{-- <div class="row">
+                                <div class="col-md-4"><label for="">Remarks</label></div>
+                                <div class="col-md-4"><input disabled class="form-control" value="{{  $rec->remarks }}">
+                                </div>
+                            </div> --}}
 
                             <div class="row">
                                 <div class="col-md-4"><label for="">Total Distance KM</label></div>
