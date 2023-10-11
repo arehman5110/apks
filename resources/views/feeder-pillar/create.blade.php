@@ -126,14 +126,14 @@
 
 
 
-
+{{--
                             <div class="row">
                                 <div class="col-md-4"><label for="voltage">Area</label></div>
                                 <div class="col-md-4">
                                     <input type="text" name="area" id="area"
                                         class="form-control" required >
                                     </div>
-                            </div>
+                            </div> --}}
                             <div class="row">
                                 <div class="col-md-4"><label for="name">Size</label></div>
                                 <div class="col-md-4">

@@ -128,7 +128,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="area">Size</label></div>
+                                <div class="col-md-4"><label for="size">Size</label></div>
                                 <div class="col-md-4">
 
                                     <select name="size" id="size" class="form-control" required>
