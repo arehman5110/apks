@@ -53,7 +53,7 @@ class FPController extends Controller
             $data->team = $request->team;
             $data->visit_date = $request->visit_date;
             $data->patrol_time = $combinedDateTime;
-            $data->area = $request->area;
+
             $data->size = $request->size;
             $data->coordinate = $request->coordinate;
             $data->gate_status = $request->gate_status == 'Others' ? $request->other_gate_status : $request->gate_status;
@@ -133,7 +133,7 @@ class FPController extends Controller
             $data->team = $request->team;
             $data->visit_date = $request->visit_date;
             $data->patrol_time = $combinedDateTime;
-            $data->area = $request->area;
+           
             $data->size = $request->size;
             $data->coordinate = $request->coordinate;
             $data->gate_status = $request->gate_status == 'Others' ? $request->other_gate_status : $request->gate_status;

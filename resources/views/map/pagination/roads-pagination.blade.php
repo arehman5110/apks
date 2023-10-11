@@ -5,7 +5,7 @@
         <tr>
             <th>Package Name</th>
             <th>Road Name</th>
-            <th>Totoal KM</th>
+            <th>Total KM</th>
             <th>Plan KM</th>
             <th>Feeder</th>
 

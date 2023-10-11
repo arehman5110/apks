@@ -108,12 +108,7 @@
                         </div>
 
 
-                        <div class="row">
-                            <div class="col-md-4"><label for="area">Area</label></div>
-                            <div class="col-md-4">
-                                <input type="text" readonly value="{{ $data->area }}" class="form-control">
-                            </div>
-                        </div>
+                         
                         <div class="row">
                             <div class="col-md-4"><label for="start_date">From</label></div>
                             <div class="col-md-4">
