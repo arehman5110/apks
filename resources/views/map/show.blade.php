@@ -1,37 +1,41 @@
 @extends('layouts.app', ['page_title' => 'Index'])
 @section('css')
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-
-    
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
 
-<style>
-    #map {
-        height: 400px;
-        z-index: 1;
-    }
-
-    .leaflet-control-attribution.leaflet-control {
-        display: none;
-    }
-</style>
 
 
-@guest
     <style>
-   body:not(.sidebar-mini-md):not(.sidebar-mini-xs):not(.layout-top-nav) .content-wrapper, body:not(.sidebar-mini-md):not(.sidebar-mini-xs):not(.layout-top-nav) .main-footer, body:not(.sidebar-mini-md):not(.sidebar-mini-xs):not(.layout-top-nav) .main-header
-     {
-        transition: margin-left .3s ease-in-out;
-        margin-left: 0px !important;
-    }
-    .content-header ,.fa-bars{display: none}
-</style>
-    @endguest
+        #map {
+            height: 400px;
+            z-index: 1;
+        }
 
+        .leaflet-control-attribution.leaflet-control {
+            display: none;
+        }
+    </style>
+
+
+    @guest
+        <style>
+            body:not(.sidebar-mini-md):not(.sidebar-mini-xs):not(.layout-top-nav) .content-wrapper,
+            body:not(.sidebar-mini-md):not(.sidebar-mini-xs):not(.layout-top-nav) .main-footer,
+            body:not(.sidebar-mini-md):not(.sidebar-mini-xs):not(.layout-top-nav) .main-header {
+                transition: margin-left .3s ease-in-out;
+                margin-left: 0px !important;
+            }
+
+            .content-header,
+            .fa-bars {
+                display: none
+            }
+        </style>
+    @endguest
 @endsection
 
 
@@ -100,15 +104,49 @@
                                 </div>
                             </div>
 
-                            {{-- <div class="row">
+                            <div class="row">
                                 <div class="col-md-4"><label for="">Remarks</label></div>
-                                <div class="col-md-4"><input disabled class="form-control" value="{{  $rec->remarks }}">
+                                <div class="col-md-4"><input disabled class="form-control" value="{{ $rec->remarks }}">
                                 </div>
-                            </div> --}}
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4"><label for="">Status</label></div>
+                                <div class="col-md-4"> <button type="button" class="btn  btn-secondary "
+                                        data-toggle="dropdown">
+                                        {{ $rec->wp_status }}
+                                    </button>
+                                    <div class="dropdown-menu" role="menu">
+
+                                        <ul class="dropdown-list">
+                                            <li class="dropdown-item">
+                                                Approved
+                                            </li>
+                                        </ul>
+                                        <form action=" " method="get">
+                                            <button type="submit"
+                                                class="dropdown-item pl-3 w-100 text-left">Detail</button>
+                                        </form>
+
+                                        <form action=" " method="get">
+                                            <button type="submit" class="dropdown-item pl-3 w-100 text-left">Edit</button>
+                                        </form>
+
+
+                                        <button type="button" class="btn btn-primary dropdown-item" data-toggle="modal"
+                                            data-target="#myModal">
+                                            Remove
+                                        </button>
+
+
+                                    </div>
+                                </div>
+                            </div>
 
                             <div class="row">
                                 <div class="col-md-4"><label for="">Total Distance KM</label></div>
-                                <div class="col-md-4"><input disabled class="form-control" value="{{  number_format( $distance , 2) }}">
+                                <div class="col-md-4"><input disabled class="form-control"
+                                        value="{{ number_format($distance, 2) }}">
                                 </div>
                             </div>
 
