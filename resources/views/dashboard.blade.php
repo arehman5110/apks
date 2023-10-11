@@ -34,16 +34,21 @@
 <div class=" p-5">
 
     <div class="row dashboard-counts">
-    <div class="col-md-2">
+    {{-- <div class="col-md-2">
         <div class="card p-3">
 
                 <h3 class="text-center">   3rd Party Digging </h3>
                 <p class="text-center mb-0 pb-0"><span>0</span></p>
 
           </div>
-    </div>
-
-    <div class="col-md-2">
+    </div> --}}
+    
+    <div class="col-md-6"> 
+      <div class="card card-success">
+        <div class="card-header">Patroling</div> 
+        <div class="card-body">  
+          <div class="row">      
+    <div class="col-md-4">
         <div class="card p-3">
 
                 <h3 class="text-center">   Total Patrollig Done </h3>
@@ -52,7 +57,7 @@
           </div>
     </div>
 
-    <div class="col-md-2">
+    <div class="col-md-4">
         <div class="card p-3">
 
                 <h3 class="text-center">  Total Notice Generated </h3>
@@ -61,7 +66,7 @@
           </div>
     </div>
 
-    <div class="col-md-2">
+    <div class="col-md-4">
         <div class="card p-3">
 
                 <h3 class="text-center">   Total Supervision </h3>
@@ -69,8 +74,18 @@
 
           </div>
     </div>
+  </div>
+  </div>
+  </div>
+</div>
 
-    <div class="col-md-2">
+  
+    <div class="col-md-6">
+      <div class="card card-warning">
+        <div class="card-header">Substation</div>
+        <div class="card-body"> 
+      <div class="row"> 
+    <div class="col-md-6">
         <div class="card p-3">
 
                 <h3 class="text-center">   Total Substation Visited </h3>
@@ -79,7 +94,7 @@
           </div>
     </div>
 
-    <div class="col-md-2">
+    <div class="col-md-6">
         <div class="card p-3">
 
                 <h3 class="text-center">  Total Substation Defects </h3>
@@ -88,18 +103,26 @@
           </div>
     </div>
 
-
-    <div class="col-md-2">
-        <div class="card p-3">
-
-                <h3 class="text-center">  Total Feeder Pillar Visited </h3>
-                <p class="text-center mb-0 pb-0"><span>0</span></p>
-
-          </div>
+    </div>
+    </div>
+  </div>
     </div>
 
+    <div class="col-md-6">
+      <div class="card card-info">
+        <div class="card-header">Feeder Pillar</div>
+        <div class="card-body"> 
+      <div class="row">    
+  <div class="col-md-6">
+    <div class="card p-3">
 
-    <div class="col-md-2">
+            <h3 class="text-center">  Total Feeder Pillar Visited </h3>
+            <p class="text-center mb-0 pb-0"><span>0</span></p>
+
+      </div>
+</div>
+
+    <div class="col-md-6">
         <div class="card p-3">
 
                 <h3 class="text-center">  Total Feeder Pillar Defects </h3>
@@ -108,7 +131,19 @@
           </div>
     </div>
 
-    <div class="col-md-2">
+  </div>
+</div>
+</div>
+</div>
+
+
+<div class="col-md-6">
+  <div class="card card-success">
+    <div class="card-header">Tiang</div>
+    <div class="card-body"> 
+  <div class="row">    
+
+    <div class="col-md-6">
         <div class="card p-3">
 
                 <h3 class="text-center">  Total Tiang Visited </h3>
@@ -118,7 +153,7 @@
     </div>
 
 
-    <div class="col-md-2">
+    <div class="col-md-6">
         <div class="card p-3">
 
                 <h3 class="text-center">  Total Tiang Defects </h3>
@@ -127,7 +162,17 @@
           </div>
     </div>
 
-    <div class="col-md-2">
+  </div>
+</div>
+</div>
+</div>
+
+<div class="col-md-6">
+  <div class="card card-primary">
+    <div class="card-header">Link Box</div>
+    <div class="card-body"> 
+  <div class="row">   
+    <div class="col-md-6">
         <div class="card p-3">
 
                 <h3 class="text-center">  Total Link Box Visited </h3>
@@ -137,7 +182,7 @@
     </div>
 
 
-    <div class="col-md-2">
+    <div class="col-md-6">
         <div class="card p-3">
 
                 <h3 class="text-center">  Total Link Box  Defects </h3>
@@ -145,8 +190,18 @@
 
           </div>
     </div>
+  </div>
+</div>
+</div>
+</div>
 
-    <div class="col-md-2">
+
+<div class="col-md-6">
+  <div class="card card-danger">
+    <div class="card-header">Cable Bridge</div>
+    <div class="card-body"> 
+  <div class="row">   
+    <div class="col-md-6">
         <div class="card p-3">
 
                 <h3 class="text-center">  Total Cable Bridge Visited </h3>
@@ -154,7 +209,7 @@
 
           </div>
     </div>
-    <div class="col-md-2">
+    <div class="col-md-6">
         <div class="card p-3">
 
                 <h3 class="text-center">  Total Cable Bridge Defects </h3>
@@ -162,6 +217,11 @@
 
           </div>
     </div>
+</div>
+
+</div>
+</div>
+</div>
 </div>
 
         <div class="accordion row" id="accordionExample">
