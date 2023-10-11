@@ -30,28 +30,28 @@
             padding: 20px;
         }
 
-           /* CSS for the Select2 dropdown to match form-control style */
-.select2-container {
-    margin-top: 10px;
-    width: 100% !important;
-}
+        /* CSS for the Select2 dropdown to match form-control style */
+        .select2-container {
+            margin-top: 10px;
+            width: 100% !important;
+        }
 
-.select2-container .select2-selection--single {
-    height: 38px;
-    padding: 6px 12px;
-    font-size: 16px;
-    line-height: 1.5;
-    border: 1px solid #00000063;;
-    border-radius:0;
-}
+        .select2-container .select2-selection--single {
+            height: 38px;
+            padding: 6px 12px;
+            font-size: 16px;
+            line-height: 1.5;
+            border: 1px solid #00000063;
+            ;
+            border-radius: 0;
+        }
 
-/* Optionally, style the focus state */
-.select2-container .select2-selection--single:focus {
-    border-color: 1px solid #00000063;
-    outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-}
-
+        /* Optionally, style the focus state */
+        .select2-container .select2-selection--single:focus {
+            border-color: 1px solid #00000063;
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
     </style>
 @endsection
 
@@ -65,7 +65,7 @@
                 </div>
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
-                        <li class="breadcrumb-item"><a href="{{route('third-party-digging.index')}}">index</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('third-party-digging.index') }}">index</a></li>
                         <li class="breadcrumb-item active">create</li>
                     </ol>
                 </div>
@@ -121,7 +121,7 @@
 
                                     </select>
                                     <input type="hidden" name="workpackage_id" id="workpackage_id" class="form-control">
-                                    <input type="hidden" name="wp_name" id="wp_name" >
+                                    <input type="hidden" name="wp_name" id="wp_name">
                                 </div>
                             </div>
 
@@ -341,8 +341,8 @@
                                 <div class="col-md-4"><label for="road_name">Road Name</label></div>
                                 <div class="col-md-4">
                                     <span id="road_name_check" class="text-danger"></span>
-                                    <input type="text" name="road_name" id="road_name"
-                                        class="form-control" required></div>
+                                    <input type="text" name="road_name" id="road_name" class="form-control" required>
+                                </div>
                             </div>
 
 
@@ -387,14 +387,14 @@
 
         $(document).ready(function() {
 
-$('#search_wp').select2();
+            $('#search_wp').select2();
         })
 
 
         function getWorkPackage(param) {
             var splitVal = param.value.split(',');
             addRemoveBundary(splitVal[1], splitVal[2], splitVal[3])
-                $('#ba').val(splitVal[1]);
+            $('#ba').val(splitVal[1]);
             if (wp != '') {
                 map.removeLayer(wp)
             }
@@ -428,10 +428,10 @@ $('#search_wp').select2();
                         if (val.wp_status == 'approved') {
 
 
-                        $('#search_wp').append(
-                            `<option value="${val.id},${val.package_name},${val.x} ,${val.y}">${val.package_name}</option>`
-                        );
-                    }
+                            $('#search_wp').append(
+                                `<option value="${val.id},${val.package_name},${val.x} ,${val.y}">${val.package_name}</option>`
+                            );
+                        }
                     });
 
 
