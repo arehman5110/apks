@@ -139,13 +139,13 @@
 
                             <div class="row">
                                 <div class="col-md-4"><label for="survey_date">Survey Date</label></div>
-                                <div class="col-md-4"><input type="date" name="survey_date" id="survey_date"
+                                <div class="col-md-4"><input type="date" name="survey_date" id="survey_date" value="{{date('Y-m-d')}}"
                                         class="form-control" required></div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-4"><label for="patrolling_time">Patrolling Time</label></div>
-                                <div class="col-md-4"><input type="time" name="patrolling_time" id="patrolling_time"
+                                <div class="col-md-4"><input type="time" name="patrolling_time" id="patrolling_time" value="{{Carbon\Carbon::now()->format('H:i:s')}}"
                                         class="form-control" required></div>
                             </div>
                             {{-- <div class="row">

@@ -59,18 +59,44 @@
 
 
 
+
     <section class="content mt-2">
         <div class="container-fluid">
-
+            @include('components.message')
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header">
-                            <div class="card-title text-right">
-                                Work Package Detail
+
+                        <div class="card-header d-flex justify-content-between ">
+                            <p class="mb-0">Workpackage Detail</p>
+                            <div class="d-flex ml-auto">
+
+
+                                <button type="button" id="wp_status"
+                                class="btn  btn-secondary form-control " data-toggle="dropdown">
+                                {{ $rec->wp_status }}
+                            </button>
+                            <div class="dropdown-menu" role="menu">
+                                @if ($rec->wp_status != 'approved')
+                                <a href="/sbum-status/{{$rec->id}}/approved"> <button type="button" class="dropdown-item pl-3 w-100 text-left"
+                                        value="approved"
+                                        onclick="return confirm('are you sure')">Approved</button></a>
+                                @endif
+                                @if ($rec->wp_status != 'rejected')
+                                   <a href="/sbum-status/{{$rec->id}}/rejected"> <button type="button" class="dropdown-item pl-3 w-100 text-left"
+
+                                    onclick="return confirm('are you sure') " >Rejected</button></a>
+                                @endif
+                                @if ($rec->wp_status != 'pending')
+                                <a href="/sbum-status/{{$rec->id}}/pending">   <button type="button" class="dropdown-item pl-3 w-100 text-left"
+                                        value="pending"
+                                        onclick="return confirm('are you sure') ">Pending</button></a>
+                                @endif
+
+
 
                             </div>
-
+                        </div>
                         </div>
 
                         <div class="card-body">
@@ -112,31 +138,27 @@
 
                             <div class="row">
                                 <div class="col-md-4"><label for="">Status</label></div>
-                                <div class="col-md-4"> <button type="button" class="btn  btn-secondary "
-                                        data-toggle="dropdown">
+                                <div class="col-md-4"> <button type="button" id="wp_status"
+                                        class="btn  btn-secondary form-control mb-3" data-toggle="dropdown">
                                         {{ $rec->wp_status }}
                                     </button>
                                     <div class="dropdown-menu" role="menu">
+                                        @if ($rec->wp_status != 'approved')
+                                        <a href="/sbum-status/{{$rec->id}}/approved"> <button type="button" class="dropdown-item pl-3 w-100 text-left"
+                                                value="approved"
+                                                onclick="return confirm('are you sure')">Approved</button></a>
+                                        @endif
+                                        @if ($rec->wp_status != 'rejected')
+                                           <a href="/sbum-status/{{$rec->id}}/rejected"> <button type="button" class="dropdown-item pl-3 w-100 text-left"
 
-                                        <ul class="dropdown-list">
-                                            <li class="dropdown-item">
-                                                Approved
-                                            </li>
-                                        </ul>
-                                        <form action=" " method="get">
-                                            <button type="submit"
-                                                class="dropdown-item pl-3 w-100 text-left">Detail</button>
-                                        </form>
+                                            onclick="return confirm('are you sure') " >Rejected</button></a>
+                                        @endif
+                                        @if ($rec->wp_status != 'pending')
+                                        <a href="/sbum-status/{{$rec->id}}/pending">   <button type="button" class="dropdown-item pl-3 w-100 text-left"
+                                                value="pending"
+                                                onclick="return confirm('are you sure') ">Pending</button></a>
+                                        @endif
 
-                                        <form action=" " method="get">
-                                            <button type="submit" class="dropdown-item pl-3 w-100 text-left">Edit</button>
-                                        </form>
-
-
-                                        <button type="button" class="btn btn-primary dropdown-item" data-toggle="modal"
-                                            data-target="#myModal">
-                                            Remove
-                                        </button>
 
 
                                     </div>
@@ -162,6 +184,7 @@
 
         </div>
     </section>
+
 
     <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -340,6 +363,23 @@
 
             return url.toString();
 
+        }
+
+
+
+        function changeStatus(event, id) {
+            var status = event.value;
+            console.log(status);
+            $('#wp_status').html(status)
+            $.ajax({
+                url: `/sbum-status/${id}/${status}`,
+                dataType: 'JSON',
+                method: 'GET',
+                success: function callback(data) {
+
+              alert('Status Change Successfully')
+                }
+            })
         }
     </script>
 @endsection
