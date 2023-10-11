@@ -98,13 +98,6 @@
                         </div>
 
 
-                        <div class="row">
-                            <div class="col-md-4"><label for="feeder_involved">Feeder Involved</label></div>
-                            <div class="col-md-4">
-                                <input type="text" readonly class="form-control" value="{{ $data->fl }}"
-                                    required>
-                            </div>
-                        </div>
 
                         <div class="row">
                             <div class="col-md-4"><label for="team">Team</label></div>
@@ -231,6 +224,21 @@
                                 @if (file_exists(public_path($data->image_building)) && $data->image_building != '')
                                     <a href="{{ URL::asset($data->image_building) }}" data-lightbox="roadtrip">
                                         <img src="{{ URL::asset($data->image_building) }}" alt="" height="70"
+                                            class="adjust-height ml-5  "></a>
+                                @else
+                                    <strong>No image found</strong>
+                                @endif
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-4"><label for="img_advertise_poster">Image Advertise Poster</label></div>
+
+                            <div class="col-md-4 text-center mb-3">
+                                @if (file_exists(public_path($data->img_advertise_poster)) && $data->img_advertise_poster != '')
+                                    <a href="{{ URL::asset($data->img_advertise_poster) }}" data-lightbox="roadtrip">
+                                        <img src="{{ URL::asset($data->img_advertise_poster) }}" alt="" height="70"
                                             class="adjust-height ml-5  "></a>
                                 @else
                                     <strong>No image found</strong>

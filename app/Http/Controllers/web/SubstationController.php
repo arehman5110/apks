@@ -20,7 +20,7 @@ class SubstationController extends Controller
     {
         $data=Substation::all();
         return view('substation.index',['datas'=>$data]);
- 
+
     }
 
     /**
@@ -52,7 +52,7 @@ class SubstationController extends Controller
             $data->team = $request->team;
             $data->visit_date = $request->visit_date;
             $data->patrol_time =$combinedDateTime;
-            $data->fl = $request->fl;
+
             $data->voltage = $request->voltage;
             $data->name = $request->name;
             $data->type = $request->type;
@@ -133,7 +133,7 @@ class SubstationController extends Controller
             $data->team = $request->team;
             $data->visit_date = $request->visit_date;
             $data->patrol_time =$combinedDateTime;
-            $data->fl = $request->fl;
+           
             $data->voltage = $request->voltage;
             $data->name = $request->name;
             $data->type = $request->type;
@@ -192,5 +192,5 @@ class SubstationController extends Controller
                 ->with('failed', 'Request Failed');
         }
     }
-    
+
 }

@@ -98,13 +98,7 @@
                         </div>
 
 
-                        <div class="row">
-                            <div class="col-md-4"><label for="feeder_involved">Feeder Involved</label></div>
-                            <div class="col-md-4">
-                                <input type="text" readonly class="form-control" value="{{ $data->feeder_involved }}"
-                                    required>
-                            </div>
-                        </div>
+
 
                         <div class="row">
                             <div class="col-md-4"><label for="team">Team</label></div>
@@ -121,17 +115,17 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4"><label for="start_date">Start Date</label></div>
+                            <div class="col-md-4"><label for="start_date">From</label></div>
                             <div class="col-md-4">
-                                <input type="date" readonly value="{{ $data->start_date }}" class="form-control"
-                                    required>
+                                <input type="text" readonly value="{{ $data->start_date }}" class="form-control"
+                                    >
                             </div>
                         </div>
 
                         <div class="row">
-                            <div class="col-md-4"><label for="end_date">End Date</label></div>
+                            <div class="col-md-4"><label for="end_date">To</label></div>
                             <div class="col-md-4">
-                                <input type="date" readonly value="{{ $data->end_date }}" class="form-control" required>
+                                <input type="text" readonly value="{{ $data->end_date }}" class="form-control" >
                             </div>
                         </div>
 
@@ -148,27 +142,27 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4"><label for="pipe_staus">Pipe Status</label></div>
+                            <div class="col-md-4"><label for="pipe_staus">Pipe Broken</label></div>
                             <div class="col-md-4">
                                 <input readonly value="{{ $data->pipe_staus }}" class="form-control" required>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4"><label for="collapsed_status">Collapsed Status</label></div>
+                            <div class="col-md-4"><label for="collapsed_status">Collapsed </label></div>
                             <div class="col-md-4">
                                 <input readonly value="{{ $data->collapsed_status }}" class="form-control" required>
                             </div>
                         </div>
 
                         <div class="row">
-                            <div class="col-md-4"><label for="rust_status">Rust Status</label></div>
+                            <div class="col-md-4"><label for="rust_status">Rusty</label></div>
                             <div class="col-md-4">
                                 <input readonly value="{{ $data->rust_status }}" class="form-control" required>
                             </div>
                         </div>
 
                         <div class="row">
-                            <div class="col-md-4"><label for="bushes_status">Bushes Status</label></div>
+                            <div class="col-md-4"><label for="bushes_status">Bushy</label></div>
                             <div class="col-md-4">
                                 <input readonly value="{{ $data->bushes_status }}" class="form-control" required>
                             </div>

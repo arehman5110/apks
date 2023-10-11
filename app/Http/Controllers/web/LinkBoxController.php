@@ -53,15 +53,16 @@ class LinkBoxController extends Controller
             $data->team = $request->team;
             $data->visit_date = $request->visit_date;
             $data->patrol_time = $combinedDateTime;
-            $data->feeder_involved = $request->feeder_involved;
+
             $data->area = $request->area;
             $data->start_date = $request->start_date;
             $data->end_date = $request->end_date;
             $data->type = $request->type;
             $data->coordinate = $request->coordinate;
-            $data->gate_status = $request->gate_status;
+            $data->cover_status = $request->cover_status;
             $data->vandalism_status = $request->vandalism_status;
             $data->leaning_staus = $request->leaning_staus;
+            $data->leaning_angle = $request->leaning_angle;
             $data->rust_status = $request->rust_status;
             $data->advertise_poster_status = $request->advertise_poster_status;
             $data->bushes_status = $request->bushes_status;

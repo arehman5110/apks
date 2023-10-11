@@ -98,13 +98,7 @@
                         </div>
 
 
-                        <div class="row">
-                            <div class="col-md-4"><label for="feeder_involved">Feeder Involved</label></div>
-                            <div class="col-md-4">
-                                <input type="text" readonly class="form-control" value="{{ $data->feeder_involved }}"
-                                    required>
-                            </div>
-                        </div>
+
 
                         <div class="row">
                             <div class="col-md-4"><label for="team">Team</label></div>
@@ -121,7 +115,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4"><label for="start_date">Start Date</label></div>
+                            <div class="col-md-4"><label for="start_date">From</label></div>
                             <div class="col-md-4">
                                 <input type="date" readonly value="{{ $data->start_date }}" class="form-control"
                                     required>
@@ -129,7 +123,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-md-4"><label for="end_date">End Date</label></div>
+                            <div class="col-md-4"><label for="end_date">To</label></div>
                             <div class="col-md-4">
                                 <input type="date" readonly value="{{ $data->end_date }}" class="form-control" required>
                             </div>
@@ -148,31 +142,38 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4"><label for="gate_status">Gate Status</label></div>
+                            <div class="col-md-4"><label for="gate_status">Cover is Not Closed</label></div>
                             <div class="col-md-4">
-                                <input readonly value="{{ $data->gate_status }}" class="form-control" required>
+                                <input readonly value="{{ $data->cover_status }}" class="form-control" required>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4"><label for="vandalism_status">Vandalism Status</label></div>
+                            <div class="col-md-4"><label for="vandalism_status">Vandalism</label></div>
                             <div class="col-md-4">
                                 <input readonly value="{{ $data->vandalism_status }}" class="form-control" required>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4"><label for="leaning_staus">Leaning Staus</label></div>
+                            <div class="col-md-4"><label for="leaning_staus">Leaning</label></div>
                             <div class="col-md-4">
                                 <input readonly value="{{ $data->leaning_staus }}" class="form-control" required>
                             </div>
                         </div>
+                        <div class="row @if ($data->leaning_staus == 'No') d-none @endif " id="leaning-angle">
+                            <div class="col-md-4"><label for="leaning_angle">Leaning angle</label></div>
+                            <div class="col-md-4">
+                                <input type="text" name="leaning_angle" id="leaning_angle" value="{{ $data->leaning_angle }}" class="form-control" readonly>
+
+                            </div>
+                        </div>
                         <div class="row">
-                            <div class="col-md-4"><label for="rust_status">Rust Status</label></div>
+                            <div class="col-md-4"><label for="rust_status">Rusty</label></div>
                             <div class="col-md-4">
                                 <input readonly value="{{ $data->rust_status }}" class="form-control" required>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4"><label for="advertise_poster_status">Advertise Poster Status</label>
+                            <div class="col-md-4"><label for="advertise_poster_status">Cleaning illegal ads/banners</label>
                             </div>
                             <div class="col-md-4">
                                 <input readonly value="{{ $data->advertise_poster_status }}" class="form-control"
@@ -180,18 +181,18 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4"><label for="bushes_status">Bushes Status</label></div>
+                            <div class="col-md-4"><label for="bushes_status">Bushy</label></div>
                             <div class="col-md-4">
                                 <input readonly value="{{ $data->bushes_status }}" class="form-control" required>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4"><label for="image_gate">Image Gate</label></div>
+                            <div class="col-md-4"><label for="image_gate">Cover Image</label></div>
 
                             <div class="col-md-4 text-center mb-3">
-                                @if (file_exists(public_path($data->image_gate)) && $data->image_gate != '')
-                                    <a href="{{ URL::asset($data->image_gate) }}" data-lightbox="roadtrip">
-                                        <img src="{{ URL::asset($data->image_gate) }}" alt="" height="70"
+                                @if (file_exists(public_path($data->image_cover)) && $data->image_cover != '')
+                                    <a href="{{ URL::asset($data->image_cover) }}" data-lightbox="roadtrip">
+                                        <img src="{{ URL::asset($data->image_cover) }}" alt="" height="70"
                                             class="adjust-height ml-5  "></a>
                                 @else
                                     <strong>No image found</strong>

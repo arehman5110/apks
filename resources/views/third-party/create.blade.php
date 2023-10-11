@@ -61,7 +61,7 @@
         <div class="container-  ">
             <div class="row  " style="flex-wrap:nowrap">
                 <div class="col-sm-6">
-                    <h3>Third Party Digging</h3>
+                    <h3>Notice Form</h3>
                 </div>
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
@@ -114,6 +114,41 @@
                             </div>
 
                             <div class="row">
+                                <div class="col-md-4"><label for="digging">Digging</label></div>
+                                <div class="col-md-4">
+
+                                    <select name="digging" id="digging" class="form-control" required>
+                                        <option value="" hidden>select digging</option>
+                                        <option value="yes">yes</option>
+                                        <option value="no">no</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"><label for="notice">Notice</label></div>
+                                <div class="col-md-4">
+                                    <select name="notice" id="notice" class="form-control" required>
+                                        <option value="" hidden>select notice</option>
+                                        <option value="yes">yes</option>
+                                        <option value="no">no</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"><label for="supervision">Supervision</label></div>
+                                <div class="col-md-4">
+
+                                    <select name="supervision" id="supervision" class="form-control" required>
+                                        <option value="" hidden>select supervision</option>
+                                        <option value="yes">yes</option>
+                                        <option value="no">no</option>
+                                    </select>
+
+                                </div>
+                            </div>
+
+
+                            <div class="row">
                                 <div class="col-md-4"><label for="search_wp">Work Package Name</label></div>
                                 <div class="col-md-4">
                                     <select name="search_wp" id="search_wp" class="form-control" required>
@@ -159,48 +194,11 @@
                                         class="form-control" required></div>
                             </div>
 
-                            <div class="row">
-                                <div class="col-md-4"><label for="km_plan">Km Plan</label></div>
-                                <div class="col-md-4"><input type="number" name="km_plan" id="km_plan"
-                                        class="form-control" required></div>
-                            </div>
+
                             <div class="row">
                                 <div class="col-md-4"><label for="km_actual">Km Actual</label></div>
                                 <div class="col-md-4"><input type="number" name="km_actual" id="km_actual"
                                         class="form-control" required></div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4"><label for="digging">Digging</label></div>
-                                <div class="col-md-4">
-
-                                    <select name="digging" id="digging" class="form-control" required>
-                                        <option value="" hidden>select digging</option>
-                                        <option value="yes">yes</option>
-                                        <option value="no">no</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4"><label for="notice">Notice</label></div>
-                                <div class="col-md-4">
-                                    <select name="notice" id="notice" class="form-control" required>
-                                        <option value="" hidden>select notice</option>
-                                        <option value="yes">yes</option>
-                                        <option value="no">no</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4"><label for="supervision">Supervision</label></div>
-                                <div class="col-md-4">
-
-                                    <select name="supervision" id="supervision" class="form-control" required>
-                                        <option value="" hidden>select supervision</option>
-                                        <option value="yes">yes</option>
-                                        <option value="no">no</option>
-                                    </select>
-
-                                </div>
                             </div>
 
 
