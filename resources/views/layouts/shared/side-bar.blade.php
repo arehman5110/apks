@@ -233,6 +233,30 @@
                     </ul>
                 </li>
 
+                <li class="nav-item ">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-road"></i>
+                        <p>
+                            PO
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('po.create')}}" class="nav-link ">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Create</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('po.index')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Index</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
 {{--
                 <li class="nav-item">
                     <a href="/map-2" class="nav-link ">

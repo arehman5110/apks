@@ -23,6 +23,7 @@ use App\Http\Controllers\web\ThirdPartyDiggingController;
 use App\Http\Controllers\web\SubstationController;
 use App\Http\Controllers\web\FPController;
 use App\Http\Controllers\web\PatrollingController;
+use App\Http\Controllers\web\POController;
 use App\Models\ThirdPartyDiging;
 
 /*
@@ -98,6 +99,9 @@ Route::middleware('auth')->group(function () {
     Route::view('/feeder-pillar-map', 'feeder-pillar.map');
     Route::get('generate-feeder-pillar-excel', [FeederPillarExcelController::class, 'generateFeederPillarExcel'])->name('generate-feeder-pillar-excel');
 
+//PO routes
+
+Route::resource('po', POController::class);
 
 
     // Patrolling
