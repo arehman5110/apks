@@ -65,11 +65,11 @@
 
                                     <thead style="background-color: #E4E3E3 !important">
                                         <tr>
-                                            <th>zone</th>
-                                            <th>Ba</th>
-                                            <th>Team Name</th>
-                                            <th>Visit Date</th>
-                                            <th>Action</th>
+                                            <th>ZONE</th>
+                                            <th>BA</th>
+                                            <th>TEAM</th>
+                                            <th>VISIT DATE</th>
+                                            <th>ACTION</th>
 
                                         </tr>
                                     </thead>

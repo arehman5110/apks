@@ -23,7 +23,7 @@
 
         input,
         select {
-            color: black !important;
+            /* color: black !important; */
             margin-bottom: 0px !important;
             margin-top: 1rem;
         }

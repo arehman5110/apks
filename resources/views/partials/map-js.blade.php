@@ -72,38 +72,7 @@
 
                 if (data.features.length != 0) {
                     showModalData(data.features[0].properties , data.features[0].id);
-                    // var str = '';
-                    // var splitKey = '';
-                    // for (key in data.features[0].properties) {
-
-                    //     splitKey = key.split("_");
-                    //     str += '<tr>';
-
-
-                    //     str +=
-                    //         `<th class="text-capitalize">${splitKey.map(part => part.charAt(0).toUpperCase() + part.slice(1)).join(' ')}</th>`;
-                    //     if (splitKey.includes('image') || splitKey.includes('images')) {
-
-                    //         if (data.features[0].properties[key] == '') {
-                    //             str = str + `<td>no image found</td></tr>`;
-                    //         } else {
-                    //             str = str +
-                    //                 `<td><a href="${data.features[0].properties[key]}" data-lightbox="roadtrip">
-                    //                                 <img src="${data.features[0].properties[key]}" alt=""
-                    //                                 width="20px" height="20px" class="adjust-height ml-5  "></a></td></tr>`;
-
-                    //     } else {
-                    //         str = str + `<td>${data.features[0].properties[key]}</td></tr>`;
-                    //     }
-
-
-                    // }
-
-
-                    // $("#my_data").html(str);
-                    // $('#myModal').modal('show');
-
-
+                 
                 }
 
             }
@@ -161,7 +130,28 @@
 
 
 <script>
-    $(document).ready(function() {
+
+const b1Options = [
+            ['W1', 'KUALA LUMPUR PUSAT', 3.14925905877391, 101.754098819705],
+            ['B1', 'PETALING JAYA', 3.1128074178475, 101.605270457169],
+            ['B1', 'RAWANG', 3.47839445121726, 101.622905486475],
+            ['B1', 'KUALA SELANGOR', 3.40703209426401, 101.317426926947],
+            ['B2', 'KLANG', 3.08428642705789, 101.436185279023],
+            ['B2', 'PELABUHAN KLANG', 2.98188527916042, 101.324234779569],
+            ['B4', 'CHERAS', 3.14197346621987, 101.849883983416],
+            ['B4', 'BANTING', 2.82111390453244, 101.505890775541],
+            ['B4', 'BANGI', 2.965810949933260, 101.81881303103104],
+            ['B4', 'PUTRAJAYA & CYBERJAYA', 2.92875032271019, 101.675338316575]
+        ];
+        const userBa = "{{ Auth::user()->ba }}";
+        $(document).ready(function() {
+
+
+
+            if (userBa !== '') {
+                getBaPoints(userBa)
+            }
+
         $('#search_zone').on('change', function() {
             const selectedValue = this.value;
             const areaSelect = $('#search_ba');
@@ -218,10 +208,24 @@
         });
     });
 
+    function getBaPoints(param) {
+            var baSelect = $('#search_ba')
+            baSelect.empty();
+
+            b1Options.map((data) => {
+                if (data[1] == param) {
+                    baSelect.append(`<option value="${data}">${data[1]}</option>`)
+                }
+            });
+            let baVal = document.getElementById('search_ba');
+            getWorkPackage(baVal)
+        }
+
     function getWorkPackage(param) {
         var splitVal = param.value.split(',');
 
         addRemoveBundary(splitVal[1], splitVal[2], splitVal[3])
+        console.log(splitVal[1]);
         var zone = $('#search_zone').val();
 
     }

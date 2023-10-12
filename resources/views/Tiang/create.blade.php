@@ -23,7 +23,7 @@
 
 
 @section('content')
-    <section class="content-header">
+    <section class="content-header ">
         <div class="container-  ">
             <div class="row  " style="flex-wrap:nowrap">
                 <div class="col-sm-6">
@@ -57,10 +57,11 @@
                                 <h3>Info</h3>
 
                                 <div class="row">
-                                    <div class="col-md-4"><label for="ba">Ba</label></div>
+                                    <div class="col-md-4"><label for="ba">BA</label></div>
                                     <div class="col-md-4"><select name="ba_s" id="ba_s" class="form-control" onchange="getWp(this)"
                                             required>
-
+                                        @if (Auth::user()->ba == '')
+                                     
                                             <option value="" hidden>Select ba</option>
                                             <optgroup label="W1">
                                                 <option value="KL PUSAT,KUALA LUMPUR PUSAT, 3.14925905877391, 101.754098819705">KL PUSAT</option>
@@ -80,7 +81,9 @@
                                                 <option value="BANGI,BANGI,2.965810949933260,101.81881303103104">BANGI</option>
                                                 <option value="PUTRAJAYA/CYBERJAYA/PUCHONG,PUTRAJAYA & CYBERJAYA, 2.92875032271019, 101.675338316575">PUTRAJAYA & CYBERJAYA</option>
                                             </optgroup>
-
+                                            @else
+                                            
+                                            @endif
 
                                         </select>
                                         <input type="hidden" name="ba" id="ba">
@@ -96,13 +99,13 @@
                                 <div class="row">
                                     <div class="col-md-4"><label for="po_start_date">PO Start Date</label></div>
                                     <div class="col-md-4"><input type="date" name="start_date" id="po_sstart_date"
-                                            class="form-control" required></div>
+                                            class="form-control" ></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="po_end_date">PO End Date</label></div>
                                     <div class="col-md-4"><input type="date" name="end_date" id="po_end_date"
-                                            class="form-control" required></div>
+                                            class="form-control" ></div>
                                 </div>
 
                                 <div class="row">
@@ -115,7 +118,7 @@
                                 <div class="row">
                                     <div class="col-md-4"><label for="review_date">Review Date </label></div>
                                     <div class="col-md-4"><input type="date" name="review_date" id="review_date"
-                                            class="form-control" required></div>
+                                            class="form-control" ></div>
                                 </div>
 
                                 <div class="row">
@@ -132,13 +135,13 @@
                                 <div class="row">
                                     <div class="col-md-4"><label for="section_from">From </label></div>
                                     <div class="col-md-4"><input type="text" name="section_from" id="section_from"
-                                            class="form-control" required></div>
+                                            class="form-control" ></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="section_to">To</label></div>
                                     <div class="col-md-4"><input type="text" name="section_to" id="section_to"
-                                            class="form-control" required></div>
+                                            class="form-control" ></div>
                                 </div>
 
                                 <div class="row">
@@ -886,6 +889,8 @@
 
     </script>
     <script type="text/javascript">
+
+
         var baseLayers
         var identifyme = '';
         var boundary3 = '';
@@ -991,6 +996,46 @@
         }
 
         map.on('click', onMapClick);
+    </script>
+
+    <script>
+        const b1Options = [
+                    ['W1', 'KUALA LUMPUR PUSAT', 3.14925905877391, 101.754098819705],
+                    ['B1', 'PETALING JAYA', 3.1128074178475, 101.605270457169],
+                    ['B1', 'RAWANG', 3.47839445121726, 101.622905486475],
+                    ['B1', 'KUALA SELANGOR', 3.40703209426401, 101.317426926947],
+                    ['B2', 'KLANG', 3.08428642705789, 101.436185279023],
+                    ['B2', 'PELABUHAN KLANG', 2.98188527916042, 101.324234779569],
+                    ['B4', 'CHERAS', 3.14197346621987, 101.849883983416],
+                    ['B4', 'BANTING', 2.82111390453244, 101.505890775541],
+                    ['B4', 'BANGI',2.965810949933260,101.81881303103104 ],
+                    ['B4', 'PUTRAJAYA & CYBERJAYA', 2.92875032271019,101.675338316575]
+                ];
+                const userBa = "{{Auth::user()->ba}}";
+                $(document).ready(function() {
+       
+       
+
+       if (userBa !== '') {
+           getBaPoints(userBa)
+       }
+       
+    });
+
+      
+       function getBaPoints(param){
+           var baSelect = $('#ba_s')
+               baSelect.empty();
+
+               b1Options.map((data)=>{
+                   if (data[1] == param) {
+                       baSelect.append(`<option value="${data}">${data[1]}</option>`)
+                   }
+               });
+               let baVal = document.getElementById('ba_s');
+               getWp(baVal)
+       }
+
     </script>
 
 

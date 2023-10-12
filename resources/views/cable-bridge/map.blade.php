@@ -47,16 +47,20 @@
                         <label for="search_zone">Zone</label>
                         <select name="search_zone" id="search_zone" class="form-control">
 
+                            @if (Auth::user()->zone == '')
                             <option value="" hidden>select zone</option>
                             <option value="W1">W1</option>
                             <option value="B1">B1</option>
                             <option value="B2">B2</option>
                             <option value="B4">B4</option>
+                        @else
+                            <option value="{{ Auth::user()->zone }}" hidden>{{ Auth::user()->zone }}</option>
+                        @endif
 
                         </select>
                     </div>
                     <div class="col-md-3">
-                        <label for="search_ba">Ba</label>
+                        <label for="search_ba">BA</label>
                         <select name="search_ba" id="search_ba" class="form-control" onchange="getWorkPackage(this)">
                             <option value="">Select zone</option>
                         </select>
@@ -135,52 +139,7 @@
         </div><!--  END MAP CARD DIV -->
     </div>
 
-    <div class="modal fade" id="geomModal" tabindex="-1" aria-labelledby="geomModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add new W.P</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form action="/save-work-package" method="post" id="save_wp" onsubmit="return submitFoam()">
-                    @csrf
-                    <div class="modal-body ">
-
-
-                        <label for="">Work Package Name</label>
-                        <span class="text-danger" id="er-pw-name"></span> <br>
-                        <input type="text" name="name" id="pw-name" class="form-control">
-                        <label for="zone">Zone</label>
-
-                        <input type="text" name="zone" id="pw-zone" class="form-control">
-                        {{-- <select name="zone" id="pw-zone" class="form-control">
-                        <option value="" hidden>select zone</option>
-                        <option value="W1">W1</option>
-                        <option value="B1">B1</option>
-                        <option value="B2">B2</option>
-                        <option value="B4">B4</option>
-                    </select> --}}
-
-                        <label for="ba">Select ba</label>
-                        <input type="text" name="ba" id="pw-ba" class="form-control">
-                        {{-- <select name="ba" id="pw-ba" class="form-control">
-                        <option value="" hidden>Select zone</option>
-                    </select> --}}
-
-                        <input type="hidden" name="geom" id="geom">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Submit</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
+   
     <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -203,49 +162,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="polyLineModal" tabindex="-1" aria-labelledby="polyLineModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Identify Roads</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form action="/save-road" method="post" id="road-form" onsubmit="return submitFoam2()">
-                    @csrf
-                    <div class="modal-body ">
-                        <label for="ba">Road Name</label>
-                        <span class="text-center" id="er_raod_name"></span>
-                        <input name="road_name" id="road_name" class="form-control">
-                        <label for="">Work Package Name</label>
-                        <input type="text" name="" id="raod-d-wp-id" class="form-control disabled">
-                        <input type="hidden" name="id_wp" id="raod-wp-id">
-                        {{-- <select name="id_wp" id="raod-wp-id" class="form-control" onchange="getWorkPackage(this)">
-                        <option value="">select wp</option>
-                        @foreach ($wps as $wp)
-                            <option value="{{$wp->id}}">{{$wp->package_name}}</option>
-                        @endforeach
-                    </select> --}}
-                        <label for="polyline-zone">Zone</label>
-                        <input id="polyline-zone" name="zone" class="form-control">
-                        <label for="polyline-ba">BA</label>
-                        <input id="polyline-ba" name="ba" class="form-control">
-
-
-
-
-                        <input type="hidden" name="geom" id="road-geom">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Submit</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+     
 @endsection
 
 @section('script')
