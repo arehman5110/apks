@@ -57,10 +57,10 @@ class SubstationController extends Controller
             $data->name = $request->name;
             $data->type = $request->type;
             $data->coordinate = $request->coordinate;
-            $data->gate_status = $request->gate_status;
+            $data->gate_status = $request->gate_status == 'Others' ? $request->other_gate_status :$request->gate_status ;
             $data->grass_status = $request->grass_status;
             $data->tree_branches_status = $request->tree_branches_status;
-            $data->building_status = $request->building_status;
+            $data->building_status = $request->building_status == 'Others' ? $request->other_building_defects : $request->building_status;
             $data->advertise_poster_status = $request->advertise_poster_status;
             $destinationPath = 'assets/images/link-box/';
 
@@ -138,10 +138,10 @@ class SubstationController extends Controller
             $data->name = $request->name;
             $data->type = $request->type;
             $data->coordinate = $request->coordinate;
-            $data->gate_status = $request->gate_status;
+            $data->gate_status = $request->gate_status == 'Others' ? $request->other_gate_status :$request->gate_status ;
             $data->grass_status = $request->grass_status;
             $data->tree_branches_status = $request->tree_branches_status;
-            $data->building_status = $request->building_status;
+            $data->building_status = $request->building_status == 'Others' ? $request->other_building_defects : $request->building_status;
             $data->advertise_poster_status = $request->advertise_poster_status;
             $destinationPath = 'assets/images/link-box/';
 

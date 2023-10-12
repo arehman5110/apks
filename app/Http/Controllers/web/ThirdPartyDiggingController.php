@@ -9,6 +9,7 @@ use App\Models\WorkPackage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class ThirdPartyDiggingController extends Controller
 {
@@ -31,6 +32,9 @@ class ThirdPartyDiggingController extends Controller
      */
     public function create()
     {
+        $ba = Auth::user()->ba;
+        $sql =  DB::select("SELECT ppb_zone FROM ba where station = '$ba'");
+        
         $team_id = auth()->user()->id_team;
         $team = Team::find($team_id)->team_name;
         $wp = WorkPackage::all();
