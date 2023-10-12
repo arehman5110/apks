@@ -8,6 +8,7 @@ use App\Models\Substation;
 use App\Models\Team;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class SubstationController extends Controller
 {
@@ -18,7 +19,8 @@ class SubstationController extends Controller
      */
     public function index()
     {
-        $data=Substation::all();
+        $ba = Auth::user()->ba ;
+        $data = Substation::where('ba', 'LIKE', '%' . $ba . '%')->get();
         return view('substation.index',['datas'=>$data]);
 
     }

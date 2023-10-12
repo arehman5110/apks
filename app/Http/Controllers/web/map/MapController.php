@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Road;
 use App\Models\WorkPackage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class MapController extends Controller
@@ -25,8 +26,8 @@ class MapController extends Controller
 
 
     public function allWP(){
-
-        $datas =WorkPackage::all('id','package_name','zone','ba','wp_status','created_at','updated_at');
+        $ba = Auth::user()->ba ;
+        $datas = WorkPackage::where('ba', 'LIKE', '%' . $ba . '%')->get();
 
         $roads = [];
 

@@ -8,6 +8,7 @@ use App\Models\FeederPillar;
 use App\Models\Team;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class FPController extends Controller
 {
@@ -18,7 +19,8 @@ class FPController extends Controller
      */
     public function index()
     {
-        $data = FeederPillar::all();
+        $ba = Auth::user()->ba ;
+        $data = FeederPillar::where('ba', 'LIKE', '%' . $ba . '%')->get();
         return view('feeder-pillar.index', ['datas' => $data]);
     }
 

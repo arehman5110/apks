@@ -8,6 +8,7 @@ use App\Models\Team;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class CableBridgeController extends Controller
 {
@@ -19,7 +20,9 @@ class CableBridgeController extends Controller
     public function index()
     {
         //
-        $data = CableBridge::all();
+
+        $ba = Auth::user()->ba ;
+        $data = CableBridge::where('ba', 'LIKE', '%' . $ba . '%')->get();
         return view('cable-bridge.index', ['datas' => $data]);
     }
 

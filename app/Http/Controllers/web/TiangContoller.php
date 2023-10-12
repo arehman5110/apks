@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Tiang;
 use App\Repositories\TiangRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class TiangContoller extends Controller
@@ -26,7 +27,8 @@ class TiangContoller extends Controller
     public function index()
     {
         //
-        $datas = Tiang::all();
+        $ba = Auth::user()->ba ;
+        $datas = Tiang::where('ba', 'LIKE', '%' . $ba . '%')->get();
 
         return view('Tiang.index', ['datas' => $datas]);
     }
