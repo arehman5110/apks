@@ -1,5 +1,14 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
+    @foreach (config('app.available_locales') as $locale)
+<x-dropdown-link :href="route(request()->route()->getName(), $locale)">
+    <span @if (app()->getLocale() == $locale) 
+        style="font-weight: bold; text-decoration: underline" 
+        @endif>
+        {{ strtoupper($locale) }}
+    </span>
+</x-dropdown-link>
+@endforeach
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">

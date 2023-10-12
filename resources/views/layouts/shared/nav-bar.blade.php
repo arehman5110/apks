@@ -1,7 +1,7 @@
 <nav class="main-header navbar navbar-expand navbar-light d-flex justify-content-between"
     style="background-color: #708090">
     <!-- Left navbar links -->
-
+    
 
     <ul class="navbar-nav">
         <li class="nav-item">
@@ -34,10 +34,21 @@
                 </button>
             </x-slot>
 
+
             <x-slot name="content">
                 <x-dropdown-link :href="route('profile.edit', app()->getLocale())">
                     {{ __('Profile') }}
                 </x-dropdown-link>
+
+                @foreach (config('app.available_locales') as $locale)
+                <x-dropdown-link :href="route(request()->route()->getName(), $locale)">
+                    <span @if (app()->getLocale() == $locale) 
+                        style="font-weight: bold; text-decoration: underline" 
+                        @endif>
+                        {{ strtoupper($locale) }}
+                    </span>
+                </x-dropdown-link>
+                @endforeach
 
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout', app()->getLocale()) }}">
@@ -51,6 +62,7 @@
                 </form>
             </x-slot>
         </x-dropdown>
+
     </div>
     @endauth
  
