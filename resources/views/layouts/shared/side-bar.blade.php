@@ -45,7 +45,7 @@
                     <ul class="nav nav-treeview">
 
                         <li class="nav-item">
-                            <a href="{{ route('third-party-digging.create') }}" class="nav-link ">
+                            <a href="{{ route('third-party-digging.create', app()->getLocale()) }}" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Create</p>
                             </a>
@@ -59,7 +59,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="{{ route('third-party-digging.index') }}" class="nav-link ">
+                            <a href="{{ route('third-party-digging.index', app()->getLocale()) }}" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Index</p>
                             </a>
@@ -89,13 +89,13 @@
                     <ul class="nav nav-treeview">
 
                         <li class="nav-item">
-                            <a href="{{ route('substation.create') }}" class="nav-link ">
+                            <a href="{{ route('substation.create', app()->getLocale()) }}" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Create</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('substation.index') }}" class="nav-link ">
+                            <a href="{{ route('substation.index', app()->getLocale()) }}" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Index</p>
                             </a>
@@ -120,13 +120,13 @@
                     <ul class="nav nav-treeview">
 
                         <li class="nav-item">
-                            <a href="{{ route('feeder-pillar.create') }}" class="nav-link ">
+                            <a href="{{ route('feeder-pillar.create', app()->getLocale()) }}" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Create</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('feeder-pillar.index') }}" class="nav-link ">
+                            <a href="{{ route('feeder-pillar.index', app()->getLocale()) }}" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Index</p>
                             </a>
@@ -151,13 +151,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{route('tiang-talian-vt-and-vr.create')}}" class="nav-link ">
+                            <a href="{{route('tiang-talian-vt-and-vr.create', app()->getLocale())}}" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Create</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('tiang-talian-vt-and-vr.index')}}" class="nav-link">
+                            <a href="{{route('tiang-talian-vt-and-vr.index', app()->getLocale())}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Index</p>
                             </a>
@@ -181,13 +181,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{route('link-box-pelbagai-voltan.create')}}" class="nav-link ">
+                            <a href="{{route('link-box-pelbagai-voltan.create', app()->getLocale())}}" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>create</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('link-box-pelbagai-voltan.index')}}" class="nav-link">
+                            <a href="{{route('link-box-pelbagai-voltan.index', app()->getLocale())}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Index</p>
                             </a>
@@ -212,13 +212,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{route('cable-bridge.create')}}" class="nav-link ">
+                            <a href="{{route('cable-bridge.create', app()->getLocale())}}" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Create</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('cable-bridge.index')}}" class="nav-link">
+                            <a href="{{route('cable-bridge.index', app()->getLocale())}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Index</p>
                             </a>
@@ -243,13 +243,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{route('po.create')}}" class="nav-link ">
+                            <a href="{{route('po.create', app()->getLocale())}}" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Create</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('po.index')}}" class="nav-link">
+                            <a href="{{route('po.index', app()->getLocale())}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Index</p>
                             </a>
@@ -269,14 +269,14 @@
 
                 @else
                 <li class="nav-item">
-                    <a href="{{route('team.index')}}" class="nav-link ">
+                    <a href="{{route('team.index', app()->getLocale())}}" class="nav-link ">
                         <i class="fa fa-map"></i>
                         <p>Team</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{route('team-users.index')}}" class="nav-link ">
+                    <a href="{{route('team-users.index', app()->getLocale())}}" class="nav-link ">
                         <i class="fa fa-user"></i>
                         <p>Users</p>
                     </a>

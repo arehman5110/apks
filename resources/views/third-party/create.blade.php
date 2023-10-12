@@ -65,7 +65,7 @@
                 </div>
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
-                        <li class="breadcrumb-item"><a href="{{ route('third-party-digging.index') }}">index</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('third-party-digging.index', app()->getLocale()) }}">index</a></li>
                         <li class="breadcrumb-item active">create</li>
                     </ol>
                 </div>
@@ -83,7 +83,7 @@
                     <div class=" ">
                         <h3 class="text-center p-2"></h3>
 
-                        <form action="{{ route('third-party-digging.store') }} " id="myForm" method="POST"
+                        <form action="{{ route('third-party-digging.store', app()->getLocale()) }} " id="myForm" method="POST"
                             enctype="multipart/form-data" onsubmit="return submitFoam()">
                             @csrf
 
@@ -117,7 +117,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="digging">Digging</label></div>
+                                <div class="col-md-4"><label for="digging"> {{__("messages.digging")}}</label></div>
                                 <div class="col-md-4">
 
                                     <select name="digging" id="digging" class="form-control" required>

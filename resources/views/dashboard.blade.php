@@ -240,10 +240,10 @@
                 <div class="card-body">
                  <ul>
                     <li>
-                        <a class=" dropdown-item" href="{{route('third-party-digging.create')}}">Create</a>
+                        <a class=" dropdown-item" href="{{route('third-party-digging.create', app()->getLocale())}}">Create</a>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="{{route('third-party-digging.index')}}">Index</a>
+                        <a class="dropdown-item" href="{{route('third-party-digging.index', app()->getLocale())}}">Index</a>
                     </li>
 
                     <li>
@@ -277,10 +277,10 @@
                     <div class="card-body">
                         <ul>
                             <li>
-                                <a class=" dropdown-item" href="{{route('substation.create')}}">Create</a>
+                                <a class=" dropdown-item" href="{{route('substation.create', app()->getLocale())}}">Create</a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="{{route('substation.index')}}">Index</a>
+                                <a class="dropdown-item" href="{{route('substation.index', app()->getLocale())}}">Index</a>
                             </li>
                             <li>
                                 <a href="/substation-map" class="dropdown-item">Map</a>
@@ -304,10 +304,10 @@
                         <div class="card-body">
                             <ul>
                                 <li>
-                                    <a class=" dropdown-item" href="{{route('feeder-pillar.create')}}">Create</a>
+                                    <a class=" dropdown-item" href="{{route('feeder-pillar.create', app()->getLocale())}}">Create</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="{{route('feeder-pillar.index')}}">Index</a>
+                                    <a class="dropdown-item" href="{{route('feeder-pillar.index', app()->getLocale())}}">Index</a>
                                 </li>
                                 <li>
                                     <a href="/feeder-pillar-map" class="dropdown-item">Map</a>
@@ -331,10 +331,10 @@
                             <div class="card-body">
                                 <ul>
                                     <li>
-                                        <a class=" dropdown-item" href="{{route('tiang-talian-vt-and-vr.create')}}">Create</a>
+                                        <a class=" dropdown-item" href="{{route('tiang-talian-vt-and-vr.create', app()->getLocale())}}">Create</a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="{{route('tiang-talian-vt-and-vr.index')}}">Index</a>
+                                        <a class="dropdown-item" href="{{route('tiang-talian-vt-and-vr.index', app()->getLocale())}}">Index</a>
                                     </li>
                                     <li>
                                         <a href="/tiang-talian-vt-and-vr-map" class="dropdown-item">Map</a>
@@ -359,10 +359,10 @@
                                 <div class="card-body">
                                     <ul>
                                         <li>
-                                            <a class=" dropdown-item" href="{{route('link-box-pelbagai-voltan.create')}}">Create</a>
+                                            <a class=" dropdown-item" href="{{route('link-box-pelbagai-voltan.create', app()->getLocale())}}">Create</a>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" href="{{route('link-box-pelbagai-voltan.index')}}">Index</a>
+                                            <a class="dropdown-item" href="{{route('link-box-pelbagai-voltan.index', app()->getLocale())}}">Index</a>
                                         </li>
                                         <li>
                                             <a href="/link-box-pelbagai-voltan-map" class="dropdown-item">Map</a>
@@ -387,10 +387,10 @@
                                     <div class="card-body">
                                         <ul>
                                             <li>
-                                                <a class=" dropdown-item" href="{{route('cable-bridge.create')}}">Create</a>
+                                                <a class=" dropdown-item" href="{{route('cable-bridge.create', app()->getLocale())}}">Create</a>
                                             </li>
                                             <li>
-                                                <a class="dropdown-item" href="{{route('cable-bridge.index')}}">Index</a>
+                                                <a class="dropdown-item" href="{{route('cable-bridge.index', app()->getLocale())}}">Index</a>
                                             </li>
                                             <li>
                                                 <a href="/cable-bridge-map" class="dropdown-item">Map</a>
