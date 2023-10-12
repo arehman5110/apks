@@ -60,7 +60,7 @@ class ThirdPartyDiggingController extends Controller
             $data->project_name = $request->project_name;
             $data->road_name = $request->road_name;
 
-            $data->km_plan = $request->km_plan;
+
             $data->km_actual = $request->km_actual;
 
             $data->digging = $request->digging;
@@ -122,7 +122,7 @@ class ThirdPartyDiggingController extends Controller
         }
         return abort(404);
 
-        
+
     }
 
     /**
@@ -163,7 +163,7 @@ class ThirdPartyDiggingController extends Controller
             $data->patrolling_time = $combinedDateTime;
             $data->project_name = $request->project_name;
             $data->feeder_involved = $request->feeder_involved;
-            $data->km_plan = $request->km_plan;
+           
             $data->km_actual = $request->km_actual;
             $data->road_name = $request->road_name;
 

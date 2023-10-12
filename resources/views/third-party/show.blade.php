@@ -41,7 +41,7 @@
         <div class="container-  ">
             <div class="row  " style="flex-wrap:nowrap">
                 <div class="col-sm-6">
-                    <h3>Third Party Digging</h3>
+                    <h3>Notice Form</h3>
                 </div>
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
@@ -75,6 +75,29 @@
                                 <div class="col-md-4"><label for="ba">BA</label></div>
                                 <div class="col-md-4">
                                     <input readonly  value="{{$data->ba}}" class="form-control">
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-4"><label for="digging">Digging</label></div>
+                                <div class="col-md-4">
+                                    <input readonly  value="{{ $data->digging }}" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4"><label for="notice">Notice</label></div>
+                                <div class="col-md-4">
+                                    <input readonly  value="{{ $data->notice }}" class="form-control">
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4"><label for="supervision">Supervision</label></div>
+                                <div class="col-md-4">
+                                    <input readonly  value="{{ $data->supervision }}" class="form-control">
                                 </div>
                             </div>
 
@@ -121,12 +144,7 @@
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col-md-4"><label for="km_plan">Km Plan</label></div>
-                                <div class="col-md-4">
-                                    <input readonly  value="{{ $data->km_plan }}" class="form-control">
-                                </div>
-                            </div>
+
 
                             <div class="row">
                                 <div class="col-md-4"><label for="km_actual">Km Actual</label></div>
@@ -135,27 +153,6 @@
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col-md-4"><label for="digging">Digging</label></div>
-                                <div class="col-md-4">
-                                    <input readonly  value="{{ $data->digging }}" class="form-control">
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-4"><label for="notice">Notice</label></div>
-                                <div class="col-md-4">
-                                    <input readonly  value="{{ $data->notice }}" class="form-control">
-
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-4"><label for="supervision">Supervision</label></div>
-                                <div class="col-md-4">
-                                    <input readonly  value="{{ $data->supervision }}" class="form-control">
-                                </div>
-                            </div>
 
 
 

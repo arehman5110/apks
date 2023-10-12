@@ -32,6 +32,8 @@
             height: 400px;
             padding: 20px;
         }
+
+
     </style>
 @endsection
 
@@ -105,7 +107,7 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="visit_date">Visit Date</label></div>
                                 <div class="col-md-4">
-                                    <input type="date" name="visit_date" id="visit_date"
+                                    <input type="date" name="visit_date" id="visit_date" value="{{date('Y-m-d')}}"
                                         class="form-control" required>
                                     </div>
                             </div>
@@ -116,16 +118,7 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="patrol_time">Patrol Time</label></div>
                                 <div class="col-md-4">
-                                    <input type="time" name="patrol_time" id="patrol_time"
-                                        class="form-control" required>
-                                    </div>
-                            </div>
-
-
-                            <div class="row">
-                                <div class="col-md-4"><label for="fl">Feeder Involved</label></div>
-                                <div class="col-md-4">
-                                    <input type="text" name="feeder_involved" id="feeder_involved"
+                                    <input type="time" name="patrol_time" id="patrol_time" value="{{date('H:i')}}"
                                         class="form-control" required>
                                     </div>
                             </div>
@@ -133,36 +126,58 @@
 
 
 
+{{--
                             <div class="row">
                                 <div class="col-md-4"><label for="voltage">Area</label></div>
                                 <div class="col-md-4">
                                     <input type="text" name="area" id="area"
                                         class="form-control" required >
                                     </div>
-                            </div>
+                            </div> --}}
                             <div class="row">
                                 <div class="col-md-4"><label for="name">Size</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="size" id="size"
-                                        class="form-control" required>
+                                    <select name="size" id="size" class="form-control" required>
+                                        <option value="" hidden>select size</option>
+                                        <option value="400">400</option>
+                                        <option value="800">800</option>
+                                        <option value="1600">1600</option>
+                                    </select>
+
                                     </div>
                             </div>
 
-                            
+
 
                             <div class="row">
                                 <div class="col-md-4"><label for="gate_status">Gate Status</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="gate_status" id="gate_status"
-                                    class="form-control" required>
+                                    <select name="gate_status" id="gate_status" required class="form-control" onchange="getStatus(this)">
+                                        <option value="" hidden>select gate</option>
+                                        <option value="Locked">Locked</option>
+                                        <option value="Unlocked">Unlocked</option>
+                                        <option value="Others">Others</option>
+                                    </select>
+
+                                </div>
+                            </div>
+
+                            <div class="row d-none" id="other-gate-status">
+                                <div class="col-md-4"><label for="other_gate_status">Other Gate Status</label></div>
+                                <div class="col-md-4">
+                                  <input type="text" name="other_gate_status" id="other_gate_status" class="form-control">
+
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="vandalism_status">Vandalism Status</label></div>
+                                <div class="col-md-4"><label for="vandalism_status">Vandalism </label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="vandalism_status" id="vandalism_status"
-                                        class="form-control" required>
+                                   <select name="vandalism_status" id="vandalism_status"  class="form-control" required>
+                                    <option value="" hidden >select status</option>
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                   </select>
                                     </div>
                             </div>
 
@@ -171,24 +186,43 @@
 
 
                               <div class="row">
-                                <div class="col-md-4"><label for="leaning_staus">Leaning Staus</label></div>
+                                <div class="col-md-4"><label for="leaning_staus">Leaning</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="leaning_staus" id="leaning_staus"
-                                        class="form-control" required>
+                                    <select name="leaning_staus" id="leaning_staus" class="form-control" required  onchange="leaningStatus(this)">
+                                        <option value="" hidden >select status</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                       </select>
+
                                     </div>
                             </div>
-                              <div class="row">
-                                <div class="col-md-4"><label for="rust_status">Rust Status</label></div>
+
+                            <div class="row  d-none" id="leaning-angle">
+                                <div class="col-md-4"><label for="leaning_angle">Leaning angle</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="rust_status" id="rust_status"
-                                        class="form-control" required>
+                                  <input type="text" name="leaning_angle" id="leaning_angle" class="form-control">
+
+                                </div>
+                            </div>
+
+                              <div class="row">
+                                <div class="col-md-4"><label for="rust_status">Rusty</label></div>
+                                <div class="col-md-4">
+                                    <select name="rust_status" id="rust_status" class="form-control" required>
+                                        <option value="" hidden  >select status</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                       </select>
                                     </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label for="advertise_poster_status">Advertise Poster Status</label></div>
+                                <div class="col-md-4"><label for="advertise_poster_status"> Cleaning illegal ads/banners</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="advertise_poster_status" id="advertise_poster_status"
-                                        class="form-control" required>
+                                    <select name="advertise_poster_status" id="advertise_poster_status" class="form-control" required>
+                                        <option value="" hidden >select status</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                       </select>
                                     </div>
                             </div>
 
@@ -272,4 +306,28 @@
 <script src="{{ URL::asset('map/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js') }}"></script>
 
    @include('partials.form-map-js')
+
+   <script>
+    function getStatus(event){
+        var val = event.value;
+        if (val !== 'Others') {
+            if (!$('#other-gate-status').hasClass('d-none')) {
+                $('#other-gate-status').addClass('d-none')
+            }
+        }else{
+            $('#other-gate-status').removeClass('d-none')
+        }
+    }
+
+    function leaningStatus(event){
+        var val = event.value;
+        if (val == 'No') {
+            if (!$('#leaning-angle').hasClass('d-none')) {
+                $('#leaning-angle').addClass('d-none')
+            }
+        }else{
+            $('#leaning-angle').removeClass('d-none')
+        }
+    }
+   </script>
 @endsection

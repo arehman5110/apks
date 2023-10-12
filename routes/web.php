@@ -58,7 +58,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/get-work-package/{ba}/{zone}', [App\Http\Controllers\web\map\WPController::class, 'selectWP']);
     Route::get('/getStats/{wp}', [App\Http\Controllers\web\map\WPController::class, 'getStats']);
 
-    Route::get('/send-to-tnbes/{id}', [StatusController::class, 'sendToTnbes']);
+    Route::get('/send-to-tnbes/{id}/', [StatusController::class, 'sendToTnbes']);
+    Route::get('/sbum-status/{id}/{status}', [StatusController::class, 'statusSUBM']);
+
     Route::get('/generate-third-party-diging-excel/{id}', [DigingExcelController::class, 'generateDigingExcel']);
 
 

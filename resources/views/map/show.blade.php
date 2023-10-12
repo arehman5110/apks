@@ -1,37 +1,41 @@
 @extends('layouts.app', ['page_title' => 'Index'])
 @section('css')
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-
-    
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
 
-<style>
-    #map {
-        height: 400px;
-        z-index: 1;
-    }
-
-    .leaflet-control-attribution.leaflet-control {
-        display: none;
-    }
-</style>
 
 
-@guest
     <style>
-   body:not(.sidebar-mini-md):not(.sidebar-mini-xs):not(.layout-top-nav) .content-wrapper, body:not(.sidebar-mini-md):not(.sidebar-mini-xs):not(.layout-top-nav) .main-footer, body:not(.sidebar-mini-md):not(.sidebar-mini-xs):not(.layout-top-nav) .main-header
-     {
-        transition: margin-left .3s ease-in-out;
-        margin-left: 0px !important;
-    }
-    .content-header ,.fa-bars{display: none}
-</style>
-    @endguest
+        #map {
+            height: 400px;
+            z-index: 1;
+        }
 
+        .leaflet-control-attribution.leaflet-control {
+            display: none;
+        }
+    </style>
+
+
+    @guest
+        <style>
+            body:not(.sidebar-mini-md):not(.sidebar-mini-xs):not(.layout-top-nav) .content-wrapper,
+            body:not(.sidebar-mini-md):not(.sidebar-mini-xs):not(.layout-top-nav) .main-footer,
+            body:not(.sidebar-mini-md):not(.sidebar-mini-xs):not(.layout-top-nav) .main-header {
+                transition: margin-left .3s ease-in-out;
+                margin-left: 0px !important;
+            }
+
+            .content-header,
+            .fa-bars {
+                display: none
+            }
+        </style>
+    @endguest
 @endsection
 
 
@@ -55,18 +59,44 @@
 
 
 
+
     <section class="content mt-2">
         <div class="container-fluid">
-
+            @include('components.message')
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header">
-                            <div class="card-title text-right">
-                                Work Package Detail
+
+                        <div class="card-header d-flex justify-content-between ">
+                            <p class="mb-0">Workpackage Detail</p>
+                            <div class="d-flex ml-auto">
+
+
+                                <button type="button" id="wp_status"
+                                class="btn  btn-secondary form-control " data-toggle="dropdown">
+                                {{ $rec->wp_status }}
+                            </button>
+                            <div class="dropdown-menu" role="menu">
+                                @if ($rec->wp_status != 'approved')
+                                <a href="/sbum-status/{{$rec->id}}/approved"> <button type="button" class="dropdown-item pl-3 w-100 text-left"
+                                        value="approved"
+                                        onclick="return confirm('are you sure')">Approved</button></a>
+                                @endif
+                                @if ($rec->wp_status != 'rejected')
+                                   <a href="/sbum-status/{{$rec->id}}/rejected"> <button type="button" class="dropdown-item pl-3 w-100 text-left"
+
+                                    onclick="return confirm('are you sure') " >Rejected</button></a>
+                                @endif
+                                @if ($rec->wp_status != 'pending')
+                                <a href="/sbum-status/{{$rec->id}}/pending">   <button type="button" class="dropdown-item pl-3 w-100 text-left"
+                                        value="pending"
+                                        onclick="return confirm('are you sure') ">Pending</button></a>
+                                @endif
+
+
 
                             </div>
-
+                        </div>
                         </div>
 
                         <div class="card-body">
@@ -100,15 +130,45 @@
                                 </div>
                             </div>
 
-                            {{-- <div class="row">
+                            <div class="row">
                                 <div class="col-md-4"><label for="">Remarks</label></div>
-                                <div class="col-md-4"><input disabled class="form-control" value="{{  $rec->remarks }}">
+                                <div class="col-md-4"><input disabled class="form-control" value="{{ $rec->remarks }}">
                                 </div>
-                            </div> --}}
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4"><label for="">Status</label></div>
+                                <div class="col-md-4"> <button type="button" id="wp_status"
+                                        class="btn  btn-secondary form-control mb-3" data-toggle="dropdown">
+                                        {{ $rec->wp_status }}
+                                    </button>
+                                    <div class="dropdown-menu" role="menu">
+                                        @if ($rec->wp_status != 'approved')
+                                        <a href="/sbum-status/{{$rec->id}}/approved"> <button type="button" class="dropdown-item pl-3 w-100 text-left"
+                                                value="approved"
+                                                onclick="return confirm('are you sure')">Approved</button></a>
+                                        @endif
+                                        @if ($rec->wp_status != 'rejected')
+                                           <a href="/sbum-status/{{$rec->id}}/rejected"> <button type="button" class="dropdown-item pl-3 w-100 text-left"
+
+                                            onclick="return confirm('are you sure') " >Rejected</button></a>
+                                        @endif
+                                        @if ($rec->wp_status != 'pending')
+                                        <a href="/sbum-status/{{$rec->id}}/pending">   <button type="button" class="dropdown-item pl-3 w-100 text-left"
+                                                value="pending"
+                                                onclick="return confirm('are you sure') ">Pending</button></a>
+                                        @endif
+
+
+
+                                    </div>
+                                </div>
+                            </div>
 
                             <div class="row">
                                 <div class="col-md-4"><label for="">Total Distance KM</label></div>
-                                <div class="col-md-4"><input disabled class="form-control" value="{{  number_format( $distance , 2) }}">
+                                <div class="col-md-4"><input disabled class="form-control"
+                                        value="{{ number_format($distance, 2) }}">
                                 </div>
                             </div>
 
@@ -124,6 +184,7 @@
 
         </div>
     </section>
+
 
     <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -302,6 +363,23 @@
 
             return url.toString();
 
+        }
+
+
+
+        function changeStatus(event, id) {
+            var status = event.value;
+            console.log(status);
+            $('#wp_status').html(status)
+            $.ajax({
+                url: `/sbum-status/${id}/${status}`,
+                dataType: 'JSON',
+                method: 'GET',
+                success: function callback(data) {
+
+              alert('Status Change Successfully')
+                }
+            })
         }
     </script>
 @endsection

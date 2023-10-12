@@ -30,28 +30,28 @@
             padding: 20px;
         }
 
-           /* CSS for the Select2 dropdown to match form-control style */
-.select2-container {
-    margin-top: 10px;
-    width: 100% !important;
-}
+        /* CSS for the Select2 dropdown to match form-control style */
+        .select2-container {
+            margin-top: 10px;
+            width: 100% !important;
+        }
 
-.select2-container .select2-selection--single {
-    height: 38px;
-    padding: 6px 12px;
-    font-size: 16px;
-    line-height: 1.5;
-    border: 1px solid #00000063;;
-    border-radius:0;
-}
+        .select2-container .select2-selection--single {
+            height: 38px;
+            padding: 6px 12px;
+            font-size: 16px;
+            line-height: 1.5;
+            border: 1px solid #00000063;
+            ;
+            border-radius: 0;
+        }
 
-/* Optionally, style the focus state */
-.select2-container .select2-selection--single:focus {
-    border-color: 1px solid #00000063;
-    outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-}
-
+        /* Optionally, style the focus state */
+        .select2-container .select2-selection--single:focus {
+            border-color: 1px solid #00000063;
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
     </style>
 @endsection
 
@@ -61,11 +61,11 @@
         <div class="container-  ">
             <div class="row  " style="flex-wrap:nowrap">
                 <div class="col-sm-6">
-                    <h3>Third Party Digging</h3>
+                    <h3>Notice Form</h3>
                 </div>
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
-                        <li class="breadcrumb-item"><a href="{{route('third-party-digging.index')}}">index</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('third-party-digging.index') }}">index</a></li>
                         <li class="breadcrumb-item active">create</li>
                     </ol>
                 </div>
@@ -114,62 +114,6 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="search_wp">Work Package Name</label></div>
-                                <div class="col-md-4">
-                                    <select name="search_wp" id="search_wp" class="form-control" required>
-                                        <option value="" hidden>select workpackage</option>
-
-                                    </select>
-                                    <input type="hidden" name="workpackage_id" id="workpackage_id" class="form-control">
-                                    <input type="hidden" name="wp_name" id="wp_name" >
-                                </div>
-                            </div>
-
-
-
-                            <div class="row">
-                                <div class="col-md-4"><label for="team_name">Team Name</label></div>
-                                <div class="col-md-4">
-                                    <input type="text" class="form-control" name="team_name" value="{{ $team }}"
-                                        readonly id="team_name">
-                                </div>
-                            </div>
-
-
-
-                            <div class="row">
-                                <div class="col-md-4"><label for="survey_date">Survey Date</label></div>
-                                <div class="col-md-4"><input type="date" name="survey_date" id="survey_date"
-                                        class="form-control" required></div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-4"><label for="patrolling_time">Patrolling Time</label></div>
-                                <div class="col-md-4"><input type="time" name="patrolling_time" id="patrolling_time"
-                                        class="form-control" required></div>
-                            </div>
-                            {{-- <div class="row">
-                                <div class="col-md-4"><label for="road_id">Road Id</label></div> --}}
-                            <div class="col-md-4"><input type="hidden" name="road_id" id="road_id" class="form-control">
-                            </div>
-                            {{-- </div> --}}
-                            <div class="row">
-                                <div class="col-md-4"><label for="project_name">Project Name</label></div>
-                                <div class="col-md-4"><input type="text" name="project_name" id="project_name"
-                                        class="form-control" required></div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-4"><label for="km_plan">Km Plan</label></div>
-                                <div class="col-md-4"><input type="number" name="km_plan" id="km_plan"
-                                        class="form-control" required></div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4"><label for="km_actual">Km Actual</label></div>
-                                <div class="col-md-4"><input type="number" name="km_actual" id="km_actual"
-                                        class="form-control" required></div>
-                            </div>
-                            <div class="row">
                                 <div class="col-md-4"><label for="digging">Digging</label></div>
                                 <div class="col-md-4">
 
@@ -201,6 +145,60 @@
                                     </select>
 
                                 </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-4"><label for="search_wp">Work Package Name</label></div>
+                                <div class="col-md-4">
+                                    <select name="search_wp" id="search_wp" class="form-control" required>
+                                        <option value="" hidden>select workpackage</option>
+
+                                    </select>
+                                    <input type="hidden" name="workpackage_id" id="workpackage_id" class="form-control">
+                                    <input type="hidden" name="wp_name" id="wp_name">
+                                </div>
+                            </div>
+
+
+
+                            <div class="row">
+                                <div class="col-md-4"><label for="team_name">Team Name</label></div>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" name="team_name" value="{{ $team }}"
+                                        readonly id="team_name">
+                                </div>
+                            </div>
+
+
+
+                            <div class="row">
+                                <div class="col-md-4"><label for="survey_date">Survey Date</label></div>
+                                <div class="col-md-4"><input type="date" name="survey_date" id="survey_date" value="{{date('Y-m-d')}}"
+                                        class="form-control" required></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4"><label for="patrolling_time">Patrolling Time</label></div>
+                                <div class="col-md-4"><input type="time" name="patrolling_time" id="patrolling_time" value="{{Carbon\Carbon::now()->format('H:i:s')}}"
+                                        class="form-control" required></div>
+                            </div>
+                            {{-- <div class="row">
+                                <div class="col-md-4"><label for="road_id">Road Id</label></div> --}}
+                            <div class="col-md-4"><input type="hidden" name="road_id" id="road_id" class="form-control">
+                            </div>
+                            {{-- </div> --}}
+                            <div class="row">
+                                <div class="col-md-4"><label for="project_name">Project Name</label></div>
+                                <div class="col-md-4"><input type="text" name="project_name" id="project_name"
+                                        class="form-control" required></div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-4"><label for="km_actual">Km Actual</label></div>
+                                <div class="col-md-4"><input type="number" name="km_actual" id="km_actual"
+                                        class="form-control" required></div>
                             </div>
 
 
@@ -341,8 +339,8 @@
                                 <div class="col-md-4"><label for="road_name">Road Name</label></div>
                                 <div class="col-md-4">
                                     <span id="road_name_check" class="text-danger"></span>
-                                    <input type="text" name="road_name" id="road_name"
-                                        class="form-control" required></div>
+                                    <input type="text" name="road_name" id="road_name" class="form-control" required>
+                                </div>
                             </div>
 
 
@@ -387,14 +385,14 @@
 
         $(document).ready(function() {
 
-$('#search_wp').select2();
+            $('#search_wp').select2();
         })
 
 
         function getWorkPackage(param) {
             var splitVal = param.value.split(',');
             addRemoveBundary(splitVal[1], splitVal[2], splitVal[3])
-                $('#ba').val(splitVal[1]);
+            $('#ba').val(splitVal[1]);
             if (wp != '') {
                 map.removeLayer(wp)
             }
@@ -428,10 +426,10 @@ $('#search_wp').select2();
                         if (val.wp_status == 'approved') {
 
 
-                        $('#search_wp').append(
-                            `<option value="${val.id},${val.package_name},${val.x} ,${val.y}">${val.package_name}</option>`
-                        );
-                    }
+                            $('#search_wp').append(
+                                `<option value="${val.id},${val.package_name},${val.x} ,${val.y}">${val.package_name}</option>`
+                            );
+                        }
                     });
 
 

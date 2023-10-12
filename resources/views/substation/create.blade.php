@@ -106,7 +106,7 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="visit_date">Visit Date</label></div>
                                 <div class="col-md-4">
-                                    <input type="date" name="visit_date" id="visit_date"
+                                    <input type="date" name="visit_date" id="visit_date" value="{{date('Y-m-d')}}"
                                         class="form-control" required>
                                     </div>
                             </div>
@@ -117,21 +117,11 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="patrol_time">Patrol Time</label></div>
                                 <div class="col-md-4">
-                                    <input type="time" name="patrol_time" id="patrol_time"
+                                    <input type="time" name="patrol_time" id="patrol_time" value="{{date('H:i')}}"
                                         class="form-control" required>
                                     </div>
                             </div>
-
-
-                            <div class="row">
-                                <div class="col-md-4"><label for="fl">FL</label></div>
-                                <div class="col-md-4">
-                                    <input type="text" name="fl" id="fl"
-                                        class="form-control" required>
-                                    </div>
-                            </div>
-
-
+ 
 
 
                             <div class="row">
@@ -157,7 +147,7 @@
                                     </div>
                             </div>
 
-                            
+
 
                             <div class="row">
                                 <div class="col-md-4"><label for="gate_status">Gate Status</label></div>
@@ -231,6 +221,14 @@
                                 <div class="col-md-4"><label for="image_building">Image Building</label></div>
                                 <div class="col-md-4">
                                     <input type="file" name="image_building" id="image_building"
+                                        class="form-control" >
+                                    </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4"><label for="img_advertise_poster">Image Advertise Poster</label></div>
+                                <div class="col-md-4">
+                                    <input type="file" name="img_advertise_poster" id="img_advertise_poster"
                                         class="form-control" >
                                     </div>
                             </div>

@@ -107,18 +107,10 @@
                                 <div class="col-md-4"><label for="patrol_time">Patrol Time</label></div>
                                 <div class="col-md-4">
                                     <input type="time" name="patrol_time" id="patrol_time" class="form-control"
-                                        value="{{ $data->patrol_time }}" required>
+                                        value="{{ date('H:i:s', strtotime($data->patrol_time)) }}" required>
                                 </div>
                             </div>
 
-
-                            <div class="row">
-                                <div class="col-md-4"><label for="feeder_involved">Feeder Involved</label></div>
-                                <div class="col-md-4">
-                                    <input type="text" name="feeder_involved" id="feeder_involved" class="form-control"
-                                        value="{{ $data->feeder_involved }}" required>
-                                </div>
-                            </div>
 
                             <div class="row">
                                 <div class="col-md-4"><label for="team">Team</label></div>
@@ -127,57 +119,120 @@
                                         value="{{ $data->team }}" readonly>
                                 </div>
                             </div>
-
-
-                            <div class="row">
-                                <div class="col-md-4"><label for="area">Size</label></div>
-                                <div class="col-md-4">
-                                    <input type="text" name="size" id="size" value="{{ $data->size }}"
-                                        class="form-control">
-                                </div>
-                            </div>
-
                             <div class="row">
                                 <div class="col-md-4"><label for="coordinate">Coordinate</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="coordinate" id="coordinate"
-                                        value="{{ $data->coordinate }}" class="form-control" required readonly>
+                                    <input type="text" name="coordinate" id="coordinate" value="{{ $data->coordinate }}"
+                                        class="form-control" required readonly>
                                 </div>
                             </div>
+
+                            <div class="row">
+                                <div class="col-md-4"><label for="size">Size</label></div>
+                                <div class="col-md-4">
+
+                                    <select name="size" id="size" class="form-control" required>
+                                        <option value="{{ $data->size }}" hidden>{{ $data->size }}</option>
+                                        <option value="400">400</option>
+                                        <option value="800">800</option>
+                                        <option value="1600">1600</option>
+                                    </select>
+
+                                </div>
+                            </div>
+
+
 
                             <div class="row">
                                 <div class="col-md-4"><label for="name">Gate Status</label></div>
                                 <div class="col-md-4">
-                                    <input type="date" name="gate_status" id="gate_status" value="{{ $data->gate_status }}"
-                                        class="form-control" required>
+                                    <select name="gate_status" id="gate_status" required class="form-control"
+                                        onchange="getStatus(this)">
+                                        <option value="{{ $data->gate_status }}" hidden>{{ $data->gate_status }}</option>
+                                        <option value="Locked">Locked</option>
+                                        <option value="Unlocked">Unlocked</option>
+                                        <option value="Others">Others</option>
+                                    </select>
+
+
+                                </div>
+                            </div>
+
+                            <div class="row  d-none" id="other-gate-status">
+                                <div class="col-md-4"><label for="other_gate_status">Other Gate Status</label></div>
+                                <div class="col-md-4">
+                                    <input type="text" name="other_gate_status" id="other_gate_status"
+                                        class="form-control">
+
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="type">Vandalism Status</label></div>
+                                <div class="col-md-4"><label for="type">Vandalism </label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="type" id="vandalism_status" value="{{ $data->vandalism_status }}"
-                                        class="form-control" required>
+                                    <select name="vandalism_status" id="vandalism_status" class="form-control" required>
+                                        <option value="{{ $data->vandalism_status }}" hidden>
+                                            {{ $data->vandalism_status }}</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-4"><label for="leaning_staus">Leaning </label></div>
+                                <div class="col-md-4">
+                                    <select name="leaning_staus" id="leaning_staus" class="form-control" required
+                                        onchange="leaningStatus(this)">
+                                        <option value="{{ $data->leaning_staus }}" hidden>{{ $data->leaning_staus }}
+                                        </option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+
+                                </div>
+                            </div>
+
+                            <div class="row @if ($data->leaning_staus == 'No') d-none @endif " id="leaning-angle">
+                                <div class="col-md-4"><label for="leaning_angle">Leaning angle</label></div>
+                                <div class="col-md-4">
+                                    <input type="text" name="leaning_angle" id="leaning_angle" value="{{ $data->leaning_angle }}" class="form-control">
+
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-4"><label for="voltage">Rust Status</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="rust_status" id="rust_status" value="{{ $data->rust_status }}"
-                                        class="form-control" required>
+
+                                    <select name="rust_status" id="rust_status" class="form-control" required>
+                                        <option value="{{ $data->rust_status }}" hidden>{{ $data->rust_status }}</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+
                                 </div>
                             </div>
-                
+
 
                             <div class="row">
-                                <div class="col-md-4"><label for="advertise_poster_status">Advertise Poster Status</label></div>
+                                <div class="col-md-4"><label for="advertise_poster_status">
+                                    Cleaning illegal ads/banners</label>
+                                </div>
                                 <div class="col-md-4">
-                                    <input type="text" name="advertise_poster_status" id="advertise_poster_status"
-                                        value="{{ $data->advertise_poster_status }}" class="form-control" required>
+                                    <select name="advertise_poster_status" id="advertise_poster_status"
+                                        class="form-control" required>
+                                        <option value="{{ $data->advertise_poster_status }}" hidden>
+                                            {{ $data->advertise_poster_status }}</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+
                                 </div>
                             </div>
-                          
+
 
                             <div class="row">
                                 <div class="col-md-4"><label for="image_pipe">Image Gate</label></div>
@@ -245,13 +300,16 @@
 
 
                             <div class="row">
-                                <div class="col-md-4"><label for="images_advertise_poster">Images Advertise Poster</label></div>
+                                <div class="col-md-4"><label for="images_advertise_poster">Images Advertise Poster</label>
+                                </div>
                                 <div class="col-md-4">
-                                    <input type="file" name="images_advertise_poster" id="images_advertise_poster" class="form-control">
+                                    <input type="file" name="images_advertise_poster" id="images_advertise_poster"
+                                        class="form-control">
                                 </div>
                                 <div class="col-md-4 text-center mb-3">
                                     @if (file_exists(public_path($data->images_advertise_poster)) && $data->images_advertise_poster != '')
-                                        <a href="{{ URL::asset($data->images_advertise_poster) }}" data-lightbox="roadtrip">
+                                        <a href="{{ URL::asset($data->images_advertise_poster) }}"
+                                            data-lightbox="roadtrip">
                                             <img src="{{ URL::asset($data->images_advertise_poster) }}" alt=""
                                                 height="70" class="adjust-height ml-5  "></a>
                                     @else
@@ -333,6 +391,29 @@
                 areaSelect.append(`<option value="${data}">${data}</option>`);
             });
 
+        }
+
+
+        function getStatus(event) {
+            var val = event.value;
+            if (val !== 'Others') {
+                if (!$('#other-gate-status').hasClass('d-none')) {
+                    $('#other-gate-status').addClass('d-none')
+                }
+            } else {
+                $('#other-gate-status').removeClass('d-none')
+            }
+        }
+
+        function leaningStatus(event) {
+            var val = event.value;
+            if (val == 'No') {
+                if (!$('#leaning-angle').hasClass('d-none')) {
+                    $('#leaning-angle').addClass('d-none')
+                }
+            } else {
+                $('#leaning-angle').removeClass('d-none')
+            }
         }
     </script>
 @endsection

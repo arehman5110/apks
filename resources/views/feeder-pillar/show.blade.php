@@ -98,13 +98,6 @@
                         </div>
 
 
-                        <div class="row">
-                            <div class="col-md-4"><label for="feeder_involved">Feeder Involved</label></div>
-                            <div class="col-md-4">
-                                <input type="text" readonly class="form-control" value="{{ $data->feeder_involved }}"
-                                    required>
-                            </div>
-                        </div>
 
                         <div class="row">
                             <div class="col-md-4"><label for="team">Team</label></div>
@@ -114,12 +107,12 @@
                         </div>
 
 
-                        <div class="row">
+                        {{-- <div class="row">
                             <div class="col-md-4"><label for="area">Area</label></div>
                             <div class="col-md-4">
                                 <input type="text" readonly value="{{ $data->area }}" class="form-control">
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="row">
                             <div class="col-md-4"><label for="start_date">size</label></div>
                             <div class="col-md-4">
@@ -141,28 +134,48 @@
                             </div>
                         </div>
 
-                       
+
                         <div class="row">
-                            <div class="col-md-4"><label for="coordinate">Vandalism Status</label></div>
+                            <div class="col-md-4"><label for="coordinate">Vandalism </label></div>
                             <div class="col-md-4">
                                 <input readonly value="{{ $data->vandalism_status }}" class="form-control" required>
                             </div>
                         </div>
+
+
+
                         <div class="row">
-                            <div class="col-md-4"><label for="pipe_staus">Rust Status</label></div>
+                            <div class="col-md-4"><label for="leaning_staus">Leaning </label></div>
+                            <div class="col-md-4">
+                                <input readonly value="{{ $data->leaning_staus }}" class="form-control" required>
+
+
+                            </div>
+                        </div>
+
+                        <div class="row @if ($data->leaning_staus == 'No') d-none @endif " id="leaning-angle">
+                            <div class="col-md-4"><label for="leaning_angle">Leaning angle</label></div>
+                            <div class="col-md-4">
+                                <input type="text" name="leaning_angle" id="leaning_angle" value="{{ $data->leaning_angle }}" class="form-control" readonly>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4"><label for="pipe_staus">Rusty</label></div>
                             <div class="col-md-4">
                                 <input readonly value="{{ $data->rust_status }}" class="form-control" required>
                             </div>
                         </div>
 
                         <div class="row">
-                            <div class="col-md-4"><label for="advertise_poster_status">Advertise Poster Status</label></div>
+                            <div class="col-md-4"><label for="advertise_poster_status">
+                                Cleaning illegal ads/banners</label></div>
                             <div class="col-md-4">
                                 <input readonly value="{{ $data->advertise_poster_status }}" class="form-control" required>
                             </div>
                         </div>
 
-                        
+
                         <div class="row">
                             <div class="col-md-4"><label for="image_pipe">Image Gate</label></div>
 

@@ -112,13 +112,7 @@
                             </div>
 
 
-                            <div class="row">
-                                <div class="col-md-4"><label for="feeder_involved">Feeder Involved</label></div>
-                                <div class="col-md-4">
-                                    <input type="text" name="feeder_involved" id="feeder_involved" class="form-control"
-                                        value="{{ date('H:i:s', strtotime($data->patrol_time)) }}" required>
-                                </div>
-                            </div>
+
 
                             <div class="row">
                                 <div class="col-md-4"><label for="team">Team</label></div>
@@ -129,26 +123,20 @@
                             </div>
 
 
+                           
                             <div class="row">
-                                <div class="col-md-4"><label for="area">Area</label></div>
+                                <div class="col-md-4"><label for="start_date">From</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="area" id="area" value="{{ $data->area }}"
-                                        class="form-control">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4"><label for="start_date">Start Date</label></div>
-                                <div class="col-md-4">
-                                    <input type="date" name="start_date" id="start_date" value="{{ $data->start_date }}"
-                                        class="form-control" required>
+                                    <input type="text" name="start_date" id="start_date" value="{{ $data->start_date }}"
+                                        class="form-control" >
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="end_date">End Date</label></div>
+                                <div class="col-md-4"><label for="end_date">To</label></div>
                                 <div class="col-md-4">
-                                    <input type="date" name="end_date" id="end_date" value="{{ $data->end_date }}"
-                                        class="form-control" required>
+                                    <input type="text" name="end_date" id="end_date" value="{{ $data->end_date }}"
+                                        class="form-control" >
                                 </div>
                             </div>
 
@@ -166,36 +154,58 @@
                                         value="{{ $data->coordinate }}" class="form-control" required readonly>
                                 </div>
                             </div>
+
                             <div class="row">
-                                <div class="col-md-4"><label for="gate_status">Gate Status</label></div>
+                                <div class="col-md-4"><label for="cover_status">Cover is Not Closed</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="gate_status" id="gate_status"
-                                        value="{{ $data->gate_status }}" class="form-control" required>
+                                    <select name="cover_status" id="cover_status" class="form-control" required>
+                                        <option value="{{$data->cover_status}}" hidden>{{$data->cover_status}}</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
                                 </div>
                             </div>
+
                             <div class="row">
-                                <div class="col-md-4"><label for="vandalism_status">Vandalism Status</label></div>
+                                <div class="col-md-4"><label for="vandalism_status">Vandalism</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="vandalism_status" id="vandalism_status"
-                                        value="{{ $data->vandalism_status }}" class="form-control" required>
+                                    <select name="vandalism_status" id="vandalism_status" class="form-control" required>
+                                        <option value="{{ $data->vandalism_status }}" hidden>{{ $data->vandalism_status }}</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
                                 </div>
                             </div>
+
                             <div class="row">
-                                <div class="col-md-4"><label for="leaning_staus">Leaning Staus</label></div>
+                                <div class="col-md-4"><label for="leaning_staus">Leaning</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="leaning_staus" id="leaning_staus"
-                                        value="{{ $data->leaning_staus }}" class="form-control" required>
+                                    <select name="leaning_staus" id="leaning_staus" class="form-control" required  onchange="leaningStatus(this)">
+                                        <option value="{{$data->leaning_staus}}" hidden >{{$data->leaning_staus}}</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                       </select>
+
+                                    </div>
+                            </div>
+
+                            <div class="row @if ($data->leaning_staus == 'No') d-none @endif " id="leaning-angle">
+                                <div class="col-md-4"><label for="leaning_angle">Leaning angle</label></div>
+                                <div class="col-md-4">
+                                    <input type="text" name="leaning_angle" id="leaning_angle" value="{{ $data->leaning_angle }}" class="form-control">
+
                                 </div>
                             </div>
+
                             <div class="row">
-                                <div class="col-md-4"><label for="rust_status">Rust Status</label></div>
+                                <div class="col-md-4"><label for="rust_status">Rusty</label></div>
                                 <div class="col-md-4">
                                     <input type="text" name="rust_status" id="rust_status"
                                         value="{{ $data->rust_status }}" class="form-control" required>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label for="advertise_poster_status">Advertise Poster Status</label>
+                                <div class="col-md-4"><label for="advertise_poster_status">Cleaning illegal ads/banners</label>
                                 </div>
                                 <div class="col-md-4">
                                     <input type="text" name="advertise_poster_status" id="advertise_poster_status"
@@ -203,21 +213,21 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label for="bushes_status">Bushes Status</label></div>
+                                <div class="col-md-4"><label for="bushes_status">Bushy</label></div>
                                 <div class="col-md-4">
                                     <input type="text" name="bushes_status" id="bushes_status"
                                         value="{{ $data->bushes_status }}" class="form-control" required>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label for="image_gate">Image Gate</label></div>
+                                <div class="col-md-4"><label for="image_gate">Cover Image</label></div>
                                 <div class="col-md-4">
-                                    <input type="file" name="image_gate" id="image_gate" class="form-control">
+                                    <input type="file" name="image_cover" id="image_cover" class="form-control">
                                 </div>
                                 <div class="col-md-4 text-center mb-3">
-                                    @if (file_exists(public_path($data->image_gate)) && $data->image_gate != '')
-                                        <a href="{{ URL::asset($data->image_gate) }}" data-lightbox="roadtrip">
-                                            <img src="{{ URL::asset($data->image_gate) }}" alt="" height="70"
+                                    @if (file_exists(public_path($data->image_cover)) && $data->image_cover != '')
+                                        <a href="{{ URL::asset($data->image_cover) }}" data-lightbox="roadtrip">
+                                            <img src="{{ URL::asset($data->image_cover) }}" alt="" height="70"
                                                 class="adjust-height ml-5  "></a>
                                     @else
                                         <strong>No image found</strong>
@@ -380,6 +390,17 @@
                 areaSelect.append(`<option value="${data}">${data}</option>`);
             });
 
+        }
+
+        function leaningStatus(event) {
+            var val = event.value;
+            if (val == 'No') {
+                if (!$('#leaning-angle').hasClass('d-none')) {
+                    $('#leaning-angle').addClass('d-none')
+                }
+            } else {
+                $('#leaning-angle').removeClass('d-none')
+            }
         }
     </script>
 @endsection

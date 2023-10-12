@@ -56,7 +56,7 @@ class CableBridgeController extends Controller
             $data->visit_date = $request->visit_date;
             $data->patrol_time = $combinedDateTime;
             $data->feeder_involved = $request->feeder_involved;
-            $data->area = $request->area;
+            
             $data->start_date = $request->start_date;
             $data->end_date = $request->end_date;
 
@@ -144,7 +144,7 @@ class CableBridgeController extends Controller
             $data->visit_date = $request->visit_date;
             $data->patrol_time = $combinedDateTime;
             $data->feeder_involved = $request->feeder_involved;
-            $data->area = $request->area;
+
             $data->start_date = $request->start_date;
             $data->end_date = $request->end_date;
 

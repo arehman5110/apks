@@ -99,7 +99,7 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="visit_date">Visit Date</label></div>
                                 <div class="col-md-4">
-                                    <input type="date" name="visit_date" id="visit_date" class="form-control" required>
+                                    <input type="date" name="visit_date" id="visit_date" class="form-control" required value="{{date('Y-m-d')}}">
                                 </div>
                             </div>
 
@@ -109,18 +109,12 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="patrol_time">Patrol Time</label></div>
                                 <div class="col-md-4">
-                                    <input type="time" name="patrol_time" id="patrol_time" class="form-control" required>
+                                    <input type="time" name="patrol_time" id="patrol_time" class="form-control" required value="{{date('H:i')}}">
                                 </div>
                             </div>
 
 
-                            <div class="row">
-                                <div class="col-md-4"><label for="feeder_involved">Feeder Involved</label></div>
-                                <div class="col-md-4">
-                                    <input type="text" name="feeder_involved" id="feeder_involved" class="form-control"
-                                        required>
-                                </div>
-                            </div>
+
 
                             <div class="row">
                                 <div class="col-md-4"><label for="team">Team</label></div>
@@ -130,24 +124,18 @@
                                 </div>
                             </div>
 
-
+ 
                             <div class="row">
-                                <div class="col-md-4"><label for="area">Area</label></div>
+                                <div class="col-md-4"><label for="start_date">From</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="area" id="area" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4"><label for="start_date">Start Date</label></div>
-                                <div class="col-md-4">
-                                    <input type="date" name="start_date" id="start_date" class="form-control" required>
+                                    <input type="text" name="start_date" id="start_date" class="form-control" >
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="end_date">End Date</label></div>
+                                <div class="col-md-4"><label for="end_date">To</label></div>
                                 <div class="col-md-4">
-                                    <input type="date" name="end_date" id="end_date" class="form-control" required>
+                                    <input type="text" name="end_date" id="end_date" class="form-control" >
                                 </div>
                             </div>
 
@@ -157,41 +145,66 @@
                                     <input type="text" name="voltage" id="voltage" class="form-control" required>
                                 </div>
                             </div>
-                            
+
                             <div class="row">
-                                <div class="col-md-4"><label for="pipe_staus">Pipe Status</label></div>
+                                <div class="col-md-4"><label for="pipe_staus">Pipe Broken</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="pipe_staus" id="pipe_staus" class="form-control"
-                                        required>
+                                    <select name="pipe_staus" id="pipe_staus" class="form-control" required>
+                                        <option value="" hidden>select option</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+
+                                    </select>
+
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label for="vandalism_status">Vandalism Status</label></div>
+                                <div class="col-md-4"><label for="vandalism_status">Vandalism </label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="vandalism_status" id="vandalism_status"
-                                        class="form-control" required>
+                                    <select name="vandalism_status" id="vandalism_status" class="form-control" required>
+                                        <option value="" hidden>select option</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+
+                                    </select>
+
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label for="collapsed_status">Collapsed Status</label></div>
+                                <div class="col-md-4"><label for="collapsed_status">Collapsed </label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="collapsed_status" id="collapsed_status"
-                                        class="form-control" required>
+                                    <select name="collapsed_status" id="collapsed_status" class="form-control" required>
+                                        <option value="" hidden>select option</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+
+                                    </select>
+
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label for="rust_status">Rust Status</label></div>
+                                <div class="col-md-4"><label for="rust_status">Rusty</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="rust_status" id="rust_status" class="form-control"
-                                        required>
+                                    <select name="rust_status" id="rust_status" class="form-control" required>
+                                        <option value="" hidden>select option</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+
+                                    </select>
+
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="bushes_status">Bushes Status</label></div>
+                                <div class="col-md-4"><label for="bushes_status">Bushy</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="bushes_status" id="bushes_status" class="form-control"
-                                        required>
+                                    <select name="bushes_status" id="bushes_status" class="form-control" required>
+                                        <option value="" hidden>select option</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+
+                                    </select>
+
                                 </div>
                             </div>
                             <div class="row">
