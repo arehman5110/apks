@@ -25,6 +25,7 @@ use App\Http\Controllers\web\FPController;
 use App\Http\Controllers\web\PatrollingController;
 use App\Http\Controllers\web\POController;
 use App\Models\ThirdPartyDiging;
+use Illuminate\Support\Facades\App;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,9 +38,27 @@ use App\Models\ThirdPartyDiging;
 |
 */
 
+// Route::get('/{lang?}', function ($lang='en') {
+//     App::setLocale($lang);
+//     return view('welcome');
+// });
+
+Route::get('/', function () {
+    return redirect(app()->getLocale());
+});
+
+Route::group(
+    [
+        'prefix' => '{locale}',
+        'where' => ['locale' => '[a-zA-Z]{2}'],
+        'middleware' => 'setlocale'
+    ], function() {
+
+
 Route::get('/', function () {
     return view('welcome');
 });
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -137,3 +156,4 @@ Route::view('/generate-pdf-for-notice','PDF.notice');
 // Route::get('/third-party-digging-mobile/{id}',[ThirdPartyDiggingController::class,'show']);
 Route::get('/get-work-package-detail/{id}', [WPController::class, 'detail']);
 require __DIR__ . '/auth.php';
+});

@@ -66,9 +66,10 @@
 </style>
 
 <body>
+    <h1>{{__("messages.welcome")}}</h1>
     <div class="container">
         <img src="{{ URL::asset('assets/web-images/main-logo.png') }}" alt="" height="265">
-        <a href="/dashboard">
+        <a href="{{app()->getLocale()}}/dashboard">
             <button class="btn  btn-success mt-4"> GOTO MAIN</button>
         </a>
     </div>
