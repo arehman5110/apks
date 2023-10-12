@@ -135,26 +135,34 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4"><label for="coordinate">gate_status</label></div>
+                            <div class="col-md-4"><label for="coordinate">Gate</label></div>
                             <div class="col-md-4">
                                 <input readonly value="{{ $data->gate_status }}" class="form-control" required>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4"><label for="pipe_staus">Grass Status</label></div>
+                            <div class="col-md-4"><label for="pipe_staus">Long Grass</label></div>
                             <div class="col-md-4">
                                 <input readonly value="{{ $data->grass_status }}" class="form-control" required>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4"><label for="collapsed_status">Tree Branches Status</label></div>
+                            <div class="col-md-4"><label for="collapsed_status">Tree Branches in PE</label></div>
                             <div class="col-md-4">
                                 <input readonly value="{{ $data->tree_branches_status }}" class="form-control" required>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-4"><label for="building_status">Building Defects</label></div>
+                            <div class="col-md-4">
+                                <input readonly value="{{ $data->building_status }}" class="form-control" required>
+
+        
+                            </div>
+                        </div>
 
                         <div class="row">
-                            <div class="col-md-4"><label for="rust_status">Advertise Poster Status</label></div>
+                            <div class="col-md-4"><label for="rust_status">Cleaning illegal ads/banners</label></div>
                             <div class="col-md-4">
                                 <input readonly value="{{ $data->advertise_poster_status }}" class="form-control" required>
                             </div>

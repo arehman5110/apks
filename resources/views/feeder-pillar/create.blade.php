@@ -150,7 +150,7 @@
 
 
                             <div class="row">
-                                <div class="col-md-4"><label for="gate_status">Gate Status</label></div>
+                                <div class="col-md-4"><label for="gate_status">Gate </label></div>
                                 <div class="col-md-4">
                                     <select name="gate_status" id="gate_status" required class="form-control" onchange="getStatus(this)">
                                         <option value="" hidden>select gate</option>

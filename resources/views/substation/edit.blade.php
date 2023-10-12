@@ -111,7 +111,7 @@
                                 </div>
                             </div>
 
- 
+
 
                             <div class="row">
                                 <div class="col-md-4"><label for="team">Team</label></div>
@@ -160,24 +160,81 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label for="pipe_staus">Gate Status</label></div>
+                                <div class="col-md-4"><label for="pipe_staus">Gate</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="gate_status" id="gate_status"
-                                        value="{{ $data->gate_status }}" class="form-control" required>
+                                    <select name="gate_status" id="gate_status" required class="form-control"
+                                        onchange="getStatus(this)">
+                                        <option value="{{ $data->gate_status }}" hidden>{{ $data->gate_status }}</option>
+                                        <option value="Locked">Locked</option>
+                                        <option value="Unlocked">Unlocked</option>
+                                        <option value="Others">Others</option>
+                                    </select>
+
+                                </div>
+                            </div>
+                            <div class="row d-none" id="other-gate-status">
+                                <div class="col-md-4"><label for="other_gate_status">Other Gate Status</label></div>
+                                <div class="col-md-4">
+                                    <input type="text" name="other_gate_status" id="other_gate_status"
+                                        class="form-control">
+
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label for="vandalism_status">Grass Status</label></div>
+                                <div class="col-md-4"><label for="vandalism_status">Long Grass</label></div>
                                 <div class="col-md-4">
+                                    <select name="grass_status" id="grass_status" class="form-control" required>
+                                        <option value="{{ $data->grass_status }}" hidden>{{ $data->grass_status }}</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
                                     <input type="text" name="grass_status" id="grass_status"
                                         value="{{ $data->grass_status }}" class="form-control" required>
                                 </div>
                             </div>
+
                             <div class="row">
-                                <div class="col-md-4"><label for="collapsed_status">Advertise Poster Status</label></div>
+                                <div class="col-md-4"><label for="tree_branches_status">Tree Branches in PE </label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="advertise_poster_status" id="advertise_poster_status"
-                                        value="{{ $data->advertise_poster_status }}" class="form-control" required>
+                                   
+                                        <select  name="tree_branches_status" id="tree_branches_status"
+                                        class="form-control" required>
+                                        <option value="{{$data->tree_branches_status}}" hidden >{{$data->tree_branches_status}}</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                        </select>
+                                    </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4"><label for="building_status">Building Defects</label></div>
+                                <div class="col-md-4">
+                                    <select name="building_status" id="building_status" class="form-control" required onchange="bulidingStatus(this)">>
+                                        <option value="{{$data->building_status}}" hidden>{{$data->building_status}}</option>
+                                        <option value="Broken Roof">Broken Roof</option>
+                                        <option value="Broken Gutter">Broken Gutter</option>
+                                        <option value="Broken Base">Broken Base</option>
+                                        <option value="Others">Others</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="row  d-none" id="other-building-defects">
+                                <div class="col-md-4"><label for="other_building_defects">Other building Defects</label></div>
+                                <div class="col-md-4">
+                                  <input type="text" name="other_building_defects" id="other_building_defects" class="form-control">
+
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-4"><label for="collapsed_status">Cleaning illegal ads/banners</label></div>
+                                <div class="col-md-4">
+                                    <select name="advertise_poster_status" id="advertise_poster_status" class="form-control" required>
+                                        <option value="{{ $data->advertise_poster_status }}" hidden >{{ $data->advertise_poster_status }}</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                       </select>
                                 </div>
                             </div>
 
@@ -200,8 +257,7 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="image_grass">Image Grass</label></div>
                                 <div class="col-md-4">
-                                    <input type="file" name="image_grass" id="image_grass"
-                                        class="form-control">
+                                    <input type="file" name="image_grass" id="image_grass" class="form-control">
                                 </div>
                                 <div class="col-md-4 text-center mb-3">
                                     @if (file_exists(public_path($data->image_grass)) && $data->image_grass != '')
@@ -216,7 +272,8 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="image_tree_branches">Image Tree Branches</label></div>
                                 <div class="col-md-4">
-                                    <input type="file" name="image_tree_branches" id="image_tree_branches" class="form-control">
+                                    <input type="file" name="image_tree_branches" id="image_tree_branches"
+                                        class="form-control">
                                 </div>
                                 <div class="col-md-4 text-center mb-3">
                                     @if (file_exists(public_path($data->image_tree_branches)) && $data->image_tree_branches != '')
@@ -230,15 +287,18 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="images_gate_after_lock">Images Gate After Lock</label></div>
+                                <div class="col-md-4"><label for="images_gate_after_lock">Images Gate After Lock</label>
+                                </div>
                                 <div class="col-md-4">
-                                    <input type="file" name="images_gate_after_lock" id="images_gate_after_lock" class="form-control">
+                                    <input type="file" name="images_gate_after_lock" id="images_gate_after_lock"
+                                        class="form-control">
                                 </div>
                                 <div class="col-md-4 text-center mb-3">
                                     @if (file_exists(public_path($data->images_gate_after_lock)) && $data->images_gate_after_lock != '')
-                                        <a href="{{ URL::asset($data->images_gate_after_lock) }}" data-lightbox="roadtrip">
-                                            <img src="{{ URL::asset($data->images_gate_after_lock) }}" alt="" height="70"
-                                                class="adjust-height ml-5  "></a>
+                                        <a href="{{ URL::asset($data->images_gate_after_lock) }}"
+                                            data-lightbox="roadtrip">
+                                            <img src="{{ URL::asset($data->images_gate_after_lock) }}" alt=""
+                                                height="70" class="adjust-height ml-5  "></a>
                                     @else
                                         <strong>No image found</strong>
                                     @endif
@@ -250,7 +310,8 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="image_building">Image Building</label></div>
                                 <div class="col-md-4">
-                                    <input type="file" name="image_building" id="image_building" class="form-control">
+                                    <input type="file" name="image_building" id="image_building"
+                                        class="form-control">
                                 </div>
                                 <div class="col-md-4 text-center mb-3">
                                     @if (file_exists(public_path($data->image_building)) && $data->image_building != '')
@@ -265,9 +326,11 @@
 
 
                             <div class="row">
-                                <div class="col-md-4"><label for="img_advertise_poster">Image Advertise Poster</label></div>
+                                <div class="col-md-4"><label for="img_advertise_poster">Image Advertise Poster</label>
+                                </div>
                                 <div class="col-md-4">
-                                    <input type="file" name="img_advertise_poster" id="img_advertise_poster" class="form-control">
+                                    <input type="file" name="img_advertise_poster" id="img_advertise_poster"
+                                        class="form-control">
                                 </div>
                                 <div class="col-md-4 text-center mb-3">
                                     @if (file_exists(public_path($data->img_advertise_poster)) && $data->img_advertise_poster != '')

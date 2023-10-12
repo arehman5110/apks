@@ -150,39 +150,80 @@
 
 
                             <div class="row">
-                                <div class="col-md-4"><label for="gate_status">Gate Status</label></div>
+                                <div class="col-md-4"><label for="gate_status">Gate </label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="gate_status" id="gate_status"
-                                    class="form-control" required>
+                                    <select name="gate_status" id="gate_status" required class="form-control" onchange="getStatus(this)">
+                                        <option value="" hidden>select gate</option>
+                                        <option value="Locked">Locked</option>
+                                        <option value="Unlocked">Unlocked</option>
+                                        <option value="Others">Others</option>
+                                    </select>
+
+                                </div>
+                            </div>
+
+                            <div class="row d-none" id="other-gate-status">
+                                <div class="col-md-4"><label for="other_gate_status">Other Gate Status</label></div>
+                                <div class="col-md-4">
+                                  <input type="text" name="other_gate_status" id="other_gate_status" class="form-control">
+
                                 </div>
                             </div>
 
                               <div class="row">
-                                <div class="col-md-4"><label for="grass_status">Grass Status</label></div>
+                                <div class="col-md-4"><label for="grass_status">Long Grass </label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="grass_status" id="grass_status"
+                                    <select  name="grass_status" id="grass_status"
                                         class="form-control" required>
+                                        <option value="" hidden >select status</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                        </select>
                                     </div>
                             </div>
                               <div class="row">
-                                <div class="col-md-4"><label for="tree_branches_status">Tree Branches Status</label></div>
+                                <div class="col-md-4"><label for="tree_branches_status">Tree Branches in PE </label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="tree_branches_status" id="tree_branches_status"
+                                   
+                                        <select  name="tree_branches_status" id="tree_branches_status"
                                         class="form-control" required>
+                                        <option value="" hidden >select status</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                        </select>
                                     </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label for="building_status">Building Status</label></div>
+                                <div class="col-md-4"><label for="building_status">Building Defects</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="building_status" id="building_status"
-                                        class="form-control" required>
+                                    <select name="building_status" id="building_status" class="form-control" required onchange="bulidingStatus(this)">>
+                                        <option value="" hidden>select</option>
+                                        <option value="Broken Roof">Broken Roof</option>
+                                        <option value="Broken Gutter">Broken Gutter</option>
+
+                                        <option value="Broken Base">Broken Base</option>
+                                        <option value="Others">Others</option>
+
+                                    </select>
+                                   
                                     </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-4"><label for="advertise_poster_status">Advertise Poster Status</label></div>
+                            
+                            <div class="row  d-none" id="other-building-defects">
+                                <div class="col-md-4"><label for="other_building_defects">Other building Defects</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="advertise_poster_status" id="advertise_poster_status"
-                                        class="form-control" required>
+                                  <input type="text" name="other_building_defects" id="other_building_defects" class="form-control">
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"><label for="advertise_poster_status">Cleaning illegal ads/banners</label></div>
+                                <div class="col-md-4">
+                                    <select name="advertise_poster_status" id="advertise_poster_status" class="form-control" required>
+                                        <option value="" hidden >select status</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                       </select>
                                     </div>
                             </div>
 
@@ -274,4 +315,27 @@
 <script src="{{ URL::asset('map/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js') }}"></script>
 
    @include('partials.form-map-js')
+   <script>
+     function getStatus(event){
+        var val = event.value;
+        if (val !== 'Others') {
+            if (!$('#other-gate-status').hasClass('d-none')) {
+                $('#other-gate-status').addClass('d-none')
+            }
+        }else{
+            $('#other-gate-status').removeClass('d-none')
+        }
+    }
+
+    function bulidingStatus(event){
+        var val = event.value;
+        if (val !== 'Others') {
+            if (!$('#other-building-defects').hasClass('d-none')) {
+                $('#other-building-defects').addClass('d-none')
+            }
+        }else{
+            $('#other-building-defects').removeClass('d-none')
+        }
+    }
+   </script>
 @endsection
