@@ -20,7 +20,8 @@ class ThirdPartyDiggingController extends Controller
      */
     public function index()
     {
-        $datas = ThirdPartyDiging::all();
+        $ba = Auth::user()->ba ;
+        $datas = ThirdPartyDiging::where('ba', 'LIKE', '%' . $ba . '%')->get();
 
         return view('third-party.index', ['datas' => $datas]);
     }

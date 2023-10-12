@@ -47,16 +47,19 @@
                     <label for="search_zone">Zone</label>
                     <select name="search_zone" id="search_zone" class="form-control">
 
+                        @if (Auth::user()->zone == '')
                         <option value="" hidden>select zone</option>
                         <option value="W1">W1</option>
                         <option value="B1">B1</option>
                         <option value="B2">B2</option>
                         <option value="B4">B4</option>
-
+                    @else
+                        <option value="{{ Auth::user()->zone }}" hidden>{{ Auth::user()->zone }}</option>
+                    @endif  
                     </select>
                 </div>
                 <div class="col-md-3">
-                    <label for="search_ba">Ba</label>
+                    <label for="search_ba">BA</label>
                     <select name="search_ba" id="search_ba" class="form-control" onchange="getWorkPackage(this)">
                         <option value="">Select zone</option>
                     </select>
@@ -287,6 +290,8 @@
         position: 'topright'
         // groupCheckboxes: true
     }).addTo(map);
+
+    
      function addRemoveBundary(param, paramY, paramX) {
     if(boundary3 != ''){
         map.removeLayer(boundary3)

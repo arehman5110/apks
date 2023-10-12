@@ -20,7 +20,7 @@
         <div class="container-  ">
             <div class="row mb-2" style="flex-wrap:nowrap">
                 <div class="col-sm-6">
-                    <h3>Third Party Digging</h3>
+                    <h3>Notice Form</h3>
                 </div>
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
@@ -51,11 +51,10 @@
                             </div>
                             <div class="d-flex ml-auto">
                                 <a href="{{ route('third-party-digging.create') }}"><button
-                                        class="btn text-white btn-success  btn-sm mr-4">Add Third Party</button></a>
+                                        class="btn text-white btn-success  btn-sm mr-4">Add Notice</button></a>
 
                                 <a href="{{ route('generate-third-party-digging-excel') }}"> <button
-                                        class="btn text-white  btn-sm mr-4" style="background-color: #708090">QR Third
-                                        Party</button></a>
+                                        class="btn text-white  btn-sm mr-4" style="background-color: #708090">QR Notice</button></a>
                             </div>
                         </div>
 
@@ -69,12 +68,12 @@
 
                                     <thead style="background-color: #E4E3E3 !important">
                                         <tr>
-                                            <th>Wp Name</th>
-                                            <th>zone</th>
-                                            <th>Ba</th>
-                                            <th>Team Name</th>
-                                            <th>Survey Date</th>
-                                            <th>Action</th>
+                                            <th>WP NAME</th>
+                                            <th>ZONE</th>
+                                            <th>BA</th>
+                                            <th>TEAM</th>
+                                            <th>SURVEY DATE</th>
+                                            <th>ACTION</th>
 
                                         </tr>
                                     </thead>

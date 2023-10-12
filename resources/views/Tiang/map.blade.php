@@ -1,10 +1,12 @@
 @extends('layouts.app', ['page_title' => 'Index'])
 
 @section('css')
-
-@include('partials.map-css')
-<style>#map{height: 600px;}</style>
-
+    @include('partials.map-css')
+    <style>
+        #map {
+            height: 600px;
+        }
+    </style>
 @endsection
 
 
@@ -40,45 +42,49 @@
     <div class="container-fluid bg-white pt-2">
 
 
-    <div class=" p-1 col-12 m-2">
-        <div class="card p-0 mb-3">
-            <div class="card-body row">
+        <div class=" p-1 col-12 m-2">
+            <div class="card p-0 mb-3">
+                <div class="card-body row">
 
-                <div class="col-md-3">
-                    <label for="search_zone">Zone</label>
-                    <select name="search_zone" id="search_zone" class="form-control">
+                    <div class="col-md-3">
+                        <label for="search_zone">Zone</label>
+                        <select name="search_zone" id="search_zone" class="form-control">
 
-                        <option value="" hidden>select zone</option>
-                        <option value="W1">W1</option>
-                        <option value="B1">B1</option>
-                        <option value="B2">B2</option>
-                        <option value="B4">B4</option>
+                            @if (Auth::user()->zone == '')
+                                <option value="" hidden>select zone</option>
+                                <option value="W1">W1</option>
+                                <option value="B1">B1</option>
+                                <option value="B2">B2</option>
+                                <option value="B4">B4</option>
+                            @else
+                                <option value="{{ Auth::user()->zone }}" hidden>{{ Auth::user()->zone }}</option>
+                            @endif
 
-                    </select>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="search_ba">Ba</label>
+                        <select name="search_ba" id="search_ba" class="form-control" onchange="getWorkPackage(this)">
+                            <option value="">Select zone</option>
+                        </select>
+                    </div>
+
+
+
+
+
                 </div>
-                <div class="col-md-3">
-                    <label for="search_ba">Ba</label>
-                    <select name="search_ba" id="search_ba" class="form-control" onchange="getWorkPackage(this)">
-                        <option value="">Select zone</option>
-                    </select>
-                </div>
-
-
-
-
-
             </div>
         </div>
-    </div>
 
 
 
 
-    <!--  START MAP CARD DIV -->
-    <div class="row m-2">
+        <!--  START MAP CARD DIV -->
+        <div class="row m-2">
 
-        <!-- START MAP SIDEBAR DIV -->
-        {{-- <div class="col-2 p-0">
+            <!-- START MAP SIDEBAR DIV -->
+            {{-- <div class="col-2 p-0">
             <div class="card p-0 m-0"
                 style="border: 1px solid rgb(177, 175, 175) !important; border-radius: 0px !important">
                 <div class="card-header"><strong> NAVIGATION</strong></div>
@@ -116,31 +122,31 @@
                 </div>
             </div>
         </div> --}}
-        <!-- END MAP SIDEBAR DIV -->
+            <!-- END MAP SIDEBAR DIV -->
 
-        <!-- START MAP  DIV -->
-        <div class="col-12 p-0 ">
-            <div class="card p-0 m-0"
-                style="border: 1px solid rgb(177, 175, 175) !important; border-radius: 0px !important;">
-                <div class="card-header text-center"><strong> MAP</strong></div>
-                <div class="card-body p-0">
-                    <div id="map">
+            <!-- START MAP  DIV -->
+            <div class="col-12 p-0 ">
+                <div class="card p-0 m-0"
+                    style="border: 1px solid rgb(177, 175, 175) !important; border-radius: 0px !important;">
+                    <div class="card-header text-center"><strong> MAP</strong></div>
+                    <div class="card-body p-0">
+                        <div id="map">
 
+                        </div>
                     </div>
                 </div>
+
+            </div>
+            <!-- END MAP  DIV -->
+            <div id="wg" class="windowGroup">
+
             </div>
 
-        </div>
-        <!-- END MAP  DIV -->
-        <div id="wg" class="windowGroup">
+            <div id="wg1" class="windowGroup">
 
-        </div>
+            </div>
 
-        <div id="wg1" class="windowGroup">
-
-        </div>
-
-    </div><!--  END MAP CARD DIV -->
+        </div><!--  END MAP CARD DIV -->
 
     </div>
     <div class="modal fade" id="geomModal" tabindex="-1" aria-labelledby="geomModalLabel" aria-hidden="true">
@@ -257,14 +263,14 @@
 @endsection
 
 @section('script')
-   @include('partials.map-js')
+    @include('partials.map-js')
 
 
-   <script>
-    var  	tbl_savr = '';
+    <script>
+        var tbl_savr = '';
 
-    var main = '';
-    main =  L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+        var main = '';
+        main = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
             layers: 'cite:tbl_savr',
             format: 'image/png',
             maxZoom: 21,
@@ -277,69 +283,70 @@
         main.bringToFront()
 
 
-    groupedOverlays = {
-        "POI": {
-            'BA': boundary3,
-            'Tiang Talian' : main,
-        }
-    };
+        groupedOverlays = {
+            "POI": {
+                'BA': boundary3,
+                'Tiang Talian': main,
+            }
+        };
 
         var layerControl = L.control.groupedLayers(baseLayers, groupedOverlays, {
-        collapsed: true,
-        position: 'topright'
-        // groupCheckboxes: true
-    }).addTo(map);
-     function addRemoveBundary(param, paramY, paramX) {
-    if(boundary3 != ''){
-        map.removeLayer(boundary3)
-    }
-    if(main != ''){
-        map.removeLayer(main)
-    }
-        if (boundary2 !== '') {
-            map.removeLayer(boundary2)
+            collapsed: true,
+            position: 'topright'
+            // groupCheckboxes: true
+        }).addTo(map);
+
+        function addRemoveBundary(param, paramY, paramX) {
+            if (boundary3 != '') {
+                map.removeLayer(boundary3)
+            }
+            if (main != '') {
+                map.removeLayer(main)
+            }
+            if (boundary2 !== '') {
+                map.removeLayer(boundary2)
+            }
+            boundary2 = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:ba',
+                format: 'image/png',
+                cql_filter: "station='" + param + "'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+            map.addLayer(boundary2)
+            boundary2.bringToFront()
+
+            map.setView([parseFloat(paramY), parseFloat(paramX)], 11);
+            if (tbl_savr != '') {
+
+                map.removeLayer(tbl_savr)
+
+            }
+
+            tbl_savr = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:tbl_savr',
+                format: 'image/png',
+                cql_filter: "ba='" + param + "'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+
+            map.addLayer(tbl_savr)
+            tbl_savr.bringToFront()
+
+            sel_lyr = tbl_savr;
+
+
         }
-        boundary2 = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-            layers: 'cite:ba',
-            format: 'image/png',
-            cql_filter: "station='" + param + "'",
-            maxZoom: 21,
-            transparent: true
-        }, {
-            buffer: 10
-        })
-        map.addLayer(boundary2)
-        boundary2.bringToFront()
-
-        map.setView([parseFloat(paramY), parseFloat(paramX)], 11);
-        if (tbl_savr != '') {
-
-            map.removeLayer(tbl_savr)
-
-        }
-
-        tbl_savr =    L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-            layers: 'cite:tbl_savr',
-            format: 'image/png',
-            cql_filter: "ba='" + param + "'",
-            maxZoom: 21,
-            transparent: true
-        }, {
-            buffer: 10
-        })
-
-        map.addLayer(tbl_savr)
-        tbl_savr.bringToFront()
-
-        sel_lyr = tbl_savr;
 
 
-    }
-
-
-    function showModalData(data , id) {
+        function showModalData(data, id) {
             var str = '';
-        
+
             $('#exampleModalLabel').html("Substation Info")
             str = ` <tr>
         <tr><th>Ba</th><td>${data.ba}</td> </tr>
@@ -357,5 +364,5 @@
             $('#myModal').modal('show');
 
         }
-</script>
+    </script>
 @endsection

@@ -86,13 +86,13 @@
 
                                     <thead style="background-color: #E4E3E3 !important">
                                         <tr>
-                                            <th>Ba</th>
-                                            <th>Contractor</th>
+                                            <th>BA</th>
+                                            <th>CONTRACTOR</th>
 
-                                            <th>PO Start Date</th>
-                                            <th>PO End Date</th>
+                                            <th>PO START DATE</th>
+                                            <th>PO END DATE</th>
 
-                                            <th>Action</th>
+                                            <th>ACTION</th>
 
                                         </tr>
                                     </thead>

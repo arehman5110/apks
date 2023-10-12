@@ -8,6 +8,7 @@ use App\Models\Team;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class LinkBoxController extends Controller
 {
@@ -19,7 +20,8 @@ class LinkBoxController extends Controller
     public function index()
     {
         //
-        $data = LinkBox::all();
+        $ba = Auth::user()->ba ;
+        $data = LinkBox::where('ba', 'LIKE', '%' . $ba . '%')->get();
         return view('link-box.index', ['datas' => $data]);
     }
 

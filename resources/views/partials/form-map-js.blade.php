@@ -101,12 +101,12 @@
         var coordinate = $('#coordinate')
 
         if (coordinate.length > 0) {
-           coordinate.val(`${lat} , ${lng}`)
-           return ;
+            coordinate.val(`${lat} , ${lng}`)
+            return;
         }
 
         $.ajax({
-            url: '/get-road-name/' + parseFloat(lat) + '/' +parseFloat(lng),
+            url: '/get-road-name/' + parseFloat(lat) + '/' + parseFloat(lng),
             dataType: 'JSON',
             //data: data,
             method: 'GET',
@@ -114,107 +114,84 @@
             success: function callback(data) {
                 console.log(data);
                 if (data.Success) {
-                    
-                
-                if (data[0].road_name == null) {
-                    $('#road_name_check').html("Road name is missing Please enter road name")
-                }else{
-                    $('#road_name_check').html("")
+
+
+                    if (data[0].road_name == null) {
+                        $('#road_name_check').html("Road name is missing Please enter road name")
+                    } else {
+                        $('#road_name_check').html("")
+                    }
+                    $('#road_name').val(data[0].road_name)
+                } else {
+                    $('#road_name_check').html("No Road Found Please select again")
                 }
-                $('#road_name').val(data[0].road_name)
-            }else{
-                $('#road_name_check').html("No Road Found Please select again")
-            }
             }
         })
     }
 
     map.on('click', onMapClick);
-
-
 </script>
 
 
 <script>
+    // ba their names and their points
+    const b10ptions = [
+        ['W1', 'KUALA LUMPUR PUSAT', 3.14925905877391, 101.754098819705],
+        ['B1', 'PETALING JAYA', 3.1128074178475, 101.605270457169],
+        ['B1', 'RAWANG', 3.47839445121726, 101.622905486475],
+        ['B1', 'KUALA SELANGOR', 3.40703209426401, 101.317426926947],
+        ['B2', 'KLANG', 3.08428642705789, 101.436185279023],
+        ['B2', 'PELABUHAN KLANG', 2.98188527916042, 101.324234779569],
+        ['B4', 'CHERAS', 3.14197346621987, 101.849883983416],
+        ['B4', 'BANTING', 2.82111390453244, 101.505890775541],
+        ['B4', 'BANGI', 2.965810949933260, 101.81881303103104],
+        ['B4', 'PUTRAJAYA & CYBERJAYA', 2.92875032271019, 101.675338316575]
+    ];
+
     $(document).ready(function() {
 
 
-        $("#myForm").validate();
+                $("#myForm").validate();
 
-        $('#search_zone').on('change', function() {
-            const selectedValue = this.value;
-            const areaSelect = $('#ba_s');
+                $('#search_zone').on('change', function() {
+                        const selectedValue = this.value;
+                        const areaSelect = $('#ba_s');
 
-            // Clear previous options
-            areaSelect.empty();
-            areaSelect.append(`<option value="" hidden>Select ba</option>`)
+                        // Clear previous options
+                        areaSelect.empty();
+                        areaSelect.append(`<option value="" hidden>Select ba</option>`)
 
-            if (selectedValue === 'W1') {
-                const w1Options = [
-                    ['KL PUSAT', 'KUALA LUMPUR PUSAT', 3.14925905877391, 101.754098819705]
-                ];
+                        b10ptions.forEach((data) => {
+                            if (selectedValue == data[0]) {
+                                areaSelect.append(`<option value="${data}">${data[1]}</option>`);
+                            }
+                        });
 
-                w1Options.forEach((data) => {
-                    areaSelect.append(`<option value="${data}">${data[0]}</option>`);
+                        $('#search_wp').empty();
+                        $('#search_wp').append(`<option value="" hidden>Select Work Package</option>`);
+
+                    })
                 });
-            } else if (selectedValue === 'B1') {
-                const b1Options = [
-                    ['PJ', 'PETALING JAYA', 3.1128074178475, 101.605270457169],
-                    ['RAWANG', 'RAWANG', 3.47839445121726, 101.622905486475],
-                    ['K.SELANGOR', 'KUALA SELANGOR', 3.40703209426401, 101.317426926947]
-                ];
 
-                b1Options.forEach((data) => {
-                    areaSelect.append(`<option value="${data}">${data[0]}</option>`);
-                });
-            } else if (selectedValue === 'B2') {
-                const b2Options = [
-                    ['KLANG', 'KLANG', 3.08428642705789, 101.436185279023],
-                    ['PORT KLANG', 'PELABUHAN KLANG', 2.98188527916042, 101.324234779569]
-                ];
 
-                b2Options.forEach((data) => {
-                    areaSelect.append(`<option value="${data}">${data[0]}</option>`);
-                });
-            } else if (selectedValue === 'B4') {
-                const b4Options = [
-                    ['CHERAS', 'CHERAS', 3.14197346621987, 101.849883983416],
-                    ['BANTING/SEPANG', 'BANTING', 2.82111390453244, 101.505890775541],
-                    ['BANGI', 'BANGI',2.965810949933260,101.81881303103104 ],
-                    ['PUTRAJAYA/CYBERJAYA/PUCHONG', 'PUTRAJAYA & CYBERJAYA', 2.92875032271019,
-                        101.675338316575
-                    ]
-                ];
 
-                b4Options.forEach((data) => {
-                    areaSelect.append(`<option value="${data}">${data[0]}</option>`);
-                });
+
+
+            function getWp(param) {
+                var splitVal = param.value.split(',');
+                addRemoveBundary(splitVal[1], splitVal[2], splitVal[3])
+
+                $('#ba').val(splitVal[1])
+
+
             }
-            $('#search_wp').empty();
-            $('#search_wp').append(`<option value="" hidden>Select Work Package</option>`);
 
-
-        });
-    })
-
-
-
-
-    function getWp(param) {
-        var splitVal = param.value.split(',');
-        addRemoveBundary(splitVal[1], splitVal[2], splitVal[3])
-
-        $('#ba').val(splitVal[1])
-
-
-    }
-
-    function submitFoam() {
-        if ($('#lat').val() == '' || $('#log').val() == '') {
-            $('.map-error').html('Please select location')
-            return false;
-        } else {
-            $('.map-error').html(' ')
-        }
-    }
+            function submitFoam() {
+                if ($('#lat').val() == '' || $('#log').val() == '') {
+                    $('.map-error').html('Please select location')
+                    return false;
+                } else {
+                    $('.map-error').html(' ')
+                }
+            }
 </script>

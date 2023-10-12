@@ -16,13 +16,13 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     @include('layouts.shared.meta-title')
-
+    <link rel="stylesheet" href="{{ URL::asset('assets/test/css/style.css') }}" />
 <style>
     body
-    {
+    /* {
         font-family: 'Arimo', sans-serif;
 font-family: 'Poppins', sans-serif;
-    }
+    } */
     .nav-sidebar>.nav-item p , .nav-item  {
         font-size: 0.9rem !important;
     margin-bottom: 0;

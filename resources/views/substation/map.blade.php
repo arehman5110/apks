@@ -51,16 +51,19 @@
                         <label for="search_zone">Zone</label>
                         <select name="search_zone" id="search_zone" class="form-control">
 
-                            <option value="" hidden>select zone</option>
-                            <option value="W1">W1</option>
-                            <option value="B1">B1</option>
-                            <option value="B2">B2</option>
-                            <option value="B4">B4</option>
-
+                            @if (Auth::user()->zone == '')
+                                <option value="" hidden>select zone</option>
+                                <option value="W1">W1</option>
+                                <option value="B1">B1</option>
+                                <option value="B2">B2</option>
+                                <option value="B4">B4</option>
+                            @else
+                                <option value="{{ Auth::user()->zone }}" hidden>{{ Auth::user()->zone }}</option>
+                            @endif
                         </select>
                     </div>
                     <div class="col-md-3">
-                        <label for="search_ba">Ba</label>
+                        <label for="search_ba">BA</label>
                         <select name="search_ba" id="search_ba" class="form-control" onchange="getWorkPackage(this)">
                             <option value="">Select zone</option>
                         </select>
@@ -168,10 +171,12 @@
 
 
     <script>
+        
+
         var substation = '';
 
         var main = '';
-    main =  L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+        main = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
             layers: 'cite:tbl_substation',
             format: 'image/png',
             maxZoom: 21,
@@ -184,26 +189,26 @@
         main.bringToFront()
 
 
-    groupedOverlays = {
-        "POI": {
-            'BA': boundary3,
-            'Substation' : main,
-        }
-    };
+        groupedOverlays = {
+            "POI": {
+                'BA': boundary3,
+                'Substation': main,
+            }
+        };
 
         var layerControl = L.control.groupedLayers(baseLayers, groupedOverlays, {
-        collapsed: true,
-        position: 'topright'
-        // groupCheckboxes: true
-    }).addTo(map);
+            collapsed: true,
+            position: 'topright'
+            // groupCheckboxes: true
+        }).addTo(map);
 
         function addRemoveBundary(param, paramY, paramX) {
             if (boundary3 != '') {
                 map.removeLayer(boundary3)
             }
-            if(main != ''){
-        map.removeLayer(main)
-    }
+            if (main != '') {
+                map.removeLayer(main)
+            }
             if (boundary2 !== '') {
                 map.removeLayer(boundary2)
             }
@@ -243,10 +248,10 @@
         }
 
 
-        function showModalData(data , id) {
+        function showModalData(data, id) {
             var str = '';
             var idSp = id.split('.');
-        
+
             $('#exampleModalLabel').html("Substation Info")
             str = ` <tr><th>Zone</th><td>${data.zone}</td> </tr>
         <tr><th>Ba</th><td>${data.ba}</td> </tr>

@@ -74,22 +74,26 @@
                                     <select name="zone" id="search_zone" class="form-control" required>
 
                                         <option value="{{ $data->zone }}" hidden>{{ $data->zone }}</option>
-                                        <option value="W1">W1</option>
-                                        <option value="B1">B1</option>
-                                        <option value="B2">B2</option>
-                                        <option value="B4">B4</option>
+                                        @if (Auth::user()->ba == '')
+                                            <option value="W1">W1</option>
+                                            <option value="B1">B1</option>
+                                            <option value="B2">B2</option>
+                                            <option value="B4">B4</option>
+                                        @endif
 
                                     </select>
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="ba">Ba</label></div>
-                                <div class="col-md-4"><select name="ba" id="ba" class="form-control" required
+                                <div class="col-md-4"><label for="ba">BA</label></div>
+                                <div class="col-md-4">
+                                    <select name="ba" id="ba" class="form-control" required
                                         onchange="getWp(this)">
-                                        <option value="" hidden>select zone</option>
+                                        <option value="{{ $data->ba }}" hidden>{{ $data->ba }}</option>
 
-                                    </select></div>
+                                    </select>
+                                </div>
                             </div>
 
                             <div class="row">
@@ -123,12 +127,12 @@
                             </div>
 
 
-                           
+
                             <div class="row">
                                 <div class="col-md-4"><label for="start_date">From</label></div>
                                 <div class="col-md-4">
                                     <input type="text" name="start_date" id="start_date" value="{{ $data->start_date }}"
-                                        class="form-control" >
+                                        class="form-control">
                                 </div>
                             </div>
 
@@ -136,7 +140,7 @@
                                 <div class="col-md-4"><label for="end_date">To</label></div>
                                 <div class="col-md-4">
                                     <input type="text" name="end_date" id="end_date" value="{{ $data->end_date }}"
-                                        class="form-control" >
+                                        class="form-control">
                                 </div>
                             </div>
 
@@ -159,7 +163,8 @@
                                 <div class="col-md-4"><label for="cover_status">Cover is Not Closed</label></div>
                                 <div class="col-md-4">
                                     <select name="cover_status" id="cover_status" class="form-control" required>
-                                        <option value="{{$data->cover_status}}" hidden>{{$data->cover_status}}</option>
+                                        <option value="{{ $data->cover_status }}" hidden>{{ $data->cover_status }}
+                                        </option>
                                         <option value="Yes">Yes</option>
                                         <option value="No">No</option>
                                     </select>
@@ -170,7 +175,8 @@
                                 <div class="col-md-4"><label for="vandalism_status">Vandalism</label></div>
                                 <div class="col-md-4">
                                     <select name="vandalism_status" id="vandalism_status" class="form-control" required>
-                                        <option value="{{ $data->vandalism_status }}" hidden>{{ $data->vandalism_status }}</option>
+                                        <option value="{{ $data->vandalism_status }}" hidden>
+                                            {{ $data->vandalism_status }}</option>
                                         <option value="Yes">Yes</option>
                                         <option value="No">No</option>
                                     </select>
@@ -180,19 +186,22 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="leaning_staus">Leaning</label></div>
                                 <div class="col-md-4">
-                                    <select name="leaning_staus" id="leaning_staus" class="form-control" required  onchange="leaningStatus(this)">
-                                        <option value="{{$data->leaning_staus}}" hidden >{{$data->leaning_staus}}</option>
+                                    <select name="leaning_staus" id="leaning_staus" class="form-control" required
+                                        onchange="leaningStatus(this)">
+                                        <option value="{{ $data->leaning_staus }}" hidden>{{ $data->leaning_staus }}
+                                        </option>
                                         <option value="Yes">Yes</option>
                                         <option value="No">No</option>
-                                       </select>
+                                    </select>
 
-                                    </div>
+                                </div>
                             </div>
 
                             <div class="row @if ($data->leaning_staus == 'No') d-none @endif " id="leaning-angle">
                                 <div class="col-md-4"><label for="leaning_angle">Leaning angle</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="leaning_angle" id="leaning_angle" value="{{ $data->leaning_angle }}" class="form-control">
+                                    <input type="text" name="leaning_angle" id="leaning_angle"
+                                        value="{{ $data->leaning_angle }}" class="form-control">
 
                                 </div>
                             </div>
@@ -205,7 +214,8 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label for="advertise_poster_status">Cleaning illegal ads/banners</label>
+                                <div class="col-md-4"><label for="advertise_poster_status">Cleaning illegal
+                                        ads/banners</label>
                                 </div>
                                 <div class="col-md-4">
                                     <input type="text" name="advertise_poster_status" id="advertise_poster_status"
@@ -227,8 +237,8 @@
                                 <div class="col-md-4 text-center mb-3">
                                     @if (file_exists(public_path($data->image_cover)) && $data->image_cover != '')
                                         <a href="{{ URL::asset($data->image_cover) }}" data-lightbox="roadtrip">
-                                            <img src="{{ URL::asset($data->image_cover) }}" alt="" height="70"
-                                                class="adjust-height ml-5  "></a>
+                                            <img src="{{ URL::asset($data->image_cover) }}" alt=""
+                                                height="70" class="adjust-height ml-5  "></a>
                                     @else
                                         <strong>No image found</strong>
                                     @endif
@@ -347,13 +357,14 @@
 @section('script')
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js"></script>
     <script>
+        const userBa = "{{ Auth::user()->ba }}";
         $(document).ready(function() {
 
 
             $("#myForm").validate();
-
-
-            getBa();
+            if (userBa == '') {
+                getBa();
+            }
         });
 
         function getBa() {

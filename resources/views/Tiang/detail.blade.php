@@ -49,7 +49,7 @@
                                 <h3>Info </h3>
 
                                 <div class="row">
-                                    <div class="col-md-4"><label for="ba">Ba</label></div>
+                                    <div class="col-md-4"><label for="ba">BA</label></div>
                                     <div class="col-md-4">
                                         <input class="form-control" value="{{ $data->ba }}" disabled>
                                     </div>

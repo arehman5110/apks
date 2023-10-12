@@ -23,7 +23,7 @@
 
         input,
         select {
-            color: black !important;
+            /* color: black !important; */
             margin-bottom: 0px !important;
             margin-top: 1rem;
         }
@@ -73,12 +73,15 @@
                                 <div class="col-md-4">
                                     <select name="zone" id="search_zone" class="form-control" required
                                         onchange="getBa()">
-
                                         <option value="{{ $data->zone }}" hidden>{{ $data->zone }}</option>
+                                        @if ( Auth::user()->ba == '' )
                                         <option value="W1">W1</option>
                                         <option value="B1">B1</option>
                                         <option value="B2">B2</option>
                                         <option value="B4">B4</option>
+                                        @endif
+                                        
+                                       
 
                                     </select>
                                 </div>
@@ -88,7 +91,7 @@
                                 <div class="col-md-4"><label for="ba">BA</label></div>
                                 <div class="col-md-4">
                                     <select name="ba" id="ba" class="form-control" required onchange="getWp(this)">
-                                        <option value="" hidden>select zone</option>
+                                        <option value="{{$data->ba}}" hidden>{{$data->ba}}</option>
 
                                     </select>
                                 </div>
@@ -449,13 +452,15 @@
 @section('script')
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js"></script>
     <script>
+        const userBa = "{{Auth::user()->ba}}";
         $(document).ready(function() {
 
 
             $("#myForm").validate();
-            getBa();
-
-
+            if (userBa == '') {
+                getBa();
+            }
+           
 
         });
 

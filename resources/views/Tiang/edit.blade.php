@@ -51,11 +51,13 @@
                                 <h3>Info </h3>
 
                                 <div class="row">
-                                    <div class="col-md-4"><label for="ba">Ba</label></div>
+                                    <div class="col-md-4"><label for="ba">BA</label></div>
                                     <div class="col-md-4"><select name="ba" id="ba" class="form-control"
                                             required>
-
-                                            <option value="{{ $data->ba }}" hidden>{{ $data->ba }}</option>
+                                           
+                                            <option value="{{ $data->ba }}" >{{ $data->ba }}</option>
+                                            
+                                            @if (Auth::user()->ba == '')
                                             <optgroup label="W1">
                                                 <option value="KUALA LUMPUR PUSAT">KL PUSAT</option>
                                             </optgroup>
@@ -74,6 +76,7 @@
                                                 <option value="BANGI">BANGI</option>
                                                 <option value="PUTRAJAYA & CYBERJAYA">PUTRAJAYA & CYBERJAYA</option>
                                             </optgroup>
+                                            @endif
 
 
                                         </select>

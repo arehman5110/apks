@@ -74,18 +74,22 @@
                                 <div class="col-md-4">
                                     <select name="zone" id="search_zone" class="form-control" required>
 
+                                        @if (Auth::user()->zone == '')
                                         <option value="" hidden>select zone</option>
                                         <option value="W1">W1</option>
                                         <option value="B1">B1</option>
                                         <option value="B2">B2</option>
                                         <option value="B4">B4</option>
+                                    @else
+                                        <option value="{{ Auth::user()->zone }}" hidden>{{ Auth::user()->zone }}</option>
+                                    @endif
 
                                     </select>
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="ba">Ba</label></div>
+                                <div class="col-md-4"><label for="ba">BA</label></div>
                                 <div class="col-md-4"><select name="ba_s" id="ba_s" class="form-control" required
                                         onchange="getWp(this)">
                                         <option value="" hidden>select zone</option>
@@ -281,4 +285,43 @@
 <script src="{{ URL::asset('map/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js') }}"></script>
 
  @include('partials.form-map-js')
+ <script>
+      const b1Options = [
+                    ['W1', 'KUALA LUMPUR PUSAT', 3.14925905877391, 101.754098819705],
+                    ['B1', 'PETALING JAYA', 3.1128074178475, 101.605270457169],
+                    ['B1', 'RAWANG', 3.47839445121726, 101.622905486475],
+                    ['B1', 'KUALA SELANGOR', 3.40703209426401, 101.317426926947],
+                    ['B2', 'KLANG', 3.08428642705789, 101.436185279023],
+                    ['B2', 'PELABUHAN KLANG', 2.98188527916042, 101.324234779569],
+                    ['B4', 'CHERAS', 3.14197346621987, 101.849883983416],
+                    ['B4', 'BANTING', 2.82111390453244, 101.505890775541],
+                    ['B4', 'BANGI',2.965810949933260,101.81881303103104 ],
+                    ['B4', 'PUTRAJAYA & CYBERJAYA', 2.92875032271019,101.675338316575]
+                ];
+                const userBa = "{{Auth::user()->ba}}";
+                $(document).ready(function() {
+       
+       
+
+       if (userBa !== '') {
+           getBaPoints(userBa)
+       }
+       
+    });
+
+      
+       function getBaPoints(param){
+           var baSelect = $('#ba_s')
+               baSelect.empty();
+
+               b1Options.map((data)=>{
+                   if (data[1] == param) {
+                       baSelect.append(`<option value="${data}">${data[1]}</option>`)
+                   }
+               });
+               let baVal = document.getElementById('ba_s');
+               getWp(baVal)
+       }
+
+ </script>
 @endsection
