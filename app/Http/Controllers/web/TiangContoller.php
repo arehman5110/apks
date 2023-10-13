@@ -52,13 +52,41 @@ class TiangContoller extends Controller
      */
     public function store(Request $request)
     {
+        // return $request;
 
         try {
 
             // $this->tiangRepository->store($request->all());
 
+            $destinationPath = 'assets/images/tiang/';
             
             $data = new Tiang();
+            foreach ($request->all() as $mainkey => $mainvalue) {
+                if (is_array($mainvalue)) {
+                    $arr = [];
+                    foreach ($mainvalue as $key => $file) {
+                        if (is_a($file, 'Illuminate\Http\UploadedFile') && $file->isValid()) {
+                            $uploadedFile = $file;
+                            $img_ext = $uploadedFile->getClientOriginalExtension();
+                            $filename = $key . '-' . strtotime(now()) . '.' . $img_ext;
+                            $uploadedFile->move($destinationPath, $filename);
+                            $arr[$key] = $destinationPath.$filename;
+                        }
+                    }
+                    $data[$mainkey] = json_encode($arr);
+                }else{
+
+                    if (is_a($mainvalue, 'Illuminate\Http\UploadedFile') && $mainvalue->isValid()) {
+                        $uploadedFile = $mainvalue;
+                        $img_ext = $uploadedFile->getClientOriginalExtension();
+                        $filename = $mainkey . '-' . strtotime(now()) . '.' . $img_ext;
+                        $uploadedFile->move($destinationPath, $filename);
+                        $data[$mainkey] = $destinationPath.$filename ;
+                    }
+        
+                }
+            }
+
             $data->ba = $request->ba;
             $data->name_contractor = $request->name_contractor;
             $data->start_date = $request->start_date;
@@ -102,30 +130,20 @@ class TiangContoller extends Controller
 
             $data->arus_pada_tiang = $request->arus_pada_tiang;
 
-            $destinationPath = 'assets/images/tiang/';
-            foreach ($request->all() as $key => $file) {
-                // Check if the input is a file and it is valid
-                if ($request->hasFile($key) && $request->file($key)->isValid()) {
-                    $uploadedFile = $request->file($key);
-                    $img_ext = $uploadedFile->getClientOriginalExtension();
-                    $filename = $key . '-' . strtotime(now()) . '.' . $img_ext;
-                    $uploadedFile->move($destinationPath, $filename);
-                    $data->{$key} = $destinationPath . $filename;
-                }
+           
+
+           
+            if ($request->lat != '' && $request->log != '') {
+                $data->geom = DB::raw("ST_GeomFromText('POINT(".$request->log." ".$request->lat.")',4326)");
             }
 
-
-
-            $data->geom = DB::raw("ST_GeomFromText('POINT(".$request->log." ".$request->lat.")',4326)");
-
-
             $data->save();
-
+return 'save';
             return redirect()
                 ->route('tiang-talian-vt-and-vr.index')
                 ->with('success', 'Form Intserted');
         } catch (\Throwable $th) {
-            // return $th->getMessage();
+            return $th->getMessage();
             return redirect()
                 ->route('tiang-talian-vt-and-vr.index')
                 ->with('failed', 'Form Intserted Failed');
