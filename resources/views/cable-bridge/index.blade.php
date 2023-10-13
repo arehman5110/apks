@@ -24,7 +24,7 @@
                 </div>
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
-                        <li class="breadcrumb-item"><a href="{{route('cable-bridge.index')}}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('cable-bridge.index',app()->getLocale())}}">Home</a></li>
                         <li class="breadcrumb-item active">index</li>
                     </ol>
                 </div>
@@ -47,9 +47,9 @@
                         <div class="card-header d-flex justify-content-between ">
                             <p class="mb-0">Cable Bridge</p>
                             <div class="d-flex ml-auto">
-                            <a href="{{route('cable-bridge.create')}}"><button class="btn text-white btn-success  btn-sm mr-4"  >Add Cable Bridge</button></a>
+                            <a href="{{route('cable-bridge.create',app()->getLocale())}}"><button class="btn text-white btn-success  btn-sm mr-4"  >Add Cable Bridge</button></a>
 
-                           <a href="{{route('generate-cable-bridge-excel')}}"> <button class="btn text-white  btn-sm mr-4" style="background-color: #708090">QR Cable Bridge</button></a>
+                           <a href="{{route('generate-cable-bridge-excel',app()->getLocale())}}"> <button class="btn text-white  btn-sm mr-4" style="background-color: #708090">QR Cable Bridge</button></a>
                         </div>
                         </div>
                         <div class="card-body">
@@ -93,14 +93,14 @@
                                                     </button>
                                                     <div class="dropdown-menu" role="menu">
 
-                                                        <form action="{{ route('cable-bridge.show', $data->id) }}"
+                                                        <form action="{{ route('cable-bridge.show', [app()->getLocale(),$data->id]) }}"
                                                             method="get">
                                                             <button type="submit"
                                                                 class="dropdown-item pl-3 w-100 text-left">Detail</button>
                                                         </form>
 
                                                         <form
-                                                            action="{{ route('cable-bridge.edit', $data->id) }}"
+                                                            action="{{ route('cable-bridge.edit', [app()->getLocale(),$data->id]) }}"
                                                             method="get">
                                                             <button type="submit"
                                                                 class="dropdown-item pl-3 w-100 text-left">Edit</button>
@@ -181,7 +181,7 @@
                 var button = $(event.relatedTarget);
                 var id = button.data('id');
                 var modal = $(this);
-                $('#remove-foam').attr('action', '/cable-bridge/' + id)
+                $('#remove-foam').attr('action', '/{{app()->getLocale()}}/cable-bridge/' + id)
             });
 
         });

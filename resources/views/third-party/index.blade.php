@@ -194,9 +194,10 @@
             });
             $('#myModal').on('show.bs.modal', function(event) {
                 var button = $(event.relatedTarget);
+                var langs='{{ app()->getLocale() }}'    
                 var id = button.data('id');
                 var modal = $(this);
-                $('#remove-foam').attr('action', '/third-party-digging/' + id)
+                $('#remove-foam').attr('action', '/'+langs+'/third-party-digging/' + id)
             });
 
         });

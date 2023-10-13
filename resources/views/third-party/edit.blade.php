@@ -44,7 +44,7 @@
                 </div>
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
-                        <li class="breadcrumb-item"><a href="{{route('third-party-digging.index')}}">index</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('third-party-digging.index',app()->getLocale())}}">index</a></li>
                         <li class="breadcrumb-item active">edit</li>
                     </ol>
                 </div>
@@ -62,7 +62,7 @@
                     <div class=" ">
                         <h3 class="text-center p-2"></h3>
 
-                        <form action="{{ route('third-party-digging.update' , $data->id)  }} " id="myForm" method="POST"
+                        <form action="{{ route('third-party-digging.update' ,[app()->getLocale(), $data->id])  }} " id="myForm" method="POST"
                             enctype="multipart/form-data">
 
                             @method('PATCH')

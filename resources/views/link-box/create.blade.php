@@ -46,7 +46,7 @@
                 </div>
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
-                        <li class="breadcrumb-item"><a href="{{ route('link-box-pelbagai-voltan.index') }}">index</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('link-box-pelbagai-voltan.index',app()->getLocale()) }}">index</a></li>
                         <li class="breadcrumb-item active">edit</li>
                     </ol>
                 </div>
@@ -64,7 +64,7 @@
                     <div class=" ">
                         <h3 class="text-center p-2"></h3>
 
-                        <form action="{{ route('link-box-pelbagai-voltan.store') }} " id="myForm" method="POST"
+                        <form action="{{ route('link-box-pelbagai-voltan.store', app()->getLocale()) }} " id="myForm" method="POST"
                             enctype="multipart/form-data" onsubmit="return submitFoam()">
                             @csrf
 

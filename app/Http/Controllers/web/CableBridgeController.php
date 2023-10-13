@@ -89,12 +89,12 @@ class CableBridgeController extends Controller
             $data->save();
 
             return redirect()
-                ->route('cable-bridge.index')
+                ->route('cable-bridge.index',app()->getLocale())
                 ->with('success', 'Form Intserted');
         } catch (\Throwable $th) {
             return $th->getMessage();
             return redirect()
-                ->route('cable-bridge.index')
+                ->route('cable-bridge.index',app()->getLocale())
                 ->with('failed', 'Form Intserted Failed');
         }
     }
@@ -105,7 +105,7 @@ class CableBridgeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($language,$id)
     {
         //
         $data = CableBridge::find($id);
@@ -118,7 +118,7 @@ class CableBridgeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($language,$id)
     {
         //
         $data = CableBridge::find($id);
@@ -132,7 +132,7 @@ class CableBridgeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,$language, $id)
     {
         //
 
@@ -175,12 +175,12 @@ class CableBridgeController extends Controller
             $data->save();
 
             return redirect()
-                ->route('cable-bridge.index')
+                ->route('cable-bridge.index',app()->getLocale())
                 ->with('success', 'Form Update');
         } catch (\Throwable $th) {
             return $th->getMessage();
             return redirect()
-                ->route('cable-bridge.index')
+                ->route('cable-bridge.index',app()->getLocale())
                 ->with('failed', 'Form Intserted Failed');
         }
     }
@@ -191,18 +191,18 @@ class CableBridgeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($language,$id)
     {
         try {
             CableBridge::find($id)->delete();
 
             return redirect()
-                ->route('cable-bridge.index')
+                ->route('cable-bridge.index',app()->getLocale())
                 ->with('success', 'Recored Removed');
         } catch (\Throwable $th) {
             // return $th->getMessage();
             return redirect()
-                ->route('cable-bridge.index')
+                ->route('cable-bridge.index',app()->getLocale())
                 ->with('failed', 'Request Failed');
         }
     }
