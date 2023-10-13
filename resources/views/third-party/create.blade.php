@@ -454,7 +454,7 @@
 
             var zone = $('#search_zone').val();
             $.ajax({
-                url: `/get-work-package/${splitVal[1]}/${zone}`,
+                url: `/{{app()->getLocale()}}/get-work-package/${splitVal[1]}/${zone}`,
                 dataType: 'JSON',
                 method: 'GET',
                 async: false,

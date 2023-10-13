@@ -78,17 +78,17 @@
                             </button>
                             <div class="dropdown-menu" role="menu">
                                 @if ($rec->wp_status != 'approved')
-                                <a href="/sbum-status/{{$rec->id}}/approved"> <button type="button" class="dropdown-item pl-3 w-100 text-left"
+                                <a href="/{{app()->getLocale()}}/sbum-status/{{$rec->id}}/approved"> <button type="button" class="dropdown-item pl-3 w-100 text-left"
                                         value="approved"
                                         onclick="return confirm('are you sure')">Approved</button></a>
                                 @endif
                                 @if ($rec->wp_status != 'rejected')
-                                   <a href="/sbum-status/{{$rec->id}}/rejected"> <button type="button" class="dropdown-item pl-3 w-100 text-left"
+                                   <a href="/{{app()->getLocale()}}/sbum-status/{{$rec->id}}/rejected"> <button type="button" class="dropdown-item pl-3 w-100 text-left"
 
                                     onclick="return confirm('are you sure') " >Rejected</button></a>
                                 @endif
                                 @if ($rec->wp_status != 'pending')
-                                <a href="/sbum-status/{{$rec->id}}/pending">   <button type="button" class="dropdown-item pl-3 w-100 text-left"
+                                <a href="/{{app()->getLocale()}}/sbum-status/{{$rec->id}}/pending">   <button type="button" class="dropdown-item pl-3 w-100 text-left"
                                         value="pending"
                                         onclick="return confirm('are you sure') ">Pending</button></a>
                                 @endif
@@ -144,17 +144,17 @@
                                     </button>
                                     <div class="dropdown-menu" role="menu">
                                         @if ($rec->wp_status != 'approved')
-                                        <a href="/sbum-status/{{$rec->id}}/approved"> <button type="button" class="dropdown-item pl-3 w-100 text-left"
+                                        <a href="/{{app()->getLocale()}}/sbum-status/{{$rec->id}}/approved"> <button type="button" class="dropdown-item pl-3 w-100 text-left"
                                                 value="approved"
                                                 onclick="return confirm('are you sure')">Approved</button></a>
                                         @endif
                                         @if ($rec->wp_status != 'rejected')
-                                           <a href="/sbum-status/{{$rec->id}}/rejected"> <button type="button" class="dropdown-item pl-3 w-100 text-left"
+                                           <a href="/{{app()->getLocale()}}/sbum-status/{{$rec->id}}/rejected"> <button type="button" class="dropdown-item pl-3 w-100 text-left"
 
                                             onclick="return confirm('are you sure') " >Rejected</button></a>
                                         @endif
                                         @if ($rec->wp_status != 'pending')
-                                        <a href="/sbum-status/{{$rec->id}}/pending">   <button type="button" class="dropdown-item pl-3 w-100 text-left"
+                                        <a href="/{{app()->getLocale()}}/sbum-status/{{$rec->id}}/pending">   <button type="button" class="dropdown-item pl-3 w-100 text-left"
                                                 value="pending"
                                                 onclick="return confirm('are you sure') ">Pending</button></a>
                                         @endif

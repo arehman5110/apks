@@ -114,7 +114,7 @@
                                                     @elseif($data->wp_status == 'pending')
                                                         <span class="badge badge-secondary">Pending </span>
                                                     @else
-                                                        <a href="/send-to-tnbes/{{ $data->id }}"><button
+                                                        <a href="/{{app()->getLocale()}}/send-to-tnbes/{{ $data->id }}"><button
                                                                 class="btn btn-sm btn-primary">Send to SBUM</button></a>
                                                     @endif
                                                 </td>
