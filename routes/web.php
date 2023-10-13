@@ -69,13 +69,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/get-all-work-packages', [MapController::class, 'allWP'])->name('get-all-work-packages');
     Route::get('/proxy/{url}', [MapController::class, 'proxy']);
 
-    Route::post('/save-work-package', [App\Http\Controllers\web\map\WPController::class, 'saveWorkPackage']);
-    Route::post('/save-road', [App\Http\Controllers\web\map\RoadController::class, 'saveRoad']);
+    Route::post('/save-work-package', [WPController::class, 'saveWorkPackage']);
+    Route::post('/save-road', [RoadController::class, 'saveRoad']);
 
-    Route::post('/get-raod-info', [App\Http\Controllers\web\map\WPController::class, 'getRoadInfo']);
-    Route::post('/get-ba-info', [App\Http\Controllers\web\map\WPController::class, 'getBaInfo']);
-    Route::get('/get-work-package/{ba}/{zone}', [App\Http\Controllers\web\map\WPController::class, 'selectWP']);
-    Route::get('/getStats/{wp}', [App\Http\Controllers\web\map\WPController::class, 'getStats']);
+    Route::post('/get-raod-info', [WPController::class, 'getRoadInfo']);
+    Route::post('/get-ba-info', [WPController::class, 'getBaInfo']);
+    Route::get('/get-work-package/{ba}/{zone}', [WPController::class, 'selectWP'])->name('get-work-package');
+    Route::get('/getStats/{wp}', [WPController::class, 'getStats']);
 
     Route::get('/send-to-tnbes/{id}/', [StatusController::class, 'sendToTnbes']);
     Route::get('/sbum-status/{id}/{status}', [StatusController::class, 'statusSUBM']);

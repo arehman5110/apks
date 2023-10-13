@@ -103,12 +103,12 @@ class ThirdPartyDiggingController extends Controller
             $data->save();
 
             return redirect()
-                ->route('third-party-digging.index')
+                ->route('third-party-digging.index',app()->getLocale())
                 ->with('success', 'Form Intserted');
         } catch (\Throwable $th) {
             // return $th->getMessage();
             return redirect()
-                ->route('third-party-digging.index')
+                ->route('third-party-digging.index',app()->getLocale())
                 ->with('failed', 'Form Intserted Failed');
         }
     }
@@ -207,10 +207,10 @@ class ThirdPartyDiggingController extends Controller
             $data->update();
 
             return redirect()
-                ->route('third-party-digging.index')
+                ->route('third-party-digging.index',app()->getLocale())
                 ->with('success', 'Form Intserted');
         } catch (\Throwable $th) {
-            // return $th->getMessage();
+             return $th->getMessage();
             return redirect()
                 ->route('third-party-digging.index',app()->getLocale())
                 ->with('failed', 'Form Intserted Failed');

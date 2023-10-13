@@ -233,7 +233,7 @@
                     </ul>
                 </li>
 
-                <li class="nav-item ">
+                {{-- <li class="nav-item ">
                     <a href="#" class="nav-link">
                         <i class="fas fa-road"></i>
                         <p>
@@ -255,7 +255,7 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
 
 
 {{--
