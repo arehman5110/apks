@@ -65,8 +65,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/map-1', [MapController::class, 'index']);
-    Route::get('/get-all-work-packages', [MapController::class, 'allWP']);
+    Route::get('/map-1', [MapController::class, 'index'])->name('map-1');
+    Route::get('/get-all-work-packages', [MapController::class, 'allWP'])->name('get-all-work-packages');
     Route::get('/proxy/{url}', [MapController::class, 'proxy']);
 
     Route::post('/save-work-package', [App\Http\Controllers\web\map\WPController::class, 'saveWorkPackage']);
@@ -93,18 +93,18 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('tiang-talian-vt-and-vr', TiangContoller::class);
     Route::get('generate-tiang-talian-vt-and-vr-excel', [TiangExcelController::class, 'generateTiangExcel'])->name('generate-tiang-talian-vt-and-vr-excel');
-    Route::view('/tiang-talian-vt-and-vr-map', 'Tiang.map');
+    Route::view('/tiang-talian-vt-and-vr-map', 'Tiang.map')->name('tiang-talian-vt-and-vr-map');
 
     //// Link Box
     Route::resource('link-box-pelbagai-voltan', LinkBoxController::class);
     Route::get('generate-link-box-excel', [LinkBoxExcelController::class, 'generateLinkBoxExcel'])->name('generate-link-box-excel');
-    Route::view('/link-box-pelbagai-voltan-map', 'link-box.map');
+    Route::view('/link-box-pelbagai-voltan-map', 'link-box.map')->name('link-box-pelbagai-voltan-map');
 
     //// Cable Bridge
 
     Route::resource('cable-bridge', CableBridgeController::class);
     Route::get('generate-cable-bridge-excel', [CableBridgeExcelController::class, 'generateCableBridgeExcel'])->name('generate-cable-bridge-excel');
-    Route::view('/cable-bridge-map', 'cable-bridge.map');
+    Route::view('/cable-bridge-map', 'cable-bridge.map')->name('cable-bridge-map');
 
     ////third party digging routes
     Route::resource('third-party-digging', ThirdPartyDiggingController::class);
@@ -112,12 +112,12 @@ Route::middleware('auth')->group(function () {
 
     ////substation routes
     Route::resource('substation', SubstationController::class);
-    Route::view('/substation-map', 'substation.map');
+    Route::view('/substation-map', 'substation.map')->name('substation-map');
     Route::get('generate-substation-excel', [SubstationExcelController::class, 'generateSubstationExcel'])->name('generate-substation-excel');
 
     ////feeder-piller routes
     Route::resource('feeder-pillar', FPController::class);
-    Route::view('/feeder-pillar-map', 'feeder-pillar.map');
+    Route::view('/feeder-pillar-map', 'feeder-pillar.map')->name('feeder-pillar-map');
     Route::get('generate-feeder-pillar-excel', [FeederPillarExcelController::class, 'generateFeederPillarExcel'])->name('generate-feeder-pillar-excel');
 
 //PO routes
@@ -126,7 +126,7 @@ Route::resource('po', POController::class);
 
 
     // Patrolling
-    Route::get('/create-patrolling',[PatrollingController::class,'create']);
+    Route::get('/create-patrolling',[PatrollingController::class,'create'])->name('create-patrolling');
     Route::post('/patrolling-update',[PatrollingController::class,'updateRoads']);
 
 
@@ -145,15 +145,15 @@ Route::resource('po', POController::class);
         Route::resource('team-users', TeamUsersController::class);
     });
 
-    Route::view('/dashboard', 'dashboard');
+    Route::view('/dashboard', 'dashboard')->name('dashboard');  ;
 
-    Route::view('/map-2', 'map');
+    Route::view('/map-2', 'map')->name('map-2');
 
     Route::get('/test-pagination/{id}/{status}',[MapController::class,'teswtpagination']);
 });
 Route::view('/generate-pdf-for-notice','PDF.notice');
 
 // Route::get('/third-party-digging-mobile/{id}',[ThirdPartyDiggingController::class,'show']);
-Route::get('/get-work-package-detail/{id}', [WPController::class, 'detail']);
+Route::get('/get-work-package-detail/{id}', [WPController::class, 'detail'])->name('get-work-package-detail');
 require __DIR__ . '/auth.php';
 });

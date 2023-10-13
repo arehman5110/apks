@@ -40,15 +40,16 @@
                     {{ __('Profile') }}
                 </x-dropdown-link>
 
-                {{-- @foreach (config('app.available_locales') as $locale)
-                <x-dropdown-link :href="route(request()->route()->getName(), $locale)">
+
+                @foreach (config('app.available_locales') as $locale)
+                <x-dropdown-link :href="route(request()->route()->getName(),[$locale,''])">
                     <span @if (app()->getLocale() == $locale) 
                         style="font-weight: bold; text-decoration: underline" 
                         @endif>
                         {{ strtoupper($locale) }}
                     </span>
                 </x-dropdown-link>
-                @endforeach --}}
+                @endforeach
 
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout', app()->getLocale()) }}">

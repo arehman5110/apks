@@ -20,15 +20,16 @@ class StatusController extends Controller
 
 
 
-    public function statusSUBM($id, $status)
+    public function statusSUBM($language,$id, $status)
     {
         try {
             WorkPackage::find($id)->update(['wp_status' => $status]);
+           
             return redirect()
                 ->back()
                 ->with('success', 'Status Update Successfully');
         } catch (\Throwable $th) {
-            // return $th->getMessage();
+             return $th->getMessage();
             return redirect()
                 ->back()
                 ->with('failed', 'Request Failed');

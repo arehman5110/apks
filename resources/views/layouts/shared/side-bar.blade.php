@@ -27,7 +27,7 @@
 
                 @if (Auth::user()->is_admin != '1')
                 <li class="nav-item">
-                    <a href="/dashboard" class="nav-link ">
+                    <a href="/{{app()->getLocale()}}/dashboard" class="nav-link ">
                         <i class="fas fa-tachometer-alt"></i>
                         <p>Dashboard</p>
                     </a>
