@@ -130,7 +130,29 @@
                         <div class="row">
                             <div class="col-md-4"><label for="end_date">Gate Status</label></div>
                             <div class="col-md-4">
-                                <input type="text" readonly value="{{ $data->gate_status }}" class="form-control" required>
+                                <div class="  d-flex">
+                                    <input type="checkbox" name="gate_status[locked]"  {{substaionCheckBox('locked', $data->gate_status)}} id="gate_status_locked" disabled>
+                                    <label for="gate_status_locked">Locked</label>
+                                </div>
+                                <div class=" d-flex">
+                                    <input type="checkbox" name="gate_status[unlocked]" {{substaionCheckBox('unlocked', $data->gate_status)}} id="gate_status_unlocked" disabled>
+                                    <label for="gate_status_unlocked">Unlocked</label>
+                                </div>
+                                <div class=" d-flex">
+                                    <input type="checkbox" name="gate_status[demaged]" {{substaionCheckBox('demaged', $data->gate_status)}} id="gate_status_demaged" disabled>
+                                    <label for="gate_status_demaged">Demaged</label>
+                                </div>
+
+                                    <div class="d-flex">
+                                    <input type="checkbox" name="gate_status[other]" {{substaionCheckBox('other', $data->gate_status)}} id="gate_status_others" disabled onclick="getStatus(this)">
+                                    <label for="gate_status_others">Others</label>
+
+
+                                </div>
+                                <input type="text" name="gate_status[other_value]" id="gate_status_other" class="form-control  @if(substaionCheckBox('other', $data->gate_status)   !== 'checked' ) d-none @endif" value="@if (substaionCheckBox('other', $data->gate_status) == 'checked')
+{{$data->gate_status->other_value}}
+                                @endif"  placeholder="please enter other gate defect" disabled >
+
                             </div>
                         </div>
 

@@ -58,12 +58,32 @@ class FPController extends Controller
 
             $data->size = $request->size;
             $data->coordinate = $request->coordinate;
-            $data->gate_status = $request->gate_status == 'Others' ? $request->other_gate_status : $request->gate_status;
+
             $data->vandalism_status = $request->vandalism_status;
             $data->leaning_staus = $request->leaning_staus;
             $data->leaning_angle = $request->leaning_angle;
             $data->rust_status = $request->rust_status;
             $data->advertise_poster_status = $request->advertise_poster_status;
+
+            $gate = ['locked' => 'false', 'unlocked' => 'false', 'demaged' => 'false', 'other'=>'false', 'other_value' => ''];
+
+            if ($request->has('gate_status')) {
+                $gateStatus = $request->gate_status;
+
+                foreach ($gate as $key => $value) {
+                    if (array_key_exists($key, $gateStatus)) {
+                        if ($key == 'other_value') {
+                            $gate['other_value'] =$request->gate_status['other_value'];
+                        }else{
+                             $gate[$key] = 'true';
+                        }
+
+                    }
+                }
+            }
+
+            $data->gate_status = json_encode($gate) ;
+
             $destinationPath = 'assets/images/cable-bridge/';
 
             foreach ($request->all() as $key => $file) {
@@ -101,7 +121,15 @@ class FPController extends Controller
     public function show($language,$id)
     {
         $data = FeederPillar::find($id);
-        return view('feeder-pillar.show', ['data' => $data]);
+        if ($data) {
+            $data->gate_status = json_decode($data->gate_status);
+
+
+            return view('feeder-pillar.show', ['data' => $data]);
+        }
+        return abort('404');
+
+
     }
 
     /**
@@ -113,7 +141,15 @@ class FPController extends Controller
     public function edit($language,$id)
     {
         $data = FeederPillar::find($id);
-        return view('feeder-pillar.edit', ['data' => $data]);
+        if ($data) {
+            $data->gate_status = json_decode($data->gate_status);
+
+
+            return view('feeder-pillar.edit', ['data' => $data]);
+        }
+        return abort('404');
+
+
     }
 
     /**
@@ -135,15 +171,32 @@ class FPController extends Controller
             $data->team = $request->team;
             $data->visit_date = $request->visit_date;
             $data->patrol_time = $combinedDateTime;
-           
+
             $data->size = $request->size;
             $data->coordinate = $request->coordinate;
-            $data->gate_status = $request->gate_status == 'Others' ? $request->other_gate_status : $request->gate_status;
             $data->leaning_angle = $request->leaning_angle;
             $data->vandalism_status = $request->vandalism_status;
             $data->leaning_staus = $request->leaning_staus;
             $data->rust_status = $request->rust_status;
             $data->advertise_poster_status = $request->advertise_poster_status;
+            $gate = ['locked' => 'false', 'unlocked' => 'false', 'demaged' => 'false', 'other'=>'false', 'other_value' => ''];
+
+            if ($request->has('gate_status')) {
+                $gateStatus = $request->gate_status;
+
+                foreach ($gate as $key => $value) {
+                    if (array_key_exists($key, $gateStatus)) {
+                        if ($key == 'other_value') {
+                            $gate['other_value'] =$request->gate_status['other_value'];
+                        }else{
+                             $gate[$key] = 'true';
+                        }
+
+                    }
+                }
+            }
+
+            $data->gate_status = json_encode($gate) ;
             $destinationPath = 'assets/images/cable-bridge/';
 
             foreach ($request->all() as $key => $file) {

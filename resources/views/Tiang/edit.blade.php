@@ -130,7 +130,7 @@
                                 <div class="row">
                                     <div class="col-md-4"><label for="name_contractor">Contractor</label></div>
                                     <div class="col-md-4"><input type="text" name="name_contractor"
-                                            value="{{ $data->name_contractor }}" id="name_contractor" class="form-control"
+                                            value="{{ $data->name_contractor }}" id="name_contractor" class="form-control" readonly
                                             required></div>
                                 </div>
 
@@ -1011,7 +1011,7 @@
                                                         class="form-control">
                                                 </td>
                                                 <td>
-                                                    @if ($data->tapak_road_img != '' && file_exists(public_path($data->tapak_road_img)) ) 
+                                                    @if ($data->tapak_road_img != '' && file_exists(public_path($data->tapak_road_img)) )
                                                     <a href="{{ URL::asset($data->tapak_road_img)}}" data-lightbox="roadtrip">
                                                        <img src="{{ URL::asset($data->tapak_road_img)}}" alt="" class="adjust-height " style="height:30px; width:30px !important">
                                                    </a>
@@ -1030,7 +1030,7 @@
                                                         class="form-control">
                                                 </td>
                                                 <td>
-                                                     @if ($data->tapak_sidewalk_img != '' && file_exists(public_path($data->tapak_sidewalk_img)) ) 
+                                                     @if ($data->tapak_sidewalk_img != '' && file_exists(public_path($data->tapak_sidewalk_img)) )
                                                      <a href="{{ URL::asset($data->tapak_sidewalk_img)}}" data-lightbox="roadtrip">
                                                         <img src="{{ URL::asset($data->tapak_sidewalk_img)}}" alt="" class="adjust-height " style="height:30px; width:30px !important">
                                                     </a>
@@ -1049,7 +1049,7 @@
                                                         id="vehicle_entry-img" class="form-control">
                                                 </td>
                                                 <td>
-                                                    @if ($data->tapak_no_vehicle_entry_img != '' && file_exists(public_path($data->tapak_no_vehicle_entry_img)) ) 
+                                                    @if ($data->tapak_no_vehicle_entry_img != '' && file_exists(public_path($data->tapak_no_vehicle_entry_img)) )
                                                     <a href="{{ URL::asset($data->tapak_no_vehicle_entry_img)}}" data-lightbox="roadtrip">
                                                        <img src="{{ URL::asset($data->tapak_no_vehicle_entry_img)}}" alt="" class="adjust-height " style="height:30px; width:30px !important">
                                                    </a>
@@ -1070,7 +1070,7 @@
                                                         class="form-control">
                                                 </td>
                                                 <td>
-                                                    @if ($data->kawasan_bend_img != '' && file_exists(public_path($data->kawasan_bend_img)) ) 
+                                                    @if ($data->kawasan_bend_img != '' && file_exists(public_path($data->kawasan_bend_img)) )
                                                     <a href="{{ URL::asset($data->kawasan_bend_img)}}" data-lightbox="roadtrip">
                                                        <img src="{{ URL::asset($data->kawasan_bend_img)}}" alt="" class="adjust-height " style="height:30px; width:30px !important">
                                                    </a>
@@ -1088,7 +1088,7 @@
                                                         class="form-control">
                                                 </td>
                                                 <td>
-                                                    @if ($data->kawasan_road_img != '' && file_exists(public_path($data->kawasan_road_img)) ) 
+                                                    @if ($data->kawasan_road_img != '' && file_exists(public_path($data->kawasan_road_img)) )
                                                     <a href="{{ URL::asset($data->kawasan_road_img)}}" data-lightbox="roadtrip">
                                                        <img src="{{ URL::asset($data->kawasan_road_img)}}" alt="" class="adjust-height " style="height:30px; width:30px !important">
                                                    </a>
@@ -1106,7 +1106,7 @@
                                                         class="form-control">
                                                 </td>
                                                 <td>
-                                                    @if ($data->kawasan_forest_img != '' && file_exists(public_path($data->kawasan_forest_img)) ) 
+                                                    @if ($data->kawasan_forest_img != '' && file_exists(public_path($data->kawasan_forest_img)) )
                                                     <a href="{{ URL::asset($data->kawasan_forest_img)}}" data-lightbox="roadtrip">
                                                        <img src="{{ URL::asset($data->kawasan_forest_img)}}" alt="" class="adjust-height " style="height:30px; width:30px !important">
                                                    </a>
@@ -1124,7 +1124,7 @@
                                                         class="form-control">
                                                 </td>
                                                 <td>
-                                                    @if ($data->kawasan_other_img != '' && file_exists(public_path($data->kawasan_other_img)) ) 
+                                                    @if ($data->kawasan_other_img != '' && file_exists(public_path($data->kawasan_other_img)) )
                                                     <a href="{{ URL::asset($data->kawasan_other_img)}}" data-lightbox="roadtrip">
                                                        <img src="{{ URL::asset($data->kawasan_other_img)}}" alt="" class="adjust-height " style="height:30px; width:30px !important">
                                                    </a>
@@ -1180,7 +1180,7 @@
                             {{-- END Heigh Clearance (4) --}}
 
 
-                            
+
                             <h3></h3>
 
 
@@ -1213,7 +1213,7 @@
                                                 <label for="arus_pada_tiang_amp">(Amp)</label>
                                                 <input type="radio" name="arus_pada_tiang_amp" id="arus_pada_tiang_amp"
                                                     class="form-control" value="{{$data->arus_pada_tiang_amp}}" required>
-                                                
+
                                             </div>
                                         </div>
                                     </div>
@@ -1309,11 +1309,11 @@
                 if (this.value == 'yes') {
                     if($('#arus_pada_tiang_amp_div').hasClass('d-none')){
                         $('#arus_pada_tiang_amp_div').removeClass('d-none');
-                    }  
+                    }
                 }else{
                     if(!$('#arus_pada_tiang_amp_div').hasClass('d-none')){
                         $('#arus_pada_tiang_amp_div').addClass('d-none');
-                    }  
+                    }
                 }
             })
 

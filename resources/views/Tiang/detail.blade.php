@@ -11,6 +11,34 @@
             min-width: 16px !important;
             margin-right: 12px;
         }
+
+        input[type='file'],
+        table input {
+            margin: 0px !important;
+        }
+
+        table label {
+            font-size : 14px !important;
+            font-weight: 400 !important;
+            margin-left: 10px !important;
+            margin-bottom: 0px !important
+        }
+        th{font-size: 14px !important;}
+        th,td{padding: 6px 16px !important}
+        table  , input[type='file']{width: 90% !important;}
+
+        table input[type="file"]{
+            font-size: 11px !important;
+            height: 33px !important;
+        }
+        td.d-flex{
+            border-bottom:0px !important;
+            border-left:0px !important;
+            border-right:0px !important;
+        }
+        textarea{border: 1px solid #999999 !important;}
+        .form-input .card{border:1px solid black !important;
+        border-radius: 0px !important}
     </style>
 @endsection
 
@@ -254,7 +282,7 @@
                                                 <label for="cracked"> Cracked</label>
 
                                             </td>
-                                           
+
                                             <td>
                                                 {!! getImage(checkCheckBox('cracked', $data->tiang_defect), $data->tiang_defect_image, 'cracked') !!}
 
@@ -267,7 +295,7 @@
                                                     class="form-check">
                                                 <label for="leaning"> Leaning</label>
                                             </td>
-                                           
+
                                             <td>
                                                 {!! getImage(checkCheckBox('leaning', $data->tiang_defect), $data->tiang_defect_image, 'leaning') !!}
                                             </td>
@@ -283,7 +311,7 @@
                                                 <label for="dim"> No. Dim Post / None </label>
 
                                             </td>
-                                           
+
                                             <td>
                                                 {!! getImage($checkbox_dim, $data->tiang_defect_image, 'dim') !!}
                                             </td>
@@ -295,11 +323,11 @@
                                         <tr>
                                             <td class="d-flex">
                                                 <input type="checkbox" name="tiang_defect[creepers]" id="creepers" disabled
-                                                    $checkbox_creepers class="form-check">
+                                                  {{checkCheckBox('creepers', $data->tiang_defect)}} class="form-check">
                                                 <label for="creepers"> Creepers </label>
 
                                             </td>
-                                           
+
                                             <td>
                                                 {!! getImage($checkbox_creepers, $data->tiang_defect_image, 'creepers') !!}
                                             </td>
@@ -314,7 +342,7 @@
                                                     {{ $checkbox }} class="form-check">
                                                 <label for="other_tiang_defect"> Others </label>
                                             </td>
-                                           
+
                                             <td>
 
                                                 {!! getImage(checkCheckBox('other', $data->tiang_defect), $data->tiang_defect_image, 'other') !!}
@@ -332,7 +360,7 @@
                                                     class="form-check" {{ checkCheckBox('joint', $data->talian_defect) }}>
                                                 <label for="joint"> Joint</label>
                                             </td>
-                                          
+
                                             <td>
                                                 {!! getImage(checkCheckBox('joint', $data->talian_defect), $data->talian_defect_image, 'joint') !!}
 
@@ -345,7 +373,7 @@
                                                     {{ checkCheckBox('need_rentis', $data->talian_defect) }}>
                                                 <label for="need_rentis"> Need Rentis</label>
                                             </td>
-                                           
+
                                             <td>
                                                 {!! getImage(checkCheckBox('need_rentis', $data->talian_defect), $data->talian_defect_image, 'need_rentis') !!}
 
@@ -359,7 +387,7 @@
                                                     {{ checkCheckBox('ground', $data->talian_defect) }}>
                                                 <label for="ground"> Does Not Comply With Ground Clearance</label>
                                             </td>
-                                           
+
                                             <td>
                                                 {!! getImage(checkCheckBox('ground', $data->talian_defect), $data->talian_defect_image, 'ground') !!}
 
@@ -373,7 +401,7 @@
                                                     {{ checkCheckBox('other', $data->talian_defect) }} class="form-check">
                                                 <label for="other_talian_defect"> Others </label>
                                             </td>
-                                           
+
                                             <td>
                                                 {!! getImage(checkCheckBox('other', $data->talian_defect), $data->talian_defect_image, 'other') !!}
 
@@ -391,7 +419,7 @@
                                                     {{ checkCheckBox('breaking', $data->umbang_defect) }}>
                                                 <label for="umbang_breaking"> Sagging/Breaking</label>
                                             </td>
-                                           
+
                                             <td>
                                                 {!! getImage(checkCheckBox('breaking', $data->umbang_defect), $data->umbang_defect_image, 'breaking') !!}
 
@@ -404,7 +432,7 @@
                                                     {{ checkCheckBox('creepers', $data->umbang_defect) }}>
                                                 <label for="umbang_creepers"> Creepers</label>
                                             </td>
-                                           
+
                                             <td>
                                                 {!! getImage(checkCheckBox('creepers', $data->umbang_defect), $data->umbang_defect_image, 'creepers') !!}
 
@@ -418,7 +446,7 @@
                                                     {{ checkCheckBox('cracked', $data->umbang_defect) }}>
                                                 <label for="umbang_cracked"> No Stay Insulator/Damaged </label>
                                             </td>
-                                           
+
                                             <td>
                                                 {!! getImage(checkCheckBox('cracked', $data->umbang_defect), $data->umbang_defect_image, 'cracked') !!}
 
@@ -432,7 +460,7 @@
                                                     {{ checkCheckBox('stay_palte', $data->umbang_defect) }}>
                                                 <label for="stay_palte"> Stay Plate / Base Stay Blocked</label>
                                             </td>
-                                           
+
                                             <td>
                                                 {!! getImage(checkCheckBox('stay_palte', $data->umbang_defect), $data->umbang_defect_image, 'stay_palte') !!}
 
@@ -446,7 +474,7 @@
                                                     {{ checkCheckBox('other', $data->umbang_defect) }} class="form-check">
                                                 <label for="other_umbang_defect"> Others </label>
                                             </td>
-                                        
+
                                             <td>
                                                 {!! getImage(checkCheckBox('other', $data->umbang_defect), $data->umbang_defect_image, 'other') !!}
                                             </td>
@@ -462,7 +490,7 @@
                                                     {{ checkCheckBox('burn', $data->ipc_defect) }}>
                                                 <label for="ipc_burn"> Burn Effect</label>
                                             </td>
-                                            
+
                                             <td>
                                                 {!! getImage(checkCheckBox('burn', $data->ipc_defect), $data->ipc_defect_image, 'burn') !!}
                                             </td>
@@ -474,7 +502,7 @@
                                                     {{ checkCheckBox('other', $data->ipc_defect) }} class="form-check">
                                                 <label for="other_ipc_defect"> Others </label>
                                             </td>
-                                          
+
                                             <td>
                                                 {!! getImage(checkCheckBox('other', $data->ipc_defect), $data->ipc_defect_image, 'other') !!}
                                             </td>
@@ -490,7 +518,7 @@
                                                     {{ checkCheckBox('cracked', $data->blackbox_defect) }}>
                                                 <label for="black_box_cracked"> Kesan Bakar</label>
                                             </td>
-                                          
+
                                             <td>
                                                 {!! getImage(checkCheckBox('cracked', $data->blackbox_defect), $data->blackbox_defect_image, 'cracked') !!}
                                             </td>
@@ -504,7 +532,7 @@
                                                     class="form-check">
                                                 <label for="other_blackbox_defect"> Others </label>
                                             </td>
-                                           
+
                                             <td>
                                                 {!! getImage(checkCheckBox('other', $data->blackbox_defect), $data->blackbox_defect_image, 'other') !!}
                                             </td>
@@ -519,7 +547,7 @@
                                                     class="form-check" {{ checkCheckBox('sleeve', $data->jumper) }}>
                                                 <label for="jumper_sleeve"> No UV Sleeve</label>
                                             </td>
-                                             
+
                                             <td>
                                                 {!! getImage(checkCheckBox('sleeve', $data->jumper), $data->jumper_image, 'sleeve') !!}
                                             </td>
@@ -542,7 +570,7 @@
                                                     {{ checkCheckBox('other', $data->jumper) }} class="form-check">
                                                 <label for="other_jumper"> Others </label>
                                             </td>
-                                             
+
                                             <td>
                                                 {!! getImage(checkCheckBox('other', $data->jumper), $data->jumper_image, 'other') !!}
                                             </td>
@@ -557,7 +585,7 @@
                                                     class="form-check" {{ checkCheckBox('broken', $data->kilat_defect) }}>
                                                 <label for="lightning_broken"> Broken</label>
                                             </td>
-                                            
+
                                             <td>
                                                 {!! getImage(checkCheckBox('broken', $data->kilat_defect), $data->kilat_defect_image, 'broken') !!}
                                             </td>
@@ -569,7 +597,7 @@
                                                     {{ checkCheckBox('other', $data->kilat_defect) }} class="form-check">
                                                 <label for="other_kilat_defect"> Others </label>
                                             </td>
-                                             
+
                                             <td>
                                                 {!! getImage(checkCheckBox('other', $data->kilat_defect), $data->kilat_defect_image, 'other') !!}
                                             </td>
@@ -584,7 +612,7 @@
                                                     class="form-check" {{ checkCheckBox('roof', $data->servis_defect) }}>
                                                 <label for="service_roof"> The service line is on the roof</label>
                                             </td>
-                                            
+
                                             <td>
                                                 {!! getImage(checkCheckBox('roof', $data->servis_defect), $data->servis_defect_image, 'othroofer') !!}
                                             </td>
@@ -597,7 +625,7 @@
                                                     {{ checkCheckBox('won_piece', $data->servis_defect) }}>
                                                 <label for="service_won_piece"> Won piece Date</label>
                                             </td>
-                                            
+
                                             <td>
                                                 {!! getImage(checkCheckBox('won_piece', $data->servis_defect), $data->servis_defect_image, 'won_piece') !!}
                                             </td>
@@ -610,7 +638,7 @@
                                                     {{ checkCheckBox('other', $data->servis_defect) }} class="form-check">
                                                 <label for="other_servis_defect"> Others </label>
                                             </td>
-                                            
+
                                             <td>
                                                 {!! getImage(checkCheckBox('other', $data->servis_defect), $data->servis_defect_image, 'other') !!}
                                             </td>
@@ -627,7 +655,7 @@
                                                     {{ checkCheckBox('netural', $data->pembumian_defect) }}>
                                                 <label for="grounding_netural"> No Connection to Neutral</label>
                                             </td>
-                                            
+
                                             <td>
                                                 {!! getImage(checkCheckBox('netural', $data->pembumian_defect), $data->pembumian_defect_image, 'netural') !!}
                                             </td>
@@ -641,7 +669,7 @@
                                                     class="form-check">
                                                 <label for="other_pembumian_defect"> Others </label>
                                             </td>
-                                            
+
                                             <td>
                                                 {!! getImage(checkCheckBox('other', $data->pembumian_defect), $data->pembumian_defect_image, 'other') !!}
                                             </td>
@@ -656,7 +684,7 @@
                                                     {{ checkCheckBox('damage', $data->bekalan_dua_defect) }}>
                                                 <label for="signage_damage"> Faded / Damaged / Missing Signage</label>
                                             </td>
-                                        
+
                                             <td>
                                                 {!! getImage(checkCheckBox('damage', $data->bekalan_dua_defect), $data->bekalan_dua_defect_image, 'damage') !!}
                                             </td>
@@ -670,7 +698,7 @@
                                                     class="form-check">
                                                 <label for="other_bekalan_dua_defect"> Others </label>
                                             </td>
-                                           
+
                                             <td>
                                                 {!! getImage(checkCheckBox('other', $data->bekalan_dua_defect), $data->bekalan_dua_defect_image, 'other') !!}
                                             </td>
@@ -686,7 +714,7 @@
                                                     {{ checkCheckBox('date_wire', $data->kaki_lima_defect) }}>
                                                 <label for="street_date_wire">Date Wire</label>
                                             </td>
-                                           
+
                                             <td>
                                                 {!! getImage(checkCheckBox('date_wire', $data->kaki_lima_defect), $data->kaki_lima_defect_image, 'date_wire') !!}
                                             </td>
@@ -698,7 +726,7 @@
                                                     {{ checkCheckBox('burn', $data->kaki_lima_defect) }}>
                                                 <label for="street_burn"> Junction Box Date / Burn Effect</label>
                                             </td>
-                                             
+
                                             <td>
                                                 {!! getImage(checkCheckBox('burn', $data->kaki_lima_defect), $data->kaki_lima_defect_image, 'burn') !!}
                                             </td>
@@ -711,7 +739,7 @@
                                                     class="form-check">
                                                 <label for="other_kaki_lima_defect_image"> Others </label>
                                             </td>
-                                            
+
                                             <td>
                                                 {!! getImage(checkCheckBox('other', $data->kaki_lima_defect), $data->kaki_lima_defect_image, 'other') !!}
                                             </td>
@@ -726,13 +754,13 @@
                             <fieldset class="form-input">
 
                                 <h3>Kejanggalan</h3>
-                              
-
- 
- 
 
 
- 
+
+
+
+
+
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="total_defects">Total Defects</label></div>
@@ -784,7 +812,7 @@
                                             <th class="col-4">Title</th>
                                             <th class="col-4">Defects</th>
                                             <th class="col-3">Upload Images</th>
-                                            
+
                                         </thead>
 
                                         <tbody>
@@ -799,9 +827,9 @@
                                                         {{ checkCheckBox('road', $data->tapak_condition) }}>
                                                     <label for="site_road">Crossing the Road</label>
                                                 </td>
-                                               
+
                                                 <td>
-                                                    @if ($data->tapak_road_img != '' && file_exists(public_path($data->tapak_road_img)) ) 
+                                                    @if ($data->tapak_road_img != '' && file_exists(public_path($data->tapak_road_img)) )
                                                     <a href="{{ URL::asset($data->tapak_road_img)}}" data-lightbox="roadtrip">
                                                        <img src="{{ URL::asset($data->tapak_road_img)}}" alt="" class="adjust-height " style="height:30px; width:30px !important">
                                                    </a>
@@ -815,9 +843,9 @@
                                                         {{ checkCheckBox('side_walk', $data->tapak_condition) }}>
                                                     <label for="side_walk">Sidewalk</label>
                                                 </td>
-                                                 
+
                                                 <td>
-                                                     @if ($data->tapak_sidewalk_img != '' && file_exists(public_path($data->tapak_sidewalk_img)) ) 
+                                                     @if ($data->tapak_sidewalk_img != '' && file_exists(public_path($data->tapak_sidewalk_img)) )
                                                      <a href="{{ URL::asset($data->tapak_sidewalk_img)}}" data-lightbox="roadtrip">
                                                         <img src="{{ URL::asset($data->tapak_sidewalk_img)}}" alt="" class="adjust-height " style="height:30px; width:30px !important">
                                                     </a>
@@ -831,9 +859,9 @@
                                                         {{ checkCheckBox('vehicle_entry', $data->tapak_condition) }}>
                                                     <label for="vehicle_entry">No vehicle entry area </label>
                                                 </td>
-                                                
+
                                                 <td>
-                                                    @if ($data->tapak_no_vehicle_entry_img != '' && file_exists(public_path($data->tapak_no_vehicle_entry_img)) ) 
+                                                    @if ($data->tapak_no_vehicle_entry_img != '' && file_exists(public_path($data->tapak_no_vehicle_entry_img)) )
                                                     <a href="{{ URL::asset($data->tapak_no_vehicle_entry_img)}}" data-lightbox="roadtrip">
                                                        <img src="{{ URL::asset($data->tapak_no_vehicle_entry_img)}}" alt="" class="adjust-height " style="height:30px; width:30px !important">
                                                    </a>
@@ -849,9 +877,9 @@
                                                         class="form-check" {{ checkCheckBox('bend', $data->kawasan) }}>
                                                     <label for="area_bend">Bend</label>
                                                 </td>
- 
+
                                                 <td>
-                                                    @if ($data->kawasan_bend_img != '' && file_exists(public_path($data->kawasan_bend_img)) ) 
+                                                    @if ($data->kawasan_bend_img != '' && file_exists(public_path($data->kawasan_bend_img)) )
                                                     <a href="{{ URL::asset($data->kawasan_bend_img)}}" data-lightbox="roadtrip">
                                                        <img src="{{ URL::asset($data->kawasan_bend_img)}}" alt="" class="adjust-height " style="height:30px; width:30px !important">
                                                    </a>
@@ -864,9 +892,9 @@
                                                         class="form-check" {{ checkCheckBox('raod', $data->kawasan) }}>
                                                     <label for="area_raod"> Road</label>
                                                 </td>
-                                               
+
                                                 <td>
-                                                    @if ($data->kawasan_road_img != '' && file_exists(public_path($data->kawasan_road_img)) ) 
+                                                    @if ($data->kawasan_road_img != '' && file_exists(public_path($data->kawasan_road_img)) )
                                                     <a href="{{ URL::asset($data->kawasan_road_img)}}" data-lightbox="roadtrip">
                                                        <img src="{{ URL::asset($data->kawasan_road_img)}}" alt="" class="adjust-height " style="height:30px; width:30px !important">
                                                    </a>
@@ -879,9 +907,9 @@
                                                         class="form-check" {{ checkCheckBox('forest', $data->kawasan) }}>
                                                     <label for="area_forest">Forest </label>
                                                 </td>
-                                                 
+
                                                 <td>
-                                                    @if ($data->kawasan_forest_img != '' && file_exists(public_path($data->kawasan_forest_img)) ) 
+                                                    @if ($data->kawasan_forest_img != '' && file_exists(public_path($data->kawasan_forest_img)) )
                                                     <a href="{{ URL::asset($data->kawasan_forest_img)}}" data-lightbox="roadtrip">
                                                        <img src="{{ URL::asset($data->kawasan_forest_img)}}" alt="" class="adjust-height " style="height:30px; width:30px !important">
                                                    </a>
@@ -894,12 +922,13 @@
                                                         class="form-check" {{ checkCheckBox('other', $data->kawasan) }}>
                                                     <label for="area_other">others (please state)</label>
                                                 </td>
-                                              
+
                                                 <td>
-                                                    @if ($data->kawasan_other_img != '' && file_exists(public_path($data->kawasan_other_img)) ) 
+                                                    @if ($data->kawasan_other_img != '' && file_exists(public_path($data->kawasan_other_img)) )
                                                     <a href="{{ URL::asset($data->kawasan_other_img)}}" data-lightbox="roadtrip">
                                                        <img src="{{ URL::asset($data->kawasan_other_img)}}" alt="" class="adjust-height " style="height:30px; width:30px !important">
                                                    </a>
+
                                                     @endif
                                                 </td>
                                             </tr>
@@ -950,141 +979,6 @@
                             </fieldset>
                             {{-- END Heigh Clearance (4) --}}
 
-
-                            <h3></h3>
-                            {{-- START Kejanggalan Images --}}
-                            <fieldset class="form-input">
-                                <h3>Kejanggalan Images</h3>
-
-
-
-                                <div class="row">
-                                    <div class="col-md-4"><label for="tapak_road_img">Crossing the Road Image</label>
-                                    </div>
-
-                                    <div class="col-md-4 text-center mb-3">
-                                        @if (file_exists(public_path($data->tapak_road_img)) && $data->tapak_road_img != '')
-                                            <a href="{{ URL::asset($data->tapak_road_img) }}" data-lightbox="roadtrip">
-                                                <img src="{{ URL::asset($data->tapak_road_img) }}" alt=""
-                                                    height="70" class="adjust-height ml-5  "></a>
-                                        @else
-                                            <strong>No image found</strong>
-                                        @endif
-                                    </div>
-                                </div>
-
-
-
-                                <div class="row">
-                                    <div class="col-md-4"><label for="tapak_sidewalk_img">Sidewalk Image</label></div>
-
-
-                                    <div class="col-md-4 text-center mb-3">
-                                        @if (file_exists(public_path($data->tapak_sidewalk_img)) && $data->tapak_sidewalk_img != '')
-                                            <a href="{{ URL::asset($data->tapak_sidewalk_img) }}"
-                                                data-lightbox="roadtrip">
-                                                <img src="{{ URL::asset($data->tapak_sidewalk_img) }}" alt=""
-                                                    height="70" class="adjust-height ml-5  "></a>
-                                        @else
-                                            <strong>No image found</strong>
-                                        @endif
-                                    </div>
-                                </div>
-
-
-
-
-
-
-                                <div class="row">
-                                    <div class="col-md-4"><label for="tapak_no_vehicle_entry_img">No Vehicle Entry Area
-                                            Image</label></div>
-
-                                    <div class="col-md-4 text-center mb-3">
-                                        @if (file_exists(public_path($data->tapak_no_vehicle_entry_img)) && $data->tapak_no_vehicle_entry_img != '')
-                                            <a href="{{ URL::asset($data->tapak_no_vehicle_entry_img) }}"
-                                                data-lightbox="roadtrip">
-                                                <img src="{{ URL::asset($data->tapak_no_vehicle_entry_img) }}"
-                                                    alt="" height="70" class="adjust-height ml-5  "></a>
-                                        @else
-                                            <strong>No image found</strong>
-                                        @endif
-                                    </div>
-                                </div>
-
-
-
-
-                                <div class="row">
-                                    <div class="col-md-4"><label for="kawasan_bend_img">Bend Area Image</label></div>
-
-
-                                    <div class="col-md-4 text-center mb-3">
-                                        @if (file_exists(public_path($data->kawasan_bend_img)) && $data->kawasan_bend_img != '')
-                                            <a href="{{ URL::asset($data->kawasan_bend_img) }}" data-lightbox="roadtrip">
-                                                <img src="{{ URL::asset($data->kawasan_bend_img) }}" alt=""
-                                                    height="70" class="adjust-height ml-5  "></a>
-                                        @else
-                                            <strong>No image found</strong>
-                                        @endif
-                                    </div>
-                                </div>
-
-
-
-
-                                <div class="row">
-                                    <div class="col-md-4"><label for="kawasan_road_img">Road Area Image</label></div>
-
-
-                                    <div class="col-md-4 text-center mb-3">
-                                        @if (file_exists(public_path($data->kawasan_road_img)) && $data->kawasan_road_img != '')
-                                            <a href="{{ URL::asset($data->kawasan_road_img) }}" data-lightbox="roadtrip">
-                                                <img src="{{ URL::asset($data->kawasan_road_img) }}" alt=""
-                                                    height="70" class="adjust-height ml-5  "></a>
-                                        @else
-                                            <strong>No image found</strong>
-                                        @endif
-                                    </div>
-                                </div>
-
-
-
-
-                                <div class="row">
-                                    <div class="col-md-4"><label for="kawasan_forest_img">Forest Area Image</label></div>
-
-
-                                    <div class="col-md-4 text-center mb-3">
-                                        @if (file_exists(public_path($data->kawasan_forest_img)) && $data->kawasan_forest_img != '')
-                                            <a href="{{ URL::asset($data->kawasan_forest_img) }}"
-                                                data-lightbox="roadtrip">
-                                                <img src="{{ URL::asset($data->kawasan_forest_img) }}" alt=""
-                                                    height="70" class="adjust-height ml-5  "></a>
-                                        @else
-                                            <strong>No image found</strong>
-                                        @endif
-                                    </div>
-                                </div>
-
-
-                                <div class="row">
-                                    <div class="col-md-4"><label for="kawasan_other_img">Other Area Image</label></div>
-
-                                    <div class="col-md-4 text-center mb-3">
-                                        @if (file_exists(public_path($data->kawasan_other_img)) && $data->kawasan_other_img != '')
-                                            <a href="{{ URL::asset($data->kawasan_other_img) }}"
-                                                data-lightbox="roadtrip">
-                                                <img src="{{ URL::asset($data->kawasan_other_img) }}" alt=""
-                                                    height="70" class="adjust-height ml-5  "></a>
-                                        @else
-                                            <strong>No image found</strong>
-                                        @endif
-                                    </div>
-                                </div>
-
-                            </fieldset>
-                            {{-- END Kejanggalan Images --}}
 
 
                             <h3></h3>

@@ -80,7 +80,7 @@
                                         <option value="B2">B2</option>
                                         <option value="B4">B4</option>
                                         @endif
-                                      
+
 
                                     </select>
                                 </div>
@@ -150,14 +150,28 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="name">Gate Status</label></div>
                                 <div class="col-md-4">
-                                    <select name="gate_status" id="gate_status" required class="form-control"
-                                        onchange="getStatus(this)">
-                                        <option value="{{ $data->gate_status }}" hidden>{{ $data->gate_status }}</option>
-                                        <option value="Locked">Locked</option>
-                                        <option value="Unlocked">Unlocked</option>
-                                        <option value="Others">Others</option>
-                                    </select>
+                                    <div class="  d-flex">
+                                        <input type="checkbox" name="gate_status[locked]"  {{substaionCheckBox('locked', $data->gate_status)}} id="gate_status_locked">
+                                        <label for="gate_status_locked">Locked</label>
+                                    </div>
+                                    <div class=" d-flex">
+                                        <input type="checkbox" name="gate_status[unlocked]" {{substaionCheckBox('unlocked', $data->gate_status)}} id="gate_status_unlocked">
+                                        <label for="gate_status_unlocked">Unlocked</label>
+                                    </div>
+                                    <div class=" d-flex">
+                                        <input type="checkbox" name="gate_status[demaged]" {{substaionCheckBox('demaged', $data->gate_status)}} id="gate_status_demaged">
+                                        <label for="gate_status_demaged">Demaged</label>
+                                    </div>
 
+                                        <div class="d-flex">
+                                        <input type="checkbox" name="gate_status[other]" {{substaionCheckBox('other', $data->gate_status)}} id="gate_status_others" onclick="getStatus(this)">
+                                        <label for="gate_status_others">Others</label>
+
+
+                                    </div>
+                                    <input type="text" name="gate_status[other_value]" id="gate_status_other" class="form-control  @if(substaionCheckBox('other', $data->gate_status)   !== 'checked' ) d-none @endif" value="@if (substaionCheckBox('other', $data->gate_status) == 'checked')
+{{$data->gate_status->other_value}}
+                                    @endif"  placeholder="please enter other gate defect" >
 
                                 </div>
                             </div>
@@ -400,16 +414,6 @@
         }
 
 
-        function getStatus(event) {
-            var val = event.value;
-            if (val !== 'Others') {
-                if (!$('#other-gate-status').hasClass('d-none')) {
-                    $('#other-gate-status').addClass('d-none')
-                }
-            } else {
-                $('#other-gate-status').removeClass('d-none')
-            }
-        }
 
         function leaningStatus(event) {
             var val = event.value;
@@ -421,5 +425,18 @@
                 $('#leaning-angle').removeClass('d-none')
             }
         }
+        function getStatus(event){
+        var val = event.value;
+
+            if (!$('#gate_status_other').hasClass('d-none')) {
+                $('#gate_status_other').addClass('d-none')
+            }else{
+                $('#gate_status_other').removeClass('d-none')
+            }
+
+
+
+    }
+
     </script>
 @endsection

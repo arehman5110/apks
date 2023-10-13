@@ -124,7 +124,7 @@
                                         class="form-control" required>
                                     </div>
                             </div>
- 
+
 
 
                             <div class="row">
@@ -155,20 +155,26 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="gate_status">Gate </label></div>
                                 <div class="col-md-4">
-                                    <select name="gate_status" id="gate_status" required class="form-control" onchange="getStatus(this)">
-                                        <option value="" hidden>select gate</option>
-                                        <option value="Locked">Locked</option>
-                                        <option value="Unlocked">Unlocked</option>
-                                        <option value="Others">Others</option>
-                                    </select>
+                                    <div class="  d-flex">
+                                        <input type="checkbox" name="gate_status[locked]" id="gate_status_locked">
+                                        <label for="gate_status_locked">Locked</label>
+                                    </div>
+                                    <div class=" d-flex">
+                                        <input type="checkbox" name="gate_status[unlocked]" id="gate_status_unlocked">
+                                        <label for="gate_status_unlocked">Unlocked</label>
+                                    </div>
+                                    <div class=" d-flex">
+                                        <input type="checkbox" name="gate_status[demaged]" id="gate_status_demaged">
+                                        <label for="gate_status_demaged">Demaged</label>
+                                    </div>
 
-                                </div>
-                            </div>
+                                        <div class="d-flex">
+                                        <input type="checkbox" name="gate_status[other]" id="gate_status_others" onclick="getStatus(this)">
+                                        <label for="gate_status_others">Others</label>
 
-                            <div class="row d-none" id="other-gate-status">
-                                <div class="col-md-4"><label for="other_gate_status">Other Gate Status</label></div>
-                                <div class="col-md-4">
-                                  <input type="text" name="other_gate_status" id="other_gate_status" class="form-control">
+
+                                    </div>
+                                    <input type="text" name="gate_status[other_value]" id="gate_status_other" class="form-control d-none" placeholder="please enter other gate defect" >
 
                                 </div>
                             </div>
@@ -187,7 +193,7 @@
                               <div class="row">
                                 <div class="col-md-4"><label for="tree_branches_status">Tree Branches in PE </label></div>
                                 <div class="col-md-4">
-                                   
+
                                         <select  name="tree_branches_status" id="tree_branches_status"
                                         class="form-control" required>
                                         <option value="" hidden >select status</option>
@@ -199,26 +205,32 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="building_status">Building Defects</label></div>
                                 <div class="col-md-4">
-                                    <select name="building_status" id="building_status" class="form-control" required onchange="bulidingStatus(this)">>
-                                        <option value="" hidden>select</option>
-                                        <option value="Broken Roof">Broken Roof</option>
-                                        <option value="Broken Gutter">Broken Gutter</option>
+                                    <div class="d-flex">
+                                        <input type="checkbox" name="building_status[broken_roof]" id="building_status_broken_roof">
+                                        <label for="building_status_broken_roof">Broken Roof</label>
+                                    </div>
 
-                                        <option value="Broken Base">Broken Base</option>
-                                        <option value="Others">Others</option>
+                                    <div class="d-flex">
+                                        <input type="checkbox" name="building_status[broken_gutter]" id="building_status_broken_gutter">
+                                        <label for="building_status_broken_gutter">Broken Gutter</label>
+                                    </div>
 
-                                    </select>
-                                   
+                                    <div class="d-flex">
+                                        <input type="checkbox" name="building_status[broken_base]" id="building_status_broken_base">
+                                        <label for="building_status_broken_base">Broken Base</label>
+                                    </div>
+
+                                    <div class="d-flex">
+                                        <input type="checkbox" name="building_status[other]" id="building_status_other" onclick="bulidingStatus(this)">
+                                        <label for="building_status_other">Other</label>
+                                    </div>
+
+                                    <input type="text" name="building_status[other_value]" id="other_building_defects" placeholder="please enter other buliding defects" class="form-control d-none" >
+
                                     </div>
                             </div>
-                            
-                            <div class="row  d-none" id="other-building-defects">
-                                <div class="col-md-4"><label for="other_building_defects">Other building Defects</label></div>
-                                <div class="col-md-4">
-                                  <input type="text" name="other_building_defects" id="other_building_defects" class="form-control">
 
-                                </div>
-                            </div>
+
                             <div class="row">
                                 <div class="col-md-4"><label for="advertise_poster_status">Cleaning illegal ads/banners</label></div>
                                 <div class="col-md-4">
@@ -288,7 +300,7 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="coordinate">Coordinate</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="coordinate" id="coordinate"
+                                    <input type="text" name="coordinate" id="coordinate" readonly
                                         class="form-control" required>
                                     </div>
                             </div>
@@ -333,16 +345,16 @@
                 ];
                 const userBa = "{{Auth::user()->ba}}";
                 $(document).ready(function() {
-       
-       
+
+
 
        if (userBa !== '') {
            getBaPoints(userBa)
        }
-       
+
     });
 
-      
+
        function getBaPoints(param){
            var baSelect = $('#ba_s')
                baSelect.empty();
@@ -359,23 +371,25 @@
 
      function getStatus(event){
         var val = event.value;
-        if (val !== 'Others') {
-            if (!$('#other-gate-status').hasClass('d-none')) {
-                $('#other-gate-status').addClass('d-none')
+
+            if (!$('#gate_status_other').hasClass('d-none')) {
+                $('#gate_status_other').addClass('d-none')
+            }else{
+                $('#gate_status_other').removeClass('d-none')
             }
-        }else{
-            $('#other-gate-status').removeClass('d-none')
-        }
+
+
+
     }
 
     function bulidingStatus(event){
         var val = event.value;
-        if (val !== 'Others') {
-            if (!$('#other-building-defects').hasClass('d-none')) {
-                $('#other-building-defects').addClass('d-none')
-            }
+
+            if (!$('#other_building_defects').hasClass('d-none')) {
+                $('#other_building_defects').addClass('d-none')
+
         }else{
-            $('#other-building-defects').removeClass('d-none')
+            $('#other_building_defects').removeClass('d-none')
         }
     }
    </script>

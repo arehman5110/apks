@@ -59,7 +59,7 @@ class TiangContoller extends Controller
             // $this->tiangRepository->store($request->all());
 
             $destinationPath = 'assets/images/tiang/';
-            
+
             $data = new Tiang();
             foreach ($request->all() as $mainkey => $mainvalue) {
                 if (is_array($mainvalue)) {
@@ -83,7 +83,7 @@ class TiangContoller extends Controller
                         $uploadedFile->move($destinationPath, $filename);
                         $data[$mainkey] = $destinationPath.$filename ;
                     }
-        
+
                 }
             }
 
@@ -130,9 +130,9 @@ class TiangContoller extends Controller
 
             $data->arus_pada_tiang = $request->arus_pada_tiang;
 
-           
 
-           
+
+
             if ($request->lat != '' && $request->log != '') {
                 $data->geom = DB::raw("ST_GeomFromText('POINT(".$request->log." ".$request->lat.")',4326)");
             }
@@ -197,7 +197,7 @@ class TiangContoller extends Controller
             foreach ($request->all() as $mainkey => $mainvalue) {
                 if (is_array($mainvalue)) {
                     $json = json_decode($data[$mainkey], true) ?? []; // Decode existing JSON or create an empty array if not exists
-            
+
                     foreach ($mainvalue as $key => $file) {
                         if (is_a($file, 'Illuminate\Http\UploadedFile') && $file->isValid()) {
                             $uploadedFile = $file;
@@ -207,7 +207,7 @@ class TiangContoller extends Controller
                             $json[$key] = $destinationPath . $filename;
                         }
                     }
-            
+
                     $data[$mainkey] = json_encode($json);
                 } else {
                     if (is_a($mainvalue, 'Illuminate\Http\UploadedFile') && $mainvalue->isValid()) {
@@ -216,11 +216,11 @@ class TiangContoller extends Controller
                         $filename = $mainkey . '-' . strtotime(now()) . '.' . $img_ext;
                         $uploadedFile->move($destinationPath, $filename);
                         $data[$mainkey] = $destinationPath.$filename ;
-                      
+
                     }
                 }
             }
-     
+
             $data->ba = $request->ba;
             $data->name_contractor = $request->name_contractor;
             $data->start_date = $request->start_date;
@@ -294,7 +294,7 @@ class TiangContoller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($language ,$id)
     {
         //
         try{
@@ -302,7 +302,7 @@ class TiangContoller extends Controller
 
          return redirect()
                 ->route('tiang-talian-vt-and-vr.index',app()->getLocale())
-                ->with('success', 'Recored Removed');
+                ->with('success', 'Record Removed');
         } catch (\Throwable $th) {
             // return $th->getMessage();
             return redirect()

@@ -165,24 +165,32 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="pipe_staus">Gate</label></div>
                                 <div class="col-md-4">
-                                    <select name="gate_status" id="gate_status" required class="form-control"
-                                        onchange="getStatus(this)">
-                                        <option value="{{ $data->gate_status }}" hidden>{{ $data->gate_status }}</option>
-                                        <option value="Locked">Locked</option>
-                                        <option value="Unlocked">Unlocked</option>
-                                        <option value="Others">Others</option>
-                                    </select>
+                                    <div class="  d-flex">
+                                        <input type="checkbox" name="gate_status[locked]"  {{substaionCheckBox('locked', $data->gate_status)}} id="gate_status_locked">
+                                        <label for="gate_status_locked">Locked</label>
+                                    </div>
+                                    <div class=" d-flex">
+                                        <input type="checkbox" name="gate_status[unlocked]" {{substaionCheckBox('unlocked', $data->gate_status)}} id="gate_status_unlocked">
+                                        <label for="gate_status_unlocked">Unlocked</label>
+                                    </div>
+                                    <div class=" d-flex">
+                                        <input type="checkbox" name="gate_status[demaged]" {{substaionCheckBox('demaged', $data->gate_status)}} id="gate_status_demaged">
+                                        <label for="gate_status_demaged">Demaged</label>
+                                    </div>
+
+                                        <div class="d-flex">
+                                        <input type="checkbox" name="gate_status[other]" {{substaionCheckBox('other', $data->gate_status)}} id="gate_status_others" onclick="getStatus(this)">
+                                        <label for="gate_status_others">Others</label>
+
+
+                                    </div>
+                                    <input type="text" name="gate_status[other_value]" id="gate_status_other" class="form-control  @if(substaionCheckBox('other', $data->gate_status)   !== 'checked' ) d-none @endif" value="@if (substaionCheckBox('other', $data->gate_status) == 'checked')
+{{$data->gate_status->other_value}}
+                                    @endif"  placeholder="please enter other gate defect" >
 
                                 </div>
                             </div>
-                            <div class="row d-none" id="other-gate-status">
-                                <div class="col-md-4"><label for="other_gate_status">Other Gate Status</label></div>
-                                <div class="col-md-4">
-                                    <input type="text" name="other_gate_status" id="other_gate_status"
-                                        class="form-control">
 
-                                </div>
-                            </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="vandalism_status">Long Grass</label></div>
                                 <div class="col-md-4">
@@ -191,15 +199,14 @@
                                         <option value="Yes">Yes</option>
                                         <option value="No">No</option>
                                     </select>
-                                    <input type="text" name="grass_status" id="grass_status"
-                                        value="{{ $data->grass_status }}" class="form-control" required>
+
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-4"><label for="tree_branches_status">Tree Branches in PE </label></div>
                                 <div class="col-md-4">
-                                   
+
                                         <select  name="tree_branches_status" id="tree_branches_status"
                                         class="form-control" required>
                                         <option value="{{$data->tree_branches_status}}" hidden >{{$data->tree_branches_status}}</option>
@@ -211,17 +218,36 @@
 
                             <div class="row">
                                 <div class="col-md-4"><label for="building_status">Building Defects</label></div>
-                                <div class="col-md-4">
-                                    <select name="building_status" id="building_status" class="form-control" required onchange="bulidingStatus(this)">>
-                                        <option value="{{$data->building_status}}" hidden>{{$data->building_status}}</option>
-                                        <option value="Broken Roof">Broken Roof</option>
-                                        <option value="Broken Gutter">Broken Gutter</option>
-                                        <option value="Broken Base">Broken Base</option>
-                                        <option value="Others">Others</option>
-                                    </select>
-                                </div>
+
+                                    <div class="col-md-4">
+                                        <div class="d-flex">
+                                            <input type="checkbox" name="building_status[broken_roof]" {{substaionCheckBox('broken_roof', $data->building_status)}}  id="building_status_broken_roof">
+                                            <label for="building_status_broken_roof">Broken Roof</label>
+                                        </div>
+
+                                        <div class="d-flex">
+                                            <input type="checkbox" name="building_status[broken_gutter]" {{substaionCheckBox('broken_gutter', $data->building_status)}}  id="building_status_broken_gutter">
+                                            <label for="building_status_broken_gutter">Broken Gutter</label>
+                                        </div>
+
+                                        <div class="d-flex">
+                                            <input type="checkbox" name="building_status[broken_base]" {{substaionCheckBox('broken_base', $data->building_status)}}  id="building_status_broken_base">
+                                            <label for="building_status_broken_base">Broken Base</label>
+                                        </div>
+
+                                        <div class="d-flex">
+                                            <input type="checkbox" name="building_status[other]" {{substaionCheckBox('other', $data->building_status)}}  id="building_status_other" onclick="bulidingStatus(this)">
+                                            <label for="building_status_other">Other</label>
+                                        </div>
+
+                                        <input type="text" name="building_status[other_value]" id="other_building_defects" placeholder="please enter other buliding defects" class="form-control @if(substaionCheckBox('other', $data->building_status)   !== 'checked' ) d-none @endif"
+                                        value="@if(substaionCheckBox('other', $data->building_status)   !== 'checked' ) {{$data->building_status->other_value}} @endif"
+                                        >
+
+                                        </div>
+
                             </div>
-                            
+
                             <div class="row  d-none" id="other-building-defects">
                                 <div class="col-md-4"><label for="other_building_defects">Other building Defects</label></div>
                                 <div class="col-md-4">
@@ -229,7 +255,7 @@
 
                                 </div>
                             </div>
-                            
+
                             <div class="row">
                                 <div class="col-md-4"><label for="collapsed_status">Cleaning illegal ads/banners</label></div>
                                 <div class="col-md-4">
@@ -421,5 +447,29 @@
             });
 
         }
+
+        function getStatus(event){
+        var val = event.value;
+
+            if (!$('#gate_status_other').hasClass('d-none')) {
+                $('#gate_status_other').addClass('d-none')
+            }else{
+                $('#gate_status_other').removeClass('d-none')
+            }
+
+
+
+    }
+
+    function bulidingStatus(event){
+        var val = event.value;
+
+            if (!$('#other_building_defects').hasClass('d-none')) {
+                $('#other_building_defects').addClass('d-none')
+
+        }else{
+            $('#other_building_defects').removeClass('d-none')
+        }
+    }
     </script>
 @endsection

@@ -45,6 +45,7 @@ class SubstationController extends Controller
      */
     public function store(Request $request)
     {
+
         try {
             $currentDate = Carbon::now()->toDateString();
             $combinedDateTime = $currentDate . ' ' . $request->patrol_time;
@@ -59,11 +60,50 @@ class SubstationController extends Controller
             $data->name = $request->name;
             $data->type = $request->type;
             $data->coordinate = $request->coordinate;
-            $data->gate_status = $request->gate_status == 'Others' ? $request->other_gate_status :$request->gate_status ;
+
             $data->grass_status = $request->grass_status;
             $data->tree_branches_status = $request->tree_branches_status;
-            $data->building_status = $request->building_status == 'Others' ? $request->other_building_defects : $request->building_status;
+
             $data->advertise_poster_status = $request->advertise_poster_status;
+            $gate = ['locked' => 'false', 'unlocked' => 'false', 'demaged' => 'false', 'other'=>'false', 'other_value' => ''];
+
+            if ($request->has('gate_status')) {
+                $gateStatus = $request->gate_status;
+
+                foreach ($gate as $key => $value) {
+                    if (array_key_exists($key, $gateStatus)) {
+                        if ($key == 'other_value') {
+                            $gate['other_value'] =$request->gate_status['other_value'];
+                        }else{
+                             $gate[$key] = 'true';
+                        }
+
+                    }
+                }
+            }
+
+            $data->gate_status = json_encode($gate) ;
+
+
+            $building = ['broken_roof' => 'false', 'broken_gutter' => 'false', 'broken_base' => 'false', 'other'=>'false', 'other_value' => ''];
+
+            if ($request->has('building_status')) {
+                $buildingStatus = $request->building_status;
+
+                foreach ($building as $key => $value) {
+                    if (array_key_exists($key, $buildingStatus)) {
+                        if ($key == 'other_value') {
+                            $building['other_value'] =$request->building_status['other_value'];
+                        }else{
+                             $building[$key] = 'true';
+                        }
+
+                    }
+                }
+            }
+            $data->building_status = json_encode($building);
+
+
             $destinationPath = 'assets/images/link-box/';
 
             foreach ($request->all() as $key => $file) {
@@ -101,7 +141,13 @@ class SubstationController extends Controller
     public function show($language,$id)
     {
         $data = Substation::find($id);
-        return view('substation.show',['data'=>$data]);
+        if ($data) {
+            $data->gate_status = json_decode($data->gate_status);
+            $data->building_status = json_decode($data->building_status);
+
+            return view('substation.show',['data'=>$data]);
+        }
+        return abort('404');
     }
 
     /**
@@ -113,7 +159,15 @@ class SubstationController extends Controller
     public function edit($language,$id)
     {
         $data = Substation::find($id);
-        return view('substation.edit',['data'=>$data]);
+        if ($data) {
+            $data->gate_status = json_decode($data->gate_status);
+            $data->building_status = json_decode($data->building_status);
+            // return $data->gate_status->locked;
+
+            return view('substation.edit',['data'=>$data]);
+        }
+        return abort('404');
+
     }
 
     /**
@@ -123,7 +177,7 @@ class SubstationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $language, $id)
     {
         try {
             $currentDate = Carbon::now()->toDateString();
@@ -135,16 +189,54 @@ class SubstationController extends Controller
             $data->team = $request->team;
             $data->visit_date = $request->visit_date;
             $data->patrol_time =$combinedDateTime;
-           
+
             $data->voltage = $request->voltage;
             $data->name = $request->name;
             $data->type = $request->type;
             $data->coordinate = $request->coordinate;
-            $data->gate_status = $request->gate_status == 'Others' ? $request->other_gate_status :$request->gate_status ;
             $data->grass_status = $request->grass_status;
             $data->tree_branches_status = $request->tree_branches_status;
-            $data->building_status = $request->building_status == 'Others' ? $request->other_building_defects : $request->building_status;
+
             $data->advertise_poster_status = $request->advertise_poster_status;
+            $gate = ['locked' => 'false', 'unlocked' => 'false', 'demaged' => 'false', 'other'=>'false', 'other_value' => ''];
+
+            if ($request->has('gate_status')) {
+                $gateStatus = $request->gate_status;
+
+                foreach ($gate as $key => $value) {
+                    if (array_key_exists($key, $gateStatus)) {
+                        if ($key == 'other_value') {
+                            $gate['other_value'] =$request->gate_status['other_value'];
+                        }else{
+                             $gate[$key] = 'true';
+                        }
+
+                    }
+                }
+            }
+
+            $data->gate_status = json_encode($gate) ;
+
+
+            $building = ['broken_roof' => 'false', 'broken_gutter' => 'false', 'broken_base' => 'false', 'other'=>'false', 'other_value' => ''];
+
+            if ($request->has('building_status')) {
+                $buildingStatus = $request->building_status;
+
+                foreach ($building as $key => $value) {
+                    if (array_key_exists($key, $buildingStatus)) {
+                        if ($key == 'other_value') {
+                            $building['other_value'] =$request->building_status['other_value'];
+                        }else{
+                             $building[$key] = 'true';
+                        }
+
+                    }
+                }
+            }
+            $data->building_status = json_encode($building);
+            // return $data;
+
             $destinationPath = 'assets/images/link-box/';
 
             foreach ($request->all() as $key => $file) {
@@ -163,12 +255,12 @@ class SubstationController extends Controller
             $data->update();
 
             return redirect()
-                ->route('substation.index')
+                ->route('substation.index',app()->getLocale())
                 ->with('success', 'Form Update');
         } catch (\Throwable $th) {
             return $th->getMessage();
             return redirect()
-                ->route('substation.index')
+                ->route('substation.index',app()->getLocale())
                 ->with('failed', 'Form Intserted Failed');
         }
     }

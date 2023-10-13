@@ -137,7 +137,29 @@
                         <div class="row">
                             <div class="col-md-4"><label for="coordinate">Gate</label></div>
                             <div class="col-md-4">
-                                <input readonly value="{{ $data->gate_status }}" class="form-control" required>
+                                <div class="  d-flex">
+                                    <input type="checkbox" name="gate_status[locked]"  {{substaionCheckBox('locked', $data->gate_status)}} id="gate_status_locked" disabled>
+                                    <label for="gate_status_locked">Locked</label>
+                                </div>
+                                <div class=" d-flex">
+                                    <input type="checkbox" name="gate_status[unlocked]" {{substaionCheckBox('unlocked', $data->gate_status)}} id="gate_status_unlocked" disabled>
+                                    <label for="gate_status_unlocked">Unlocked</label>
+                                </div>
+                                <div class=" d-flex">
+                                    <input type="checkbox" name="gate_status[demaged]" {{substaionCheckBox('demaged', $data->gate_status)}} id="gate_status_demaged" disabled>
+                                    <label for="gate_status_demaged">Demaged</label>
+                                </div>
+
+                                    <div class="d-flex">
+                                    <input type="checkbox" name="gate_status[other]" {{substaionCheckBox('other', $data->gate_status)}} id="gate_status_others" disabled onclick="getStatus(this)">
+                                    <label for="gate_status_others">Others</label>
+
+
+                                </div>
+                                <input type="text" name="gate_status[other_value]" id="gate_status_other" class="form-control  @if(substaionCheckBox('other', $data->gate_status)   !== 'checked' ) d-none @endif" value="@if (substaionCheckBox('other', $data->gate_status) == 'checked')
+{{$data->gate_status->other_value}}
+                                @endif"  placeholder="please enter other gate defect" disabled >
+
                             </div>
                         </div>
                         <div class="row">
@@ -155,10 +177,31 @@
                         <div class="row">
                             <div class="col-md-4"><label for="building_status">Building Defects</label></div>
                             <div class="col-md-4">
-                                <input readonly value="{{ $data->building_status }}" class="form-control" required>
+                                <div class="d-flex">
+                                    <input type="checkbox" name="building_status[broken_roof]" {{substaionCheckBox('broken_roof', $data->building_status)}} disabled  id="building_status_broken_roof">
+                                    <label for="building_status_broken_roof">Broken Roof</label>
+                                </div>
 
-        
-                            </div>
+                                <div class="d-flex">
+                                    <input type="checkbox" name="building_status[broken_gutter]" {{substaionCheckBox('broken_gutter', $data->building_status)}} disabled id="building_status_broken_gutter">
+                                    <label for="building_status_broken_gutter">Broken Gutter</label>
+                                </div>
+
+                                <div class="d-flex">
+                                    <input type="checkbox" name="building_status[broken_base]" {{substaionCheckBox('broken_base', $data->building_status)}}  disabledid="building_status_broken_base">
+                                    <label for="building_status_broken_base">Broken Base</label>
+                                </div>
+
+                                <div class="d-flex">
+                                    <input type="checkbox" name="building_status[other]" {{substaionCheckBox('other', $data->building_status)}} disabled id="building_status_other" onclick="bulidingStatus(this)">
+                                    <label for="building_status_other">Other</label>
+                                </div>
+
+                                <input type="text" name="building_status[other_value]" id="other_building_defects" placeholder="please enter other buliding defects"disabled class="form-control @if(substaionCheckBox('other', $data->building_status)   !== 'checked' ) d-none @endif"
+                                value="@if(substaionCheckBox('other', $data->building_status)   !== 'checked' ) {{$data->building_status->other_value}} @endif"
+                                >
+
+                                </div>
                         </div>
 
                         <div class="row">

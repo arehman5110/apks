@@ -37,3 +37,5 @@ Route::get('/generate-html', [GenerateNoticePDFController::class,'generateHtml']
 
 
 Route::post('/upload-site-images/{model}/{id}',[uploadImagesContoller::class,"uploadImages"]);
+Route::post('/upload-tiang-images/{id}',[uploadImagesContoller::class,"uploadTiangImages"]);
+

@@ -62,7 +62,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                       
+
                         <div class="card-header d-flex justify-content-between ">
                             <div class="card-title">
                                 Tiang
@@ -86,12 +86,10 @@
 
                                     <thead style="background-color: #E4E3E3 !important">
                                         <tr>
+                                            <th>TIANG NO</th>
                                             <th>BA</th>
                                             <th>CONTRACTOR</th>
-
-                                            <th>PO START DATE</th>
-                                            <th>PO END DATE</th>
-
+                                            <th>REVIEW DATE</th>
                                             <th>ACTION</th>
 
                                         </tr>
@@ -100,6 +98,7 @@
 
                                         @foreach ($datas as $data)
                                             <tr>
+                                                <td>{{$data->tiang_no}}</td>
                                                 <td class="align-middle">{{ $data->ba }}</td>
                                                 <td class="align-middle">
                                                     {{ $data->name_contractor }}</td>
@@ -107,20 +106,12 @@
 
                                                 <td class="align-middle text-center">
                                                     @php
-                                                        $date = new DateTime($data->start_date);
+                                                        $date = new DateTime($data->review_date);
                                                         $datePortion = $date->format('Y-m-d');
 
                                                     @endphp
                                                     {{ $datePortion }}
-                                                </td>
-                                                <td class="align-middle text-center">
-                                                    @php
-                                                        $date = new DateTime($data->end_date);
-                                                        $datePortion = $date->format('Y-m-d');
 
-                                                    @endphp
-                                                    {{ $datePortion }}
-                                                </td>
                                                 <td class="text-center">
 
                                                     <button type="button" class="btn  " data-toggle="dropdown">
@@ -211,12 +202,20 @@
 
     <script>
         $(document).ready(function() {
-            $('#myTable').DataTable();
+            $('#myTable').DataTable({
+                aaSorting: [
+                    [3, 'desc']
+                ],
+                "lengthMenu": [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, "All"]
+                ],
+            });
             $('#myModal').on('show.bs.modal', function(event) {
                 var button = $(event.relatedTarget);
                 var id = button.data('id');
                 var modal = $(this);
-                $('#remove-foam').attr('action', 'tiang-talian-vt-and-vr/' + id)
+                $('#remove-foam').attr('action', '/en/tiang-talian-vt-and-vr/' + id)
             });
 
         });

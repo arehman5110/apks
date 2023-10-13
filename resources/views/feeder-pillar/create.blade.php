@@ -157,12 +157,26 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="gate_status">Gate </label></div>
                                 <div class="col-md-4">
-                                    <select name="gate_status" id="gate_status" required class="form-control" onchange="getStatus(this)">
-                                        <option value="" hidden>select gate</option>
-                                        <option value="Locked">Locked</option>
-                                        <option value="Unlocked">Unlocked</option>
-                                        <option value="Others">Others</option>
-                                    </select>
+                                    <div class="  d-flex">
+                                        <input type="checkbox" name="gate_status[locked]" id="gate_status_locked">
+                                        <label for="gate_status_locked">Locked</label>
+                                    </div>
+                                    <div class=" d-flex">
+                                        <input type="checkbox" name="gate_status[unlocked]" id="gate_status_unlocked">
+                                        <label for="gate_status_unlocked">Unlocked</label>
+                                    </div>
+                                    <div class=" d-flex">
+                                        <input type="checkbox" name="gate_status[demaged]" id="gate_status_demaged">
+                                        <label for="gate_status_demaged">Demaged</label>
+                                    </div>
+
+                                        <div class="d-flex">
+                                        <input type="checkbox" name="gate_status[other]" id="gate_status_others" onclick="getStatus(this)">
+                                        <label for="gate_status_others">Others</label>
+
+
+                                    </div>
+                                    <input type="text" name="gate_status[other_value]" id="gate_status_other" class="form-control d-none" placeholder="please enter other gate defect" >
 
                                 </div>
                             </div>
@@ -284,7 +298,7 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="coordinate">Coordinate</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="coordinate" id="coordinate"
+                                    <input type="text" name="coordinate" id="coordinate" readonly
                                         class="form-control" required>
                                     </div>
                             </div>
@@ -330,16 +344,16 @@ const b1Options = [
         const userBa = "{{Auth::user()->ba}}";
 
         $(document).ready(function() {
-       
-       
+
+
 
        if (userBa !== '') {
            getBaPoints(userBa)
        }
-       
+
     });
 
-      
+
        function getBaPoints(param){
            var baSelect = $('#ba_s')
                baSelect.empty();
@@ -347,24 +361,13 @@ const b1Options = [
                b1Options.map((data)=>{
                    if (data[1] == param) {
                        baSelect.append(`<option value="${data}">${data[1]}</option>`)
-                      
+
                    }
                });
                let baVal = document.getElementById('ba_s');
 
                getWp(baVal)
        }
-
-    function getStatus(event){
-        var val = event.value;
-        if (val !== 'Others') {
-            if (!$('#other-gate-status').hasClass('d-none')) {
-                $('#other-gate-status').addClass('d-none')
-            }
-        }else{
-            $('#other-gate-status').removeClass('d-none')
-        }
-    }
 
     function leaningStatus(event){
         var val = event.value;
@@ -375,6 +378,18 @@ const b1Options = [
         }else{
             $('#leaning-angle').removeClass('d-none')
         }
+    }
+    function getStatus(event){
+        var val = event.value;
+
+            if (!$('#gate_status_other').hasClass('d-none')) {
+                $('#gate_status_other').addClass('d-none')
+            }else{
+                $('#gate_status_other').removeClass('d-none')
+            }
+
+
+
     }
    </script>
 @endsection

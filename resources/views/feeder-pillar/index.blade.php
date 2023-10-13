@@ -181,7 +181,7 @@
         $(document).ready(function() {
             $('#myTable').DataTable({
                 aaSorting: [
-                    [0, 'asc']
+                    [3, 'desc']
                 ],
                 "lengthMenu": [
                     [10, 25, 50, -1],
