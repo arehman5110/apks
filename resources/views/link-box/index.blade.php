@@ -50,9 +50,9 @@
                                     Link Box
                                 </div>
                                 <div class="d-flex ml-auto">
-                                <a href="{{route('link-box-pelbagai-voltan.create')}}"><button class="btn text-white btn-success  btn-sm mr-4"  >Add Link Box</button></a>
+                                <a href="{{route('link-box-pelbagai-voltan.create', app()->getLocale())}}"><button class="btn text-white btn-success  btn-sm mr-4"  >Add Link Box</button></a>
 
-                               <a href="{{route('generate-link-box-excel')}}"> <button class="btn text-white  btn-sm mr-4" style="background-color: #708090">QR Link Box</button></a>
+                               <a href="{{route('generate-link-box-excel', app()->getLocale())}}"> <button class="btn text-white  btn-sm mr-4" style="background-color: #708090">QR Link Box</button></a>
                             </div>
                             </div>
 
@@ -100,14 +100,14 @@
                                                     </button>
                                                     <div class="dropdown-menu" role="menu">
 
-                                                        <form action="{{ route('link-box-pelbagai-voltan.show', $data->id) }}"
+                                                        <form action="{{ route('link-box-pelbagai-voltan.show', [app()->getLocale(),$data->id]) }}"
                                                             method="get">
                                                             <button type="submit"
                                                                 class="dropdown-item pl-3 w-100 text-left">Detail</button>
                                                         </form>
 
                                                         <form
-                                                            action="{{ route('link-box-pelbagai-voltan.edit', $data->id) }}"
+                                                            action="{{ route('link-box-pelbagai-voltan.edit',[app()->getLocale(),$data->id]) }}"
                                                             method="get">
                                                             <button type="submit"
                                                                 class="dropdown-item pl-3 w-100 text-left">Edit</button>
@@ -188,7 +188,7 @@
                 var button = $(event.relatedTarget);
                 var id = button.data('id');
                 var modal = $(this);
-                $('#remove-foam').attr('action', '/link-box-pelbagai-voltan/' + id)
+                $('#remove-foam').attr('action', '/{{app()->getLocale()}}/link-box-pelbagai-voltan/' + id)
             });
 
         });

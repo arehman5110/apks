@@ -82,12 +82,12 @@ class SubstationController extends Controller
             $data->save();
 
             return redirect()
-                ->route('substation.index')
+                ->route('substation.index', app()->getLocale())
                 ->with('success', 'Form Intserted');
         } catch (\Throwable $th) {
             return $th->getMessage();
             return redirect()
-                ->route('substation.index')
+                ->route('substation.index', app()->getLocale())
                 ->with('failed', 'Form Intserted Failed');
         }
     }
@@ -98,7 +98,7 @@ class SubstationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($language,$id)
     {
         $data = Substation::find($id);
         return view('substation.show',['data'=>$data]);
@@ -110,7 +110,7 @@ class SubstationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($language,$id)
     {
         $data = Substation::find($id);
         return view('substation.edit',['data'=>$data]);
@@ -179,18 +179,18 @@ class SubstationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($language,$id)
     {
         try {
             Substation::find($id)->delete();
 
             return redirect()
-                ->route('substation.index')
+                ->route('substation.index',app()->getLocale())
                 ->with('success', 'Recored Removed');
         } catch (\Throwable $th) {
             // return $th->getMessage();
             return redirect()
-                ->route('substation.index')
+                ->route('substation.index',app()->getLocale())
                 ->with('failed', 'Request Failed');
         }
     }

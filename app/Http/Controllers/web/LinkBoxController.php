@@ -86,12 +86,12 @@ class LinkBoxController extends Controller
             $data->save();
 
             return redirect()
-                ->route('link-box-pelbagai-voltan.index')
+                ->route('link-box-pelbagai-voltan.index', app()->getLocale())
                 ->with('success', 'Form Intserted');
         } catch (\Throwable $th) {
             return $th->getMessage();
             return redirect()
-                ->route('link-box-pelbagai-voltan.index')
+                ->route('link-box-pelbagai-voltan.index', app()->getLocale())
                 ->with('failed', 'Form Intserted Failed');
         }
     }
@@ -102,7 +102,7 @@ class LinkBoxController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($language,$id)
     {
         //
         $data = LinkBox::find($id);
@@ -115,7 +115,7 @@ class LinkBoxController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($language,$id)
     {
         //
         $data = LinkBox::find($id);
@@ -129,7 +129,7 @@ class LinkBoxController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,$language, $id)
     {
         //
 
@@ -170,12 +170,12 @@ class LinkBoxController extends Controller
             $data->save();
 
             return redirect()
-                ->route('link-box-pelbagai-voltan.index')
+                ->route('link-box-pelbagai-voltan.index', app()->getLocale())
                 ->with('success', 'Form Update');
         } catch (\Throwable $th) {
             return $th->getMessage();
             return redirect()
-                ->route('link-box-pelbagai-voltan.index')
+                ->route('link-box-pelbagai-voltan.index', app()->getLocale())
                 ->with('failed', 'Request Failed');
         }
     }
@@ -186,19 +186,19 @@ class LinkBoxController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($language,$id)
     {
         //
         try {
             LinkBox::find($id)->delete();
 
             return redirect()
-                ->route('link-box-pelbagai-voltan.index')
+                ->route('link-box-pelbagai-voltan.index', app()->getLocale())
                 ->with('success', 'Recored Removed');
         } catch (\Throwable $th) {
             // return $th->getMessage();
             return redirect()
-                ->route('link-box-pelbagai-voltan.index')
+                ->route('link-box-pelbagai-voltan.index', app()->getLocale())
                 ->with('failed', 'Request Failed');
         }
     }

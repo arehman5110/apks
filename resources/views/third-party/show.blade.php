@@ -45,7 +45,7 @@
                 </div>
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
-                        <li class="breadcrumb-item"><a href="{{route('third-party-digging.index')}}">index</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('third-party-digging.index',app()->getLocale())}}">index</a></li>
                         <li class="breadcrumb-item active">show</li>
                     </ol>
                 </div>

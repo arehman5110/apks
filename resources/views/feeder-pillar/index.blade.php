@@ -48,9 +48,9 @@
                             <div class="card-header d-flex justify-content-between ">
                                 <p class="mb-0">Feeder Pillar</p>
                                 <div class="d-flex ml-auto">
-                                <a href="{{route('feeder-pillar.create')}}"><button class="btn text-white btn-success  btn-sm mr-4"  >Add Fedder Pillar</button></a>
+                                <a href="{{route('feeder-pillar.create',app()->getLocale())}}"><button class="btn text-white btn-success  btn-sm mr-4"  >Add Fedder Pillar</button></a>
 
-                               <a href="{{route('generate-feeder-pillar-excel')}}"> <button class="btn text-white  btn-sm mr-4" style="background-color: #708090">QR Feeder Pillar</button></a>
+                               <a href="{{route('generate-feeder-pillar-excel',app()->getLocale())}}"> <button class="btn text-white  btn-sm mr-4" style="background-color: #708090">QR Feeder Pillar</button></a>
                             </div>
                             </div>
 
@@ -96,14 +96,14 @@
                                                     </button>
                                                     <div class="dropdown-menu" role="menu">
 
-                                                        <form action="{{ route('feeder-pillar.show', $data->id) }}"
+                                                        <form action="{{ route('feeder-pillar.show', [app()->getLocale(),$data->id]) }}"
                                                             method="get">
                                                             <button type="submit"
                                                                 class="dropdown-item pl-3 w-100 text-left">Detail</button>
                                                         </form>
 
                                                         <form
-                                                            action="{{ route('feeder-pillar.edit', $data->id) }}"
+                                                            action="{{ route('feeder-pillar.edit', [app()->getLocale(),$data->id]) }}"
                                                             method="get">
                                                             <button type="submit"
                                                                 class="dropdown-item pl-3 w-100 text-left">Edit</button>
@@ -191,8 +191,9 @@
             $('#myModal').on('show.bs.modal', function(event) {
                 var button = $(event.relatedTarget);
                 var id = button.data('id');
+                var langs='{{app()->getLocale()}}';
                 var modal = $(this);
-                $('#remove-foam').attr('action', '/feeder-pillar/' + id)
+                $('#remove-foam').attr('action', '/'+langs+'/feeder-pillar/' + id)
             });
 
         });

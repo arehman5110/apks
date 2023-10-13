@@ -137,11 +137,11 @@
                                                     <div class="dropdown-menu" role="menu">
 
                                                         <a class="dropdown-item"
-                                                            href="/get-work-package-detail/{{ $data->id }}">Detail</a>
+                                                            href="/{{app()->getLocale()}}/get-work-package-detail/{{ $data->id }}">Detail</a>
 
 
                                                         <a class="dropdown-item"
-                                                            href="/remove-work-package/{{ $data->id }}"
+                                                            href="/{{app()->getLocale()}}/remove-work-package/{{ $data->id }}"
                                                             onclick="return confirm('Are you sure?')">Remove</a>
 
 

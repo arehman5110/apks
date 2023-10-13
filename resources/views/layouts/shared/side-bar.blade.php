@@ -52,7 +52,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="/create-patrolling" class="nav-link ">
+                            <a href="/{{app()->getLocale()}}/create-patrolling" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Patrolling</p>
                             </a>
@@ -65,13 +65,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/map-1" class="nav-link ">
+                            <a href="/{{app()->getLocale()}}/map-1" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Map</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/get-all-work-packages" class="nav-link">
+                            <a href="/{{app()->getLocale()}}/get-all-work-packages" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>SBUM Approval and Deatil</p>
                             </a>
@@ -102,7 +102,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="/substation-map" class="nav-link ">
+                            <a href="/{{app()->getLocale()}}/substation-map" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Map</p>
                             </a>
@@ -132,7 +132,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/feeder-pillar-map" class="nav-link ">
+                            <a href="/{{app()->getLocale()}}/feeder-pillar-map" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Map</p>
                             </a>
@@ -163,7 +163,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/tiang-talian-vt-and-vr-map" class="nav-link ">
+                            <a href="/{{app()->getLocale()}}/tiang-talian-vt-and-vr-map" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Map</p>
                             </a>
@@ -194,7 +194,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="/link-box-pelbagai-voltan-map" class="nav-link ">
+                            <a href="/{{app()->getLocale()}}/link-box-pelbagai-voltan-map" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Map</p>
                             </a>
@@ -225,7 +225,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="/cable-bridge-map" class="nav-link ">
+                            <a href="/{{app()->getLocale()}}/cable-bridge-map" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Map</p>
                             </a>

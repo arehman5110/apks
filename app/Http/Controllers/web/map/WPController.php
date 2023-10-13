@@ -71,7 +71,7 @@ class WPController extends Controller
         return response()->json([$result[0]], 200);
     }
 
-    public function detail($id)
+    public function detail($language,$id)
     {
         $rec = WorkPackage::withCount('diging')->find($id);
 
@@ -104,7 +104,7 @@ class WPController extends Controller
         return response()->json([$result[0], $result1[0], $result2[0]], 200);
     }
 
-    public function removeWP($id)
+    public function removeWP($language,$id)
     {
         try {
             $wp = WorkPackage::find($id);

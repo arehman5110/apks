@@ -82,13 +82,13 @@ class FPController extends Controller
             $data->save();
 
             return redirect()
-                ->route('feeder-pillar.index')
+                ->route('feeder-pillar.index',app()->getLocale())
                 ->with('success', 'Form Intserted');
         } catch (\Throwable $th) {
             return $th->getMessage();
             return redirect()
                 ->route('feeder-pillar.index')
-                ->with('failed', 'Form Intserted Failed');
+                ->with('failed', 'Form Intserted Failed',app()->getLocale());
         }
     }
 
@@ -98,7 +98,7 @@ class FPController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($language,$id)
     {
         $data = FeederPillar::find($id);
         return view('feeder-pillar.show', ['data' => $data]);
@@ -110,7 +110,7 @@ class FPController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($language,$id)
     {
         $data = FeederPillar::find($id);
         return view('feeder-pillar.edit', ['data' => $data]);
@@ -123,7 +123,7 @@ class FPController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,$language,$id)
     {
         try {
             $currentDate = Carbon::now()->toDateString();
@@ -162,12 +162,12 @@ class FPController extends Controller
             $data->update();
 
             return redirect()
-                ->route('feeder-pillar.index')
+                ->route('feeder-pillar.index',app()->getLocale())
                 ->with('success', 'Form Intserted');
         } catch (\Throwable $th) {
             return $th->getMessage();
             return redirect()
-                ->route('feeder-pillar.index')
+                ->route('feeder-pillar.index',app()->getLocale())
                 ->with('failed', 'Form Intserted Failed');
         }
     }
@@ -178,18 +178,18 @@ class FPController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($language,$id)
     {
         try {
             FeederPillar::find($id)->delete();
 
             return redirect()
-                ->route('feeder-pillar.index')
+                ->route('feeder-pillar.index',app()->getLocale())
                 ->with('success', 'Recored Removed');
         } catch (\Throwable $th) {
             // return $th->getMessage();
             return redirect()
-                ->route('feeder-pillar.index')
+                ->route('feeder-pillar.index',app()->getLocale())
                 ->with('failed', 'Request Failed');
         }
     }

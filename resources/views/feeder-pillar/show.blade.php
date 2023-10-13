@@ -44,7 +44,7 @@
                 </div>
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
-                        <li class="breadcrumb-item"><a href="{{route('feeder-pillar.index')}}">index</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('feeder-pillar.index',app()->getLocale())}}">index</a></li>
                         <li class="breadcrumb-item active">Detail</li>
                     </ol>
                 </div>

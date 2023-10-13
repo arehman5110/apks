@@ -119,7 +119,7 @@ class ThirdPartyDiggingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($language,$id)
     {
         $data = ThirdPartyDiging::find($id);
         if ($data) {
@@ -136,7 +136,7 @@ class ThirdPartyDiggingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($language,$id)
     {
 
 
@@ -153,7 +153,7 @@ class ThirdPartyDiggingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,$language, $id)
     {
         try {
 
@@ -212,7 +212,7 @@ class ThirdPartyDiggingController extends Controller
         } catch (\Throwable $th) {
             // return $th->getMessage();
             return redirect()
-                ->route('third-party-digging.index')
+                ->route('third-party-digging.index',app()->getLocale())
                 ->with('failed', 'Form Intserted Failed');
         }
     }
@@ -223,18 +223,18 @@ class ThirdPartyDiggingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($language,$id)
     {
         try {
             ThirdPartyDiging::find($id)->delete();
 
             return redirect()
-                ->route('third-party-digging.index')
+                ->route('third-party-digging.index',app()->getLocale())
                 ->with('success', 'Recored Removed');
         } catch (\Throwable $th) {
             // return $th->getMessage();
             return redirect()
-                ->route('third-party-digging.index')
+                ->route('third-party-digging.index',app()->getLocale())
                 ->with('failed', 'Request Failed');
         }
     }
