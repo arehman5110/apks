@@ -138,14 +138,14 @@ class TiangContoller extends Controller
             }
 
             $data->save();
-return 'save';
+
             return redirect()
-                ->route('tiang-talian-vt-and-vr.index')
+                ->route('tiang-talian-vt-and-vr.index',app()->getLocale())
                 ->with('success', 'Form Intserted');
         } catch (\Throwable $th) {
             return $th->getMessage();
             return redirect()
-                ->route('tiang-talian-vt-and-vr.index')
+                ->route('tiang-talian-vt-and-vr.index',app()->getLocale())
                 ->with('failed', 'Form Intserted Failed');
         }
     }
@@ -156,7 +156,7 @@ return 'save';
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($language , $id)
     {
 
         $data =  $this->tiangRepository->getRecoreds($id);
@@ -170,7 +170,7 @@ return 'save';
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($language , $id)
     {
 
 
@@ -187,13 +187,40 @@ return 'save';
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $language,  $id)
     {
         //
         try {
             //code...
-
+            $destinationPath = 'assets/images/tiang/';
             $data =Tiang::find($id);
+            foreach ($request->all() as $mainkey => $mainvalue) {
+                if (is_array($mainvalue)) {
+                    $json = json_decode($data[$mainkey], true) ?? []; // Decode existing JSON or create an empty array if not exists
+            
+                    foreach ($mainvalue as $key => $file) {
+                        if (is_a($file, 'Illuminate\Http\UploadedFile') && $file->isValid()) {
+                            $uploadedFile = $file;
+                            $img_ext = $uploadedFile->getClientOriginalExtension();
+                            $filename = $key . '-' . strtotime(now()) . '.' . $img_ext;
+                            $uploadedFile->move($destinationPath, $filename);
+                            $json[$key] = $destinationPath . $filename;
+                        }
+                    }
+            
+                    $data[$mainkey] = json_encode($json);
+                } else {
+                    if (is_a($mainvalue, 'Illuminate\Http\UploadedFile') && $mainvalue->isValid()) {
+                        $uploadedFile = $mainvalue;
+                        $img_ext = $uploadedFile->getClientOriginalExtension();
+                        $filename = $mainkey . '-' . strtotime(now()) . '.' . $img_ext;
+                        $uploadedFile->move($destinationPath, $filename);
+                        $data[$mainkey] = $destinationPath.$filename ;
+                      
+                    }
+                }
+            }
+     
             $data->ba = $request->ba;
             $data->name_contractor = $request->name_contractor;
             $data->start_date = $request->start_date;
@@ -236,27 +263,27 @@ return 'save';
             $data->talian_spec = $request->has('talian_spec') ? json_encode($request->talian_spec) : null;
 
             $data->arus_pada_tiang = $request->arus_pada_tiang;
-            $destinationPath = 'assets/images/tiang/';
-            foreach ($request->all() as $key => $file) {
-                // Check if the input is a file and it is valid
-                if ($request->hasFile($key) && $request->file($key)->isValid()) {
-                    $uploadedFile = $request->file($key);
-                    $img_ext = $uploadedFile->getClientOriginalExtension();
-                    $filename = $key . '-' . strtotime(now()) . '.' . $img_ext;
-                    $uploadedFile->move($destinationPath, $filename);
-                    $data->{$key} = $destinationPath . $filename;
-                }
-            }
+            // $destinationPath = 'assets/images/tiang/';
+            // foreach ($request->all() as $key => $file) {
+            //     // Check if the input is a file and it is valid
+            //     if ($request->hasFile($key) && $request->file($key)->isValid()) {
+            //         $uploadedFile = $request->file($key);
+            //         $img_ext = $uploadedFile->getClientOriginalExtension();
+            //         $filename = $key . '-' . strtotime(now()) . '.' . $img_ext;
+            //         $uploadedFile->move($destinationPath, $filename);
+            //         $data->{$key} = $destinationPath . $filename;
+            //     }
+            // }
 
             $data->update();
 
             return redirect()
-                ->route('tiang-talian-vt-and-vr.index')
+                ->route('tiang-talian-vt-and-vr.index',app()->getLocale())
                 ->with('success', 'Form Update');
         } catch (\Throwable $th) {
-            // return $th->getMessage();
+            return $th->getMessage();
             return redirect()
-                ->route('tiang-talian-vt-and-vr.index')
+                ->route('tiang-talian-vt-and-vr.index',app()->getLocale())
                 ->with('failed', 'Form Update Failed');
         }
     }
@@ -274,12 +301,12 @@ return 'save';
             Tiang::find($id)->delete();
 
          return redirect()
-                ->route('tiang-talian-vt-and-vr.index')
+                ->route('tiang-talian-vt-and-vr.index',app()->getLocale())
                 ->with('success', 'Recored Removed');
         } catch (\Throwable $th) {
             // return $th->getMessage();
             return redirect()
-                ->route('tiang-talian-vt-and-vr.index')
+                ->route('tiang-talian-vt-and-vr.index',app()->getLocale())
                 ->with('failed', 'Request Failed');
         }
     }

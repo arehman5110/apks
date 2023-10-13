@@ -44,6 +44,8 @@
             border-right:0px !important;
         }
         textarea{border: 1px solid #999999 !important;}
+        .form-input .card{border:1px solid black !important;
+        border-radius: 0px !important}
     </style>
 @endsection
 
@@ -190,6 +192,12 @@
                                     <div class="col-md-4"><label for="tiang_no">Tiang No</label></div>
                                     <div class="col-md-4"><input type="text" name="tiang_no" id="tiang_no"
                                             class="form-control" required></div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="cordinates">Cordinates</label></div>
+                                    <div class="col-md-4"><input type="text" name="cordinates" id="cordinates"
+                                            class="form-control" required readonly></div>
                                 </div>
 
                                 <input type="hidden" name="lat" id="lat" required class="form-control">
@@ -948,10 +956,11 @@
                                                     Yes</label>
                                             </div>
 
-                                            <div class="col-md-4 d-flex">
-                                                <input type="radio" name="arus_pada_tiang" id="arus_pada_tiang_amp"
-                                                    value="amp" class="form-check"><label for="arus_pada_tiang_amp">
+                                            <div class="col-md-4 d-none  " id="arus_pada_tiang_amp_div">
+                                                <label for="arus_pada_tiang_amp">
                                                     (Amp)</label>
+                                                <input type="text" name="arus_pada_tiang_amp" id="arus_pada_tiang_amp"
+                                                     class="form-control" required>
                                             </div>
 
 
@@ -1146,6 +1155,7 @@
 
             $('#lat').val(lat);
             $('#log').val(lng);
+            $('#cordinates').val(e.latlng);
         }
 
         map.on('click', onMapClick);
@@ -1176,6 +1186,17 @@
             $('input[type="checkbox"]').on('click',function(){
                 addReomveImageField(this)
                 
+            })
+            $('input[name="arus_pada_tiang"]').on('change',function(){
+                if (this.value == 'yes') {
+                    if($('#arus_pada_tiang_amp_div').hasClass('d-none')){
+                        $('#arus_pada_tiang_amp_div').removeClass('d-none');
+                    }  
+                }else{
+                    if(!$('#arus_pada_tiang_amp_div').hasClass('d-none')){
+                        $('#arus_pada_tiang_amp_div').addClass('d-none');
+                    }  
+                }
             })
 
         });

@@ -65,13 +65,13 @@
                        
                         <div class="card-header d-flex justify-content-between ">
                             <div class="card-title">
-                                Third Party Digging
+                                Tiang
                             </div>
                             <div class="d-flex ml-auto">
-                                <a href="{{ route('tiang-talian-vt-and-vr.create') }}"><button
+                                <a href="{{ route('tiang-talian-vt-and-vr.create' ,app()->getLocale()) }}"><button
                                         class="btn text-white btn-success  btn-sm mr-4">Add Tiang</button></a>
 
-                                <a href="{{ route('generate-tiang-talian-vt-and-vr-excel') }}"> <button
+                                <a href="{{ route('generate-tiang-talian-vt-and-vr-excel', app()->getLocale() )}}"> <button
                                         class="btn text-white  btn-sm mr-4" style="background-color: #708090">QR Tiang Talian</button></a>
                             </div>
                         </div>
@@ -129,13 +129,13 @@
                                                     </button>
                                                     <div class="dropdown-menu" role="menu">
 
-                                                        <form action="{{ route('tiang-talian-vt-and-vr.show', $data->id) }}"
+                                                        <form action="{{ route('tiang-talian-vt-and-vr.show',[app()->getLocale() , $data->id]) }}"
                                                             method="get">
                                                             <button type="submit"
                                                                 class="dropdown-item pl-3 w-100 text-left">Detail</button>
                                                         </form>
 
-                                                        <form action="{{ route('tiang-talian-vt-and-vr.edit', $data->id) }}"
+                                                        <form action="{{ route('tiang-talian-vt-and-vr.edit', [app()->getLocale() , $data->id]) }}"
                                                             method="get">
                                                             <button type="submit"
                                                                 class="dropdown-item pl-3 w-100 text-left">Edit</button>

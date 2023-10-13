@@ -11,26 +11,69 @@
             min-width: 16px !important;
             margin-right: 12px;
         }
+
+        input[type='file'],
+        table input {
+            margin: 0px !important;
+        }
+
+        table label {
+            font-size: 14px !important;
+            font-weight: 400 !important;
+            margin-left: 10px !important;
+            margin-bottom: 0px !important
+        }
+
+        th {
+            font-size: 14px !important;
+        }
+
+        th,
+        td {
+            padding: 6px 16px !important
+        }
+
+        table,
+        input[type='file'] {
+            width: 90% !important;
+        }
+
+
+        table input[type="file"] {
+            font-size: 11px !important;
+            height: 33px !important;
+        }
+
+        td.d-flex {
+            border-bottom: 0px !important;
+            border-left: 0px !important;
+            border-right: 0px !important;
+        }
+
+        textarea {
+            border: 1px solid #999999 !important;
+        }
     </style>
 @endsection
 
 
 @section('content')
-<section class="content-header">
-    <div class="container-  ">
-        <div class="row " style="flex-wrap:nowrap">
-            <div class="col-sm-6">
-                <h3>Tiang</h3>
-            </div>
-            <div class="col-sm-6 text-right">
-                <ol class="breadcrumb float-right">
-                    <li class="breadcrumb-item"><a href="{{route('tiang-talian-vt-and-vr.index')}}">index</a></li>
-                    <li class="breadcrumb-item active">edit</li>
-                </ol>
+    <section class="content-header">
+        <div class="container-  ">
+            <div class="row " style="flex-wrap:nowrap">
+                <div class="col-sm-6">
+                    <h3>Tiang</h3>
+                </div>
+                <div class="col-sm-6 text-right">
+                    <ol class="breadcrumb float-right">
+                        <li class="breadcrumb-item"><a
+                                href="{{ route('tiang-talian-vt-and-vr.index', app()->getLocale()) }}">index</a></li>
+                        <li class="breadcrumb-item active">edit</li>
+                    </ol>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
     <div class=" ">
 
         <div class="container">
@@ -40,8 +83,9 @@
                 <div class=" card col-md-12 p-3 ">
                     <div class=" ">
                         <h3 class="text-center p-2">QR SAVR</h3>
-                        <form id="framework-wizard-form" action="{{ route('tiang-talian-vt-and-vr.update',$data->id) }}" enctype="multipart/form-data"
-                            style="display: none" method="POST">
+                        <form id="framework-wizard-form"
+                            action="{{ route('tiang-talian-vt-and-vr.update', [app()->getLocale(), $data->id]) }}"
+                            enctype="multipart/form-data" style="display: none" method="POST">
                             @method('PATCH')
                             @csrf
                             <h3></h3>
@@ -54,28 +98,28 @@
                                     <div class="col-md-4"><label for="ba">BA</label></div>
                                     <div class="col-md-4"><select name="ba" id="ba" class="form-control"
                                             required>
-                                           
-                                            <option value="{{ $data->ba }}" >{{ $data->ba }}</option>
-                                            
+
+                                            <option value="{{ $data->ba }}">{{ $data->ba }}</option>
+
                                             @if (Auth::user()->ba == '')
-                                            <optgroup label="W1">
-                                                <option value="KUALA LUMPUR PUSAT">KL PUSAT</option>
-                                            </optgroup>
-                                            <optgroup label="B1">
-                                                <option value="PETALING JAYA">PETALING JAYA</option>
-                                                <option value="RAWANG">RAWANG</option>
-                                                <option value="KUALA SELANGOR">KUALA SELANGOR</option>
-                                            </optgroup>
-                                            <optgroup label="B2">
-                                                <option value="KLANG">KLANG</option>
-                                                <option value="PELABUHAN KLANG">PELABUHAN KLANG</option>
-                                            </optgroup>
-                                            <optgroup label="B4">
-                                                <option value="CHERAS">CHERAS</option>
-                                                <option value="BANTING">BANTING</option>
-                                                <option value="BANGI">BANGI</option>
-                                                <option value="PUTRAJAYA & CYBERJAYA">PUTRAJAYA & CYBERJAYA</option>
-                                            </optgroup>
+                                                <optgroup label="W1">
+                                                    <option value="KUALA LUMPUR PUSAT">KL PUSAT</option>
+                                                </optgroup>
+                                                <optgroup label="B1">
+                                                    <option value="PETALING JAYA">PETALING JAYA</option>
+                                                    <option value="RAWANG">RAWANG</option>
+                                                    <option value="KUALA SELANGOR">KUALA SELANGOR</option>
+                                                </optgroup>
+                                                <optgroup label="B2">
+                                                    <option value="KLANG">KLANG</option>
+                                                    <option value="PELABUHAN KLANG">PELABUHAN KLANG</option>
+                                                </optgroup>
+                                                <optgroup label="B4">
+                                                    <option value="CHERAS">CHERAS</option>
+                                                    <option value="BANTING">BANTING</option>
+                                                    <option value="BANGI">BANGI</option>
+                                                    <option value="PUTRAJAYA & CYBERJAYA">PUTRAJAYA & CYBERJAYA</option>
+                                                </optgroup>
                                             @endif
 
 
@@ -120,8 +164,9 @@
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="fp_road">Feeder Name / Street Name</label></div>
-                                    <div class="col-md-4"><input type="text" name="fp_road" value="{{ $data->fp_road }}"
-                                            id="fp_road" class="form-control" required></div>
+                                    <div class="col-md-4"><input type="text" name="fp_road"
+                                            value="{{ $data->fp_road }}" id="fp_road" class="form-control" required>
+                                    </div>
                                 </div>
 
                                 <div class="row">
@@ -189,7 +234,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4"><label for="concrete">Pole Type No Concrete </label></div>
-                                    <div class="col-md-4"><input type="number" name="   [concrete]"
+                                    <div class="col-md-4"><input type="number" name="jenis_tiang[concrete]"
                                             value="{{ $data->jenis_tiang->concrete }}" id="concrete"
                                             class="form-control"></div>
                                 </div>
@@ -267,311 +312,636 @@
 
                             {{-- END Asset Register (2) --}}
 
-                            {{-- START Kejanggalan (3) --}}
+
+
                             <h3></h3>
                             <fieldset class="form-input">
 
                                 <h3>Kejanggalan</h3>
-                                <div class="row">
-                                    <div class="col-md-4"><label for="section_to">Pole</label></div>
-                                    <div class="col-md-8">
-                                        <div class="row">
-                                            <div class="col-md-4 d-flex">
-
+                                <div class="table-responsive">
+                                    <table class="table table-bordered w-100">
+                                        <thead style="background-color: #E4E3E3 !important">
+                                            <th class="col-4">Title</th>
+                                            <th class="col-4">Defects</th>
+                                            <th class="col-3">Upload Images</th>
+                                            <th class="col-1">Images</th>
+                                        </thead>
+                                        {{-- POLE --}}
+                                        <tr>
+                                            <th rowspan="5">Pole</th>
+                                            <td class="d-flex">
                                                 <input type="checkbox" name="tiang_defect[cracked]" id="cracked"
                                                     {{ checkCheckBox('cracked', $data->tiang_defect) }}
                                                     class="form-check">
                                                 <label for="cracked"> Cracked</label>
-                                            </div>
 
+                                            </td>
+                                            <td>
+                                                <input type="file" name="tiang_defect_image[cracked]"
+                                                    id="cracked-image"
+                                                    class=" @if (checkCheckBox('cracked', $data->tiang_defect) != 'checked') d-none @endif form-control">
+                                            </td>
+                                            <td>
+                                                {!! getImage(checkCheckBox('cracked', $data->tiang_defect), $data->tiang_defect_image, 'cracked') !!}
 
-                                            <div class="col-md-4 d-flex">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="d-flex">
                                                 <input type="checkbox" name="tiang_defect[leaning]" id="leaning"
                                                     {{ checkCheckBox('leaning', $data->tiang_defect) }}
-                                                    class="form-check"><label for="leaning"> Leaning</label>
-                                            </div>
+                                                    class="form-check">
+                                                <label for="leaning"> Leaning</label>
+                                            </td>
+                                            <td>
+                                                <input type="file" name="tiang_defect_image[leaning]"
+                                                    id="leaning-image"
+                                                    class=" @if (checkCheckBox('leaning', $data->tiang_defect) != 'checked') d-none @endif form-control">
+                                            </td>
+                                            <td>
+                                                {!! getImage(checkCheckBox('leaning', $data->tiang_defect), $data->tiang_defect_image, 'leaning') !!}
+                                            </td>
 
-                                            <div class="col-md-4 d-flex">
+                                        </tr>
+
+                                        @php($checkbox_dim = checkCheckBox('dim', $data->tiang_defect))
+
+                                        <tr>
+                                            <td class="d-flex">
                                                 <input type="checkbox" name="tiang_defect[dim]" id="dim"
-                                                    {{ checkCheckBox('dim', $data->tiang_defect) }}
-                                                    class="form-check"><label for="dim"> No. Dim Post / None
-                                                </label>
-                                            </div>
+                                                    {{ $checkbox_dim }} class="form-check">
+                                                <label for="dim"> No. Dim Post / None </label>
 
-                                            <div class="col-md-4 d-flex">
+                                            </td>
+                                            <td>
+                                                <input type="file" name="tiang_defect_image[dim]" id="dim-image"
+                                                    class="{{ $checkbox_dim != 'checked' ? 'd-none' : '' }} form-control">
+                                            </td>
+                                            <td>
+                                                {!! getImage($checkbox_dim, $data->tiang_defect_image, 'dim') !!}
+                                            </td>
+
+                                        </tr>
+
+                                        @php($checkbox_creepers = checkCheckBox('creepers', $data->tiang_defect))
+
+                                        <tr>
+                                            <td class="d-flex">
                                                 <input type="checkbox" name="tiang_defect[creepers]" id="creepers"
-                                                    {{ checkCheckBox('creepers', $data->tiang_defect) }}
-                                                    class="form-check"><label for="creepers"> Creepers
-                                                </label>
-                                            </div>
+                                                    $checkbox_creepers class="form-check">
+                                                <label for="creepers"> Creepers </label>
 
-                                        </div>
-                                    </div>
-                                </div>
+                                            </td>
+                                            <td>
+                                                <input type="file" name="tiang_defect_image[creepers]"
+                                                    id="creepers-image"
+                                                    class=" {{ $checkbox_creepers != 'checked' ? 'd-none' : '' }} form-control">
+                                            </td>
+                                            <td>
+                                                {!! getImage($checkbox_creepers, $data->tiang_defect_image, 'creepers') !!}
+                                            </td>
+
+                                        </tr>
+
+                                        @php($checkbox = checkCheckBox('other', $data->tiang_defect))
+
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" name="tiang_defect[other]" id="other_tiang_defect"
+                                                    {{ $checkbox }} class="form-check">
+                                                <label for="other_tiang_defect"> Others </label>
+                                            </td>
+                                            <td>
+                                                <input type="file" name="tiang_defect_image[other]"
+                                                    id="other_tiang_defect-image"
+                                                    class=" {{ $checkbox != 'checked' ? 'd-none' : '' }} form-control">
+                                            </td>
+                                            <td>
+
+                                                {!! getImage(checkCheckBox('other', $data->tiang_defect), $data->tiang_defect_image, 'other') !!}
 
 
-                                <div class="row">
-                                    <div class="col-md-4"><label for="">Line (Main / Service)</label></div>
-                                    <div class="col-md-8">
-                                        <div class="row">
-                                            <div class="col-md-4 d-flex">
+                                            </td>
+                                        </tr>
+
+                                        {{-- Line (Main / Service) --}}
+
+                                        <tr>
+                                            <th rowspan="4">Line (Main / Service)</th>
+                                            <td class="d-flex">
                                                 <input type="checkbox" name="talian_defect[joint]" id="joint"
-                                                    {{ checkCheckBox('joint', $data->talian_defect) }}
-                                                    class="form-check"><label for="joint"> Joint</label>
-                                            </div>
+                                                    class="form-check" {{ checkCheckBox('joint', $data->talian_defect) }}>
+                                                <label for="joint"> Joint</label>
+                                            </td>
+                                            <td>
+                                                <input type="file" name="talian_defect_image[joint]" id="joint-image"
+                                                    class="@if (checkCheckBox('joint', $data->talian_defect) != 'checked') d-none @endif  form-control">
+                                            </td>
+                                            <td>
+                                                {!! getImage(checkCheckBox('joint', $data->talian_defect), $data->talian_defect_image, 'joint') !!}
 
-                                            <div class="col-md-4 d-flex">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="d-flex">
                                                 <input type="checkbox" name="talian_defect[need_rentis]" id="need_rentis"
-                                                    {{ checkCheckBox('need_rentis', $data->talian_defect) }}
-                                                    class="form-check"><label for="need_rentis">
-                                                    Need Rentis</label>
-                                            </div>
+                                                    class="form-check"
+                                                    {{ checkCheckBox('need_rentis', $data->talian_defect) }}>
+                                                <label for="need_rentis"> Need Rentis</label>
+                                            </td>
+                                            <td>
+                                                <input type="file" name="talian_defect_image[need_rentis]"
+                                                    id="need_rentis-image"
+                                                    class=" @if (checkCheckBox('need_rentis', $data->talian_defect) != 'checked') d-none @endif form-control">
+                                            </td>
+                                            <td>
+                                                {!! getImage(checkCheckBox('need_rentis', $data->talian_defect), $data->talian_defect_image, 'need_rentis') !!}
 
-                                            <div class="col-md-4 d-flex">
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="d-flex">
                                                 <input type="checkbox" name="talian_defect[ground]" id="ground"
-                                                    {{ checkCheckBox('ground', $data->talian_defect) }}
-                                                    class="form-check"><label for="ground"> Does Not Comply With Ground
-                                                    Clearance
-                                                </label>
-                                            </div>
+                                                    class="form-check"
+                                                    {{ checkCheckBox('ground', $data->talian_defect) }}>
+                                                <label for="ground"> Does Not Comply With Ground Clearance</label>
+                                            </td>
+                                            <td>
+                                                <input type="file" name="talian_defect_image[ground]"
+                                                    id="ground-image"
+                                                    class="@if (checkCheckBox('ground', $data->talian_defect) != 'checked') d-none @endif form-control">
+                                            </td>
+                                            <td>
+                                                {!! getImage(checkCheckBox('ground', $data->talian_defect), $data->talian_defect_image, 'ground') !!}
 
-                                        </div>
-                                    </div>
-                                </div>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" name="talian_defect[other]"
+                                                    id="other_talian_defect"
+                                                    {{ checkCheckBox('other', $data->talian_defect) }} class="form-check">
+                                                <label for="other_talian_defect"> Others </label>
+                                            </td>
+                                            <td>
+                                                <input type="file" name="talian_defect_image[other]"
+                                                    id="other_talian_defect-image"
+                                                    class="@if (checkCheckBox('other', $data->talian_defect) != 'checked') d-none @endif form-control">
+                                            </td>
+                                            <td>
+                                                {!! getImage(checkCheckBox('other', $data->talian_defect), $data->talian_defect_image, 'other') !!}
+
+                                            </td>
+                                        </tr>
 
 
+                                        {{-- Umbang --}}
 
-                                <div class="row">
-                                    <div class="col-md-4"><label for="">Umbang</label></div>
-                                    <div class="col-md-8">
-                                        <div class="row">
-                                            <div class="col-md-4 d-flex">
+                                        <tr>
+                                            <th rowspan="5">Umbang</th>
+                                            <td class="d-flex">
                                                 <input type="checkbox" name="umbang_defect[breaking]"
-                                                    {{ checkCheckBox('breaking', $data->umbang_defect) }}
-                                                    id="umbang-breaking" class="form-check"><label for="umbang-breaking">
-                                                    Sagging/Breaking</label>
-                                            </div>
+                                                    id="umbang_breaking" class="form-check "
+                                                    {{ checkCheckBox('breaking', $data->umbang_defect) }}>
+                                                <label for="umbang_breaking"> Sagging/Breaking</label>
+                                            </td>
+                                            <td>
+                                                <input type="file" name="umbang_defect_image[breaking]"
+                                                    id="umbang_breaking-image"
+                                                    class="@if (checkCheckBox('breaking', $data->umbang_defect) != 'checked') d-none @endif form-control">
+                                            </td>
+                                            <td>
+                                                {!! getImage(checkCheckBox('breaking', $data->umbang_defect), $data->umbang_defect_image, 'breaking') !!}
 
-                                            <div class="col-md-4 d-flex">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="d-flex">
                                                 <input type="checkbox" name="umbang_defect[creepers]"
-                                                    {{ checkCheckBox('creepers', $data->umbang_defect) }}
-                                                    id="umbang-creepers" class="form-check"><label for="umbang-creepers">
-                                                    Creepers</label>
-                                            </div>
+                                                    id="umbang_creepers" class="form-check "
+                                                    {{ checkCheckBox('creepers', $data->umbang_defect) }}>
+                                                <label for="umbang_creepers"> Creepers</label>
+                                            </td>
+                                            <td>
+                                                <input type="file" name="umbang_defect_image[creepers]"
+                                                    id="umbang_creepers-image"
+                                                    class="@if (checkCheckBox('creepers', $data->umbang_defect) != 'checked') d-none @endif form-control">
+                                            </td>
+                                            <td>
+                                                {!! getImage(checkCheckBox('creepers', $data->umbang_defect), $data->umbang_defect_image, 'creepers') !!}
 
-                                            <div class="col-md-4 d-flex">
-                                                <input type="checkbox" name="umbang_defect['cracked']"
-                                                    id="umbang_cracked"
-                                                    {{ checkCheckBox('cracked', $data->umbang_defect) }}
-                                                    class="form-check"><label for="umbang_cracked"> No Stay
-                                                    Insulator/Damaged
-                                                </label>
-                                            </div>
+                                            </td>
+                                        </tr>
 
-                                            <div class="col-md-4 d-flex">
+                                        <tr>
+                                            <td class="d-flex">
+                                                <input type="checkbox" name="umbang_defect[cracked]" id="umbang_cracked"
+                                                    class="form-check "
+                                                    {{ checkCheckBox('cracked', $data->umbang_defect) }}>
+                                                <label for="umbang_cracked"> No Stay Insulator/Damaged </label>
+                                            </td>
+                                            <td>
+                                                <input type="file" name="umbang_defect_image[cracked]"
+                                                    id="umbang_cracked-image"
+                                                    class="@if (checkCheckBox('cracked', $data->umbang_defect) != 'checked') d-none @endif form-control">
+                                            </td>
+                                            <td>
+                                                {!! getImage(checkCheckBox('cracked', $data->umbang_defect), $data->umbang_defect_image, 'cracked') !!}
+
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="d-flex">
                                                 <input type="checkbox" name="umbang_defect[stay_palte]" id="stay_palte"
-                                                    {{ checkCheckBox('stay_palte', $data->umbang_defect) }}
-                                                    class="form-check"><label for="stay_palte"> Stay Plate / Base Stay
-                                                    Blocked
-                                                </label>
-                                            </div>
+                                                    class="form-check"
+                                                    {{ checkCheckBox('stay_palte', $data->umbang_defect) }}>
+                                                <label for="stay_palte"> Stay Plate / Base Stay Blocked</label>
+                                            </td>
+                                            <td>
+                                                <input type="file" name="umbang_defect_image[stay_palte]"
+                                                    id="stay_palte-image"
+                                                    class="@if (checkCheckBox('stay_palte', $data->umbang_defect) != 'checked') d-none @endif form-control">
+                                            </td>
+                                            <td>
+                                                {!! getImage(checkCheckBox('stay_palte', $data->umbang_defect), $data->umbang_defect_image, 'stay_palte') !!}
 
-                                        </div>
-                                    </div>
-                                </div>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" name="umbang_defect[other]"
+                                                    id="other_umbang_defect"
+                                                    {{ checkCheckBox('other', $data->umbang_defect) }} class="form-check">
+                                                <label for="other_umbang_defect"> Others </label>
+                                            </td>
+                                            <td>
+                                                <input type="file" name="umbang_defect_image[other]"
+                                                    id="other_umbang_defect-image"
+                                                    class="@if (checkCheckBox('other', $data->umbang_defect) != 'checked') d-none @endif form-control">
+                                            </td>
+                                            <td>
+                                                {!! getImage(checkCheckBox('other', $data->umbang_defect), $data->umbang_defect_image, 'other') !!}
+                                            </td>
+                                        </tr>
 
 
+                                        {{-- IPC --}}
+                                        <tr>
+                                            <th rowspan="2">IPC</th>
+                                            <td>
+                                                <input type="checkbox" name="ipc_defect[burn]"
+                                                    id="ipc_burn"class="form-check"
+                                                    {{ checkCheckBox('burn', $data->ipc_defect) }}>
+                                                <label for="ipc_burn"> Burn Effect</label>
+                                            </td>
+                                            <td>
+                                                <input type="file" name="ipc_defect_image[burn]" id="ipc_burn-image"
+                                                    class="@if (checkCheckBox('burn', $data->ipc_defect) != 'checked') d-none @endif form-control">
+                                            </td>
+                                            <td>
+                                                {!! getImage(checkCheckBox('burn', $data->ipc_defect), $data->ipc_defect_image, 'burn') !!}
+                                            </td>
+                                        </tr>
 
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" name="ipc_defect[other]" id="other_ipc_defect"
+                                                    {{ checkCheckBox('other', $data->ipc_defect) }} class="form-check">
+                                                <label for="other_ipc_defect"> Others </label>
+                                            </td>
+                                            <td>
+                                                <input type="file" name="ipc_defect_image[other]"
+                                                    id="other_ipc_defect-image"
+                                                    class="@if (checkCheckBox('other', $data->ipc_defect) != 'checked') d-none @endif form-control">
+                                            </td>
+                                            <td>
+                                                {!! getImage(checkCheckBox('other', $data->ipc_defect), $data->ipc_defect_image, 'other') !!}
+                                            </td>
+                                        </tr>
 
-                                <div class="row">
-                                    <div class="col-md-4"><label for="">IPC</label></div>
-                                    <div class="col-md-8">
-                                        <div class="row">
-                                            <div class="col-md-4 d-flex">
-                                                <input type="checkbox" name="ipc_defect[burn]" id="ipc-burn"
-                                                    {{ checkCheckBox('burn', $data->ipc_defect) }}
-                                                    class="form-check"><label for="ipc-burn"> Burn Effect</label>
-                                            </div>
+                                        {{-- Black Box --}}
 
-                                        </div>
-                                    </div>
-                                </div>
-
-
-
-                                <div class="row">
-                                    <div class="col-md-4"><label for="">Black Box</label></div>
-                                    <div class="col-md-8">
-                                        <div class="row">
-                                            <div class="col-md-4 d-flex">
+                                        <tr>
+                                            <th rowspan="2">Black Box</th>
+                                            <td class="d-flex">
                                                 <input type="checkbox" name="blackbox_defect[cracked]"
-                                                    {{ checkCheckBox('cracked', $data->blackbox_defect) }}
-                                                    id="black-box-cracked" class="form-check"><label
-                                                    for="black-box-cracked"> Kesan Bakar</label>
-                                            </div>
+                                                    id="black_box_cracked" class="form-check"
+                                                    {{ checkCheckBox('cracked', $data->blackbox_defect) }}>
+                                                <label for="black_box_cracked"> Kesan Bakar</label>
+                                            </td>
+                                            <td>
+                                                <input type="file" name="blackbox_defect_image[cracked]"
+                                                    id="black_box_cracked-image"
+                                                    class="@if (checkCheckBox('cracked', $data->blackbox_defect) != 'checked') d-none @endif form-control">
+                                            </td>
+                                            <td>
+                                                {!! getImage(checkCheckBox('cracked', $data->blackbox_defect), $data->blackbox_defect_image, 'cracked') !!}
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" name="blackbox_defect[other]"
+                                                    id="other_blackbox_defect"
+                                                    {{ checkCheckBox('other', $data->blackbox_defect) }}
+                                                    class="form-check">
+                                                <label for="other_blackbox_defect"> Others </label>
+                                            </td>
+                                            <td>
+                                                <input type="file" name="blackbox_defect_image[other]"
+                                                    id="other_blackbox_defect-image"
+                                                    class="@if (checkCheckBox('other', $data->blackbox_defect) != 'checked') d-none @endif form-control">
+                                            </td>
+                                            <td>
+                                                {!! getImage(checkCheckBox('other', $data->blackbox_defect), $data->blackbox_defect_image, 'other') !!}
+                                            </td>
+                                        </tr>
+
+                                        {{-- Jumper --}}
+
+                                        <tr>
+                                            <th rowspan="3">Jumper</th>
+                                            <td class="d-flex">
+                                                <input type="checkbox" name="jumper[sleeve]" id="jumper_sleeve"
+                                                    class="form-check" {{ checkCheckBox('sleeve', $data->jumper) }}>
+                                                <label for="jumper_sleeve"> No UV Sleeve</label>
+                                            </td>
+                                            <td>
+                                                <input type="file" name="jumper_image[sleeve]"
+                                                    id="jumper_sleeve-image"
+                                                    class=" form-control  @if (checkCheckBox('sleeve', $data->jumper) != 'checked') d-none @endif ">
+                                            </td>
+                                            <td>
+                                                {!! getImage(checkCheckBox('sleeve', $data->jumper), $data->jumper_image, 'sleeve') !!}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="d-flex">
+                                                <input type="checkbox" name="jumper[burn]" id="jumper_burn"
+                                                    class="form-check" {{ checkCheckBox('burn', $data->jumper) }}>
+                                                <label for="jumper_burn"> Burn Effect</label>
+                                            </td>
+                                            <td>
+                                                <input type="file" name="jumper_image[burn]" id="jumper_burn-image"
+                                                    class=" form-control  @if (checkCheckBox('burn', $data->jumper) != 'checked') d-none @endif">
+                                            </td>
+                                            <td>
+                                                {!! getImage(checkCheckBox('burn', $data->jumper), $data->jumper_image, 'burn') !!}
+                                            </td>
+                                        </tr>
 
 
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" name="jumper[other]" id="other_jumper"
+                                                    {{ checkCheckBox('other', $data->jumper) }} class="form-check">
+                                                <label for="other_jumper"> Others </label>
+                                            </td>
+                                            <td>
+                                                <input type="file" name="jumper_image[other]" id="other_jumper-image"
+                                                    class=" form-control @if (checkCheckBox('other', $data->jumper) != 'checked') d-none @endif">
+                                            </td>
+                                            <td>
+                                                {!! getImage(checkCheckBox('other', $data->jumper), $data->jumper_image, 'other') !!}
+                                            </td>
+                                        </tr>
 
-                                        </div>
-                                    </div>
-                                </div>
+                                        {{-- Lightning catcher --}}
 
+                                        <tr>
+                                            <th rowspan="2">Lightning catcher</th>
+                                            <td class="d-flex">
+                                                <input type="checkbox" name="kilat_defect[broken]" id="lightning_broken"
+                                                    class="form-check" {{ checkCheckBox('broken', $data->kilat_defect) }}>
+                                                <label for="lightning_broken"> Broken</label>
+                                            </td>
+                                            <td>
+                                                <input type="file" name="kilat_defect_image[broken]"
+                                                    id="lightning_broken-image"
+                                                    class="@if (checkCheckBox('broken', $data->kilat_defect) != 'checked') d-none @endif form-control">
+                                            </td>
+                                            <td>
+                                                {!! getImage(checkCheckBox('broken', $data->kilat_defect), $data->kilat_defect_image, 'broken') !!}
+                                            </td>
+                                        </tr>
 
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" name="kilat_defect[other]" id="other_kilat_defect"
+                                                    {{ checkCheckBox('other', $data->kilat_defect) }} class="form-check">
+                                                <label for="other_kilat_defect"> Others </label>
+                                            </td>
+                                            <td>
+                                                <input type="file" name="kilat_defect_image[other]"
+                                                    id="other_kilat_defect-image"
+                                                    class="@if (checkCheckBox('other', $data->kilat_defect) != 'checked') d-none @endif form-control">
+                                            </td>
+                                            <td>
+                                                {!! getImage(checkCheckBox('other', $data->kilat_defect), $data->kilat_defect_image, 'other') !!}
+                                            </td>
+                                        </tr>
 
+                                        {{-- Service --}}
 
+                                        <tr>
+                                            <th rowspan="3">Service</th>
+                                            <td class="d-felx">
+                                                <input type="checkbox" name="servis_defect[roof]" id="service_roof"
+                                                    class="form-check" {{ checkCheckBox('roof', $data->servis_defect) }}>
+                                                <label for="service_roof"> The service line is on the roof</label>
+                                            </td>
+                                            <td>
+                                                <input type="file" name="servis_defect_image[roof]"
+                                                    id="service_roof-image"
+                                                    class="@if (checkCheckBox('roof', $data->servis_defect) != 'checked') d-none @endif form-control">
+                                            </td>
+                                            <td>
+                                                {!! getImage(checkCheckBox('roof', $data->servis_defect), $data->servis_defect_image, 'othroofer') !!}
+                                            </td>
+                                        </tr>
 
-
-                                <div class="row">
-                                    <div class="col-md-4"><label for="">Jumper</label></div>
-                                    <div class="col-md-8">
-                                        <div class="row">
-                                            <div class="col-md-4 d-flex">
-                                                <input type="checkbox" name="jumper[sleeve]" id="jumper-sleeve"
-                                                    {{ checkCheckBox('sleeve', $data->jumper) }}
-                                                    class="form-check"><label for="jumper-sleeve"> No UV Sleeve</label>
-                                            </div>
-
-                                            <div class="col-md-4 d-flex">
-                                                <input type="checkbox" name="jumper[burn]" id="jumper-burn"
-                                                    {{ checkCheckBox('burn', $data->jumper) }} class="form-check"><label
-                                                    for="jumper-burn">
-                                                    Burn Effect</label>
-                                            </div>
-
-                                            {{-- <div class="col-md-4 d-flex">
-                                                <input type="checkbox" name="jumper[damage]" id="jumper-damage"
-                                                    {{ checkCheckBox('damage', $data->jumper) }}
-                                                    class="form-check"><label for="jumper-damage"> No Stay
-                                                    Insulator/Damaged
-                                                </label>
-                                            </div>
-
-                                            <div class="col-md-4 d-flex">
-                                                <input type="checkbox" name="jumper[blocked]" id="jumper-blocked"
-                                                    {{ checkCheckBox('damage', $data->jumper) }}
-                                                    class="form-check"><label for="jumper-blocked"> Stay Plate / Base Stay
-                                                    Blocked
-                                                </label>
-                                            </div> --}}
-
-                                        </div>
-                                    </div>
-                                </div>
-
-
-
-
-
-
-                                <div class="row">
-                                    <div class="col-md-4"><label for="">Lightning catcher</label></div>
-                                    <div class="col-md-8">
-                                        <div class="row">
-                                            <div class="col-md-4 d-flex">
-                                                <input type="checkbox" name="kilat_defect[broken]" id="lightning-broken"
-                                                    {{ checkCheckBox('broken', $data->kilat_defect) }}
-                                                    class="form-check"><label for="lightning-broken"> Broken</label>
-                                            </div>
-
-
-
-                                        </div>
-                                    </div>
-                                </div>
-
-
-
-
-                                <div class="row">
-                                    <div class="col-md-4"><label for="">Service</label></div>
-                                    <div class="col-md-8">
-                                        <div class="row">
-                                            <div class="col-md-4 d-flex">
-                                                <input type="checkbox" name="servis_defect[roof]" id="service-roof"
-                                                    {{ checkCheckBox('roof', $data->servis_defect) }}
-                                                    class="form-check"><label for="service-roof">
-                                                    The service line is on the roof</label>
-                                            </div>
-
-                                            <div class="col-md-4 d-flex">
+                                        <tr>
+                                            <td class="d-felx">
                                                 <input type="checkbox" name="servis_defect[won_piece]"
-                                                    {{ checkCheckBox('won_piece', $data->servis_defect) }}
-                                                    id="service-won-piece" class="form-check"><label
-                                                    for="service-won-piece">
-                                                    Won piece Date</label>
-                                            </div>
+                                                    id="service_won_piece" class="form-check"
+                                                    {{ checkCheckBox('won_piece', $data->servis_defect) }}>
+                                                <label for="service_won_piece"> Won piece Date</label>
+                                            </td>
+                                            <td>
+                                                <input type="file" name="servis_defect_image[won_piece]"
+                                                    id="service_won_piece-image"
+                                                    class="@if (checkCheckBox('won_piece', $data->servis_defect) != 'checked') d-none @endif form-control">
+                                            </td>
+                                            <td>
+                                                {!! getImage(checkCheckBox('won_piece', $data->servis_defect), $data->servis_defect_image, 'won_piece') !!}
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" name="servis_defect[other]"
+                                                    id="other_servis_defect"
+                                                    {{ checkCheckBox('other', $data->servis_defect) }} class="form-check">
+                                                <label for="other_servis_defect"> Others </label>
+                                            </td>
+                                            <td>
+                                                <input type="file" name="servis_defect_image[other]"
+                                                    id="other_servis_defect-image"
+                                                    class="@if (checkCheckBox('other', $data->servis_defect) != 'checked') d-none @endif form-control">
+                                            </td>
+                                            <td>
+                                                {!! getImage(checkCheckBox('other', $data->servis_defect), $data->servis_defect_image, 'other') !!}
+                                            </td>
+                                        </tr>
 
 
+                                        {{-- Grounding --}}
 
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="row">
-                                    <div class="col-md-4"><label for="">Grounding</label></div>
-                                    <div class="col-md-8">
-                                        <div class="row">
-                                            <div class="col-md-4 d-flex">
+                                        <tr>
+                                            <th rowspan="2">Grounding</th>
+                                            <td>
                                                 <input type="checkbox" name="pembumian_defect[netural]"
-                                                    {{ checkCheckBox('netural', $data->pembumian_defect) }}
-                                                    id="grounding-netural" class="form-check"><label
-                                                    for="grounding-netural"> No Connection to Neutral</label>
-                                            </div>
+                                                    id="grounding_netural" class="form-check"
+                                                    {{ checkCheckBox('netural', $data->pembumian_defect) }}>
+                                                <label for="grounding_netural"> No Connection to Neutral</label>
+                                            </td>
+                                            <td>
+                                                <input type="file" name="pembumian_defect_image[netural]"
+                                                    id="grounding_netural-image"
+                                                    class="@if (checkCheckBox('netural', $data->pembumian_defect) != 'checked') d-none @endif form-control">
+                                            </td>
+                                            <td>
+                                                {!! getImage(checkCheckBox('netural', $data->pembumian_defect), $data->pembumian_defect_image, 'netural') !!}
+                                            </td>
+                                        </tr>
 
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" name="pembumian_defect[other]"
+                                                    id="other_pembumian_defect"
+                                                    {{ checkCheckBox('other', $data->pembumian_defect) }}
+                                                    class="form-check">
+                                                <label for="other_pembumian_defect"> Others </label>
+                                            </td>
+                                            <td>
+                                                <input type="file" name="pembumian_defect_image[other]"
+                                                    id="other_pembumian_defect-image"
+                                                    class="@if (checkCheckBox('other', $data->pembumian_defect) != 'checked') d-none @endif form-control">
+                                            </td>
+                                            <td>
+                                                {!! getImage(checkCheckBox('other', $data->pembumian_defect), $data->pembumian_defect_image, 'other') !!}
+                                            </td>
+                                        </tr>
 
-
-                                        </div>
-                                    </div>
-                                </div>
-
-
-
-                                <div class="row">
-                                    <div class="col-md-4"><label for="">
-                                            Signage - OFF Point / Two Way Supply</label></div>
-                                    <div class="col-md-8">
-                                        <div class="row">
-                                            <div class="col-md-4 d-flex">
+                                        {{-- Signage - OFF Point / Two Way Supply --}}
+                                        <tr>
+                                            <th rowspan="2">Signage - OFF Point / Two Way Supply</th>
+                                            <td class="d-flex">
                                                 <input type="checkbox" name="bekalan_dua_defect[damage]"
-                                                    {{ checkCheckBox('damage', $data->bekalan_dua_defect) }}
-                                                    id="signage-damage" class="form-check"><label for="signage-damage">
-                                                    Faded / Damaged / Missing Signage</label>
-                                            </div>
+                                                    id="signage_damage" class="form-check"
+                                                    {{ checkCheckBox('damage', $data->bekalan_dua_defect) }}>
+                                                <label for="signage_damage"> Faded / Damaged / Missing Signage</label>
+                                            </td>
+                                            <td>
+                                                <input type="file" name="bekalan_dua_defect_image[damage]"
+                                                    id="signage_damage-image"
+                                                    class="@if (checkCheckBox('damage', $data->bekalan_dua_defect) != 'checked') d-none @endif form-control">
+                                            </td>
+                                            <td>
+                                                {!! getImage(checkCheckBox('damage', $data->bekalan_dua_defect), $data->bekalan_dua_defect_image, 'damage') !!}
+                                            </td>
+                                        </tr>
 
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" name="bekalan_dua_defect[other]"
+                                                    id="other_bekalan_dua_defect"
+                                                    {{ checkCheckBox('other', $data->bekalan_dua_defect) }}
+                                                    class="form-check">
+                                                <label for="other_bekalan_dua_defect"> Others </label>
+                                            </td>
+                                            <td>
+                                                <input type="file" name="bekalan_dua_defect_image[other]"
+                                                    id="other_bekalan_dua_defect-image"
+                                                    class="@if (checkCheckBox('other', $data->bekalan_dua_defect) != 'checked') d-none @endif form-control">
+                                            </td>
+                                            <td>
+                                                {!! getImage(checkCheckBox('other', $data->bekalan_dua_defect), $data->bekalan_dua_defect_image, 'other') !!}
+                                            </td>
+                                        </tr>
 
-                                        </div>
-                                    </div>
-                                </div>
+                                        {{-- Main Street --}}
 
-
-
-                                <div class="row">
-                                    <div class="col-md-4"><label for="">Main Street</label></div>
-                                    <div class="col-md-8">
-                                        <div class="row">
-                                            <div class="col-md-4 d-flex">
+                                        <tr>
+                                            <th rowspan="3">Main Street</th>
+                                            <td class="d-flex">
                                                 <input type="checkbox" name="kaki_lima_defect[date_wire]"
-                                                    {{ checkCheckBox('date_wire', $data->kaki_lima_defect) }}
-                                                    id="street-date-wire" class="form-check"><label
-                                                    for="street-date-wire">Date Wire</label>
-                                            </div>
-
-                                            <div class="col-md-4 d-flex">
-                                                <input type="checkbox" name="kaki_lima_defect[burn]" id="street-burn"
-                                                    {{ checkCheckBox('burn', $data->kaki_lima_defect) }}
-                                                    class="form-check"><label for="street-burn">
-                                                    Junction Box Date / Burn Effect</label>
-                                            </div>
-
-
-                                        </div>
-                                    </div>
+                                                    id="street_date_wire" class="form-check"
+                                                    {{ checkCheckBox('date_wire', $data->kaki_lima_defect) }}>
+                                                <label for="street_date_wire">Date Wire</label>
+                                            </td>
+                                            <td>
+                                                <input type="file" name="kaki_lima_defect_image[date_wire]"
+                                                    id="street_date_wire-image"
+                                                    class="@if (checkCheckBox('date_wire', $data->kaki_lima_defect) != 'checked') d-none @endif form-control">
+                                            </td>
+                                            <td>
+                                                {!! getImage(checkCheckBox('date_wire', $data->kaki_lima_defect), $data->kaki_lima_defect_image, 'date_wire') !!}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="d-flex">
+                                                <input type="checkbox" name="kaki_lima_defect[burn]" id="street_burn"
+                                                    class="form-check"
+                                                    {{ checkCheckBox('burn', $data->kaki_lima_defect) }}>
+                                                <label for="street_burn"> Junction Box Date / Burn Effect</label>
+                                            </td>
+                                            <td>
+                                                <input type="file" name="kaki_lima_defect_image[burn]"
+                                                    id="street_burn-image"
+                                                    class="@if (checkCheckBox('burn', $data->kaki_lima_defect) != 'checked') d-none @endif form-control">
+                                            </td>
+                                            <td>
+                                                {!! getImage(checkCheckBox('burn', $data->kaki_lima_defect), $data->kaki_lima_defect_image, 'burn') !!}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" name="kaki_lima_defect[other]"
+                                                    id="other_kaki_lima_defect_image"
+                                                    {{ checkCheckBox('other', $data->kaki_lima_defect) }}
+                                                    class="form-check">
+                                                <label for="other_kaki_lima_defect_image"> Others </label>
+                                            </td>
+                                            <td>
+                                                <input type="file" name="kaki_lima_defect_image[other]"
+                                                    id="other_kaki_lima_defect_image-image"
+                                                    class="@if (checkCheckBox('other', $data->kaki_lima_defect) != 'checked') d-none @endif form-control">
+                                            </td>
+                                            <td>
+                                                {!! getImage(checkCheckBox('other', $data->kaki_lima_defect), $data->kaki_lima_defect_image, 'other') !!}
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </div>
+
+                            </fieldset>
+
+
+
+
+                            {{-- START Kejanggalan (3) --}}
+                            <h3></h3>
+                            <fieldset class="form-input">
+
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="total_defects">Total Defects</label></div>
-                                    <div class="col-md-4"><input type="number" name="total_defects" id="total_defects"
+                                    <div class="col-md-4"><input type="number" name="total_defects" id="total_defects" readonly
                                             value="{{ $data->total_defects }}" class="form-control"></div>
                                 </div>
 
@@ -593,8 +963,11 @@
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="remarks">Remarks</label></div>
-                                    <div class="col-md-4"><input type="text" name="remarks" id="remarks"
-                                            value="{{ $data->remarks }}" class="form-control"></div>
+                                    <div class="col-md-4">
+                                        <textarea name="remarks" id="remarks" cols="30" rows="10" class="form-control">
+                                            {{ $data->remarks }}
+                                        </textarea>
+                                    </div>
                                 </div>
 
 
@@ -612,73 +985,160 @@
 
                             <fieldset class="form-input">
                                 <h3>Heigh Clearance</h3>
-                                <div class="row">
-                                    <div class="col-md-4"><label for="">Site Conditions</label></div>
-                                    <div class="col-md-8">
-                                        <div class="row">
-                                            <div class="col-md-4 d-flex">
-                                                <input type="checkbox" name="tapak_condition[road]" id="site-road"
-                                                    {{ checkCheckBox('road', $data->tapak_condition) }}
-                                                    class="form-check"><label for="site-road">
-                                                    Crossing the Road</label>
-                                            </div>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered w-100">
+                                        <thead style="background-color: #E4E3E3 !important">
+                                            <th class="col-4">Title</th>
+                                            <th class="col-4">Defects</th>
+                                            <th class="col-3">Upload Images</th>
+                                            <th class="col-1">Images</th>
+                                        </thead>
 
-                                            <div class="col-md-4 d-flex">
-                                                <input type="checkbox" name="tapak_condition[side_walk]" id="side_walk"
-                                                    {{ checkCheckBox('side_walk', $data->tapak_condition) }}
-                                                    class="form-check"><label for="side_walk">
-                                                    Sidewalk</label>
-                                            </div>
+                                        <tbody>
 
-                                            <div class="col-md-4 d-flex">
-                                                <input type="checkbox" name="tapak_condition[vehicle_entry]"
-                                                    {{ checkCheckBox('vehicle_entry', $data->tapak_condition) }}
-                                                    id="vehicle_entry" class="form-check"><label for="vehicle_entry">No
-                                                    vehicle entry area
-                                                </label>
-                                            </div>
+                                            {{-- Site Conditions --}}
 
-                                        </div>
-                                    </div>
+                                            <tr>
+                                                <th rowspan="3">Site Conditions</th>
+                                                <td class="d-flex">
+                                                    <input type="checkbox" name="tapak_condition[road]" id="site_road"
+                                                        class="form-check"
+                                                        {{ checkCheckBox('road', $data->tapak_condition) }}>
+                                                    <label for="site_road">Crossing the Road</label>
+                                                </td>
+                                                <td>
+                                                    <input type="file" name="tapak_road_img" id="site_road-img"
+                                                        class="form-control">
+                                                </td>
+                                                <td>
+                                                    @if ($data->tapak_road_img != '' && file_exists(public_path($data->tapak_road_img)) ) 
+                                                    <a href="{{ URL::asset($data->tapak_road_img)}}" data-lightbox="roadtrip">
+                                                       <img src="{{ URL::asset($data->tapak_road_img)}}" alt="" class="adjust-height " style="height:30px; width:30px !important">
+                                                   </a>
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input type="checkbox" name="tapak_condition[side_walk]"
+                                                        id="side_walk" class="form-check"
+                                                        {{ checkCheckBox('side_walk', $data->tapak_condition) }}>
+                                                    <label for="side_walk">Sidewalk</label>
+                                                </td>
+                                                <td>
+                                                    <input type="file" name="tapak_sidewalk_img" id="side_walk-img"
+                                                        class="form-control">
+                                                </td>
+                                                <td>
+                                                     @if ($data->tapak_sidewalk_img != '' && file_exists(public_path($data->tapak_sidewalk_img)) ) 
+                                                     <a href="{{ URL::asset($data->tapak_sidewalk_img)}}" data-lightbox="roadtrip">
+                                                        <img src="{{ URL::asset($data->tapak_sidewalk_img)}}" alt="" class="adjust-height " style="height:30px; width:30px !important">
+                                                    </a>
+                                                     @endif
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input type="checkbox" name="tapak_condition[vehicle_entry]"
+                                                        id="vehicle_entry" class="form-check"
+                                                        {{ checkCheckBox('vehicle_entry', $data->tapak_condition) }}>
+                                                    <label for="vehicle_entry">No vehicle entry area </label>
+                                                </td>
+                                                <td>
+                                                    <input type="file" name="tapak_no_vehicle_entry_img"
+                                                        id="vehicle_entry-img" class="form-control">
+                                                </td>
+                                                <td>
+                                                    @if ($data->tapak_no_vehicle_entry_img != '' && file_exists(public_path($data->tapak_no_vehicle_entry_img)) ) 
+                                                    <a href="{{ URL::asset($data->tapak_no_vehicle_entry_img)}}" data-lightbox="roadtrip">
+                                                       <img src="{{ URL::asset($data->tapak_no_vehicle_entry_img)}}" alt="" class="adjust-height " style="height:30px; width:30px !important">
+                                                   </a>
+                                                    @endif
+                                                </td>
+                                            </tr>
+
+                                            {{-- Area --}}
+                                            <tr>
+                                                <th rowspan="4">Area</th>
+                                                <td class="d-flex">
+                                                    <input type="checkbox" name="kawasan[bend]" id="area_bend"
+                                                        class="form-check" {{ checkCheckBox('bend', $data->kawasan) }}>
+                                                    <label for="area_bend">Bend</label>
+                                                </td>
+                                                <td>
+                                                    <input type="file" name="kawasan_bend_img" id="area_bend-img"
+                                                        class="form-control">
+                                                </td>
+                                                <td>
+                                                    @if ($data->kawasan_bend_img != '' && file_exists(public_path($data->kawasan_bend_img)) ) 
+                                                    <a href="{{ URL::asset($data->kawasan_bend_img)}}" data-lightbox="roadtrip">
+                                                       <img src="{{ URL::asset($data->kawasan_bend_img)}}" alt="" class="adjust-height " style="height:30px; width:30px !important">
+                                                   </a>
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input type="checkbox" name="kawasan[raod]" id="area_raod"
+                                                        class="form-check" {{ checkCheckBox('raod', $data->kawasan) }}>
+                                                    <label for="area_raod"> Road</label>
+                                                </td>
+                                                <td>
+                                                    <input type="file" name="kawasan_road_img" id="area_raod-img"
+                                                        class="form-control">
+                                                </td>
+                                                <td>
+                                                    @if ($data->kawasan_road_img != '' && file_exists(public_path($data->kawasan_road_img)) ) 
+                                                    <a href="{{ URL::asset($data->kawasan_road_img)}}" data-lightbox="roadtrip">
+                                                       <img src="{{ URL::asset($data->kawasan_road_img)}}" alt="" class="adjust-height " style="height:30px; width:30px !important">
+                                                   </a>
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input type="checkbox" name="kawasan[forest]" id="area_forest"
+                                                        class="form-check" {{ checkCheckBox('forest', $data->kawasan) }}>
+                                                    <label for="area_forest">Forest </label>
+                                                </td>
+                                                <td>
+                                                    <input type="file" name="kawasan_forest_img" id="area_forest-img"
+                                                        class="form-control">
+                                                </td>
+                                                <td>
+                                                    @if ($data->kawasan_forest_img != '' && file_exists(public_path($data->kawasan_forest_img)) ) 
+                                                    <a href="{{ URL::asset($data->kawasan_forest_img)}}" data-lightbox="roadtrip">
+                                                       <img src="{{ URL::asset($data->kawasan_forest_img)}}" alt="" class="adjust-height " style="height:30px; width:30px !important">
+                                                   </a>
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input type="checkbox" name="kawasan[other]" id="area_other"
+                                                        class="form-check" {{ checkCheckBox('other', $data->kawasan) }}>
+                                                    <label for="area_other">others (please state)</label>
+                                                </td>
+                                                <td>
+                                                    <input type="file" name="kawasan_other_img" id="area_other-img"
+                                                        class="form-control">
+                                                </td>
+                                                <td>
+                                                    @if ($data->kawasan_other_img != '' && file_exists(public_path($data->kawasan_other_img)) ) 
+                                                    <a href="{{ URL::asset($data->kawasan_other_img)}}" data-lightbox="roadtrip">
+                                                       <img src="{{ URL::asset($data->kawasan_other_img)}}" alt="" class="adjust-height " style="height:30px; width:30px !important">
+                                                   </a>
+                                                    @endif
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
                                 </div>
 
 
 
-                                <div class="row">
-                                    <div class="col-md-4"><label for=""> Area</label></div>
-                                    <div class="col-md-8">
-                                        <div class="row">
-                                            <div class="col-md-4 d-flex">
-                                                <input type="checkbox" name="kawasan[bend]" id="area-bend"
-                                                    {{ checkCheckBox('bend', $data->kawasan) }} class="form-check"><label
-                                                    for="area-bend">
-                                                    Bend</label>
-                                            </div>
 
-                                            <div class="col-md-4 d-flex">
-                                                <input type="checkbox" name="kawasan[raod]" id="area-raod"
-                                                    {{ checkCheckBox('raod', $data->kawasan) }} class="form-check"><label
-                                                    for="area-raod">
-                                                    Road</label>
-                                            </div>
-
-                                            <div class="col-md-4 d-flex">
-                                                <input type="checkbox" name="kawasan[forest]" id="area-forest"
-                                                    {{ checkCheckBox('forest', $data->kawasan) }}
-                                                    class="form-check"><label for="area-forest">Forest
-                                                </label>
-                                            </div>
-
-                                            <div class="col-md-4 d-flex">
-                                                <input type="checkbox" name="kawasan[other]" id="area-other"
-                                                    {{ checkCheckBox('other', $data->kawasan) }}
-                                                    class="form-check"><label for="area-other">others (please state)
-                                                </label>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
 
 
                                 <div class="row">
@@ -720,168 +1180,7 @@
                             {{-- END Heigh Clearance (4) --}}
 
 
-                            <h3></h3>
-                            {{-- START Kejanggalan Images --}}
-                            <fieldset class="form-input">
-                                <h3>Kejanggalan Images</h3>
-
-
-
-                                <div class="row">
-                                    <div class="col-md-4"><label for="tapak_road_img">Crossing the Road Image</label></div>
-                                    <div class="col-md-4">
-                                        <input type="file" name="tapak_road_img" id="tapak_road_img"
-                                            class="form-control">
-                                    </div>
-
-                                    <div class="col-md-4 text-center mb-3">
-                                        @if (file_exists(public_path($data->tapak_road_img)) && $data->tapak_road_img != '')
-                                            <a href="{{ URL::asset($data->tapak_road_img) }}"
-                                                data-lightbox="roadtrip">
-                                                <img src="{{ URL::asset($data->tapak_road_img) }}" alt=""
-                                                    height="70" class="adjust-height ml-5  "></a>
-                                        @else
-                                            <strong>No image found</strong>
-                                        @endif
-                                    </div>
-                                </div>
-
-
-
-                                <div class="row">
-                                    <div class="col-md-4"><label for="tapak_sidewalk_img">Sidewalk Image</label></div>
-                                    <div class="col-md-4">
-                                        <input type="file" name="tapak_sidewalk_img" id="tapak_sidewalk_img"
-                                            class="form-control">
-                                    </div>
-
-                                    <div class="col-md-4 text-center mb-3">
-                                        @if (file_exists(public_path($data->tapak_sidewalk_img)) && $data->tapak_sidewalk_img != '')
-                                            <a href="{{ URL::asset($data->tapak_sidewalk_img) }}"
-                                                data-lightbox="roadtrip">
-                                                <img src="{{ URL::asset($data->tapak_sidewalk_img) }}" alt=""
-                                                    height="70" class="adjust-height ml-5  "></a>
-                                        @else
-                                            <strong>No image found</strong>
-                                        @endif
-                                    </div>
-                                </div>
-
-
-
-
-
-
-                                <div class="row">
-                                    <div class="col-md-4"><label
-                                            for="tapak_no_vehicle_entry_img">No Vehicle Entry Area Image</label></div>
-                                    <div class="col-md-4">
-                                        <input type="file" name="tapak_no_vehicle_entry_img"
-                                            id="tapak_no_vehicle_entry_img" class="form-control">
-                                    </div>
-
-                                    <div class="col-md-4 text-center mb-3">
-                                        @if (file_exists(public_path($data->tapak_no_vehicle_entry_img)) && $data->tapak_no_vehicle_entry_img != '')
-                                            <a href="{{ URL::asset($data->tapak_no_vehicle_entry_img) }}"
-                                                data-lightbox="roadtrip">
-                                                <img src="{{ URL::asset($data->tapak_no_vehicle_entry_img) }}" alt=""
-                                                    height="70" class="adjust-height ml-5  "></a>
-                                        @else
-                                            <strong>No image found</strong>
-                                        @endif
-                                    </div>
-                                </div>
-
-
-
-
-                                <div class="row">
-                                    <div class="col-md-4"><label for="kawasan_bend_img">Bend Area Image</label></div>
-                                    <div class="col-md-4">
-                                        <input type="file" name="kawasan_bend_img" id="kawasan_bend_img"
-                                            class="form-control">
-                                    </div>
-
-                                    <div class="col-md-4 text-center mb-3">
-                                        @if (file_exists(public_path($data->kawasan_bend_img)) && $data->kawasan_bend_img != '')
-                                            <a href="{{ URL::asset($data->kawasan_bend_img) }}"
-                                                data-lightbox="roadtrip">
-                                                <img src="{{ URL::asset($data->kawasan_bend_img) }}" alt=""
-                                                    height="70" class="adjust-height ml-5  "></a>
-                                        @else
-                                            <strong>No image found</strong>
-                                        @endif
-                                    </div>
-                                </div>
-
-
-
-
-                                <div class="row">
-                                    <div class="col-md-4"><label for="kawasan_road_img">Road Area Image</label></div>
-                                    <div class="col-md-4">
-                                        <input type="file" name="kawasan_road_img" id="kawasan_road_img"
-                                            class="form-control">
-                                    </div>
-
-                                    <div class="col-md-4 text-center mb-3">
-                                        @if (file_exists(public_path($data->kawasan_road_img)) && $data->kawasan_road_img != '')
-                                            <a href="{{ URL::asset($data->kawasan_road_img) }}"
-                                                data-lightbox="roadtrip">
-                                                <img src="{{ URL::asset($data->kawasan_road_img) }}" alt=""
-                                                    height="70" class="adjust-height ml-5  "></a>
-                                        @else
-                                            <strong>No image found</strong>
-                                        @endif
-                                    </div>
-                                </div>
-
-
-
-
-                                <div class="row">
-                                    <div class="col-md-4"><label for="kawasan_forest_img">Forest Area Image</label></div>
-                                    <div class="col-md-4">
-                                        <input type="file" name="kawasan_forest_img" id="kawasan_forest_img"
-                                            class="form-control">
-                                    </div>
-
-                                    <div class="col-md-4 text-center mb-3">
-                                        @if (file_exists(public_path($data->kawasan_forest_img)) && $data->kawasan_forest_img != '')
-                                            <a href="{{ URL::asset($data->kawasan_forest_img) }}"
-                                                data-lightbox="roadtrip">
-                                                <img src="{{ URL::asset($data->kawasan_forest_img) }}" alt=""
-                                                    height="70" class="adjust-height ml-5  "></a>
-                                        @else
-                                            <strong>No image found</strong>
-                                        @endif
-                                    </div>
-                                </div>
-
-
-                                <div class="row">
-                                    <div class="col-md-4"><label for="kawasan_other_img">Other Area Image</label></div>
-                                    <div class="col-md-4">
-                                        <input type="file" name="kawasan_other_img" id="kawasan_other_img"
-                                            class="form-control">
-                                    </div>
-
-                                    <div class="col-md-4 text-center mb-3">
-                                        @if (file_exists(public_path($data->kawasan_other_img)) && $data->kawasan_other_img != '')
-                                            <a href="{{ URL::asset($data->kawasan_other_img) }}"
-                                                data-lightbox="roadtrip">
-                                                <img src="{{ URL::asset($data->kawasan_other_img) }}" alt=""
-                                                    height="70" class="adjust-height ml-5  "></a>
-                                        @else
-                                            <strong>No image found</strong>
-                                        @endif
-                                    </div>
-                                </div>
-
-                            </fieldset>
-                            {{-- END Kejanggalan Images --}}
-
-
+                            
                             <h3></h3>
 
 
@@ -894,27 +1193,30 @@
                                 <div class="row">
                                     <div class="col-md-4"><label for="">Inspection of current leakage on the
                                             pole</label></div>
-                                            <div class="col-md-8">
-                                                <div class="row">
-                                                    <div class="col-md-4 d-flex">
-                                                        <input type="radio" name="arus_pada_tiang" id="arus_pada_tiang_no" class="form-check" value="no"
-                                                            {{ $data->arus_pada_tiang === 'no' ? 'checked' : '' }}>
-                                                        <label for="arus_pada_tiang_no">No</label>
-                                                    </div>
-
-                                                    <div class="col-md-4 d-flex">
-                                                        <input type="radio" name="arus_pada_tiang" id="arus_pada_tiang_yes" class="form-check" value="yes"
-                                                            {{ $data->arus_pada_tiang === 'yes' ? 'checked' : '' }}>
-                                                        <label for="arus_pada_tiang_yes">Yes</label>
-                                                    </div>
-
-                                                    <div class="col-md-4 d-flex">
-                                                        <input type="radio" name="arus_pada_tiang" id="arus_pada_tiang_amp" class="form-check" value="amp"
-                                                            {{ $data->arus_pada_tiang === 'amp' ? 'checked' : '' }}>
-                                                        <label for="arus_pada_tiang_amp">(Amp)</label>
-                                                    </div>
-                                                </div>
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <div class="col-md-4 d-flex">
+                                                <input type="radio" name="arus_pada_tiang" id="arus_pada_tiang_no"
+                                                    class="form-check" value="no"
+                                                    {{ $data->arus_pada_tiang === 'no' ? 'checked' : '' }}>
+                                                <label for="arus_pada_tiang_no">No</label>
                                             </div>
+
+                                            <div class="col-md-4 d-flex">
+                                                <input type="radio" name="arus_pada_tiang" id="arus_pada_tiang_yes"
+                                                    class="form-check" value="yes"
+                                                    {{ $data->arus_pada_tiang === 'yes' ? 'checked' : '' }}>
+                                                <label for="arus_pada_tiang_yes">Yes</label>
+                                            </div>
+
+                                            <div class="col-md-4 @if($data->arus_pada_tiang == 'no' || $data->arus_pada_tiang == '') d-none @endif" id="arus_pada_tiang_amp_div">
+                                                <label for="arus_pada_tiang_amp">(Amp)</label>
+                                                <input type="radio" name="arus_pada_tiang_amp" id="arus_pada_tiang_amp"
+                                                    class="form-control" value="{{$data->arus_pada_tiang_amp}}" required>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
 
                                 </div>
                             </fieldset>
@@ -993,6 +1295,52 @@
 
             $('#lat').val(position.coords.latitude)
             $('#log').val(position.coords.longitude)
+
+        }
+
+        $(document).ready(function() {
+
+            $('input[type="checkbox"]').on('click', function() {
+                addReomveImageField(this)
+
+            })
+
+            $('input[name="arus_pada_tiang"]').on('change',function(){
+                if (this.value == 'yes') {
+                    if($('#arus_pada_tiang_amp_div').hasClass('d-none')){
+                        $('#arus_pada_tiang_amp_div').removeClass('d-none');
+                    }  
+                }else{
+                    if(!$('#arus_pada_tiang_amp_div').hasClass('d-none')){
+                        $('#arus_pada_tiang_amp_div').addClass('d-none');
+                    }  
+                }
+            })
+
+
+        });
+
+        var total_defects = parseInt({{ $data->total_defects }});
+
+        function addReomveImageField(checkbox) {
+            var element = $(checkbox);
+            var id = element.attr('id');
+            var input = $(`#${id}-image`)
+
+            if (checkbox.checked) {
+                if (input.hasClass('d-none')) {
+                    input.removeClass('d-none');
+                    total_defects += 1;
+                }
+            } else {
+                if (!input.hasClass('d-none')) {
+                    input.addClass('d-none');
+                    total_defects -= 1;
+                }
+                console.log('unchecked');
+            }
+
+            $('#total_defects').val(total_defects)
 
         }
     </script>

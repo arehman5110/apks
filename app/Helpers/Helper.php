@@ -49,3 +49,19 @@ function getZone(){
     
     return $zone;
 }
+
+function getImage($checkBox, $arr, $key) {
+ 
+    if ($checkBox == 'checked') {
+        if ($arr != null) {
+            if (array_key_exists($key, $arr) && file_exists(public_path($arr[$key])) && $arr[$key] != '') {
+                return '<a href="' . URL::asset($arr[$key]) . '" data-lightbox="roadtrip">
+                            <img src="' . URL::asset($arr[$key]) . '" alt="" class="adjust-height " style="height:30px; width:30px !important">
+                        </a>';
+            }
+        }
+    }else{
+        return '';
+    }
+    return "<span style='font-size:11px'>no image found</span>";
+}
