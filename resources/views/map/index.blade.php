@@ -163,7 +163,7 @@
                 </div>
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
-                        <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/{{app()->getLocale()}}/dashboard">Home</a></li>
                         <li class="breadcrumb-item active">map</li>
                     </ol>
                 </div>
@@ -826,7 +826,7 @@
                         }
                     );
                     $.ajax({
-                        url: '/proxy/' + encodeURIComponent(url),
+                        url: '/{{app()->getLocale()}}/proxy/' + encodeURIComponent(url),
                         dataType: 'JSON',
                         //data: data,
                         method: 'GET',
@@ -922,7 +922,7 @@
                 );
                 var secondUrl = encodeURIComponent(url)
                 $.ajax({
-                    url: '/proxy/' + encodeURIComponent(secondUrl),
+                    url: '/{{app()->getLocale()}}/proxy/' + encodeURIComponent(secondUrl),
                     dataType: 'JSON',
                     //data: data,
                     method: 'GET',
@@ -947,8 +947,8 @@
                                         if (data.features[0].properties[key] =='') {
                                             str = str + `<td>no image found</td></tr>`;
                                         }else{
-                                         str = str + `<td><a href="${data.features[0].properties[key]}" data-lightbox="roadtrip">
-                                                    <img src="${data.features[0].properties[key]}" alt=""
+                                         str = str + `<td><a href="http://`+window.location.host+`/${data.features[0].properties[key]}" data-lightbox="roadtrip">
+                                                    <img src="http://`+window.location.host+`/${data.features[0].properties[key]}" alt=""
                                                     width="20px" height="20px" class="adjust-height ml-5  "></a></td></tr>`;
                                               }
                                     // str = str + '<tr><td>' + key + '</td><td><a href="' + data.features[
@@ -965,7 +965,7 @@
                             }
                             if ($('#tableLayer').val() == 'supervise' || $('#tableLayer').val() =='notice') {
                                 str = str +
-                                    `<tr><td> Report</td><td> <a href="/generate-third-party-pdf/${data.features[0].properties.id}" target="_blank"><button class="btn btn-sm btn-success">Download</button></a></td></tr>`
+                                    `<tr><td> Report</td><td> <a href="/{{app()->getLocale()}}/generate-third-party-pdf/${data.features[0].properties.id}" target="_blank"><button class="btn btn-sm btn-success">Download</button></a></td></tr>`
 
                             }
 
@@ -1296,7 +1296,7 @@
             addRemoveBundary(splitVal[1], splitVal[2], splitVal[3])
             var zone = $('#search_zone').val();
             $.ajax({
-                url: `/get-work-package/${splitVal[1]}/${zone}`,
+                url: `/{{app()->getLocale()}}/get-work-package/${splitVal[1]}/${zone}`,
                 dataType: 'JSON',
                 method: 'GET',
                 async: false,
@@ -1316,7 +1316,7 @@
             })
 
             $.ajax({
-                url: `/getStats/${splitVal[1]}`,
+                url: `/{{app()->getLocale()}}/getStats/${splitVal[1]}`,
                 dataType: 'JSON',
                 method: 'GET',
                 async: false,
@@ -1339,7 +1339,7 @@
 
             zoomToxy(parseFloat(spiltVal[1]), parseFloat(spiltVal[2]))
 
-            $('#for-excel').html(`<a class="mt-4" href="/generate-third-party-diging-excel/${spiltVal[0]}"><button class="btn-sm mt-2
+            $('#for-excel').html(`<a class="mt-4" href="/{{app()->getLocale()}}/generate-third-party-diging-excel/${spiltVal[0]}"><button class="btn-sm mt-2
                 btn btn-primary">Download Qr</button></a>`)
 
 

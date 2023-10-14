@@ -259,7 +259,7 @@
         <tr><th>Voltage</th><td>${data.voltage}</td> </tr>
         <tr><th>Coordinate</th><td>${data.coordinate}</td> </tr>
         <tr><th>Created At</th><td>${data.created_at}</td> </tr>
-        <tr><th>Detail</th><td class="text-center">    <a href="/substation/${idSp[1]}" target="_blank" class="btn btn-sm btn-secondary">Detail</a>
+        <tr><th>Detail</th><td class="text-center">    <a href="/{{app()->getLocale()}}/substation/${idSp[1]}" target="_blank" class="btn btn-sm btn-secondary">Detail</a>
             </td> </tr>
         `
 

@@ -67,7 +67,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/map-1', [MapController::class, 'index'])->name('map-1');
     Route::get('/get-all-work-packages', [MapController::class, 'allWP'])->name('get-all-work-packages');
-    Route::get('/proxy/{url}', [MapController::class, 'proxy']);
+    Route::get('/proxy/{url}', [MapController::class, 'proxy'])->name('proxy');
 
     Route::post('/save-work-package', [WPController::class, 'saveWorkPackage']);
     Route::post('/save-road', [RoadController::class, 'saveRoad']);
@@ -75,7 +75,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/get-raod-info', [WPController::class, 'getRoadInfo']);
     Route::post('/get-ba-info', [WPController::class, 'getBaInfo']);
     Route::get('/get-work-package/{ba}/{zone}', [WPController::class, 'selectWP'])->name('get-work-package');
-    Route::get('/getStats/{wp}', [WPController::class, 'getStats']);
+    Route::get('/getStats/{wp}', [WPController::class, 'getStats'])->name('getStats');
 
     Route::get('/send-to-tnbes/{id}/', [StatusController::class, 'sendToTnbes']);
     Route::get('/sbum-status/{id}/{status}', [StatusController::class, 'statusSUBM']);
@@ -136,7 +136,7 @@ Route::resource('po', POController::class);
     Route::get('/get-roads-details/{wpID}',[MapController::class,'getRoadsDetails']);
         // PATROLING VIEWS
     Route::get('/edit-patrolling/{id}',[PatrollingController::class,'editRoad']);
-    Route::get('/patrolling-detail/{id}',[PatrollingController::class,'getRoad']);
+    Route::get('/patrolling-detail/{id}',[PatrollingController::class,'getRoad'])->name('patrolling-detail');
 
 
     //// Admin side

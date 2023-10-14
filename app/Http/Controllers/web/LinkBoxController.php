@@ -148,7 +148,7 @@ class LinkBoxController extends Controller
             $data->end_date = $request->end_date;
             $data->type = $request->type;
             $data->coordinate = $request->coordinate;
-            $data->gate_status = $request->gate_status;
+           // $data->gate_status = $request->gate_status;
             $data->vandalism_status = $request->vandalism_status;
             $data->leaning_staus = $request->leaning_staus;
             $data->rust_status = $request->rust_status;

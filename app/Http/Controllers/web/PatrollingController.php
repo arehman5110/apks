@@ -39,15 +39,15 @@ class PatrollingController extends Controller
             $road->total_supervision = $request->total_supervision;
             $road->update();
 
-            return redirect('/get-all-work-packages')
+            return redirect()->route('get-all-work-packages',app()->getLocale())
                 ->with('success', 'Request Success');
         } catch (\Throwable $th) {
-            return redirect('/get-all-work-packages')
+            return redirect()->route('get-all-work-packages',app()->getLocale())
                 ->with('failed', 'Request Failed');
         }
     }
 
-    public function editRoad($id)
+    public function editRoad($language,$id)
     {
         try {
             $road = Road::find($id);
@@ -58,7 +58,7 @@ class PatrollingController extends Controller
         }
     }
 
-    public function getRoads($id)
+    public function getRoads($language,$id)
     {
         $roads = Road::where('id_workpackage', $id)
             ->select('id', 'road_name')
@@ -67,7 +67,7 @@ class PatrollingController extends Controller
         return $roads;
     }
 
-    public function getRoadsByID($id)
+    public function getRoadsByID($language,$id)
     {
         $road = Road::where('id', $id)
             ->select('id', 'road_name', 'km', 'date_patrol', 'time_petrol', 'name_project', 'actual_km', 'fidar', 'total_digging', 'total_notice', 'total_supervision')
@@ -76,7 +76,7 @@ class PatrollingController extends Controller
         return $road;
     }
 
-    public function getRoad($id)
+    public function getRoad($language,$id)
     {
         $road = Road::where('id', $id)
             ->with('workPackage')

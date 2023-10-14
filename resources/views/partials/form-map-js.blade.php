@@ -106,7 +106,7 @@
         }
 
         $.ajax({
-            url: '/get-road-name/' + parseFloat(lat) + '/' + parseFloat(lng),
+            url: '/{{app()->getLocale()}}/get-road-name/' + parseFloat(lat) + '/' + parseFloat(lng),
             dataType: 'JSON',
             //data: data,
             method: 'GET',

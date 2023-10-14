@@ -34,7 +34,7 @@
                     href="/edit-patrolling/{{ $road->id }}">Edit</a> --}}
 
                     <a class="dropdown-item"
-                        href="/patrolling-detail/{{ $road->id }}">Detail</a>
+                        href="/{{app()->getLocale()}}/patrolling-detail/{{ $road->id }}">Detail</a>
 
 
 

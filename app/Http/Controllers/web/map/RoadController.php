@@ -45,7 +45,7 @@ class RoadController extends Controller
         }
     }
 
-    public function getRoadName($lat, $lng)
+    public function getRoadName($language,$lat, $lng)
     {
         try {
             $data = DB::select("SELECT road_name,

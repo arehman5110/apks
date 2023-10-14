@@ -61,7 +61,7 @@
         );
         var secondUrl = encodeURIComponent(url)
         $.ajax({
-            url: '/proxy/' + encodeURIComponent(secondUrl),
+            url: '/{{app()->getLocale()}}/proxy/' + encodeURIComponent(secondUrl),
             dataType: 'JSON',
             //data: data,
             method: 'GET',

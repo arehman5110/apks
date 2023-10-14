@@ -42,13 +42,13 @@ class MapController extends Controller
     }
 
 
-    public function proxy($url){
+    public function proxy($language,$url){
 
        $result =  file_get_contents(rawurldecode($url));
        return response()->json($result);
     }
 
-    public function teswtpagination( Request $request , $id , $status){
+    public function teswtpagination( Request $request ,$language, $id , $status){
         if ($status == 'Patroled') {
             $roads = Road::where('id_workpackage',$id)->where('actual_km' , '!=' , null)->select('id','road_name','actual_km','km')->paginate(10);
         }else{

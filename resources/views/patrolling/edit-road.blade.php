@@ -85,7 +85,7 @@
                     <div class=" ">
                         <h3 class="text-center p-2"></h3>
 
-                        <form action="/patrolling-update" id="myForm" method="POST" enctype="multipart/form-data"
+                        <form action="/{{app()->getLocale()}}/patrolling-update" id="myForm" method="POST" enctype="multipart/form-data"
                             onsubmit="return submitFoam()">
                             @csrf
 
@@ -333,7 +333,7 @@ $('#road_select').select2();
 
             var zone = $('#search_zone').val();
             $.ajax({
-                url: `/get-work-package/${splitVal[1]}/${zone}`,
+                url: `/{{app()->getLocale()}}/get-work-package/${splitVal[1]}/${zone}`,
                 dataType: 'JSON',
                 method: 'GET',
                 async: false,
@@ -372,7 +372,7 @@ $('#road_select').select2();
 
             selectedRoad.append(`<option value="" hidden>select road </option>`)
             $.ajax({
-                url: `/get-roads-name/${workPakcageId}`,
+                url: `/{{app()->getLocale()}}/get-roads-name/${workPakcageId}`,
                 dataType: 'JSON',
                 method: 'GET',
                 async: false,
@@ -402,7 +402,7 @@ $('#road_select').select2();
 
 
             $.ajax({
-                url: `/get-roads-id/${selectedRoad}`,
+                url: `/{{app()->getLocale()}}/get-roads-id/${selectedRoad}`,
                 dataType: 'JSON',
                 method: 'GET',
                 async: false,

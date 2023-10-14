@@ -93,7 +93,7 @@ class WPController extends Controller
 
         return $rec != '' ? view('map.show', ['rec' => $rec, 'wp' => $wp, 'distance' => $road->sum('distance') , 'count'=>$count]) : abort(404);
     }
-    public function getStats($ba)
+    public function getStats($language,$ba)
     {
 
         $result = DB::select("SELECT (sum(st_length(geom::geography)))/1000 as distance FROM tbl_roads where ba='$ba'");

@@ -24,7 +24,7 @@
                 </div>
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
-                        <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/{{app()->getLocale()}}/dashboard">Home</a></li>
                         <li class="breadcrumb-item active">index</li>
                     </ol>
                 </div>
@@ -233,7 +233,7 @@
 
                     var page = $(this).attr('href').split('page=')[1];
                     $.ajax({
-                        url: `/test-pagination/${packID}/${patrolStatus}?page=${page}`,
+                        url: `/{{app()->getLocale()}}/test-pagination/${packID}/${patrolStatus}?page=${page}`,
                         dataType: 'html',
                         method: 'GET',
                         async: false,
@@ -254,7 +254,7 @@
             patrolStatus = param.value;
             $('#raods-header').html(patrolStatus)
             $.ajax({
-                url: `/test-pagination/${packID}/${patrolStatus}`,
+                url: `/{{app()->getLocale()}}/test-pagination/${packID}/${patrolStatus}`,
                 dataType: 'html',
                 method: 'GET',
                 async: false,
@@ -275,7 +275,7 @@
 
             packName = $(param).text()
             $.ajax({
-                url: `/test-pagination/${packID}/${patrolStatus}`,
+                url: `/{{app()->getLocale()}}/test-pagination/${packID}/${patrolStatus}`,
                 dataType: 'html',
                 method: 'GET',
                 async: false,
