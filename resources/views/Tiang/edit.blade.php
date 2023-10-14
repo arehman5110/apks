@@ -185,7 +185,7 @@
                                     <div class="col-md-4"><label for="section_to">To</label></div>
                                     <div class="col-md-4"><input type="text" name="section_to"
                                             value="{{ $data->section_to }}" id="section_to" class="form-control"
-                                            required></div>
+                                            ></div>
                                 </div>
 
                                 <div class="row">
@@ -1211,7 +1211,7 @@
 
                                             <div class="col-md-4 @if($data->arus_pada_tiang == 'no' || $data->arus_pada_tiang == '') d-none @endif" id="arus_pada_tiang_amp_div">
                                                 <label for="arus_pada_tiang_amp">(Amp)</label>
-                                                <input type="radio" name="arus_pada_tiang_amp" id="arus_pada_tiang_amp"
+                                                <input type="text" name="arus_pada_tiang_amp" id="arus_pada_tiang_amp"
                                                     class="form-control" value="{{$data->arus_pada_tiang_amp}}" required>
 
                                             </div>
