@@ -124,7 +124,7 @@
                             </div>
 
 
-                          
+
                             <div class="row">
                                 <div class="col-md-4"><label for="start_date">From</label></div>
                                 <div class="col-md-4">
@@ -158,37 +158,61 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="pipe_staus">Pipe Broken</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="pipe_staus" id="pipe_staus"
-                                        value="{{ $data->pipe_staus }}" class="form-control" required>
+                                    <select name="pipe_staus" id="pipe_staus" class="form-control" required>
+                                        <option value="{{ $data->pipe_staus }}" hidden>{{ $data->pipe_staus }}</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+
+                                    </select>
+
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="vandalism_status">Vandalism </label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="vandalism_status" id="vandalism_status"
-                                        value="{{ $data->vandalism_status }}" class="form-control" required>
+                                    <select name="vandalism_status" id="vandalism_status" class="form-control" required>
+                                        <option value="{{ $data->vandalism_status }}" hidden>{{ $data->vandalism_status }}</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+
+                                    </select>
+
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="collapsed_status">Collapsed </label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="collapsed_status" id="collapsed_status"
-                                        value="{{ $data->collapsed_status }}" class="form-control" required>
+                                    <select name="collapsed_status" id="collapsed_status" class="form-control" required>
+                                        <option value="{{ $data->collapsed_status }}" hidden>{{ $data->collapsed_status }}</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+
+                                    </select>
+
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="rust_status">Rusty</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="rust_status" id="rust_status"
-                                        value="{{ $data->rust_status }}" class="form-control" required>
+                                    <select name="rust_status" id="rust_status" class="form-control" required>
+                                        <option value="{{ $data->rust_status }}" hidden>{{ $data->rust_status }}</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+
+                                    </select>
+
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-4"><label for="bushes_status">Bushy</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="bushes_status" id="bushes_status"
-                                        value="{{ $data->bushes_status }}" class="form-control" required>
+                                    <select name="bushes_status" id="bushes_status" class="form-control" required>
+                                        <option value="{{ $data->bushes_status }}" hidden>{{ $data->bushes_status }}</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+
+                                    </select> 
                                 </div>
                             </div>
                             <div class="row">

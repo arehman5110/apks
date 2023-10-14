@@ -200,6 +200,7 @@
                             <div class="row @if ($data->leaning_staus == 'No') d-none @endif " id="leaning-angle">
                                 <div class="col-md-4"><label for="leaning_angle">Leaning angle</label></div>
                                 <div class="col-md-4">
+
                                     <input type="text" name="leaning_angle" id="leaning_angle"
                                         value="{{ $data->leaning_angle }}" class="form-control">
 
@@ -209,8 +210,12 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="rust_status">Rusty</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="rust_status" id="rust_status"
-                                        value="{{ $data->rust_status }}" class="form-control" required>
+                                    <select name="rust_status" id="rust_status" class="form-control" required>
+                                        <option value="{{ $data->rust_status }}" hidden>{{ $data->rust_status }}</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+
                                 </div>
                             </div>
                             <div class="row">
@@ -218,15 +223,24 @@
                                         ads/banners</label>
                                 </div>
                                 <div class="col-md-4">
-                                    <input type="text" name="advertise_poster_status" id="advertise_poster_status"
-                                        value="{{ $data->advertise_poster_status }}" class="form-control" required>
+                                    <select name="advertise_poster_status" id="advertise_poster_status"
+                                    class="form-control" required>
+                                    <option value="{{ $data->advertise_poster_status }}" hidden>{{ $data->advertise_poster_status }}</option>
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                </select>
+
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="bushes_status">Bushy</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="bushes_status" id="bushes_status"
-                                        value="{{ $data->bushes_status }}" class="form-control" required>
+                                    <select name="bushes_status" id="bushes_status" class="form-control" required>
+                                        <option value="{{ $data->bushes_status }}" hidden>{{ $data->bushes_status }}</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+
                                 </div>
                             </div>
                             <div class="row">
