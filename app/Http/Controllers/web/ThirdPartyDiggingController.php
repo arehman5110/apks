@@ -19,7 +19,9 @@ class ThirdPartyDiggingController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
+
     {
+        // return ThirdPartyDiging::all();
         $ba = Auth::user()->ba ;
         $datas = ThirdPartyDiging::where('ba', 'LIKE', '%' . $ba . '%')->get();
 
@@ -35,7 +37,7 @@ class ThirdPartyDiggingController extends Controller
     {
         $ba = Auth::user()->ba;
         $sql =  DB::select("SELECT ppb_zone FROM ba where station = '$ba'");
-        
+
         $team_id = auth()->user()->id_team;
         $team = Team::find($team_id)->team_name;
         $wp = WorkPackage::all();
@@ -168,7 +170,7 @@ class ThirdPartyDiggingController extends Controller
             $data->patrolling_time = $combinedDateTime;
             $data->project_name = $request->project_name;
             $data->feeder_involved = $request->feeder_involved;
-           
+
             $data->km_actual = $request->km_actual;
             $data->road_name = $request->road_name;
 

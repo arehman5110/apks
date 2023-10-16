@@ -2,7 +2,7 @@
     <div class="text-center">
         <img src="{{URL::asset('assets/web-images/main-logo.png')}}" alt="" height="60" srcset="" class="" style="height: 60px !important ; margin:5% auto">
     </div>
-    <form method="POST" action="{{ route('register') }}">
+    <form method="POST" action="{{ route('register', app()->getLocale()) }}">
         @csrf
 
 
