@@ -357,7 +357,7 @@
    
         <tr><th>Coordinate</th><td>${data.coordinate}</td> </tr>
         <tr><th>Created At</th><td>${data.created_at}</td> </tr>
-        <tr><th>Detail</th><td class="text-center">    <a href="/tiang-talian-vt-and-vr/${data.id}" target="_blank" class="btn btn-sm btn-secondary">Detail</a>
+        <tr><th>Detail</th><td class="text-center">    <a href="/{{app()->getLocale()}}/tiang-talian-vt-and-vr/${data.id}" target="_blank" class="btn btn-sm btn-secondary">Detail</a>
             </td> </tr>
         `
             $("#my_data").html(str);
