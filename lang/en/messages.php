@@ -1,5 +1,29 @@
 <?php
 return [
+
+    //*****************DASHBOARD */
+
+    'patroling'=>'Patroling',
+        'total_patrollig_done'=>'Total Patrollig Done',
+        'total_notice_generated'=>'Total Notice Generated',
+        'total_supervision'=>'Total Supervision',
+    'substation'=>'Substation',
+        'total_substation_visited'=>'Total Substation Visited',
+        'total_substation_defects'=>'Total Substation Defects',
+    'feeder_pillar'=>'Feeder Pillar',
+        'total_feeder_pillar Visited'=>'Total Feeder Pillar Visited',
+        'total_feeder_pillar Defects'=>'Total Feeder Pillar Defects',
+    'tiang'=>'Tiang',
+        'total_tiang_visited'=>'Total Tiang Visited',
+        'total_tiang_defects'=>'Total Tiang Defects',
+    'link_box'=>'Link Box',
+        'total_link_box_visited'=>'Total Link Box Visited',
+        'total_link_box_defects'=>'Total Link Box Defects',
+    'cable_bridge'=>'Cable Bridge',
+        'total_cable_bridge_visited'=>'Total Cable Bridge Visited',
+        'total_cable_bridge_defects'=>'Total Cable Bridge Defects',
+
+    //*************************end dashboard */
     //**********************3rd party */
     'digging' => 'Digging',
     'notice' => 'Notice',

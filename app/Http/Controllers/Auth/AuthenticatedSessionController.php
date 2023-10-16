@@ -29,7 +29,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
         if (Auth::user()->is_admin == '1') {
-            return redirect()->route('team.index');
+            return redirect()->route('team.index',app()->getLocale());
         } else {
             return redirect(app()->getLocale().'/dashboard');
         }

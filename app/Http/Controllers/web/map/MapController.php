@@ -26,6 +26,7 @@ class MapController extends Controller
 
 
     public function allWP(){
+        // return WorkPackage::all();
         $ba = Auth::user()->ba ;
         $datas = WorkPackage::where('ba', 'LIKE', '%' . $ba . '%')->get();
 
