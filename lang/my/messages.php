@@ -1,7 +1,34 @@
 <?php
 return [
+ //*****************DASHBOARD */
+
+
+    "patroling" => "Pemondaan",
+        "total_patrollig_done"=> "Jumlah Pemondaan Selesai",
+        "total_notice_generated"=> "Jumlah Notis Dijana",
+        "total_supervision"=> "Jumlah Pengawasan",
+    "substation"=> "Stesen Janakuasa",
+        "total_substation_visited"=> "Jumlah Stesen Janakuasa Dikunjungi",
+        "total_substation_defects"=> "Jumlah Kerosakan Stesen Janakuasa",
+    "feeder_pillar"=> "Pilar Pengumpan",
+        "total_feeder_pillar_visited"=> "Jumlah Pilar Pengumpan Dikunjungi",
+        "total_feeder_pillar_defects"=> "Jumlah Kerosakan Pilar Pengumpan",
+    "tiang"=> "Tiang",
+        "total_tiang_visited"=> "Jumlah Tiang Dikunjungi",
+        "total_tiang_defects"=> "Jumlah Kerosakan Tiang",
+    "link_box"=> "Peti Tautan",
+        "total_link_box_visited"=> "Jumlah Peti Tautan Dikunjungi",
+        "total_link_box_defects"=> "Jumlah Kerosakan Peti Tautan",
+    "cable_bridge"=> "Jambatan Kabel",
+        "total_cable_bridge_visited"=> "Jumlah Jambatan Kabel Dikunjungi",
+        "total_cable_bridge_defects"=> "Jumlah Kerosakan Jambatan Kabel",
+
+
+
+    //*************************end dashboard */
+
     'digging' =>'Menggali',
-    'notice' =>  'Notice' ,                         
+    'notice' =>  'Notice' ,
     'supervision' =>'Supervision',
     'wp_name' => 'Work Package Nama',
     'team_name' =>'Team Nama',

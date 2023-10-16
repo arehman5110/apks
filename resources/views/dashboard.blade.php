@@ -46,13 +46,13 @@
 
             <div class="col-md-6">
                 <div class="card card-success">
-                    <div class="card-header">Patroling</div>
+                    <div class="card-header">{{__("messages.patroling")}}</div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="card p-3">
 
-                                    <h3 class="text-center"> Total Patrollig Done </h3>
+                                    <h3 class="text-center"> {{__("messages.total_patrollig_done")}}</h3>
                                     <p class="text-center mb-0 pb-0"><span>0 KM</span></p>
 
                                 </div>
@@ -61,7 +61,7 @@
                             <div class="col-md-4">
                                 <div class="card p-3">
 
-                                    <h3 class="text-center"> Total Notice Generated </h3>
+                                    <h3 class="text-center">{{__("messages.total_notice_generated")}} </h3>
                                     <p class="text-center mb-0 pb-0"><span>0</span></p>
 
                                 </div>
@@ -70,7 +70,7 @@
                             <div class="col-md-4">
                                 <div class="card p-3">
 
-                                    <h3 class="text-center"> Total Supervision </h3>
+                                    <h3 class="text-center"> {{__("messages.total_supervision")}} </h3>
                                     <p class="text-center mb-0 pb-0"><span>0</span></p>
 
                                 </div>
@@ -83,13 +83,13 @@
 
             <div class="col-md-6">
                 <div class="card card-warning">
-                    <div class="card-header">Substation</div>
+                    <div class="card-header">{{__("messages.substation")}}</div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="card p-3">
 
-                                    <h3 class="text-center"> Total Substation Visited </h3>
+                                    <h3 class="text-center"> {{__("messages.total_substation_visited")}}</h3>
                                     <p class="text-center mb-0 pb-0"><span>0</span></p>
 
                                 </div>
@@ -98,7 +98,7 @@
                             <div class="col-md-6">
                                 <div class="card p-3">
 
-                                    <h3 class="text-center"> Total Substation Defects </h3>
+                                    <h3 class="text-center"> {{__("messages.total_substation_defects")}}</h3>
                                     <p class="text-center mb-0 pb-0"><span>0</span></p>
 
                                 </div>
@@ -111,13 +111,13 @@
 
             <div class="col-md-6">
                 <div class="card card-info">
-                    <div class="card-header">Feeder Pillar</div>
+                    <div class="card-header">{{__("messages.feeder_pillar")}}</div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="card p-3">
 
-                                    <h3 class="text-center"> Total Feeder Pillar Visited </h3>
+                                    <h3 class="text-center">{{__("messages.total_feeder_pillar_visited")}}</h3>
                                     <p class="text-center mb-0 pb-0"><span>0</span></p>
 
                                 </div>
@@ -126,7 +126,7 @@
                             <div class="col-md-6">
                                 <div class="card p-3">
 
-                                    <h3 class="text-center"> Total Feeder Pillar Defects </h3>
+                                    <h3 class="text-center"> {{__("messages.total_feeder_pillar_defects")}}</h3>
                                     <p class="text-center mb-0 pb-0"><span>0</span></p>
 
                                 </div>
@@ -140,14 +140,14 @@
 
             <div class="col-md-6">
                 <div class="card card-success">
-                    <div class="card-header">Tiang</div>
+                    <div class="card-header">{{__("messages.total_feeder_pillar_visited")}}</div>
                     <div class="card-body">
                         <div class="row">
 
                             <div class="col-md-6">
                                 <div class="card p-3">
 
-                                    <h3 class="text-center"> Total Tiang Visited </h3>
+                                    <h3 class="text-center">{{__("messages.total_tiang_visited")}} </h3>
                                     <p class="text-center mb-0 pb-0"><span>0</span></p>
 
                                 </div>
@@ -157,7 +157,7 @@
                             <div class="col-md-6">
                                 <div class="card p-3">
 
-                                    <h3 class="text-center"> Total Tiang Defects </h3>
+                                    <h3 class="text-center"> {{__("messages.total_tiang_defects")}}</h3>
                                     <p class="text-center mb-0 pb-0"><span>0</span></p>
 
                                 </div>
@@ -170,13 +170,13 @@
 
             <div class="col-md-6">
                 <div class="card card-primary">
-                    <div class="card-header">Link Box</div>
+                    <div class="card-header">{{__("messages.link_box")}}</div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="card p-3">
 
-                                    <h3 class="text-center"> Total Link Box Visited </h3>
+                                    <h3 class="text-center"> {{__("messages.total_link_box_visited")}} </h3>
                                     <p class="text-center mb-0 pb-0"><span>0</span></p>
 
                                 </div>
@@ -186,7 +186,7 @@
                             <div class="col-md-6">
                                 <div class="card p-3">
 
-                                    <h3 class="text-center"> Total Link Box Defects </h3>
+                                    <h3 class="text-center"> {{__("messages.total_link_box_defects")}} </h3>
                                     <p class="text-center mb-0 pb-0"><span>0</span></p>
 
                                 </div>
@@ -199,13 +199,13 @@
 
             <div class="col-md-6">
                 <div class="card card-danger">
-                    <div class="card-header">Cable Bridge</div>
+                    <div class="card-header"> {{__("messages.cable_bridge")}}</div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="card p-3">
 
-                                    <h3 class="text-center"> Total Cable Bridge Visited </h3>
+                                    <h3 class="text-center"> {{__("messages.total_cable_bridge_visited")}}</h3>
                                     <p class="text-center mb-0 pb-0"><span>0</span></p>
 
                                 </div>
@@ -213,7 +213,7 @@
                             <div class="col-md-6">
                                 <div class="card p-3">
 
-                                    <h3 class="text-center"> Total Cable Bridge Defects </h3>
+                                    <h3 class="text-center"> {{__("messages.total_cable_bridge_defects")}} </h3>
                                     <p class="text-center mb-0 pb-0"><span>0</span></p>
 
                                 </div>
