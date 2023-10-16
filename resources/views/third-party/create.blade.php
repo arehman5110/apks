@@ -226,7 +226,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="developer_phone_no">Developer Phone No</label></div>
-                                <div class="col-md-4"><input type="text" name="developer_phone_no"
+                                <div class="col-md-4"><input type="number" name="developer_phone_no"
                                         id="developer_phone_no" class="form-control" required minlength="9"
                                         maxlength="11"></div>
                             </div>
@@ -406,16 +406,17 @@
         var rd = '';
 
      $(document).ready(function() {
-       
+
         $('#search_wp').select2();
+        console.log(userBa);
 
         if (userBa !== '') {
             getBaPoints(userBa)
         }
-        
+
      });
 
-       
+
         function getBaPoints(param){
             var baSelect = $('#ba_s')
                 baSelect.empty();

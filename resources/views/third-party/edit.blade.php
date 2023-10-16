@@ -80,8 +80,8 @@
                                         <option value="B2">B2</option>
                                         <option value="B4">B4</option>
                                         @endif
-                                        
-                                       
+
+
 
                                     </select>
                                 </div>
@@ -165,7 +165,7 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="survey_date">Survey Date</label></div>
                                 <div class="col-md-4">
-                                    <input type="date" name="survey_date" id="survey_date" value="{{ $data->survey_date }}" class="form-control" required>
+                                    <input type="date" name="survey_date" id="survey_date" value="{{date('Y-m-d', strtotime($data->survey_date)) }}" class="form-control" required>
                                 </div>
                             </div>
 
@@ -460,7 +460,7 @@
             if (userBa == '') {
                 getBa();
             }
-           
+
 
         });
 
