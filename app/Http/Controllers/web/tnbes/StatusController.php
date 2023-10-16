@@ -10,7 +10,7 @@ class StatusController extends Controller
 {
     //
 
-    public function sendToTnbes($id)
+    public function sendToTnbes($language ,$id)
     {
         WorkPackage::find($id)->update(['wp_status' => 'pending']);
         return redirect()
@@ -24,7 +24,7 @@ class StatusController extends Controller
     {
         try {
             WorkPackage::find($id)->update(['wp_status' => $status]);
-           
+
             return redirect()
                 ->back()
                 ->with('success', 'Status Update Successfully');
