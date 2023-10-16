@@ -24,7 +24,7 @@
                 </div>
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
-                        <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/{{app()->getLocale()}}/dashboard">Home</a></li>
                         <li class="breadcrumb-item active">index</li>
                     </ol>
                 </div>
@@ -194,7 +194,7 @@
             });
             $('#myModal').on('show.bs.modal', function(event) {
                 var button = $(event.relatedTarget);
-                var langs='{{ app()->getLocale() }}'    
+                var langs='{{ app()->getLocale() }}'
                 var id = button.data('id');
                 var modal = $(this);
                 $('#remove-foam').attr('action', '/'+langs+'/third-party-digging/' + id)
