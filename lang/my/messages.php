@@ -45,8 +45,10 @@ return [
 
 
     /**************************end side-bar and dashboard */
-
-
+    'edit'=>'edit',
+    'zone'=>'Zone',
+    'ba'=>'BA',
+    'notice_form'=>'Borang Notis',
     'digging' =>'Menggali',
     'notice' =>  'Notice' ,
     'supervision' =>'Supervision',
@@ -55,12 +57,12 @@ return [
     'survey_date' =>'Survey Date',
     'patrolling_time' =>'Patrolling Time',
     'project_name' =>    'Projekt Nama',
-    'km _actual' =>    'Km Actual',
+    'km_actual' =>    'Km Actual',
    'company_name' =>   'Company Name',
    'office_phone_no' =>   'Office Phone No',
    'main_contractor' =>   'Main Kontraktor  ',
    'developer_phone_no'=>'No. Telefon Pembangun',
-   'contractorc_ompany_name'=>'Nama Syarikat Kontraktor',
+   'contractort_company_name'=>'Nama Syarikat Kontraktor',
     'site_supervisor_name'=>'Nama Penyelia Tapak',
     'site_supervisor_phone_no'=>'No Telefon Penyelia Tapak',
     'excavator_operator_name'=>'Nama Operator Jengkaut',
@@ -76,7 +78,8 @@ return [
     'after_image_1'=>    'After Image 1',
     'after_image_2'=>'After Image 2',
     'after_image_3'=>    'After Image 3',
-    'rd_name'=>'Nama Jalan
-    '
+    'rd_name'=>'Nama Jalan',
+    'submit'=>'Serahkan',
+    'update'=>'Kemas Kini'
 ];
 ?>
