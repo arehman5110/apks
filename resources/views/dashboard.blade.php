@@ -83,7 +83,7 @@
 
             <div class="col-md-6">
                 <div class="card card-warning">
-                    <div class="card-header">{{__("messages.substation")}}</div>
+                    <div class="card-header text-white">{{__("messages.substation")}}</div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6">
@@ -233,7 +233,7 @@
                         <h2 class="mb-0">
                             <button class="btn   btn-block text-left" type="button" data-toggle="collapse"
                                 data-target="#thirdPartyDiging" aria-expanded="true" aria-controls="collapseOne">
-                                <h3> <i class="fas fa-tools"></i> 3rd Party Digging </h3>
+                                <h3> <i class="fas fa-tools"></i>{{__("messages.3rd_party_digging")}}</h3>
                             </button>
                         </h2>
                     </div>
@@ -244,22 +244,22 @@
                             <ul>
                                 <li>
                                     <a class=" dropdown-item"
-                                        href="{{ route('third-party-digging.create', app()->getLocale()) }}">Create</a>
+                                        href="{{ route('third-party-digging.create', app()->getLocale()) }}">{{__("messages.create")}}</a>
                                 </li>
                                 <li>
                                     <a class="dropdown-item"
-                                        href="{{ route('third-party-digging.index', app()->getLocale()) }}">Index</a>
+                                        href="{{ route('third-party-digging.index', app()->getLocale()) }}">{{__("messages.index")}}</a>
                                 </li>
 
                                 <li>
-                                    <a href="/create-patrolling" class="dropdown-item">Patrolling</a>
+                                    <a href="/create-patrolling" class="dropdown-item">{{__("messages.patrolling")}}</a>
                                 </li>
                                 <li>
-                                    <a href="/map-1" class="dropdown-item">Map</a>
+                                    <a href="/map-1" class="dropdown-item">{{__("messages.map")}}</a>
                                 </li>
 
                                 <li>
-                                    <a href="/get-all-work-packages" class="dropdown-item">SBUM Approval and Deatil</a>
+                                    <a href="/get-all-work-packages" class="dropdown-item">{{__("messages.sbum_approval_and_detail")}}</a>
                                 </li>
 
                             </ul>
@@ -274,7 +274,7 @@
                         <h2 class="mb-0">
                             <button class="btn   btn-block text-left" type="button" data-toggle="collapse"
                                 data-target="#substation" aria-expanded="true" aria-controls="collapseOne">
-                                <h3><i class="fas fa-building"></i> Substation</h3>
+                                <h3><i class="fas fa-building"></i> {{__("messages.substation")}}</h3>
                             </button>
                         </h2>
                     </div>
@@ -285,14 +285,14 @@
                             <ul>
                                 <li>
                                     <a class=" dropdown-item"
-                                        href="{{ route('substation.create', app()->getLocale()) }}">Create</a>
+                                        href="{{ route('substation.create', app()->getLocale()) }}">{{__("messages.create")}}</a>
                                 </li>
                                 <li>
                                     <a class="dropdown-item"
-                                        href="{{ route('substation.index', app()->getLocale()) }}">Index</a>
+                                        href="{{ route('substation.index', app()->getLocale()) }}">{{__("messages.index")}}</a>
                                 </li>
                                 <li>
-                                    <a href="/substation-map" class="dropdown-item">Map</a>
+                                    <a href="/substation-map" class="dropdown-item">{{__("messages.map")}}</a>
                                 </li>
                             </ul>
                         </div>
@@ -306,7 +306,7 @@
                         <h2 class="mb-0">
                             <button class="btn   btn-block text-left" type="button" data-toggle="collapse"
                                 data-target="#feederPillar" aria-expanded="false" aria-controls="collapseOne">
-                                <h3><i class="fas fa-cube"></i> Feeder Pillar</h3>
+                                <h3><i class="fas fa-cube"></i> {{__("messages.feeder_pillar")}}</h3>
                             </button>
                         </h2>
                     </div>
@@ -317,14 +317,14 @@
                             <ul>
                                 <li>
                                     <a class=" dropdown-item"
-                                        href="{{ route('feeder-pillar.create', app()->getLocale()) }}">Create</a>
+                                        href="{{ route('feeder-pillar.create', app()->getLocale()) }}">{{__("messages.create")}}</a>
                                 </li>
                                 <li>
                                     <a class="dropdown-item"
-                                        href="{{ route('feeder-pillar.index', app()->getLocale()) }}">Index</a>
+                                        href="{{ route('feeder-pillar.index', app()->getLocale()) }}">{{__("messages.index")}}</a>
                                 </li>
                                 <li>
-                                    <a href="/feeder-pillar-map" class="dropdown-item">Map</a>
+                                    <a href="/feeder-pillar-map" class="dropdown-item">{{__("messages.map")}}</a>
                                 </li>
                             </ul>
                         </div>
@@ -338,7 +338,7 @@
                         <h2 class="mb-0">
                             <button class="btn   btn-block text-left" type="button" data-toggle="collapse"
                                 data-target="#tiang" aria-expanded="false" aria-controls="collapseOne">
-                                <h3> <i class="fas fa-bolt"></i> Tiang + Talian VT & VR</h3>
+                                <h3> <i class="fas fa-bolt"></i> {{__("messages.tiang_talian_vt_&_vr")}}</h3>
                             </button>
                         </h2>
                     </div>
@@ -349,14 +349,14 @@
                             <ul>
                                 <li>
                                     <a class=" dropdown-item"
-                                        href="{{ route('tiang-talian-vt-and-vr.create', app()->getLocale()) }}">Create</a>
+                                        href="{{ route('tiang-talian-vt-and-vr.create', app()->getLocale()) }}">{{__("messages.create")}}</a>
                                 </li>
                                 <li>
                                     <a class="dropdown-item"
-                                        href="{{ route('tiang-talian-vt-and-vr.index', app()->getLocale()) }}">Index</a>
+                                        href="{{ route('tiang-talian-vt-and-vr.index', app()->getLocale()) }}">{{__("messages.index")}}</a>
                                 </li>
                                 <li>
-                                    <a href="/tiang-talian-vt-and-vr-map" class="dropdown-item">Map</a>
+                                    <a href="/tiang-talian-vt-and-vr-map" class="dropdown-item">{{__("messages.map")}}</a>
                                 </li>
                             </ul>
                         </div>
@@ -371,7 +371,7 @@
                         <h2 class="mb-0">
                             <button class="btn   btn-block text-left" type="button" data-toggle="collapse"
                                 data-target="#linkBox" aria-expanded="false" aria-controls="collapseOne">
-                                <h3><i class="fas fa-link"></i> Link Box Pelbagai Voltan</h3>
+                                <h3><i class="fas fa-link"></i>{{__('messages.link_box_pelbagai_voltan')}}</h3>
                             </button>
                         </h2>
                     </div>
@@ -382,14 +382,14 @@
                             <ul>
                                 <li>
                                     <a class=" dropdown-item"
-                                        href="{{ route('link-box-pelbagai-voltan.create', app()->getLocale()) }}">Create</a>
+                                        href="{{ route('link-box-pelbagai-voltan.create', app()->getLocale()) }}">{{__('messages.create')}}</a>
                                 </li>
                                 <li>
                                     <a class="dropdown-item"
-                                        href="{{ route('link-box-pelbagai-voltan.index', app()->getLocale()) }}">Index</a>
+                                        href="{{ route('link-box-pelbagai-voltan.index', app()->getLocale()) }}">{{__('messages.index')}}</a>
                                 </li>
                                 <li>
-                                    <a href="/link-box-pelbagai-voltan-map" class="dropdown-item">Map</a>
+                                    <a href="/link-box-pelbagai-voltan-map" class="dropdown-item">{{__('messages.map')}}</a>
                                 </li>
                             </ul>
                         </div>
@@ -404,7 +404,7 @@
                         <h2 class="mb-0">
                             <button class="btn   btn-block text-left" type="button" data-toggle="collapse"
                                 data-target="#cableBridge" aria-expanded="false" aria-controls="collapseOne">
-                                <h3><i class="fas fa-road"></i> Cable Bridge</h3>
+                                <h3><i class="fas fa-road"></i> {{__('messages.cable_bridge')}}</h3>
                             </button>
                         </h2>
                     </div>
@@ -415,14 +415,14 @@
                             <ul>
                                 <li>
                                     <a class=" dropdown-item"
-                                        href="{{ route('cable-bridge.create', app()->getLocale()) }}">Create</a>
+                                        href="{{ route('cable-bridge.create', app()->getLocale()) }}">{{__('messages.create')}}</a>
                                 </li>
                                 <li>
                                     <a class="dropdown-item"
-                                        href="{{ route('cable-bridge.index', app()->getLocale()) }}">Index</a>
+                                        href="{{ route('cable-bridge.index', app()->getLocale()) }}">{{__('messages.index')}}</a>
                                 </li>
                                 <li>
-                                    <a href="/cable-bridge-map" class="dropdown-item">Map</a>
+                                    <a href="/cable-bridge-map" class="dropdown-item">{{__('messages.map')}}</a>
                                 </li>
                             </ul>
                         </div>

@@ -23,6 +23,30 @@ return [
         'total_cable_bridge_visited'=>'Total Cable Bridge Visited',
         'total_cable_bridge_defects'=>'Total Cable Bridge Defects',
 
+
+    //*************************end dashboard */
+
+
+    /************************side-bar and dahsboard */
+
+    'dashboard' =>"Dashboard",
+    '3rd_party_digging'=>"3rd Party Digging",
+        'create'=>'Create',
+        'index'=>'Index',
+        'patrolling'=>'Patrolling',
+        'map'=>'Map',
+        'sbum_approval_and_detail'=>'SBUM Approval and Deatil',
+    'substation'=>'Substation',
+    'feeder_pillar'=>'Feeder Pillar',
+    'tiang_talian_vt_&_vr'=>'Tiang + Talian VT & VR',
+    'link_box_pelbagai_voltan'=> 'Link Box Pelbagai Voltan',
+    'cable_bridge'=>'Cable Bridge',
+
+
+
+
+    /**************************end side-bar and dashboard */
+
     //*************************end dashboard */
     //**********************3rd party */
     'digging' => 'Digging',

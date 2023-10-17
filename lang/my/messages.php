@@ -27,6 +27,26 @@ return [
 
     //*************************end dashboard */
 
+
+    /************************side-bar and dahsboard */
+
+    'dashboard' =>"Papan Pemuka",
+    '3rd_party_digging' => 'Penggalian Pihak Ketiga',
+        'create' => 'Cipta',
+        'index' => 'Indeks',
+        'patrolling' => 'Pemondaan',
+        'map' => 'Peta',
+        'sbum_approval_and_detail' => 'Kelulusan SBUM dan Perincian',
+    'substation' => 'Stesen Janakuasa',
+    'feeder_pillar' => 'Pilar Pengumpan',
+    'tiang_talian_vt_&_vr' => 'Tiang + Talian VT & VR',
+    'link_box_pelbagai_voltan' => 'Peti Tautan Pelbagai Voltan',
+    'cable_bridge' => 'Jambatan Kabel',
+
+
+    /**************************end side-bar and dashboard */
+
+
     'digging' =>'Menggali',
     'notice' =>  'Notice' ,
     'supervision' =>'Supervision',
