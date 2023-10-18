@@ -257,7 +257,7 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="coordinate">Coordinate</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="coordinate" id="coordinate" class="form-control"
+                                    <input type="text" name="coordinate" id="coordinate" class="form-control" disabled
                                         required>
                                 </div>
                             </div>

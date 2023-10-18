@@ -50,9 +50,13 @@ class MapController extends Controller
     }
 
     public function teswtpagination( Request $request ,$language, $id , $status){
+        
+      
         if ($status == 'Patroled') {
+         
             $roads = Road::where('id_workpackage',$id)->where('actual_km' , '!=' , null)->select('id','road_name','actual_km','km')->paginate(10);
         }else{
+          
              $roads = Road::where('id_workpackage',$id)->where('actual_km' , null)->select('id','road_name','actual_km','km')->paginate(10);
 
         }
