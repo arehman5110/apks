@@ -23,8 +23,36 @@ return [
         'total_cable_bridge_visited'=>'Total Cable Bridge Visited',
         'total_cable_bridge_defects'=>'Total Cable Bridge Defects',
 
+
+    //*************************end dashboard */
+
+
+    /************************side-bar and dahsboard */
+
+    'dashboard' =>"Dashboard",
+    '3rd_party_digging'=>"3rd Party Digging",
+        'create'=>'Create',
+        'index'=>'Index',
+        'patrolling'=>'Patrolling',
+        'map'=>'Map',
+        'sbum_approval_and_detail'=>'SBUM Approval and Deatil',
+    'substation'=>'Substation',
+    'feeder_pillar'=>'Feeder Pillar',
+    'tiang_talian_vt_&_vr'=>'Tiang + Talian VT & VR',
+    'link_box_pelbagai_voltan'=> 'Link Box Pelbagai Voltan',
+    'cable_bridge'=>'Cable Bridge',
+
+
+
+
+    /**************************end side-bar and dashboard */
+
     //*************************end dashboard */
     //**********************3rd party */
+    'edit'=>'edit',
+    'zone'=>'Zone',
+    'ba'=>'BA',
+    'notice_form'=>'Notice Form',
     'digging' => 'Digging',
     'notice' => 'Notice',
     'supervision' => 'Supervision',
@@ -33,12 +61,12 @@ return [
     'survey_date' => 'Survey Date',
     'patrolling_time' => 'Patrolling Time',
     'project_name' => 'Project Name',
-    'km _actual' => 'Km Actual',
+    'km_actual' => 'Km Actual',
     'company_name' => 'Company Name',
     'office_phone_no' => 'Office Phone No',
     'main_contractor' => 'Main Contractor',
     'developer_phone_no' => 'Developer Phone No',
-    'contractorc_ompany_name' => 'Contractor Company Name',
+    'contractort_company_name' => 'Contractor Company Name',
     'site_supervisor_name' => 'Site Supervisor Name',
     'site_supervisor_phone_no' => 'Site Supervisor Phone No',
     'excavator_operator_name' => 'Excavator Operator Name',
@@ -55,6 +83,8 @@ return [
     'after_image_2' => 'After Image 2',
     'after_image_3' => 'After Image 3',
     'rd_name' => 'Road Name',
+    'submit'=>'Submit',
+    'update'=>'Update'
     //**********************3rd party end  */
 ];
 ?>

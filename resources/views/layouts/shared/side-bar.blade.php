@@ -1,6 +1,6 @@
 <aside class="main-sidebar sidebar-dark-primary ">
 
-    <a href="" class="brand-link">
+    <a href="/{{app()->getLocale()}}/dashboard" class="brand-link">
         <img src="{{ asset('assets/web-images/main-logo-sm.png') }}" alt="AdminLTE Logo" class="brand-image "
             style="opacity: .8">
         <span class="brand-text font-weight-light">APKS</span>
@@ -29,7 +29,7 @@
                 <li class="nav-item">
                     <a href="/{{app()->getLocale()}}/dashboard" class="nav-link ">
                         <i class="fas fa-tachometer-alt"></i>
-                        <p>Dashboard</p>
+                        <p>{{__('messages.dashboard')}}</p>
                     </a>
                 </li>
 
@@ -37,7 +37,7 @@
                     <a href="#" class="nav-link">
                         <i class="fas fa-tools"></i>
                         <p>
-                            3rd Party Digging
+                            {{__('messages.3rd_party_digging')}}
                             <i class="right fas fa-angle-left"></i>
 
                         </p>
@@ -47,33 +47,33 @@
                         <li class="nav-item">
                             <a href="{{ route('third-party-digging.create', app()->getLocale()) }}" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Create</p>
+                                <p>{{__('messages.create')}}</p>
                             </a>
                         </li>
 
                         <li class="nav-item">
                             <a href="/{{app()->getLocale()}}/create-patrolling" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Patrolling</p>
+                                <p>{{__('messages.patrolling')}}</p>
                             </a>
                         </li>
 
                         <li class="nav-item">
                             <a href="{{ route('third-party-digging.index', app()->getLocale()) }}" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Index</p>
+                                <p>{{__('messages.index')}}</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="/{{app()->getLocale()}}/map-1" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Map</p>
+                                <p>{{__('messages.map')}}</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="/{{app()->getLocale()}}/get-all-work-packages" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>SBUM Approval and Deatil</p>
+                                <p>{{__('messages.sbum_approval_and_detail')}}</p>
                             </a>
                         </li>
                     </ul>
@@ -83,7 +83,7 @@
                 <li class="nav-item">
                     <a href="/pencawang" class="nav-link ">
                         <i class="fas fa-building"></i>
-                        <p>Substation</p>
+                        <p>{{__('messages.substation')}}</p>
                         <i class="right fas fa-angle-left"></i>
                     </a>
                     <ul class="nav nav-treeview">
@@ -91,20 +91,20 @@
                         <li class="nav-item">
                             <a href="{{ route('substation.create', app()->getLocale()) }}" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Create</p>
+                                <p>{{__('messages.create')}}</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('substation.index', app()->getLocale()) }}" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Index</p>
+                                <p>{{__('messages.index')}}</p>
                             </a>
                         </li>
 
                         <li class="nav-item">
                             <a href="/{{app()->getLocale()}}/substation-map" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Map</p>
+                                <p>{{__('messages.map')}}</p>
                             </a>
                         </li>
 
@@ -113,7 +113,7 @@
                 <li class="nav-item">
                     <a href="/feeder-pillar" class="nav-link ">
                         <i class="fas fa-cube"></i>
-                        <p>Feeder Pillar</p>
+                        <p>{{__('messages.feeder_pillar')}}</p>
                         <i class="right fas fa-angle-left"></i>
                     </a>
 
@@ -122,19 +122,19 @@
                         <li class="nav-item">
                             <a href="{{ route('feeder-pillar.create', app()->getLocale()) }}" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Create</p>
+                                <p>{{__('messages.create')}}</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('feeder-pillar.index', app()->getLocale()) }}" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Index</p>
+                                <p>{{__('messages.index')}}</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="/{{app()->getLocale()}}/feeder-pillar-map" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Map</p>
+                                <p>{{__('messages.map')}}</p>
                             </a>
                         </li>
                     </ul>
@@ -145,7 +145,7 @@
                     <a href="#" class="nav-link">
                         <i class="fas fa-bolt"></i>
                         <p>
-                            Tiang + Talian VT & VR
+                            {{__('messages.tiang_talian_vt_&_vr')}}
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
@@ -153,19 +153,19 @@
                         <li class="nav-item">
                             <a href="{{route('tiang-talian-vt-and-vr.create', app()->getLocale())}}" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Create</p>
+                                <p>{{__('messages.create')}}</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{route('tiang-talian-vt-and-vr.index', app()->getLocale())}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Index</p>
+                                <p>{{__('messages.index')}}</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="/{{app()->getLocale()}}/tiang-talian-vt-and-vr-map" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Map</p>
+                                <p>{{__('messages.map')}}</p>
                             </a>
                         </li>
                     </ul>
@@ -175,7 +175,7 @@
                     <a href="#" class="nav-link">
                         <i class="fas fa-link"></i>
                         <p>
-                            Link Box Pelbagai Voltan
+                            {{__('messages.link_box_pelbagai_voltan')}}
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
@@ -183,20 +183,20 @@
                         <li class="nav-item">
                             <a href="{{route('link-box-pelbagai-voltan.create', app()->getLocale())}}" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>create</p>
+                                <p>{{__('messages.create')}}</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{route('link-box-pelbagai-voltan.index', app()->getLocale())}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Index</p>
+                                <p>{{__('messages.index')}}</p>
                             </a>
                         </li>
 
                         <li class="nav-item">
                             <a href="/{{app()->getLocale()}}/link-box-pelbagai-voltan-map" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Map</p>
+                                <p>{{__('messages.map')}}</p>
                             </a>
                         </li>
                     </ul>
@@ -206,7 +206,7 @@
                     <a href="#" class="nav-link">
                         <i class="fas fa-road"></i>
                         <p>
-                            Cable Bridge
+                            {{__('messages.cable_bridge')}}
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
@@ -214,20 +214,20 @@
                         <li class="nav-item">
                             <a href="{{route('cable-bridge.create', app()->getLocale())}}" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Create</p>
+                                <p>{{__('messages.create')}}</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{route('cable-bridge.index', app()->getLocale())}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Index</p>
+                                <p>{{__('messages.index')}}</p>
                             </a>
                         </li>
 
                         <li class="nav-item">
                             <a href="/{{app()->getLocale()}}/cable-bridge-map" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Map</p>
+                                <p>{{__('messages.map')}}</p>
                             </a>
                         </li>
                     </ul>
