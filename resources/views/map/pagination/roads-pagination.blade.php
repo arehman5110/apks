@@ -15,6 +15,9 @@
         </tr>
     </thead>
     <tbody>
+        @if ($roads != '')
+            
+       
         @foreach ($roads as $road)
         <tr>
             <td><span class="work_pakcage_name"></span></td>
@@ -43,6 +46,14 @@
         </tr>
 
         @endforeach
+        @else
+        <tr>
+            <td class="text-center" colspan="6"><strong>no recored found</strong></td>
+            
+
+        </tr>
+
+        @endif
 
     </tbody>
 </table>

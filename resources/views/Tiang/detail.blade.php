@@ -275,137 +275,53 @@
                                         {{-- POLE --}}
                                         <tr>
                                             <th rowspan="5">Pole</th>
-                                            <td class="d-flex">
-                                                <input type="checkbox" name="tiang_defect[cracked]" id="cracked"
-                                                    {{ checkCheckBox('cracked', $data->tiang_defect) }}
-                                                    class="form-check" disabled>
-                                                <label for="cracked"> Cracked</label>
+                                            {!! getImageShow('cracked', $data->tiang_defect , 'tiang_defect' , $data->tiang_defect_image , 'Cracked') !!}
 
-                                            </td>
-
-                                            <td>
-                                                {!! getImage(checkCheckBox('cracked', $data->tiang_defect), $data->tiang_defect_image, 'cracked') !!}
-
-                                            </td>
                                         </tr>
                                         <tr>
-                                            <td class="d-flex">
-                                                <input type="checkbox" name="tiang_defect[leaning]" id="leaning"
-                                                    {{ checkCheckBox('leaning', $data->tiang_defect) }} disabled
-                                                    class="form-check">
-                                                <label for="leaning"> Leaning</label>
-                                            </td>
+                                            {!! getImageShow('leaning', $data->tiang_defect , 'tiang_defect' , $data->tiang_defect_image , 'Leaning') !!}
 
-                                            <td>
-                                                {!! getImage(checkCheckBox('leaning', $data->tiang_defect), $data->tiang_defect_image, 'leaning') !!}
-                                            </td>
 
                                         </tr>
 
-                                        @php($checkbox_dim = checkCheckBox('dim', $data->tiang_defect))
 
                                         <tr>
-                                            <td class="d-flex">
-                                                <input type="checkbox" name="tiang_defect[dim]" id="dim" disabled
-                                                    {{ $checkbox_dim }} class="form-check">
-                                                <label for="dim"> No. Dim Post / None </label>
-
-                                            </td>
-
-                                            <td>
-                                                {!! getImage($checkbox_dim, $data->tiang_defect_image, 'dim') !!}
-                                            </td>
+                                            {!! getImageShow('dim', $data->tiang_defect , 'tiang_defect' , $data->tiang_defect_image , 'Dim') !!}
 
                                         </tr>
 
-                                        @php($checkbox_creepers = checkCheckBox('creepers', $data->tiang_defect))
 
-                                        <tr>
-                                            <td class="d-flex">
-                                                <input type="checkbox" name="tiang_defect[creepers]" id="creepers" disabled
-                                                  {{checkCheckBox('creepers', $data->tiang_defect)}} class="form-check">
-                                                <label for="creepers"> Creepers </label>
-
-                                            </td>
-
-                                            <td>
-                                                {!! getImage($checkbox_creepers, $data->tiang_defect_image, 'creepers') !!}
-                                            </td>
+                                        <tr> 
+                                            {!! getImageShow('creepers', $data->tiang_defect , 'tiang_defect' , $data->tiang_defect_image , 'Creepers') !!}
 
                                         </tr>
 
-                                        @php($checkbox = checkCheckBox('other', $data->tiang_defect))
 
                                         <tr>
-                                            <td>
-                                                <input type="checkbox" name="tiang_defect[other]" id="other_tiang_defect" disabled
-                                                    {{ $checkbox }} class="form-check">
-                                                <label for="other_tiang_defect"> Others </label>
-                                            </td>
+                                            {!! getImageShow('other', $data->tiang_defect , 'tiang_defect' , $data->tiang_defect_image , 'Other') !!}
 
-                                            <td>
-
-                                                {!! getImage(checkCheckBox('other', $data->tiang_defect), $data->tiang_defect_image, 'other') !!}
-
-
-                                            </td>
                                         </tr>
 
                                         {{-- Line (Main / Service) --}}
 
                                         <tr>
                                             <th rowspan="4">Line (Main / Service)</th>
-                                            <td class="d-flex">
-                                                <input type="checkbox" name="talian_defect[joint]" id="joint" disabled
-                                                    class="form-check" {{ checkCheckBox('joint', $data->talian_defect) }}>
-                                                <label for="joint"> Joint</label>
-                                            </td>
+                                            {!! getImageShow('joint', $data->talian_defect , 'talian_defect' , $data->talian_defect_image , 'Joint') !!}
 
-                                            <td>
-                                                {!! getImage(checkCheckBox('joint', $data->talian_defect), $data->talian_defect_image, 'joint') !!}
-
-                                            </td>
                                         </tr>
                                         <tr>
-                                            <td class="d-flex">
-                                                <input type="checkbox" name="talian_defect[need_rentis]" id="need_rentis" disabled
-                                                    class="form-check"
-                                                    {{ checkCheckBox('need_rentis', $data->talian_defect) }}>
-                                                <label for="need_rentis"> Need Rentis</label>
-                                            </td>
+                                            {!! getImageShow('need_rentis', $data->talian_defect , 'talian_defect' , $data->talian_defect_image ,'Need Rentis') !!}
 
-                                            <td>
-                                                {!! getImage(checkCheckBox('need_rentis', $data->talian_defect), $data->talian_defect_image, 'need_rentis') !!}
-
-                                            </td>
                                         </tr>
 
                                         <tr>
-                                            <td class="d-flex">
-                                                <input type="checkbox" name="talian_defect[ground]" id="ground"
-                                                    class="form-check" disabled
-                                                    {{ checkCheckBox('ground', $data->talian_defect) }}>
-                                                <label for="ground"> Does Not Comply With Ground Clearance</label>
-                                            </td>
+                                            {!! getImageShow('ground', $data->talian_defect , 'talian_defect' , $data->talian_defect_image ,'Does Not Comply With Ground Clearance') !!}
 
-                                            <td>
-                                                {!! getImage(checkCheckBox('ground', $data->talian_defect), $data->talian_defect_image, 'ground') !!}
-
-                                            </td>
                                         </tr>
 
                                         <tr>
-                                            <td>
-                                                <input type="checkbox" name="talian_defect[other]"
-                                                    id="other_talian_defect" disabled
-                                                    {{ checkCheckBox('other', $data->talian_defect) }} class="form-check">
-                                                <label for="other_talian_defect"> Others </label>
-                                            </td>
+                                            {!! getImageShow('other', $data->talian_defect , 'talian_defect' , $data->talian_defect_image ,'Others') !!}
 
-                                            <td>
-                                                {!! getImage(checkCheckBox('other', $data->talian_defect), $data->talian_defect_image, 'other') !!}
-
-                                            </td>
                                         </tr>
 
 
@@ -413,235 +329,102 @@
 
                                         <tr>
                                             <th rowspan="5">Umbang</th>
-                                            <td class="d-flex">
-                                                <input type="checkbox" name="umbang_defect[breaking]" disabled
-                                                    id="umbang_breaking" class="form-check "
-                                                    {{ checkCheckBox('breaking', $data->umbang_defect) }}>
-                                                <label for="umbang_breaking"> Sagging/Breaking</label>
-                                            </td>
+                                            {!! getImageShow('breaking', $data->umbang_defect , 'umbang_defect' , $data->umbang_defect_image ,'Sagging/Breaking') !!}
 
-                                            <td>
-                                                {!! getImage(checkCheckBox('breaking', $data->umbang_defect), $data->umbang_defect_image, 'breaking') !!}
-
-                                            </td>
                                         </tr>
                                         <tr>
-                                            <td class="d-flex">
-                                                <input type="checkbox" name="umbang_defect[creepers]" disabled
-                                                    id="umbang_creepers" class="form-check "
-                                                    {{ checkCheckBox('creepers', $data->umbang_defect) }}>
-                                                <label for="umbang_creepers"> Creepers</label>
-                                            </td>
+                                            {!! getImageShow('creepers', $data->umbang_defect , 'umbang_defect' , $data->umbang_defect_image ,'Creepers') !!}
 
-                                            <td>
-                                                {!! getImage(checkCheckBox('creepers', $data->umbang_defect), $data->umbang_defect_image, 'creepers') !!}
-
-                                            </td>
                                         </tr>
 
                                         <tr>
-                                            <td class="d-flex">
-                                                <input type="checkbox" name="umbang_defect[cracked]" id="umbang_cracked" disabled
-                                                    class="form-check "
-                                                    {{ checkCheckBox('cracked', $data->umbang_defect) }}>
-                                                <label for="umbang_cracked"> No Stay Insulator/Damaged </label>
-                                            </td>
+                                            {!! getImageShow('cracked', $data->umbang_defect , 'umbang_defect' , $data->umbang_defect_image ,'No Stay Insulator/Damaged') !!}
 
-                                            <td>
-                                                {!! getImage(checkCheckBox('cracked', $data->umbang_defect), $data->umbang_defect_image, 'cracked') !!}
-
-                                            </td>
                                         </tr>
 
                                         <tr>
-                                            <td class="d-flex">
-                                                <input type="checkbox" name="umbang_defect[stay_palte]" id="stay_palte" disabled
-                                                    class="form-check"
-                                                    {{ checkCheckBox('stay_palte', $data->umbang_defect) }}>
-                                                <label for="stay_palte"> Stay Plate / Base Stay Blocked</label>
-                                            </td>
+                                            {!! getImageShow('stay_palte', $data->umbang_defect , 'umbang_defect' , $data->umbang_defect_image ,'Stay Plate / Base Stay Blocked') !!}
 
-                                            <td>
-                                                {!! getImage(checkCheckBox('stay_palte', $data->umbang_defect), $data->umbang_defect_image, 'stay_palte') !!}
-
-                                            </td>
                                         </tr>
 
                                         <tr>
-                                            <td>
-                                                <input type="checkbox" name="umbang_defect[other]" disabled
-                                                    id="other_umbang_defect"
-                                                    {{ checkCheckBox('other', $data->umbang_defect) }} class="form-check">
-                                                <label for="other_umbang_defect"> Others </label>
-                                            </td>
+                                            {!! getImageShow('other', $data->umbang_defect , 'umbang_defect' , $data->umbang_defect_image ,'Others') !!}
 
-                                            <td>
-                                                {!! getImage(checkCheckBox('other', $data->umbang_defect), $data->umbang_defect_image, 'other') !!}
-                                            </td>
                                         </tr>
 
 
                                         {{-- IPC --}}
                                         <tr>
                                             <th rowspan="2">IPC</th>
-                                            <td>
-                                                <input type="checkbox" name="ipc_defect[burn]" disabled
-                                                    id="ipc_burn"class="form-check"
-                                                    {{ checkCheckBox('burn', $data->ipc_defect) }}>
-                                                <label for="ipc_burn"> Burn Effect</label>
-                                            </td>
+                                            {!! getImageShow('burn', $data->ipc_defect , 'ipc_defect' , $data->ipc_defect_image ,'Burn Effect') !!}
 
-                                            <td>
-                                                {!! getImage(checkCheckBox('burn', $data->ipc_defect), $data->ipc_defect_image, 'burn') !!}
-                                            </td>
                                         </tr>
 
                                         <tr>
-                                            <td>
-                                                <input type="checkbox" name="ipc_defect[other]" id="other_ipc_defect" disabled
-                                                    {{ checkCheckBox('other', $data->ipc_defect) }} class="form-check">
-                                                <label for="other_ipc_defect"> Others </label>
-                                            </td>
+                                            {!! getImageShow('other', $data->ipc_defect , 'ipc_defect' , $data->ipc_defect_image ,'Others') !!}
 
-                                            <td>
-                                                {!! getImage(checkCheckBox('other', $data->ipc_defect), $data->ipc_defect_image, 'other') !!}
-                                            </td>
                                         </tr>
 
                                         {{-- Black Box --}}
 
                                         <tr>
                                             <th rowspan="2">Black Box</th>
-                                            <td class="d-flex">
-                                                <input type="checkbox" name="blackbox_defect[cracked]" disabled
-                                                    id="black_box_cracked" class="form-check"
-                                                    {{ checkCheckBox('cracked', $data->blackbox_defect) }}>
-                                                <label for="black_box_cracked"> Kesan Bakar</label>
-                                            </td>
+                                            {!! getImageShow('cracked', $data->blackbox_defect , 'blackbox_defect' , $data->blackbox_defect_image ,'Kesan Bakar') !!}
 
-                                            <td>
-                                                {!! getImage(checkCheckBox('cracked', $data->blackbox_defect), $data->blackbox_defect_image, 'cracked') !!}
-                                            </td>
                                         </tr>
 
                                         <tr>
-                                            <td>
-                                                <input type="checkbox" name="blackbox_defect[other]" disabled
-                                                    id="other_blackbox_defect"
-                                                    {{ checkCheckBox('other', $data->blackbox_defect) }}
-                                                    class="form-check">
-                                                <label for="other_blackbox_defect"> Others </label>
-                                            </td>
+                                            {!! getImageShow('other', $data->blackbox_defect , 'blackbox_defect' , $data->blackbox_defect_image ,'Others') !!}
 
-                                            <td>
-                                                {!! getImage(checkCheckBox('other', $data->blackbox_defect), $data->blackbox_defect_image, 'other') !!}
-                                            </td>
                                         </tr>
 
                                         {{-- Jumper --}}
 
                                         <tr>
                                             <th rowspan="3">Jumper</th>
-                                            <td class="d-flex">
-                                                <input type="checkbox" name="jumper[sleeve]" id="jumper_sleeve" disabled
-                                                    class="form-check" {{ checkCheckBox('sleeve', $data->jumper) }}>
-                                                <label for="jumper_sleeve"> No UV Sleeve</label>
-                                            </td>
+                                            {!! getImageShow('sleeve', $data->jumper , 'jumper' , $data->jumper_image ,'No UV Sleeve') !!}
 
-                                            <td>
-                                                {!! getImage(checkCheckBox('sleeve', $data->jumper), $data->jumper_image, 'sleeve') !!}
-                                            </td>
                                         </tr>
                                         <tr>
-                                            <td class="d-flex">
-                                                <input type="checkbox" name="jumper[burn]" id="jumper_burn" disabled
-                                                    class="form-check" {{ checkCheckBox('burn', $data->jumper) }}>
-                                                <label for="jumper_burn"> Burn Effect</label>
-                                            </td>
-                                            <td>
-                                                {!! getImage(checkCheckBox('burn', $data->jumper), $data->jumper_image, 'burn') !!}
-                                            </td>
+                                            {!! getImageShow('burn', $data->jumper , 'jumper' , $data->jumper_image ,'Burn Effect') !!}
+
                                         </tr>
 
 
                                         <tr>
-                                            <td>
-                                                <input type="checkbox" name="jumper[other]" id="other_jumper" disabled
-                                                    {{ checkCheckBox('other', $data->jumper) }} class="form-check">
-                                                <label for="other_jumper"> Others </label>
-                                            </td>
+                                            {!! getImageShow('other', $data->jumper , 'jumper' , $data->jumper_image ,'Others') !!}
 
-                                            <td>
-                                                {!! getImage(checkCheckBox('other', $data->jumper), $data->jumper_image, 'other') !!}
-                                            </td>
                                         </tr>
 
                                         {{-- Lightning catcher --}}
 
                                         <tr>
                                             <th rowspan="2">Lightning catcher</th>
-                                            <td class="d-flex">
-                                                <input type="checkbox" name="kilat_defect[broken]" id="lightning_broken" disabled
-                                                    class="form-check" {{ checkCheckBox('broken', $data->kilat_defect) }}>
-                                                <label for="lightning_broken"> Broken</label>
-                                            </td>
+                                            {!! getImageShow('broken', $data->kilat_defect , 'kilat_defect' , $data->kilat_defect_image ,'Broken') !!}
 
-                                            <td>
-                                                {!! getImage(checkCheckBox('broken', $data->kilat_defect), $data->kilat_defect_image, 'broken') !!}
-                                            </td>
                                         </tr>
 
                                         <tr>
-                                            <td>
-                                                <input type="checkbox" name="kilat_defect[other]" id="other_kilat_defect" disabled
-                                                    {{ checkCheckBox('other', $data->kilat_defect) }} class="form-check">
-                                                <label for="other_kilat_defect"> Others </label>
-                                            </td>
+                                            {!! getImageShow('other', $data->kilat_defect , 'kilat_defect' , $data->kilat_defect_image ,'Others') !!}
 
-                                            <td>
-                                                {!! getImage(checkCheckBox('other', $data->kilat_defect), $data->kilat_defect_image, 'other') !!}
-                                            </td>
                                         </tr>
 
                                         {{-- Service --}}
 
                                         <tr>
                                             <th rowspan="3">Service</th>
-                                            <td class="d-felx">
-                                                <input type="checkbox" name="servis_defect[roof]" id="service_roof" disabled
-                                                    class="form-check" {{ checkCheckBox('roof', $data->servis_defect) }}>
-                                                <label for="service_roof"> The service line is on the roof</label>
-                                            </td>
+                                            {!! getImageShow('roof', $data->servis_defect , 'servis_defect' , $data->servis_defect_image ,'The service line is on the roof') !!}
 
-                                            <td>
-                                                {!! getImage(checkCheckBox('roof', $data->servis_defect), $data->servis_defect_image, 'othroofer') !!}
-                                            </td>
                                         </tr>
 
                                         <tr>
-                                            <td class="d-felx">
-                                                <input type="checkbox" name="servis_defect[won_piece]" disabled
-                                                    id="service_won_piece" class="form-check"
-                                                    {{ checkCheckBox('won_piece', $data->servis_defect) }}>
-                                                <label for="service_won_piece"> Won piece Date</label>
-                                            </td>
+                                            {!! getImageShow('won_piece', $data->servis_defect , 'servis_defect' , $data->servis_defect_image ,'Won piece Dat') !!}
 
-                                            <td>
-                                                {!! getImage(checkCheckBox('won_piece', $data->servis_defect), $data->servis_defect_image, 'won_piece') !!}
-                                            </td>
                                         </tr>
 
                                         <tr>
-                                            <td>
-                                                <input type="checkbox" name="servis_defect[other]" disabled
-                                                    id="other_servis_defect"
-                                                    {{ checkCheckBox('other', $data->servis_defect) }} class="form-check">
-                                                <label for="other_servis_defect"> Others </label>
-                                            </td>
+                                            {!! getImageShow('other', $data->servis_defect , 'servis_defect' , $data->servis_defect_image ,'Others') !!}
 
-                                            <td>
-                                                {!! getImage(checkCheckBox('other', $data->servis_defect), $data->servis_defect_image, 'other') !!}
-                                            </td>
                                         </tr>
 
 
@@ -649,100 +432,41 @@
 
                                         <tr>
                                             <th rowspan="2">Grounding</th>
-                                            <td>
-                                                <input type="checkbox" name="pembumian_defect[netural]" disabled
-                                                    id="grounding_netural" class="form-check"
-                                                    {{ checkCheckBox('netural', $data->pembumian_defect) }}>
-                                                <label for="grounding_netural"> No Connection to Neutral</label>
-                                            </td>
+                                            {!! getImageShow('netural', $data->pembumian_defect , 'pembumian_defect' , $data->pembumian_defect_image ,'No Connection to Neutral') !!}
 
-                                            <td>
-                                                {!! getImage(checkCheckBox('netural', $data->pembumian_defect), $data->pembumian_defect_image, 'netural') !!}
-                                            </td>
                                         </tr>
 
                                         <tr>
-                                            <td>
-                                                <input type="checkbox" name="pembumian_defect[other]" disabled
-                                                    id="other_pembumian_defect"
-                                                    {{ checkCheckBox('other', $data->pembumian_defect) }}
-                                                    class="form-check">
-                                                <label for="other_pembumian_defect"> Others </label>
-                                            </td>
+                                            {!! getImageShow('other', $data->pembumian_defect , 'pembumian_defect' , $data->pembumian_defect_image ,'Others') !!}
 
-                                            <td>
-                                                {!! getImage(checkCheckBox('other', $data->pembumian_defect), $data->pembumian_defect_image, 'other') !!}
-                                            </td>
                                         </tr>
 
                                         {{-- Signage - OFF Point / Two Way Supply --}}
                                         <tr>
                                             <th rowspan="2">Signage - OFF Point / Two Way Supply</th>
-                                            <td class="d-flex">
-                                                <input type="checkbox" name="bekalan_dua_defect[damage]" disabled
-                                                    id="signage_damage" class="form-check"
-                                                    {{ checkCheckBox('damage', $data->bekalan_dua_defect) }}>
-                                                <label for="signage_damage"> Faded / Damaged / Missing Signage</label>
-                                            </td>
+                                            {!! getImageShow('damage', $data->bekalan_dua_defect , 'bekalan_dua_defect' , $data->bekalan_dua_defect_image ,'Faded / Damaged / Missing Signage') !!}
 
-                                            <td>
-                                                {!! getImage(checkCheckBox('damage', $data->bekalan_dua_defect), $data->bekalan_dua_defect_image, 'damage') !!}
-                                            </td>
                                         </tr>
 
                                         <tr>
-                                            <td>
-                                                <input type="checkbox" name="bekalan_dua_defect[other]" disabled
-                                                    id="other_bekalan_dua_defect"
-                                                    {{ checkCheckBox('other', $data->bekalan_dua_defect) }}
-                                                    class="form-check">
-                                                <label for="other_bekalan_dua_defect"> Others </label>
-                                            </td>
+                                            {!! getImageShow('other', $data->bekalan_dua_defect , 'bekalan_dua_defect' , $data->bekalan_dua_defect_image ,'Others') !!}
 
-                                            <td>
-                                                {!! getImage(checkCheckBox('other', $data->bekalan_dua_defect), $data->bekalan_dua_defect_image, 'other') !!}
-                                            </td>
                                         </tr>
 
                                         {{-- Main Street --}}
 
                                         <tr>
                                             <th rowspan="3">Main Street</th>
-                                            <td class="d-flex">
-                                                <input type="checkbox" name="kaki_lima_defect[date_wire]" disabled
-                                                    id="street_date_wire" class="form-check"
-                                                    {{ checkCheckBox('date_wire', $data->kaki_lima_defect) }}>
-                                                <label for="street_date_wire">Date Wire</label>
-                                            </td>
+                                            {!! getImageShow('date_wire', $data->kaki_lima_defect , 'kaki_lima_defect' , $data->kaki_lima_defect_image ,'Date Wire') !!}
 
-                                            <td>
-                                                {!! getImage(checkCheckBox('date_wire', $data->kaki_lima_defect), $data->kaki_lima_defect_image, 'date_wire') !!}
-                                            </td>
                                         </tr>
                                         <tr>
-                                            <td class="d-flex">
-                                                <input type="checkbox" name="kaki_lima_defect[burn]" id="street_burn" disabled
-                                                    class="form-check"
-                                                    {{ checkCheckBox('burn', $data->kaki_lima_defect) }}>
-                                                <label for="street_burn"> Junction Box Date / Burn Effect</label>
-                                            </td>
+                                            {!! getImageShow('burn', $data->kaki_lima_defect , 'kaki_lima_defect' , $data->kaki_lima_defect_image ,'Junction Box Date / Burn Effect') !!}
 
-                                            <td>
-                                                {!! getImage(checkCheckBox('burn', $data->kaki_lima_defect), $data->kaki_lima_defect_image, 'burn') !!}
-                                            </td>
                                         </tr>
                                         <tr>
-                                            <td>
-                                                <input type="checkbox" name="kaki_lima_defect[other]" disabled
-                                                    id="other_kaki_lima_defect_image"
-                                                    {{ checkCheckBox('other', $data->kaki_lima_defect) }}
-                                                    class="form-check">
-                                                <label for="other_kaki_lima_defect_image"> Others </label>
-                                            </td>
+                                            {!! getImageShow('other', $data->kaki_lima_defect , 'kaki_lima_defect' , $data->kaki_lima_defect_image ,'Others') !!}
 
-                                            <td>
-                                                {!! getImage(checkCheckBox('other', $data->kaki_lima_defect), $data->kaki_lima_defect_image, 'other') !!}
-                                            </td>
                                         </tr>
                                     </table>
                                 </div>
@@ -754,12 +478,6 @@
                             <fieldset class="form-input">
 
                                 <h3>Kejanggalan</h3>
-
-
-
-
-
-
 
 
                                 <div class="row">
@@ -811,7 +529,7 @@
                                         <thead style="background-color: #E4E3E3 !important">
                                             <th class="col-4">Title</th>
                                             <th class="col-4">Defects</th>
-                                            <th class="col-3">Upload Images</th>
+                                            <th class="col-3">Images</th>
 
                                         </thead>
 

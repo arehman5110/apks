@@ -329,171 +329,55 @@
                                         {{-- POLE --}}
                                         <tr>
                                             <th rowspan="5">Pole</th>
-                                            <td class="d-flex">
-                                                <input type="checkbox" name="tiang_defect[cracked]" id="cracked"
-                                                    {{ checkCheckBox('cracked', $data->tiang_defect) }}
-                                                    class="form-check">
-                                                <label for="cracked"> Cracked</label>
 
-                                            </td>
-                                            <td>
-                                                <input type="file" name="tiang_defect_image[cracked]"
-                                                    id="cracked-image"
-                                                    class=" @if (checkCheckBox('cracked', $data->tiang_defect) != 'checked') d-none @endif form-control">
-                                            </td>
-                                            <td>
-                                                {!! getImage(checkCheckBox('cracked', $data->tiang_defect), $data->tiang_defect_image, 'cracked') !!}
-
-                                            </td>
+                                            {!! getImage2('cracked', $data->tiang_defect , 'tiang_defect' , $data->tiang_defect_image , 'Cracked') !!}
+    
                                         </tr>
                                         <tr>
-                                            <td class="d-flex">
-                                                <input type="checkbox" name="tiang_defect[leaning]" id="leaning"
-                                                    {{ checkCheckBox('leaning', $data->tiang_defect) }}
-                                                    class="form-check">
-                                                <label for="leaning"> Leaning</label>
-                                            </td>
-                                            <td>
-                                                <input type="file" name="tiang_defect_image[leaning]"
-                                                    id="leaning-image"
-                                                    class=" @if (checkCheckBox('leaning', $data->tiang_defect) != 'checked') d-none @endif form-control">
-                                            </td>
-                                            <td>
-                                                {!! getImage(checkCheckBox('leaning', $data->tiang_defect), $data->tiang_defect_image, 'leaning') !!}
-                                            </td>
+                                            {!! getImage2('leaning', $data->tiang_defect , 'tiang_defect' , $data->tiang_defect_image , 'Leaning') !!}
+                                           
+                                        </tr>
+
+
+                                        <tr>
+                                            {!! getImage2('dim', $data->tiang_defect , 'tiang_defect' , $data->tiang_defect_image , 'Dim') !!}
+                
+                                        </tr>
+
+                                        <tr>
+                                            {!! getImage2('creepers', $data->tiang_defect , 'tiang_defect' , $data->tiang_defect_image , 'Creepers') !!}
 
                                         </tr>
 
-                                        @php($checkbox_dim = checkCheckBox('dim', $data->tiang_defect))
 
                                         <tr>
-                                            <td class="d-flex">
-                                                <input type="checkbox" name="tiang_defect[dim]" id="dim"
-                                                    {{ $checkbox_dim }} class="form-check">
-                                                <label for="dim"> No. Dim Post / None </label>
-
-                                            </td>
-                                            <td>
-                                                <input type="file" name="tiang_defect_image[dim]" id="dim-image"
-                                                    class="{{ $checkbox_dim != 'checked' ? 'd-none' : '' }} form-control">
-                                            </td>
-                                            <td>
-                                                {!! getImage($checkbox_dim, $data->tiang_defect_image, 'dim') !!}
-                                            </td>
-
-                                        </tr>
-
-                                        @php($checkbox_creepers = checkCheckBox('creepers', $data->tiang_defect))
-
-                                        <tr>
-                                            <td class="d-flex">
-                                                <input type="checkbox" name="tiang_defect[creepers]" id="creepers"
-                                                    $checkbox_creepers class="form-check">
-                                                <label for="creepers"> Creepers </label>
-
-                                            </td>
-                                            <td>
-                                                <input type="file" name="tiang_defect_image[creepers]"
-                                                    id="creepers-image"
-                                                    class=" {{ $checkbox_creepers != 'checked' ? 'd-none' : '' }} form-control">
-                                            </td>
-                                            <td>
-                                                {!! getImage($checkbox_creepers, $data->tiang_defect_image, 'creepers') !!}
-                                            </td>
-
-                                        </tr>
-
-                                        @php($checkbox = checkCheckBox('other', $data->tiang_defect))
-
-                                        <tr>
-                                            <td>
-                                                <input type="checkbox" name="tiang_defect[other]" id="other_tiang_defect"
-                                                    {{ $checkbox }} class="form-check">
-                                                <label for="other_tiang_defect"> Others </label>
-                                            </td>
-                                            <td>
-                                                <input type="file" name="tiang_defect_image[other]"
-                                                    id="other_tiang_defect-image"
-                                                    class=" {{ $checkbox != 'checked' ? 'd-none' : '' }} form-control">
-                                            </td>
-                                            <td>
-
-                                                {!! getImage(checkCheckBox('other', $data->tiang_defect), $data->tiang_defect_image, 'other') !!}
-
-
-                                            </td>
+                                            {!! getImage2('other', $data->tiang_defect , 'tiang_defect' , $data->tiang_defect_image , 'Other') !!}
+                                           
                                         </tr>
 
                                         {{-- Line (Main / Service) --}}
 
                                         <tr>
                                             <th rowspan="4">Line (Main / Service)</th>
-                                            <td class="d-flex">
-                                                <input type="checkbox" name="talian_defect[joint]" id="joint"
-                                                    class="form-check" {{ checkCheckBox('joint', $data->talian_defect) }}>
-                                                <label for="joint"> Joint</label>
-                                            </td>
-                                            <td>
-                                                <input type="file" name="talian_defect_image[joint]" id="joint-image"
-                                                    class="@if (checkCheckBox('joint', $data->talian_defect) != 'checked') d-none @endif  form-control">
-                                            </td>
-                                            <td>
-                                                {!! getImage(checkCheckBox('joint', $data->talian_defect), $data->talian_defect_image, 'joint') !!}
+                                            {!! getImage2('joint', $data->talian_defect , 'talian_defect' , $data->talian_defect_image , 'Joint') !!}
 
-                                            </td>
+                                          
                                         </tr>
                                         <tr>
-                                            <td class="d-flex">
-                                                <input type="checkbox" name="talian_defect[need_rentis]" id="need_rentis"
-                                                    class="form-check"
-                                                    {{ checkCheckBox('need_rentis', $data->talian_defect) }}>
-                                                <label for="need_rentis"> Need Rentis</label>
-                                            </td>
-                                            <td>
-                                                <input type="file" name="talian_defect_image[need_rentis]"
-                                                    id="need_rentis-image"
-                                                    class=" @if (checkCheckBox('need_rentis', $data->talian_defect) != 'checked') d-none @endif form-control">
-                                            </td>
-                                            <td>
-                                                {!! getImage(checkCheckBox('need_rentis', $data->talian_defect), $data->talian_defect_image, 'need_rentis') !!}
+                                            {!! getImage2('need_rentis', $data->talian_defect , 'talian_defect' , $data->talian_defect_image ,'Need Rentis') !!}
 
-                                            </td>
+                                           
                                         </tr>
 
                                         <tr>
-                                            <td class="d-flex">
-                                                <input type="checkbox" name="talian_defect[ground]" id="ground"
-                                                    class="form-check"
-                                                    {{ checkCheckBox('ground', $data->talian_defect) }}>
-                                                <label for="ground"> Does Not Comply With Ground Clearance</label>
-                                            </td>
-                                            <td>
-                                                <input type="file" name="talian_defect_image[ground]"
-                                                    id="ground-image"
-                                                    class="@if (checkCheckBox('ground', $data->talian_defect) != 'checked') d-none @endif form-control">
-                                            </td>
-                                            <td>
-                                                {!! getImage(checkCheckBox('ground', $data->talian_defect), $data->talian_defect_image, 'ground') !!}
+                                            {!! getImage2('ground', $data->talian_defect , 'talian_defect' , $data->talian_defect_image ,'Does Not Comply With Ground Clearance') !!}
 
-                                            </td>
                                         </tr>
 
                                         <tr>
-                                            <td>
-                                                <input type="checkbox" name="talian_defect[other]"
-                                                    id="other_talian_defect"
-                                                    {{ checkCheckBox('other', $data->talian_defect) }} class="form-check">
-                                                <label for="other_talian_defect"> Others </label>
-                                            </td>
-                                            <td>
-                                                <input type="file" name="talian_defect_image[other]"
-                                                    id="other_talian_defect-image"
-                                                    class="@if (checkCheckBox('other', $data->talian_defect) != 'checked') d-none @endif form-control">
-                                            </td>
-                                            <td>
-                                                {!! getImage(checkCheckBox('other', $data->talian_defect), $data->talian_defect_image, 'other') !!}
+                                            
+                                            {!! getImage2('other', $data->talian_defect , 'talian_defect' , $data->talian_defect_image ,'Others') !!}
 
-                                            </td>
                                         </tr>
 
 
@@ -501,301 +385,108 @@
 
                                         <tr>
                                             <th rowspan="5">Umbang</th>
-                                            <td class="d-flex">
-                                                <input type="checkbox" name="umbang_defect[breaking]"
-                                                    id="umbang_breaking" class="form-check "
-                                                    {{ checkCheckBox('breaking', $data->umbang_defect) }}>
-                                                <label for="umbang_breaking"> Sagging/Breaking</label>
-                                            </td>
-                                            <td>
-                                                <input type="file" name="umbang_defect_image[breaking]"
-                                                    id="umbang_breaking-image"
-                                                    class="@if (checkCheckBox('breaking', $data->umbang_defect) != 'checked') d-none @endif form-control">
-                                            </td>
-                                            <td>
-                                                {!! getImage(checkCheckBox('breaking', $data->umbang_defect), $data->umbang_defect_image, 'breaking') !!}
-
-                                            </td>
+                                            {!! getImage2('breaking', $data->umbang_defect , 'umbang_defect' , $data->umbang_defect_image ,'Sagging/Breaking') !!}
+ 
                                         </tr>
                                         <tr>
-                                            <td class="d-flex">
-                                                <input type="checkbox" name="umbang_defect[creepers]"
-                                                    id="umbang_creepers" class="form-check "
-                                                    {{ checkCheckBox('creepers', $data->umbang_defect) }}>
-                                                <label for="umbang_creepers"> Creepers</label>
-                                            </td>
-                                            <td>
-                                                <input type="file" name="umbang_defect_image[creepers]"
-                                                    id="umbang_creepers-image"
-                                                    class="@if (checkCheckBox('creepers', $data->umbang_defect) != 'checked') d-none @endif form-control">
-                                            </td>
-                                            <td>
-                                                {!! getImage(checkCheckBox('creepers', $data->umbang_defect), $data->umbang_defect_image, 'creepers') !!}
+                                            {!! getImage2('creepers', $data->umbang_defect , 'umbang_defect' , $data->umbang_defect_image ,'Creepers') !!}
 
-                                            </td>
                                         </tr>
 
                                         <tr>
-                                            <td class="d-flex">
-                                                <input type="checkbox" name="umbang_defect[cracked]" id="umbang_cracked"
-                                                    class="form-check "
-                                                    {{ checkCheckBox('cracked', $data->umbang_defect) }}>
-                                                <label for="umbang_cracked"> No Stay Insulator/Damaged </label>
-                                            </td>
-                                            <td>
-                                                <input type="file" name="umbang_defect_image[cracked]"
-                                                    id="umbang_cracked-image"
-                                                    class="@if (checkCheckBox('cracked', $data->umbang_defect) != 'checked') d-none @endif form-control">
-                                            </td>
-                                            <td>
-                                                {!! getImage(checkCheckBox('cracked', $data->umbang_defect), $data->umbang_defect_image, 'cracked') !!}
+                                            {!! getImage2('cracked', $data->umbang_defect , 'umbang_defect' , $data->umbang_defect_image ,'No Stay Insulator/Damaged') !!}
 
-                                            </td>
                                         </tr>
 
                                         <tr>
-                                            <td class="d-flex">
-                                                <input type="checkbox" name="umbang_defect[stay_palte]" id="stay_palte"
-                                                    class="form-check"
-                                                    {{ checkCheckBox('stay_palte', $data->umbang_defect) }}>
-                                                <label for="stay_palte"> Stay Plate / Base Stay Blocked</label>
-                                            </td>
-                                            <td>
-                                                <input type="file" name="umbang_defect_image[stay_palte]"
-                                                    id="stay_palte-image"
-                                                    class="@if (checkCheckBox('stay_palte', $data->umbang_defect) != 'checked') d-none @endif form-control">
-                                            </td>
-                                            <td>
-                                                {!! getImage(checkCheckBox('stay_palte', $data->umbang_defect), $data->umbang_defect_image, 'stay_palte') !!}
+                                            {!! getImage2('stay_palte', $data->umbang_defect , 'umbang_defect' , $data->umbang_defect_image ,'Stay Plate / Base Stay Blocked') !!}
 
-                                            </td>
                                         </tr>
 
                                         <tr>
-                                            <td>
-                                                <input type="checkbox" name="umbang_defect[other]"
-                                                    id="other_umbang_defect"
-                                                    {{ checkCheckBox('other', $data->umbang_defect) }} class="form-check">
-                                                <label for="other_umbang_defect"> Others </label>
-                                            </td>
-                                            <td>
-                                                <input type="file" name="umbang_defect_image[other]"
-                                                    id="other_umbang_defect-image"
-                                                    class="@if (checkCheckBox('other', $data->umbang_defect) != 'checked') d-none @endif form-control">
-                                            </td>
-                                            <td>
-                                                {!! getImage(checkCheckBox('other', $data->umbang_defect), $data->umbang_defect_image, 'other') !!}
-                                            </td>
+                                            {!! getImage2('other', $data->umbang_defect , 'umbang_defect' , $data->umbang_defect_image ,'Others') !!}
+
                                         </tr>
 
 
                                         {{-- IPC --}}
                                         <tr>
                                             <th rowspan="2">IPC</th>
-                                            <td>
-                                                <input type="checkbox" name="ipc_defect[burn]"
-                                                    id="ipc_burn"class="form-check"
-                                                    {{ checkCheckBox('burn', $data->ipc_defect) }}>
-                                                <label for="ipc_burn"> Burn Effect</label>
-                                            </td>
-                                            <td>
-                                                <input type="file" name="ipc_defect_image[burn]" id="ipc_burn-image"
-                                                    class="@if (checkCheckBox('burn', $data->ipc_defect) != 'checked') d-none @endif form-control">
-                                            </td>
-                                            <td>
-                                                {!! getImage(checkCheckBox('burn', $data->ipc_defect), $data->ipc_defect_image, 'burn') !!}
-                                            </td>
+
+                                            {!! getImage2('burn', $data->ipc_defect , 'ipc_defect' , $data->ipc_defect_image ,'Burn Effect') !!}
+
                                         </tr>
 
                                         <tr>
-                                            <td>
-                                                <input type="checkbox" name="ipc_defect[other]" id="other_ipc_defect"
-                                                    {{ checkCheckBox('other', $data->ipc_defect) }} class="form-check">
-                                                <label for="other_ipc_defect"> Others </label>
-                                            </td>
-                                            <td>
-                                                <input type="file" name="ipc_defect_image[other]"
-                                                    id="other_ipc_defect-image"
-                                                    class="@if (checkCheckBox('other', $data->ipc_defect) != 'checked') d-none @endif form-control">
-                                            </td>
-                                            <td>
-                                                {!! getImage(checkCheckBox('other', $data->ipc_defect), $data->ipc_defect_image, 'other') !!}
-                                            </td>
+                                            {!! getImage2('other', $data->ipc_defect , 'ipc_defect' , $data->ipc_defect_image ,'Others') !!}
+
                                         </tr>
 
                                         {{-- Black Box --}}
 
                                         <tr>
                                             <th rowspan="2">Black Box</th>
-                                            <td class="d-flex">
-                                                <input type="checkbox" name="blackbox_defect[cracked]"
-                                                    id="black_box_cracked" class="form-check"
-                                                    {{ checkCheckBox('cracked', $data->blackbox_defect) }}>
-                                                <label for="black_box_cracked"> Kesan Bakar</label>
-                                            </td>
-                                            <td>
-                                                <input type="file" name="blackbox_defect_image[cracked]"
-                                                    id="black_box_cracked-image"
-                                                    class="@if (checkCheckBox('cracked', $data->blackbox_defect) != 'checked') d-none @endif form-control">
-                                            </td>
-                                            <td>
-                                                {!! getImage(checkCheckBox('cracked', $data->blackbox_defect), $data->blackbox_defect_image, 'cracked') !!}
-                                            </td>
+
+                                            {!! getImage2('cracked', $data->blackbox_defect , 'blackbox_defect' , $data->blackbox_defect_image ,'Kesan Bakar') !!}
+
                                         </tr>
 
                                         <tr>
-                                            <td>
-                                                <input type="checkbox" name="blackbox_defect[other]"
-                                                    id="other_blackbox_defect"
-                                                    {{ checkCheckBox('other', $data->blackbox_defect) }}
-                                                    class="form-check">
-                                                <label for="other_blackbox_defect"> Others </label>
-                                            </td>
-                                            <td>
-                                                <input type="file" name="blackbox_defect_image[other]"
-                                                    id="other_blackbox_defect-image"
-                                                    class="@if (checkCheckBox('other', $data->blackbox_defect) != 'checked') d-none @endif form-control">
-                                            </td>
-                                            <td>
-                                                {!! getImage(checkCheckBox('other', $data->blackbox_defect), $data->blackbox_defect_image, 'other') !!}
-                                            </td>
+                                            {!! getImage2('other', $data->blackbox_defect , 'blackbox_defect' , $data->blackbox_defect_image ,'Others') !!}
+
                                         </tr>
 
                                         {{-- Jumper --}}
 
                                         <tr>
                                             <th rowspan="3">Jumper</th>
-                                            <td class="d-flex">
-                                                <input type="checkbox" name="jumper[sleeve]" id="jumper_sleeve"
-                                                    class="form-check" {{ checkCheckBox('sleeve', $data->jumper) }}>
-                                                <label for="jumper_sleeve"> No UV Sleeve</label>
-                                            </td>
-                                            <td>
-                                                <input type="file" name="jumper_image[sleeve]"
-                                                    id="jumper_sleeve-image"
-                                                    class=" form-control  @if (checkCheckBox('sleeve', $data->jumper) != 'checked') d-none @endif ">
-                                            </td>
-                                            <td>
-                                                {!! getImage(checkCheckBox('sleeve', $data->jumper), $data->jumper_image, 'sleeve') !!}
-                                            </td>
+                                            {!! getImage2('sleeve', $data->jumper , 'jumper' , $data->jumper_image ,'No UV Sleeve') !!}
+
                                         </tr>
                                         <tr>
-                                            <td class="d-flex">
-                                                <input type="checkbox" name="jumper[burn]" id="jumper_burn"
-                                                    class="form-check" {{ checkCheckBox('burn', $data->jumper) }}>
-                                                <label for="jumper_burn"> Burn Effect</label>
-                                            </td>
-                                            <td>
-                                                <input type="file" name="jumper_image[burn]" id="jumper_burn-image"
-                                                    class=" form-control  @if (checkCheckBox('burn', $data->jumper) != 'checked') d-none @endif">
-                                            </td>
-                                            <td>
-                                                {!! getImage(checkCheckBox('burn', $data->jumper), $data->jumper_image, 'burn') !!}
-                                            </td>
+                                            {!! getImage2('burn', $data->jumper , 'jumper' , $data->jumper_image ,'Burn Effect') !!}
+
                                         </tr>
 
 
                                         <tr>
-                                            <td>
-                                                <input type="checkbox" name="jumper[other]" id="other_jumper"
-                                                    {{ checkCheckBox('other', $data->jumper) }} class="form-check">
-                                                <label for="other_jumper"> Others </label>
-                                            </td>
-                                            <td>
-                                                <input type="file" name="jumper_image[other]" id="other_jumper-image"
-                                                    class=" form-control @if (checkCheckBox('other', $data->jumper) != 'checked') d-none @endif">
-                                            </td>
-                                            <td>
-                                                {!! getImage(checkCheckBox('other', $data->jumper), $data->jumper_image, 'other') !!}
-                                            </td>
+                                            {!! getImage2('other', $data->jumper , 'jumper' , $data->jumper_image ,'Others') !!}
+
                                         </tr>
 
                                         {{-- Lightning catcher --}}
 
                                         <tr>
                                             <th rowspan="2">Lightning catcher</th>
-                                            <td class="d-flex">
-                                                <input type="checkbox" name="kilat_defect[broken]" id="lightning_broken"
-                                                    class="form-check" {{ checkCheckBox('broken', $data->kilat_defect) }}>
-                                                <label for="lightning_broken"> Broken</label>
-                                            </td>
-                                            <td>
-                                                <input type="file" name="kilat_defect_image[broken]"
-                                                    id="lightning_broken-image"
-                                                    class="@if (checkCheckBox('broken', $data->kilat_defect) != 'checked') d-none @endif form-control">
-                                            </td>
-                                            <td>
-                                                {!! getImage(checkCheckBox('broken', $data->kilat_defect), $data->kilat_defect_image, 'broken') !!}
-                                            </td>
+
+                                            {!! getImage2('broken', $data->kilat_defect , 'kilat_defect' , $data->kilat_defect_image ,'Broken') !!}
+
                                         </tr>
 
                                         <tr>
-                                            <td>
-                                                <input type="checkbox" name="kilat_defect[other]" id="other_kilat_defect"
-                                                    {{ checkCheckBox('other', $data->kilat_defect) }} class="form-check">
-                                                <label for="other_kilat_defect"> Others </label>
-                                            </td>
-                                            <td>
-                                                <input type="file" name="kilat_defect_image[other]"
-                                                    id="other_kilat_defect-image"
-                                                    class="@if (checkCheckBox('other', $data->kilat_defect) != 'checked') d-none @endif form-control">
-                                            </td>
-                                            <td>
-                                                {!! getImage(checkCheckBox('other', $data->kilat_defect), $data->kilat_defect_image, 'other') !!}
-                                            </td>
+
+                                            {!! getImage2('other', $data->kilat_defect , 'kilat_defect' , $data->kilat_defect_image ,'Others') !!}
+
                                         </tr>
 
                                         {{-- Service --}}
 
                                         <tr>
                                             <th rowspan="3">Service</th>
-                                            <td class="d-felx">
-                                                <input type="checkbox" name="servis_defect[roof]" id="service_roof"
-                                                    class="form-check" {{ checkCheckBox('roof', $data->servis_defect) }}>
-                                                <label for="service_roof"> The service line is on the roof</label>
-                                            </td>
-                                            <td>
-                                                <input type="file" name="servis_defect_image[roof]"
-                                                    id="service_roof-image"
-                                                    class="@if (checkCheckBox('roof', $data->servis_defect) != 'checked') d-none @endif form-control">
-                                            </td>
-                                            <td>
-                                                {!! getImage(checkCheckBox('roof', $data->servis_defect), $data->servis_defect_image, 'othroofer') !!}
-                                            </td>
+
+                                            {!! getImage2('roof', $data->servis_defect , 'servis_defect' , $data->servis_defect_image ,'The service line is on the roof') !!}
+
                                         </tr>
 
                                         <tr>
-                                            <td class="d-felx">
-                                                <input type="checkbox" name="servis_defect[won_piece]"
-                                                    id="service_won_piece" class="form-check"
-                                                    {{ checkCheckBox('won_piece', $data->servis_defect) }}>
-                                                <label for="service_won_piece"> Won piece Date</label>
-                                            </td>
-                                            <td>
-                                                <input type="file" name="servis_defect_image[won_piece]"
-                                                    id="service_won_piece-image"
-                                                    class="@if (checkCheckBox('won_piece', $data->servis_defect) != 'checked') d-none @endif form-control">
-                                            </td>
-                                            <td>
-                                                {!! getImage(checkCheckBox('won_piece', $data->servis_defect), $data->servis_defect_image, 'won_piece') !!}
-                                            </td>
+                                            {!! getImage2('won_piece', $data->servis_defect , 'servis_defect' , $data->servis_defect_image ,'Won piece Dat') !!}
+
+                                           
                                         </tr>
 
                                         <tr>
-                                            <td>
-                                                <input type="checkbox" name="servis_defect[other]"
-                                                    id="other_servis_defect"
-                                                    {{ checkCheckBox('other', $data->servis_defect) }} class="form-check">
-                                                <label for="other_servis_defect"> Others </label>
-                                            </td>
-                                            <td>
-                                                <input type="file" name="servis_defect_image[other]"
-                                                    id="other_servis_defect-image"
-                                                    class="@if (checkCheckBox('other', $data->servis_defect) != 'checked') d-none @endif form-control">
-                                            </td>
-                                            <td>
-                                                {!! getImage(checkCheckBox('other', $data->servis_defect), $data->servis_defect_image, 'other') !!}
-                                            </td>
+                                            {!! getImage2('other', $data->servis_defect , 'servis_defect' , $data->servis_defect_image ,'Others') !!}
+
                                         </tr>
 
 
@@ -803,128 +494,44 @@
 
                                         <tr>
                                             <th rowspan="2">Grounding</th>
-                                            <td>
-                                                <input type="checkbox" name="pembumian_defect[netural]"
-                                                    id="grounding_netural" class="form-check"
-                                                    {{ checkCheckBox('netural', $data->pembumian_defect) }}>
-                                                <label for="grounding_netural"> No Connection to Neutral</label>
-                                            </td>
-                                            <td>
-                                                <input type="file" name="pembumian_defect_image[netural]"
-                                                    id="grounding_netural-image"
-                                                    class="@if (checkCheckBox('netural', $data->pembumian_defect) != 'checked') d-none @endif form-control">
-                                            </td>
-                                            <td>
-                                                {!! getImage(checkCheckBox('netural', $data->pembumian_defect), $data->pembumian_defect_image, 'netural') !!}
-                                            </td>
+
+                                            {!! getImage2('netural', $data->pembumian_defect , 'pembumian_defect' , $data->pembumian_defect_image ,'No Connection to Neutral') !!}
+
                                         </tr>
 
                                         <tr>
-                                            <td>
-                                                <input type="checkbox" name="pembumian_defect[other]"
-                                                    id="other_pembumian_defect"
-                                                    {{ checkCheckBox('other', $data->pembumian_defect) }}
-                                                    class="form-check">
-                                                <label for="other_pembumian_defect"> Others </label>
-                                            </td>
-                                            <td>
-                                                <input type="file" name="pembumian_defect_image[other]"
-                                                    id="other_pembumian_defect-image"
-                                                    class="@if (checkCheckBox('other', $data->pembumian_defect) != 'checked') d-none @endif form-control">
-                                            </td>
-                                            <td>
-                                                {!! getImage(checkCheckBox('other', $data->pembumian_defect), $data->pembumian_defect_image, 'other') !!}
-                                            </td>
+                                            {!! getImage2('other', $data->pembumian_defect , 'pembumian_defect' , $data->pembumian_defect_image ,'Others') !!}
+
                                         </tr>
 
                                         {{-- Signage - OFF Point / Two Way Supply --}}
                                         <tr>
                                             <th rowspan="2">Signage - OFF Point / Two Way Supply</th>
-                                            <td class="d-flex">
-                                                <input type="checkbox" name="bekalan_dua_defect[damage]"
-                                                    id="signage_damage" class="form-check"
-                                                    {{ checkCheckBox('damage', $data->bekalan_dua_defect) }}>
-                                                <label for="signage_damage"> Faded / Damaged / Missing Signage</label>
-                                            </td>
-                                            <td>
-                                                <input type="file" name="bekalan_dua_defect_image[damage]"
-                                                    id="signage_damage-image"
-                                                    class="@if (checkCheckBox('damage', $data->bekalan_dua_defect) != 'checked') d-none @endif form-control">
-                                            </td>
-                                            <td>
-                                                {!! getImage(checkCheckBox('damage', $data->bekalan_dua_defect), $data->bekalan_dua_defect_image, 'damage') !!}
-                                            </td>
+
+                                            {!! getImage2('damage', $data->bekalan_dua_defect , 'bekalan_dua_defect' , $data->bekalan_dua_defect_image ,'Faded / Damaged / Missing Signage') !!}
+
                                         </tr>
 
                                         <tr>
-                                            <td>
-                                                <input type="checkbox" name="bekalan_dua_defect[other]"
-                                                    id="other_bekalan_dua_defect"
-                                                    {{ checkCheckBox('other', $data->bekalan_dua_defect) }}
-                                                    class="form-check">
-                                                <label for="other_bekalan_dua_defect"> Others </label>
-                                            </td>
-                                            <td>
-                                                <input type="file" name="bekalan_dua_defect_image[other]"
-                                                    id="other_bekalan_dua_defect-image"
-                                                    class="@if (checkCheckBox('other', $data->bekalan_dua_defect) != 'checked') d-none @endif form-control">
-                                            </td>
-                                            <td>
-                                                {!! getImage(checkCheckBox('other', $data->bekalan_dua_defect), $data->bekalan_dua_defect_image, 'other') !!}
-                                            </td>
+                                            {!! getImage2('other', $data->bekalan_dua_defect , 'bekalan_dua_defect' , $data->bekalan_dua_defect_image ,'Others') !!}
+
                                         </tr>
 
                                         {{-- Main Street --}}
 
                                         <tr>
                                             <th rowspan="3">Main Street</th>
-                                            <td class="d-flex">
-                                                <input type="checkbox" name="kaki_lima_defect[date_wire]"
-                                                    id="street_date_wire" class="form-check"
-                                                    {{ checkCheckBox('date_wire', $data->kaki_lima_defect) }}>
-                                                <label for="street_date_wire">Date Wire</label>
-                                            </td>
-                                            <td>
-                                                <input type="file" name="kaki_lima_defect_image[date_wire]"
-                                                    id="street_date_wire-image"
-                                                    class="@if (checkCheckBox('date_wire', $data->kaki_lima_defect) != 'checked') d-none @endif form-control">
-                                            </td>
-                                            <td>
-                                                {!! getImage(checkCheckBox('date_wire', $data->kaki_lima_defect), $data->kaki_lima_defect_image, 'date_wire') !!}
-                                            </td>
+
+                                            {!! getImage2('date_wire', $data->kaki_lima_defect , 'kaki_lima_defect' , $data->kaki_lima_defect_image ,'Date Wire') !!}
+
                                         </tr>
                                         <tr>
-                                            <td class="d-flex">
-                                                <input type="checkbox" name="kaki_lima_defect[burn]" id="street_burn"
-                                                    class="form-check"
-                                                    {{ checkCheckBox('burn', $data->kaki_lima_defect) }}>
-                                                <label for="street_burn"> Junction Box Date / Burn Effect</label>
-                                            </td>
-                                            <td>
-                                                <input type="file" name="kaki_lima_defect_image[burn]"
-                                                    id="street_burn-image"
-                                                    class="@if (checkCheckBox('burn', $data->kaki_lima_defect) != 'checked') d-none @endif form-control">
-                                            </td>
-                                            <td>
-                                                {!! getImage(checkCheckBox('burn', $data->kaki_lima_defect), $data->kaki_lima_defect_image, 'burn') !!}
-                                            </td>
+                                            {!! getImage2('burn', $data->kaki_lima_defect , 'kaki_lima_defect' , $data->kaki_lima_defect_image ,'Junction Box Date / Burn Effect') !!}
+
                                         </tr>
                                         <tr>
-                                            <td>
-                                                <input type="checkbox" name="kaki_lima_defect[other]"
-                                                    id="other_kaki_lima_defect_image"
-                                                    {{ checkCheckBox('other', $data->kaki_lima_defect) }}
-                                                    class="form-check">
-                                                <label for="other_kaki_lima_defect_image"> Others </label>
-                                            </td>
-                                            <td>
-                                                <input type="file" name="kaki_lima_defect_image[other]"
-                                                    id="other_kaki_lima_defect_image-image"
-                                                    class="@if (checkCheckBox('other', $data->kaki_lima_defect) != 'checked') d-none @endif form-control">
-                                            </td>
-                                            <td>
-                                                {!! getImage(checkCheckBox('other', $data->kaki_lima_defect), $data->kaki_lima_defect_image, 'other') !!}
-                                            </td>
+                                            {!! getImage2('other', $data->kaki_lima_defect , 'kaki_lima_defect' , $data->kaki_lima_defect_image ,'Others') !!}
+
                                         </tr>
                                     </table>
                                 </div>
@@ -1326,16 +933,32 @@
             var element = $(checkbox);
             var id = element.attr('id');
             var input = $(`#${id}-image`)
+            var input_2 = $(`#${id}-image-2`)
+            var input_val = $(`#${id}-input`)
 
-            if (checkbox.checked) {
-                if (input.hasClass('d-none')) {
+            if(checkbox.checked){
+               if (input.hasClass('d-none')) {
                     input.removeClass('d-none');
-                    total_defects += 1;
-                }
-            } else {
+                    input_2.removeClass('d-none');
+                    input_val.removeClass('d-none');
+                total_defects +=1;
+               }
+            }else{
+
                 if (!input.hasClass('d-none')) {
                     input.addClass('d-none');
-                    total_defects -= 1;
+                    input_2.addClass('d-none');
+                    input_val.addClass('d-none');
+        
+                   total_defects -=1;
+                   if (input.hasClass('error')) {
+                    input.removeClass('error')
+                    input_2.removeClass('error')
+                   }
+                 var span =  input.parent().find('label');
+                 if(span.length > 0){ span.html('')}
+                 var span_val =  $(`#${id}-input-error`);
+                 if(span_val.length > 0){ span.html('')}
                 }
                 console.log('unchecked');
             }

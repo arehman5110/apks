@@ -43,6 +43,9 @@
             border-left:0px !important;
             border-right:0px !important;
         }
+        .defects input[type="file"]{
+            margin-bottom: 5px !important;
+        }
         textarea{border: 1px solid #999999 !important;}
         .form-input .card{border:1px solid black !important;
         border-radius: 0px !important}
@@ -161,7 +164,7 @@
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="review_date">Review Date </label></div>
-                                    <div class="col-md-4"><input type="date" name="review_date" id="review_date"
+                                    <div class="col-md-4"><input type="date" name="review_date" id="review_date" value="{{date('Y-m-d')}}"
                                             class="form-control"></div>
                                 </div>
 
@@ -210,8 +213,6 @@
                                 <div id="map">
 
                                 </div>
-
-
 
 
                             </fieldset>
@@ -375,7 +376,7 @@
 
                             {{-- START Kejanggalan (3) --}}
                             <h3></h3>
-                            <fieldset class="form-input">
+                            <fieldset class="form-input defects">
 
                                 <h3>Kejanggalan</h3>
                                 <div class="table-responsive">
@@ -395,7 +396,9 @@
 
                                         </td>
                                         <td>
-                                            <input type="file" name="tiang_defect_image[cracked]" id="cracked-image" class="d-none form-control">
+                                            <input type="file" name="tiang_defect_image[cracked]" id="cracked-image" accept="image/*" class="d-none form-control" required>
+                                            <input type="file" name="tiang_defect_image[cracked_2]" id="cracked-image-2" accept="image/*" class="d-none form-control" required>
+
                                         </td>
                                     </tr>
                                     <tr>
@@ -405,7 +408,9 @@
                                             <label for="leaning"> Leaning</label>
                                         </td>
                                         <td>
-                                            <input type="file" name="tiang_defect_image[leaning]" id="leaning-image" class="d-none form-control">
+                                            <input type="file" name="tiang_defect_image[leaning]" id="leaning-image" accept="image/*" class="d-none form-control" required>
+                                            <input type="file" name="tiang_defect_image[leaning_2]" id="leaning-image-2" accept="image/*" class="d-none form-control" required>
+
                                         </td>
 
                                     </tr>
@@ -417,7 +422,9 @@
 
                                         </td>
                                         <td>
-                                            <input type="file" name="tiang_defect_image[dim]" id="dim-image" class="d-none form-control">
+                                            <input type="file" name="tiang_defect_image[dim]" id="dim-image" accept="image/*" class="d-none form-control" required>
+                                            <input type="file" name="tiang_defect_image[dim_2]" id="dim-image-2" accept="image/*" class="d-none form-control" required>
+
                                         </td>
 
                                     </tr>
@@ -429,7 +436,9 @@
 
                                         </td>
                                         <td>
-                                            <input type="file" name="tiang_defect_image[creepers]" id="creepers-image" class="d-none form-control">
+                                            <input type="file" name="tiang_defect_image[creepers]" id="creepers-image" class="d-none form-control" accept="image/*" required>
+                                            <input type="file" name="tiang_defect_image[creepers_2]" id="creepers-image-2" class="d-none form-control" accept="image/*" required>
+
                                         </td>
 
                                     </tr>
@@ -438,9 +447,13 @@
                                             <input type="checkbox" name="tiang_defect[other]" id="other_tiang_defect"
                                             class="form-check">
                                         <label for="other_tiang_defect"> Others </label>
+                                        <input type="text" name="tiang_defect[other_input]" id="other_tiang_defect-input" placeholder="mention other defect" required
+                                        class="form-control d-none">
                                         </td>
                                         <td>
-                                            <input type="file" name="tiang_defect_image[other]" id="other_tiang_defect-image" class="d-none form-control">
+                                            <input type="file" name="tiang_defect_image[other]" id="other_tiang_defect-image" class="d-none form-control" accept="image/*" required>
+                                            <input type="file" name="tiang_defect_image[other_2]" id="other_tiang_defect-image-2" class="d-none form-control" accept="image/*" required>
+
                                         </td>
                                     </tr>
 
@@ -453,7 +466,9 @@
                                             <label for="joint"> Joint</label>
                                         </td>
                                         <td>
-                                            <input type="file" name="talian_defect_image[joint]" id="joint-image" class="d-none  form-control">
+                                            <input type="file" name="talian_defect_image[joint]" id="joint-image" class="d-none  form-control" accept="image/*" required>
+                                            <input type="file" name="talian_defect_image[joint_2]" id="joint-image-2" class="d-none  form-control" accept="image/*" required>
+
                                         </td>
                                     </tr>
                                     <tr>
@@ -462,7 +477,10 @@
                                             <label for="need_rentis"> Need Rentis</label>
                                         </td>
                                         <td>
-                                            <input type="file" name="talian_defect_image[need_rentis]" id="need_rentis-image" class="d-none form-control">
+                                            <input type="file" name="talian_defect_image[need_rentis]" id="need_rentis-image" class="d-none form-control" accept="image/*" required>
+                                            <input type="file" name="talian_defect_image[need_rentis_2]" id="need_rentis-image-2" class="d-none form-control" accept="image/*" required>
+
+                                            
                                         </td>
                                     </tr>
 
@@ -472,7 +490,9 @@
                                             <label for="ground"> Does Not Comply With Ground Clearance</label>
                                         </td>
                                         <td>
-                                            <input type="file" name="talian_defect_image[ground]" id="ground-image" class="d-none form-control">
+                                            <input type="file" name="talian_defect_image[ground]" id="ground-image" class="d-none form-control" accept="image/*" required>
+                                            <input type="file" name="talian_defect_image[ground_2]" id="ground-image-2" class="d-none form-control" accept="image/*" required>
+
                                         </td>
                                     </tr>
 
@@ -481,9 +501,13 @@
                                             <input type="checkbox" name="talian_defect[other]" id="other_talian_defect"
                                             class="form-check">
                                         <label for="other_talian_defect"> Others </label>
+                                        <input type="text" name="talian_defect[other_input]" id="other_talian_defect-input" placeholder="mention other defect" required
+                                            class="form-control d-none">
                                         </td>
                                         <td>
-                                            <input type="file" name="talian_defect_image[other]" id="other_talian_defect-image" class="d-none form-control">
+                                            <input type="file" name="talian_defect_image[other]" id="other_talian_defect-image" class="d-none form-control" accept="image/*" required>
+                                            <input type="file" name="talian_defect_image[other_2]" id="other_talian_defect-image-2" class="d-none form-control" accept="image/*" required>
+
                                         </td>
                                     </tr>
 
@@ -497,7 +521,9 @@
                                             <label for="umbang_breaking"> Sagging/Breaking</label>
                                         </td>
                                         <td>
-                                            <input type="file" name="umbang_defect_image[breaking]" id="umbang_breaking-image" class="d-none form-control">
+                                            <input type="file" name="umbang_defect_image[breaking]" id="umbang_breaking-image" class="d-none form-control" accept="image/*" required>
+                                            <input type="file" name="umbang_defect_image[breaking_2]" id="umbang_breaking-image-2" class="d-none form-control" accept="image/*" required>
+                                        
                                         </td>
                                     </tr>
                                     <tr>
@@ -506,7 +532,9 @@
                                             <label for="umbang_creepers"> Creepers</label>
                                         </td>
                                         <td>
-                                            <input type="file" name="umbang_defect_image[creepers]" id="umbang_creepers-image" class="d-none form-control">
+                                            <input type="file" name="umbang_defect_image[creepers]" id="umbang_creepers-image" class="d-none form-control" accept="image/*" required>
+                                            <input type="file" name="umbang_defect_image[creepers_2]" id="umbang_creepers-image-2" class="d-none form-control" accept="image/*" required>
+
                                         </td>
                                     </tr>
 
@@ -516,7 +544,9 @@
                                             <label for="umbang_cracked"> No Stay Insulator/Damaged </label>
                                         </td>
                                         <td>
-                                            <input type="file" name="umbang_defect_image[cracked]" id="umbang_cracked-image" class="d-none form-control">
+                                            <input type="file" name="umbang_defect_image[cracked]" id="umbang_cracked-image" class="d-none form-control" accept="image/*" required>
+                                            <input type="file" name="umbang_defect_image[cracked_2]" id="umbang_cracked-image-2" class="d-none form-control" accept="image/*" required>
+
                                         </td>
                                     </tr>
 
@@ -526,7 +556,9 @@
                                             <label for="stay_palte"> Stay Plate / Base Stay Blocked</label>
                                         </td>
                                         <td>
-                                            <input type="file" name="umbang_defect_image[stay_palte]" id="stay_palte-image" class="d-none form-control">
+                                            <input type="file" name="umbang_defect_image[stay_palte]" id="stay_palte-image" class="d-none form-control" accept="image/*" required>
+                                            <input type="file" name="umbang_defect_image[stay_palte_2]" id="stay_palte-image-2" class="d-none form-control" accept="image/*" required>
+
                                         </td>
                                     </tr>
 
@@ -535,9 +567,13 @@
                                             <input type="checkbox" name="umbang_defect[other]" id="other_umbang_defect"
                                             class="form-check">
                                         <label for="other_umbang_defect"> Others </label>
+                                        <input type="text" name="umbang_defect[other_input]" id="other_umbang_defect-input" placeholder="mention other defect" required
+                                            class="form-control d-none">
                                         </td>
                                         <td>
-                                            <input type="file" name="umbang_defect_image[other]" id="other_umbang_defect-image" class="d-none form-control">
+                                            <input type="file" name="umbang_defect_image[other]" id="other_umbang_defect-image" class="d-none form-control" accept="image/*" required>
+                                            <input type="file" name="umbang_defect_image[other_2]" id="other_umbang_defect-image-2" class="d-none form-control" accept="image/*" required>
+
                                         </td>
                                     </tr>
 
@@ -550,7 +586,9 @@
                                             <label for="ipc_burn"> Burn Effect</label>
                                         </td>
                                         <td>
-                                            <input type="file" name="ipc_defect_image[burn]" id="ipc_burn-image" class="d-none form-control">
+                                            <input type="file" name="ipc_defect_image[burn]" id="ipc_burn-image" class="d-none form-control" accept="image/*" required>
+                                            <input type="file" name="ipc_defect_image[burn_2]" id="ipc_burn-image-2" class="d-none form-control" accept="image/*" required>
+
                                         </td>
                                     </tr>
 
@@ -559,9 +597,13 @@
                                             <input type="checkbox" name="ipc_defect[other]" id="other_ipc_defect"
                                             class="form-check">
                                         <label for="other_ipc_defect"> Others </label>
+                                        <input type="text" name="ipc_defect[other_input]" id="other_ipc_defect-input" placeholder="mention other defect" required
+                                            class="form-control d-none">
                                         </td>
                                         <td>
-                                            <input type="file" name="ipc_defect_image[other]" id="other_ipc_defect-image" class="d-none form-control">
+                                            <input type="file" name="ipc_defect_image[other]" id="other_ipc_defect-image" class="d-none form-control" accept="image/*" required>
+                                            <input type="file" name="ipc_defect_image[other_2]" id="other_ipc_defect-image-2" class="d-none form-control" accept="image/*" required>
+
                                         </td>
                                     </tr>
 
@@ -574,7 +616,9 @@
                                             <label for="black_box_cracked"> Kesan Bakar</label>
                                         </td>
                                         <td>
-                                            <input type="file" name="blackbox_defect_image[cracked]" id="black_box_cracked-image" class="d-none form-control">
+                                            <input type="file" name="blackbox_defect_image[cracked]" id="black_box_cracked-image" class="d-none form-control" accept="image/*" required>
+                                            <input type="file" name="blackbox_defect_image[cracked_2]" id="black_box_cracked-image-2" class="d-none form-control" accept="image/*" required>
+
                                         </td>
                                     </tr>
 
@@ -583,9 +627,13 @@
                                             <input type="checkbox" name="blackbox_defect[other]" id="other_blackbox_defect"
                                             class="form-check">
                                         <label for="other_blackbox_defect"> Others </label>
+                                        <input type="text" name="blackbox_defect[other_input]" id="other_blackbox_defect-input" placeholder="mention other defect" required
+                                            class="form-control d-none">
                                         </td>
                                         <td>
-                                            <input type="file" name="blackbox_defect_image[other]" id="other_blackbox_defect-image" class="d-none form-control">
+                                            <input type="file" name="blackbox_defect_image[other]" id="other_blackbox_defect-image" class="d-none form-control" accept="image/*" required>
+                                            <input type="file" name="blackbox_defect_image[other_2]" id="other_blackbox_defect-image-2" class="d-none form-control" accept="image/*" required>
+
                                         </td>
                                     </tr>
 
@@ -598,7 +646,9 @@
                                             <label for="jumper_sleeve"> No UV Sleeve</label>
                                         </td>
                                         <td>
-                                            <input type="file" name="jumper_image[sleeve]" id="jumper_sleeve-image" class="d-none form-control">
+                                            <input type="file" name="jumper_image[sleeve]" id="jumper_sleeve-image" class="d-none form-control" accept="image/*" required>
+                                            <input type="file" name="jumper_image[sleeve_2]" id="jumper_sleeve-image-2" class="d-none form-control" accept="image/*" required>
+
                                         </td>
                                     </tr>
                                     <tr>
@@ -607,7 +657,9 @@
                                             <label for="jumper_burn"> Burn Effect</label>
                                         </td>
                                         <td>
-                                            <input type="file" name="jumper_image[burn]" id="jumper_burn-image" class="d-none form-control">
+                                            <input type="file" name="jumper_image[burn]" id="jumper_burn-image" class="d-none form-control" accept="image/*" required>
+                                            <input type="file" name="jumper_image[burn_2]" id="jumper_burn-image-2" class="d-none form-control" accept="image/*" required>
+
                                         </td>
                                     </tr>
 
@@ -617,9 +669,13 @@
                                             <input type="checkbox" name="jumper[other]" id="other_jumper"
                                             class="form-check">
                                         <label for="other_jumper"> Others </label>
+                                        <input type="text" name="jumper[other_input]" id="other_jumper-input" placeholder="mention other defect" required
+                                        class="form-control d-none">
                                         </td>
                                         <td>
-                                            <input type="file" name="jumper_image[other]" id="other_jumper-image" class="d-none form-control">
+                                            <input type="file" name="jumper_image[other]" id="other_jumper-image" class="d-none form-control" accept="image/*" required>
+                                            <input type="file" name="jumper_image[other_2]" id="other_jumper-image-2" class="d-none form-control" accept="image/*" required>
+
                                         </td>
                                     </tr>
 
@@ -632,7 +688,9 @@
                                             <label for="lightning_broken"> Broken</label>
                                         </td>
                                         <td>
-                                            <input type="file" name="kilat_defect_image[broken]" id="lightning_broken-image" class="d-none form-control">
+                                            <input type="file" name="kilat_defect_image[broken]" id="lightning_broken-image" class="d-none form-control" accept="image/*" required>
+                                            <input type="file" name="kilat_defect_image[broken_2]" id="lightning_broken-image-2" class="d-none form-control" accept="image/*" required>
+
                                         </td>
                                     </tr>
 
@@ -641,9 +699,13 @@
                                             <input type="checkbox" name="kilat_defect[other]" id="other_kilat_defect"
                                             class="form-check">
                                         <label for="other_kilat_defect"> Others </label>
+                                        <input type="text" name="kilat_defect[other_input]" id="other_kilat_defect-input" placeholder="mention other defect" required
+                                        class="form-control d-none">
                                         </td>
                                         <td>
-                                            <input type="file" name="kilat_defect_image[other]" id="other_kilat_defect-image" class="d-none form-control">
+                                            <input type="file" name="kilat_defect_image[other]" id="other_kilat_defect-image" class="d-none form-control" accept="image/*" required>
+                                            <input type="file" name="kilat_defect_image[other_2]" id="other_kilat_defect-image-2" class="d-none form-control" accept="image/*" required>
+
                                         </td>
                                     </tr>
 
@@ -654,9 +716,12 @@
                                         <td class="d-felx">
                                             <input type="checkbox" name="servis_defect[roof]" id="service_roof" class="form-check">
                                             <label for="service_roof"> The service line is on the roof</label>
+                                            
                                         </td>
                                         <td>
-                                            <input type="file" name="servis_defect_image[roof]" id="service_roof-image" class="d-none form-control">
+                                            <input type="file" name="servis_defect_image[roof]" id="service_roof-image" class="d-none form-control" accept="image/*" required>
+                                            <input type="file" name="servis_defect_image[roof_2]" id="service_roof-image-2" class="d-none form-control" accept="image/*" required>
+
                                         </td>
                                     </tr>
 
@@ -666,7 +731,9 @@
                                             <label for="service_won_piece"> Won piece Date</label>
                                         </td>
                                         <td>
-                                            <input type="file" name="servis_defect_image[won_piece]" id="service_won_piece-image" class="d-none form-control">
+                                            <input type="file" name="servis_defect_image[won_piece]" id="service_won_piece-image" class="d-none form-control" accept="image/*" required>
+                                            <input type="file" name="servis_defect_image[won_piece_2]" id="service_won_piece-image-2" class="d-none form-control" accept="image/*" required>
+
                                         </td>
                                     </tr>
 
@@ -675,9 +742,13 @@
                                             <input type="checkbox" name="servis_defect[other]" id="other_servis_defect"
                                             class="form-check">
                                         <label for="other_servis_defect"> Others </label>
+                                        <input type="text" name="servis_defect[other_input]" id="other_servis_defect-input" placeholder="mention other defect" required
+                                        class="form-control d-none">
                                         </td>
                                         <td>
-                                            <input type="file" name="servis_defect_image[other]" id="other_servis_defect-image" class="d-none form-control">
+                                            <input type="file" name="servis_defect_image[other]" id="other_servis_defect-image" class="d-none form-control" accept="image/*" required>
+                                            <input type="file" name="servis_defect_image[other_2]" id="other_servis_defect-image-2" class="d-none form-control" accept="image/*" required>
+
                                         </td>
                                     </tr>
 
@@ -691,7 +762,9 @@
                                             <label for="grounding_netural"> No Connection to Neutral</label>
                                         </td>
                                         <td>
-                                            <input type="file" name="pembumian_defect_image[netural]" id="grounding_netural-image" class="d-none form-control">
+                                            <input type="file" name="pembumian_defect_image[netural]" id="grounding_netural-image" class="d-none form-control" accept="image/*" required>
+                                            <input type="file" name="pembumian_defect_image[netural_2]" id="grounding_netural-image-2" class="d-none form-control" accept="image/*" required>
+
                                         </td>
                                     </tr>
 
@@ -700,9 +773,13 @@
                                             <input type="checkbox" name="pembumian_defect[other]" id="other_pembumian_defect"
                                             class="form-check">
                                         <label for="other_pembumian_defect"> Others </label>
+                                        <input type="text" name="pembumian_defect[other_input]" id="other_pembumian_defect-input" placeholder="mention other defect" required
+                                        class="form-control d-none">
                                         </td>
                                         <td>
-                                            <input type="file" name="pembumian_defect_image[other]" id="other_pembumian_defect-image" class="d-none form-control">
+                                            <input type="file" name="pembumian_defect_image[other]" id="other_pembumian_defect-image" class="d-none form-control" accept="image/*" required>
+                                            <input type="file" name="pembumian_defect_image[other_2]" id="other_pembumian_defect-image-2" class="d-none form-control" accept="image/*" required>
+
                                         </td>
                                     </tr>
 
@@ -714,7 +791,9 @@
                                             <label for="signage_damage"> Faded / Damaged / Missing Signage</label>
                                         </td>
                                         <td>
-                                            <input type="file" name="bekalan_dua_defect_image[damage]" id="signage_damage-image" class="d-none form-control">
+                                            <input type="file" name="bekalan_dua_defect_image[damage]" id="signage_damage-image" class="d-none form-control" accept="image/*" required>
+                                            <input type="file" name="bekalan_dua_defect_image[damage_2]" id="signage_damage-image-2" class="d-none form-control" accept="image/*" required>
+
                                         </td>
                                     </tr>
 
@@ -723,9 +802,13 @@
                                         <input type="checkbox" name="bekalan_dua_defect[other]" id="other_bekalan_dua_defect"
                                         class="form-check">
                                     <label for="other_bekalan_dua_defect"> Others </label>
+                                    <input type="text" name="bekalan_dua_defect[other_input]" id="other_bekalan_dua_defect-input" placeholder="mention other defect" required
+                                    class="form-control d-none">
                                     </td>
                                     <td>
-                                        <input type="file" name="bekalan_dua_defect_image[other]" id="other_bekalan_dua_defect-image" class="d-none form-control">
+                                        <input type="file" name="bekalan_dua_defect_image[other]" id="other_bekalan_dua_defect-image" class="d-none form-control" accept="image/*" required>
+                                        <input type="file" name="bekalan_dua_defect_image[other_2]" id="other_bekalan_dua_defect-image-2" class="d-none form-control" accept="image/*" required>
+
                                     </td>
                                 </tr>
 
@@ -738,7 +821,9 @@
                                             <label for="street_date_wire">Date Wire</label>
                                         </td>
                                         <td>
-                                            <input type="file" name="kaki_lima_defect_image[date_wire]" id="street_date_wire-image" class="d-none form-control">
+                                            <input type="file" name="kaki_lima_defect_image[date_wire]" id="street_date_wire-image" class="d-none form-control" accept="image/*" required>
+                                            <input type="file" name="kaki_lima_defect_image[date_wire_2]" id="street_date_wire-image-2" class="d-none form-control" accept="image/*" required>
+                                            
                                         </td>
                                     </tr>
                                     <tr>
@@ -746,8 +831,10 @@
                                             <input type="checkbox" name="kaki_lima_defect[burn]" id="street_burn" class="form-check">
                                             <label for="street_burn"> Junction Box Date / Burn Effect</label>
                                         </td>
-                                        <td>
-                                            <input type="file" name="kaki_lima_defect_image[burn]" id="street_burn-image" class="d-none form-control">
+                                        <td> 
+                                            <input type="file" name="kaki_lima_defect_image[burn]" id="street_burn-image" class="d-none form-control" accept="image/*" required>
+                                            <input type="file" name="kaki_lima_defect_image[burn_2]" id="street_burn-image-2" class="d-none form-control" accept="image/*" required>
+
                                         </td>
                                     </tr>
                                 <tr>
@@ -755,9 +842,13 @@
                                         <input type="checkbox" name="kaki_lima_defect[other]" id="other_kaki_lima_defect_image"
                                         class="form-check">
                                     <label for="other_kaki_lima_defect_image"> Others </label>
+                                    <input type="text" name="kaki_lima_defect[other_input]" id="other_kaki_lima_defect_image-input" placeholder="mention other defect" required
+                                    class="form-control d-none">
                                     </td>
                                     <td>
-                                        <input type="file" name="kaki_lima_defect_image[other]" id="other_kaki_lima_defect_image-image" class="d-none form-control">
+                                        <input type="file" name="kaki_lima_defect_image[other]" id="other_kaki_lima_defect_image-image" class="d-none form-control" accept="image/*" required>
+                                        <input type="file" name="kaki_lima_defect_image[other_2]" id="other_kaki_lima_defect_image-image-2" class="d-none form-control" accept="image/*" required>
+
                                     </td>
                                 </tr>
                                 </table>
@@ -1183,7 +1274,7 @@
                 getBaPoints(userBa)
             }
 
-            $('input[type="checkbox"]').on('click',function(){
+            $('.defects input[type="checkbox"]').on('click',function(){
                 addReomveImageField(this)
 
             })
@@ -1207,16 +1298,32 @@
             var element = $(checkbox);
             var id = element.attr('id');
             var input = $(`#${id}-image`)
+            var input_2 = $(`#${id}-image-2`)
+            var input_val = $(`#${id}-input`)
 
             if(checkbox.checked){
                if (input.hasClass('d-none')) {
                     input.removeClass('d-none');
+                    input_2.removeClass('d-none');
+                    input_val.removeClass('d-none');
                 total_defects +=1;
                }
             }else{
+
                 if (!input.hasClass('d-none')) {
                     input.addClass('d-none');
+                    input_2.addClass('d-none');
+                    input_val.addClass('d-none');
+                    input_val.val('');
                    total_defects -=1;
+                   if (input.hasClass('error')) {
+                    input.removeClass('error')
+                    input_2.removeClass('error')
+                   }
+                 var span =  input.parent().find('label');
+                 if(span.length > 0){ span.html('')}
+                 var span_val =  $(`#${id}-input-error`);
+                 if(span_val.length > 0){ span.html('')}
                 }
                 console.log('unchecked');
             }

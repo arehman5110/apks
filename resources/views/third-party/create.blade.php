@@ -361,7 +361,7 @@
 
                             </div>
 
-                            <div class="text-center p-4"><button class="btn btn-sm btn-success">{{__('messages.submit')}}</button></div>
+                            <div class="text-center p-4"><button class="btn btn-sm btn-success">                                                                                                                                                                                                                                                                                                    messages.submit')}}</button></div>
 
 
                         </form>
