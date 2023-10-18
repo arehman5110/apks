@@ -52,6 +52,7 @@ return [
     'edit'=>'edit',
     'zone'=>'Zone',
     'ba'=>'BA',
+    'notice'=>'Notice',
     'notice_form'=>'Notice Form',
     'digging' => 'Digging',
     'notice' => 'Notice',
@@ -84,7 +85,9 @@ return [
     'after_image_3' => 'After Image 3',
     'rd_name' => 'Road Name',
     'submit'=>'Submit',
-    'update'=>'Update'
+    'update'=>'Update',
+    'show' => 'Show',
+    'no_image_found'=>'no image found',
     //**********************3rd party end  */
 ];
 ?>

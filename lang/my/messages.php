@@ -46,6 +46,7 @@ return [
 
     /**************************end side-bar and dashboard */
     'edit'=>'edit',
+    'notice'=>'Notis',
     'zone'=>'Zone',
     'ba'=>'BA',
     'notice_form'=>'Borang Notis',
@@ -80,6 +81,8 @@ return [
     'after_image_3'=>    'After Image 3',
     'rd_name'=>'Nama Jalan',
     'submit'=>'Serahkan',
-    'update'=>'Kemas Kini'
+    'update'=>'Kemas Kini',
+    'show' => 'Show',
+    'no_image_found'=>'tiada imej ditemui',
 ];
 ?>

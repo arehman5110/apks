@@ -20,7 +20,7 @@
         <div class="container-  ">
             <div class="row mb-2" style="flex-wrap:nowrap">
                 <div class="col-sm-6">
-                    <h3>Notice Form</h3>
+                    <h3>{{__('notice')}}</h3>
                 </div>
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
@@ -47,7 +47,7 @@
 
                         <div class="card-header d-flex justify-content-between ">
                             <div class="card-title">
-                                Notice
+                                {{__('notice')}}
                             </div>
                             <div class="d-flex ml-auto">
                                 <a href="{{ route('third-party-digging.create', app()->getLocale()) }}"><button

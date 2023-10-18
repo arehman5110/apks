@@ -117,7 +117,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="digging"> {{__("messages.digging")}}</label></div>
+                                <div class="col-md-4"><label for="digging">{{__("messages.digging")}}</label></div>
                                 <div class="col-md-4">
 
                                     <select name="digging" id="digging" class="form-control" required>

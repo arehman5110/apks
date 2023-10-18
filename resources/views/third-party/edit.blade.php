@@ -71,7 +71,7 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="zone">{{__('messages.zone')}}</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" readonly id="zone" name="search_zone" value="{{ $data->zone }}"  class="form-control"> 
+                                    <input type="text" readonly id="zone" name="search_zone" value="{{ $data->zone }}"  class="form-control">
                                     {{-- <select name="zone" id="search_zone" class="form-control" required
                                         onchange="getBa()">
                                         <option value="{{ $data->zone }}" hidden>{{ $data->zone }}</option>
@@ -282,7 +282,7 @@
                                         value="{{ $data->excavator_machinery_reg_no }}" id="excavator_machinery_reg_no"
                                         class="form-control" required></div>
                             </div>
-                           
+
                             <div class="row">
                                 <div class="col-md-4"><label for="department_diging">{{__('messages.dpt_diging')}}</label></div>
                                 <div class="col-md-4"><input type="text" name="department_diging"
@@ -316,6 +316,8 @@
                                         <a href="{{ URL::asset($data->before_image1) }}" data-lightbox="roadtrip">
                                             <img src="{{ URL::asset($data->before_image1) }}" alt=""
                                                 height="70" class="adjust-height ml-5  "></a>
+                                                @else
+                                                <strong>{{__('messages.no_image_found')}}</strong>
                                     @endif
                                 </div>
 
@@ -330,6 +332,8 @@
                                                 <a href="{{ URL::asset($data->before_image2) }}" data-lightbox="roadtrip">
                                                     <img src="{{ URL::asset($data->before_image2) }}" alt=""
                                                         height="70" class="adjust-height ml-5  "></a>
+                                                        @else
+                                                        <strong>{{__('messages.no_image_found')}}</strong>
                                             @endif
                                         </div>
                             </div>
@@ -344,6 +348,8 @@
                                                 <a href="{{ URL::asset($data->before_image3) }}" data-lightbox="roadtrip">
                                                     <img src="{{ URL::asset($data->before_image3) }}" alt=""
                                                         height="70" class="adjust-height ml-5  "></a>
+                                                        @else
+                                                        <strong>{{__('messages.no_image_found')}}</strong>
                                             @endif
                                         </div>
                             </div>
@@ -358,6 +364,8 @@
                                                 <a href="{{ URL::asset($data->during_image1) }}" data-lightbox="roadtrip">
                                                     <img src="{{ URL::asset($data->during_image1) }}" alt=""
                                                         height="70" class="adjust-height ml-5  "></a>
+                                                        @else
+                                                        <strong>{{__('messages.no_image_found')}}</strong>
                                             @endif
                                         </div>
                             </div>
@@ -372,6 +380,8 @@
                                                 <a href="{{ URL::asset($data->during_image2) }}" data-lightbox="roadtrip">
                                                     <img src="{{ URL::asset($data->during_image2) }}" alt=""
                                                         height="70" class="adjust-height ml-5  "></a>
+                                                        @else
+                                                        <strong>{{__('messages.no_image_found')}}</strong>
                                             @endif
                                         </div>
                             </div>
@@ -386,6 +396,8 @@
                                                 <a href="{{ URL::asset($data->during_image3) }}" data-lightbox="roadtrip">
                                                     <img src="{{ URL::asset($data->during_image3) }}" alt=""
                                                         height="70" class="adjust-height ml-5  "></a>
+                                                        @else
+                                                        <strong>{{__('messages.no_image_found')}}</strong>
                                             @endif
                                         </div>
                             </div>
@@ -400,6 +412,8 @@
                                                 <a href="{{ URL::asset($data->after_image1) }}" data-lightbox="roadtrip">
                                                     <img src="{{ URL::asset($data->after_image1) }}" alt=""
                                                         height="70" class="adjust-height ml-5  "></a>
+                                                        @else
+                                                        <strong>{{__('messages.no_image_found')}}</strong>
                                             @endif
                                         </div>
                             </div>
@@ -413,6 +427,8 @@
                                                 <a href="{{ URL::asset($data->after_image2) }}" data-lightbox="roadtrip">
                                                     <img src="{{ URL::asset($data->after_image2) }}" alt=""
                                                         height="70" class="adjust-height ml-5  "></a>
+                                                        @else
+                                                        <strong>{{__('messages.no_image_found')}}</strong>
                                             @endif
                                         </div>
                             </div>
@@ -426,6 +442,8 @@
                                                 <a href="{{ URL::asset($data->after_image3) }}" data-lightbox="roadtrip">
                                                     <img src="{{ URL::asset($data->after_image3) }}" alt=""
                                                         height="70" class="adjust-height ml-5  "></a>
+                                                        @else
+                                                        <strong>{{__('messages.no_image_found')}}</strong>
                                             @endif
                                         </div>
                             </div>
