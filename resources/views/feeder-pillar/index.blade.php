@@ -20,12 +20,12 @@
         <div class="container-  ">
             <div class="row mb-2" style="flex-wrap:nowrap">
                 <div class="col-sm-6">
-                    <h3>Feeder Pillar</h3>
+                    <h3>{{__('messages.feeder_pillar')}}</h3>
                 </div>
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
-                        <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                        <li class="breadcrumb-item active">index</li>
+                        <li class="breadcrumb-item text-lowercase "><a href="/{{ app()->getLocale()}}/dashboard">{{__('messages.dashboard')}}</a></li>
+                        <li class="breadcrumb-item text-lowercase active">{{__('messages.index')}}</li>
                     </ol>
                 </div>
             </div>
@@ -46,7 +46,7 @@
                     <div class="card">
 
                             <div class="card-header d-flex justify-content-between ">
-                                <p class="mb-0">Feeder Pillar</p>
+                                <p class="mb-0">{{__("messages.feeder_pillar")}}</p>
                                 <div class="d-flex ml-auto">
                                 <a href="{{route('feeder-pillar.create',app()->getLocale())}}"><button class="btn text-white btn-success  btn-sm mr-4"  >Add Fedder Pillar</button></a>
 

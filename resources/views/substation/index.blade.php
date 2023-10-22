@@ -20,12 +20,12 @@
         <div class="container-  ">
             <div class="row mb-2" style="flex-wrap:nowrap">
                 <div class="col-sm-6">
-                    <h3>Substation</h3>
+                    <h3>{{__('messages.substation')}}</h3>
                 </div>
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
-                        <li class="breadcrumb-item"><a href="/{{app()->getLocale()}}/dashboard">Home</a></li>
-                        <li class="breadcrumb-item active">index</li>
+                        <li class="breadcrumb-item"><a href="/{{app()->getLocale()}}/dashboard">{{__("messages.dashboard")}}</a></li>
+                        <li class="breadcrumb-item active">{{__('messages.index')}} </li>
                     </ol>
                 </div>
             </div>
@@ -46,7 +46,7 @@
                     <div class="card">
 
                             <div class="card-header d-flex justify-content-between ">
-                                <p class="mb-0">Substation</p>
+                                <p class="mb-0">{{__('messages.substation')}}</p>
                                 <div class="d-flex ml-auto">
                                 <a href="{{route('substation.create',app()->getLocale())}}"><button class="btn text-white btn-success  btn-sm mr-4"  >Add Substation</button></a>
 

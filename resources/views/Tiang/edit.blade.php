@@ -315,7 +315,7 @@
 
 
                             <h3></h3>
-                            <fieldset class="form-input">
+                            <fieldset class="form-input defects">
 
                                 <h3>Kejanggalan</h3>
                                 <div class="table-responsive">
@@ -331,17 +331,17 @@
                                             <th rowspan="5">Pole</th>
 
                                             {!! getImage2('cracked', $data->tiang_defect , 'tiang_defect' , $data->tiang_defect_image , 'Cracked') !!}
-    
+
                                         </tr>
                                         <tr>
                                             {!! getImage2('leaning', $data->tiang_defect , 'tiang_defect' , $data->tiang_defect_image , 'Leaning') !!}
-                                           
+
                                         </tr>
 
 
                                         <tr>
                                             {!! getImage2('dim', $data->tiang_defect , 'tiang_defect' , $data->tiang_defect_image , 'Dim') !!}
-                
+
                                         </tr>
 
                                         <tr>
@@ -352,7 +352,7 @@
 
                                         <tr>
                                             {!! getImage2('other', $data->tiang_defect , 'tiang_defect' , $data->tiang_defect_image , 'Other') !!}
-                                           
+
                                         </tr>
 
                                         {{-- Line (Main / Service) --}}
@@ -361,12 +361,12 @@
                                             <th rowspan="4">Line (Main / Service)</th>
                                             {!! getImage2('joint', $data->talian_defect , 'talian_defect' , $data->talian_defect_image , 'Joint') !!}
 
-                                          
+
                                         </tr>
                                         <tr>
                                             {!! getImage2('need_rentis', $data->talian_defect , 'talian_defect' , $data->talian_defect_image ,'Need Rentis') !!}
 
-                                           
+
                                         </tr>
 
                                         <tr>
@@ -375,7 +375,7 @@
                                         </tr>
 
                                         <tr>
-                                            
+
                                             {!! getImage2('other', $data->talian_defect , 'talian_defect' , $data->talian_defect_image ,'Others') !!}
 
                                         </tr>
@@ -386,7 +386,7 @@
                                         <tr>
                                             <th rowspan="5">Umbang</th>
                                             {!! getImage2('breaking', $data->umbang_defect , 'umbang_defect' , $data->umbang_defect_image ,'Sagging/Breaking') !!}
- 
+
                                         </tr>
                                         <tr>
                                             {!! getImage2('creepers', $data->umbang_defect , 'umbang_defect' , $data->umbang_defect_image ,'Creepers') !!}
@@ -481,7 +481,7 @@
                                         <tr>
                                             {!! getImage2('won_piece', $data->servis_defect , 'servis_defect' , $data->servis_defect_image ,'Won piece Dat') !!}
 
-                                           
+
                                         </tr>
 
                                         <tr>
@@ -590,7 +590,7 @@
                             <h3></h3>
                             {{-- START Heigh Clearance (4) --}}
 
-                            <fieldset class="form-input">
+                            <fieldset class="form-input high-clearance">
                                 <h3>Heigh Clearance</h3>
                                 <div class="table-responsive">
                                     <table class="table table-bordered w-100">
@@ -615,7 +615,9 @@
                                                 </td>
                                                 <td>
                                                     <input type="file" name="tapak_road_img" id="site_road-img"
-                                                        class="form-control">
+                                                        class="form-control @if ( checkCheckBox('road', $data->tapak_condition) != "checked")
+                                                            d-none
+                                                        @endif">
                                                 </td>
                                                 <td>
                                                     @if ($data->tapak_road_img != '' && file_exists(public_path($data->tapak_road_img)) )
@@ -634,7 +636,9 @@
                                                 </td>
                                                 <td>
                                                     <input type="file" name="tapak_sidewalk_img" id="side_walk-img"
-                                                        class="form-control">
+                                                        class="form-control @if ( checkCheckBox('side_walk', $data->tapak_condition)   != "checked")
+                                                        d-none
+                                                    @endif">
                                                 </td>
                                                 <td>
                                                      @if ($data->tapak_sidewalk_img != '' && file_exists(public_path($data->tapak_sidewalk_img)) )
@@ -653,7 +657,9 @@
                                                 </td>
                                                 <td>
                                                     <input type="file" name="tapak_no_vehicle_entry_img"
-                                                        id="vehicle_entry-img" class="form-control">
+                                                        id="vehicle_entry-img" class="form-control @if ( checkCheckBox('vehicle_entry', $data->tapak_condition) != "checked")
+                                                        d-none
+                                                    @endif">
                                                 </td>
                                                 <td>
                                                     @if ($data->tapak_no_vehicle_entry_img != '' && file_exists(public_path($data->tapak_no_vehicle_entry_img)) )
@@ -674,7 +680,9 @@
                                                 </td>
                                                 <td>
                                                     <input type="file" name="kawasan_bend_img" id="area_bend-img"
-                                                        class="form-control">
+                                                        class="form-control @if ( checkCheckBox('bend', $data->kawasan)  != "checked")
+                                                        d-none
+                                                    @endif">
                                                 </td>
                                                 <td>
                                                     @if ($data->kawasan_bend_img != '' && file_exists(public_path($data->kawasan_bend_img)) )
@@ -692,7 +700,9 @@
                                                 </td>
                                                 <td>
                                                     <input type="file" name="kawasan_road_img" id="area_raod-img"
-                                                        class="form-control">
+                                                        class="form-control @if ( checkCheckBox('raod', $data->kawasan)  != "checked")
+                                                        d-none
+                                                    @endif">
                                                 </td>
                                                 <td>
                                                     @if ($data->kawasan_road_img != '' && file_exists(public_path($data->kawasan_road_img)) )
@@ -710,7 +720,9 @@
                                                 </td>
                                                 <td>
                                                     <input type="file" name="kawasan_forest_img" id="area_forest-img"
-                                                        class="form-control">
+                                                        class="form-control @if ( checkCheckBox('forest', $data->kawasan)  != "checked")
+                                                        d-none
+                                                    @endif">
                                                 </td>
                                                 <td>
                                                     @if ($data->kawasan_forest_img != '' && file_exists(public_path($data->kawasan_forest_img)) )
@@ -724,11 +736,20 @@
                                                 <td>
                                                     <input type="checkbox" name="kawasan[other]" id="area_other"
                                                         class="form-check" {{ checkCheckBox('other', $data->kawasan) }}>
-                                                    <label for="area_other">others (please state)</label>
+                                                    <label for="area_other">others </label>
+                                                    @if (checkCheckBox('other', $data->kawasan)  != 'checked')
+
+                                                    @endif
+                                                    <input type="text" name="kawasan[other_input]"
+                                                    value="{{ checkCheckBox('other', $data->kawasan)  != 'checked' ? '' : $data->kawasan['other_input'] }}"
+                                                        id="area_other-input" class="form-control {{ checkCheckBox('other', $data->kawasan)  != 'checked' ? 'd-none' : '' }}" required
+                                                        placeholder="(please state)">
                                                 </td>
                                                 <td>
                                                     <input type="file" name="kawasan_other_img" id="area_other-img"
-                                                        class="form-control">
+                                                        class="form-control @if (  checkCheckBox('other', $data->kawasan)  != "checked")
+                                                        d-none
+                                                    @endif">
                                                 </td>
                                                 <td>
                                                     @if ($data->kawasan_other_img != '' && file_exists(public_path($data->kawasan_other_img)) )
@@ -907,8 +928,13 @@
 
         $(document).ready(function() {
 
-            $('input[type="checkbox"]').on('click', function() {
+            $('.defects input[type="checkbox"]').on('click', function() {
                 addReomveImageField(this)
+
+            })
+
+            $('.high-clearance input[type="checkbox"]').on('click', function() {
+                addReomveImageHighClearanceField(this)
 
             })
 
@@ -949,7 +975,7 @@
                     input.addClass('d-none');
                     input_2.addClass('d-none');
                     input_val.addClass('d-none');
-        
+
                    total_defects -=1;
                    if (input.hasClass('error')) {
                     input.removeClass('error')
@@ -965,6 +991,46 @@
 
             $('#total_defects').val(total_defects)
 
+        }
+
+        function addReomveImageHighClearanceField(checkbox) {
+            var element = $(checkbox);
+            var id = element.attr('id');
+            var input = $(`#${id}-img`)
+            var input_val = $(`#${id}-input`)
+
+            if (checkbox.checked) {
+                if (input.hasClass('d-none')) {
+                    input.removeClass('d-none');
+
+                    input_val.removeClass('d-none');
+
+                }
+            } else {
+
+                if (!input.hasClass('d-none')) {
+                    input.addClass('d-none');
+
+
+                    input_val.addClass('d-none');
+                    input_val.val('');
+
+                    if (input.hasClass('error')) {
+                        input.removeClass('error')
+
+                    }
+                    var span = input.parent().find('label');
+                    if (span.length > 0) {
+                        span.html('')
+                    }
+
+                    var span_val = $(`#${id}-input-error`);
+                    if (span_val.length > 0) {
+                        span_val.html('')
+                    }
+                }
+
+            }
         }
     </script>
 @endsection

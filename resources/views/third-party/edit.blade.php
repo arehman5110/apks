@@ -44,8 +44,8 @@
                 </div>
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
-                        <li class="breadcrumb-item"><a href="{{route('third-party-digging.index',app()->getLocale())}}">{{__('messages.index')}}</a></li>
-                        <li class="breadcrumb-item active">{{__('messages.edit')}}</li>
+                        <li class="breadcrumb-item text-lowercase"><a href="{{route('third-party-digging.index',app()->getLocale())}}">{{__('messages.index')}}</a></li>
+                        <li class="breadcrumb-item  text-lowercase active">{{__('messages.edit')}}</li>
                     </ol>
                 </div>
             </div>

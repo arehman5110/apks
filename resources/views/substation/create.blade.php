@@ -42,12 +42,12 @@
         <div class="container-  ">
             <div class="row  " style="flex-wrap:nowrap">
                 <div class="col-sm-6">
-                    <h3>Substation</h3>
+                    <h3>{{__('messages.substation')}}</h3>
                 </div>
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
-                        <li class="breadcrumb-item"><a href="{{route('substation.index', app()->getLocale())}}">index</a></li>
-                        <li class="breadcrumb-item active">edit</li>
+                        <li class="breadcrumb-item text-lowercase"><a href="{{route('substation.index', app()->getLocale())}}">{{__('messages.index')}}</a></li>
+                        <li class="breadcrumb-item text-lowercase active">{{__('messages.create')}}</li>
                     </ol>
                 </div>
             </div>
@@ -70,7 +70,7 @@
 
 
                             <div class="row">
-                                <div class="col-md-4"><label for="zone">Zone</label></div>
+                                <div class="col-md-4"><label for="zone">{{__('messages.zone')}}</label></div>
                                 <div class="col-md-4">
                                     <select name="zone" id="search_zone" class="form-control" required>
                                     @if (Auth::user()->zone == '')
@@ -88,7 +88,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="ba">BA</label></div>
+                                <div class="col-md-4"><label for="ba">{{__('messages.ba')}}</label></div>
                                 <div class="col-md-4"><select name="ba_s" id="ba_s" class="form-control" required
                                         onchange="getWp(this)">
                                         <option value="" hidden>select zone</option>
@@ -99,7 +99,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="team">Team</label></div>
+                                <div class="col-md-4"><label for="team">{{__('messages.team_name')}}</label></div>
                                 <div class="col-md-4">
                                     <input type="text" name="team" id="team" value="{{$team}}"
                                         class="form-control"  readonly>
@@ -107,7 +107,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="visit_date">Visit Date</label></div>
+                                <div class="col-md-4"><label for="visit_date">{{__('messages.visit_date')}}</label></div>
                                 <div class="col-md-4">
                                     <input type="date" name="visit_date" id="visit_date" value="{{date('Y-m-d')}}"
                                         class="form-control" required>
@@ -118,7 +118,7 @@
 
 
                             <div class="row">
-                                <div class="col-md-4"><label for="patrol_time">Patrol Time</label></div>
+                                <div class="col-md-4"><label for="patrol_time">{{__('messages.patrol_time')}}</label></div>
                                 <div class="col-md-4">
                                     <input type="time" name="patrol_time" id="patrol_time" value="{{date('H:i')}}"
                                         class="form-control" required>
@@ -128,14 +128,14 @@
 
 
                             <div class="row">
-                                <div class="col-md-4"><label for="voltage">voltage</label></div>
+                                <div class="col-md-4"><label for="voltage">{{__('messages.voltage')}}</label></div>
                                 <div class="col-md-4">
                                     <input type="text" name="voltage" id="voltage"
                                         class="form-control" >
                                     </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label for="name">Name</label></div>
+                                <div class="col-md-4"><label for="name">{{__('messages.name')}}</label></div>
                                 <div class="col-md-4">
                                     <input type="text" name="name" id="name"
                                         class="form-control" required>
@@ -143,7 +143,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="type">Type</label></div>
+                                <div class="col-md-4"><label for="type">{{__('messages.type')}}</label></div>
                                 <div class="col-md-4">
                                     <input type="text" name="type" id="type"
                                         class="form-control" required>
@@ -153,24 +153,24 @@
 
 
                             <div class="row">
-                                <div class="col-md-4"><label for="gate_status">Gate </label></div>
+                                <div class="col-md-4"><label for="gate_status">{{__('messages.gate')}} </label></div>
                                 <div class="col-md-4">
                                     <div class="  d-flex">
                                         <input type="checkbox" name="gate_status[locked]" id="gate_status_locked">
-                                        <label for="gate_status_locked">Locked</label>
+                                        <label for="gate_status_locked">{{__('messages.locked')}}</label>
                                     </div>
                                     <div class=" d-flex">
                                         <input type="checkbox" name="gate_status[unlocked]" id="gate_status_unlocked">
-                                        <label for="gate_status_unlocked">Unlocked</label>
+                                        <label for="gate_status_unlocked">{{__('messages.unlocked')}}</label>
                                     </div>
                                     <div class=" d-flex">
                                         <input type="checkbox" name="gate_status[demaged]" id="gate_status_demaged">
-                                        <label for="gate_status_demaged">Demaged</label>
+                                        <label for="gate_status_demaged">{{__('messages.demaged')}}</label>
                                     </div>
 
                                         <div class="d-flex">
                                         <input type="checkbox" name="gate_status[other]" id="gate_status_others" onclick="getStatus(this)">
-                                        <label for="gate_status_others">Others</label>
+                                        <label for="gate_status_others">{{__('messages.others')}}</label>
 
 
                                     </div>
@@ -180,7 +180,7 @@
                             </div>
 
                               <div class="row">
-                                <div class="col-md-4"><label for="grass_status">Long Grass </label></div>
+                                <div class="col-md-4"><label for="grass_status">{{__('messages.long_grass')}} </label></div>
                                 <div class="col-md-4">
                                     <select  name="grass_status" id="grass_status"
                                         class="form-control" required>
@@ -191,7 +191,7 @@
                                     </div>
                             </div>
                               <div class="row">
-                                <div class="col-md-4"><label for="tree_branches_status">Tree Branches in PE </label></div>
+                                <div class="col-md-4"><label for="tree_branches_status">{{__('messages.tree_branches_in_PE')}} </label></div>
                                 <div class="col-md-4">
 
                                         <select  name="tree_branches_status" id="tree_branches_status"
@@ -203,26 +203,26 @@
                                     </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label for="building_status">Building Defects</label></div>
+                                <div class="col-md-4"><label for="building_status">{{__('messages.building_defects')}}</label></div>
                                 <div class="col-md-4">
                                     <div class="d-flex">
                                         <input type="checkbox" name="building_status[broken_roof]" id="building_status_broken_roof">
-                                        <label for="building_status_broken_roof">Broken Roof</label>
+                                        <label for="building_status_broken_roof">{{__('messages.broken_roof')}}</label>
                                     </div>
 
                                     <div class="d-flex">
                                         <input type="checkbox" name="building_status[broken_gutter]" id="building_status_broken_gutter">
-                                        <label for="building_status_broken_gutter">Broken Gutter</label>
+                                        <label for="building_status_broken_gutter">{{__('messages.broken_gutter')}}</label>
                                     </div>
 
                                     <div class="d-flex">
                                         <input type="checkbox" name="building_status[broken_base]" id="building_status_broken_base">
-                                        <label for="building_status_broken_base">Broken Base</label>
+                                        <label for="building_status_broken_base">{{__('messages.broken_base')}}</label>
                                     </div>
 
                                     <div class="d-flex">
                                         <input type="checkbox" name="building_status[other]" id="building_status_other" onclick="bulidingStatus(this)">
-                                        <label for="building_status_other">Other</label>
+                                        <label for="building_status_other">{{__('messages.others')}}</label>
                                     </div>
 
                                     <input type="text" name="building_status[other_value]" id="other_building_defects" placeholder="please enter other buliding defects" class="form-control d-none" >
@@ -232,7 +232,7 @@
 
 
                             <div class="row">
-                                <div class="col-md-4"><label for="advertise_poster_status">Cleaning illegal ads/banners</label></div>
+                                <div class="col-md-4"><label for="advertise_poster_status">{{__('messages.cleaning_illegal_ads_banners')}}</label></div>
                                 <div class="col-md-4">
                                     <select name="advertise_poster_status" id="advertise_poster_status" class="form-control" required>
                                         <option value="" hidden >select status</option>
@@ -243,27 +243,27 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="image_gate">Image Gate</label></div>
+                                <div class="col-md-4"><label for="image_gate">{{__('messages.image_gate')}}</label></div>
                                 <div class="col-md-4">
                                     <input type="file" name="image_gate" id="image_gate"
                                         class="form-control" >
                                     </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label for="image_grass">Image Grass</label></div>
+                                <div class="col-md-4"><label for="image_grass">{{__('messages.image_grass')}}</label></div>
                                 <div class="col-md-4">
                                     <input type="file" name="image_grass" id="image_grass"
                                         class="form-control" >
                                     </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label for="image_tree_branches">Image Tree Branches</label></div>
+                                <div class="col-md-4"><label for="image_tree_branches">{{__('messages.image_tree_branches')}}</label></div>
                                 <div class="col-md-4">
                                     <input type="file" name="image_tree_branches" id="image_tree_branches" class="form-control">
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label for="images_gate_after_lock">Images Gate After Lock</label></div>
+                                <div class="col-md-4"><label for="images_gate_after_lock">{{__('messages.images_gate_after_lock')}}</label></div>
                                 <div class="col-md-4">
                                     <input type="file" name="images_gate_after_lock" id="images_gate_after_lock"
                                         class="form-control" >
@@ -274,7 +274,7 @@
 
 
                             <div class="row">
-                                <div class="col-md-4"><label for="image_building">Image Building</label></div>
+                                <div class="col-md-4"><label for="image_building">{{__('messages.image_building')}}</label></div>
                                 <div class="col-md-4">
                                     <input type="file" name="image_building" id="image_building"
                                         class="form-control" >
@@ -282,7 +282,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="img_advertise_poster">Image Advertise Poster</label></div>
+                                <div class="col-md-4"><label for="img_advertise_poster">{{__('messages.image_advertise_poster')}}</label></div>
                                 <div class="col-md-4">
                                     <input type="file" name="img_advertise_poster" id="img_advertise_poster"
                                         class="form-control" >
@@ -290,7 +290,7 @@
                             </div>
 
                              <div class="row">
-                                <div class="col-md-4"><label for="other_image">Other Image</label></div>
+                                <div class="col-md-4"><label for="other_image">{{__('messages.other_image')}}</label></div>
                                 <div class="col-md-4">
                                     <input type="file" name="other_image" id="other_image"
                                         class="form-control" >
@@ -298,7 +298,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="coordinate">Coordinate</label></div>
+                                <div class="col-md-4"><label for="coordinate">{{__('messages.coordinate')}}</label></div>
                                 <div class="col-md-4">
                                     <input type="text" name="coordinate" id="coordinate" readonly
                                         class="form-control" required>

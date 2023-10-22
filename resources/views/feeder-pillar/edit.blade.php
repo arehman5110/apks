@@ -44,8 +44,9 @@
                 </div>
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
-                        <li class="breadcrumb-item"><a href="{{ route('feeder-pillar.index',app()->getLocale()) }}">index</a></li>
-                        <li class="breadcrumb-item active">Edit</li>
+                        <li class="breadcrumb-item text-lowercase"><a
+                                href="{{ route('feeder-pillar.index', app()->getLocale()) }}">{{__('messages.index')}}</a></li>
+                        <li class="breadcrumb-item active text-lowercase">{{__('messages.create')}}</li>
                     </ol>
                 </div>
             </div>
@@ -62,23 +63,23 @@
                     <div class=" ">
                         <h3 class="text-center p-2"></h3>
 
-                        <form action="{{ route('feeder-pillar.update', [app()->getLocale(),$data->id]) }} " id="myForm" method="POST"
-                            enctype="multipart/form-data">
+                        <form action="{{ route('feeder-pillar.update', [app()->getLocale(), $data->id]) }} " id="myForm"
+                            method="POST" enctype="multipart/form-data">
                             @method('PATCH')
                             @csrf
 
 
                             <div class="row">
-                                <div class="col-md-4"><label for="zone">Zone</label></div>
+                                <div class="col-md-4"><label for="zone">{{__('messages.zone')}}</label></div>
                                 <div class="col-md-4">
                                     <select name="zone" id="search_zone" class="form-control" required>
 
                                         <option value="{{ $data->zone }}" hidden>{{ $data->zone }}</option>
-                                        @if ( Auth::user()->ba == '' )
-                                        <option value="W1">W1</option>
-                                        <option value="B1">B1</option>
-                                        <option value="B2">B2</option>
-                                        <option value="B4">B4</option>
+                                        @if (Auth::user()->ba == '')
+                                            <option value="W1">W1</option>
+                                            <option value="B1">B1</option>
+                                            <option value="B2">B2</option>
+                                            <option value="B4">B4</option>
                                         @endif
 
 
@@ -87,17 +88,17 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="ba">BA</label></div>
+                                <div class="col-md-4"><label for="ba">{{__('messages.ba')}}</label></div>
                                 <div class="col-md-4"><select name="ba" id="ba" class="form-control" required
                                         onchange="getWp(this)">
-                                        <option value="{{$data->ba}}" hidden>{{$data->ba}}</option>
+                                        <option value="{{ $data->ba }}" hidden>{{ $data->ba }}</option>
 
 
                                     </select></div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="visit_date">Visit Date</label></div>
+                                <div class="col-md-4"><label for="visit_date">{{__('messages.visit_date')}}</label></div>
                                 <div class="col-md-4">
                                     <input type="date" name="visit_date" id="visit_date" class="form-control"
                                         value="{{ date('Y-m-d', strtotime($data->visit_date)) }}" required>
@@ -108,7 +109,7 @@
 
 
                             <div class="row">
-                                <div class="col-md-4"><label for="patrol_time">Patrol Time</label></div>
+                                <div class="col-md-4"><label for="patrol_time">{{__('messages.patrol_time')}}</label></div>
                                 <div class="col-md-4">
                                     <input type="time" name="patrol_time" id="patrol_time" class="form-control"
                                         value="{{ date('H:i:s', strtotime($data->patrol_time)) }}" required>
@@ -117,14 +118,14 @@
 
 
                             <div class="row">
-                                <div class="col-md-4"><label for="team">Team</label></div>
+                                <div class="col-md-4"><label for="team">{{__('messages.team_name')}}</label></div>
                                 <div class="col-md-4">
                                     <input type="text" name="team" id="team" class="form-control"
                                         value="{{ $data->team }}" readonly>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label for="coordinate">Coordinate</label></div>
+                                <div class="col-md-4"><label for="coordinate">{{__('messages.coordinate')}}</label></div>
                                 <div class="col-md-4">
                                     <input type="text" name="coordinate" id="coordinate" value="{{ $data->coordinate }}"
                                         class="form-control" required readonly>
@@ -132,7 +133,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="size">Size</label></div>
+                                <div class="col-md-4"><label for="size">{{__('messages.size')}}</label></div>
                                 <div class="col-md-4">
 
                                     <select name="size" id="size" class="form-control" required>
@@ -148,45 +149,46 @@
 
 
                             <div class="row">
-                                <div class="col-md-4"><label for="name">Gate Status</label></div>
+                                <div class="col-md-4"><label for="name">{{__('messages.gate')}}</label></div>
                                 <div class="col-md-4">
                                     <div class="  d-flex">
-                                        <input type="checkbox" name="gate_status[locked]"  {{substaionCheckBox('locked', $data->gate_status)}} id="gate_status_locked">
-                                        <label for="gate_status_locked">Locked</label>
+                                        <input type="checkbox" name="gate_status[locked]"
+                                            {{ substaionCheckBox('locked', $data->gate_status) }} id="gate_status_locked">
+                                        <label for="gate_status_locked">{{(__('messages.locked'))}}</label>
                                     </div>
                                     <div class=" d-flex">
-                                        <input type="checkbox" name="gate_status[unlocked]" {{substaionCheckBox('unlocked', $data->gate_status)}} id="gate_status_unlocked">
-                                        <label for="gate_status_unlocked">Unlocked</label>
+                                        <input type="checkbox" name="gate_status[unlocked]"
+                                            {{ substaionCheckBox('unlocked', $data->gate_status) }}
+                                            id="gate_status_unlocked">
+                                        <label for="gate_status_unlocked">{{__("messages.unlocked")}}</label>
                                     </div>
                                     <div class=" d-flex">
-                                        <input type="checkbox" name="gate_status[demaged]" {{substaionCheckBox('demaged', $data->gate_status)}} id="gate_status_demaged">
-                                        <label for="gate_status_demaged">Demaged</label>
+                                        <input type="checkbox" name="gate_status[demaged]"
+                                            {{ substaionCheckBox('demaged', $data->gate_status) }}
+                                            id="gate_status_demaged">
+                                        <label for="gate_status_demaged">{{__("messages.demaged")}}</label>
                                     </div>
 
-                                        <div class="d-flex">
-                                        <input type="checkbox" name="gate_status[other]" {{substaionCheckBox('other', $data->gate_status)}} id="gate_status_others" onclick="getStatus(this)">
-                                        <label for="gate_status_others">Others</label>
+                                    <div class="d-flex">
+                                        <input type="checkbox" name="gate_status[other]"
+                                            {{ substaionCheckBox('other', $data->gate_status) }} id="gate_status_others"
+                                            onclick="getStatus(this)">
+                                        <label for="gate_status_others">{{__("messages.other")}}</label>
 
 
                                     </div>
-                                    <input type="text" name="gate_status[other_value]" id="gate_status_other" class="form-control  @if(substaionCheckBox('other', $data->gate_status)   !== 'checked' ) d-none @endif" value="@if (substaionCheckBox('other', $data->gate_status) == 'checked')
-{{$data->gate_status->other_value}}
-                                    @endif"  placeholder="please enter other gate defect" >
+                                    <input type="text" name="gate_status[other_value]" id="gate_status_other"
+                                        class="form-control  @if (substaionCheckBox('other', $data->gate_status) !== 'checked') d-none @endif"
+                                        value="@if (substaionCheckBox('other', $data->gate_status) == 'checked') {{ $data->gate_status->other_value }} @endif"
+                                        placeholder="please enter other gate defect">
 
                                 </div>
                             </div>
 
-                            <div class="row  d-none" id="other-gate-status">
-                                <div class="col-md-4"><label for="other_gate_status">Other Gate Status</label></div>
-                                <div class="col-md-4">
-                                    <input type="text" name="other_gate_status" id="other_gate_status"
-                                        class="form-control">
 
-                                </div>
-                            </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="type">Vandalism </label></div>
+                                <div class="col-md-4"><label for="type">{{__('messages.vandalism')}}</label></div>
                                 <div class="col-md-4">
                                     <select name="vandalism_status" id="vandalism_status" class="form-control" required>
                                         <option value="{{ $data->vandalism_status }}" hidden>
@@ -200,7 +202,7 @@
 
 
                             <div class="row">
-                                <div class="col-md-4"><label for="leaning_staus">Leaning </label></div>
+                                <div class="col-md-4"><label for="leaning_staus">{{__('messages.leaning')}} </label></div>
                                 <div class="col-md-4">
                                     <select name="leaning_staus" id="leaning_staus" class="form-control" required
                                         onchange="leaningStatus(this)">
@@ -214,15 +216,16 @@
                             </div>
 
                             <div class="row @if ($data->leaning_staus == 'No') d-none @endif " id="leaning-angle">
-                                <div class="col-md-4"><label for="leaning_angle">Leaning angle</label></div>
+                                <div class="col-md-4"><label for="leaning_angle">{{__('messages.leaning_angle')}}</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="leaning_angle" id="leaning_angle" value="{{ $data->leaning_angle }}" class="form-control">
+                                    <input type="text" name="leaning_angle" id="leaning_angle"
+                                        value="{{ $data->leaning_angle }}" class="form-control">
 
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="voltage">Rust Status</label></div>
+                                <div class="col-md-4"><label for="voltage">{{__('messages.rusty')}} </label></div>
                                 <div class="col-md-4">
 
                                     <select name="rust_status" id="rust_status" class="form-control" required>
@@ -237,7 +240,7 @@
 
                             <div class="row">
                                 <div class="col-md-4"><label for="advertise_poster_status">
-                                    Cleaning illegal ads/banners</label>
+                                        {{__('messages.cleaning_illegal_ads_banners')}}</label>
                                 </div>
                                 <div class="col-md-4">
                                     <select name="advertise_poster_status" id="advertise_poster_status"
@@ -253,7 +256,7 @@
 
 
                             <div class="row">
-                                <div class="col-md-4"><label for="image_pipe">Image Gate</label></div>
+                                <div class="col-md-4"><label for="image_pipe">{{__('messages.image_gate')}}</label></div>
                                 <div class="col-md-4">
                                     <input type="file" name="image_gate" id="image_gate" class="form-control">
                                 </div>
@@ -263,12 +266,13 @@
                                             <img src="{{ URL::asset($data->image_gate) }}" alt="" height="70"
                                                 class="adjust-height ml-5  "></a>
                                     @else
-                                        <strong>No image found</strong>
+                                    <strong>{{__('messages.no_image_found')}}</strong>
+
                                     @endif
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label for="image_vandalism">Image Vandalism</label></div>
+                                <div class="col-md-4"><label for="image_vandalism">{{__('messages.image_vandalism')}}</label></div>
                                 <div class="col-md-4">
                                     <input type="file" name="image_vandalism" id="image_vandalism"
                                         class="form-control">
@@ -279,12 +283,13 @@
                                             <img src="{{ URL::asset($data->image_vandalism) }}" alt=""
                                                 height="70" class="adjust-height ml-5  "></a>
                                     @else
-                                        <strong>No image found</strong>
+                                    <strong>{{__('messages.no_image_found')}}</strong>
+
                                     @endif
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label for="image_leaning">Image Leaning</label></div>
+                                <div class="col-md-4"><label for="image_leaning">{{__('messages.image_leaning')}}</label></div>
                                 <div class="col-md-4">
                                     <input type="file" name="image_leaning" id="image_leaning" class="form-control">
                                 </div>
@@ -294,13 +299,14 @@
                                             <img src="{{ URL::asset($data->image_leaning) }}" alt=""
                                                 height="70" class="adjust-height ml-5  "></a>
                                     @else
-                                        <strong>No image found</strong>
+                                    <strong>{{__('messages.no_image_found')}}</strong>
+
                                     @endif
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="image_rust">Images Rust</label></div>
+                                <div class="col-md-4"><label for="image_rust">{{__("messages.image_rust")}}</label></div>
                                 <div class="col-md-4">
                                     <input type="file" name="image_rust" id="image_rust" class="form-control">
                                 </div>
@@ -310,7 +316,8 @@
                                             <img src="{{ URL::asset($data->image_rust) }}" alt="" height="70"
                                                 class="adjust-height ml-5  "></a>
                                     @else
-                                        <strong>No image found</strong>
+                                    <strong>{{__('messages.no_image_found')}}</strong>
+
                                     @endif
                                 </div>
                             </div>
@@ -318,7 +325,7 @@
 
 
                             <div class="row">
-                                <div class="col-md-4"><label for="images_advertise_poster">Images Advertise Poster</label>
+                                <div class="col-md-4"><label for="images_advertise_poster">{{__("messages.image_advertise_poster")}}</label>
                                 </div>
                                 <div class="col-md-4">
                                     <input type="file" name="images_advertise_poster" id="images_advertise_poster"
@@ -331,13 +338,14 @@
                                             <img src="{{ URL::asset($data->images_advertise_poster) }}" alt=""
                                                 height="70" class="adjust-height ml-5  "></a>
                                     @else
-                                        <strong>No image found</strong>
+                                    <strong>{{__('messages.no_image_found')}}</strong>
+
                                     @endif
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="other_image">Other Image</label></div>
+                                <div class="col-md-4"><label for="other_image">{{__('messages.other_image')}}</label></div>
                                 <div class="col-md-4">
                                     <input type="file" name="other_image" id="other_image" class="form-control">
                                 </div>
@@ -347,13 +355,13 @@
                                             <img src="{{ URL::asset($data->other_image) }}" alt=""
                                                 height="70" class="adjust-height ml-5  "></a>
                                     @else
-                                        <strong>No image found</strong>
+                                        <strong>{{__('messages.no_image_found')}}</strong>
                                     @endif
                                 </div>
                             </div>
 
 
-                            <div class="text-center p-4"><button class="btn btn-sm btn-success">Update</button></div>
+                            <div class="text-center p-4"><button class="btn btn-sm btn-success">{{__('messages.update')}}</button></div>
                         </form>
                     </div>
                 </div>
@@ -366,7 +374,7 @@
 @section('script')
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js"></script>
     <script>
-        const userBa = "{{Auth::user()->ba}}";
+        const userBa = "{{ Auth::user()->ba }}";
         $(document).ready(function() {
 
 
@@ -425,18 +433,18 @@
                 $('#leaning-angle').removeClass('d-none')
             }
         }
-        function getStatus(event){
-        var val = event.value;
+
+        function getStatus(event) {
+            var val = event.value;
 
             if (!$('#gate_status_other').hasClass('d-none')) {
                 $('#gate_status_other').addClass('d-none')
-            }else{
+            } else {
                 $('#gate_status_other').removeClass('d-none')
             }
 
 
 
-    }
-
+        }
     </script>
 @endsection

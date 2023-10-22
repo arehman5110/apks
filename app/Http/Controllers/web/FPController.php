@@ -105,7 +105,7 @@ class FPController extends Controller
                 ->route('feeder-pillar.index',app()->getLocale())
                 ->with('success', 'Form Intserted');
         } catch (\Throwable $th) {
-            return $th->getMessage();
+            // return $th->getMessage();
             return redirect()
                 ->route('feeder-pillar.index')
                 ->with('failed', 'Form Intserted Failed',app()->getLocale());
@@ -218,7 +218,7 @@ class FPController extends Controller
                 ->route('feeder-pillar.index',app()->getLocale())
                 ->with('success', 'Form Intserted');
         } catch (\Throwable $th) {
-            return $th->getMessage();
+            // return $th->getMessage();
             return redirect()
                 ->route('feeder-pillar.index',app()->getLocale())
                 ->with('failed', 'Form Intserted Failed');

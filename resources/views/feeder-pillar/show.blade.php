@@ -40,12 +40,12 @@
         <div class="container-  ">
             <div class="row  " style="flex-wrap:nowrap">
                 <div class="col-sm-6">
-                    <h3>Feeder Pillar</h3>
+                    <h3>{{__('messages.feedar_piller')}}</h3>
                 </div>
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
-                        <li class="breadcrumb-item"><a href="{{route('feeder-pillar.index',app()->getLocale())}}">index</a></li>
-                        <li class="breadcrumb-item active">Detail</li>
+                        <li class="breadcrumb-item text-lowercase"><a href="{{route('feeder-pillar.index',app()->getLocale())}}">{{__("messages.index")}}</a></li>
+                        <li class="breadcrumb-item text-lowercase active">{{__("messages.show")}}</li>
                     </ol>
                 </div>
             </div>
@@ -64,22 +64,37 @@
 
 
                         <div class="row">
-                            <div class="col-md-4"><label for="zone">Zone</label></div>
+                            <div class="col-md-4"><label for="zone">{{__('messages.zone')}}</label></div>
                             <div class="col-md-4"><input readonly value="{{ $data->zone }}" class="form-control">
 
                             </div>
                         </div>
 
                         <div class="row">
-                            <div class="col-md-4"><label for="ba">BA</label></div>
+                            <div class="col-md-4"><label for="ba">{{__('messages.ba')}}</label></div>
                             <div class="col-md-4">
                                 <input readonly value="{{ $data->ba }}" class="form-control">
                             </div>
                         </div>
 
+                        <div class="row">
+                            <div class="col-md-4"><label for="team">{{__('messages.team_name')}}</label></div>
+                            <div class="col-md-4">
+                                <input type="text" readonly class="form-control" value="{{ $data->team }}" readonly>
+                            </div>
+                        </div>
 
                         <div class="row">
-                            <div class="col-md-4"><label for="visit_date">Visit Date</label></div>
+                            <div class="col-md-4"><label for="voltage">coordinate</label></div>
+                            <div class="col-md-4">
+                                <input readonly value="{{ $data->coordinate }}" class="form-control" required>
+                            </div>
+                        </div>
+
+
+
+                        <div class="row">
+                            <div class="col-md-4"><label for="visit_date">{{__('messages.visit_date')}}</label></div>
                             <div class="col-md-4">
                                 <input type="date" readonly class="form-control"
                                     value="{{ date('Y-m-d', strtotime($data->visit_date)) }}" required>
@@ -90,7 +105,7 @@
 
 
                         <div class="row">
-                            <div class="col-md-4"><label for="patrol_time">Patrol Time</label></div>
+                            <div class="col-md-4"><label for="patrol_time">{{__('messages.patrol_time')}}</label></div>
                             <div class="col-md-4">
                                 <input type="time" readonly class="form-control" value="{{ date('H:i:s', strtotime($data->patrol_time)) }}"
                                     required>
@@ -98,13 +113,6 @@
                         </div>
 
 
-
-                        <div class="row">
-                            <div class="col-md-4"><label for="team">Team</label></div>
-                            <div class="col-md-4">
-                                <input type="text" readonly class="form-control" value="{{ $data->team }}" readonly>
-                            </div>
-                        </div>
 
 
                         {{-- <div class="row">
@@ -114,18 +122,13 @@
                             </div>
                         </div> --}}
                         <div class="row">
-                            <div class="col-md-4"><label for="start_date">size</label></div>
+                            <div class="col-md-4"><label for="start_date">{{__('messages.size')}}</label></div>
                             <div class="col-md-4">
                                 <input type="text" readonly value="{{ $data->size }}" class="form-control"
                                     required>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-4"><label for="voltage">coordinate</label></div>
-                            <div class="col-md-4">
-                                <input readonly value="{{ $data->coordinate }}" class="form-control" required>
-                            </div>
-                        </div>
+
 
                         <div class="row">
                             <div class="col-md-4"><label for="end_date">Gate Status</label></div>

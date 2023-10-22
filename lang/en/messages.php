@@ -49,6 +49,7 @@ return [
 
     //*************************end dashboard */
     //**********************3rd party */
+    'add_notice' =>'Add Notice',
     'edit'=>'edit',
     'zone'=>'Zone',
     'ba'=>'BA',
@@ -89,5 +90,59 @@ return [
     'show' => 'Show',
     'no_image_found'=>'no image found',
     //**********************3rd party end  */
+
+
+    // *********************Substation    */
+
+    'substation' => 'Substation',
+    'visit_date' => 'Visit Date',
+    'patrol_time' => 'Patrol Time',
+    'voltage' => 'Voltage',
+    'name' => 'Name',
+    'type' => 'Type',
+    'gate' => 'Gate',
+    'locked' => 'Locked',
+    'unlocked' => 'Unlocked',
+    'demaged' => 'Demaged',
+    'others' => 'Others',
+    'long_grass' => 'Long Grass',
+    'tree_branches_in_PE' => 'Tree Branches in PE',
+    'building_defects' => 'Building Defects',
+    'broken_roof' => 'Broken Roof',
+    'broken_gutter' => 'Broken Gutter',
+    'broken_base' => 'Broken Base',
+    'cleaning_illegal_ads_banners' => 'Cleaning Illegal Ads/Banners',
+    'image_gate' => 'Image Gate',
+    'image_grass' => 'Image Grass',
+    'image_tree_branches' => 'Image Tree Branches',
+    'images_gate_after_lock' => 'Images Gate After Lock',
+    'image_building' => 'Image Building',
+    'image_advertise_poster' => 'Image Advertise Poster',
+    'other_image' => 'Other Image',
+    'coordinate' => 'Coordinate',
+
+
+    /*******************End substation  */
+
+
+    /********************Feeder Pillar */
+
+    'feedar_piller'=>'Feedar Piller',
+    'size' => 'Size',
+    'vandalism' =>'Vandalism',
+    'leaning' => 'Leaning',
+    'leaning_angle' => 'Leaning Angle',
+    'rusty' =>'Rusty',
+    'image_vandalism' => 'Image Vandalism',
+    'image_leaning' => 'Image Leaning',
+    'image_rust' => 'Image Rust',
+
+
+
+
+
+    /********************END Feeder Pillar */
+
+
 ];
 ?>
