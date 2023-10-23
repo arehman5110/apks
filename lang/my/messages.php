@@ -131,5 +131,19 @@ return [
 
     /********************END Feeder Pillar */
 
+    'from' => 'Daripada',
+    'to' => 'Kepada',
+    'cover_is_not_closed' => 'Sampul Tidak Ditutup',
+    'bushy' => 'Bushy',
+    'cover_image' => 'Imej Muka Depan',
+    'image_bushes' => 'Imej Semak',
+ 
+
+ 
+    'pipe_broken' => 'Paip Pecah',
+    'collapsed' => 'Runtuh',
+    'image_pipe' => 'Paip Imej',
+    'image_collapsed' => 'Imej Diruntuhkan'
+
 ];
 ?>

@@ -22,6 +22,7 @@ use App\Http\Controllers\web\tnbes\StatusController;
 use App\Http\Controllers\web\ThirdPartyDiggingController;
 use App\Http\Controllers\web\SubstationController;
 use App\Http\Controllers\web\FPController;
+use App\Http\Controllers\web\GenerateNoticeController;
 use App\Http\Controllers\web\PatrollingController;
 use App\Http\Controllers\web\POController;
 use App\Models\ThirdPartyDiging;
@@ -109,6 +110,7 @@ Route::middleware('auth')->group(function () {
     ////third party digging routes
     Route::resource('third-party-digging', ThirdPartyDiggingController::class);
     Route::get('generate-third-party-digging-excel', [ThirdPartyExcelController::class, 'generateThirdPartExcel'])->name('generate-third-party-digging-excel');
+    Route::post('/generate-notice',[GenerateNoticeController::class,'generateNotice']);
 
     ////substation routes
     Route::resource('substation', SubstationController::class);

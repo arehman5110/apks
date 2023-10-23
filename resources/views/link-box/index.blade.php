@@ -20,12 +20,13 @@
         <div class="container-  ">
             <div class="row mb-2" style="flex-wrap:nowrap">
                 <div class="col-sm-6">
-                    <h3>Link Box</h3>
+                    <h3>{{__('messages.link_box_pelbagai_voltan')}}</h3>
+
                 </div>
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">index</li>
+                        <li class="breadcrumb-item"><a href="#">{{__("messages.dashboard")}}</a></li>
+                        <li class="breadcrumb-item active">{{__("messages.index")}}</li>
                     </ol>
                 </div>
             </div>
@@ -47,7 +48,7 @@
 
                             <div class="card-header d-flex justify-content-between ">
                                 <div class="card-title">
-                                    Link Box
+                                    {{-- Link Box --}}
                                 </div>
                                 <div class="d-flex ml-auto">
                                 <a href="{{route('link-box-pelbagai-voltan.create', app()->getLocale())}}"><button class="btn text-white btn-success  btn-sm mr-4"  >Add Link Box</button></a>

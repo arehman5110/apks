@@ -144,5 +144,26 @@ return [
     /********************END Feeder Pillar */
 
 
+    'from' =>'From',
+    'to' =>'To',
+    'cover_is_not_closed' => 'Cover Is Not Closed',
+    'bushy' => 'Bushy',
+    'cover_image' =>'Cover Image',
+    'image_bushes' => 'Images Bushes',
+ 
+
+ 
+    'pipe_broken' => 'Pipe Broken',
+    'collapsed' => 'Collapsed',
+    'image_pipe' =>'Image Pipe',
+    'image_collapsed' => 'Image Collapsed',
+
+
+    'generate_notice' => 'Generate Notice'
+
+
+
+
+
 ];
 ?>
