@@ -176,7 +176,15 @@
 
     <script>
         $(document).ready(function() {
-            $('#myTable').DataTable();
+            $('#myTable').DataTable({
+                aaSorting: [
+                    [3, 'desc']
+                ],
+                "lengthMenu": [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, "All"]
+                ],
+            });
             $('#myModal').on('show.bs.modal', function(event) {
                 var button = $(event.relatedTarget);
                 var id = button.data('id');

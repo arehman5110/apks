@@ -33,6 +33,7 @@
             height: 400px;
             padding: 20px;
         }
+        .form-input{border: 0}
     </style>
 @endsection
 
@@ -61,7 +62,7 @@
             <div class=" ">
 
                 <div class=" card col-md-12 p-4 ">
-                    <div class=" ">
+                    <div class="form-input ">
                         <h3 class="text-center p-2"></h3>
 
                         <form action="{{ route('cable-bridge.store',app()->getLocale()) }} " id="myForm" method="POST"
@@ -214,28 +215,33 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="image_pipe">Image Pipe</label></div>
                                 <div class="col-md-4">
-                                    <input type="file" name="image_pipe" id="image_pipe" class="form-control">
+                                    <input type="file" name="image_pipe" id="image_pipe" class="form-control" accept="image/*">
+                                    <input type="file" name="image_pipe_2" id="image_pipe_2" class="form-control" accept="image/*">
+
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="image_vandalism">Image vandalism</label></div>
                                 <div class="col-md-4">
-                                    <input type="file" name="image_vandalism" id="image_vandalism"
-                                        class="form-control">
+                                    <input type="file" name="image_vandalism" id="image_vandalism" class="form-control" accept="image/*">
+                                    <input type="file" name="image_vandalism_2" id="image_vandalism_2" class="form-control" accept="image/*">
+
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="image_collapsed">Image Collapsed</label></div>
                                 <div class="col-md-4">
-                                    <input type="file" name="image_collapsed" id="image_collapsed"
-                                        class="form-control">
+                                    <input type="file" name="image_collapsed" id="image_collapsed" class="form-control" accept="image/*">
+                                    <input type="file" name="image_collapsed_2" id="image_collapsed_2" class="form-control" accept="image/*">
+
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-4"><label for="image_rust">Image Rust</label></div>
                                 <div class="col-md-4">
-                                    <input type="file" name="image_rust" id="image_rust" class="form-control">
+                                    <input type="file" name="image_rust" id="image_rust" class="form-control" accept="image/*">
+                                    <input type="file" name="image_rust_2" id="image_rust_2" class="form-control" accept="image/*">
                                 </div>
                             </div>
 
@@ -243,21 +249,22 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="images_bushes">Images Bushes</label></div>
                                 <div class="col-md-4">
-                                    <input type="file" name="images_bushes" id="images_bushes" class="form-control">
+                                    <input type="file" name="images_bushes" id="images_bushes" class="form-control" accept="image/*">
+                                    <input type="file" name="images_bushes_2" id="images_bushes_2" class="form-control" accept="image/*">
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-4"><label for="other_image">Other Image</label></div>
                                 <div class="col-md-4">
-                                    <input type="file" name="other_image" id="other_image" class="form-control">
+                                    <input type="file" name="other_image" id="other_image" class="form-control" accept="image/*">
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-4"><label for="coordinate">Coordinate</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="coordinate" id="coordinate" class="form-control" disabled
+                                    <input type="text" name="coordinate" id="coordinate" class="form-control" readonly
                                         required>
                                 </div>
                             </div>

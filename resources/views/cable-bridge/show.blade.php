@@ -31,6 +31,8 @@
         .adjust-height {
             height: 70px;
         }
+        .form-input{border: 0}
+
     </style>
 @endsection
 
@@ -55,11 +57,10 @@
     <div class=" ">
 
         <div class="container">
-
-            <div class=" ">
+ 
 
                 <div class=" card col-md-12 p-4 ">
-                    <div class=" ">
+                    <div class=" form-input">
                         <h3 class="text-center p-2"></h3>
 
 
@@ -174,6 +175,14 @@
                                     <strong>No image found</strong>
                                 @endif
 
+                                </div><div class="col-md-4 text-center mb-3">
+                                @if (file_exists(public_path($data->image_pipe_2)) && $data->image_pipe_2 != '')
+                                <a href="{{ URL::asset($data->image_pipe_2) }}" data-lightbox="roadtrip">
+                                    <img src="{{ URL::asset($data->image_pipe_2) }}" alt="" height="70"
+                                        class="adjust-height ml-5  "></a>
+                           
+                            @endif
+
                             </div>
                         </div>
                         <div class="row">
@@ -187,6 +196,15 @@
                                 @else
                                     <strong>No image found</strong>
                                 @endif
+                            </div><div class="col-md-4 text-center mb-3">
+
+
+                                @if (file_exists(public_path($data->image_vandalism_2)) && $data->image_vandalism_2 != '')
+                                <a href="{{ URL::asset($data->image_vandalism_2) }}" data-lightbox="roadtrip">
+                                    <img src="{{ URL::asset($data->image_vandalism_2) }}" alt=""
+                                        height="70" class="adjust-height ml-5  "></a>
+ 
+                            @endif
                             </div>
                         </div>
                         <div class="row">
@@ -199,6 +217,15 @@
                                             class="adjust-height ml-5  "></a>
                                 @else
                                     <strong>No image found</strong>
+                                @endif
+                            </div><div class="col-md-4 text-center mb-3">
+
+
+                                @if (file_exists(public_path($data->image_collapsed)) && $data->image_collapsed != '')
+                                    <a href="{{ URL::asset($data->image_collapsed) }}" data-lightbox="roadtrip">
+                                        <img src="{{ URL::asset($data->image_collapsed) }}" alt="" height="70"
+                                            class="adjust-height ml-5  "></a>
+                                
                                 @endif
                             </div>
                         </div>
@@ -213,6 +240,15 @@
                                             class="adjust-height ml-5  "></a>
                                 @else
                                     <strong>No image found</strong>
+                                @endif
+                            </div><div class="col-md-4 text-center mb-3">
+
+
+                                @if (file_exists(public_path($data->image_rust_2)) && $data->image_rust_2 != '')
+                                    <a href="{{ URL::asset($data->image_rust_2) }}" data-lightbox="roadtrip">
+                                        <img src="{{ URL::asset($data->image_rust_2) }}" alt="" height="70"
+                                            class="adjust-height ml-5  "></a>
+                               
                                 @endif
                             </div>
                         </div>
@@ -229,6 +265,14 @@
                                 @else
                                     <strong>No image found</strong>
                                 @endif
+                            </div><div class="col-md-4 text-center mb-3">
+
+                                @if (file_exists(public_path($data->images_bushes_2)) && $data->images_bushes_2 != '')
+                                <a href="{{ URL::asset($data->images_bushes_2) }}" data-lightbox="roadtrip">
+                                    <img src="{{ URL::asset($data->images_bushes_2) }}" alt="" height="70"
+                                        class="adjust-height ml-5  "></a>
+                   
+                            @endif
                             </div>
                         </div>
 
@@ -243,6 +287,9 @@
                                 @else
                                     <strong>No image found</strong>
                                 @endif
+                                <div class="col-md-4 text-center mb-3"></div>
+
+                             
                             </div>
                         </div>
 

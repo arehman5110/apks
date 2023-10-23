@@ -12,6 +12,7 @@
             min-width: 16px !important;
             margin-right: 12px;
         }
+        .form-input{border : 0}
 
         .error {
             color: red;
@@ -61,7 +62,7 @@
             <div class=" ">
 
                 <div class=" card col-md-12 p-4 ">
-                    <div class=" ">
+                    <div class=" form-input ">
                         <h3 class="text-center p-2"></h3>
 
                         <form action="{{ route('substation.store', app()->getLocale()) }} " id="myForm" method="POST"
@@ -245,27 +246,37 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="image_gate">{{__('messages.image_gate')}}</label></div>
                                 <div class="col-md-4">
-                                    <input type="file" name="image_gate" id="image_gate"
+                                    <input type="file" name="image_gate" id="image_gate" accept="image/*"
                                         class="form-control" >
+                                        
+                                        <input type="file" name="image_gate_2" id="image_gate_2" accept="image/*"
+                                            class="form-control" >
                                     </div>
+                                 
                             </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="image_grass">{{__('messages.image_grass')}}</label></div>
                                 <div class="col-md-4">
-                                    <input type="file" name="image_grass" id="image_grass"
+                                    <input type="file" name="image_grass" id="image_grass" accept="image/*"
+                                        class="form-control" >
+                                        <input type="file" name="image_grass_2" id="image_grass_2" accept="image/*"
                                         class="form-control" >
                                     </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="image_tree_branches">{{__('messages.image_tree_branches')}}</label></div>
                                 <div class="col-md-4">
-                                    <input type="file" name="image_tree_branches" id="image_tree_branches" class="form-control">
+                                    <input type="file" name="image_tree_branches" id="image_tree_branches" class="form-control" accept="image/*">
+                                    <input type="file" name="image_tree_branches_2" id="image_tree_branches_2" class="form-control" accept="image/*">
+
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="images_gate_after_lock">{{__('messages.images_gate_after_lock')}}</label></div>
                                 <div class="col-md-4">
-                                    <input type="file" name="images_gate_after_lock" id="images_gate_after_lock"
+                                    <input type="file" name="images_gate_after_lock" id="images_gate_after_lock" accept="image/*"
+                                        class="form-control" >
+                                        <input type="file" name="images_gate_after_lock_2" id="images_gate_after_lock_2" accept="image/*"
                                         class="form-control" >
                                     </div>
                             </div>
@@ -276,24 +287,29 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="image_building">{{__('messages.image_building')}}</label></div>
                                 <div class="col-md-4">
-                                    <input type="file" name="image_building" id="image_building"
+                                    <input type="file" name="image_building" id="image_building" accept="image/*"
+                                        class="form-control" >
+                                        <input type="file" name="image_building_2" id="image_building_2" accept="image/*"
                                         class="form-control" >
                                     </div>
                             </div>
-
+{{-- 
                             <div class="row">
                                 <div class="col-md-4"><label for="img_advertise_poster">{{__('messages.image_advertise_poster')}}</label></div>
                                 <div class="col-md-4">
-                                    <input type="file" name="img_advertise_poster" id="img_advertise_poster"
+                                    <input type="file" name="img_advertise_poster" id="img_advertise_poster" accept="image/*"
+                                        class="form-control" >
+                                        <input type="file" name="img_advertise_poster_2" id="img_advertise_poster_2" accept="image/*"
                                         class="form-control" >
                                     </div>
-                            </div>
+                            </div> --}}
 
-                             <div class="row">
+                             <div class="row ">
                                 <div class="col-md-4"><label for="other_image">{{__('messages.other_image')}}</label></div>
                                 <div class="col-md-4">
-                                    <input type="file" name="other_image" id="other_image"
+                                    <input type="file" name="other_image" id="other_image" accept="image/*"
                                         class="form-control" >
+                                        
                                     </div>
                             </div>
 
@@ -302,6 +318,7 @@
                                 <div class="col-md-4">
                                     <input type="text" name="coordinate" id="coordinate" readonly
                                         class="form-control" required>
+                                         
                                     </div>
                             </div>
 
