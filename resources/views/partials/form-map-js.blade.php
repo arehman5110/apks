@@ -101,7 +101,7 @@
         var coordinate = $('#coordinate')
 
         if (coordinate.length > 0) {
-            coordinate.val(`${lat} , ${lng}`)
+            coordinate.val(`${lat.toFixed(2)} , ${lng.toFixed(2)}`)
             return;
         }
 

@@ -43,12 +43,12 @@
         <div class="container-  ">
             <div class="row  " style="flex-wrap:nowrap">
                 <div class="col-sm-6">
-                    <h3>Feedar Piller</h3>
+                    <h3>{{__('messages.feeder_pillar')}}</h3>
                 </div>
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
-                        <li class="breadcrumb-item"><a href="{{route('substation.index',app()->getLocale())}}">index</a></li>
-                        <li class="breadcrumb-item active">create</li>
+                        <li class="breadcrumb-item text-lowercase"><a href="{{route('substation.index',app()->getLocale())}}">{{__('messages.index')}}</a></li>
+                        <li class="breadcrumb-item text-lowercase active">{{__('messages.create')}} </li>
                     </ol>
                 </div>
             </div>
@@ -71,7 +71,7 @@
 
 
                             <div class="row">
-                                <div class="col-md-4"><label for="zone">Zone</label></div>
+                                <div class="col-md-4"><label for="zone">{{__('messages.zone')}}</label></div>
                                 <div class="col-md-4">
                                     <select name="zone" id="search_zone" class="form-control" required>
 
@@ -91,7 +91,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="ba">BA</label></div>
+                                <div class="col-md-4"><label for="ba">{{__('messages.ba')}}</label></div>
                                 <div class="col-md-4"><select name="ba_s" id="ba_s" class="form-control" required
                                         onchange="getWp(this)">
                                         <option value="" hidden>select zone</option>
@@ -102,7 +102,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="team">Team</label></div>
+                                <div class="col-md-4"><label for="team">{{__('messages.team_name')}}</label></div>
                                 <div class="col-md-4">
                                     <input type="text" name="team" id="team" value="{{$team}}"
                                         class="form-control"  readonly>
@@ -110,7 +110,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="visit_date">Visit Date</label></div>
+                                <div class="col-md-4"><label for="visit_date">{{__('messages.visit_date')}}</label></div>
                                 <div class="col-md-4">
                                     <input type="date" name="visit_date" id="visit_date" value="{{date('Y-m-d')}}"
                                         class="form-control" required>
@@ -121,7 +121,7 @@
 
 
                             <div class="row">
-                                <div class="col-md-4"><label for="patrol_time">Patrol Time</label></div>
+                                <div class="col-md-4"><label for="patrol_time">{{__('messages.patrol_time')}}</label></div>
                                 <div class="col-md-4">
                                     <input type="time" name="patrol_time" id="patrol_time" value="{{date('H:i')}}"
                                         class="form-control" required>
@@ -140,7 +140,7 @@
                                     </div>
                             </div> --}}
                             <div class="row">
-                                <div class="col-md-4"><label for="name">Size</label></div>
+                                <div class="col-md-4"><label for="name">{{__('messages.size')}}</label></div>
                                 <div class="col-md-4">
                                     <select name="size" id="size" class="form-control" required>
                                         <option value="" hidden>select size</option>
@@ -155,24 +155,24 @@
 
 
                             <div class="row">
-                                <div class="col-md-4"><label for="gate_status">Gate </label></div>
+                                <div class="col-md-4"><label for="gate_status">{{__('messages.gate')}} </label></div>
                                 <div class="col-md-4">
                                     <div class="  d-flex">
                                         <input type="checkbox" name="gate_status[locked]" id="gate_status_locked">
-                                        <label for="gate_status_locked">Locked</label>
+                                        <label for="gate_status_locked">{{__('messages.locked')}}</label>
                                     </div>
                                     <div class=" d-flex">
                                         <input type="checkbox" name="gate_status[unlocked]" id="gate_status_unlocked">
-                                        <label for="gate_status_unlocked">Unlocked</label>
+                                        <label for="gate_status_unlocked">{{__('messages.unlocked')}}</label>
                                     </div>
                                     <div class=" d-flex">
                                         <input type="checkbox" name="gate_status[demaged]" id="gate_status_demaged">
-                                        <label for="gate_status_demaged">Demaged</label>
+                                        <label for="gate_status_demaged">{{__('messages.demaged')}}</label>
                                     </div>
 
                                         <div class="d-flex">
                                         <input type="checkbox" name="gate_status[other]" id="gate_status_others" onclick="getStatus(this)">
-                                        <label for="gate_status_others">Others</label>
+                                        <label for="gate_status_others">{{__('messages.others')}}</label>
 
 
                                     </div>
@@ -181,16 +181,10 @@
                                 </div>
                             </div>
 
-                            <div class="row d-none" id="other-gate-status">
-                                <div class="col-md-4"><label for="other_gate_status">Other Gate Status</label></div>
-                                <div class="col-md-4">
-                                  <input type="text" name="other_gate_status" id="other_gate_status" class="form-control">
 
-                                </div>
-                            </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="vandalism_status">Vandalism </label></div>
+                                <div class="col-md-4"><label for="vandalism_status">{{__('messages.vandalism')}} </label></div>
                                 <div class="col-md-4">
                                    <select name="vandalism_status" id="vandalism_status"  class="form-control" required>
                                     <option value="" hidden >select status</option>
@@ -205,7 +199,7 @@
 
 
                               <div class="row">
-                                <div class="col-md-4"><label for="leaning_staus">Leaning</label></div>
+                                <div class="col-md-4"><label for="leaning_staus">{{__('messages.leaning')}}</label></div>
                                 <div class="col-md-4">
                                     <select name="leaning_staus" id="leaning_staus" class="form-control" required  onchange="leaningStatus(this)">
                                         <option value="" hidden >select status</option>
@@ -217,7 +211,7 @@
                             </div>
 
                             <div class="row  d-none" id="leaning-angle">
-                                <div class="col-md-4"><label for="leaning_angle">Leaning angle</label></div>
+                                <div class="col-md-4"><label for="leaning_angle">{{__('messages.leaning_angle')}}</label></div>
                                 <div class="col-md-4">
                                   <input type="text" name="leaning_angle" id="leaning_angle" class="form-control">
 
@@ -225,7 +219,7 @@
                             </div>
 
                               <div class="row">
-                                <div class="col-md-4"><label for="rust_status">Rusty</label></div>
+                                <div class="col-md-4"><label for="rust_status">{{__('messages.rusty')}}</label></div>
                                 <div class="col-md-4">
                                     <select name="rust_status" id="rust_status" class="form-control" required>
                                         <option value="" hidden  >select status</option>
@@ -235,7 +229,7 @@
                                     </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label for="advertise_poster_status"> Cleaning illegal ads/banners</label></div>
+                                <div class="col-md-4"><label for="advertise_poster_status">{{__("messages.cleaning_illegal_ads_banners")}}</label></div>
                                 <div class="col-md-4">
                                     <select name="advertise_poster_status" id="advertise_poster_status" class="form-control" required>
                                         <option value="" hidden >select status</option>
@@ -247,23 +241,23 @@
 
 
                             <div class="row">
-                                <div class="col-md-4"><label for="image_gate">Image Gate</label></div>
+                                <div class="col-md-4"><label for="image_gate">{{__("messages.image_gate")}}</label></div>
                                 <div class="col-md-4">
-                                    <input type="file" name="image_gate" id="image_gate"
+                                    <input type="file" name="image_gate" id="image_gate" accept="image/*"
                                         class="form-control" >
                                     </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label for="image_grass">Image Vandalism</label></div>
+                                <div class="col-md-4"><label for="image_grass">{{__('messages.image_vandalism')}}</label></div>
                                 <div class="col-md-4">
-                                    <input type="file" name="image_vandalism" id="image_vandalism"
+                                    <input type="file" name="image_vandalism" id="image_vandalism" accept="image/*"
                                         class="form-control" >
                                     </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label for="images_gate_after_lock">Image Leaning</label></div>
+                                <div class="col-md-4"><label for="images_gate_after_lock">{{__('messages.image_leaning')}}</label></div>
                                 <div class="col-md-4">
-                                    <input type="file" name="image_leaning" id="image_leaning"
+                                    <input type="file" name="image_leaning" id="image_leaning" accept="image/*"
                                         class="form-control" >
                                     </div>
                             </div>
@@ -272,31 +266,31 @@
 
 
                             <div class="row">
-                                <div class="col-md-4"><label for="image_rust">Image Rust</label></div>
+                                <div class="col-md-4"><label for="image_rust">{{__('messages.image_rust')}}</label></div>
                                 <div class="col-md-4">
-                                    <input type="file" name="image_rust" id="image_rust"
+                                    <input type="file" name="image_rust" id="image_rust" accept="image/*"
                                         class="form-control" >
                                     </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="images_advertise_poster">Images Advertise Poster</label></div>
+                                <div class="col-md-4"><label for="images_advertise_poster">{{__('messages.image_advertise_poster')}}</label></div>
                                 <div class="col-md-4">
-                                    <input type="file" name="images_advertise_poster" id="images_advertise_poster"
+                                    <input type="file" name="images_advertise_poster" id="images_advertise_poster" accept="image/*"
                                         class="form-control" >
                                     </div>
                             </div>
 
                              <div class="row">
-                                <div class="col-md-4"><label for="other_image">Other Image</label></div>
+                                <div class="col-md-4"><label for="other_image">{{__('messages.other_image')}}</label></div>
                                 <div class="col-md-4">
-                                    <input type="file" name="other_image" id="other_image"
+                                    <input type="file" name="other_image" id="other_image" accept="image/*"
                                         class="form-control" >
                                     </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="coordinate">Coordinate</label></div>
+                                <div class="col-md-4"><label for="coordinate">{{__('messages.coordinate')}}</label></div>
                                 <div class="col-md-4">
                                     <input type="text" name="coordinate" id="coordinate" readonly
                                         class="form-control" required>
@@ -310,7 +304,7 @@
                               </div>
                               <div id="map"></div>
 
-                            <div class="text-center p-4"><button class="btn btn-sm btn-success">Submit</button></div>
+                            <div class="text-center p-4"><button class="btn btn-sm btn-success">{{__('messages.submit')}}</button></div>
                         </form>
                     </div>
                 </div>
