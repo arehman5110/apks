@@ -33,6 +33,7 @@
             height: 400px;
             padding: 20px;
         }
+        .form-input{border: 0}
     </style>
 @endsection
 
@@ -42,12 +43,12 @@
         <div class="container-  ">
             <div class="row  " style="flex-wrap:nowrap">
                 <div class="col-sm-6">
-                    <h3>Link Box Pelbagai Voltan</h3>
+                    <h3>{{__('messages.link_box_pelbagai_voltan')}}</h3>
                 </div>
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
-                        <li class="breadcrumb-item"><a href="{{ route('link-box-pelbagai-voltan.index',app()->getLocale()) }}">index</a></li>
-                        <li class="breadcrumb-item active">edit</li>
+                        <li class="breadcrumb-item"><a href="{{ route('link-box-pelbagai-voltan.index',app()->getLocale()) }}">{{__("messages.index")}}</a></li>
+                        <li class="breadcrumb-item active">{{__("messages.create")}}</li>
                     </ol>
                 </div>
             </div>
@@ -61,7 +62,7 @@
             <div class=" ">
 
                 <div class=" card col-md-12 p-4 ">
-                    <div class=" ">
+                    <div class="form-input ">
                         <h3 class="text-center p-2"></h3>
 
                         <form action="{{ route('link-box-pelbagai-voltan.store', app()->getLocale()) }} " id="myForm" method="POST"
@@ -70,7 +71,7 @@
 
 
                             <div class="row">
-                                <div class="col-md-4"><label for="zone">Zone</label></div>
+                                <div class="col-md-4"><label for="zone">{{__('messages.zone')}} </label></div>
                                 <div class="col-md-4">
                                     <select name="zone" id="search_zone" class="form-control" required>
 
@@ -89,7 +90,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label for="ba">BA</label></div>
+                                <div class="col-md-4"><label for="ba">{{__('messages.ba')}}</label></div>
                                 <div class="col-md-4"><select name="ba_s" id="ba_s" class="form-control" required
                                         onchange="getWp(this)">
                                         <option value="" hidden>select zone</option>
@@ -100,7 +101,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="visit_date">Visit Date</label></div>
+                                <div class="col-md-4"><label for="visit_date">{{__('messages.visit_date')}}</label></div>
                                 <div class="col-md-4">
                                     <input type="date" name="visit_date" id="visit_date" class="form-control" required
                                         value="{{ date('Y-m-d') }}">
@@ -111,7 +112,7 @@
 
 
                             <div class="row">
-                                <div class="col-md-4"><label for="patrol_time">Patrol Time</label></div>
+                                <div class="col-md-4"><label for="patrol_time">{{__('messages.patrol_time')}}</label></div>
                                 <div class="col-md-4">
                                     <input type="time" name="patrol_time" id="patrol_time" class="form-control" required
                                         value="{{ date('H:i') }}">
@@ -122,7 +123,7 @@
 
 
                             <div class="row">
-                                <div class="col-md-4"><label for="team">Team</label></div>
+                                <div class="col-md-4"><label for="team">{{__('messages.team_name')}}</label></div>
                                 <div class="col-md-4">
                                     <input type="text" name="team" id="team" value="{{ $team }}"
                                         class="form-control" readonly>
@@ -131,28 +132,28 @@
 
 
                             <div class="row">
-                                <div class="col-md-4"><label for="start_date">From</label></div>
+                                <div class="col-md-4"><label for="start_date">{{__('messages.from')}}</label></div>
                                 <div class="col-md-4">
                                     <input type="text" name="start_date" id="start_date" class="form-control">
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="end_date">To</label></div>
+                                <div class="col-md-4"><label for="end_date">{{__('messages.to')}}</label></div>
                                 <div class="col-md-4">
                                     <input type="text" name="end_date" id="end_date" class="form-control">
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="type">Type</label></div>
+                                <div class="col-md-4"><label for="type">{{__('messages.type')}}</label></div>
                                 <div class="col-md-4">
                                     <input type="text" name="type" id="type" class="form-control" required>
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="cover_status">Cover is Not Closed</label></div>
+                                <div class="col-md-4"><label for="cover_status">{{__("messages.cover_is_not_closed")}}</label></div>
                                 <div class="col-md-4">
                                     <select name="cover_status" id="cover_status" class="form-control" required>
                                         <option value="" hidden>select status</option>
@@ -163,7 +164,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="vandalism_status">Vandalism </label></div>
+                                <div class="col-md-4"><label for="vandalism_status">{{__("messages.vandalism")}}</label></div>
                                 <div class="col-md-4">
                                     <select name="vandalism_status" id="vandalism_status" class="form-control" required>
                                         <option value="" hidden>select status</option>
@@ -174,7 +175,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label for="leaning_staus">Leaning </label></div>
+                                <div class="col-md-4"><label for="leaning_staus">{{__("messages.leaning")}} </label></div>
                                 <div class="col-md-4">
                                     <select name="leaning_staus" id="leaning_staus" class="form-control" required
                                         onchange="leaningStatus(this)">
@@ -187,7 +188,7 @@
                             </div>
 
                             <div class="row  d-none" id="leaning-angle">
-                                <div class="col-md-4"><label for="leaning_angle">Leaning angle</label></div>
+                                <div class="col-md-4"><label for="leaning_angle">{{__('messages.leaning_angle')}}</label></div>
                                 <div class="col-md-4">
                                     <input type="text" name="leaning_angle" id="leaning_angle" class="form-control">
 
@@ -195,7 +196,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="rust_status">Rusty</label></div>
+                                <div class="col-md-4"><label for="rust_status">{{__('messages.rusty')}}</label></div>
                                 <div class="col-md-4">
                                     <select name="rust_status" id="rust_status" class="form-control" required>
                                         <option value="" hidden>select status</option>
@@ -206,8 +207,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label for="advertise_poster_status">Cleaning illegal
-                                        ads/banners</label>
+                                <div class="col-md-4"><label for="advertise_poster_status">{{__("messages.cleaning_illegal_ads_banners")}}</label>
                                 </div>
                                 <div class="col-md-4">
                                     <select name="advertise_poster_status" id="advertise_poster_status"
@@ -220,7 +220,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label for="bushes_status">Bushy</label></div>
+                                <div class="col-md-4"><label for="bushes_status">{{__("messages.bushy")}}</label></div>
                                 <div class="col-md-4">
                                     <select name="bushes_status" id="bushes_status" class="form-control" required>
                                         <option value="" hidden>select status</option>
@@ -231,59 +231,63 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label for="image_gate">Cover Image</label></div>
+                                <div class="col-md-4"><label for="image_gate">{{__('messages.cover_image')}}</label></div>
                                 <div class="col-md-4">
-                                    <input type="file" name="image_cover" id="image_cover" class="form-control">
+                                    <input type="file" name="image_cover" id="image_cover" class="form-control" accept="image/*">
+                                    <input type="file" name="image_cover_2" id="image_cover_2" class="form-control" accept="image/*">
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label for="image_vandalism">Image vandalism</label></div>
+                                <div class="col-md-4"><label for="image_vandalism">{{__('messages.image_vandalism')}}</label></div>
                                 <div class="col-md-4">
-                                    <input type="file" name="image_vandalism" id="image_vandalism"
-                                        class="form-control">
+                                    <input type="file" name="image_vandalism" id="image_vandalism" class="form-control" accept="image/*">
+                                    <input type="file" name="image_vandalism_2" id="image_vandalism_2" class="form-control" accept="image/*">
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label for="image_leaning">Image Leaning</label></div>
+                                <div class="col-md-4"><label for="image_leaning">{{__("messages.image_leaning")}}</label></div>
                                 <div class="col-md-4">
-                                    <input type="file" name="image_leaning" id="image_leaning" class="form-control">
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-4"><label for="image_rust">Image Rust</label></div>
-                                <div class="col-md-4">
-                                    <input type="file" name="image_rust" id="image_rust" class="form-control">
+                                    <input type="file" name="image_leaning" id="image_leaning" class="form-control" accept="image/*">
+                                    <input type="file" name="image_leaning_2" id="image_leaning_2" class="form-control" accept="image/*">
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="images_advertise_poster">Images Advertise Poster</label>
-                                </div>
+                                <div class="col-md-4"><label for="image_rust">{{__("messages.image_rust")}}</label></div>
                                 <div class="col-md-4">
-                                    <input type="file" name="images_advertise_poster" id="images_advertise_poster"
-                                        class="form-control">
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-4"><label for="images_bushes">Images Bushes</label></div>
-                                <div class="col-md-4">
-                                    <input type="file" name="images_bushes" id="images_bushes" class="form-control">
+                                    <input type="file" name="image_rust" id="image_rust" class="form-control" accept="image/*">
+                                    <input type="file" name="image_rust_2" id="image_rust_2" class="form-control" accept="image/*">
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="other_image">Other Image</label></div>
+                                <div class="col-md-4"><label for="images_advertise_poster">{{__('messages.image_advertise_poster')}}</label>
+                                </div>
                                 <div class="col-md-4">
-                                    <input type="file" name="other_image" id="other_image" class="form-control">
+                                    <input type="file" name="images_advertise_poster" id="images_advertise_poster" class="form-control" accept="image/*">
+                                    <input type="file" name="images_advertise_poster_2" id="images_advertise_poster_2" class="form-control" accept="image/*">
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="coordinate">Coordinate</label></div>
+                                <div class="col-md-4"><label for="images_bushes">{{__("messages.image_bushes")}}</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="coordinate" id="coordinate" class="form-control"
+                                    <input type="file" name="images_bushes" id="images_bushes" class="form-control" accept="image/*">
+                                    <input type="file" name="images_bushes_2" id="images_bushes_2" class="form-control" accept="image/*">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4"><label for="other_image">{{__("messages.other_image")}}</label></div>
+                                <div class="col-md-4">
+                                    <input type="file" name="other_image" id="other_image" class="form-control" accept="image/*">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4"><label for="coordinate">{{__("messages.coordinate")}}</label></div>
+                                <div class="col-md-4">
+                                    <input type="text" name="coordinate" id="coordinate" class="form-control" readonly
                                         required>
                                 </div>
                             </div>
@@ -299,7 +303,7 @@
 
                             </div>
 
-                            <div class="text-center p-4"><button class="btn btn-sm btn-success">Submit</button></div>
+                            <div class="text-center p-4"><button class="btn btn-sm btn-success">{{__("messages.submit")}}</button></div>
                         </form>
                     </div>
                 </div>

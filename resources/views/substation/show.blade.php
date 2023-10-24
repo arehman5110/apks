@@ -225,6 +225,14 @@
                                 <strong>{{__('messages.no_image_found')}}</strong>
 
                                 @endif
+                            </div>
+                                <div class="col-md-4 text-center mb-3">
+                                @if (file_exists(public_path($data->image_gate_2)) && $data->image_gate_2 != '')
+                                    <a href="{{ URL::asset($data->image_gate_2) }}" data-lightbox="roadtrip">
+                                        <img src="{{ URL::asset($data->image_gate_2) }}" alt="" height="70"
+                                            class="adjust-height ml-5  "></a>
+                               
+                                @endif
 
                             </div>
                         </div>
@@ -238,6 +246,16 @@
                                             height="70" class="adjust-height ml-5  "></a>
                                 @else
                                 <strong>{{__('messages.no_image_found')}}</strong>
+
+                                @endif
+                            </div>
+                                <div class="col-md-4 text-center mb-3">
+
+                                @if (file_exists(public_path($data->image_grass_2)) && $data->image_grass_2 != '')
+                                    <a href="{{ URL::asset($data->image_grass_2) }}" data-lightbox="roadtrip">
+                                        <img src="{{ URL::asset($data->image_grass_2) }}" alt=""
+                                            height="70" class="adjust-height ml-5  "></a>
+                                
 
                                 @endif
                             </div>
@@ -255,6 +273,16 @@
 
                                 @endif
                             </div>
+                                <div class="col-md-4 text-center mb-3">
+
+                                @if (file_exists(public_path($data->image_tree_branches_2)) && $data->image_tree_branches_2 != '')
+                                <a href="{{ URL::asset($data->image_tree_branches_2) }}" data-lightbox="roadtrip">
+                                    <img src="{{ URL::asset($data->image_tree_branches_2) }}" alt="" height="70"
+                                        class="adjust-height ml-5  "></a>
+                             
+
+                            @endif
+                            </div>
                         </div>
 
                         <div class="row">
@@ -270,13 +298,22 @@
 
                                 @endif
                             </div>
+                                <div class="col-md-4 text-center mb-3">
+                                @if (file_exists(public_path($data->images_gate_after_lock_2)) && $data->images_gate_after_lock_2 != '')
+                                    <a href="{{ URL::asset($data->images_gate_after_lock_2) }}" data-lightbox="roadtrip">
+                                        <img src="{{ URL::asset($data->images_gate_after_lock_2) }}" alt="" height="70"
+                                            class="adjust-height ml-5  "></a>
+                                
+
+                                @endif
+                            </div>
                         </div>
 
 
                         <div class="row">
                             <div class="col-md-4"><label for="images_bushes">{{__('messages.image_building')}}</label></div>
 
-                            <div class="col-md-4 text-center mb-3">
+                            <div class="col-md-4 text-center  ">
                                 @if (file_exists(public_path($data->image_building)) && $data->image_building != '')
                                     <a href="{{ URL::asset($data->image_building) }}" data-lightbox="roadtrip">
                                         <img src="{{ URL::asset($data->image_building) }}" alt="" height="70"
@@ -286,9 +323,19 @@
 
                                 @endif
                             </div>
+                                <div class="col-md-4 text-center mb-3">
+
+                                @if (file_exists(public_path($data->image_building_2)) && $data->image_building_2 != '')
+                                <a href="{{ URL::asset($data->image_building_2) }}" data-lightbox="roadtrip">
+                                    <img src="{{ URL::asset($data->image_building_2) }}" alt="" height="70"
+                                        class="adjust-height ml-5  "></a>
+                            
+
+                            @endif
+                            </div>
                         </div>
 
-
+{{-- 
                         <div class="row">
                             <div class="col-md-4"><label for="img_advertise_poster">{{__('messages.image_advertise_poster')}}</label></div>
 
@@ -301,8 +348,10 @@
                                 <strong>{{__('messages.no_image_found')}}</strong>
 
                                 @endif
+
+
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="row">
                             <div class="col-md-4"><label for="other_image">{{__('messages.other_image')}}</label></div>
@@ -313,9 +362,11 @@
                                         <img src="{{ URL::asset($data->other_image) }}" alt="" height="70"
                                             class="adjust-height ml-5  "></a>
                                 @else
-                                <strong>{{__('messages.no_image_found')}}</strong>
+                                    <strong>{{__('messages.no_image_found')}}</strong>
 
                                 @endif
+
+
                             </div>
                         </div>
 

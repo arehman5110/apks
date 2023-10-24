@@ -4,6 +4,7 @@
     <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+    
 
     <style>
         div#myTable_length,
@@ -20,13 +21,12 @@
         <div class="container-  ">
             <div class="row mb-2" style="flex-wrap:nowrap">
                 <div class="col-sm-6">
-                    <h3>{{__('messages.cable_bridge')}}</h3>
-
+                    <h3>{{__('messages.notice')}}</h3>
                 </div>
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
-                        <li class="breadcrumb-item"><a href="{{route('cable-bridge.index',app()->getLocale())}}">{{__('messages.dashboard')}}</a></li>
-                        <li class="breadcrumb-item active">{{__('messages.index')}}</li>
+                        <li class="breadcrumb-item text-lowercase" ><a href="/{{app()->getLocale()}}/dashboard">{{__('messages.dashboard')}}</a></li>
+                        <li class="breadcrumb-item text-lowercase active">{{__('messages.index')}} </li>
                     </ol>
                 </div>
             </div>
@@ -45,14 +45,20 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header d-flex justify-content-between ">
-                            <p class="mb-0">{{__('messages.cable_bridge')}}</p>
-                            <div class="d-flex ml-auto">
-                            <a href="{{route('cable-bridge.create',app()->getLocale())}}"><button class="btn text-white btn-success  btn-sm mr-4"  >Add Cable Bridge</button></a>
 
-                           <a href="{{route('generate-cable-bridge-excel',app()->getLocale())}}"> <button class="btn text-white  btn-sm mr-4" style="background-color: #708090">QR Cable Bridge</button></a>
+                        <div class="card-header d-flex justify-content-between ">
+                            <div class="card-title">
+                                {{__('messages.notice')}}
+                            </div>
+                            <div class="d-flex ml-auto">
+                                {{-- <a href="{{ route('third-party-digging.create', app()->getLocale()) }}"><button
+                                        class="btn text-white btn-success  btn-sm mr-4">{{__('messages.add_notice')}}</button></a> --}}
+
+                                {{-- <a href="{{ route('generate-third-party-digging-excel', app()->getLocale()) }}"> <button
+                                        class="btn text-white  btn-sm mr-4" style="background-color: #708090">QR Notice</button></a> --}}
+                            </div>
                         </div>
-                        </div>
+
                         <div class="card-body">
                             <div class="text-right mb-4">
 
@@ -63,10 +69,12 @@
 
                                     <thead style="background-color: #E4E3E3 !important">
                                         <tr>
+                                            <th>WP NAME</th>
                                             <th>ZONE</th>
                                             <th>BA</th>
                                             <th>TEAM</th>
-                                            <th>VISIT DATE</th>
+                                            <th>SURVEY DATE</th>
+                                            <th>GENERATE NOTICE</th>
                                             <th>ACTION</th>
 
                                         </tr>
@@ -75,17 +83,26 @@
 
                                         @foreach ($datas as $data)
                                             <tr>
+                                                <td class="align-middle">{{ $data->wp_name }}</td>
                                                 <td class="align-middle">{{ $data->zone }}</td>
                                                 <td>{{ $data->ba }}</td>
-                                                <td class="align-middle text-center">{{ $data->team }}</td>
+                                                <td class="align-middle text-center">{{ $data->team_name }}</td>
                                                 <td class="align-middle text-center">
                                                     @php
-                                                        $date = new DateTime($data->visit_date);
+                                                        $date = new DateTime($data->survey_date);
                                                         $datePortion = $date->format('Y-m-d');
 
                                                     @endphp
                                                     {{ $datePortion }}
                                                 </td>
+                                                <td class="text-center">
+
+                                                    <a href="/{{app()->getLocale()}}/generate-third-party-pdf/{{$data->id}}" target="_blank" rel="noopener noreferrer">
+                                                        <button class="btn-sm btn-success">Generate Notice</button>
+                                                    </a>
+
+                                                </td>
+
                                                 <td class="text-center">
 
                                                     <button type="button" class="btn  " data-toggle="dropdown">
@@ -94,25 +111,13 @@
                                                     </button>
                                                     <div class="dropdown-menu" role="menu">
 
-                                                        <form action="{{ route('cable-bridge.show', [app()->getLocale(),$data->id]) }}"
+                                                        <form action="{{ route('third-party-digging.show',[app()->getLocale(), $data->id]) }}"
                                                             method="get">
                                                             <button type="submit"
                                                                 class="dropdown-item pl-3 w-100 text-left">Detail</button>
                                                         </form>
 
-                                                        <form
-                                                            action="{{ route('cable-bridge.edit', [app()->getLocale(),$data->id]) }}"
-                                                            method="get">
-                                                            <button type="submit"
-                                                                class="dropdown-item pl-3 w-100 text-left">Edit</button>
-                                                        </form>
-
-
-                                                        <button type="button" class="btn btn-primary dropdown-item"
-                                                            data-id="{{ $data->id }}" data-toggle="modal"
-                                                            data-target="#myModal">
-                                                            Remove
-                                                        </button>
+                                                     
 
 
                                                     </div>
@@ -138,33 +143,7 @@
             </div>
         </div>
     </section>
-    <div class="modal fade" id="myModal">
-        <div class="modal-dialog">
-            <div class="modal-content ">
 
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title">Remove Recored</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <form action="" id="remove-foam" method="POST">
-                    @method('DELETE')
-                    @csrf
-
-                    <div class="modal-body">
-                        Are You Sure ?
-                        <input type="hidden" name="id" id="modal-id">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
-                        <button type="submit" class="btn btn-danger">Remove</button>
-                    </div>
-                </form>
-
-            </div>
-        </div>
-    </div>
 @endsection
 
 
@@ -179,19 +158,14 @@
         $(document).ready(function() {
             $('#myTable').DataTable({
                 aaSorting: [
-                    [3, 'desc']
+                    [0, 'asc']
                 ],
                 "lengthMenu": [
                     [10, 25, 50, -1],
                     [10, 25, 50, "All"]
                 ],
             });
-            $('#myModal').on('show.bs.modal', function(event) {
-                var button = $(event.relatedTarget);
-                var id = button.data('id');
-                var modal = $(this);
-                $('#remove-foam').attr('action', '/{{app()->getLocale()}}/cable-bridge/' + id)
-            });
+         
 
         });
     </script>

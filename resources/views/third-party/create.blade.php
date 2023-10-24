@@ -52,6 +52,7 @@
             outline: 0;
             box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
         }
+        .form-input{border: 0}
     </style>
 @endsection
 
@@ -80,7 +81,7 @@
             <div class=" ">
 
                 <div class=" card col-md-12 p-4 ">
-                    <div class=" ">
+                    <div class="form-input ">
                         <h3 class="text-center p-2"></h3>
 
                         <form action="{{ route('third-party-digging.store', app()->getLocale()) }} " id="myForm" method="POST"
@@ -130,12 +131,15 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="notice">{{__('messages.notice')}}</label></div>
                                 <div class="col-md-4">
-                                    <select name="notice" id="notice" class="form-control" required>
+                                    <select name="notice" id="notice" class="form-control" required  >
                                         <option value="" hidden>select notice</option>
                                         <option value="yes">yes</option>
                                         <option value="no">no</option>
                                     </select>
                                 </div>
+                                {{-- <div class="col-md-4 text-center pt-3 ">
+                                    <button type="button" class="btn btn-sm btn-success d-none" id="generate-notice" data-toggle="modal" data-target="#myModal">{{__('messages.generate_notice')}}</button>
+                                </div> --}}
                             </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="supervision">{{__('messages.supervision')}}</label></div>
@@ -361,13 +365,41 @@
 
                             </div>
 
-                            <div class="text-center p-4"><button class="btn btn-sm btn-success">                                                                                                                                                                                                                                                                                                    messages.submit')}}</button></div>
+                            <div class="text-center p-4"><button class="btn btn-sm btn-success">{{__('messages.submit')}}</button></div>
 
 
                         </form>
 
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content ">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">{{__("messages.generate_notice")}}</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <form action="/{{app()->getLocale()}}/generate-notice" id="remove-foam" method="POST" target="_blank" >
+                    
+                    @csrf
+
+                    <div class="modal-body">
+                       comming soon ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
+
+                        <button type="submit" class="btn btn-sm btn-success"  >{{__("messages.generate_notice")}}</button>
+                    </div>
+                </form>
+
             </div>
         </div>
     </div>
@@ -409,6 +441,11 @@
         if (userBa !== '') {
             getBaPoints(userBa)
         }
+
+        $('#remove-foam').on('submit', function () {
+            
+            $('#myModal').modal('hide');
+        });
 
      });
 
@@ -515,5 +552,15 @@
             rd.bringToFront()
 
         })
+
+        function generateNotice(param){
+            if (param.value == "yes") {
+                $('#generate-notice').removeClass('d-none')
+            }else{
+                if (!$('#generate-notice').hasClass('d-none')) {
+                    $('#generate-notice').addClass('d-none')
+                }
+            }
+        }
     </script>
 @endsection

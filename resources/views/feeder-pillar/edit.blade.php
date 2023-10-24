@@ -31,6 +31,7 @@
         .adjust-height {
             height: 70px;
         }
+        .form-input{border : 0}
     </style>
 @endsection
 
@@ -60,7 +61,7 @@
             <div class=" ">
 
                 <div class=" card col-md-12 p-4 ">
-                    <div class=" ">
+                    <div class="form-input ">
                         <h3 class="text-center p-2"></h3>
 
                         <form action="{{ route('feeder-pillar.update', [app()->getLocale(), $data->id]) }} " id="myForm"
@@ -256,98 +257,206 @@
 
 
                             <div class="row">
-                                <div class="col-md-4"><label for="image_pipe">{{__('messages.image_gate')}}</label></div>
                                 <div class="col-md-4">
-                                    <input type="file" name="image_gate" id="image_gate" class="form-control">
+                                    <label for="image_pipe">{{__('messages.image_gate')}}</label>
                                 </div>
-                                <div class="col-md-4 text-center mb-3">
-                                    @if (file_exists(public_path($data->image_gate)) && $data->image_gate != '')
-                                        <a href="{{ URL::asset($data->image_gate) }}" data-lightbox="roadtrip">
-                                            <img src="{{ URL::asset($data->image_gate) }}" alt="" height="70"
-                                                class="adjust-height ml-5  "></a>
-                                    @else
-                                    <strong>{{__('messages.no_image_found')}}</strong>
 
-                                    @endif
+                                <div class="col-md-8 row">  
+                                    <div class="col-md-6">
+                                        <input type="file" accept="image/*" name="image_gate" id="image_gate" class="form-control">
+                                    </div>
+
+                                    <div class="col-md-6 text-center  ">
+                                        @if (file_exists(public_path($data->image_gate)) && $data->image_gate != '')
+                                            <a href="{{ URL::asset($data->image_gate) }}" data-lightbox="roadtrip">
+                                                <img src="{{ URL::asset($data->image_gate) }}" alt="" height="70" class="adjust-height ml-5 ">
+                                            </a>
+                                        @else
+                                            <strong>{{ __('messages.no_image_found') }}</strong>
+                                        @endif
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <input type="file" accept="image/*" name="image_gate_2" id="image_gate_2" class="form-control">
+                                    </div>
+
+                                    <div class="col-md-6 text-center  ">
+                                        @if (file_exists(public_path($data->image_gate_2)) && $data->image_gate_2 != '')
+                                            <a href="{{ URL::asset($data->image_gate_2) }}" data-lightbox="roadtrip">
+                                                <img src="{{ URL::asset($data->image_gate_2) }}" alt="" height="70" class="adjust-height ml-5  ">
+                                            </a>
+                                        @else
+                                            <strong>{{ __('messages.no_image_found') }}</strong>
+                                        @endif
+                                    </div>
                                 </div>
+                                 
                             </div>
-                            <div class="row">
-                                <div class="col-md-4"><label for="image_vandalism">{{__('messages.image_vandalism')}}</label></div>
-                                <div class="col-md-4">
-                                    <input type="file" name="image_vandalism" id="image_vandalism"
-                                        class="form-control">
-                                </div>
-                                <div class="col-md-4 text-center mb-3">
-                                    @if (file_exists(public_path($data->image_vandalism)) && $data->image_vandalism != '')
-                                        <a href="{{ URL::asset($data->image_vandalism) }}" data-lightbox="roadtrip">
-                                            <img src="{{ URL::asset($data->image_vandalism) }}" alt=""
-                                                height="70" class="adjust-height ml-5  "></a>
-                                    @else
-                                    <strong>{{__('messages.no_image_found')}}</strong>
-
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4"><label for="image_leaning">{{__('messages.image_leaning')}}</label></div>
-                                <div class="col-md-4">
-                                    <input type="file" name="image_leaning" id="image_leaning" class="form-control">
-                                </div>
-                                <div class="col-md-4 text-center mb-3">
-                                    @if (file_exists(public_path($data->image_leaning)) && $data->image_leaning != '')
-                                        <a href="{{ URL::asset($data->image_leaning) }}" data-lightbox="roadtrip">
-                                            <img src="{{ URL::asset($data->image_leaning) }}" alt=""
-                                                height="70" class="adjust-height ml-5  "></a>
-                                    @else
-                                    <strong>{{__('messages.no_image_found')}}</strong>
-
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-4"><label for="image_rust">{{__("messages.image_rust")}}</label></div>
-                                <div class="col-md-4">
-                                    <input type="file" name="image_rust" id="image_rust" class="form-control">
-                                </div>
-                                <div class="col-md-4 text-center mb-3">
-                                    @if (file_exists(public_path($data->image_rust)) && $data->image_rust != '')
-                                        <a href="{{ URL::asset($data->image_rust) }}" data-lightbox="roadtrip">
-                                            <img src="{{ URL::asset($data->image_rust) }}" alt="" height="70"
-                                                class="adjust-height ml-5  "></a>
-                                    @else
-                                    <strong>{{__('messages.no_image_found')}}</strong>
-
-                                    @endif
-                                </div>
-                            </div>
-
 
 
                             <div class="row">
-                                <div class="col-md-4"><label for="images_advertise_poster">{{__("messages.image_advertise_poster")}}</label>
-                                </div>
-                                <div class="col-md-4">
-                                    <input type="file" name="images_advertise_poster" id="images_advertise_poster"
-                                        class="form-control">
-                                </div>
-                                <div class="col-md-4 text-center mb-3">
-                                    @if (file_exists(public_path($data->images_advertise_poster)) && $data->images_advertise_poster != '')
-                                        <a href="{{ URL::asset($data->images_advertise_poster) }}"
-                                            data-lightbox="roadtrip">
-                                            <img src="{{ URL::asset($data->images_advertise_poster) }}" alt=""
-                                                height="70" class="adjust-height ml-5  "></a>
-                                    @else
-                                    <strong>{{__('messages.no_image_found')}}</strong>
 
-                                    @endif
+                                <div class="col-md-4">
+                                    <label for="image_vandalism">{{__('messages.image_vandalism')}}</label>
                                 </div>
+
+                                <div class="col-md-8 row">  
+
+                                    <div class="col-md-6">
+                                        <input type="file" accept="image/*" name="image_vandalism" id="image_vandalism" class="form-control">
+                                    </div>
+
+                                    <div class="col-md-6 text-center  ">
+                                        @if (file_exists(public_path($data->image_vandalism)) && $data->image_vandalism != '')
+                                            <a href="{{ URL::asset($data->image_vandalism) }}" data-lightbox="roadtrip">
+                                                <img src="{{ URL::asset($data->image_vandalism) }}" alt="" height="70" class="adjust-height ml-5 ">
+                                            </a>
+                                        @else
+                                            <strong>{{ __('messages.no_image_found') }}</strong>
+                                        @endif
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <input type="file" accept="image/*" name="image_vandalism_2" id="image_vandalism_2" class="form-control">
+                                    </div>
+
+                                    <div class="col-md-6 text-center  ">
+                                        @if (file_exists(public_path($data->image_vandalism_2)) && $data->image_vandalism_2 != '')
+                                            <a href="{{ URL::asset($data->image_vandalism_2) }}" data-lightbox="roadtrip">
+                                                <img src="{{ URL::asset($data->image_vandalism_2) }}" alt="" height="70" class="adjust-height ml-5  ">
+                                            </a>
+                                        @else
+                                            <strong>{{ __('messages.no_image_found') }}</strong>
+                                        @endif
+                                    </div>
+                                </div>
+
                             </div>
+
+
+                            <div class="row">
+
+                                <div class="col-md-4">
+                                    <label for="image_leaning">{{__('messages.image_leaning')}}</label>
+                                </div>
+
+                                <div class="col-md-8 row">  
+
+                                    <div class="col-md-6">
+                                        <input type="file" accept="image/*" name="image_leaning" id="image_leaning" class="form-control">
+                                    </div>
+
+                                    <div class="col-md-6 text-center  ">
+                                        @if (file_exists(public_path($data->image_leaning)) && $data->image_leaning != '')
+                                            <a href="{{ URL::asset($data->image_leaning) }}" data-lightbox="roadtrip">
+                                                <img src="{{ URL::asset($data->image_leaning) }}" alt="" height="70" class="adjust-height ml-5 ">
+                                            </a>
+                                        @else
+                                            <strong>{{ __('messages.no_image_found') }}</strong>
+                                        @endif
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <input type="file" accept="image/*" name="image_leaning_2" id="image_leaning_2" class="form-control">
+                                    </div>
+
+                                    <div class="col-md-6 text-center  ">
+                                        @if (file_exists(public_path($data->image_leaning_2)) && $data->image_leaning_2 != '')
+                                            <a href="{{ URL::asset($data->image_leaning_2) }}" data-lightbox="roadtrip">
+                                                <img src="{{ URL::asset($data->image_leaning_2) }}" alt="" height="70" class="adjust-height ml-5  ">
+                                            </a>
+                                        @else
+                                            <strong>{{ __('messages.no_image_found') }}</strong>
+                                        @endif
+                                    </div>
+                                </div>
+
+                            </div>
+                            
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="image_rust">{{__("messages.image_rust")}}</label>
+                                </div>
+
+                                <div class="col-md-8 row">  
+
+                                    <div class="col-md-6">
+                                        <input type="file" accept="image/*" name="image_rust" id="image_rust" class="form-control">
+                                    </div>
+
+                                    <div class="col-md-6 text-center  ">
+                                        @if (file_exists(public_path($data->image_rust)) && $data->image_rust != '')
+                                            <a href="{{ URL::asset($data->image_rust) }}" data-lightbox="roadtrip">
+                                                <img src="{{ URL::asset($data->image_rust) }}" alt="" height="70" class="adjust-height ml-5 ">
+                                            </a>
+                                        @else
+                                            <strong>{{ __('messages.no_image_found') }}</strong>
+                                        @endif
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <input type="file" accept="image/*" name="image_rust_2" id="image_rust_2" class="form-control">
+                                    </div>
+
+                                    <div class="col-md-6 text-center  ">
+                                        @if (file_exists(public_path($data->image_rust_2)) && $data->image_rust_2 != '')
+                                            <a href="{{ URL::asset($data->image_rust_2) }}" data-lightbox="roadtrip">
+                                                <img src="{{ URL::asset($data->image_rust_2) }}" alt="" height="70" class="adjust-height ml-5  ">
+                                            </a>
+                                        @else
+                                            <strong>{{ __('messages.no_image_found') }}</strong>
+                                        @endif
+                                    </div>
+                                </div>
+                                 
+                            </div>
+
+
+                            <div class="row">
+
+                                <div class="col-md-4">
+                                    <label for="images_advertise_poster">{{__("messages.image_advertise_poster")}}</label>
+                                </div>
+
+                                <div class="col-md-8 row">  
+
+                                    <div class="col-md-6">
+                                        <input type="file" accept="image/*" name="images_advertise_poster" id="images_advertise_poster" class="form-control">
+                                    </div>
+
+                                    <div class="col-md-6 text-center  ">
+                                        @if (file_exists(public_path($data->images_advertise_poster)) && $data->images_advertise_poster != '')
+                                            <a href="{{ URL::asset($data->images_advertise_poster) }}" data-lightbox="roadtrip">
+                                                <img src="{{ URL::asset($data->images_advertise_poster) }}" alt="" height="70" class="adjust-height ml-5 ">
+                                            </a>
+                                        @else
+                                            <strong>{{ __('messages.no_image_found') }}</strong>
+                                        @endif
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <input type="file" accept="image/*" name="images_advertise_poster_2" id="images_advertise_poster_2" class="form-control">
+                                    </div>
+
+                                    <div class="col-md-6 text-center  ">
+                                        @if (file_exists(public_path($data->images_advertise_poster_2)) && $data->images_advertise_poster_2 != '')
+                                            <a href="{{ URL::asset($data->images_advertise_poster_2) }}" data-lightbox="roadtrip">
+                                                <img src="{{ URL::asset($data->images_advertise_poster_2) }}" alt="" height="70" class="adjust-height ml-5  ">
+                                            </a>
+                                        @else
+                                            <strong>{{ __('messages.no_image_found') }}</strong>
+                                        @endif
+                                    </div>
+                                </div>
+                               
+                            </div>
+
 
                             <div class="row">
                                 <div class="col-md-4"><label for="other_image">{{__('messages.other_image')}}</label></div>
                                 <div class="col-md-4">
-                                    <input type="file" name="other_image" id="other_image" class="form-control">
+                                    <input type="file" accept="image/*" name="other_image" id="other_image" class="form-control">
                                 </div>
                                 <div class="col-md-4 text-center mb-3">
                                     @if (file_exists(public_path($data->other_image)) && $data->other_image != '')

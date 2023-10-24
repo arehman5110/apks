@@ -13,7 +13,7 @@
 
         h3 {
             color: #7379AE;
-            font-size: 1.5rem;
+            font-size: 20px !important;
         }
 
         .accordion .card {
@@ -32,7 +32,7 @@
 @endsection
 
 @section('content')
-    <div class=" p-5">
+    <div class=" p-4 ">
 
         <div class="row dashboard-counts">
             {{-- <div class="col-md-2">

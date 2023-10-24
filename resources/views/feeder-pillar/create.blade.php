@@ -32,6 +32,7 @@
             height: 400px;
             padding: 20px;
         }
+        .form-input{border : 0}
 
 
     </style>
@@ -62,7 +63,7 @@
             <div class=" ">
 
                 <div class=" card col-md-12 p-4 ">
-                    <div class=" ">
+                    <div class="form-input ">
                         <h3 class="text-center p-2"></h3>
 
                         <form action="{{ route('feeder-pillar.store',app()->getLocale()) }} " id="myForm" method="POST"
@@ -241,66 +242,75 @@
 
 
                             <div class="row">
-                                <div class="col-md-4"><label for="image_gate">{{__("messages.image_gate")}}</label></div>
                                 <div class="col-md-4">
-                                    <input type="file" name="image_gate" id="image_gate" accept="image/*"
-                                        class="form-control" >
-                                    </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4"><label for="image_grass">{{__('messages.image_vandalism')}}</label></div>
+                                    <label for="image_gate">{{__("messages.image_gate")}}</label>
+                                </div>
                                 <div class="col-md-4">
-                                    <input type="file" name="image_vandalism" id="image_vandalism" accept="image/*"
-                                        class="form-control" >
-                                    </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4"><label for="images_gate_after_lock">{{__('messages.image_leaning')}}</label></div>
-                                <div class="col-md-4">
-                                    <input type="file" name="image_leaning" id="image_leaning" accept="image/*"
-                                        class="form-control" >
-                                    </div>
-                            </div>
-
-
-
-
-                            <div class="row">
-                                <div class="col-md-4"><label for="image_rust">{{__('messages.image_rust')}}</label></div>
-                                <div class="col-md-4">
-                                    <input type="file" name="image_rust" id="image_rust" accept="image/*"
-                                        class="form-control" >
-                                    </div>
+                                    <input type="file" name="image_gate" id="image_gate" accept="image/*" class="form-control" >
+                                    <input type="file" name="image_gate_2" id="image_gate_2" accept="image/*" class="form-control" >
+                                </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="images_advertise_poster">{{__('messages.image_advertise_poster')}}</label></div>
                                 <div class="col-md-4">
-                                    <input type="file" name="images_advertise_poster" id="images_advertise_poster" accept="image/*"
-                                        class="form-control" >
-                                    </div>
+                                    <label for="image_grass">{{__('messages.image_vandalism')}}</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="file" name="image_vandalism" id="image_vandalism" accept="image/*" class="form-control" >
+                                    <input type="file" name="image_vandalism_2" id="image_vandalism_2" accept="image/*" class="form-control" >
+                                </div>
                             </div>
 
-                             <div class="row">
-                                <div class="col-md-4"><label for="other_image">{{__('messages.other_image')}}</label></div>
+                            <div class="row">
                                 <div class="col-md-4">
-                                    <input type="file" name="other_image" id="other_image" accept="image/*"
-                                        class="form-control" >
-                                    </div>
+                                    <label for="images_gate_after_lock">{{__('messages.image_leaning')}}</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="file" name="image_leaning" id="image_leaning" accept="image/*" class="form-control" >
+                                    <input type="file" name="image_leaning_2" id="image_leaning_2" accept="image/*" class="form-control" >
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="image_rust">{{__('messages.image_rust')}}</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="file" name="image_rust" id="image_rust" accept="image/*" class="form-control" >
+                                    <input type="file" name="image_rust_2" id="image_rust_2" accept="image/*" class="form-control" >
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="images_advertise_poster">{{__('messages.image_advertise_poster')}}</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="file" name="images_advertise_poster" id="images_advertise_poster" accept="image/*" class="form-control" >
+                                    <input type="file" name="images_advertise_poster_2" id="images_advertise_poster_2" accept="image/*" class="form-control" >
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="other_image">{{__('messages.other_image')}}</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="file" name="other_image" id="other_image" accept="image/*" class="form-control" >
+                                </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-4"><label for="coordinate">{{__('messages.coordinate')}}</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="coordinate" id="coordinate" readonly
-                                        class="form-control" required>
-                                    </div>
+                                    <input type="text" name="coordinate" id="coordinate" readonly class="form-control" required>
+                                </div>
                             </div>
 
                             <input type="hidden" name="lat" id="lat" required class="form-control">
                             <input type="hidden" name="log" id="log" class="form-control">
                             <div class="text-center">
-                                <strong>  <span class="text-danger map-error"  ></span></strong>
+                                <strong> <span class="text-danger map-error"></span> </strong>
                               </div>
                               <div id="map"></div>
 

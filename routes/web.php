@@ -22,6 +22,7 @@ use App\Http\Controllers\web\tnbes\StatusController;
 use App\Http\Controllers\web\ThirdPartyDiggingController;
 use App\Http\Controllers\web\SubstationController;
 use App\Http\Controllers\web\FPController;
+use App\Http\Controllers\web\GenerateNoticeController;
 use App\Http\Controllers\web\PatrollingController;
 use App\Http\Controllers\web\POController;
 use App\Models\ThirdPartyDiging;
@@ -109,6 +110,7 @@ Route::middleware('auth')->group(function () {
     ////third party digging routes
     Route::resource('third-party-digging', ThirdPartyDiggingController::class);
     Route::get('generate-third-party-digging-excel', [ThirdPartyExcelController::class, 'generateThirdPartExcel'])->name('generate-third-party-digging-excel');
+  
 
     ////substation routes
     Route::resource('substation', SubstationController::class);
@@ -119,6 +121,13 @@ Route::middleware('auth')->group(function () {
     Route::resource('feeder-pillar', FPController::class);
     Route::view('/feeder-pillar-map', 'feeder-pillar.map')->name('feeder-pillar-map');
     Route::get('generate-feeder-pillar-excel', [FeederPillarExcelController::class, 'generateFeederPillarExcel'])->name('generate-feeder-pillar-excel');
+
+
+    //generate notice pdf
+    Route::get('/generate-notice/{id}',[GenerateNoticeController::class,'generateNotice']);
+    Route::get('/notice',[GenerateNoticeController::class,'index']);
+
+
 
 //PO routes
 
@@ -157,3 +166,5 @@ Route::view('/generate-pdf-for-notice','PDF.notice');
 Route::get('/get-work-package-detail/{id}', [WPController::class, 'detail'])->name('get-work-package-detail');
 require __DIR__ . '/auth.php';
 });
+
+Route::get('/generate-third-party-pdf/{id}', [GeneratePDFController::class, 'generateP']);

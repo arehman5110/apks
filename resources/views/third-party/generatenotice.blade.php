@@ -4,14 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>APKS</title>
+    <title>Generate Notice</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <link rel="shortcut icon" href="{{ asset('assets/web-images/main-logo.ico') }}">
     <style>
         @media print {
             #print-button {
@@ -37,9 +36,8 @@
                 max-width: 99% !important;
                 width: 100% !important;
             }
-
-            section {
-                page-break-before: always;
+            section{
+                            page-break-before: always;
 
             }
         }
@@ -51,11 +49,10 @@
         td {
             padding-left: 10px
         }
+        hr{
 
-        hr {
-
-            border-style: dotted;
-            border-width: 1px;
+    border-style: dotted;
+    border-width: 1px;
         }
     </style>
 </head>
@@ -66,133 +63,23 @@
     <div class="">
 
         <div class="container shadow p-4   my-5 bg-white ">
-            <section class="pb-5 mb-5">
-                <img src="{{ URL::asset('assets/web-images/pdfimg.png') }}" alt="">
+            
+            <section>
+                
 
                 <div class="text-end">
                     <button type="button" class="btn btn-sm btn-secondary" id="print-button"
                         onclick="exportToPDF()">Export to
                         PDF</button>
                 </div>
-                <h5>BORANG RONDAAN / LAWATAN TAPAK KERJA KOREKAN DI LALUAN KABEL TENAGA NASIONAL BERHAD</h5>
-
-                <table class="table-bordered w-100 caption-top">
-                    <tr>
-                        <th class="col-6">Tarikh Rondaan / Lawatan Tapak</th>
-                        <td class="col-6">{{ $data->survey_date }}</td>
-                    </tr>
-
-                    <tr>
-                        <th>Masa Rondaan / Lawatan Tapak</th>
-                        <td>{{ $data->patrolling_time }}</td>
-                    </tr>
-                    <tr>
-                        <th>Lokasi</th>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th>Nama Projek</th>
-                        <td>{{ $data->project_name }}</td>
-                    </tr>
-                    <tr>
-                        <th>Feeder Terlibat / Bil. Litar</th>
-                        <td>{{ $data->feeder_involved }}</td>
-                    </tr>
-                </table>
-
-                <table class="table-bordered w-100 caption-top">
-                    <caption>MAKLUMAT PEMAJU / KONTRAKTOR UTAMA</caption>
-                    <tr>
-                        <th class="col-6">Nama Syarikat</th>
-                        <td>{{ $data->company_name }}</td>
-                    </tr>
-                    <tr>
-                        <th>No Telefon Pejabat</th>
-                        <td>{{ $data->office_phone_no }}</td>
-                    </tr>
-                    <tr>
-                        <th>Wakil Pemaju / Kontraktor Utama</th>
-                        <td>{{ $data->main_contractor }}</td>
-                    </tr>
-                    <tr>
-                        <th>No Telefon Wakil Pemaju / Kontraktor Utama</th>
-                        <td>{{ $data->developer_phone_no }}</td>
-                    </tr>
-
-                </table>
-
-                <table class="table-bordered w-100 caption-top">
-                    <caption>MAKLUMAT KONTRAKTOR</caption>
-                    <tr>
-                        <th>Nama Syarikat Kontraktor</th>
-                        <td>{{ $data->contractor_company_name }}</td>
-                    </tr>
-                    <tr>
-                        <th>Nama Penyelia Tapak</th>
-                        <td>{{ $data->site_supervisor_name }}</td>
-                    </tr>
-                    <tr>
-                        <th class="col-6">No Telefon Penyelia Tapak</th>
-                        <td>{{ $data->site_supervisor_phone_no }}</td>
-                    </tr>
-                </table>
-                <table class="table-bordered w-100 caption-top">
-                    <caption class="caption-top">MAKLUMAT JENTERA PROJEK</caption>
-                    <tr>
-                        <th class="col-6">Nama Pengendali Jentera Pengorek</th>
-                        <td>{{ $data->excavator_operator_name }}</td>
-                    </tr>
-                    <tr>
-                        <th>No Pendaftaran Jentera Pengorek</th>
-                        <td>{{ $data->excavator_machinery_reg_no }}</td>
-                    </tr>
-                </table>
-
-                <p><strong>PERAKUAN</strong></p>
-                <ol class="mb-5 pb-3">
-                    <li> Saya dengan ini telah dimaklumkan dan faham bahawa terdapat / mungkin kabel TNB di tapak kerja
-                        korekan sedang dilaksanakan.</li>
-                    <li> Saya berjanji akan berhati-hati dan akan mengambil langkah yang sewajarnya bagi mengelakkan
-                        kerosakan
-                        di mana kerja berhampiran kabel TNB.</li>
-                    <li> Saya juga faham akan bertanggungjawab sepenuhnya ke atas sebarang kerosakan kabel termasuk kos
-                        pembaikan akibat kerja korekan yang diselia oleh saya.</li>
-                    <li> Saya juga telah menerima Notis Pemberitahuan daripada TNB.</li>
-                </ol>
-
-                <table class="w-100 ">
-                    <tr>
-                        <td class="col-4">Wakil Pemaju / Kontraktor Utama</td>
-                        <td class="col-4 text-center">Wakil Kontraktor</td>
-                        <td class="col-4 text-center">Wakil TNB</td>
-                    </tr>
-                    <tr>
-                        <td class="col-4">NAMA:</td>
-                        <td>NAMA:</td>
-                        <td>NAMA:</td>
-                    </tr>
-                    <tr class="col-4">
-                        <td>NO IC:</td>
-                        <td>NO IC:</td>
-                        <td>NO IC:</td>
-                    </tr>
-                    <tr>
-                        <td>NO H/P:</td>
-                        <td>NO H/P:</td>
-                        <td>NO H/P:</td>
-                    </tr>
-
-                </table>
-            </section>
-            <hr>
-            <section>
                 <img src="{{ URL::asset('assets/web-images/pdfimg.png') }}" alt="">
+
                 <div class="text-end"> No. Siri: SWO 001</div>
                 <h6 class="text-center">NOTIS MEMBERHENTIKAN AKTIVITI BAHAYA BERHAMPIRAN PEPASANGAN ELEKTRIK TNB</h6>
                 <div class="p-4">
                     <div class="row ">
                         <div class="col-2">Kepada</div>
-                        <div class="col-4">: {{$data->company_name}}</div>
+                        <div class="col-4">: …………………………………………</div>
                         <div class="col-3"></div>
                         <div class="col-3">Kepada : ............</div>
                     </div>
@@ -219,7 +106,7 @@
 
                     <div class="row">
                         <div class="col-2">Tel</div>
-                        <div class="col-4">: {{$data->office_phone_no}}</div>
+                        <div class="col-4">: …………………………………………</div>
                         <div class="col-3"></div>
                         <div class="col-3"> </div>
                     </div>
@@ -239,9 +126,9 @@
                     </div>
 
                     <div class="row  ">
-                        <div class="col-2">Lokasi</div>
+                        <div class="col-4">Lokasi</div>
                         <div class="col-4">
-                           {{$data->road_name}}
+                            <hr>
                         </div>
 
                     </div>
@@ -330,19 +217,16 @@
 
                     <div class="row">
                         <div class="col-4">Unit Operasi dan Senggaraan
-                        </div>
-                        <div class="col-4">
-                            <hr>
-                        </div>
-                        <div class="col-4">
-                            <hr>
+                           </div>
+                        <div class="col-4"><hr></div>
+                        <div class="col-4"><hr>
                         </div>
                     </div>
 
 
                     <div class="row">
                         <div class="col-4">Zon Selangor & Putrajaya/Cyberjaya
-                        </div>
+                            </div>
                         <div class="col-4"> </div>
                         <div class="col-4">
                         </div>
@@ -351,34 +235,26 @@
 
                     <div class="row">
                         <div class="col-4">Bahagian Pembahagian</div>
-                        <div class="col-4 d-flex">No. I/C:
-                            <hr>
-                        </div>
+                        <div class="col-4 d-flex">No. I/C: <hr></div>
 
-                        <div class="col-4 d-flex">No. I/C:
-                            <hr>
-                        </div>
+                        <div class="col-4 d-flex">No. I/C: <hr></div>
                     </div>
 
 
 
                     <div class="row">
                         <div class="col-4">Tenaga Nasional Berhad</div>
-                        <div class="col-4 d-flex"> </div>
+                        <div class="col-4 d-flex">   </div>
 
-                        <div class="col-4 d-flex"> </div>
+                        <div class="col-4 d-flex">  </div>
                     </div>
 
 
                     <div class="row">
                         <div class="col-4">s.k. Suruhanjaya Tenaga</div>
-                        <div class="col-4 d-flex">TandaTangan:
-                            <hr>
-                        </div>
+                        <div class="col-4 d-flex">TandaTangan: <hr></div>
 
-                        <div class="col-4 d-flex">TandaTangan:
-                            <hr>
-                        </div>
+                        <div class="col-4 d-flex">TandaTangan: <hr></div>
                     </div>
                 </div>
             </section>
