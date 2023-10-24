@@ -78,13 +78,13 @@
         <div class="container-  ">
             <div class="row  " style="flex-wrap:nowrap">
                 <div class="col-sm-6">
-                    <h3>Tiang</h3>
+                    <h3>{{__('messages.tiang')}}</h3>
                 </div>
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
                         <li class="breadcrumb-item"><a
-                                href="{{ route('tiang-talian-vt-and-vr.index', app()->getLocale()) }}">index</a></li>
-                        <li class="breadcrumb-item active">create</li>
+                                href="{{ route('tiang-talian-vt-and-vr.index', app()->getLocale()) }}">{{__('messages.index')}}</a></li>
+                        <li class="breadcrumb-item active">{{__('messages.create')}}</li>
                     </ol>
                 </div>
             </div>
@@ -98,7 +98,7 @@
 
                 <div class=" card col-md-12 p-3 ">
                     <div class=" ">
-                        <h3 class="text-center p-2">QR SAVR</h3>
+                        <h3 class="text-center p-2">{{__('messages.qr_savr')}}</h3>
                         <form id="framework-wizard-form"
                             action="{{ route('tiang-talian-vt-and-vr.store', app()->getLocale()) }}"
                             enctype="multipart/form-data" style="display: none" method="POST"
@@ -108,10 +108,10 @@
 
                             {{-- START Info (1) --}}
                             <fieldset class=" form-input">
-                                <h3>Info</h3>
+                                <h3>{{__('messages.info')}}</h3>
 
                                 <div class="row">
-                                    <div class="col-md-4"><label for="ba">BA</label></div>
+                                    <div class="col-md-4"><label for="ba">{{__('messages.ba')}}</label></div>
                                     <div class="col-md-4"><select name="ba_s" id="ba_s" class="form-control"
                                             onchange="getWp(this)" required>
                                             @if (Auth::user()->ba == '')
@@ -158,19 +158,19 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-4"><label for="name_contractor">Contractor</label></div>
+                                    <div class="col-md-4"><label for="name_contractor">{{__('messages.contractor')}}</label></div>
                                     <div class="col-md-4"><input type="text" name="name_contractor" id="name_contractor"
                                             readonly value="Arosynergy" class="form-control" required></div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-4"><label for="po_start_date">PO Start Date</label></div>
+                                    <div class="col-md-4"><label for="po_start_date">{{__('messages.po_start_date')}}</label></div>
                                     <div class="col-md-4"><input type="date" name="start_date" id="po_start_date"
                                             class="form-control"></div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-4"><label for="po_end_date">PO End Date</label></div>
+                                    <div class="col-md-4"><label for="po_end_date">{{__('messages.po_end_date')}}</label></div>
                                     <div class="col-md-4"><input type="date" name="end_date" id="po_end_date"
                                             class="form-control"></div>
                                 </div>
