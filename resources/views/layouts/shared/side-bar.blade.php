@@ -59,6 +59,13 @@
                         </li>
 
                         <li class="nav-item">
+                            <a href="/{{app()->getLocale()}}/notice" class="nav-link ">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>{{__('messages.patrolling')}}</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
                             <a href="{{ route('third-party-digging.index', app()->getLocale()) }}" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>{{__('messages.index')}}</p>

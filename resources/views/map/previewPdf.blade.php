@@ -11,6 +11,7 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <link rel="shortcut icon" href="{{ asset('assets/web-images/main-logo.ico') }}">
     <style>
         @media print {
             #print-button {
@@ -36,8 +37,9 @@
                 max-width: 99% !important;
                 width: 100% !important;
             }
-            section{
-                            page-break-before: always;
+
+            section {
+                page-break-before: always;
 
             }
         }
@@ -49,10 +51,11 @@
         td {
             padding-left: 10px
         }
-        hr{
 
-    border-style: dotted;
-    border-width: 1px;
+        hr {
+
+            border-style: dotted;
+            border-width: 1px;
         }
     </style>
 </head>
@@ -235,9 +238,9 @@
                     </div>
 
                     <div class="row  ">
-                        <div class="col-4">Lokasi</div>
+                        <div class="col-2">Lokasi</div>
                         <div class="col-4">
-                            <hr>
+                           {{$data->road_name}}
                         </div>
 
                     </div>
@@ -326,16 +329,19 @@
 
                     <div class="row">
                         <div class="col-4">Unit Operasi dan Senggaraan
-                           </div>
-                        <div class="col-4"><hr></div>
-                        <div class="col-4"><hr>
+                        </div>
+                        <div class="col-4">
+                            <hr>
+                        </div>
+                        <div class="col-4">
+                            <hr>
                         </div>
                     </div>
 
 
                     <div class="row">
                         <div class="col-4">Zon Selangor & Putrajaya/Cyberjaya
-                            </div>
+                        </div>
                         <div class="col-4"> </div>
                         <div class="col-4">
                         </div>
@@ -344,26 +350,34 @@
 
                     <div class="row">
                         <div class="col-4">Bahagian Pembahagian</div>
-                        <div class="col-4 d-flex">No. I/C: <hr></div>
+                        <div class="col-4 d-flex">No. I/C:
+                            <hr>
+                        </div>
 
-                        <div class="col-4 d-flex">No. I/C: <hr></div>
+                        <div class="col-4 d-flex">No. I/C:
+                            <hr>
+                        </div>
                     </div>
 
 
 
                     <div class="row">
                         <div class="col-4">Tenaga Nasional Berhad</div>
-                        <div class="col-4 d-flex">   </div>
+                        <div class="col-4 d-flex"> </div>
 
-                        <div class="col-4 d-flex">  </div>
+                        <div class="col-4 d-flex"> </div>
                     </div>
 
 
                     <div class="row">
                         <div class="col-4">s.k. Suruhanjaya Tenaga</div>
-                        <div class="col-4 d-flex">TandaTangan: <hr></div>
+                        <div class="col-4 d-flex">TandaTangan:
+                            <hr>
+                        </div>
 
-                        <div class="col-4 d-flex">TandaTangan: <hr></div>
+                        <div class="col-4 d-flex">TandaTangan:
+                            <hr>
+                        </div>
                     </div>
                 </div>
             </section>

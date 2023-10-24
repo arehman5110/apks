@@ -276,7 +276,25 @@ return [
 
 
 
+ /******************patroling */
 
+
+ 'Patrolling'=>'Patrolling',
+ 'Work_Package_Name'=>'Work Package Name',
+ 'Select_Road'=>'Select Road',
+ 'Road_Name'=>'Road Name',
+ 'Patrolling_Date'=>'Patrolling Date',
+ 'Feeder'=>'Feeder',
+ 'Project_Name' =>'Project Name',
+ 'Km_Plan'=>"Km Plan",
+ 'Km-Actual'=>'Km Actual',
+ 'Total_Digging'=>'Total Digging',
+ 'Total_Notice'=>'Total Notice',
+ 'Total_Supervision'=>'Total Supervision',
+
+
+
+/**************End Patroling */
 
 
 

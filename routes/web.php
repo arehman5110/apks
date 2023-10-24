@@ -110,7 +110,7 @@ Route::middleware('auth')->group(function () {
     ////third party digging routes
     Route::resource('third-party-digging', ThirdPartyDiggingController::class);
     Route::get('generate-third-party-digging-excel', [ThirdPartyExcelController::class, 'generateThirdPartExcel'])->name('generate-third-party-digging-excel');
-    Route::post('/generate-notice',[GenerateNoticeController::class,'generateNotice']);
+  
 
     ////substation routes
     Route::resource('substation', SubstationController::class);
@@ -121,6 +121,13 @@ Route::middleware('auth')->group(function () {
     Route::resource('feeder-pillar', FPController::class);
     Route::view('/feeder-pillar-map', 'feeder-pillar.map')->name('feeder-pillar-map');
     Route::get('generate-feeder-pillar-excel', [FeederPillarExcelController::class, 'generateFeederPillarExcel'])->name('generate-feeder-pillar-excel');
+
+
+    //generate notice pdf
+    Route::get('/generate-notice/{id}',[GenerateNoticeController::class,'generateNotice']);
+    Route::get('/notice',[GenerateNoticeController::class,'index']);
+
+
 
 //PO routes
 
