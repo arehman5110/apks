@@ -159,7 +159,129 @@ return [
     'image_collapsed' => 'Image Collapsed',
 
 
-    'generate_notice' => 'Generate Notice'
+    'generate_notice' => 'Generate Notice',
+
+    /******************Tiang */
+
+    'tiang'=>'Tiang',
+    'qr_savr'=>'QR SAVR',
+    'info' =>'Info',
+        'contractor'=>'Contractor',
+        'po_tart_date'=>'PO Start Date',
+        'po_end_date' => 'PO End Date',
+        'name_of_substation' =>'Name of Substation',
+        'Name_of_Feeder_Pillar' =>'Name of Feeder Pillar',
+        'Review_Date'=>'Review Date',
+        'Feeder_Name'=>'Feeder Name',
+        'Street_Name'=>'Street Name',
+        'Section'=>'Section',
+        'Tiang_No'=>'Tiang No',
+
+    'Asset_Register'=>'Asset Register',
+        'Pole_Size_Bill'=>'Pole Size Bill',
+        'Pole_type_No'=>'Pole Type No',
+        'Spun'=>'Spun',
+        'Concrete'=>'Concrete',
+        'Iron'=>'Iron',
+        'Wood'=>'Wood',
+        'BARE_Span'=>'BARE (Span)',
+        'PVC_Span'=>'PVC (Span)',
+        'ABC_Span'=>'ABC (Span)',
+
+    'kejanggalan'=>'Kejanggalan',
+        'title'=>'Title',
+        'defects'=>'Defects',
+        'images'=>'Images',
+
+        'pole'=>'Pole',
+            'cracked'=>'Cracked',
+            'leaning'=>'Leaning',
+            'no_dim_post_none'=>'No. Dim Post / None',
+            'creepers'=>'Creepers',
+
+        'line_main_service'=>'Line (Main / Service)',
+            'joint'=>'Joint',
+            'need_rentis'=>'Need Rentis',
+            'Does_Not_Comply_With_Ground_Clearance'=>'Does Not Comply With Ground Clearance',
+        
+        'Umbang'=>'Umbang',
+            'Sagging_Breaking'=>'Sagging/Breaking',
+            'Creepers'=>'Creepers',
+            'No_Stay_Insulator_Damaged'=>'No Stay Insulator/Damaged',
+            'Stay_Plate_Base_Stay_Blocked'=>'Stay Plate / Base Stay Blocked',
+
+        'IPC'=>'IPC',
+            'Burn Effect'=>'Burn Effect',
+
+        'Black_Box'=>'Black Box',
+            'Kesan_Bakar'=>'Kesan Bakar',
+
+        'jumper'=>'Jumper',
+            'no_uv_sleeve'=>'No UV Sleeve',
+
+        'lightning_catcher'=>'Lightning catcher',
+            'broken'=>'Broken',
+
+        'Service'=>'Service',
+            'the_service_line_is_on_the_roof'=>'The service line is on the roof',
+            'won_piece_date'=>'Won piece Date',
+
+        'grounding'=>'Grounding',
+            'no_connection_to_neutral'=>'No Connection to Neutral',
+        
+        'signage_off_point_two_way_supply'=>'Signage - OFF Point / Two Way Supply',
+            'faded_damaged_missing_signage'=>'Faded / Damaged / Missing Signage',
+            'main_street'=>'Main Street',
+            'date_wire'=>'Date Wire',
+            'junction_box_date_burn_effect'=>'Junction Box Date / Burn Effect',
+
+    
+    'total_defects'=>'Total Defects',
+    'planned_repair_date'=>'Planned Repair Date',
+    'date_of_repair_performed'=>'Date of Repair Performed',
+    'remarks'=>'Remarks',
+
+    'Heigh_Clearance'=>'Heigh Clearance',
+        'Site_Conditions'=>'Site Conditions',
+        'Crossing_the_Road'=>'Crossing the Road',
+        'Sidewalk'=>'Sidewalk',
+        'No_vehicle_entry_area'=>'No vehicle entry area',
+        'Area'=>'Area',
+        'Bend'=>'Bend',
+        'Road'=>'Road',
+        'Forest'=>'Forest',
+        'Clearance_Distance'=>'Clearance Distance',
+        'Line_clearance_specifications'=>'Line clearance specifications',
+        'Comply'=>'Comply',
+        'Disobedient'=>'Disobedient',
+
+    'Kebocoran_Arus'=>'Kebocoran Arus',
+        'Inspection_of_current_leakage_on_the_pole'=>'Inspection of current leakage on the pole',
+            'no'=>'no',
+            'yes'=>'yes',
+            'Amp'=>'(Amp)',
+
+
+    /*******************ENd tiang */
+
+
+    'are_you_sure' =>'Are you sure ?',
+    'deatil'=>'Detail',
+    'remove'=>'remove',
+    'request_failed'=>'Request Failed',
+    'action'=>'Action',
+    'profile'=>'Profile',
+    'login'=>' Login',
+    'logout'=>'logout',
+
+
+
+
+
+
+
+
+
 
 
 
