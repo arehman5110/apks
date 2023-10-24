@@ -150,9 +150,9 @@ return [
     'bushy' => 'Bushy',
     'cover_image' =>'Cover Image',
     'image_bushes' => 'Images Bushes',
- 
 
- 
+
+
     'pipe_broken' => 'Pipe Broken',
     'collapsed' => 'Collapsed',
     'image_pipe' =>'Image Pipe',
@@ -167,7 +167,7 @@ return [
     'qr_savr'=>'QR SAVR',
     'info' =>'Info',
         'contractor'=>'Contractor',
-        'po_tart_date'=>'PO Start Date',
+        'po_start_date'=>'PO Start Date',
         'po_end_date' => 'PO End Date',
         'name_of_substation' =>'Name of Substation',
         'Name_of_Feeder_Pillar' =>'Name of Feeder Pillar',
@@ -203,7 +203,7 @@ return [
             'joint'=>'Joint',
             'need_rentis'=>'Need Rentis',
             'Does_Not_Comply_With_Ground_Clearance'=>'Does Not Comply With Ground Clearance',
-        
+
         'Umbang'=>'Umbang',
             'Sagging_Breaking'=>'Sagging/Breaking',
             'Creepers'=>'Creepers',
@@ -228,14 +228,14 @@ return [
 
         'grounding'=>'Grounding',
             'no_connection_to_neutral'=>'No Connection to Neutral',
-        
+
         'signage_off_point_two_way_supply'=>'Signage - OFF Point / Two Way Supply',
             'faded_damaged_missing_signage'=>'Faded / Damaged / Missing Signage',
             'main_street'=>'Main Street',
             'date_wire'=>'Date Wire',
             'junction_box_date_burn_effect'=>'Junction Box Date / Burn Effect',
 
-    
+
     'total_defects'=>'Total Defects',
     'planned_repair_date'=>'Planned Repair Date',
     'date_of_repair_performed'=>'Date of Repair Performed',

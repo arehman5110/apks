@@ -61,7 +61,7 @@
                         <li class="nav-item">
                             <a href="/{{app()->getLocale()}}/notice" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>{{__('messages.patrolling')}}</p>
+                                <p>{{__('messages.notice')}}</p>
                             </a>
                         </li>
 
