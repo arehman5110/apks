@@ -125,7 +125,7 @@ Route::middleware('auth')->group(function () {
 
     //generate notice pdf
     Route::get('/generate-notice/{id}',[GenerateNoticeController::class,'generateNotice']);
-    Route::get('/notice',[GenerateNoticeController::class,'index']);
+    Route::get('/notice',[GenerateNoticeController::class,'index'])->name('notice');
 
 
 
