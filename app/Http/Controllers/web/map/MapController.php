@@ -13,58 +13,55 @@ class MapController extends Controller
 {
     //
 
-    public function index(){
+    public function index()
+    {
         $wp = DB::table('tbl_workpackage')
-        ->select('id','package_name')
-        ->get();
+            ->select('id', 'package_name')
+            ->get();
 
-
-    //    return response()->json($wp);
-    return view('map.index',['wps'=>$wp]) ;
+        //    return response()->json($wp);
+        return view('map.index', ['wps' => $wp]);
     }
 
-
-
-    public function allWP(){
+    public function allWP()
+    {
         // return WorkPackage::all();
-        $ba = Auth::user()->ba ;
+        $ba = Auth::user()->ba;
         $datas = WorkPackage::where('ba', 'LIKE', '%' . $ba . '%')->get();
 
         $roads = [];
 
-
-       return  view('map.detail',['datas'=>$datas,'roads'=>$roads]);
+        return view('map.detail', ['datas' => $datas, 'roads' => $roads]);
     }
 
-    public function getRoadsDetails($wpID){
-
-        return Road::where('id_workpackage',$wpID)->select('id', 'road_name', 'km','actual_km','fidar')->get();
-
+    public function getRoadsDetails($wpID)
+    {
+        return Road::where('id_workpackage', $wpID)
+            ->select('id', 'road_name', 'km', 'actual_km', 'fidar')
+            ->get();
     }
 
-
-    public function proxy($language,$url){
-
-       $result =  file_get_contents(rawurldecode($url));
-       return response()->json($result);
+    public function proxy($language, $url)
+    {
+        $result = file_get_contents(rawurldecode($url));
+        return response()->json($result);
     }
 
-    public function teswtpagination( Request $request ,$language, $id , $status){
-        
-      
+    
+    public function teswtpagination(Request $request, $language, $id, $status)
+    {
         if ($status == 'Patroled') {
-         
-            $roads = Road::where('id_workpackage',$id)->where('actual_km' , '!=' , null)->select('id','road_name','actual_km','km')->paginate(10);
-        }else{
-          
-             $roads = Road::where('id_workpackage',$id)->where('actual_km' , null)->select('id','road_name','actual_km','km')->paginate(10);
-
+            $roads = Road::where('id_workpackage', $id)
+                ->where('actual_km', '!=', null)
+                ->select('id', 'road_name', 'actual_km', 'km')
+                ->paginate(10);
+        } else {
+            $roads = Road::where('id_workpackage', $id)
+                ->where('actual_km', null)
+                ->select('id', 'road_name', 'actual_km', 'km')
+                ->paginate(10);
         }
 
-
-
-        return view('map.pagination.roads-pagination',['roads'=>$roads])->render();
-
-
+        return view('map.pagination.roads-pagination', ['roads' => $roads])->render();
     }
 }

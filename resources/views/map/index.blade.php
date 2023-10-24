@@ -18,27 +18,16 @@
     <link rel="stylesheet" href="{{ URL::asset('assets/lib/images_slider/css-view/lightbox.css') }}">
     <script src="{{ URL::asset('assets/lib/images_slider/js-view/lightbox-2.6.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css" />
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
-    <link rel="stylesheet" href="{{ URL::asset('assets/lib/window-engine.css') }}" />
-    <script src="{{ URL::asset('assets/lib/window-engine.js') }}"></script>
+    <link rel="stylesheet" href="{{ URL::asset('assets/pannellum/pannellum.css') }}" />
 
+    <script src="{{ URL::asset('assets/pannellum/pannellum.js') }}"></script>
+    <link rel="stylesheet" href="{{ URL::asset('assets/pannellum/lib/window-engine.css') }}" />
+    <script src="{{ URL::asset('assets/pannellum/lib/window-engine.js') }}"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
 
 
-
+    {{-- <?php # header('Access-Control-Allow-Origin: *'); ?> --}}
     <style>
-        /* .sidebar-mini.sidebar-collapse .content-wrapper,
-                .sidebar-mini.sidebar-collapse .main-footer,
-                .sidebar-mini.sidebar-collapse .main-header {
-                    margin-left: 0rem !important;
-                }
-
-                .sidebar-mini.sidebar-collapse .main-sidebar,
-                .sidebar-mini.sidebar-collapse .main-sidebar::before {
-                    margin-left: 0;
-                    width: 0rem !important;
-                } */
 
         .card-header {
             font-weight: 700;
@@ -60,18 +49,13 @@
         }
 
 
-        #panorama {
-            width: 400px;
-            height: 400px;
-        }
-
         input {
             min-width: 16px !important;
         }
 
-        div#lightbox {
+        /* div#lightbox {
             display: none;
-        }
+        } */
 
         .side-bar>.table td {
             padding: 0.5rem !important
@@ -97,8 +81,8 @@
             padding-left: 0.5rem;
         }
 
-        .side-bar::-webkit-scrollbar,
-        .lb-outerContainer {
+        .side-bar::-webkit-scrollbar
+        {
             display: none;
         }
 
@@ -110,36 +94,37 @@
         input {
             min-width: 16px !important;
         }
-
+/*
         div#lightbox {
             display: none;
-        }
+        } */
 
         .side-bar>.table td {
             padding: 0.5rem !important
         }
-           /* CSS for the Select2 dropdown to match form-control style */
-.select2-container {
-    
-    width: 100% !important;
-}
 
-.select2-container .select2-selection--single {
-    height: 38px;
-    padding: 6px 12px;
-    font-size: 16px;
-    line-height: 1.5;
-    border: 1px solid #00000063;;
-    border-radius:0;
-}
+        /* CSS for the Select2 dropdown to match form-control style */
+        .select2-container {
 
-/* Optionally, style the focus state */
-.select2-container .select2-selection--single:focus {
-    border-color: 1px solid #00000063;
-    outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-}
+            width: 100% !important;
+        }
 
+        .select2-container .select2-selection--single {
+            height: 38px;
+            padding: 6px 12px;
+            font-size: 16px;
+            line-height: 1.5;
+            border: 1px solid #00000063;
+            ;
+            border-radius: 0;
+        }
+
+        /* Optionally, style the focus state */
+        .select2-container .select2-selection--single:focus {
+            border-color: 1px solid #00000063;
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
     </style>
 @endsection
 
@@ -163,7 +148,7 @@
                 </div>
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
-                        <li class="breadcrumb-item"><a href="/{{app()->getLocale()}}/dashboard">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/{{ app()->getLocale() }}/dashboard">Home</a></li>
                         <li class="breadcrumb-item active">map</li>
                     </ol>
                 </div>
@@ -172,169 +157,6 @@
     </section>
     <div class="container-fluid bg-white pt-2">
 
-
-
-
-        <!--  START TOP TABS -->
-
-        {{-- <div class="row text-center m-2">
-
-        <!--  START TAB W1 -->
-
-        <div class="col-md-4 p-1">
-
-            <div class="card p-0 mb-3" style="height: 90%;">
-                <div class="card-header ">W1</div>
-                <div class="card-body row">
-                    <div class="col-md-12 "
-                        onclick="addRemoveBundary('KUALA LUMPUR PUSAT' , 3.14925905877391 , 101.754098819705)"
-                        style="cursor: pointer;">
-
-                        <div class="  p-1" style="background-color:  skyblue !important;color:white">
-                            <p style="font-weight: 600;">KL PUSAT</p>
-
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-        </div> <!--  END TAB w1 -->
-
-
-        <!--  START TAB B1 -->
-
-        <div class="col-md-4 p-1">
-            <div class="card p-0 mb-3 ">
-                <div class="card-header ">B1</div>
-                <div class="card-body row">
-
-
-
-                    <div class="col-md-4 " onclick="addRemoveBundary('PETALING JAYA', 3.1128074178475 , 101.605270457169)"
-                        style="cursor: pointer;">
-
-                        <div class="  p-1" style="background-color:  purple !important;color:white">
-                            <p style="font-weight: 600;">PJ</p>
-
-                        </div>
-
-                    </div>
-
-                    <div class="col-md-4 " onclick="addRemoveBundary('RAWANG' , 3.47839445121726, 101.622905486475)"
-                        style="cursor: pointer;">
-
-                        <div class=" mx-1   p-1" style="background-color:  purple !important;color:white">
-                            <p style="font-weight: 600;">RAWANG</p>
-
-                        </div>
-
-                    </div>
-                    <div class="col-md-4 " onclick="addRemoveBundary('KUALA SELANGOR' , 3.40703209426401, 101.317426926947)"
-                        style="cursor: pointer;">
-
-                        <div class="ml-0  p-1" style="background-color:  purple !important; color:white;">
-                            <p style="font-weight: 600;">K.SELANGOR </p>
-
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-        </div> <!--  END TAB B1 -->
-
-
-        <!--  START TAB B2 -->
-        <div class="col-md-4 p-1">
-            <div class="card p-0 mb-3 ">
-                <div class="card-header ">B2</div>
-                <div class="card-body row">
-
-
-
-                    <div class="col-md-6 " onclick="addRemoveBundary('KLANG' , 3.08428642705789, 101.436185279023)"
-                        style="cursor: pointer;color:white">
-
-                        <div class=" p-1" style="background-color:  red !important;">
-                            <p style="font-weight: 600;">KLANG</p>
-
-                        </div>
-
-                    </div>
-
-                    <div class="col-md-6 "
-                        onclick="addRemoveBundary('PELABUHAN KLANG' , 2.98188527916042, 101.324234779569)"
-                        style="cursor: pointer;color:white">
-
-                        <div class=" mx-1   p-1" style="background-color:  red !important;">
-                            <p style="font-weight: 600;">PORT KLANG</p>
-
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-
-        </div> <!--  END TAB B2 -->
-
-
-        <!-- START TAB B4 -->
-        <div class=" p-1 col-12">
-            <div class="card p-0 mb-3">
-                <div class="card-header ">B4</div>
-                <div class="card-body row">
-
-
-
-                    <div class="col-md-3 " onclick="addRemoveBundary('CHERAS' , 3.14197346621987, 101.849883983416)"
-                        style="cursor: pointer;color:white">
-
-                        <div class=" p-1" style="background-color:  green !important; height: 100%;">
-                            <p style="font-weight: 600;">CHERAS</p>
-
-                        </div>
-
-                    </div>
-
-                    <div class="col-md-3 " onclick="addRemoveBundary('BANTING' , 2.82111390453244 , 101.505890775541)"
-                        style="cursor: pointer;">
-
-                        <div class=" mx-1   p-1 text-capitalize"
-                            style="background-color:  green !important;color:white ; height: 100%;">
-                            <p style="font-weight: 600;">BANTING/SEPANG</p>
-
-                        </div>
-
-                    </div>
-
-                    <div class="col-md-3 " onclick="bangi()" style="cursor: pointer;">
-
-                        <div class=" mx-1  p-1 text-capitalize"
-                            style="background-color:  green !important;color:white;  height: 100%;">
-                            <p style="font-weight: 600;">BANGI</p>
-
-                        </div>
-
-                    </div>
-
-                    <div class="col-md-3 "
-                        onclick="addRemoveBundary('PUTRAJAYA & CYBERJAYA' , 2.92875032271019 , 101.675338316575)"
-                        style="cursor: pointer;">
-
-                        <div class=" mx-1   p-1 t" style="background-color:  green !important;color:white">
-                            <p style="font-weight: 600;">PUTRAJAYA/CYBERJAYA/PUCHONG</p>
-
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-        </div> <!--  END TAB B4 -->
-
-    </div> <!--  END TOP TABS  --> --}}
 
         <div class=" p-1  col-12 m-2 ">
             <div class="card p-0 mb-3">
@@ -345,14 +167,14 @@
                         <select name="search_zone" id="search_zone" class="form-control">
 
                             @if (Auth::user()->zone == '')
-                            <option value="" hidden>select zone</option>
-                            <option value="W1">W1</option>
-                            <option value="B1">B1</option>
-                            <option value="B2">B2</option>
-                            <option value="B4">B4</option>
-                        @else
-                            <option value="{{ Auth::user()->zone }}" hidden>{{ Auth::user()->zone }}</option>
-                        @endif
+                                <option value="" hidden>select zone</option>
+                                <option value="W1">W1</option>
+                                <option value="B1">B1</option>
+                                <option value="B2">B2</option>
+                                <option value="B4">B4</option>
+                            @else
+                                <option value="{{ Auth::user()->zone }}" hidden>{{ Auth::user()->zone }}</option>
+                            @endif
                         </select>
                     </div>
                     <div class="col-md-3">
@@ -442,6 +264,7 @@
                                     <option value="rd">Road</option>
                                     <option value="notice">Notice</option>
                                     <option value="supervise">Supervise</option>
+                                    <option value="pano">Pano</option>
 
 
                                 </select>
@@ -497,6 +320,8 @@
             </div>
 
         </div><!--  END MAP CARD DIV -->
+        <div id="panorama"></div>
+
 
     </div>
     <div class="modal fade" id="geomModal" tabindex="-1" aria-labelledby="geomModalLabel" aria-hidden="true">
@@ -735,23 +560,23 @@
 
 
         wp = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-                layers: 'cite:tbl_workpackage',
-                format: 'image/png',
-                maxZoom: 21,
-                transparent: true
-            }, {
-                buffer: 10
-            })
+            layers: 'cite:tbl_workpackage',
+            format: 'image/png',
+            maxZoom: 21,
+            transparent: true
+        }, {
+            buffer: 10
+        })
 
 
-            rd = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-                layers: 'cite:tbl_roads',
-                format: 'image/png',
-                maxZoom: 21,
-                transparent: true
-            }, {
-                buffer: 10
-            })
+        rd = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+            layers: 'cite:tbl_roads',
+            format: 'image/png',
+            maxZoom: 21,
+            transparent: true
+        }, {
+            buffer: 10
+        })
 
 
         boundary3 = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
@@ -764,7 +589,14 @@
         })
 
 
-
+        pano_layer = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+            layers: 'cite:pano_apks',
+            format: 'image/png',
+            maxZoom: 21,
+            transparent: true
+        }, {
+            buffer: 10
+        }).addTo(map);
 
 
         // ADD LAYERS GROUPED OVER LAYS
@@ -773,6 +605,7 @@
                 'BA': boundary3,
                 "Work Package": wp,
                 "Roads": rd,
+                "Pano ": pano_layer,
 
             }
         };
@@ -801,91 +634,123 @@
         function addpanolayer(event) {
 
 
-            if (panolayer == false) {
-                panolayer = true;
-                $(event).css('background', 'white');
-                map.off('click');
-                map.removeLayer(customer)
-                map.removeLayer(identifyme)
+            // if (panolayer == false) {
+            //     panolayer = true;
+            //     $(event).css('background', 'white');
+            map.off('click');
+            //     map.removeLayer(pano_layer)
+            //     map.removeLayer(identifyme)
 
 
-            } else {
-                panolayer = false;
-                $(event).css('background', '#c9def2');
-                map.addLayer(customer)
-                map.on('click', function(e) {
-                    //map.off('click');
-                    $("#wg").html('');
-                    // Build the URL for a GetFeatureInfo
-                    var url = getFeatureInfoUrl(
-                        map,
-                        customer,
-                        e.latlng, {
-                            'info_format': 'application/json',
-                            'propertyName': 'NAME,AREA_CODE,DESCRIPTIO'
-                        }
-                    );
-                    $.ajax({
-                        url: '/{{app()->getLocale()}}/proxy/' + encodeURIComponent(url),
-                        dataType: 'JSON',
-                        //data: data,
-                        method: 'GET',
-                        async: false,
-                        success: function callback(data) {
-                            console.log(data);
-                            //  alert(data
-                            var str = '<div id="window1" class="window">' +
-                                '<div class="green">' +
-                                '<p class="windowTitle">Pano Images</p>' +
-                                '</div>' +
-                                '<div class="mainWindow">' +
-                                // '<canvas id="canvas" width="400" height="480">' +
-                                // '</canvas>' +
-                                '<div id="panorama" width="400px" height="480px"></div>' +
-                                // '<div class="row"><button style="margin-left: 30%;" onclick=preNext("pre") class="btn btn-success">Previous</button><button  onclick=preNext("next")  style="float: right;margin-right: 35%;" class="btn btn-success">Next</button></div>'
+            // } else {
+            //     panolayer = false;
+            //     $(event).css('background', '#c9def2');
+            // map.addLayer(pano_layer)
+            map.on('click', function(e) {
+                //map.off('click');
+                $("#wg").html('');
+                // Build the URL for a GetFeatureInfo
+                var url = getFeatureInfoUrl(
+                    map,
+                    pano_layer,
+                    e.latlng, {
+                        'info_format': 'application/json',
+                        'propertyName': 'NAME,AREA_CODE,DESCRIPTIO'
+                    }
+                );
+                var secondUrl = encodeURIComponent(url)
 
-                                '</div>' +
-                                '</div>'
-
-                            $("#wg").html(str);
-
-
-                            console.log(data)
-                            if (data.features.length != 0) {
-                                createWindow(1);
-                                selectedId = data.features[0].id.split('.')[1];
-                                // var canvas = document.getElementById('canvas');
-                                // var context = canvas.getContext('2d');
-                                // context.clearRect(0,0 ,canvas.width,canvas.height)
-                                //     img.src = data.features[0].properties.image_path;
-                                //     init_pano('canvas')
-                                // setTimeout(function () {
-                                //     init_pano('canvas')
-                                // },1000)
-                                pannellum.viewer('panorama', {
-                                    "type": "equirectangular",
-                                    "panorama": "http://121.121.232.54:88/" + data.features[0]
-                                        .properties.photo,
-                                    "compass": true,
-                                    "autoLoad": true
-                                });
-
-                                if (identifyme != '') {
-                                    map.removeLayer(identifyme)
-                                }
-                                identifyme = L.geoJSON(data.features[0].geometry).addTo(map);
-
-                            }
-
-                        }
-                    });
-
-
-
-
+                $.ajax({
+            url: '/{{ app()->getLocale() }}/proxy/' + encodeURIComponent(secondUrl),
+            dataType: 'json',
+            method: 'GET',
+        })
+        .done(function(data) {
+            var deco = JSON.parse(data)
+            console.log(deco.features[0]);
+            if (deco && deco.features && deco.features.length !== undefined) {
+                // Create the panorama viewer
+                pannellum.viewer('panorama', {
+                    "type": "equirectangular",
+                    "panorama": deco.features[0].properties.photo,
+                    "compass": true,
+                    "autoLoad": true
                 });
-            }
+
+                if (identifyme !== '') {
+                    map.removeLayer(identifyme);
+                }
+
+                identifyme = L.geoJSON(deco.features[0].geometry).addTo(map);
+            } else {
+        console.log('Data or data.features is undefined or does not have a valid length property.');
+    }
+        })
+        .fail(function(error) {
+            console.log('Error: ', error);
+        });
+
+                // $.ajax({
+                //     url: '/{{ app()->getLocale() }}/proxy/' + encodeURIComponent(secondUrl),
+                //     dataType: 'JSON',
+                //     //data: data,
+                //     method: 'GET',
+                //     async: false,
+                //     success: function callback(data) {
+                //         console.log(data);
+                //         //  alert(data
+                //         var str = '<div id="window1" class="window">' +
+                //             '<div class="green">' +
+                //             '<p class="windowTitle">Pano Images</p>' +
+                //             '</div>' +
+                //             '<div class="mainWindow">' +
+                //             // '<canvas id="canvas" width="400" height="480">' +
+                //             // '</canvas>' +
+                //             '<div id="panorama" width="400px" height="480px"></div>' +
+                //             // '<div class="row"><button style="margin-left: 30%;" onclick=preNext("pre") class="btn btn-success">Previous</button><button  onclick=preNext("next")  style="float: right;margin-right: 35%;" class="btn btn-success">Next</button></div>'
+
+                //             '</div>' +
+                //             '</div>'
+
+                //         $("#wg").html(str);
+
+                //         console.log(data)
+                //         if(data.features.length!=0){
+				// 	 createWindow(1);
+				// 	selectedId=data.features[0].id.split('.')[1];
+                //     // var canvas = document.getElementById('canvas');
+                //     // var context = canvas.getContext('2d');
+                //     // context.clearRect(0,0 ,canvas.width,canvas.height)
+                //     //     img.src = data.features[0].properties.image_path;
+                //     //     init_pano('canvas')
+                //     // setTimeout(function () {
+                //     //     init_pano('canvas')
+                //     // },1000)
+                //     pannellum.viewer('panorama', {
+                //         "type": "equirectangular",
+                //         "panorama": data.features[0].properties.photo,
+				// 		"compass": true,
+                //         "autoLoad": true
+                //     });
+
+
+
+                //             if (identifyme != '') {
+                //                 map.removeLayer(identifyme)
+                //             }
+                //             identifyme = L.geoJSON(data.features[0].geometry).addTo(map);
+
+                //         }
+
+                //     }
+                // });
+
+
+
+
+            });
         }
+        // }
 
 
 
@@ -894,22 +759,26 @@
 
             var sel_lyr = ''
 
-        if (val == 'rd') {
-            sel_lyr = rd;
+            if (val == 'rd') {
+                sel_lyr = rd;
 
-        }
-        if (val == 'wp') {
-            sel_lyr = wp;
+            }
+            if (val == 'wp') {
+                sel_lyr = wp;
 
-        }
-        if (val == 'notice') {
-            sel_lyr = notice;
+            }
+            if (val == 'notice') {
+                sel_lyr = notice;
 
-        }
-        if (val == 'supervise') {
-            sel_lyr = supervise;
+            }
+            if (val == 'supervise') {
+                sel_lyr = supervise;
 
-        }
+            }
+            if (val == "pano") {
+                addpanolayer();
+                return;
+            }
             map.off('click');
             map.on('click', function(e) {
                 var url = getFeatureInfoUrl(
@@ -921,8 +790,9 @@
                     }
                 );
                 var secondUrl = encodeURIComponent(url)
+
                 $.ajax({
-                    url: '/{{app()->getLocale()}}/proxy/' + encodeURIComponent(secondUrl),
+                    url: '/{{ app()->getLocale() }}/proxy/' + encodeURIComponent(secondUrl),
                     dataType: 'JSON',
                     //data: data,
                     method: 'GET',
@@ -939,18 +809,22 @@
                                 str += '<tr>';
 
 
-                            str += `<th class="text-capitalize">${splitKey.map(part => part.charAt(0).toUpperCase() + part.slice(1)).join(' ')}</th>`;
-                                if (key == 'during_image1' || key == 'during_image2' || key == 'during_image3' || key ==
-                                    'before_image1' || key == 'before_image2' || key == 'before_image3' || key ==
-                                    'after_image1' || key == 'after_image2' || key == 'after_image3' ) {
+                                str +=
+                                    `<th class="text-capitalize">${splitKey.map(part => part.charAt(0).toUpperCase() + part.slice(1)).join(' ')}</th>`;
+                                if (key == 'during_image1' || key == 'during_image2' || key ==
+                                    'during_image3' || key ==
+                                    'before_image1' || key == 'before_image2' || key ==
+                                    'before_image3' || key ==
+                                    'after_image1' || key == 'after_image2' || key == 'after_image3') {
 
-                                        if (data.features[0].properties[key] =='') {
-                                            str = str + `<td>no image found</td></tr>`;
-                                        }else{
-                                         str = str + `<td><a href="http://`+window.location.host+`/${data.features[0].properties[key]}" data-lightbox="roadtrip">
-                                                    <img src="http://`+window.location.host+`/${data.features[0].properties[key]}" alt=""
+                                    if (data.features[0].properties[key] == '') {
+                                        str = str + `<td>no image found</td></tr>`;
+                                    } else {
+                                        str = str + `<td><a href="http://` + window.location.host + `/${data.features[0].properties[key]}" data-lightbox="roadtrip">
+                                                    <img src="http://` + window.location.host +
+                                            `/${data.features[0].properties[key]}" alt=""
                                                     width="20px" height="20px" class="adjust-height ml-5  "></a></td></tr>`;
-                                              }
+                                    }
                                     // str = str + '<tr><td>' + key + '</td><td><a href="' + data.features[
                                     //         0].properties[key] +
                                     //     '" class=\'example-image-link\' data-lightbox=\'example-set\' title=\'&lt;button class=&quot;primary &quot; onclick= rotate_img(&quot;pic1&quot)  &gt;Rotate image&lt;/button&gt;\'><img src="' +
@@ -958,14 +832,15 @@
                                     //     '" width="20px" height="20px"></a></td></tr>'
 
                                 } else {
-                                    str = str  +`<td>${data.features[0].properties[key]}</td></tr>`;
+                                    str = str + `<td>${data.features[0].properties[key]}</td></tr>`;
                                 }
 
 
                             }
-                            if ($('#tableLayer').val() == 'supervise' || $('#tableLayer').val() =='notice') {
+                            if ($('#tableLayer').val() == 'supervise' || $('#tableLayer').val() ==
+                                'notice') {
                                 str = str +
-                                    `<tr><td> Report</td><td> <a href="/{{app()->getLocale()}}/generate-third-party-pdf/${data.features[0].properties.id}" target="_blank"><button class="btn btn-sm btn-success">Download</button></a></td></tr>`
+                                    `<tr><td> Report</td><td> <a href="/{{ app()->getLocale() }}/generate-third-party-pdf/${data.features[0].properties.id}" target="_blank"><button class="btn btn-sm btn-success">Download</button></a></td></tr>`
 
                             }
 
@@ -1059,7 +934,7 @@
             boundary2.bringToFront()
 
             map.setView([parseFloat(paramY), parseFloat(paramX)], 11);
-            if(wp != ''){
+            if (wp != '') {
                 map.removeLayer(wp)
             }
 
@@ -1082,7 +957,7 @@
             rd = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
                 layers: 'cite:tbl_roads',
                 format: 'image/png',
-                cql_filter: "ba='" + param+ "'",
+                cql_filter: "ba='" + param + "'",
                 maxZoom: 21,
                 transparent: true
             }, {
@@ -1090,11 +965,6 @@
             })
             map.addLayer(rd)
             rd.bringToFront()
-
-
-
-
-
 
 
         }
@@ -1176,7 +1046,7 @@
                 getBaPoints(userBa)
             }
 
-   
+
 
             $('#search_wp').select2();
             option = {
@@ -1249,7 +1119,7 @@
                     const b4Options = [
                         ['CHERAS', 'CHERAS', 3.14197346621987, 101.849883983416],
                         ['BANTING/SEPANG', 'BANTING', 2.82111390453244, 101.505890775541],
-                        ['BANGI', 'BANGI',2.965810949933260,101.81881303103104 ],
+                        ['BANGI', 'BANGI', 2.965810949933260, 101.81881303103104],
                         ['PUTRAJAYA/CYBERJAYA/PUCHONG', 'PUTRAJAYA & CYBERJAYA', 2.92875032271019,
                             101.675338316575
                         ]
@@ -1272,7 +1142,7 @@
 
         })
 
-        
+
         function getBaPoints(param) {
             var baSelect = $('#search_ba')
             baSelect.empty();
@@ -1296,7 +1166,7 @@
             addRemoveBundary(splitVal[1], splitVal[2], splitVal[3])
             var zone = $('#search_zone').val();
             $.ajax({
-                url: `/{{app()->getLocale()}}/get-work-package/${splitVal[1]}/${zone}`,
+                url: `/{{ app()->getLocale() }}/get-work-package/${splitVal[1]}/${zone}`,
                 dataType: 'JSON',
                 method: 'GET',
                 async: false,
@@ -1316,7 +1186,7 @@
             })
 
             $.ajax({
-                url: `/{{app()->getLocale()}}/getStats/${splitVal[1]}`,
+                url: `/{{ app()->getLocale() }}/getStats/${splitVal[1]}`,
                 dataType: 'JSON',
                 method: 'GET',
                 async: false,
@@ -1339,15 +1209,15 @@
 
             zoomToxy(parseFloat(spiltVal[1]), parseFloat(spiltVal[2]))
 
-            $('#for-excel').html(`<a class="mt-4" href="/{{app()->getLocale()}}/generate-third-party-diging-excel/${spiltVal[0]}"><button class="btn-sm mt-2
+            $('#for-excel').html(`<a class="mt-4" href="/{{ app()->getLocale() }}/generate-third-party-diging-excel/${spiltVal[0]}"><button class="btn-sm mt-2
                 btn btn-primary">Download Qr</button></a>`)
 
 
             if (rd != '') {
                 map.removeLayer(rd)
             }
-             //road wms layer
-             rd = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+            //road wms layer
+            rd = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
                 layers: 'cite:tbl_roads',
                 format: 'image/png',
                 cql_filter: "id_workpackage='" + spiltVal[0] + "'",
@@ -1362,13 +1232,12 @@
 
         })
 
-        function clearFields()
-{
-    $("#total").html('');
-                    $("#total_notice").html('')
-                    $("#total_supervise").html('')
-                    $('#for-excel').html('')
-}
+        function clearFields() {
+            $("#total").html('');
+            $("#total_notice").html('')
+            $("#total_supervise").html('')
+            $('#for-excel').html('')
+        }
 
 
 

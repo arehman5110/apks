@@ -15,10 +15,7 @@
     <link rel="stylesheet" href="{{ URL::asset('assets/lib/images_slider/css-view/lightbox.css') }}">
     <script src="{{ URL::asset('assets/lib/images_slider/js-view/lightbox-2.6.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css" />
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
-    <link rel="stylesheet" href="{{ URL::asset('assets/lib/window-engine.css') }}" />
-    <script src="{{ URL::asset('assets/lib/window-engine.js') }}"></script>
+  
 
 
     <style>
@@ -49,5 +46,9 @@
         .side-bar::-webkit-scrollbar,
         .lb-outerContainer {
             display: none;
+        }
+        #panorama {
+            width: 400px;
+            height: 400px;
         }
     </style>
