@@ -131,15 +131,15 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="notice">{{__('messages.notice')}}</label></div>
                                 <div class="col-md-4">
-                                    <select name="notice" id="notice" class="form-control" required  onchange="generateNotice(this)">
+                                    <select name="notice" id="notice" class="form-control" required  >
                                         <option value="" hidden>select notice</option>
                                         <option value="yes">yes</option>
                                         <option value="no">no</option>
                                     </select>
                                 </div>
-                                <div class="col-md-4 text-center pt-3 ">
+                                {{-- <div class="col-md-4 text-center pt-3 ">
                                     <button type="button" class="btn btn-sm btn-success d-none" id="generate-notice" data-toggle="modal" data-target="#myModal">{{__('messages.generate_notice')}}</button>
-                                </div>
+                                </div> --}}
                             </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="supervision">{{__('messages.supervision')}}</label></div>

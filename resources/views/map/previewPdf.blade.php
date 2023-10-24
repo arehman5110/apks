@@ -66,7 +66,7 @@
     <div class="">
 
         <div class="container shadow p-4   my-5 bg-white ">
-            <section>
+            <section class="pb-5 mb-5">
                 <img src="{{ URL::asset('assets/web-images/pdfimg.png') }}" alt="">
 
                 <div class="text-end">
@@ -184,6 +184,7 @@
 
                 </table>
             </section>
+            <hr>
             <section>
                 <img src="{{ URL::asset('assets/web-images/pdfimg.png') }}" alt="">
                 <div class="text-end"> No. Siri: SWO 001</div>
@@ -191,7 +192,7 @@
                 <div class="p-4">
                     <div class="row ">
                         <div class="col-2">Kepada</div>
-                        <div class="col-4">: …………………………………………</div>
+                        <div class="col-4">: {{$data->company_name}}</div>
                         <div class="col-3"></div>
                         <div class="col-3">Kepada : ............</div>
                     </div>
@@ -218,7 +219,7 @@
 
                     <div class="row">
                         <div class="col-2">Tel</div>
-                        <div class="col-4">: …………………………………………</div>
+                        <div class="col-4">: {{$data->office_phone_no}}</div>
                         <div class="col-3"></div>
                         <div class="col-3"> </div>
                     </div>
