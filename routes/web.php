@@ -110,7 +110,7 @@ Route::middleware('auth')->group(function () {
     ////third party digging routes
     Route::resource('third-party-digging', ThirdPartyDiggingController::class);
     Route::get('generate-third-party-digging-excel', [ThirdPartyExcelController::class, 'generateThirdPartExcel'])->name('generate-third-party-digging-excel');
-  
+
 
     ////substation routes
     Route::resource('substation', SubstationController::class);
@@ -167,4 +167,4 @@ Route::get('/get-work-package-detail/{id}', [WPController::class, 'detail'])->na
 require __DIR__ . '/auth.php';
 });
 
-Route::get('/generate-third-party-pdf/{id}', [GeneratePDFController::class, 'generateP']);
+// Route::get('/generate-third-party-pdf/{id}', [GeneratePDFController::class, 'generateP']);
