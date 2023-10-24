@@ -37,16 +37,32 @@
         buffer: 10
     })
 
-
-
-
-
    
+
+
+
+
+        //// new code
+
+
+
+
+
+
+
+
+
+
+        ////
+
+
+
+
 
     map.addLayer(boundary3)
     map.setView([2.59340882301331, 101.07054901123], 8);
 
-    
+
 
 
     // Map on click
@@ -67,12 +83,12 @@
             method: 'GET',
             async: false,
             success: function callback(data1) {
-             
+
                 data = JSON.parse(data1)
 
                 if (data.features.length != 0) {
                     showModalData(data.features[0].properties , data.features[0].id);
-                 
+
                 }
 
             }
