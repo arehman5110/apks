@@ -167,4 +167,4 @@ Route::get('/get-work-package-detail/{id}', [WPController::class, 'detail'])->na
 require __DIR__ . '/auth.php';
 });
 
-// Route::get('/generate-third-party-pdf/{id}', [GeneratePDFController::class, 'generateP']);
+Route::get('/generate-third-party-pdf/{id}', [GeneratePDFController::class, 'generateP']);
