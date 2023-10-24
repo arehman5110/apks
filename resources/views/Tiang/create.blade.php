@@ -78,13 +78,13 @@
         <div class="container-  ">
             <div class="row  " style="flex-wrap:nowrap">
                 <div class="col-sm-6">
-                    <h3>Tiang</h3>
+                    <h3>{{__('messages.tiang')}}</h3>
                 </div>
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
                         <li class="breadcrumb-item"><a
-                                href="{{ route('tiang-talian-vt-and-vr.index', app()->getLocale()) }}">index</a></li>
-                        <li class="breadcrumb-item active">create</li>
+                                href="{{ route('tiang-talian-vt-and-vr.index', app()->getLocale()) }}">{{__('messages.index')}}</a></li>
+                        <li class="breadcrumb-item active">{{__('messages.create')}}</li>
                     </ol>
                 </div>
             </div>
@@ -98,7 +98,7 @@
 
                 <div class=" card col-md-12 p-3 ">
                     <div class=" ">
-                        <h3 class="text-center p-2">QR SAVR</h3>
+                        <h3 class="text-center p-2">{{__()}}</h3>
                         <form id="framework-wizard-form"
                             action="{{ route('tiang-talian-vt-and-vr.store', app()->getLocale()) }}"
                             enctype="multipart/form-data" style="display: none" method="POST"
