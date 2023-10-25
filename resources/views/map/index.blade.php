@@ -630,6 +630,57 @@
 
 
         var panolayer = true;
+        var selectedId='';
+
+
+        function preNext(status){
+            $("#wg").html('');
+            $.ajax({
+                url: '/{{ app()->getLocale() }}/preNext/'+selectedId+'/'+status,
+                dataType: 'JSON',
+                //data: data,
+                method: 'GET',
+                async: false,
+                success: function callback(data) {
+
+            //  alert(data
+            var str='<div id="window1" class="window">' +
+                '<div class="green">' +
+                '<p class="windowTitle">Pano Images</p>' +
+                '</div>' +
+                '<div class="mainWindow">' +
+                // '<canvas id="canvas" width="400" height="480">' +
+                // '</canvas>' +
+                '<div id="panorama" width="400px" height="480px"></div>'+
+                '<div class="row"><button style="margin-left: 30%;" onclick=preNext("pre") class="btn btn-success">Previous</button><button  onclick=preNext("next")  style="float: right;margin-right: 35%;" class="btn btn-success">Next</button></div>'
+            '</div>' +
+            '</div>'
+
+            $("#wg").html(str);
+
+            createWindow(1);
+            console.log(data)
+            selectedId=data[0].gid
+            pannellum.viewer('panorama', {
+                "type": "equirectangular",
+                "panorama": data[0].photo,
+				"compass": true,
+                "autoLoad": true
+            });
+			
+			if(identifyme!=''){
+                         map.removeLayer(identifyme)
+                        }
+            identifyme = L.geoJSON(JSON.parse(data[0].geom)).addTo(map);
+
+
+        }
+    });
+
+}
+
+
+
 
         function addpanolayer(event) {
 
@@ -671,7 +722,7 @@
             if (deco && deco.features && deco.features.length !== undefined) {
                 // Create the panorama viewer
 
-                        var str = '<div id="window1" class="window" style="top:200px;margin-left:20%;">' +
+                        var str = '<div id="window1" class="window">' +
                             '<div class="green">' +
                             '<p class="windowTitle">Pano Images</p>' +
                             '</div>' +
