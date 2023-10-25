@@ -7,6 +7,7 @@
 
 <script src="{{ URL::asset('map/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js') }}"></script>
 
+
 <script type="text/javascript">
     var baseLayers = '';
     var identifyme = '';
@@ -37,24 +38,14 @@
         buffer: 10
     })
 
-   
-
-
-
-
-        //// new code
-
-
-
-
-
-
-
-
-
-
-        ////
-
+    pano_layer = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+        layers: 'cite:pano_apks',
+        format: 'image/png',
+        maxZoom: 21,
+        transparent: true
+    }, {
+        buffer: 10
+    }).addTo(map);
 
 
 
@@ -64,38 +55,41 @@
 
 
 
+    function callSelfLayer() {
+        console.log("asdasdasdasdas");
+        console.log(sel_lyr);
+        map.off('click');
+        map.on('click', function(e) {
+            var url = getFeatureInfoUrl(
+                map,
+                sel_lyr,
+                e.latlng, {
+                    'info_format': 'application/json',
+                    'propertyName': 'NAME,AREA_CODE,DESCRIPTIO'
+                }
+            );
+            var secondUrl = encodeURIComponent(url)
+            $.ajax({
+                url: '/{{ app()->getLocale() }}/proxy/' + encodeURIComponent(secondUrl),
+                dataType: 'JSON',
+                //data: data,
+                method: 'GET',
+                async: false,
+                success: function callback(data1) {
 
-    // Map on click
-    map.on('click', function(e) {
-        var url = getFeatureInfoUrl(
-            map,
-            sel_lyr,
-            e.latlng, {
-                'info_format': 'application/json',
-                'propertyName': 'NAME,AREA_CODE,DESCRIPTIO'
-            }
-        );
-        var secondUrl = encodeURIComponent(url)
-        $.ajax({
-            url: '/{{app()->getLocale()}}/proxy/' + encodeURIComponent(secondUrl),
-            dataType: 'JSON',
-            //data: data,
-            method: 'GET',
-            async: false,
-            success: function callback(data1) {
+                    data = JSON.parse(data1)
 
-                data = JSON.parse(data1)
+                    if (data.features.length != 0) {
+                        showModalData(data.features[0].properties, data.features[0].id);
 
-                if (data.features.length != 0) {
-                    showModalData(data.features[0].properties , data.features[0].id);
+                    }
 
                 }
+            });
 
-            }
+
         });
-
-
-    });
+    }
 
     function getFeatureInfoUrl(map, layer, latlng, params) {
 
@@ -141,32 +135,106 @@
         return url.toString();
 
     }
+
+
+
+    function addpanolayer() {
+
+
+        map.off('click');
+
+        map.on('click', function(e) {
+            //map.off('click');
+            $("#wg").html('');
+            // Build the URL for a GetFeatureInfo
+            var url = getFeatureInfoUrl(
+                map,
+                pano_layer,
+                e.latlng, {
+                    'info_format': 'application/json',
+                    'propertyName': 'NAME,AREA_CODE,DESCRIPTIO'
+                }
+            );
+            var secondUrl = encodeURIComponent(url)
+
+            $.ajax({
+                    url: '/{{ app()->getLocale() }}/proxy/' + encodeURIComponent(secondUrl),
+                    dataType: 'json',
+                    method: 'GET',
+                })
+                .done(function(data) {
+                    var deco = JSON.parse(data)
+                    console.log(deco.features[0]);
+                    if (deco && deco.features && deco.features.length !== undefined) {
+                        // Create the panorama viewer
+
+                        var str = '<div id="window1" class="window">' +
+                            '<div class="green">' +
+                            '<p class="windowTitle">Pano Images</p>' +
+                            '</div>' +
+                            '<div class="mainWindow">' +
+
+                            '<div id="panorama" width="400px" height="480px"></div>' +
+                            '<div class="row"><button style="margin-left: 30%;" onclick=preNext("pre") class="btn btn-success">Previous</button><button  onclick=preNext("next")  style="float: right;margin-right: 35%;" class="btn btn-success">Next</button></div>'
+
+                        '</div>' +
+                        '</div>'
+
+                        $("#wg").html(str);
+
+                        createWindow(1);
+                        selectedId = deco.features[0].id.split('.')[1];
+
+                        pannellum.viewer('panorama', {
+                            "type": "equirectangular",
+                            "panorama": deco.features[0].properties.photo,
+                            "compass": true,
+                            "autoLoad": true
+                        });
+
+                        if (identifyme !== '') {
+                            map.removeLayer(identifyme);
+                        }
+
+                        identifyme = L.geoJSON(deco.features[0].geometry).addTo(map);
+                    } else {
+                        console.log(
+                            'Data or data.features is undefined or does not have a valid length property.'
+                        );
+                    }
+                })
+                .fail(function(error) {
+                    console.log('Error: ', error);
+                });
+
+
+        });
+    }
 </script>
 
 
 
 <script>
-
-const b1Options = [
-            ['W1', 'KUALA LUMPUR PUSAT', 3.14925905877391, 101.754098819705],
-            ['B1', 'PETALING JAYA', 3.1128074178475, 101.605270457169],
-            ['B1', 'RAWANG', 3.47839445121726, 101.622905486475],
-            ['B1', 'KUALA SELANGOR', 3.40703209426401, 101.317426926947],
-            ['B2', 'KLANG', 3.08428642705789, 101.436185279023],
-            ['B2', 'PELABUHAN KLANG', 2.98188527916042, 101.324234779569],
-            ['B4', 'CHERAS', 3.14197346621987, 101.849883983416],
-            ['B4', 'BANTING', 2.82111390453244, 101.505890775541],
-            ['B4', 'BANGI', 2.965810949933260, 101.81881303103104],
-            ['B4', 'PUTRAJAYA & CYBERJAYA', 2.92875032271019, 101.675338316575]
-        ];
-        const userBa = "{{ Auth::user()->ba }}";
-        $(document).ready(function() {
-
+    const b1Options = [
+        ['W1', 'KUALA LUMPUR PUSAT', 3.14925905877391, 101.754098819705],
+        ['B1', 'PETALING JAYA', 3.1128074178475, 101.605270457169],
+        ['B1', 'RAWANG', 3.47839445121726, 101.622905486475],
+        ['B1', 'KUALA SELANGOR', 3.40703209426401, 101.317426926947],
+        ['B2', 'KLANG', 3.08428642705789, 101.436185279023],
+        ['B2', 'PELABUHAN KLANG', 2.98188527916042, 101.324234779569],
+        ['B4', 'CHERAS', 3.14197346621987, 101.849883983416],
+        ['B4', 'BANTING', 2.82111390453244, 101.505890775541],
+        ['B4', 'BANGI', 2.965810949933260, 101.81881303103104],
+        ['B4', 'PUTRAJAYA & CYBERJAYA', 2.92875032271019, 101.675338316575]
+    ];
+    const userBa = "{{ Auth::user()->ba }}";
+    $(document).ready(function() {
 
 
-            if (userBa !== '') {
-                getBaPoints(userBa)
-            }
+
+        if (userBa !== '') {
+            getBaPoints(userBa)
+        }
 
         $('#search_zone').on('change', function() {
             const selectedValue = this.value;
@@ -225,17 +293,17 @@ const b1Options = [
     });
 
     function getBaPoints(param) {
-            var baSelect = $('#search_ba')
-            baSelect.empty();
+        var baSelect = $('#search_ba')
+        baSelect.empty();
 
-            b1Options.map((data) => {
-                if (data[1] == param) {
-                    baSelect.append(`<option value="${data}">${data[1]}</option>`)
-                }
-            });
-            let baVal = document.getElementById('search_ba');
-            getWorkPackage(baVal)
-        }
+        b1Options.map((data) => {
+            if (data[1] == param) {
+                baSelect.append(`<option value="${data}">${data[1]}</option>`)
+            }
+        });
+        let baVal = document.getElementById('search_ba');
+        getWorkPackage(baVal)
+    }
 
     function getWorkPackage(param) {
         var splitVal = param.value.split(',');

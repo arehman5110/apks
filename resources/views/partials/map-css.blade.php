@@ -15,21 +15,14 @@
     <link rel="stylesheet" href="{{ URL::asset('assets/lib/images_slider/css-view/lightbox.css') }}">
     <script src="{{ URL::asset('assets/lib/images_slider/js-view/lightbox-2.6.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-  
+    <link rel="stylesheet" href="{{ URL::asset('assets/pannellum/pannellum.css') }}" />
 
+    <script src="{{ URL::asset('assets/pannellum/pannellum.js') }}"></script>
+    <link rel="stylesheet" href="{{ URL::asset('assets/pannellum/lib/window-engine.css') }}" />
+    <script src="{{ URL::asset('assets/pannellum/lib/window-engine.js') }}"></script>
 
     <style>
-        /* .sidebar-mini.sidebar-collapse .content-wrapper,
-        .sidebar-mini.sidebar-collapse .main-footer,
-        .sidebar-mini.sidebar-collapse .main-header {
-            margin-left: 0rem !important;
-        }
 
-        .sidebar-mini.sidebar-collapse .main-sidebar,
-        .sidebar-mini.sidebar-collapse .main-sidebar::before {
-            margin-left: 0;
-            width: 0rem !important;
-        } */
         .leaflet-control-attribution.leaflet-control {
     display: none;
 }
@@ -38,9 +31,6 @@
             min-width: 16px !important;
         }
 
-        div#lightbox {
-            display: none;
-        }
 
 
         .side-bar::-webkit-scrollbar,
@@ -50,5 +40,8 @@
         #panorama {
             width: 400px;
             height: 400px;
+        }
+        .windowGroup {
+            z-index: 99999;
         }
     </style>

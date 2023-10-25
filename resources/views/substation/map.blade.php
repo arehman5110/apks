@@ -83,6 +83,17 @@
         <!--  START MAP CARD DIV -->
         <div class="row m-2">
 
+            <div class="p-3 form-input">
+                <label for="select_layer">Select Layer : </label>
+                <span class="text-danger" id="er-select-layer"></span>
+                <select name="select_layer" id="select_layer" onchange="selectLayer(this.value)" class="form-control">
+                    <option value="" hidden>select layer</option>
+                    <option value="sel_layer">Cable Bridge</option>
+                    <option value="pano">Pano</option>
+                </select>
+            </div>
+
+
             <!-- START MAP SIDEBAR DIV -->
             {{-- <div class="col-2 p-0">
                 <div class="card p-0 m-0"
@@ -91,7 +102,7 @@
                     <div class="card-body">
                         <!-- MAP SIDEBAR LAYERS SELECTOR -->
                         <div class="side-bar" style="height: 569px !important; overflow-y: scroll;">
-                           
+
 
                             <details class="mb-3" open>
                                 <summary><strong>Substation</strong> </summary>
@@ -171,7 +182,7 @@
 
 
     <script>
-        
+
 
         var substation = '';
 
@@ -184,6 +195,7 @@
         }, {
             buffer: 10
         })
+        substation = main;
 
         map.addLayer(main)
         main.bringToFront()
@@ -247,6 +259,17 @@
 
         }
 
+        function selectLayer(param){
+        if (param == 'sel_layer') {
+            sel_lyr = substation;
+            callSelfLayer();
+
+        }else if(param == 'pano'){
+            // sel_lyr = pano_layer;
+            addpanolayer()
+
+        }
+    }
 
         function showModalData(data, id) {
             var str = '';

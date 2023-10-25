@@ -317,7 +317,7 @@
 
             <div id="wg1" class="windowGroup">
 
-            </div>  
+            </div>
 
         </div><!--  END MAP CARD DIV -->
         {{-- <div id="panorama"></div> --}}
@@ -667,7 +667,7 @@
 				"compass": true,
                 "autoLoad": true
             });
-			
+
 			if(identifyme!=''){
                          map.removeLayer(identifyme)
                         }
@@ -738,9 +738,9 @@
                         $("#wg").html(str);
                      //   console.log(data)
 				//if(deco.features.length!=0){
-					createWindow(1);	
+					createWindow(1);
 				selectedId=deco.features[0].id.split('.')[1];
-                 
+
                 pannellum.viewer('panorama', {
                     "type": "equirectangular",
                     "panorama": deco.features[0].properties.photo,
