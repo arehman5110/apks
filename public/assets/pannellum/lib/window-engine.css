@@ -2,7 +2,8 @@
 
 .window {
 	position: absolute;
-	top: 80px;
+	top: 200px;
+	left:500px;
 	z-index: 10000000;
 	background-color: #f1f1f1;
 	width: 400px;

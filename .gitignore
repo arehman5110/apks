@@ -1,5 +1,7 @@
 /node_modules
 /public/build
+/public/lib
+/public/apks_gopro
 /public/hot
 /public/storage
 /storage/*.key

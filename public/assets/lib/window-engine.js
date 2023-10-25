@@ -29,8 +29,8 @@ function createWindow(id) {
         if (windowID.style.display === "initial") {
 			activeWindow(windowID);
         } else {
-            windowID.style = "position: absolute;";
-            windowID.style = "top: 20px;";
+         //   windowID.style = "position: absolute;";
+           // windowID.style = "top: 200px;";
             fadeIn(windowID);
         }
     //};

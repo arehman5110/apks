@@ -159,6 +159,8 @@ Route::resource('po', POController::class);
     Route::view('/map-2', 'map')->name('map-2');
 
     Route::get('/test-pagination/{id}/{status}',[MapController::class,'teswtpagination']);
+    Route::get('/preNext/{id}/{status}',[MapController::class,'preNext']);
+
 });
 Route::view('/generate-pdf-for-notice','PDF.notice');
 
