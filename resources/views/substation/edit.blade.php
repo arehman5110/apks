@@ -269,7 +269,7 @@
                                     <input type="text" name="building_status[other_value]" id="other_building_defects"
                                         placeholder="please enter other buliding defects"
                                         class="form-control @if (substaionCheckBox('other', $data->building_status) !== 'checked') d-none @endif"
-                                        value="@if (substaionCheckBox('other', $data->building_status) !== 'checked') {{ $data->building_status->other_value }} @endif">
+                                        value="@if (substaionCheckBox('other', $data->building_status) == 'checked') {{ $data->building_status->other_value }} @endif">
 
                                 </div>
 
@@ -297,7 +297,7 @@
                                     <label for="image_pipe">{{ __('messages.image_gate') }}</label>
                                 </div>
                                 <div class="col-md-8 row">
-                                   
+
                                         <div class="col-md-6">
                                             <input type="file" accept="image/*" name="image_gate" id="image_gate"
                                                 class="form-control">
@@ -311,10 +311,10 @@
                                                 <strong>{{ __('messages.no_image_found') }}</strong>
                                             @endif
                                         </div>
-                                   
 
 
-                                   
+
+
                                         <div class="col-md-6">
                                             <input type="file" accept="image/*" name="image_gate_2" id="image_gate_2"
                                                 class="form-control">
@@ -329,7 +329,7 @@
                                             @endif
                                         </div>
                                     </div>
-                            
+
 
                             </div>
                             <div class="row">
@@ -337,7 +337,7 @@
                                 </div>
 
                                 <div class="col-md-8 row">
-                                   
+
                                     <div class="col-md-6">
                                         <input type="file" accept="image/*" name="image_grass" id="image_grass"
                                             class="form-control">
@@ -366,10 +366,10 @@
                                             <strong>{{ __('messages.no_image_found') }}</strong>
                                         @endif
                                     </div>
-                               
+
 
                                 </div>
-                                
+
                             </div>
                             <div class="row">
                                 <div class="col-md-4">
@@ -378,7 +378,7 @@
 
 
                                         <div class="col-md-8 row">
-                                   
+
                                             <div class="col-md-6">
                                                 <input type="file" accept="image/*" name="image_tree_branches" id="image_tree_branches"
                                                     class="form-control">
@@ -407,7 +407,7 @@
                                                 @endif
                                             </div>
                                         </div>
-                               
+
                             </div>
 
                             <div class="row">
@@ -416,7 +416,7 @@
                                 </div>
 
                                 <div class="col-md-8 row">
-                                   
+
                                     <div class="col-md-6">
                                         <input type="file" accept="image/*" name="images_gate_after_lock" id="images_gate_after_lock"
                                             class="form-control">
@@ -446,7 +446,7 @@
                                     </div>
                                 </div>
 
-                                
+
                             </div>
 
 
@@ -457,7 +457,7 @@
                                 </div>
 
                                 <div class="col-md-8 row">
-                                   
+
                                     <div class="col-md-6">
                                         <input type="file" accept="image/*" name="image_building" id="image_building"
                                             class="form-control">
@@ -486,7 +486,7 @@
                                         @endif
                                     </div>
                                 </div>
-                               
+
                             </div>
 
 
