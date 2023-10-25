@@ -311,16 +311,16 @@
 
             </div>
             <!-- END MAP  DIV -->
-            <div id="wg" class="windowGroup">
+           <div id="wg" class="windowGroup">
 
             </div>
 
             <div id="wg1" class="windowGroup">
 
-            </div>
+            </div>  
 
         </div><!--  END MAP CARD DIV -->
-        <div id="panorama"></div>
+        {{-- <div id="panorama"></div> --}}
 
 
     </div>

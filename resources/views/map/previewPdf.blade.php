@@ -391,7 +391,7 @@
         $(document).ready(function() {
 
             window.addEventListener('afterprint', function() {
-                window.close()
+                // window.close()
             })
         })
 
