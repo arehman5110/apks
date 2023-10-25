@@ -30,7 +30,7 @@ function createWindow(id) {
 			activeWindow(windowID);
         } else {
             windowID.style = "position: absolute;";
-            windowID.style = "top: 80px;";
+            windowID.style = "top: 20px;";
             fadeIn(windowID);
         }
     //};

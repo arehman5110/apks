@@ -94,10 +94,10 @@
         input {
             min-width: 16px !important;
         }
-/*
+
         div#lightbox {
             display: none;
-        } */
+        }
 
         .side-bar>.table td {
             padding: 0.5rem !important
@@ -670,6 +670,26 @@
             console.log(deco.features[0]);
             if (deco && deco.features && deco.features.length !== undefined) {
                 // Create the panorama viewer
+
+                        var str = '<div id="window1" class="window" style="top:200px;margin-left:20%;">' +
+                            '<div class="green">' +
+                            '<p class="windowTitle">Pano Images</p>' +
+                            '</div>' +
+                            '<div class="mainWindow">' +
+                            // '<canvas id="canvas" width="400" height="480">' +
+                            // '</canvas>' +
+                            '<div id="panorama" width="400px" height="480px"></div>' +
+                             '<div class="row"><button style="margin-left: 30%;" onclick=preNext("pre") class="btn btn-success">Previous</button><button  onclick=preNext("next")  style="float: right;margin-right: 35%;" class="btn btn-success">Next</button></div>'
+
+                            '</div>' +
+                            '</div>'
+
+                        $("#wg").html(str);
+                     //   console.log(data)
+				//if(deco.features.length!=0){
+					createWindow(1);	
+				selectedId=deco.features[0].id.split('.')[1];
+                 
                 pannellum.viewer('panorama', {
                     "type": "equirectangular",
                     "panorama": deco.features[0].properties.photo,
