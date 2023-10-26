@@ -15,8 +15,8 @@ class SubstationExcelController extends Controller
     public function generateSubstationExcel()
     {
         try {
-            $recored = Substation::all();
-         
+          $recored = Substation::all();
+
             if (sizeof($recored) > 0) {
                 $excelFile = public_path('assets/excel-template/substation.xlsx');
 
@@ -50,10 +50,10 @@ class SubstationExcelController extends Controller
 
                 $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
 
-                
-                $writer->save(public_path('assets/updated-excels/') . 'qr-substation.xlsx');
-                ob_end_clean();
-                return response()->download(public_path('assets/updated-excels/') . 'qr-substation.xlsx');
+
+                $writer->save(public_path('assets/updated-excels/') . 'substation.xlsx');
+            ob_end_clean();
+            return response()->download(public_path('assets/updated-excels/'). 'substation.xlsx');
             } else {
                 return redirect()
                     ->back()
@@ -61,6 +61,7 @@ class SubstationExcelController extends Controller
             }
 
         } catch (\Throwable $th) {
+            return $th->getMessage();
             return redirect()
                 ->back()
                 ->with('failed', 'Request Failed');

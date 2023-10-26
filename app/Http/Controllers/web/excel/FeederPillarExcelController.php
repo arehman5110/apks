@@ -35,7 +35,7 @@ class FeederPillarExcelController extends Controller
                     $worksheet->setCellValue('H' . $i, $rec->area);
                     $worksheet->setCellValue('I' . $i, $rec->size);
                     $worksheet->setCellValue('J' . $i, $rec->coordinate);
-                    $worksheet->setCellValue('K' . $i, $rec->gate_status);
+                    // $worksheet->setCellValue('K' . $i, $rec->gate_status);
                     $worksheet->setCellValue('L' . $i, $rec->vandalism_status);
                     $worksheet->setCellValue('M' . $i, $rec->leaning_staus);
 
@@ -46,7 +46,7 @@ class FeederPillarExcelController extends Controller
                     $i++;
                 }
                 $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
-             
+
             $writer->save(public_path('assets/updated-excels/') . 'qr-feeder-pillar.xlsx');
             ob_end_clean();
             return response()->download(public_path('assets/updated-excels/'). 'qr-feeder-pillar.xlsx');

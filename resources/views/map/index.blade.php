@@ -26,9 +26,9 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
 
 
-    {{-- <?php # header('Access-Control-Allow-Origin: *'); ?> --}}
+    {{-- <?php # header('Access-Control-Allow-Origin: *');
+    ?> --}}
     <style>
-
         .card-header {
             font-weight: 700;
         }
@@ -54,8 +54,8 @@
         }
 
         /* div#lightbox {
-            display: none;
-        } */
+                display: none;
+            } */
 
         .side-bar>.table td {
             padding: 0.5rem !important
@@ -81,8 +81,7 @@
             padding-left: 0.5rem;
         }
 
-        .side-bar::-webkit-scrollbar
-        {
+        .side-bar::-webkit-scrollbar {
             display: none;
         }
 
@@ -265,6 +264,7 @@
                                     <option value="notice">Notice</option>
                                     <option value="supervise">Supervise</option>
                                     <option value="pano">Pano</option>
+                                    <option value="substation">Substation</option>
 
 
                                 </select>
@@ -311,7 +311,7 @@
 
             </div>
             <!-- END MAP  DIV -->
-           <div id="wg" class="windowGroup">
+            <div id="wg" class="windowGroup">
 
             </div>
 
@@ -452,6 +452,9 @@
     <script type="text/javascript">
         var baseLayers
         var identifyme = '';
+        var substation = '';
+        var groupedOverlays = '';
+        var layerControl = '';
         map = L.map('map').setView([3.016603, 101.858382], 5);
 
         var st1 = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
@@ -578,6 +581,19 @@
             buffer: 10
         })
 
+        substation = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:tbl_substation',
+                format: 'image/png',
+                // cql_filter: "ba ILIKE '%" + param + "%'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+
+            // map.addLayer(substation)
+            // substation.bringToFront()
+
 
         boundary3 = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
             layers: 'cite:aero_apks',
@@ -598,6 +614,9 @@
             buffer: 10
         }).addTo(map);
 
+        function  addLayerControl(params) {
+
+        }
 
         // ADD LAYERS GROUPED OVER LAYS
         groupedOverlays = {
@@ -606,6 +625,7 @@
                 "Work Package": wp,
                 "Roads": rd,
                 "Pano ": pano_layer,
+                'Subsation' : substation,
 
             }
         };
@@ -630,54 +650,54 @@
 
 
         var panolayer = true;
-        var selectedId='';
+        var selectedId = '';
 
 
-        function preNext(status){
+        function preNext(status) {
             $("#wg").html('');
             $.ajax({
-                url: '/{{ app()->getLocale() }}/preNext/'+selectedId+'/'+status,
+                url: '/{{ app()->getLocale() }}/preNext/' + selectedId + '/' + status,
                 dataType: 'JSON',
                 //data: data,
                 method: 'GET',
                 async: false,
                 success: function callback(data) {
 
-            //  alert(data
-            var str='<div id="window1" class="window">' +
-                '<div class="green">' +
-                '<p class="windowTitle">Pano Images</p>' +
-                '</div>' +
-                '<div class="mainWindow">' +
-                // '<canvas id="canvas" width="400" height="480">' +
-                // '</canvas>' +
-                '<div id="panorama" width="400px" height="480px"></div>'+
-                '<div class="row"><button style="margin-left: 30%;" onclick=preNext("pre") class="btn btn-success">Previous</button><button  onclick=preNext("next")  style="float: right;margin-right: 35%;" class="btn btn-success">Next</button></div>'
-            '</div>' +
-            '</div>'
+                    //  alert(data
+                    var str = '<div id="window1" class="window">' +
+                        '<div class="green">' +
+                        '<p class="windowTitle">Pano Images</p>' +
+                        '</div>' +
+                        '<div class="mainWindow">' +
+                        // '<canvas id="canvas" width="400" height="480">' +
+                        // '</canvas>' +
+                        '<div id="panorama" width="400px" height="480px"></div>' +
+                        '<div class="row"><button style="margin-left: 30%;" onclick=preNext("pre") class="btn btn-success">Previous</button><button  onclick=preNext("next")  style="float: right;margin-right: 35%;" class="btn btn-success">Next</button></div>'
+                    '</div>' +
+                    '</div>'
 
-            $("#wg").html(str);
+                    $("#wg").html(str);
 
-            createWindow(1);
-            console.log(data)
-            selectedId=data[0].gid
-            pannellum.viewer('panorama', {
-                "type": "equirectangular",
-                "panorama": data[0].photo,
-				"compass": true,
-                "autoLoad": true
+                    createWindow(1);
+                    console.log(data)
+                    selectedId = data[0].gid
+                    pannellum.viewer('panorama', {
+                        "type": "equirectangular",
+                        "panorama": data[0].photo,
+                        "compass": true,
+                        "autoLoad": true
+                    });
+
+                    if (identifyme != '') {
+                        map.removeLayer(identifyme)
+                    }
+                    identifyme = L.geoJSON(JSON.parse(data[0].geom)).addTo(map);
+
+
+                }
             });
 
-			if(identifyme!=''){
-                         map.removeLayer(identifyme)
-                        }
-            identifyme = L.geoJSON(JSON.parse(data[0].geom)).addTo(map);
-
-
         }
-    });
-
-}
 
 
 
@@ -685,18 +705,9 @@
         function addpanolayer(event) {
 
 
-            // if (panolayer == false) {
-            //     panolayer = true;
-            //     $(event).css('background', 'white');
+
             map.off('click');
-            //     map.removeLayer(pano_layer)
-            //     map.removeLayer(identifyme)
 
-
-            // } else {
-            //     panolayer = false;
-            //     $(event).css('background', '#c9def2');
-            // map.addLayer(pano_layer)
             map.on('click', function(e) {
                 //map.off('click');
                 $("#wg").html('');
@@ -712,116 +723,62 @@
                 var secondUrl = encodeURIComponent(url)
 
                 $.ajax({
-            url: '/{{ app()->getLocale() }}/proxy/' + encodeURIComponent(secondUrl),
-            dataType: 'json',
-            method: 'GET',
-        })
-        .done(function(data) {
-            var deco = JSON.parse(data)
-            console.log(deco.features[0]);
-            if (deco && deco.features && deco.features.length !== undefined) {
-                // Create the panorama viewer
+                        url: '/{{ app()->getLocale() }}/proxy/' + encodeURIComponent(secondUrl),
+                        dataType: 'json',
+                        method: 'GET',
+                    })
+                    .done(function(data) {
+                        var deco = JSON.parse(data)
+                        console.log(deco.features[0]);
+                        if (deco && deco.features && deco.features.length !== undefined) {
+                            // Create the panorama viewer
 
-                        var str = '<div id="window1" class="window">' +
-                            '<div class="green">' +
-                            '<p class="windowTitle">Pano Images</p>' +
-                            '</div>' +
-                            '<div class="mainWindow">' +
-                            // '<canvas id="canvas" width="400" height="480">' +
-                            // '</canvas>' +
-                            '<div id="panorama" width="400px" height="480px"></div>' +
-                             '<div class="row"><button style="margin-left: 30%;" onclick=preNext("pre") class="btn btn-success">Previous</button><button  onclick=preNext("next")  style="float: right;margin-right: 35%;" class="btn btn-success">Next</button></div>'
+                            var str = '<div id="window1" class="window">' +
+                                '<div class="green">' +
+                                '<p class="windowTitle">Pano Images</p>' +
+                                '</div>' +
+                                '<div class="mainWindow">' +
+                                // '<canvas id="canvas" width="400" height="480">' +
+                                // '</canvas>' +
+                                '<div id="panorama" width="400px" height="480px"></div>' +
+                                '<div class="row"><button style="margin-left: 30%;" onclick=preNext("pre") class="btn btn-success">Previous</button><button  onclick=preNext("next")  style="float: right;margin-right: 35%;" class="btn btn-success">Next</button></div>'
 
                             '</div>' +
                             '</div>'
 
-                        $("#wg").html(str);
-                     //   console.log(data)
-				//if(deco.features.length!=0){
-					createWindow(1);
-				selectedId=deco.features[0].id.split('.')[1];
+                            $("#wg").html(str);
+                            //   console.log(data)
+                            //if(deco.features.length!=0){
+                            createWindow(1);
+                            selectedId = deco.features[0].id.split('.')[1];
 
-                pannellum.viewer('panorama', {
-                    "type": "equirectangular",
-                    "panorama": deco.features[0].properties.photo,
-                    "compass": true,
-                    "autoLoad": true
-                });
+                            pannellum.viewer('panorama', {
+                                "type": "equirectangular",
+                                "panorama": deco.features[0].properties.photo,
+                                "compass": true,
+                                "autoLoad": true
+                            });
 
-                if (identifyme !== '') {
-                    map.removeLayer(identifyme);
-                }
+                            if (identifyme !== '') {
+                                map.removeLayer(identifyme);
+                            }
 
-                identifyme = L.geoJSON(deco.features[0].geometry).addTo(map);
-            } else {
-        console.log('Data or data.features is undefined or does not have a valid length property.');
-    }
-        })
-        .fail(function(error) {
-            console.log('Error: ', error);
-        });
-
-                // $.ajax({
-                //     url: '/{{ app()->getLocale() }}/proxy/' + encodeURIComponent(secondUrl),
-                //     dataType: 'JSON',
-                //     //data: data,
-                //     method: 'GET',
-                //     async: false,
-                //     success: function callback(data) {
-                //         console.log(data);
-                //         //  alert(data
-                //         var str = '<div id="window1" class="window">' +
-                //             '<div class="green">' +
-                //             '<p class="windowTitle">Pano Images</p>' +
-                //             '</div>' +
-                //             '<div class="mainWindow">' +
-                //             // '<canvas id="canvas" width="400" height="480">' +
-                //             // '</canvas>' +
-                //             '<div id="panorama" width="400px" height="480px"></div>' +
-                //             // '<div class="row"><button style="margin-left: 30%;" onclick=preNext("pre") class="btn btn-success">Previous</button><button  onclick=preNext("next")  style="float: right;margin-right: 35%;" class="btn btn-success">Next</button></div>'
-
-                //             '</div>' +
-                //             '</div>'
-
-                //         $("#wg").html(str);
-
-                //         console.log(data)
-                //         if(data.features.length!=0){
-				// 	 createWindow(1);
-				// 	selectedId=data.features[0].id.split('.')[1];
-                //     // var canvas = document.getElementById('canvas');
-                //     // var context = canvas.getContext('2d');
-                //     // context.clearRect(0,0 ,canvas.width,canvas.height)
-                //     //     img.src = data.features[0].properties.image_path;
-                //     //     init_pano('canvas')
-                //     // setTimeout(function () {
-                //     //     init_pano('canvas')
-                //     // },1000)
-                //     pannellum.viewer('panorama', {
-                //         "type": "equirectangular",
-                //         "panorama": data.features[0].properties.photo,
-				// 		"compass": true,
-                //         "autoLoad": true
-                //     });
-
-
-
-                //             if (identifyme != '') {
-                //                 map.removeLayer(identifyme)
-                //             }
-                //             identifyme = L.geoJSON(data.features[0].geometry).addTo(map);
-
-                //         }
-
-                //     }
-                // });
+                            identifyme = L.geoJSON(deco.features[0].geometry).addTo(map);
+                        } else {
+                            console.log(
+                                'Data or data.features is undefined or does not have a valid length property.'
+                                );
+                        }
+                    })
+                    .fail(function(error) {
+                        console.log('Error: ', error);
+                    });
 
 
 
 
             });
         }
-        // }
 
 
 
@@ -844,6 +801,10 @@
             }
             if (val == 'supervise') {
                 sel_lyr = supervise;
+
+            }
+            if (val == 'substation') {
+                sel_lyr = substation;
 
             }
             if (val == "pano") {
@@ -1037,8 +998,49 @@
             map.addLayer(rd)
             rd.bringToFront()
 
+            if (substation != '') {
+                map.removeLayer(substation)
+            }
+            substation = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:tbl_substation',
+                format: 'image/png',
+                cql_filter: "ba='" + param + "'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
 
+            map.addLayer(substation)
+            substation.bringToFront()
+            // addLayerControl()
         }
+
+        function addLayerControl() {
+
+
+            // ADD LAYERS GROUPED OVER LAYS
+            groupedOverlays = {
+                "POI": {
+                    'BA': boundary2,
+                    "Work Package": wp,
+                    "Roads": rd,
+                    "Pano ": pano_layer,
+                    'Subsation': substation,
+
+                }
+            };
+
+            var layerControl = L.control.groupedLayers(baseLayers, groupedOverlays, {
+                collapsed: true,
+                position: 'topright'
+                // groupCheckboxes: true
+            }).addTo(map);
+            if (map.hasLayer(layerControl)) {
+    map.removeControl(layerControl);
+}
+        }
+
 
         var notice = '';
         var supervise = '';
