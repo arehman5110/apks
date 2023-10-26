@@ -48,7 +48,8 @@
 
                     <div class="col-md-3">
                         <label for="search_zone">Zone</label>
-                        <select name="search_zone" id="search_zone" class="form-control">
+                        <select name="search_zone" id="search_zone" class="form-control"
+                            onchange="onChangeZone(this.value)">
 
                             @if (Auth::user()->zone == '')
                                 <option value="" hidden>select zone</option>
@@ -59,13 +60,14 @@
                             @else
                                 <option value="{{ Auth::user()->zone }}" hidden>{{ Auth::user()->zone }}</option>
                             @endif
-
                         </select>
                     </div>
                     <div class="col-md-3">
-                        <label for="search_ba">Ba</label>
-                        <select name="search_ba" id="search_ba" class="form-control" onchange="getWorkPackage(this)">
-                            <option value="">Select zone</option>
+                        <label for="search_ba">BA</label>
+                        <select name="search_ba" id="search_ba" class="form-control" onchange="callLayers(this.value)">
+
+                            <option value="{{ Auth::user()->ba }}" hidden>
+                                {{ Auth::user()->ba != '' ? Auth::user()->ba : 'Select BA' }}</option>
                         </select>
                     </div>
 
@@ -88,8 +90,9 @@
                 <span class="text-danger" id="er-select-layer"></span>
                 <select name="select_layer" id="select_layer" onchange="selectLayer(this.value)" class="form-control">
                     <option value="" hidden>select layer</option>
-                    <option value="sel_layer">Tiang</option>
+                    <option value="substation">Substation</option>
                     <option value="pano">Pano</option>
+                    <option value="tbl_savr">Tiang</option>
                 </select>
             </div>
             <!-- START MAP SIDEBAR DIV -->
@@ -158,51 +161,6 @@
         </div><!--  END MAP CARD DIV -->
 
     </div>
-    <div class="modal fade" id="geomModal" tabindex="-1" aria-labelledby="geomModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add new W.P</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form action="/save-work-package" method="post" id="save_wp" onsubmit="return submitFoam()">
-                    @csrf
-                    <div class="modal-body ">
-
-
-                        <label for="">Work Package Name</label>
-                        <span class="text-danger" id="er-pw-name"></span> <br>
-                        <input type="text" name="name" id="pw-name" class="form-control">
-                        <label for="zone">Zone</label>
-
-                        <input type="text" name="zone" id="pw-zone" class="form-control">
-                        {{-- <select name="zone" id="pw-zone" class="form-control">
-                        <option value="" hidden>select zone</option>
-                        <option value="W1">W1</option>
-                        <option value="B1">B1</option>
-                        <option value="B2">B2</option>
-                        <option value="B4">B4</option>
-                    </select> --}}
-
-                        <label for="ba">Select ba</label>
-                        <input type="text" name="ba" id="pw-ba" class="form-control">
-                        {{-- <select name="ba" id="pw-ba" class="form-control">
-                        <option value="" hidden>Select zone</option>
-                    </select> --}}
-
-                        <input type="hidden" name="geom" id="geom">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Submit</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 
     <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -226,49 +184,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="polyLineModal" tabindex="-1" aria-labelledby="polyLineModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Identify Roads</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form action="/save-road" method="post" id="road-form" onsubmit="return submitFoam2()">
-                    @csrf
-                    <div class="modal-body ">
-                        <label for="ba">Road Name</label>
-                        <span class="text-center" id="er_raod_name"></span>
-                        <input name="road_name" id="road_name" class="form-control">
-                        <label for="">Work Package Name</label>
-                        <input type="text" name="" id="raod-d-wp-id" class="form-control disabled">
-                        <input type="hidden" name="id_wp" id="raod-wp-id">
-                        {{-- <select name="id_wp" id="raod-wp-id" class="form-control" onchange="getWorkPackage(this)">
-                        <option value="">select wp</option>
-                        @foreach ($wps as $wp)
-                            <option value="{{$wp->id}}">{{$wp->package_name}}</option>
-                        @endforeach
-                    </select> --}}
-                        <label for="polyline-zone">Zone</label>
-                        <input id="polyline-zone" name="zone" class="form-control">
-                        <label for="polyline-ba">BA</label>
-                        <input id="polyline-ba" name="ba" class="form-control">
 
-
-
-
-                        <input type="hidden" name="geom" id="road-geom">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Submit</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 @endsection
 
 @section('script')
@@ -276,98 +192,103 @@
 
 
     <script>
-        var tbl_savr = '';
-
-        var main = '';
-        main = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-            layers: 'cite:tbl_savr',
-            format: 'image/png',
-            maxZoom: 21,
-            transparent: true
-        }, {
-            buffer: 10
-        })
-        tbl_savr = main;
-
-        map.addLayer(main)
-        main.bringToFront()
 
 
-        groupedOverlays = {
-            "POI": {
-                'BA': boundary3,
-                'Tiang Talian': main,
-            }
-        };
-
-        var layerControl = L.control.groupedLayers(baseLayers, groupedOverlays, {
-            collapsed: true,
-            position: 'topright'
-            // groupCheckboxes: true
-        }).addTo(map);
-
+        // for add and remove layers
         function addRemoveBundary(param, paramY, paramX) {
-            if (boundary3 != '') {
-                map.removeLayer(boundary3)
-            }
-            if (main != '') {
-                map.removeLayer(main)
-            }
-            if (boundary2 !== '') {
-                map.removeLayer(boundary2)
-            }
-            boundary2 = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-                layers: 'cite:ba',
-                format: 'image/png',
-                cql_filter: "station='" + param + "'",
-                maxZoom: 21,
-                transparent: true
-            }, {
-                buffer: 10
-            })
-            map.addLayer(boundary2)
-            boundary2.bringToFront()
 
-            map.setView([parseFloat(paramY), parseFloat(paramX)], 11);
-            if (tbl_savr != '') {
-
-                map.removeLayer(tbl_savr)
-
-            }
-
-            tbl_savr = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-                layers: 'cite:tbl_savr',
-                format: 'image/png',
-                cql_filter: "ba='" + param + "'",
-                maxZoom: 21,
-                transparent: true
-            }, {
-                buffer: 10
-            })
-
-            map.addLayer(tbl_savr)
-            tbl_savr.bringToFront()
-
-            sel_lyr = tbl_savr;
+if (boundary !== '') {
+    map.removeLayer(boundary)
+}
 
 
-        }
-        function selectLayer(param){
-        if (param == 'sel_layer') {
-            sel_lyr = tbl_savr;
-            callSelfLayer();
+boundary = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+    layers: 'cite:ba',
+    format: 'image/png',
+    cql_filter: "station ILIKE '%" + param + "%'",
+    maxZoom: 21,
+    transparent: true
+}, {
+    buffer: 10
+})
+map.addLayer(boundary)
+boundary.bringToFront()
 
-        }else if(param == 'pano'){
-            // sel_lyr = pano_layer;
-            addpanolayer()
+map.flyTo([parseFloat(paramY), parseFloat(paramX)], zoom, {
+    duration: 1.5, // Animation duration in seconds
+    easeLinearity: 0.25,
+});
 
-        }
+
+if (substation != '') {
+    map.removeLayer(substation)
+}
+
+substation = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+    layers: 'cite:tbl_substation',
+    format: 'image/png',
+    cql_filter: "ba ILIKE '%" + param + "%'",
+    maxZoom: 21,
+    transparent: true
+}, {
+    buffer: 10
+})
+
+map.addLayer(substation)
+substation.bringToFront()
+
+
+
+if (tbl_savr != '') {
+    map.removeLayer(tbl_savr)
+}
+
+tbl_savr = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+    layers: 'cite:tbl_savr',
+    format: 'image/png',
+    cql_filter: "ba ILIKE '%" + param + "%'",
+    maxZoom: 21,
+    transparent: true
+}, {
+    buffer: 10
+})
+
+map.addLayer(tbl_savr)
+tbl_savr.bringToFront()
+
+
+addGroupOverLays()
+
+}
+
+
+// add group overlayes
+function addGroupOverLays() {
+if (layerControl != '') {
+    // console.log("inmsdanssdkjnasjnd");
+    map.removeControl(layerControl);
+}
+// console.log("sdfsdf");
+groupedOverlays = {
+    "POI": {
+        'BA': boundary,
+        'Substation': substation,
+        'Pano': pano_layer,
+        'Tiang' : tbl_savr,
     }
+};
+//add layer control on top right corner of map
+layerControl = L.control.groupedLayers(baseLayers, groupedOverlays, {
+    collapsed: true,
+    position: 'topright'
+    // groupCheckboxes: true
+}).addTo(map);
+}
 
         function showModalData(data, id) {
             var str = '';
 
-            $('#exampleModalLabel').html("Substation Info")
+            $('#exampleModalLabel').html("Tiang Info")
             str = ` <tr>
         <tr><th>Ba</th><td>${data.ba}</td> </tr>
         <tr><th>Section From</th><td>${data.section_from}</td> </tr>

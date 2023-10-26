@@ -49,7 +49,8 @@
 
                     <div class="col-md-3">
                         <label for="search_zone">Zone</label>
-                        <select name="search_zone" id="search_zone" class="form-control">
+                        <select name="search_zone" id="search_zone" class="form-control"
+                            onchange="onChangeZone(this.value)">
 
                             @if (Auth::user()->zone == '')
                                 <option value="" hidden>select zone</option>
@@ -60,15 +61,17 @@
                             @else
                                 <option value="{{ Auth::user()->zone }}" hidden>{{ Auth::user()->zone }}</option>
                             @endif
-
                         </select>
                     </div>
                     <div class="col-md-3">
                         <label for="search_ba">BA</label>
-                        <select name="search_ba" id="search_ba" class="form-control" onchange="getWorkPackage(this)">
-                            <option value="">Select zone</option>
+                        <select name="search_ba" id="search_ba" class="form-control" onchange="callLayers(this.value)">
+
+                            <option value="{{ Auth::user()->ba }}" hidden>
+                                {{ Auth::user()->ba != '' ? Auth::user()->ba : 'Select BA' }}</option>
                         </select>
                     </div>
+
 
 
 
@@ -88,13 +91,14 @@
                 <span class="text-danger" id="er-select-layer"></span>
                 <select name="select_layer" id="select_layer" onchange="selectLayer(this.value)" class="form-control">
                     <option value="" hidden>select layer</option>
-                    <option value="sel_layer">Cable Bridge</option>
+                    <option value="substation">Substation</option>
                     <option value="pano">Pano</option>
+                    <option value="cable_bridge">Cable Bridge</option>
                 </select>
             </div>
 
             <!-- START MAP SIDEBAR DIV -->
-                {{-- <div class="col-2 p-0">
+            {{-- <div class="col-2 p-0">
                     <div class="card p-0 m-0"
                         style="border: 1px solid rgb(177, 175, 175) !important; border-radius: 0px !important">
                         <div class="card-header"><strong> NAVIGATION</strong></div>
@@ -180,68 +184,63 @@
     @include('partials.map-js')
 
     <script>
-        var cable_bridge = '';
-        var main = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-            layers: 'cite:tbl_cable_bridge',
-            format: 'image/png',
-            maxZoom: 21,
-            transparent: true
-        }, {
-            buffer: 10
-        })
-        map.addLayer(main);
-        main.bringToFront;
-
-        cable_bridge = main;
-        // ADD LAYERS GROUPED OVER LAYS
-        groupedOverlays = {
-            "POI": {
-                'BA': boundary3,
-                'Cable Bridge': main,
-            }
-        };
-
-        var layerControl = L.control.groupedLayers(baseLayers, groupedOverlays, {
-            collapsed: true,
-            position: 'topright'
-            // groupCheckboxes: true
-        }).addTo(map);
 
 
 
+
+        // for add and remove layers
         function addRemoveBundary(param, paramY, paramX) {
-            if (boundary3 != '') {
-                map.removeLayer(boundary3)
+
+            if (boundary !== '') {
+                map.removeLayer(boundary)
             }
-            if (main != '') {
-                map.removeLayer(main)
-            }
-            if (boundary2 !== '') {
-                map.removeLayer(boundary2)
-            }
-            boundary2 = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+
+
+            boundary = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
                 layers: 'cite:ba',
                 format: 'image/png',
-                cql_filter: "station='" + param + "'",
+                cql_filter: "station ILIKE '%" + param + "%'",
                 maxZoom: 21,
                 transparent: true
             }, {
                 buffer: 10
             })
-            map.addLayer(boundary2)
-            boundary2.bringToFront()
+            map.addLayer(boundary)
+            boundary.bringToFront()
 
-            map.setView([parseFloat(paramY), parseFloat(paramX)], 11);
+            map.flyTo([parseFloat(paramY), parseFloat(paramX)], zoom, {
+                duration: 1.5, // Animation duration in seconds
+                easeLinearity: 0.25,
+            });
+
+
+            if (substation != '') {
+                map.removeLayer(substation)
+            }
+
+            substation = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:tbl_substation',
+                format: 'image/png',
+                cql_filter: "ba ILIKE '%" + param + "%'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+
+            map.addLayer(substation)
+            substation.bringToFront()
+
+
+
             if (cable_bridge != '') {
-
                 map.removeLayer(cable_bridge)
-
             }
 
             cable_bridge = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
                 layers: 'cite:tbl_cable_bridge',
                 format: 'image/png',
-                cql_filter: "ba='" + param + "'",
+                cql_filter: "ba ILIKE '%" + param + "%'",
                 maxZoom: 21,
                 transparent: true
             }, {
@@ -252,19 +251,33 @@
             cable_bridge.bringToFront()
 
 
-            sel_lyr = cable_bridge;
+            addGroupOverLays()
+
         }
 
-        function selectLayer(param) {
-            if (param == 'sel_layer') {
-                sel_lyr = cable_bridge;
-                callSelfLayer();
 
-            } else if (param == 'pano') {
-                // sel_lyr = pano_layer;
-                addpanolayer()
-
+        // add group overlayes
+        function addGroupOverLays() {
+            if (layerControl != '') {
+                // console.log("inmsdanssdkjnasjnd");
+                map.removeControl(layerControl);
             }
+            // console.log("sdfsdf");
+            groupedOverlays = {
+                "POI": {
+                    'BA': boundary,
+                    'Substation': substation,
+                    'Pano': pano_layer,
+                    'Cable Bridge': cable_bridge,
+                }
+            };
+
+            //add layer control on top right corner of map
+            layerControl = L.control.groupedLayers(baseLayers, groupedOverlays, {
+                collapsed: true,
+                position: 'topright'
+                // groupCheckboxes: true
+            }).addTo(map);
         }
 
         function showModalData(data, id) {

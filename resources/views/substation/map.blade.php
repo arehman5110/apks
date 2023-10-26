@@ -49,7 +49,8 @@
 
                     <div class="col-md-3">
                         <label for="search_zone">Zone</label>
-                        <select name="search_zone" id="search_zone" class="form-control">
+                        <select name="search_zone" id="search_zone" class="form-control"
+                            onchange="onChangeZone(this.value)">
 
                             @if (Auth::user()->zone == '')
                                 <option value="" hidden>select zone</option>
@@ -64,8 +65,10 @@
                     </div>
                     <div class="col-md-3">
                         <label for="search_ba">BA</label>
-                        <select name="search_ba" id="search_ba" class="form-control" onchange="getWorkPackage(this)">
-                            <option value="">Select zone</option>
+                        <select name="search_ba" id="search_ba" class="form-control" onchange="callLayers(this.value)">
+
+                            <option value="{{ Auth::user()->ba }}" hidden>
+                                {{ Auth::user()->ba != '' ? Auth::user()->ba : 'Select BA' }}</option>
                         </select>
                     </div>
 
@@ -88,7 +91,7 @@
                 <span class="text-danger" id="er-select-layer"></span>
                 <select name="select_layer" id="select_layer" onchange="selectLayer(this.value)" class="form-control">
                     <option value="" hidden>select layer</option>
-                    <option value="sel_layer">Cable Bridge</option>
+                    <option value="substation">Substation</option>
                     <option value="pano">Pano</option>
                 </select>
             </div>
@@ -184,69 +187,40 @@
     <script>
 
 
-        var substation = '';
-
-        var main = '';
-        main = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-            layers: 'cite:tbl_substation',
-            format: 'image/png',
-            maxZoom: 21,
-            transparent: true
-        }, {
-            buffer: 10
-        })
-        substation = main;
-
-        map.addLayer(main)
-        main.bringToFront()
-
-
-        groupedOverlays = {
-            "POI": {
-                'BA': boundary3,
-                'Substation': main,
-            }
-        };
-
-        var layerControl = L.control.groupedLayers(baseLayers, groupedOverlays, {
-            collapsed: true,
-            position: 'topright'
-            // groupCheckboxes: true
-        }).addTo(map);
-
+        // for add and remove layers
         function addRemoveBundary(param, paramY, paramX) {
-            if (boundary3 != '') {
-                map.removeLayer(boundary3)
+
+            if (boundary !== '') {
+                map.removeLayer(boundary)
             }
-            if (main != '') {
-                map.removeLayer(main)
-            }
-            if (boundary2 !== '') {
-                map.removeLayer(boundary2)
-            }
-            boundary2 = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+
+
+            boundary = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
                 layers: 'cite:ba',
                 format: 'image/png',
-                cql_filter: "station='" + param + "'",
+                cql_filter: "station ILIKE '%" + param + "%'",
                 maxZoom: 21,
                 transparent: true
             }, {
                 buffer: 10
             })
-            map.addLayer(boundary2)
-            boundary2.bringToFront()
+            map.addLayer(boundary)
+            boundary.bringToFront()
 
-            map.setView([parseFloat(paramY), parseFloat(paramX)], 11);
+            map.flyTo([parseFloat(paramY), parseFloat(paramX)], zoom, {
+                duration: 1.5, // Animation duration in seconds
+                easeLinearity: 0.25,
+            });
+
+
             if (substation != '') {
-
                 map.removeLayer(substation)
-
             }
 
             substation = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
                 layers: 'cite:tbl_substation',
                 format: 'image/png',
-                cql_filter: "ba='" + param + "'",
+                cql_filter: "ba ILIKE '%" + param + "%'",
                 maxZoom: 21,
                 transparent: true
             }, {
@@ -255,21 +229,40 @@
 
             map.addLayer(substation)
             substation.bringToFront()
-            sel_lyr = substation;
+
+            addGroupOverLays()
 
         }
 
-        function selectLayer(param){
-        if (param == 'sel_layer') {
-            sel_lyr = substation;
-            callSelfLayer();
 
-        }else if(param == 'pano'){
-            // sel_lyr = pano_layer;
-            addpanolayer()
-
+   // add group overlayes
+   function addGroupOverLays() {
+        if (layerControl != '') {
+            // console.log("inmsdanssdkjnasjnd");
+            map.removeControl(layerControl);
         }
+        // console.log("sdfsdf");
+        groupedOverlays = {
+            "POI": {
+                'BA': boundary,
+                'Substation': substation,
+                'Pano': pano_layer
+            }
+        };
+        //add layer control on top right corner of map
+        layerControl = L.control.groupedLayers(baseLayers, groupedOverlays, {
+            collapsed: true,
+            position: 'topright'
+            // groupCheckboxes: true
+        }).addTo(map);
     }
+
+
+
+
+
+
+
 
         function showModalData(data, id) {
             var str = '';
@@ -282,13 +275,13 @@
         <tr><th>Voltage</th><td>${data.voltage}</td> </tr>
         <tr><th>Coordinate</th><td>${data.coordinate}</td> </tr>
         <tr><th>Created At</th><td>${data.created_at}</td> </tr>
-        <tr><th>Detail</th><td class="text-center">    <a href="/{{app()->getLocale()}}/substation/${idSp[1]}" target="_blank" class="btn btn-sm btn-secondary">Detail</a>
+        <tr><th>Detail</th><td class="text-center">    <a href="/{{ app()->getLocale() }}/substation/${idSp[1]}" target="_blank" class="btn btn-sm btn-secondary">Detail</a>
             </td> </tr>
         `
 
             $("#my_data").html(str);
             $('#myModal').modal('show');
-            console.log(data);
+            // console.log(data);
         }
     </script>
 @endsection

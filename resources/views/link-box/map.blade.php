@@ -1,11 +1,13 @@
 @extends('layouts.app', ['page_title' => 'Index'])
 
 @section('css')
+    @include('partials.map-css')
 
-@include('partials.map-css')
-
-<style>#map{height: 600px;}</style>
-
+    <style>
+        #map {
+            height: 600px;
+        }
+    </style>
 @endsection
 @section('content')
     @if (Session::has('failed'))
@@ -39,55 +41,60 @@
 
 
 
-    <div class=" p-1 col-12 m-2">
-        <div class="card p-0 mb-3">
-            <div class="card-body row">
+        <div class=" p-1 col-12 m-2">
+            <div class="card p-0 mb-3">
+                <div class="card-body row">
 
-                <div class="col-md-3">
-                    <label for="search_zone">Zone</label>
-                    <select name="search_zone" id="search_zone" class="form-control">
+                    <div class="col-md-3">
+                        <label for="search_zone">Zone</label>
+                        <select name="search_zone" id="search_zone" class="form-control"
+                            onchange="onChangeZone(this.value)">
 
-                        @if (Auth::user()->zone == '')
-                        <option value="" hidden>select zone</option>
-                        <option value="W1">W1</option>
-                        <option value="B1">B1</option>
-                        <option value="B2">B2</option>
-                        <option value="B4">B4</option>
-                    @else
-                        <option value="{{ Auth::user()->zone }}" hidden>{{ Auth::user()->zone }}</option>
-                    @endif
-                    </select>
+                            @if (Auth::user()->zone == '')
+                                <option value="" hidden>select zone</option>
+                                <option value="W1">W1</option>
+                                <option value="B1">B1</option>
+                                <option value="B2">B2</option>
+                                <option value="B4">B4</option>
+                            @else
+                                <option value="{{ Auth::user()->zone }}" hidden>{{ Auth::user()->zone }}</option>
+                            @endif
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="search_ba">BA</label>
+                        <select name="search_ba" id="search_ba" class="form-control" onchange="callLayers(this.value)">
+
+                            <option value="{{ Auth::user()->ba }}" hidden>
+                                {{ Auth::user()->ba != '' ? Auth::user()->ba : 'Select BA' }}</option>
+                        </select>
+                    </div>
+
+
+
+
+
                 </div>
-                <div class="col-md-3">
-                    <label for="search_ba">BA</label>
-                    <select name="search_ba" id="search_ba" class="form-control" onchange="getWorkPackage(this)">
-                        <option value="">Select zone</option>
-                    </select>
-                </div>
-
-
-
-
             </div>
         </div>
-    </div>
 
 
 
 
-    <!--  START MAP CARD DIV -->
-    <div class="row m-2">
-        <div class="p-3 form-input">
-            <label for="select_layer">Select Layer : </label>
-            <span class="text-danger" id="er-select-layer"></span>
-            <select name="select_layer" id="select_layer" onchange="selectLayer(this.value)" class="form-control">
-                <option value="" hidden>select layer</option>
-                <option value="sel_layer">Link Box</option>
-                <option value="pano">Pano</option>
-            </select>
-        </div>
-        <!-- START MAP SIDEBAR DIV -->
-        {{-- <div class="col-2 p-0">
+        <!--  START MAP CARD DIV -->
+        <div class="row m-2">
+            <div class="p-3 form-input">
+                <label for="select_layer">Select Layer : </label>
+                <span class="text-danger" id="er-select-layer"></span>
+                <select name="select_layer" id="select_layer" onchange="selectLayer(this.value)" class="form-control">
+                    <option value="" hidden>select layer</option>
+                    <option value="substation">Substation</option>
+                    <option value="pano">Pano</option>
+                    <option value="link_box">Link Box</option>
+                </select>
+            </div>
+            <!-- START MAP SIDEBAR DIV -->
+            {{-- <div class="col-2 p-0">
             <div class="card p-0 m-0"
                 style="border: 1px solid rgb(177, 175, 175) !important; border-radius: 0px !important">
                 <div class="card-header"><strong> NAVIGATION</strong></div>
@@ -127,31 +134,31 @@
                 </div>
             </div>
         </div> --}}
-        <!-- END MAP SIDEBAR DIV -->
+            <!-- END MAP SIDEBAR DIV -->
 
-        <!-- START MAP  DIV -->
-        <div class="col-12 p-0 ">
-            <div class="card p-0 m-0"
-                style="border: 1px solid rgb(177, 175, 175) !important; border-radius: 0px !important;">
-                <div class="card-header text-center"><strong> MAP</strong></div>
-                <div class="card-body p-0">
-                    <div id="map">
+            <!-- START MAP  DIV -->
+            <div class="col-12 p-0 ">
+                <div class="card p-0 m-0"
+                    style="border: 1px solid rgb(177, 175, 175) !important; border-radius: 0px !important;">
+                    <div class="card-header text-center"><strong> MAP</strong></div>
+                    <div class="card-body p-0">
+                        <div id="map">
 
+                        </div>
                     </div>
                 </div>
+
+            </div>
+            <!-- END MAP  DIV -->
+            <div id="wg" class="windowGroup">
+
             </div>
 
-        </div>
-        <!-- END MAP  DIV -->
-        <div id="wg" class="windowGroup">
+            <div id="wg1" class="windowGroup">
 
-        </div>
+            </div>
 
-        <div id="wg1" class="windowGroup">
-
-        </div>
-
-    </div><!--  END MAP CARD DIV -->
+        </div><!--  END MAP CARD DIV -->
     </div>
 
 
@@ -176,117 +183,121 @@
             </div>
         </div>
     </div>
-
-
 @endsection
 
 @section('script')
-   @include('partials.map-js')
+    @include('partials.map-js')
 
-   <script>
-    var  	link_box = '';
-    var main = '';
-    main =  L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-            layers: 'cite:tbl_link_box',
-            format: 'image/png',
-            maxZoom: 21,
-            transparent: true
-        }, {
-            buffer: 10
-        })
-
-        map.addLayer(main)
-        main.bringToFront()
-
-        link_box = main;
+    <script>
 
 
-    groupedOverlays = {
-        "POI": {
-            'BA': boundary3,
-            'Link Box' : main,
-        }
-    };
-
-        var layerControl = L.control.groupedLayers(baseLayers, groupedOverlays, {
-        collapsed: true,
-        position: 'topright'
-        // groupCheckboxes: true
-    }).addTo(map);
 
 
-     function addRemoveBundary(param, paramY, paramX) {
-    if(boundary3 != ''){
-        map.removeLayer(boundary3)
-    }
-    if(main != ''){
-        map.removeLayer(main)
-    }
-        if (boundary2 !== '') {
-            map.removeLayer(boundary2)
-        }
-        boundary2 = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-            layers: 'cite:ba',
-            format: 'image/png',
-            cql_filter: "station='" + param + "'",
-            maxZoom: 21,
-            transparent: true
-        }, {
-            buffer: 10
-        })
-        map.addLayer(boundary2)
-        boundary2.bringToFront()
+        // for add and remove layers
+        function addRemoveBundary(param, paramY, paramX) {
 
-        map.setView([parseFloat(paramY), parseFloat(paramX)], 11);
-        if (link_box != '') {
+            if (boundary !== '') {
+                map.removeLayer(boundary)
+            }
 
-            map.removeLayer(link_box)
 
-        }
+            boundary = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:ba',
+                format: 'image/png',
+                cql_filter: "station ILIKE '%" + param + "%'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+            map.addLayer(boundary)
+            boundary.bringToFront()
 
-        // alert(param)
-        link_box =    L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-            layers: 'cite:tbl_link_box',
-            format: 'image/png',
-            cql_filter: "ba='" + param + "'",
-            maxZoom: 21,
-            transparent: true
-        }, {
-            buffer: 10
-        })
+            map.flyTo([parseFloat(paramY), parseFloat(paramX)], zoom, {
+                duration: 1.5, // Animation duration in seconds
+                easeLinearity: 0.25,
+            });
 
-        map.addLayer(link_box)
-        link_box.bringToFront()
 
-        sel_lyr = link_box;
-    }
+            if (substation != '') {
+                map.removeLayer(substation)
+            }
 
-    function selectLayer(param){
-        if (param == 'sel_layer') {
-            sel_lyr = link_box;
-            callSelfLayer();
+            substation = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:tbl_substation',
+                format: 'image/png',
+                cql_filter: "ba ILIKE '%" + param + "%'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
 
-        }else if(param == 'pano'){
-            // sel_lyr = pano_layer;
-            addpanolayer()
+            map.addLayer(substation)
+            substation.bringToFront()
+
+
+
+            if (link_box != '') {
+                map.removeLayer(link_box)
+            }
+
+            link_box = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:tbl_link_box',
+                format: 'image/png',
+                cql_filter: "ba ILIKE '%" + param + "%'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+
+            map.addLayer(link_box)
+            link_box.bringToFront()
+
+
+            addGroupOverLays()
 
         }
-    }
 
-    function showModalData(data , id) {
+
+        // add group overlayes
+        function addGroupOverLays() {
+            if (layerControl != '') {
+                // console.log("inmsdanssdkjnasjnd");
+                map.removeControl(layerControl);
+            }
+            // console.log("sdfsdf");
+            groupedOverlays = {
+                "POI": {
+                    'BA': boundary,
+                    'Substation': substation,
+                    'Pano': pano_layer,
+                    'Link Box': link_box,
+                }
+            };
+            //add layer control on top right corner of map
+            layerControl = L.control.groupedLayers(baseLayers, groupedOverlays, {
+                collapsed: true,
+                position: 'topright'
+                // groupCheckboxes: true
+            }).addTo(map);
+        }
+
+        function showModalData(data, id) {
             var str = '';
             var idSp = id.split('.');
-            var vDS ='';
+            var vDS = '';
             if (data.visit_date != '') {
-                 var sDate = data.visit_date.split('T');
-                 console.log(sDate[0]);
-                 vDS = sDate[0]
+                var sDate = data.visit_date.split('T');
+                console.log(sDate[0]);
+                vDS = sDate[0]
             }
-            var vTM ='';
+            var vTM = '';
             if (data.visit_date != '') {
-                 var VTime = data.patrol_time.split('T');
+                var VTime = data.patrol_time.split('T');
 
-                 vTM = VTime[1]
+                vTM = VTime[1]
             }
 
 
@@ -301,7 +312,7 @@
 
         <tr><th>Coordinate</th><td>${data.coordinate}</td> </tr>
         <tr><th>Created At</th><td>${data.created_at}</td> </tr>
-        <tr><th>Detail</th><td class="text-center">    <a href="/{{app()->getLocale()}}/link-box-pelbagai-voltan/${idSp[1]}" target="_blank" class="btn btn-sm btn-secondary">Detail</a>
+        <tr><th>Detail</th><td class="text-center">    <a href="/{{ app()->getLocale() }}/link-box-pelbagai-voltan/${idSp[1]}" target="_blank" class="btn btn-sm btn-secondary">Detail</a>
             </td> </tr>
 
         `
@@ -310,5 +321,5 @@
             $('#myModal').modal('show');
 
         }
-</script>
+    </script>
 @endsection

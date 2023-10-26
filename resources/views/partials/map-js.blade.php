@@ -11,10 +11,20 @@
 <script type="text/javascript">
     var baseLayers = '';
     var identifyme = '';
-    var boundary3 = '';
-    var boundary2 = '';
     var sel_lyr = '';
-    map = L.map('map').setView([3.016603, 101.858382], 5);
+    var layerControl = '';
+    var boundary = '';
+    var zoom = 8;
+
+    // for layers
+    var substation = '';
+    var feeder_pillar = '';
+    var tbl_savr = '';
+    var link_box = '';
+    var cable_bridge = '';
+
+
+    map = L.map('map').setView([2.75101756479656, 101.304931640625], 8);
 
     var st1 = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
         maxZoom: 20,
@@ -29,14 +39,7 @@
     };
 
 
-    boundary3 = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-        layers: 'cite:aero_apks',
-        format: 'image/png',
-        maxZoom: 21,
-        transparent: true
-    }, {
-        buffer: 10
-    })
+
 
     pano_layer = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
         layers: 'cite:pano_apks',
@@ -50,13 +53,37 @@
 
 
 
-    map.addLayer(boundary3)
-    map.setView([2.59340882301331, 101.07054901123], 8);
+
+    function selectLayer(param) {
+        if (param == 'pano') {
+            addpanolayer();
+        } else {
+
+            if (param == 'substation') {
+                sel_lyr = substation;
+
+            } else if (param == 'feeder_pillar') {
+                sel_lyr = feeder_pillar;
+
+            } else if (param == 'tbl_savr') {
+                sel_lyr = tbl_savr;
+
+            } else if (param == 'link_box') {
+                sel_lyr = link_box;
+
+            } else if (param == 'cable_bridge') {
+                sel_lyr = cable_bridge;
+
+            }
+            callSelfLayer();
+        }
+    }
+
 
 
 
     function callSelfLayer() {
-        console.log("asdasdasdasdas");
+        // console.log("asdasdasdasdas");
         console.log(sel_lyr);
         map.off('click');
         map.on('click', function(e) {
@@ -80,8 +107,12 @@
                     data = JSON.parse(data1)
 
                     if (data.features.length != 0) {
-                        showModalData(data.features[0].properties, data.features[0].id);
+                        if ($('#select_layer').val() == 'substation') {
+                            substationModal(data.features[0].properties, data.features[0].id);
 
+                        } else {
+                            showModalData(data.features[0].properties, data.features[0].id);
+                        }
                     }
 
                 }
@@ -89,6 +120,26 @@
 
 
         });
+    }
+
+    function substationModal(data, id) {
+        var str = '';
+        var idSp = id.split('.');
+
+        $('#exampleModalLabel').html("Substation Info")
+        str = ` <tr><th>Zone</th><td>${data.zone}</td> </tr>
+        <tr><th>Ba</th><td>${data.ba}</td> </tr>
+        <tr><th>Type</th><td>${data.type}</td> </tr>
+        <tr><th>Voltage</th><td>${data.voltage}</td> </tr>
+        <tr><th>Coordinate</th><td>${data.coordinate}</td> </tr>
+        <tr><th>Created At</th><td>${data.created_at}</td> </tr>
+        <tr><th>Detail</th><td class="text-center">    <a href="/{{ app()->getLocale() }}/substation/${idSp[1]}" target="_blank" class="btn btn-sm btn-secondary">Detail</a>
+            </td> </tr>
+        `
+
+        $("#my_data").html(str);
+        $('#myModal').modal('show');
+        // console.log(data);
     }
 
     function getFeatureInfoUrl(map, layer, latlng, params) {
@@ -210,6 +261,52 @@
 
         });
     }
+
+    function preNext(status) {
+        $("#wg").html('');
+        $.ajax({
+            url: '/{{ app()->getLocale() }}/preNext/' + selectedId + '/' + status,
+            dataType: 'JSON',
+            //data: data,
+            method: 'GET',
+            async: false,
+            success: function callback(data) {
+
+                //  alert(data
+                var str = '<div id="window1" class="window">' +
+                    '<div class="green">' +
+                    '<p class="windowTitle">Pano Images</p>' +
+                    '</div>' +
+                    '<div class="mainWindow">' +
+                    // '<canvas id="canvas" width="400" height="480">' +
+                    // '</canvas>' +
+                    '<div id="panorama" width="400px" height="480px"></div>' +
+                    '<div class="row"><button style="margin-left: 30%;" onclick=preNext("pre") class="btn btn-success">Previous</button><button  onclick=preNext("next")  style="float: right;margin-right: 35%;" class="btn btn-success">Next</button></div>'
+                '</div>' +
+                '</div>'
+
+                $("#wg").html(str);
+
+                createWindow(1);
+                console.log(data)
+                selectedId = data[0].gid
+                pannellum.viewer('panorama', {
+                    "type": "equirectangular",
+                    "panorama": data[0].photo,
+                    "compass": true,
+                    "autoLoad": true
+                });
+
+                if (identifyme != '') {
+                    map.removeLayer(identifyme)
+                }
+                identifyme = L.geoJSON(JSON.parse(data[0].geom)).addTo(map);
+
+
+            }
+        });
+
+    }
 </script>
 
 
@@ -227,90 +324,50 @@
         ['B4', 'BANGI', 2.965810949933260, 101.81881303103104],
         ['B4', 'PUTRAJAYA & CYBERJAYA', 2.92875032271019, 101.675338316575]
     ];
-    const userBa = "{{ Auth::user()->ba }}";
+
+    var ba = "{{ Auth::user()->ba }}";
+
+
+    // on page load
     $(document).ready(function() {
 
-
-
-        if (userBa !== '') {
-            getBaPoints(userBa)
+        // check ba is empty or not
+        if (ba == '') {
+            addRemoveBundary('', 2.75101756479656, 101.304931640625)
+        } else {
+            callLayers(ba);
         }
 
-        $('#search_zone').on('change', function() {
-            const selectedValue = this.value;
-            const areaSelect = $('#search_ba');
-
-            // Clear previous options
-            areaSelect.empty();
-            areaSelect.append(`<option value="" hidden>Select ba</option>`)
-
-            if (selectedValue === 'W1') {
-                const w1Options = [
-                    ['KL PUSAT', 'KUALA LUMPUR PUSAT', 3.14925905877391, 101.754098819705]
-                ];
-
-                w1Options.forEach((data) => {
-                    areaSelect.append(`<option value="${data}">${data[0]}</option>`);
-                });
-            } else if (selectedValue === 'B1') {
-                const b1Options = [
-                    ['PJ', 'PETALING JAYA', 3.1128074178475, 101.605270457169],
-                    ['RAWANG', 'RAWANG', 3.47839445121726, 101.622905486475],
-                    ['K.SELANGOR', 'KUALA SELANGOR', 3.40703209426401, 101.317426926947]
-                ];
-
-                b1Options.forEach((data) => {
-                    areaSelect.append(`<option value="${data}">${data[0]}</option>`);
-                });
-            } else if (selectedValue === 'B2') {
-                const b2Options = [
-                    ['KLANG', 'KLANG', 3.08428642705789, 101.436185279023],
-                    ['PORT KLANG', 'PELABUHAN KLANG', 2.98188527916042, 101.324234779569]
-                ];
-
-                b2Options.forEach((data) => {
-                    areaSelect.append(`<option value="${data}">${data[0]}</option>`);
-                });
-            } else if (selectedValue === 'B4') {
-                const b4Options = [
-                    ['CHERAS', 'CHERAS', 3.14197346621987, 101.849883983416],
-                    ['BANTING/SEPANG', 'BANTING', 2.82111390453244, 101.505890775541],
-                    ['BANGI', 'BANGI', 2.965810949933260, 101.81881303103104],
-                    ['PUTRAJAYA/CYBERJAYA/PUCHONG', 'PUTRAJAYA & CYBERJAYA', 2.92875032271019,
-                        101.675338316575
-                    ]
-                ];
-
-                b4Options.forEach((data) => {
-                    areaSelect.append(`<option value="${data}">${data[0]}</option>`);
-                });
-            }
-            $('#search_wp').empty();
-            $('#search_wp').append(`<option value="" hidden>Select Work Package</option>`);
-            $('#for-excel').html('')
-            // $('#pw-zone').val(this.value);
-        });
     });
 
-    function getBaPoints(param) {
-        var baSelect = $('#search_ba')
-        baSelect.empty();
 
-        b1Options.map((data) => {
+    // if ba is not empty
+    function callLayers(param) {
+        var userBa = '';
+        for (const data of b1Options) {
             if (data[1] == param) {
-                baSelect.append(`<option value="${data}">${data[1]}</option>`)
+                userBa = data;
+                break;
             }
-        });
-        let baVal = document.getElementById('search_ba');
-        getWorkPackage(baVal)
+        }
+        zoom = 11;
+        addRemoveBundary(userBa[1], userBa[2], userBa[3])
     }
 
-    function getWorkPackage(param) {
-        var splitVal = param.value.split(',');
 
-        addRemoveBundary(splitVal[1], splitVal[2], splitVal[3])
-        console.log(splitVal[1]);
-        var zone = $('#search_zone').val();
+    function onChangeZone(param) {
+        const areaSelect = $('#search_ba');
+
+        // Clear previous options
+        areaSelect.empty();
+        areaSelect.append(`<option value="" hidden>Select ba</option>`)
+
+
+        b1Options.map((data) => {
+            if (data[0] == param) {
+                areaSelect.append(`<option value="${data[1]}">${data[1]}</option>`)
+            }
+        });
 
     }
 </script>
