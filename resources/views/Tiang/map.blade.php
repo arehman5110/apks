@@ -83,6 +83,15 @@
         <!--  START MAP CARD DIV -->
         <div class="row m-2">
 
+            <div class="p-3 form-input">
+                <label for="select_layer">Select Layer : </label>
+                <span class="text-danger" id="er-select-layer"></span>
+                <select name="select_layer" id="select_layer" onchange="selectLayer(this.value)" class="form-control">
+                    <option value="" hidden>select layer</option>
+                    <option value="sel_layer">Tiang</option>
+                    <option value="pano">Pano</option>
+                </select>
+            </div>
             <!-- START MAP SIDEBAR DIV -->
             {{-- <div class="col-2 p-0">
             <div class="card p-0 m-0"
@@ -91,7 +100,7 @@
                 <div class="card-body">
                     <!-- MAP SIDEBAR LAYERS SELECTOR -->
                     <div class="side-bar" style="height: 569px !important; overflow-y: scroll;">
-                      
+
 
 
                         <details class="mb-3" open>
@@ -278,6 +287,7 @@
         }, {
             buffer: 10
         })
+        tbl_savr = main;
 
         map.addLayer(main)
         main.bringToFront()
@@ -342,7 +352,17 @@
 
 
         }
+        function selectLayer(param){
+        if (param == 'sel_layer') {
+            sel_lyr = tbl_savr;
+            callSelfLayer();
 
+        }else if(param == 'pano'){
+            // sel_lyr = pano_layer;
+            addpanolayer()
+
+        }
+    }
 
         function showModalData(data, id) {
             var str = '';
@@ -354,7 +374,7 @@
         <tr><th>Section To</th><td>${data.section_to}</td> </tr>
         <th>Actual Date</th><td>${data.actual_date}</td> </tr>
         <th>Planed Date</th><td>${data.planed_date}</td> </tr>
-   
+
         <tr><th>Coordinate</th><td>${data.coordinate}</td> </tr>
         <tr><th>Created At</th><td>${data.created_at}</td> </tr>
         <tr><th>Detail</th><td class="text-center">    <a href="/{{app()->getLocale()}}/tiang-talian-vt-and-vr/${data.id}" target="_blank" class="btn btn-sm btn-secondary">Detail</a>

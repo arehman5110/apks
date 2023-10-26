@@ -20,8 +20,8 @@ class SubstationController extends Controller
     public function index()
     {
         $ba = Auth::user()->ba ;
-        $data = Substation::where('ba', 'LIKE', '%' . $ba . '%')->get();
-        return view('substation.index',['datas'=>$data]);
+        $data = Substation::where('ba', 'LIKE', '%' . $ba . '%')->paginate(10);
+        return view('substation.index', ['datas' => $data]);
 
     }
 

@@ -6,6 +6,7 @@
 
     {{-- <link rel="stylesheet" href="{{ URL::asset('assets/test/css/style.css') }}" /> --}}
     <style>
+        
         input[type='checkbox'],
         input[type='radio'] {
             min-width: 16px !important;
@@ -193,13 +194,13 @@
                                     <label for="building_status_broken_base">{{__('messages.broken_base')}}</label>
                                 </div>
 
-                                <div class="d-flex">
+                               <div class="d-flex">
                                     <input type="checkbox" name="building_status[other]" {{substaionCheckBox('other', $data->building_status)}} disabled id="building_status_other" onclick="bulidingStatus(this)">
                                     <label for="building_status_other">{{__('messages.others')}}</label>
                                 </div>
 
                                 <input type="text" name="building_status[other_value]" id="other_building_defects" placeholder="please enter other buliding defects"disabled class="form-control @if(substaionCheckBox('other', $data->building_status)   !== 'checked' ) d-none @endif"
-                                value="@if(substaionCheckBox('other', $data->building_status)   !== 'checked' ) {{$data->building_status->other_value}} @endif"
+                                value="@if(substaionCheckBox('other_value', $data->building_status)   == 'checked' ) {{$data->building_status->other_value}} @endif"
                                 >
 
                                 </div>
@@ -231,7 +232,7 @@
                                     <a href="{{ URL::asset($data->image_gate_2) }}" data-lightbox="roadtrip">
                                         <img src="{{ URL::asset($data->image_gate_2) }}" alt="" height="70"
                                             class="adjust-height ml-5  "></a>
-                               
+
                                 @endif
 
                             </div>
@@ -255,7 +256,7 @@
                                     <a href="{{ URL::asset($data->image_grass_2) }}" data-lightbox="roadtrip">
                                         <img src="{{ URL::asset($data->image_grass_2) }}" alt=""
                                             height="70" class="adjust-height ml-5  "></a>
-                                
+
 
                                 @endif
                             </div>
@@ -279,7 +280,7 @@
                                 <a href="{{ URL::asset($data->image_tree_branches_2) }}" data-lightbox="roadtrip">
                                     <img src="{{ URL::asset($data->image_tree_branches_2) }}" alt="" height="70"
                                         class="adjust-height ml-5  "></a>
-                             
+
 
                             @endif
                             </div>
@@ -303,7 +304,7 @@
                                     <a href="{{ URL::asset($data->images_gate_after_lock_2) }}" data-lightbox="roadtrip">
                                         <img src="{{ URL::asset($data->images_gate_after_lock_2) }}" alt="" height="70"
                                             class="adjust-height ml-5  "></a>
-                                
+
 
                                 @endif
                             </div>
@@ -329,13 +330,13 @@
                                 <a href="{{ URL::asset($data->image_building_2) }}" data-lightbox="roadtrip">
                                     <img src="{{ URL::asset($data->image_building_2) }}" alt="" height="70"
                                         class="adjust-height ml-5  "></a>
-                            
+
 
                             @endif
                             </div>
                         </div>
 
-{{-- 
+{{--
                         <div class="row">
                             <div class="col-md-4"><label for="img_advertise_poster">{{__('messages.image_advertise_poster')}}</label></div>
 

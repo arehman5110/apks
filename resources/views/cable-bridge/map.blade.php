@@ -2,7 +2,11 @@
 
 @section('css')
     @include('partials.map-css')
-    <style>#map{height: 600px;}</style>
+    <style>
+        #map {
+            height: 600px;
+        }
+    </style>
 @endsection
 
 
@@ -48,14 +52,14 @@
                         <select name="search_zone" id="search_zone" class="form-control">
 
                             @if (Auth::user()->zone == '')
-                            <option value="" hidden>select zone</option>
-                            <option value="W1">W1</option>
-                            <option value="B1">B1</option>
-                            <option value="B2">B2</option>
-                            <option value="B4">B4</option>
-                        @else
-                            <option value="{{ Auth::user()->zone }}" hidden>{{ Auth::user()->zone }}</option>
-                        @endif
+                                <option value="" hidden>select zone</option>
+                                <option value="W1">W1</option>
+                                <option value="B1">B1</option>
+                                <option value="B2">B2</option>
+                                <option value="B4">B4</option>
+                            @else
+                                <option value="{{ Auth::user()->zone }}" hidden>{{ Auth::user()->zone }}</option>
+                            @endif
 
                         </select>
                     </div>
@@ -79,39 +83,48 @@
 
         <!--  START MAP CARD DIV -->
         <div class="row m-2">
+            <div class="p-3 form-input">
+                <label for="select_layer">Select Layer : </label>
+                <span class="text-danger" id="er-select-layer"></span>
+                <select name="select_layer" id="select_layer" onchange="selectLayer(this.value)" class="form-control">
+                    <option value="" hidden>select layer</option>
+                    <option value="sel_layer">Cable Bridge</option>
+                    <option value="pano">Pano</option>
+                </select>
+            </div>
 
             <!-- START MAP SIDEBAR DIV -->
-            {{-- <div class="col-2 p-0">
-                <div class="card p-0 m-0"
-                    style="border: 1px solid rgb(177, 175, 175) !important; border-radius: 0px !important">
-                    <div class="card-header"><strong> NAVIGATION</strong></div>
-                    <div class="card-body">
-                        <!-- MAP SIDEBAR LAYERS SELECTOR -->
-                        <div class="side-bar" style="height: 569px !important; overflow-y: scroll;">
-                            
-
-                            <details class="mb-3" open>
-                                <summary><strong>Cable Bridge</strong> </summary>
-                                <table class="table table-bordered">
-                                    <tr>
-                                        <td>Pemeriksaan visual</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Pembersihan semak samun / creepers/sampah/ rumput </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Report</td>
-                                    </tr>
-                                </table>
-
-                            </details>
+                {{-- <div class="col-2 p-0">
+                    <div class="card p-0 m-0"
+                        style="border: 1px solid rgb(177, 175, 175) !important; border-radius: 0px !important">
+                        <div class="card-header"><strong> NAVIGATION</strong></div>
+                        <div class="card-body">
+                            <!-- MAP SIDEBAR LAYERS SELECTOR -->
+                            <div class="side-bar" style="height: 569px !important; overflow-y: scroll;">
 
 
-                            <!-- END MAP SIDEBAR DETAILS -->
+                                <details class="mb-3" open>
+                                    <summary><strong>Cable Bridge</strong> </summary>
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <td>Pemeriksaan visual</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Pembersihan semak samun / creepers/sampah/ rumput </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Report</td>
+                                        </tr>
+                                    </table>
+
+                                </details>
+
+
+                                <!-- END MAP SIDEBAR DETAILS -->
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div> --}}
+                </div> --}}
             <!-- END MAP SIDEBAR DIV -->
 
             <!-- START MAP  DIV -->
@@ -139,7 +152,7 @@
         </div><!--  END MAP CARD DIV -->
     </div>
 
-   
+
     <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -161,53 +174,48 @@
             </div>
         </div>
     </div>
-
-     
 @endsection
 
 @section('script')
     @include('partials.map-js')
 
     <script>
+        var cable_bridge = '';
+        var main = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+            layers: 'cite:tbl_cable_bridge',
+            format: 'image/png',
+            maxZoom: 21,
+            transparent: true
+        }, {
+            buffer: 10
+        })
+        map.addLayer(main);
+        main.bringToFront;
 
-
-
-        var  cable_bridge = '';
-        var main =    L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-                layers: 'cite:tbl_cable_bridge',
-                format: 'image/png',
-                maxZoom: 21,
-                transparent: true
-            }, {
-                buffer: 10
-            })
-            map.addLayer(main);
-            main.bringToFront;
-
-
-         // ADD LAYERS GROUPED OVER LAYS
-    groupedOverlays = {
-        "POI": {
-            'BA': boundary3,
-            'Cable Bridge' : main,
-        }
-    };
+        cable_bridge = main;
+        // ADD LAYERS GROUPED OVER LAYS
+        groupedOverlays = {
+            "POI": {
+                'BA': boundary3,
+                'Cable Bridge': main,
+            }
+        };
 
         var layerControl = L.control.groupedLayers(baseLayers, groupedOverlays, {
-        collapsed: true,
-        position: 'topright'
-        // groupCheckboxes: true
-    }).addTo(map);
+            collapsed: true,
+            position: 'topright'
+            // groupCheckboxes: true
+        }).addTo(map);
 
 
-        
-         function addRemoveBundary(param, paramY, paramX) {
-        if(boundary3 != ''){
-            map.removeLayer(boundary3)
-        }
-        if (main != '') {
-            map.removeLayer(main)
-        }
+
+        function addRemoveBundary(param, paramY, paramX) {
+            if (boundary3 != '') {
+                map.removeLayer(boundary3)
+            }
+            if (main != '') {
+                map.removeLayer(main)
+            }
             if (boundary2 !== '') {
                 map.removeLayer(boundary2)
             }
@@ -230,7 +238,7 @@
 
             }
 
-            cable_bridge =    L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+            cable_bridge = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
                 layers: 'cite:tbl_cable_bridge',
                 format: 'image/png',
                 cql_filter: "ba='" + param + "'",
@@ -247,42 +255,54 @@
             sel_lyr = cable_bridge;
         }
 
-        function showModalData(data , id) {
+        function selectLayer(param) {
+            if (param == 'sel_layer') {
+                sel_lyr = cable_bridge;
+                callSelfLayer();
+
+            } else if (param == 'pano') {
+                // sel_lyr = pano_layer;
+                addpanolayer()
+
+            }
+        }
+
+        function showModalData(data, id) {
             var str = '';
             var idSp = id.split('.');
-            var vDS ='';
+            var vDS = '';
             if (data.visit_date != '') {
-                 var sDate = data.visit_date.split('T');
-                 console.log(sDate[0]);
-                 vDS = sDate[0]
+                var sDate = data.visit_date.split('T');
+                console.log(sDate[0]);
+                vDS = sDate[0]
             }
-            var vTM ='';
+            var vTM = '';
             if (data.visit_date != '') {
-                 var VTime = data.patrol_time.split('T');
+                var VTime = data.patrol_time.split('T');
 
-                 vTM = VTime[1]
+                vTM = VTime[1]
             }
-            
-        
+
+
             $('#exampleModalLabel').html("Cable Bridge Info")
-            str = ` <tr>
+            str = `
                 <tr><th>Zone</th><td>${data.zone}</td> </tr>
         <tr><th>Ba</th><td>${data.ba}</td> </tr>
         <tr><th>Area</th><td>${data.area}</td> </tr>
 
         <tr><th>Visit Date</th><td>${vDS}</td> </tr>
         <th>Patrol TIme</th><td>${vTM}</td> </tr>
-   
+
         <tr><th>Coordinate</th><td>${data.coordinate}</td> </tr>
         <tr><th>Created At</th><td>${data.created_at}</td> </tr>
-        <tr><th>Detail</th><td class="text-center">    <a href="/{{app()->getLocale()}}/cable-bridge/${idSp[1]}" target="_blank" class="btn btn-sm btn-secondary">Detail</a>
+        <tr><th>Detail</th><td class="text-center">    <a href="/{{ app()->getLocale() }}/cable-bridge/${idSp[1]}" target="_blank" class="btn btn-sm btn-secondary">Detail</a>
             </td> </tr>
 
         `
 
             $("#my_data").html(str);
             $('#myModal').modal('show');
-       
+
         }
     </script>
 @endsection

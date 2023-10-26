@@ -55,7 +55,7 @@
                         <option value="B4">B4</option>
                     @else
                         <option value="{{ Auth::user()->zone }}" hidden>{{ Auth::user()->zone }}</option>
-                    @endif  
+                    @endif
                     </select>
                 </div>
                 <div class="col-md-3">
@@ -77,7 +77,15 @@
 
     <!--  START MAP CARD DIV -->
     <div class="row m-2">
-
+        <div class="p-3 form-input">
+            <label for="select_layer">Select Layer : </label>
+            <span class="text-danger" id="er-select-layer"></span>
+            <select name="select_layer" id="select_layer" onchange="selectLayer(this.value)" class="form-control">
+                <option value="" hidden>select layer</option>
+                <option value="sel_layer">Link Box</option>
+                <option value="pano">Pano</option>
+            </select>
+        </div>
         <!-- START MAP SIDEBAR DIV -->
         {{-- <div class="col-2 p-0">
             <div class="card p-0 m-0"
@@ -86,7 +94,7 @@
                 <div class="card-body">
                     <!-- MAP SIDEBAR LAYERS SELECTOR -->
                     <div class="side-bar" style="height: 569px !important; overflow-y: scroll;">
-                        
+
 
                         <!-- START MAP SIDEBAR DETAILS -->
 
@@ -146,51 +154,6 @@
     </div><!--  END MAP CARD DIV -->
     </div>
 
-    <div class="modal fade" id="geomModal" tabindex="-1" aria-labelledby="geomModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add new W.P</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form action="/save-work-package" method="post" id="save_wp" onsubmit="return submitFoam()">
-                    @csrf
-                    <div class="modal-body ">
-
-
-                        <label for="">Work Package Name</label>
-                        <span class="text-danger" id="er-pw-name"></span> <br>
-                        <input type="text" name="name" id="pw-name" class="form-control">
-                        <label for="zone">Zone</label>
-
-                        <input type="text" name="zone" id="pw-zone" class="form-control">
-                        {{-- <select name="zone" id="pw-zone" class="form-control">
-                        <option value="" hidden>select zone</option>
-                        <option value="W1">W1</option>
-                        <option value="B1">B1</option>
-                        <option value="B2">B2</option>
-                        <option value="B4">B4</option>
-                    </select> --}}
-
-                        <label for="ba">Select ba</label>
-                        <input type="text" name="ba" id="pw-ba" class="form-control">
-                        {{-- <select name="ba" id="pw-ba" class="form-control">
-                        <option value="" hidden>Select zone</option>
-                    </select> --}}
-
-                        <input type="hidden" name="geom" id="geom">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Submit</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 
     <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -214,49 +177,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="polyLineModal" tabindex="-1" aria-labelledby="polyLineModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Identify Roads</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form action="/save-road" method="post" id="road-form" onsubmit="return submitFoam2()">
-                    @csrf
-                    <div class="modal-body ">
-                        <label for="ba">Road Name</label>
-                        <span class="text-center" id="er_raod_name"></span>
-                        <input name="road_name" id="road_name" class="form-control">
-                        <label for="">Work Package Name</label>
-                        <input type="text" name="" id="raod-d-wp-id" class="form-control disabled">
-                        <input type="hidden" name="id_wp" id="raod-wp-id">
-                        {{-- <select name="id_wp" id="raod-wp-id" class="form-control" onchange="getWorkPackage(this)">
-                        <option value="">select wp</option>
-                        @foreach ($wps as $wp)
-                            <option value="{{$wp->id}}">{{$wp->package_name}}</option>
-                        @endforeach
-                    </select> --}}
-                        <label for="polyline-zone">Zone</label>
-                        <input id="polyline-zone" name="zone" class="form-control">
-                        <label for="polyline-ba">BA</label>
-                        <input id="polyline-ba" name="ba" class="form-control">
 
-
-
-
-                        <input type="hidden" name="geom" id="road-geom">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Submit</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 @endsection
 
 @section('script')
@@ -277,6 +198,8 @@
         map.addLayer(main)
         main.bringToFront()
 
+        link_box = main;
+
 
     groupedOverlays = {
         "POI": {
@@ -291,7 +214,7 @@
         // groupCheckboxes: true
     }).addTo(map);
 
-    
+
      function addRemoveBundary(param, paramY, paramX) {
     if(boundary3 != ''){
         map.removeLayer(boundary3)
@@ -338,6 +261,18 @@
         sel_lyr = link_box;
     }
 
+    function selectLayer(param){
+        if (param == 'sel_layer') {
+            sel_lyr = link_box;
+            callSelfLayer();
+
+        }else if(param == 'pano'){
+            // sel_lyr = pano_layer;
+            addpanolayer()
+
+        }
+    }
+
     function showModalData(data , id) {
             var str = '';
             var idSp = id.split('.');
@@ -353,8 +288,8 @@
 
                  vTM = VTime[1]
             }
-            
-        
+
+
             $('#exampleModalLabel').html("Link Box Info")
             str = ` <tr>
                 <tr><th>Zone</th><td>${data.zone}</td> </tr>
@@ -363,7 +298,7 @@
 
         <tr><th>Visit Date</th><td>${vDS}</td> </tr>
         <th>Patrol TIme</th><td>${vTM}</td> </tr>
-   
+
         <tr><th>Coordinate</th><td>${data.coordinate}</td> </tr>
         <tr><th>Created At</th><td>${data.created_at}</td> </tr>
         <tr><th>Detail</th><td class="text-center">    <a href="/{{app()->getLocale()}}/link-box-pelbagai-voltan/${idSp[1]}" target="_blank" class="btn btn-sm btn-secondary">Detail</a>
@@ -373,7 +308,7 @@
 
             $("#my_data").html(str);
             $('#myModal').modal('show');
-       
+
         }
 </script>
 @endsection
