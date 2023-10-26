@@ -316,8 +316,9 @@
             </div>
 
             <div id="wg1" class="windowGroup">
-
+ 
             </div>
+ 
 
         </div><!--  END MAP CARD DIV -->
         {{-- <div id="panorama"></div> --}}
