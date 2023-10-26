@@ -36,12 +36,12 @@
         <div class="container-  ">
             <div class="row  " style="flex-wrap:nowrap">
                 <div class="col-sm-6">
-                    <h3>Patrolling</h3>
+                    <h3>{{__('messages.patrolling')}}</h3>
                 </div>
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
-                        <li class="breadcrumb-item"><a href="/{{app()->getLocale()}}/get-all-work-packages">index</a></li>
-                        <li class="breadcrumb-item active">detail</li>
+                        <li class="breadcrumb-item"><a href="/{{app()->getLocale()}}/get-all-work-packages">{{__('messages.index')}}</a></li>
+                        <li class="breadcrumb-item active">{{__('messages.deatil')}}</li>
                     </ol>
                 </div>
             </div>
@@ -61,20 +61,20 @@
 
 
                             <div class="row">
-                                <div class="col-md-4"><label for="zone">Zone</label></div>
+                                <div class="col-md-4"><label for="zone">{{__('messages.zone')}}</label></div>
                                 <div class="col-md-4">
                                     <input type="text" readonly value="{{$road->zone}}" class="form-control">
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="ba">BA</label></div>
+                                <div class="col-md-4"><label for="ba">{{__('messages.ba')}}</label></div>
                                 <div class="col-md-4"><input type="text" readonly value="{{$road->ba}}" class="form-control">
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="search_wp">Work Package Name</label></div>
+                                <div class="col-md-4"><label for="search_wp">{{__('messages.Work_Package_Name')}}</label></div>
                                 <div class="col-md-4">
                                     <input type="text" readonly value="{{$road->workPackage->package_name}}" class="form-control">
                                 </div>
@@ -84,7 +84,7 @@
 
 
                             <div class="row">
-                                <div class="col-md-4"><label for="road_name">Road Name</label></div>
+                                <div class="col-md-4"><label for="road_name">{{__('messages.Road_Name')}}</label></div>
                                 <div class="col-md-4">
                                     <input type="text" readonly value="{{$road->road_name}}" class="form-control">
                                 </div>
@@ -93,50 +93,50 @@
 
 
                             <div class="row">
-                                <div class="col-md-4"><label for="date_patrol">Patrolling Date</label></div>
+                                <div class="col-md-4"><label for="date_patrol">{{__('messages.Patrolling_Date')}}</label></div>
                                 <div class="col-md-4"> <input type="text" readonly value="{{$road->date_patrol}}" class="form-control"></div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="time_petrol">Patrolling Time</label></div>
+                                <div class="col-md-4"><label for="time_petrol">{{__('messages.patrolling_time')}}</label></div>
                                 <div class="col-md-4"> <input type="text" readonly value="{{$road->time_petrol}}" class="form-control"></div>
                             </div>
 
 
 
                             <div class="row">
-                                <div class="col-md-4"><label for="fidar">Feeder</label></div>
+                                <div class="col-md-4"><label for="fidar">{{__('messages.Feeder')}}</label></div>
                                 <div class="col-md-4"> <input type="text" readonly value="{{$road->fidar}}" class="form-control"></div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="name_project">Project Name</label></div>
+                                <div class="col-md-4"><label for="name_project">{{__('messages.Project_Name')}}</label></div>
                                 <div class="col-md-4"> <input type="text" readonly value="{{$road->name_project}}" class="form-control"></div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="km">Km Plan</label></div>
+                                <div class="col-md-4"><label for="km">{{__('messages.Km_Plan')}}</label></div>
                                      <div class="col-md-4"> <input type="text" readonly value="{{ number_format($road->km , 2)}}" class="form-control"></div>
 
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label for="actual_km">Km Actual</label></div>
+                                <div class="col-md-4"><label for="actual_km">{{__('messages.km_actual')}}</label></div>
                                 <div class="col-md-4"> <input type="text" readonly value="{{ number_format($road->actual_km ,2)}}" class="form-control"></div>
 
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label for="digging">Total Digging</label></div>
+                                <div class="col-md-4"><label for="digging">{{__('messages.Total_Digging')}}</label></div>
                                 <div class="col-md-4"> <input type="text" readonly value="{{$road->total_digging}}" class="form-control"></div>
 
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label for="notice">Total Notice</label></div>
-                                <div class="col-md-4"> <input type="text" readonly value="{{$road->total_digging}}" class="form-control"></div>
+                                <div class="col-md-4"><label for="notice">{{__('messages.Total_Notice')}}</label></div>
+                                <div class="col-md-4"> <input type="text" readonly value="{{$road->total_notice}}" class="form-control"></div>
 
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label for="supervision">Total Supervision</label></div>
-                                <div class="col-md-4"> <input type="text" readonly value="{{$road->total_digging}}" class="form-control"></div>
+                                <div class="col-md-4"><label for="supervision">{{__('messages.Total_Supervision')}}</label></div>
+                                <div class="col-md-4"> <input type="text" readonly value="{{$road->total_supervision}}" class="form-control"></div>
 
                             </div>
 

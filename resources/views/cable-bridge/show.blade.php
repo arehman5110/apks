@@ -42,7 +42,7 @@
         <div class="container-  ">
             <div class="row  " style="flex-wrap:nowrap">
                 <div class="col-sm-6">
-                    <h3>Cable Bridge</h3>
+                    <h3>{{__('messages.cable_bridge')}}</h3>
                 </div>
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
@@ -57,7 +57,7 @@
     <div class=" ">
 
         <div class="container">
- 
+
 
                 <div class=" card col-md-12 p-4 ">
                     <div class=" form-input">
@@ -109,7 +109,7 @@
                         </div>
 
 
-                         
+
                         <div class="row">
                             <div class="col-md-4"><label for="start_date">{{__("messages.from")}}</label></div>
                             <div class="col-md-4">
@@ -180,7 +180,7 @@
                                 <a href="{{ URL::asset($data->image_pipe_2) }}" data-lightbox="roadtrip">
                                     <img src="{{ URL::asset($data->image_pipe_2) }}" alt="" height="70"
                                         class="adjust-height ml-5  "></a>
-                           
+
                             @endif
 
                             </div>
@@ -203,7 +203,7 @@
                                 <a href="{{ URL::asset($data->image_vandalism_2) }}" data-lightbox="roadtrip">
                                     <img src="{{ URL::asset($data->image_vandalism_2) }}" alt=""
                                         height="70" class="adjust-height ml-5  "></a>
- 
+
                             @endif
                             </div>
                         </div>
@@ -225,7 +225,7 @@
                                     <a href="{{ URL::asset($data->image_collapsed) }}" data-lightbox="roadtrip">
                                         <img src="{{ URL::asset($data->image_collapsed) }}" alt="" height="70"
                                             class="adjust-height ml-5  "></a>
-                                
+
                                 @endif
                             </div>
                         </div>
@@ -248,7 +248,7 @@
                                     <a href="{{ URL::asset($data->image_rust_2) }}" data-lightbox="roadtrip">
                                         <img src="{{ URL::asset($data->image_rust_2) }}" alt="" height="70"
                                             class="adjust-height ml-5  "></a>
-                               
+
                                 @endif
                             </div>
                         </div>
@@ -271,7 +271,7 @@
                                 <a href="{{ URL::asset($data->images_bushes_2) }}" data-lightbox="roadtrip">
                                     <img src="{{ URL::asset($data->images_bushes_2) }}" alt="" height="70"
                                         class="adjust-height ml-5  "></a>
-                   
+
                             @endif
                             </div>
                         </div>
@@ -290,7 +290,7 @@
                                 @endif
                                 <div class="col-md-4 text-center mb-3"></div>
 
-                             
+
                             </div>
                         </div>
 

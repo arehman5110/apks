@@ -262,6 +262,8 @@
         });
     }
 
+    var selectedId = '';
+
     function preNext(status) {
         $("#wg").html('');
         $.ajax({

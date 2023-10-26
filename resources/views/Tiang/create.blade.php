@@ -176,49 +176,48 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-4"><label for="fp_name">Name of Substation / Name of Feeder
-                                            Pillar</label></div>
+                                    <div class="col-md-4"><label for="fp_name"> {{__("messages.name_of_substation")}} / {{__("messages.Name_of_Feeder_Pillar")}} </label></div>
                                     <div class="col-md-4"><input type="text" name="fp_name" id="fp_name"
                                             class="form-control" required></div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-4"><label for="review_date">Review Date </label></div>
+                                    <div class="col-md-4"><label for="review_date">{{__('messages.Review_Date')}}</label></div>
                                     <div class="col-md-4"><input type="date" name="review_date" id="review_date"
                                             value="{{ date('Y-m-d') }}" class="form-control"></div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-4"><label for="fp_road">Feeder Name / Street Name</label></div>
+                                    <div class="col-md-4"><label for="fp_road"> {{__('messages.Feeder_Name')}} / {{__("messages.Street_Name")}}</label></div>
                                     <div class="col-md-4"><input type="text" name="fp_road" id="fp_road"
                                             class="form-control" required></div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-4"><label for="">Section </label></div>
+                                    <div class="col-md-4"><label for="">{{__("messages.Section")}} </label></div>
 
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-4"><label for="section_from">From </label></div>
+                                    <div class="col-md-4"><label for="section_from">{{__("messages.from")}} </label></div>
                                     <div class="col-md-4"><input type="text" name="section_from" id="section_from"
                                             class="form-control"></div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-4"><label for="section_to">To</label></div>
+                                    <div class="col-md-4"><label for="section_to">{{__("messages.to")}}</label></div>
                                     <div class="col-md-4"><input type="text" name="section_to" id="section_to"
                                             class="form-control"></div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-4"><label for="tiang_no">Tiang No</label></div>
+                                    <div class="col-md-4"><label for="tiang_no">{{__("messages.Tiang_No")}}</label></div>
                                     <div class="col-md-4"><input type="text" name="tiang_no" id="tiang_no"
                                             class="form-control" required></div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-4"><label for="cordinates">Cordinates</label></div>
+                                    <div class="col-md-4"><label for="cordinates">{{__("messages.coordinate")}}</label></div>
                                     <div class="col-md-4"><input type="text" name="cordinates" id="cordinates"
                                             class="form-control" required readonly></div>
                                 </div>
@@ -241,23 +240,23 @@
 
                             {{-- START Asset Register (2) --}}
                             <fieldset class="form-input">
-                                <h3>Asset Register</h3>
+                                <h3> {{__("messages.Asset_Register")}} </h3>
                                 <div class="row">
                                     <div class="col-md-6 ">
                                         <div class="card p-4 ">
                                             <div class="row">
                                                 <div class="col-md-6"><label for="st7">
-                                                        Pole Size Bill 7.5</label></div>
+                                                        {{__("messages.Pole_Size_Bill")}} 7.5</label></div>
                                                 <div class="col-md-6"><input type="number" name="size_tiang[st7]"
                                                         id="st7" class="form-control" min="0"></div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-6"><label for="st9">Pole Size Bill 9</label></div>
+                                                <div class="col-md-6"><label for="st9">{{__("messages.Pole_Size_Bill")}} 9</label></div>
                                                 <div class="col-md-6"><input type="number" name="size_tiang[st9]"
                                                         id="st9" class="form-control"></div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-6"><label for="st10">Pole Size Bill 10</label>
+                                                <div class="col-md-6"><label for="st10">{{__("messages.Pole_Size_Bill")}} 10</label>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <input type="number" name="size_tiang[st10]" id="st10"
@@ -271,7 +270,7 @@
                                         <div class="card p-4">
 
                                             <div class="row">
-                                                <div class="col-md-6"><label for="s19_064">PVC (Span) 19/064</label>
+                                                <div class="col-md-6"><label for="s19_064">{{__("messages.PVC_Span")}} 19/064</label>
                                                 </div>
                                                 <div class="col-md-6"><input type="number" name="pvc_span[s19_064]"
                                                         id="s19_064" class="form-control"></div>
@@ -279,13 +278,13 @@
 
 
                                             <div class="row">
-                                                <div class="col-md-6"><label for="s7_083">PVC (Span) 7/083</label></div>
+                                                <div class="col-md-6"><label for="s7_083">{{__("messages.PVC_Span")}} 7/083</label></div>
                                                 <div class="col-md-6"><input type="number" name="pvc_span[s7_083]"
                                                         id="s7_083" class="form-control"></div>
                                             </div>
 
                                             <div class="row">
-                                                <div class="col-md-6"><label for="s7_044">PVC (Span) 7/044</label></div>
+                                                <div class="col-md-6"><label for="s7_044">{{__("messages.PVC_Span")}} 7/044</label></div>
                                                 <div class="col-md-6"><input type="number" name="pvc_span[s7_044]"
                                                         id="s7_044" class="form-control"></div>
                                             </div>
@@ -295,7 +294,7 @@
                                     <div class="col-md-6">
                                         <div class="card p-4">
                                             <div class="row">
-                                                <div class="col-md-6"><label for="spun">Pole Type No Spun</label>
+                                                <div class="col-md-6"><label for="spun">{{__("messages.Pole_type_No")}} {{__("messages.Spun")}} </label>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <input type="number" name="jenis_tiang[spun]" id="spun"
@@ -303,7 +302,7 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-6"><label for="concrete">Pole Type No Concrete </label>
+                                                <div class="col-md-6"><label for="concrete">{{__("messages.Pole_type_No")}} {{__("messages.Concrete")}} </label>
                                                 </div>
                                                 <div class="col-md-6"><input type="number" name="jenis_tiang[concrete]"
                                                         id="concrete" class="form-control">
@@ -311,14 +310,14 @@
                                             </div>
 
                                             <div class="row">
-                                                <div class="col-md-6"><label for="iron">Pole Type No Iron</label>
+                                                <div class="col-md-6"><label for="iron">{{__("messages.Pole_type_No")}} {{__("messages.Iron")}}</label>
                                                 </div>
                                                 <div class="col-md-6"><input type="number" name="jenis_tiang[iron]"
                                                         id="iron" class="form-control"></div>
                                             </div>
 
                                             <div class="row">
-                                                <div class="col-md-6"><label for="wood">Pole Type No Wood</label>
+                                                <div class="col-md-6"><label for="wood">{{__("messages.Pole_type_No")}} {{__("messages.Wood")}}</label>
                                                 </div>
                                                 <div class="col-md-6"><input type="number" name="jenis_tiang[wood]"
                                                         id="wood" class="form-control"></div>
@@ -331,25 +330,25 @@
                                     <div class="col-md-6">
                                         <div class="card p-4">
                                             <div class="row">
-                                                <div class="col-md-6"><label for="section_to">ABC (Span) 3 X 185</label>
+                                                <div class="col-md-6"><label for="section_to">{{__("messages.ABC_Span")}} 3 X 185</label>
                                                 </div>
                                                 <div class="col-md-6"><input type="number" name="abc_span[s3_185]"
                                                         id="section_to" class="form-control"></div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-6"><label for="s3_95">ABC (Span) 3 X 95</label>
+                                                <div class="col-md-6"><label for="s3_95">{{__("messages.ABC_Span")}} 3 X 95</label>
                                                 </div>
                                                 <div class="col-md-6"><input type="number" name="abc_span[s3_95]"
                                                         id="s3_95" class="form-control"></div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-6"><label for="s3_16">ABC (Span) 3 X 16</label>
+                                                <div class="col-md-6"><label for="s3_16">{{__("messages.ABC_Span")}} 3 X 16</label>
                                                 </div>
                                                 <div class="col-md-6"><input type="number" name="abc_span[s3_16]"
                                                         id="s3_16" class="form-control"></div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-6"><label for="s1_16">ABC (Span) 1 X 16</label>
+                                                <div class="col-md-6"><label for="s1_16">{{__("messages.ABC_Span")}} 1 X 16</label>
                                                 </div>
                                                 <div class="col-md-6"><input type="number" name="abc_span[s1_16]"
                                                         id="s1_16" class="form-control"></div>
@@ -360,20 +359,20 @@
                                         <div class="card p-4">
 
                                             <div class="row">
-                                                <div class="col-md-6"><label for="s7_173">BARE (Span) 7/173</label>
+                                                <div class="col-md-6"><label for="s7_173">{{__("messages.BARE_Span")}} 7/173</label>
                                                 </div>
                                                 <div class="col-md-6"><input type="number" name="bare_span[s7_173]"
                                                         id="s7_173" class="form-control"></div>
                                             </div>
 
                                             <div class="row">
-                                                <div class="col-md-6"><label for="s7_122">BARE (Span) 7/122</label>
+                                                <div class="col-md-6"><label for="s7_122">{{__("messages.BARE_Span")}} 7/122</label>
                                                 </div>
                                                 <div class="col-md-6"><input type="number" name="bare_span[s7_122]"
                                                         id="s7_122" class="form-control"></div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-6"><label for="s3_132">BARE (Span) 3/132</label>
+                                                <div class="col-md-6"><label for="s3_132">{{__("messages.BARE_Span")}} 3/132</label>
                                                 </div>
                                                 <div class="col-md-6"><input type="number" name="bare_span[s3_132]"
                                                         id="s3_132" class="form-control"></div>
@@ -398,21 +397,21 @@
                             <h3></h3>
                             <fieldset class="form-input defects">
 
-                                <h3>Kejanggalan</h3>
+                                <h3>{{__("messages.kejanggalan")}}</h3>
                                 <div class="table-responsive">
                                     <table class="table table-bordered w-100">
                                         <thead style="background-color: #E4E3E3 !important">
-                                            <th class="col-4">Title</th>
-                                            <th class="col-4">Defects</th>
-                                            <th class="col-4">Images</th>
+                                            <th class="col-4">{{__("messages.title")}}</th>
+                                            <th class="col-4">{{__("messages.defects")}}</th>
+                                            <th class="col-4">{{__("messages.images")}}</th>
                                         </thead>
                                         {{-- POLE --}}
                                         <tr>
-                                            <th rowspan="5">Pole</th>
+                                            <th rowspan="5">{{__("messages.pole")}}</th>
                                             <td class="d-flex">
                                                 <input type="checkbox" name="tiang_defect[cracked]" id="cracked"
                                                     class="form-check">
-                                                <label for="cracked"> Cracked</label>
+                                                <label for="cracked"> {{__("messages.cracked")}}</label>
 
                                             </td>
                                             <td>
@@ -429,7 +428,7 @@
                                             <td class="d-flex">
                                                 <input type="checkbox" name="tiang_defect[leaning]" id="leaning"
                                                     class="form-check">
-                                                <label for="leaning"> Leaning</label>
+                                                <label for="leaning"> {{__("messages.leaning")}}</label>
                                             </td>
                                             <td>
                                                 <input type="file" name="tiang_defect_image[leaning]"
@@ -446,7 +445,7 @@
                                             <td class="d-flex">
                                                 <input type="checkbox" name="tiang_defect[dim]" id="dim"
                                                     class="form-check">
-                                                <label for="dim"> No. Dim Post / None </label>
+                                                <label for="dim"> {{__("messages.no_dim_post_none")}}</label>
 
                                             </td>
                                             <td>
@@ -462,7 +461,7 @@
                                             <td class="d-flex">
                                                 <input type="checkbox" name="tiang_defect[creepers]" id="creepers"
                                                     class="form-check">
-                                                <label for="creepers"> Creepers </label>
+                                                <label for="creepers"> {{__("messages.Creepers")}} </label>
 
                                             </td>
                                             <td>
@@ -480,7 +479,7 @@
                                             <td>
                                                 <input type="checkbox" name="tiang_defect[other]" id="other_tiang_defect"
                                                     class="form-check">
-                                                <label for="other_tiang_defect"> Others </label>
+                                                <label for="other_tiang_defect"> {{__("messages.others")}} </label>
                                                 <input type="text" name="tiang_defect[other_input]"
                                                     id="other_tiang_defect-input" placeholder="mention other defect"
                                                     required class="form-control d-none">
@@ -499,11 +498,11 @@
                                         {{-- Line (Main / Service) --}}
 
                                         <tr>
-                                            <th rowspan="4">Line (Main / Service)</th>
+                                            <th rowspan="4">{{__("messages.line_main_service")}}</th>
                                             <td class="d-flex">
                                                 <input type="checkbox" name="talian_defect[joint]" id="joint"
                                                     class="form-check">
-                                                <label for="joint"> Joint</label>
+                                                <label for="joint"> {{__("messages.joint")}}</label>
                                             </td>
                                             <td>
                                                 <input type="file" name="talian_defect_image[joint]" id="joint-image"
@@ -518,7 +517,7 @@
                                             <td class="d-flex">
                                                 <input type="checkbox" name="talian_defect[need_rentis]" id="need_rentis"
                                                     class="form-check">
-                                                <label for="need_rentis"> Need Rentis</label>
+                                                <label for="need_rentis"> {{__("messages.need_rentis")}}</label>
                                             </td>
                                             <td>
                                                 <input type="file" name="talian_defect_image[need_rentis]"
@@ -536,7 +535,7 @@
                                             <td class="d-flex">
                                                 <input type="checkbox" name="talian_defect[ground]" id="ground"
                                                     class="form-check">
-                                                <label for="ground"> Does Not Comply With Ground Clearance</label>
+                                                <label for="ground">{{__("messages.Does_Not_Comply_With_Ground_Clearance")}}</label>
                                             </td>
                                             <td>
                                                 <input type="file" name="talian_defect_image[ground]"
@@ -553,7 +552,7 @@
                                             <td>
                                                 <input type="checkbox" name="talian_defect[other]"
                                                     id="other_talian_defect" class="form-check">
-                                                <label for="other_talian_defect"> Others </label>
+                                                <label for="other_talian_defect"> {{__("messages.others")}} </label>
                                                 <input type="text" name="talian_defect[other_input]"
                                                     id="other_talian_defect-input" placeholder="mention other defect"
                                                     required class="form-control d-none">
@@ -573,11 +572,11 @@
                                         {{-- Umbang --}}
 
                                         <tr>
-                                            <th rowspan="5">Umbang</th>
+                                            <th rowspan="5">{{__("messages.Umbang")}}</th>
                                             <td class="d-flex">
                                                 <input type="checkbox" name="umbang_defect[breaking]"
                                                     id="umbang_breaking" class="form-check ">
-                                                <label for="umbang_breaking"> Sagging/Breaking</label>
+                                                <label for="umbang_breaking"> {{__("messages.Sagging_Breaking")}}</label>
                                             </td>
                                             <td>
                                                 <input type="file" name="umbang_defect_image[breaking]"
@@ -593,7 +592,7 @@
                                             <td class="d-flex">
                                                 <input type="checkbox" name="umbang_defect[creepers]"
                                                     id="umbang_creepers" class="form-check ">
-                                                <label for="umbang_creepers"> Creepers</label>
+                                                <label for="umbang_creepers">{{__("messages.Creepers")}} Creepers</label>
                                             </td>
                                             <td>
                                                 <input type="file" name="umbang_defect_image[creepers]"
@@ -610,7 +609,7 @@
                                             <td class="d-flex">
                                                 <input type="checkbox" name="umbang_defect[cracked]" id="umbang_cracked"
                                                     class="form-check ">
-                                                <label for="umbang_cracked"> No Stay Insulator/Damaged </label>
+                                                <label for="umbang_cracked"> {{__("messages.No_Stay_Insulator_Damaged")}}</label>
                                             </td>
                                             <td>
                                                 <input type="file" name="umbang_defect_image[cracked]"
@@ -627,7 +626,7 @@
                                             <td class="d-flex">
                                                 <input type="checkbox" name="umbang_defect[stay_palte]" id="stay_palte"
                                                     class="form-check">
-                                                <label for="stay_palte"> Stay Plate / Base Stay Blocked</label>
+                                                <label for="stay_palte">{{__("messages.Stay_Plate_Base_Stay_Blocked")}}</label>
                                             </td>
                                             <td>
                                                 <input type="file" name="umbang_defect_image[stay_palte]"
@@ -644,7 +643,7 @@
                                             <td>
                                                 <input type="checkbox" name="umbang_defect[other]"
                                                     id="other_umbang_defect" class="form-check">
-                                                <label for="other_umbang_defect"> Others </label>
+                                                <label for="other_umbang_defect">{{__("messages.others")}}</label>
                                                 <input type="text" name="umbang_defect[other_input]"
                                                     id="other_umbang_defect-input" placeholder="mention other defect"
                                                     required class="form-control d-none">
@@ -663,11 +662,11 @@
 
                                         {{-- IPC --}}
                                         <tr>
-                                            <th rowspan="2">IPC</th>
+                                            <th rowspan="2">{{__("messages.IPC")}}</th>
                                             <td>
                                                 <input type="checkbox" name="ipc_defect[burn]"
                                                     id="ipc_burn"class="form-check">
-                                                <label for="ipc_burn"> Burn Effect</label>
+                                                <label for="ipc_burn">{{__("messages.Burn Effect")}} Burn Effect</label>
                                             </td>
                                             <td>
                                                 <input type="file" name="ipc_defect_image[burn]" id="ipc_burn-image"
@@ -683,7 +682,7 @@
                                             <td>
                                                 <input type="checkbox" name="ipc_defect[other]" id="other_ipc_defect"
                                                     class="form-check">
-                                                <label for="other_ipc_defect"> Others </label>
+                                                <label for="other_ipc_defect">{{__("messages.others")}}</label>
                                                 <input type="text" name="ipc_defect[other_input]"
                                                     id="other_ipc_defect-input" placeholder="mention other defect"
                                                     required class="form-control d-none">
@@ -702,11 +701,11 @@
                                         {{-- Black Box --}}
 
                                         <tr>
-                                            <th rowspan="2">Black Box</th>
+                                            <th rowspan="2">{{__("messages.Black_Box")}}</th>
                                             <td class="d-flex">
                                                 <input type="checkbox" name="blackbox_defect[cracked]"
                                                     id="black_box_cracked" class="form-check">
-                                                <label for="black_box_cracked"> Kesan Bakar</label>
+                                                <label for="black_box_cracked">{{__('messages.Kesan_Bakar')}}</label>
                                             </td>
                                             <td>
                                                 <input type="file" name="blackbox_defect_image[cracked]"
@@ -723,7 +722,7 @@
                                             <td>
                                                 <input type="checkbox" name="blackbox_defect[other]"
                                                     id="other_blackbox_defect" class="form-check">
-                                                <label for="other_blackbox_defect"> Others </label>
+                                                <label for="other_blackbox_defect">{{__("messages.others")}}</label>
                                                 <input type="text" name="blackbox_defect[other_input]"
                                                     id="other_blackbox_defect-input" placeholder="mention other defect"
                                                     required class="form-control d-none">
@@ -742,11 +741,11 @@
                                         {{-- Jumper --}}
 
                                         <tr>
-                                            <th rowspan="3">Jumper</th>
+                                            <th rowspan="3">{{__("messages.jumper")}}</th>
                                             <td class="d-flex">
                                                 <input type="checkbox" name="jumper[sleeve]" id="jumper_sleeve"
                                                     class="form-check">
-                                                <label for="jumper_sleeve"> No UV Sleeve</label>
+                                                <label for="jumper_sleeve">{{__("messages.no_uv_sleeve")}}</label>
                                             </td>
                                             <td>
                                                 <input type="file" name="jumper_image[sleeve]"
@@ -762,7 +761,7 @@
                                             <td class="d-flex">
                                                 <input type="checkbox" name="jumper[burn]" id="jumper_burn"
                                                     class="form-check">
-                                                <label for="jumper_burn"> Burn Effect</label>
+                                                <label for="jumper_burn">{{__('messages.Burn Effect')}}  </label>
                                             </td>
                                             <td>
                                                 <input type="file" name="jumper_image[burn]" id="jumper_burn-image"
@@ -779,7 +778,7 @@
                                             <td>
                                                 <input type="checkbox" name="jumper[other]" id="other_jumper"
                                                     class="form-check">
-                                                <label for="other_jumper"> Others </label>
+                                                <label for="other_jumper">{{__("messages.others")}}</label>
                                                 <input type="text" name="jumper[other_input]" id="other_jumper-input"
                                                     placeholder="mention other defect" required
                                                     class="form-control d-none">
@@ -797,11 +796,11 @@
                                         {{-- Lightning catcher --}}
 
                                         <tr>
-                                            <th rowspan="2">Lightning catcher</th>
+                                            <th rowspan="2">{{__("messages.lightning_catcher")}}</th>
                                             <td class="d-flex">
                                                 <input type="checkbox" name="kilat_defect[broken]" id="lightning_broken"
                                                     class="form-check">
-                                                <label for="lightning_broken"> Broken</label>
+                                                <label for="lightning_broken">{{__("messages.broken")}}</label>
                                             </td>
                                             <td>
                                                 <input type="file" name="kilat_defect_image[broken]"
@@ -818,7 +817,7 @@
                                             <td>
                                                 <input type="checkbox" name="kilat_defect[other]" id="other_kilat_defect"
                                                     class="form-check">
-                                                <label for="other_kilat_defect"> Others </label>
+                                                <label for="other_kilat_defect">{{__("messages.others")}}</label>
                                                 <input type="text" name="kilat_defect[other_input]"
                                                     id="other_kilat_defect-input" placeholder="mention other defect"
                                                     required class="form-control d-none">
@@ -837,11 +836,11 @@
                                         {{-- Service --}}
 
                                         <tr>
-                                            <th rowspan="3">Service</th>
+                                            <th rowspan="3">{{__("messages.Service")}}</th>
                                             <td class="d-felx">
                                                 <input type="checkbox" name="servis_defect[roof]" id="service_roof"
                                                     class="form-check">
-                                                <label for="service_roof"> The service line is on the roof</label>
+                                                <label for="service_roof">{{__("messages.the_service_line_is_on_the_roof")}}</label>
 
                                             </td>
                                             <td>
@@ -859,7 +858,7 @@
                                             <td class="d-felx">
                                                 <input type="checkbox" name="servis_defect[won_piece]"
                                                     id="service_won_piece" class="form-check">
-                                                <label for="service_won_piece"> Won piece Date</label>
+                                                <label for="service_won_piece">{{__("messages.won_piece_date")}}</label>
                                             </td>
                                             <td>
                                                 <input type="file" name="servis_defect_image[won_piece]"
@@ -876,7 +875,7 @@
                                             <td>
                                                 <input type="checkbox" name="servis_defect[other]"
                                                     id="other_servis_defect" class="form-check">
-                                                <label for="other_servis_defect"> Others </label>
+                                                <label for="other_servis_defect">{{__('messages.others')}} </label>
                                                 <input type="text" name="servis_defect[other_input]"
                                                     id="other_servis_defect-input" placeholder="mention other defect"
                                                     required class="form-control d-none">
@@ -896,11 +895,11 @@
                                         {{-- Grounding --}}
 
                                         <tr>
-                                            <th rowspan="2">Grounding</th>
+                                            <th rowspan="2">{{__('messages.grounding')}}</th>
                                             <td>
                                                 <input type="checkbox" name="pembumian_defect[netural]"
                                                     id="grounding_netural" class="form-check">
-                                                <label for="grounding_netural"> No Connection to Neutral</label>
+                                                <label for="grounding_netural">{{__('messages.no_connection_to_neutral')}}</label>
                                             </td>
                                             <td>
                                                 <input type="file" name="pembumian_defect_image[netural]"
@@ -917,7 +916,7 @@
                                             <td>
                                                 <input type="checkbox" name="pembumian_defect[other]"
                                                     id="other_pembumian_defect" class="form-check">
-                                                <label for="other_pembumian_defect"> Others </label>
+                                                <label for="other_pembumian_defect">{{__('messages.others')}}</label>
                                                 <input type="text" name="pembumian_defect[other_input]"
                                                     id="other_pembumian_defect-input" placeholder="mention other defect"
                                                     required class="form-control d-none">
@@ -935,11 +934,11 @@
 
                                         {{-- Signage - OFF Point / Two Way Supply --}}
                                         <tr>
-                                            <th rowspan="2">Signage - OFF Point / Two Way Supply</th>
+                                            <th rowspan="2">{{__('messages.signage_off_point_two_way_supply')}}</th>
                                             <td class="d-flex">
                                                 <input type="checkbox" name="bekalan_dua_defect[damage]"
                                                     id="signage_damage" class="form-check">
-                                                <label for="signage_damage"> Faded / Damaged / Missing Signage</label>
+                                                <label for="signage_damage">{{__('messages.faded_damaged_missing_signage')}}</label>
                                             </td>
                                             <td>
                                                 <input type="file" name="bekalan_dua_defect_image[damage]"
@@ -956,7 +955,7 @@
                                             <td>
                                                 <input type="checkbox" name="bekalan_dua_defect[other]"
                                                     id="other_bekalan_dua_defect" class="form-check">
-                                                <label for="other_bekalan_dua_defect"> Others </label>
+                                                <label for="other_bekalan_dua_defect">{{__("messages.others")}}</label>
                                                 <input type="text" name="bekalan_dua_defect[other_input]"
                                                     id="other_bekalan_dua_defect-input" placeholder="mention other defect"
                                                     required class="form-control d-none">
@@ -975,11 +974,11 @@
                                         {{-- Main Street --}}
 
                                         <tr>
-                                            <th rowspan="3">Main Street</th>
+                                            <th rowspan="3">{{__('messages.main_street')}}</th>
                                             <td class="d-flex">
                                                 <input type="checkbox" name="kaki_lima_defect[date_wire]"
                                                     id="street_date_wire" class="form-check">
-                                                <label for="street_date_wire">Date Wire</label>
+                                                <label for="street_date_wire">{{__('messages.date_wire')}}</label>
                                             </td>
                                             <td>
                                                 <input type="file" name="kaki_lima_defect_image[date_wire]"
@@ -995,7 +994,7 @@
                                             <td class="d-flex">
                                                 <input type="checkbox" name="kaki_lima_defect[burn]" id="street_burn"
                                                     class="form-check">
-                                                <label for="street_burn"> Junction Box Date / Burn Effect</label>
+                                                <label for="street_burn">{{__('messages.junction_box_date_burn_effect')}}</label>
                                             </td>
                                             <td>
                                                 <input type="file" name="kaki_lima_defect_image[burn]"
@@ -1011,7 +1010,7 @@
                                             <td>
                                                 <input type="checkbox" name="kaki_lima_defect[other]"
                                                     id="other_kaki_lima_defect_image" class="form-check">
-                                                <label for="other_kaki_lima_defect_image"> Others </label>
+                                                <label for="other_kaki_lima_defect_image">{{__('messages.others')}}</label>
                                                 <input type="text" name="kaki_lima_defect[other_input]"
                                                     id="other_kaki_lima_defect_image-input"
                                                     placeholder="mention other defect" required
@@ -1037,27 +1036,27 @@
 
                             <fieldset class="form-input">
                                 <div class="row">
-                                    <div class="col-md-4"><label for="total_defects">Total Defects</label></div>
+                                    <div class="col-md-4"><label for="total_defects">{{__('messages.total_defects')}}</label></div>
                                     <div class="col-md-4"><input type="number" name="total_defects" id="total_defects"
                                             class="form-control" readonly></div>
                                 </div>
 
 
                                 <div class="row">
-                                    <div class="col-md-4"><label for="planed_date">Planned Repair Date</label></div>
+                                    <div class="col-md-4"><label for="planed_date">{{__('messages.planned_repair_date')}}</label></div>
                                     <div class="col-md-4"><input type="date" name="planed_date" id="planed_date"
                                             class="form-control"></div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-4"><label for="actual_date">Date of Repair Performed</label></div>
+                                    <div class="col-md-4"><label for="actual_date">{{__('messages.date_of_repair_performed')}}</label></div>
                                     <div class="col-md-4"><input type="date" name="actual_date" id="actual_date"
                                             class="form-control"></div>
                                 </div>
 
 
                                 <div class="row">
-                                    <div class="col-md-4"><label for="remarks">Remarks</label></div>
+                                    <div class="col-md-4"><label for="remarks">{{__('messages.remarks')}}</label></div>
                                     <div class="col-md-4">
                                         <textarea name="remarks" id="remarks" cols="30" rows="10" class="form-control"></textarea>
 
@@ -1077,13 +1076,13 @@
                             {{-- START Heigh Clearance (4) --}}
 
                             <fieldset class="form-input high-clearance">
-                                <h3>Heigh Clearance</h3>
+                                <h3>{{__('messages.Heigh_Clearance')}}</h3>
                                 <div class="table-responsive">
                                     <table class="table table-bordered w-100">
                                         <thead style="background-color: #E4E3E3 !important">
-                                            <th class="col-4">Title</th>
-                                            <th class="col-4">Defects</th>
-                                            <th class="col-4">Images</th>
+                                            <th class="col-4">{{__("messages.title")}}</th>
+                                            <th class="col-4">{{__('messages.defects')}}</th>
+                                            <th class="col-4">{{__('messages.images')}}</th>
                                         </thead>
 
                                         <tbody>
@@ -1091,11 +1090,11 @@
                                             {{-- Site Conditions --}}
 
                                             <tr>
-                                                <th rowspan="3">Site Conditions</th>
+                                                <th rowspan="3">{{__('messages.Site_Conditions')}}</th>
                                                 <td class="d-flex">
                                                     <input type="checkbox" name="tapak_condition[road]" id="site_road"
                                                         class="form-check">
-                                                    <label for="site_road">Crossing the Road</label>
+                                                    <label for="site_road">{{__('messages.Crossing_the_Road')}}</label>
                                                 </td>
                                                 <td>
                                                     <input type="file" name="tapak_road_img" id="site_road-img"
@@ -1106,7 +1105,7 @@
                                                 <td>
                                                     <input type="checkbox" name="tapak_condition[side_walk]"
                                                         id="side_walk" class="form-check">
-                                                    <label for="side_walk">Sidewalk</label>
+                                                    <label for="side_walk">{{__('messages.Sidewalk')}}</label>
                                                 </td>
                                                 <td>
                                                     <input type="file" name="tapak_sidewalk_img" id="side_walk-img"
@@ -1117,7 +1116,7 @@
                                                 <td>
                                                     <input type="checkbox" name="tapak_condition[vehicle_entry]"
                                                         id="vehicle_entry" class="form-check">
-                                                    <label for="vehicle_entry">No vehicle entry area </label>
+                                                    <label for="vehicle_entry">{{__('messages.No_vehicle_entry_area')}}</label>
                                                 </td>
                                                 <td>
                                                     <input type="file" name="tapak_no_vehicle_entry_img"
@@ -1127,11 +1126,11 @@
 
                                             {{-- Area --}}
                                             <tr>
-                                                <th rowspan="4">Area</th>
+                                                <th rowspan="4">{{__('messages.Area')}}</th>
                                                 <td class="d-flex">
                                                     <input type="checkbox" name="kawasan[bend]" id="area_bend"
                                                         class="form-check">
-                                                    <label for="area_bend">Bend</label>
+                                                    <label for="area_bend">{{__('messages.Bend')}}</label>
                                                 </td>
                                                 <td>
                                                     <input type="file" name="kawasan_bend_img" id="area_bend-img"
@@ -1142,7 +1141,7 @@
                                                 <td>
                                                     <input type="checkbox" name="kawasan[raod]" id="area_raod"
                                                         class="form-check">
-                                                    <label for="area_raod"> Road</label>
+                                                    <label for="area_raod"> {{__('messages.Road')}}</label>
                                                 </td>
                                                 <td>
                                                     <input type="file" name="kawasan_road_img" id="area_raod-img"
@@ -1153,7 +1152,7 @@
                                                 <td>
                                                     <input type="checkbox" name="kawasan[forest]" id="area_forest"
                                                         class="form-check">
-                                                    <label for="area_forest">Forest </label>
+                                                    <label for="area_forest">{{__('messages.Forest')}} </label>
                                                 </td>
                                                 <td>
                                                     <input type="file" name="kawasan_forest_img" id="area_forest-img"
@@ -1164,7 +1163,7 @@
                                                 <td>
                                                     <input type="checkbox" name="kawasan[other]" id="area_other"
                                                         class="form-check">
-                                                    <label for="area_other">others {{-- (please state) --}} </label>
+                                                    <label for="area_other">{{__('messages.others')}} {{-- (please state) --}} </label>
                                                     <input type="text" name="kawasan[other_input]"
                                                         id="area_other-input" class="form-control d-none" required
                                                         placeholder="(please state)">
@@ -1180,28 +1179,28 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-4"><label for="jarak_kelegaan">Clearance Distance</label></div>
+                                    <div class="col-md-4"><label for="jarak_kelegaan">{{__('messages.Clearance_Distance')}}</label></div>
                                     <div class="col-md-4"><input type="number" name="jarak_kelegaan"
                                             id="jarak_kelegaan" class="form-control"></div>
                                 </div>
 
 
                                 <div class="row">
-                                    <div class="col-md-4"><label for=""> Line clearance specifications</label>
+                                    <div class="col-md-4"><label for="">{{__('messages.Line_clearance_specifications')}}</label>
                                     </div>
                                     <div class="col-md-8">
                                         <div class="row">
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="talian_spec[comply]" id="line-comply"
                                                     class="form-check"><label for="line-comply">
-                                                    Comply</label>
+                                                        {{__('messages.Comply')}}</label>
                                             </div>
 
                                             <div class="col-md-4 d-flex">
                                                 <input type="checkbox" name="talian_spec[disobedient]"
                                                     id="line-disobedient" class="form-check"><label
                                                     for="line-disobedient">
-                                                    Disobedient</label>
+                                                    {{__('messages.Disobedient')}}</label>
                                             </div>
 
 
@@ -1220,30 +1219,30 @@
                             {{-- START Kebocoran Arus (5) --}}
 
                             <fieldset class="form-input">
-                                <h3>Kebocoran Arus</h3>
+                                <h3>{{__('messages.Kebocoran_Arus')}}</h3>
 
                                 <div class="row">
-                                    <div class="col-md-4"><label for="">Inspection of current leakage on the
-                                            pole</label></div>
+                                    <div class="col-md-4"><label for="">{{__('messages.Inspection_of_current_leakage_on_the_pole')}}
+                                    </label></div>
                                     <div class="col-md-8">
                                         <div class="row">
                                             <div class="col-md-4 d-flex">
                                                 <input type="radio" name="arus_pada_tiang" id="arus_pada_tiang_no"
                                                     class="form-check" value="no"><label for="arus_pada_tiang_no">
 
-                                                    No</label>
+                                                        {{__('messages.no')}}</label>
                                             </div>
 
                                             <div class="col-md-4 d-flex">
                                                 <input type="radio" name="arus_pada_tiang" id="arus_pada_tiang_yes"
                                                     class="form-check" value="yes"><label
                                                     for="arus_pada_tiang_yes">
-                                                    Yes</label>
+                                                    {{__('messages.yes')}}</label>
                                             </div>
 
                                             <div class="col-md-4 d-none  " id="arus_pada_tiang_amp_div">
                                                 <label for="arus_pada_tiang_amp">
-                                                    (Amp)</label>
+                                                    {{__('messages.Amp')}}</label>
                                                 <input type="text" name="arus_pada_tiang_amp"
                                                     id="arus_pada_tiang_amp" class="form-control" required>
                                             </div>

@@ -63,12 +63,12 @@
         <div class="container-  ">
             <div class="row  " style="flex-wrap:nowrap">
                 <div class="col-sm-6">
-                    <h3>Patrolling</h3>
+                    <h3>{{__('messages.Patrolling')}}</h3>
                 </div>
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
-                        <li class="breadcrumb-item"><a href="/get-all-work-packages">index</a></li>
-                        <li class="breadcrumb-item active">create</li>
+                        <li class="breadcrumb-item"><a href="/get-all-work-packages">{{__('messages.index')}}</a></li>
+                        <li class="breadcrumb-item active">{{__('messages.create')}}</li>
                     </ol>
                 </div>
             </div>
@@ -90,7 +90,7 @@
                             @csrf
 
                             <div class="row">
-                                <div class="col-md-4"><label for="zone">Zone</label></div>
+                                <div class="col-md-4"><label for="zone">{{__('messages.zone')}}</label></div>
                                 <div class="col-md-4">
                                     <select name="zone" id="search_zone" class="form-control" required>
 
@@ -105,7 +105,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="ba">BA</label></div>
+                                <div class="col-md-4"><label for="ba">{{__('messages.ba')}}</label></div>
                                 <div class="col-md-4"><select name="ba_s" id="ba_s" class="form-control" required
                                         onchange="getWorkPackage(this)">
                                         <option value="" hidden>select BA</option>
@@ -116,7 +116,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="search_wp">Work Package Name</label></div>
+                                <div class="col-md-4"><label for="search_wp">{{__('messages.Work_Package_Name')}}</label></div>
                                 <div class="col-md-4">
                                     <select name="search_wp" id="search_wp" class="form-control" required>
                                         <option value="" hidden>select work package</option>
@@ -128,7 +128,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="road_select">Select Road</label></div>
+                                <div class="col-md-4"><label for="road_select">{{__('messages.Select_Road')}}</label></div>
                                 <div class="col-md-4">
                                     <select name="road_select" id="road_select" class="form-control" required>
                                         <option value="" hidden>select road</option>
@@ -141,7 +141,7 @@
 
 
                             <div class="row">
-                                <div class="col-md-4"><label for="road_name">Road Name</label></div>
+                                <div class="col-md-4"><label for="road_name">{{__('messages.Road_Name')}}</label></div>
                                 <div class="col-md-4">
                                     <input type="text" class="form-control" name="road_name" id="road_name" required>
                                 </div>
@@ -150,13 +150,13 @@
 
 
                             <div class="row">
-                                <div class="col-md-4"><label for="date_patrol">Patrolling Date</label></div>
+                                <div class="col-md-4"><label for="date_patrol">{{__('messages.Patrolling_Date')}}</label></div>
                                 <div class="col-md-4"><input type="date" name="date_patrol" id="date_patrol"
                                         class="form-control" required></div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="time_petrol">Patrolling Time</label></div>
+                                <div class="col-md-4"><label for="time_petrol">{{__('messages.patrolling_time')}}</label></div>
                                 <div class="col-md-4"><input type="time" name="time_petrol" id="time_petrol"
                                         class="form-control" required></div>
                             </div>
@@ -165,29 +165,29 @@
 
 
                             <div class="row">
-                                <div class="col-md-4"><label for="fidar">Feeder</label></div>
+                                <div class="col-md-4"><label for="fidar">{{__('messages.Feeder')}}</label></div>
                                 <div class="col-md-4"><input type="text" name="fidar" id="fidar"
                                         class="form-control" required></div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="name_project">Project Name</label></div>
+                                <div class="col-md-4"><label for="name_project">{{__('messages.Project_Name')}}</label></div>
                                 <div class="col-md-4"><input type="text" name="name_project" id="name_project"
                                         class="form-control" required></div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="km">Km Plan</label></div>
+                                <div class="col-md-4"><label for="km">{{__('messages.Km_Plan')}}</label></div>
                                 <div class="col-md-4"><input type="number" name="km" id="km"
                                         class="form-control" required></div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label for="actual_km">Km Actual</label></div>
+                                <div class="col-md-4"><label for="actual_km">{{__('messages.km_actual')}}</label></div>
                                 <div class="col-md-4"><input type="number" name="actual_km" id="actual_km"
                                         class="form-control" required></div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label for="digging">Total Digging</label></div>
+                                <div class="col-md-4"><label for="digging">{{__('messages.Total_Digging')}}</label></div>
                                 <div class="col-md-4">
                                     <input type="number" class="form-control" name="total_digging" id="total_digging"
                                         required>
@@ -196,7 +196,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label for="notice">Total Notice</label></div>
+                                <div class="col-md-4"><label for="notice">{{__('messages.Total_Notice')}}</label></div>
                                 <div class="col-md-4">
                                     <input type="number" class="form-control" name="total_notice" id="total_notice"
                                         required>
@@ -204,7 +204,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label for="supervision">Total Supervision</label></div>
+                                <div class="col-md-4"><label for="supervision">{{__('messages.Total_Supervision')}}</label></div>
                                 <div class="col-md-4">
                                     <input type="number" class="form-control" name="total_supervision"
                                         id="total_supervision" required>
@@ -222,7 +222,7 @@
                                 <strong> <span class="text-danger map-error"></span></strong>
                             </div>
 
-                            <div class="text-center p-4"><button class="btn btn-sm btn-success">Submit</button></div>
+                            <div class="text-center p-4"><button class="btn btn-sm btn-success">{{__('messages.submit')}}</button></div>
 
 
                         </form>

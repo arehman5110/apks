@@ -54,8 +54,8 @@
         }
 
         /* div#lightbox {
-                display: none;
-            } */
+                        display: none;
+                    } */
 
         .side-bar>.table td {
             padding: 0.5rem !important
@@ -163,7 +163,7 @@
 
                     <div class="col-md-3">
                         <label for="search_zone">Zone</label>
-                        <select name="search_zone" id="search_zone" class="form-control">
+                        <select name="search_zone" id="search_zone" class="form-control" onchange="onChangeZone(this.value)">
 
                             @if (Auth::user()->zone == '')
                                 <option value="" hidden>select zone</option>
@@ -178,8 +178,9 @@
                     </div>
                     <div class="col-md-3">
                         <label for="search_ba">BA</label>
-                        <select name="search_ba" id="search_ba" class="form-control" onchange="getWorkPackage(this)">
-                            <option value="">Select zone</option>
+                        <select name="search_ba" id="search_ba" class="form-control" onchange="getWorkPackage(this.value)">
+                            <option value="{{ Auth::user()->ba }}" hidden>
+                                {{ Auth::user()->ba != '' ? Auth::user()->ba : 'Select BA' }}</option>
                         </select>
                     </div>
 
@@ -316,9 +317,9 @@
             </div>
 
             <div id="wg1" class="windowGroup">
- 
+
             </div>
- 
+
 
         </div><!--  END MAP CARD DIV -->
         {{-- <div id="panorama"></div> --}}
@@ -456,6 +457,7 @@
         var substation = '';
         var groupedOverlays = '';
         var layerControl = '';
+
         map = L.map('map').setView([3.016603, 101.858382], 5);
 
         var st1 = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
@@ -469,6 +471,9 @@
             "Satellite": st1,
             "Street": street
         };
+
+
+
 
 
         // ADD DRAW TOOLS
@@ -563,39 +568,6 @@
         // ADD LAYERS
 
 
-        wp = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-            layers: 'cite:tbl_workpackage',
-            format: 'image/png',
-            maxZoom: 21,
-            transparent: true
-        }, {
-            buffer: 10
-        })
-
-
-        rd = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-            layers: 'cite:tbl_roads',
-            format: 'image/png',
-            maxZoom: 21,
-            transparent: true
-        }, {
-            buffer: 10
-        })
-
-        substation = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-                layers: 'cite:tbl_substation',
-                format: 'image/png',
-                // cql_filter: "ba ILIKE '%" + param + "%'",
-                maxZoom: 21,
-                transparent: true
-            }, {
-                buffer: 10
-            })
-
-            // map.addLayer(substation)
-            // substation.bringToFront()
-
-
         boundary3 = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
             layers: 'cite:aero_apks',
             format: 'image/png',
@@ -615,38 +587,99 @@
             buffer: 10
         }).addTo(map);
 
-        function  addLayerControl(params) {
 
-        }
-
-        // ADD LAYERS GROUPED OVER LAYS
-        groupedOverlays = {
-            "POI": {
-                'BA': boundary3,
-                "Work Package": wp,
-                "Roads": rd,
-                "Pano ": pano_layer,
-                'Subsation' : substation,
-
-            }
-        };
-
-        var layerControl = L.control.groupedLayers(baseLayers, groupedOverlays, {
-            collapsed: true,
-            position: 'topright'
-            // groupCheckboxes: true
-        }).addTo(map);
 
 
         var bangi_status = false;
         var addTOmap = false;
-        var boundary2 = '';
-        var wp = '';
-        var rd = '';
+
 
 
         map.addLayer(boundary3)
         map.setView([2.59340882301331, 101.07054901123], 8);
+
+
+        var boundary2 = '';
+        var wp = '';
+        var rd = '';
+        var zoom = 8;
+
+
+
+        function addRemoveBundary(param, paramY, paramX) {
+
+            map.removeLayer(boundary3)
+
+
+            if (boundary2 !== '') {
+                map.removeLayer(boundary2)
+            }
+            boundary2 = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:ba',
+                format: 'image/png',
+                cql_filter: "station ILIKE '%" + param + "%'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+            map.addLayer(boundary2)
+            boundary2.bringToFront()
+
+            map.flyTo([parseFloat(paramY), parseFloat(paramX)], zoom, {
+                duration: 1.5,
+                easeLinearity: 0.25,
+            });
+
+            if (wp != '') {
+                map.removeLayer(wp)
+            }
+
+            // workk package
+            wp = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:tbl_workpackage',
+                format: 'image/png',
+                cql_filter: "ba ILIKE '%" + param + "%'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+            map.addLayer(wp)
+            wp.bringToFront()
+            if (rd != '') {
+                map.removeLayer(rd)
+            }
+
+            rd = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:tbl_roads',
+                format: 'image/png',
+                cql_filter: "ba ILIKE '%" + param + "%'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+            map.addLayer(rd)
+            rd.bringToFront()
+
+            if (substation != '') {
+                map.removeLayer(substation)
+            }
+            substation = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:tbl_substation',
+                format: 'image/png',
+                cql_filter: "ba ILIKE '%" + param + "%'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+
+            map.addLayer(substation)
+            substation.bringToFront()
+            addLayerControl()
+        }
 
 
 
@@ -768,7 +801,7 @@
                         } else {
                             console.log(
                                 'Data or data.features is undefined or does not have a valid length property.'
-                                );
+                            );
                         }
                     })
                     .fail(function(error) {
@@ -947,78 +980,11 @@
 
 
 
-        function addRemoveBundary(param, paramY, paramX) {
-            map.removeLayer(boundary3)
-
-
-            if (boundary2 !== '') {
-                map.removeLayer(boundary2)
-            }
-            boundary2 = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-                layers: 'cite:ba',
-                format: 'image/png',
-                cql_filter: "station='" + param + "'",
-                maxZoom: 21,
-                transparent: true
-            }, {
-                buffer: 10
-            })
-            map.addLayer(boundary2)
-            boundary2.bringToFront()
-
-            map.setView([parseFloat(paramY), parseFloat(paramX)], 11);
-            if (wp != '') {
-                map.removeLayer(wp)
-            }
-
-            // workk package
-            wp = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-                layers: 'cite:tbl_workpackage',
-                format: 'image/png',
-                cql_filter: "ba='" + param + "'",
-                maxZoom: 21,
-                transparent: true
-            }, {
-                buffer: 10
-            })
-            map.addLayer(wp)
-            wp.bringToFront()
-            if (rd != '') {
-                map.removeLayer(rd)
-            }
-
-            rd = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-                layers: 'cite:tbl_roads',
-                format: 'image/png',
-                cql_filter: "ba='" + param + "'",
-                maxZoom: 21,
-                transparent: true
-            }, {
-                buffer: 10
-            })
-            map.addLayer(rd)
-            rd.bringToFront()
-
-            if (substation != '') {
-                map.removeLayer(substation)
-            }
-            substation = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-                layers: 'cite:tbl_substation',
-                format: 'image/png',
-                cql_filter: "ba='" + param + "'",
-                maxZoom: 21,
-                transparent: true
-            }, {
-                buffer: 10
-            })
-
-            map.addLayer(substation)
-            substation.bringToFront()
-            // addLayerControl()
-        }
 
         function addLayerControl() {
-
+            if (layerControl != '') {
+                map.removeControl(layerControl);
+            }
 
             // ADD LAYERS GROUPED OVER LAYS
             groupedOverlays = {
@@ -1032,14 +998,12 @@
                 }
             };
 
-            var layerControl = L.control.groupedLayers(baseLayers, groupedOverlays, {
+            layerControl = L.control.groupedLayers(baseLayers, groupedOverlays, {
                 collapsed: true,
                 position: 'topright'
                 // groupCheckboxes: true
             }).addTo(map);
-            if (map.hasLayer(layerControl)) {
-    map.removeControl(layerControl);
-}
+
         }
 
 
@@ -1114,15 +1078,16 @@
         const userBa = "{{ Auth::user()->ba }}";
         $(document).ready(function() {
 
-
-
-            if (userBa !== '') {
-                getBaPoints(userBa)
+            // check ba is empty or not
+            if (userBa == '') {
+                addRemoveBundary('', 2.75101756479656, 101.304931640625)
+            } else {
+                getWorkPackage(userBa);
             }
 
-
-
             $('#search_wp').select2();
+
+ 
             option = {
                 success: callbackSuccess
             }
@@ -1152,62 +1117,6 @@
 
 
 
-            // search ba on ba change
-
-            $('#search_zone').on('change', function() {
-                const selectedValue = this.value;
-                const areaSelect = $('#search_ba');
-                clearFields()
-                // Clear previous options
-                areaSelect.empty();
-                areaSelect.append(`<option value="" hidden>Select ba</option>`)
-
-                if (selectedValue === 'W1') {
-                    const w1Options = [
-                        ['KL PUSAT', 'KUALA LUMPUR PUSAT', 3.14925905877391, 101.754098819705]
-                    ];
-
-                    w1Options.forEach((data) => {
-                        areaSelect.append(`<option value="${data}">${data[0]}</option>`);
-                    });
-                } else if (selectedValue === 'B1') {
-                    const b1Options = [
-                        ['PJ', 'PETALING JAYA', 3.1128074178475, 101.605270457169],
-                        ['RAWANG', 'RAWANG', 3.47839445121726, 101.622905486475],
-                        ['K.SELANGOR', 'KUALA SELANGOR', 3.40703209426401, 101.317426926947]
-                    ];
-
-                    b1Options.forEach((data) => {
-                        areaSelect.append(`<option value="${data}">${data[0]}</option>`);
-                    });
-                } else if (selectedValue === 'B2') {
-                    const b2Options = [
-                        ['KLANG', 'KLANG', 3.08428642705789, 101.436185279023],
-                        ['PORT KLANG', 'PELABUHAN KLANG', 2.98188527916042, 101.324234779569]
-                    ];
-
-                    b2Options.forEach((data) => {
-                        areaSelect.append(`<option value="${data}">${data[0]}</option>`);
-                    });
-                } else if (selectedValue === 'B4') {
-                    const b4Options = [
-                        ['CHERAS', 'CHERAS', 3.14197346621987, 101.849883983416],
-                        ['BANTING/SEPANG', 'BANTING', 2.82111390453244, 101.505890775541],
-                        ['BANGI', 'BANGI', 2.965810949933260, 101.81881303103104],
-                        ['PUTRAJAYA/CYBERJAYA/PUCHONG', 'PUTRAJAYA & CYBERJAYA', 2.92875032271019,
-                            101.675338316575
-                        ]
-                    ];
-
-                    b4Options.forEach((data) => {
-                        areaSelect.append(`<option value="${data}">${data[0]}</option>`);
-                    });
-                }
-                $('#search_wp').empty();
-                $('#search_wp').append(`<option value="" hidden>Select Work Package</option>`);
-                $('#for-excel').html('')
-                // $('#pw-zone').val(this.value);
-            });
 
             $('#ba').on('change', function() {
                 $('#pw-ba').val(this.value)
@@ -1217,30 +1126,43 @@
         })
 
 
-        function getBaPoints(param) {
-            var baSelect = $('#search_ba')
-            baSelect.empty();
 
-            b1Options.map((data) => {
-                if (data[1] == param) {
-                    baSelect.append(`<option value="${data}">${data[1]}</option>`)
-                }
-            });
-            let baVal = document.getElementById('search_ba');
-            getWorkPackage(baVal)
-        }
+
+        function onChangeZone(param) {
+        const areaSelect = $('#search_ba');
+
+        // Clear previous options
+        areaSelect.empty();
+        areaSelect.append(`<option value="" hidden>Select ba</option>`)
+
+
+        b1Options.map((data) => {
+            if (data[0] == param) {
+                areaSelect.append(`<option value="${data[1]}">${data[1]}</option>`)
+            }
+        });
+        $('#search_wp').empty();
+                $('#search_wp').append(`<option value="" hidden>Select Work Package</option>`);
+                $('#for-excel').html('')
+
+    }
 
 
 
         function getWorkPackage(param) {
             clearFields()
-            var splitVal = param.value.split(',');
-
-
-            addRemoveBundary(splitVal[1], splitVal[2], splitVal[3])
+            var selectBA = '';
+            for (const data of b1Options) {
+                if (data[1] == param) {
+                    selectBA = data;
+                    break;
+                }
+            }
+            zoom = 11;
+            addRemoveBundary(selectBA[1], selectBA[2], selectBA[3])
             var zone = $('#search_zone').val();
             $.ajax({
-                url: `/{{ app()->getLocale() }}/get-work-package/${splitVal[1]}/${zone}`,
+                url: `/{{ app()->getLocale() }}/get-work-package/${selectBA[1]}/${selectBA[0]}`,
                 dataType: 'JSON',
                 method: 'GET',
                 async: false,
@@ -1260,7 +1182,7 @@
             })
 
             $.ajax({
-                url: `/{{ app()->getLocale() }}/getStats/${splitVal[1]}`,
+                url: `/{{ app()->getLocale() }}/getStats/${selectBA[1]}`,
                 dataType: 'JSON',
                 method: 'GET',
                 async: false,

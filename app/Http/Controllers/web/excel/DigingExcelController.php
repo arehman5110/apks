@@ -14,7 +14,7 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 class DigingExcelController extends Controller
 {
     //
-    public function generateDigingExcel($id)
+    public function generateDigingExcel($language , $id)
     {
         $recored = ThirdPartyDiging::where('workpackage_id', $id)->get();
         // return $recored;
