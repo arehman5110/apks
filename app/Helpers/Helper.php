@@ -91,6 +91,7 @@ function getImage($checkBox, $arr, $key)
 
 function getImage2($key, $arr, $arr_name, $img_arr, $lab_name)
 {
+    $lab_name =  __('messages.'.$lab_name);
     $html = '';
 
     // Check for checked checkbox
@@ -167,7 +168,7 @@ function getImageShow($key, $arr, $arr_name, $img_arr, $lab_name)
 
     $id = $arr_name . '_' . $key;
     $name = $arr_name . '[' . $key . ']';
- 
+
 
     // Check if $key is "other" to decide the CSS classes
     $class = $key != 'other' ? 'd-flex' : '';

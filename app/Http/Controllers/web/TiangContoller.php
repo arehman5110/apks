@@ -8,6 +8,7 @@ use App\Repositories\TiangRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Stmt\TryCatch;
 
 class TiangContoller extends Controller
 {
@@ -158,10 +159,16 @@ class TiangContoller extends Controller
      */
     public function show($language , $id)
     {
+        try {
+            $data =  $this->tiangRepository->getRecoreds($id);
 
-        $data =  $this->tiangRepository->getRecoreds($id);
+            return view('Tiang.detail',['data'=>$data]);
+        } catch (\Throwable $th) {
+            return redirect()->route("tiang-talian-vt-and-vr.index")->with('failed','Request Failed');
+        }
 
-        return view('Tiang.detail',['data'=>$data]);
+        // dd($id);
+
     }
 
     /**

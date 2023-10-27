@@ -379,54 +379,54 @@
                             <h3></h3>
                             <fieldset class="form-input defects">
 
-                                <h3>Kejanggalan</h3>
+                                <h3>{{__("messages.kejanggalan")}}</h3>
                                 <div class="table-responsive">
                                     <table class="table table-bordered w-100">
                                         <thead style="background-color: #E4E3E3 !important">
-                                            <th class="col-4">Title</th>
-                                            <th class="col-4">Defects</th>
-                                            <th class="col-3">Upload Images</th>
-                                            <th class="col-1">Images</th>
+                                            <th class="col-4">{{__("messages.title")}}</th>
+                                            <th class="col-4">{{__("messages.defects")}}</th>
+                                            <th class="col-3">{{__("messages.images")}}</th>
+                                            <th class="col-1">{{__('messages.images')}}</th>
                                         </thead>
                                         {{-- POLE --}}
                                         <tr>
-                                            <th rowspan="5">Pole</th>
+                                            <th rowspan="5">{{__("messages.pole")}}</th>
 
-                                            {!! getImage2('cracked', $data->tiang_defect, 'tiang_defect', $data->tiang_defect_image, 'Cracked') !!}
+                                            {!! getImage2('cracked', $data->tiang_defect, 'tiang_defect', $data->tiang_defect_image, 'cracked') !!}
 
                                         </tr>
                                         <tr>
-                                            {!! getImage2('leaning', $data->tiang_defect, 'tiang_defect', $data->tiang_defect_image, 'Leaning') !!}
-
-                                        </tr>
-
-
-                                        <tr>
-                                            {!! getImage2('dim', $data->tiang_defect, 'tiang_defect', $data->tiang_defect_image, 'Dim') !!}
-
-                                        </tr>
-
-                                        <tr>
-                                            {!! getImage2('creepers', $data->tiang_defect, 'tiang_defect', $data->tiang_defect_image, 'Creepers') !!}
+                                            {!! getImage2('leaning', $data->tiang_defect, 'tiang_defect', $data->tiang_defect_image, 'leaning') !!}
 
                                         </tr>
 
 
                                         <tr>
-                                            {!! getImage2('other', $data->tiang_defect, 'tiang_defect', $data->tiang_defect_image, 'Other') !!}
+                                            {!! getImage2('dim', $data->tiang_defect, 'tiang_defect', $data->tiang_defect_image, 'no_dim_post_none') !!}
+
+                                        </tr>
+
+                                        <tr>
+                                            {!! getImage2('creepers', $data->tiang_defect, 'tiang_defect', $data->tiang_defect_image, 'creepers') !!}
+
+                                        </tr>
+
+
+                                        <tr>
+                                            {!! getImage2('other', $data->tiang_defect, 'tiang_defect', $data->tiang_defect_image, 'other') !!}
 
                                         </tr>
 
                                         {{-- Line (Main / Service) --}}
 
                                         <tr>
-                                            <th rowspan="4">Line (Main / Service)</th>
-                                            {!! getImage2('joint', $data->talian_defect, 'talian_defect', $data->talian_defect_image, 'Joint') !!}
+                                            <th rowspan="4">{{__('messages.line_main_service')}}</th>
+                                            {!! getImage2('joint', $data->talian_defect, 'talian_defect', $data->talian_defect_image, 'joint') !!}
 
 
                                         </tr>
                                         <tr>
-                                            {!! getImage2('need_rentis', $data->talian_defect, 'talian_defect', $data->talian_defect_image, 'Need Rentis') !!}
+                                            {!! getImage2('need_rentis', $data->talian_defect, 'talian_defect', $data->talian_defect_image, 'need_rentis') !!}
 
 
                                         </tr>
@@ -437,14 +437,14 @@
                                                 $data->talian_defect,
                                                 'talian_defect',
                                                 $data->talian_defect_image,
-                                                'Does Not Comply With Ground Clearance',
+                                                'Does_Not_Comply_With_Ground_Clearance',
                                             ) !!}
 
                                         </tr>
 
                                         <tr>
 
-                                            {!! getImage2('other', $data->talian_defect, 'talian_defect', $data->talian_defect_image, 'Others') !!}
+                                            {!! getImage2('other', $data->talian_defect, 'talian_defect', $data->talian_defect_image, 'others') !!}
 
                                         </tr>
 
@@ -452,8 +452,8 @@
                                         {{-- Umbang --}}
 
                                         <tr>
-                                            <th rowspan="5">Umbang</th>
-                                            {!! getImage2('breaking', $data->umbang_defect, 'umbang_defect', $data->umbang_defect_image, 'Sagging/Breaking') !!}
+                                            <th rowspan="5">{{__("messages.Umbang")}}</th>
+                                            {!! getImage2('breaking', $data->umbang_defect, 'umbang_defect', $data->umbang_defect_image, 'Sagging_Breaking') !!}
 
                                         </tr>
                                         <tr>
@@ -467,7 +467,7 @@
                                                 $data->umbang_defect,
                                                 'umbang_defect',
                                                 $data->umbang_defect_image,
-                                                'No Stay Insulator/Damaged',
+                                                'No_Stay_Insulator_Damaged',
                                             ) !!}
 
                                         </tr>
@@ -478,49 +478,49 @@
                                                 $data->umbang_defect,
                                                 'umbang_defect',
                                                 $data->umbang_defect_image,
-                                                'Stay Plate / Base Stay Blocked',
+                                                'Stay_Plate_Base_Stay_Blocked',
                                             ) !!}
 
                                         </tr>
 
                                         <tr>
-                                            {!! getImage2('other', $data->umbang_defect, 'umbang_defect', $data->umbang_defect_image, 'Others') !!}
+                                            {!! getImage2('other', $data->umbang_defect, 'umbang_defect', $data->umbang_defect_image, 'others') !!}
 
                                         </tr>
 
 
                                         {{-- IPC --}}
                                         <tr>
-                                            <th rowspan="2">IPC</th>
+                                            <th rowspan="2">{{__("messages.IPC")}}</th>
 
                                             {!! getImage2('burn', $data->ipc_defect, 'ipc_defect', $data->ipc_defect_image, 'Burn Effect') !!}
 
                                         </tr>
 
                                         <tr>
-                                            {!! getImage2('other', $data->ipc_defect, 'ipc_defect', $data->ipc_defect_image, 'Others') !!}
+                                            {!! getImage2('other', $data->ipc_defect, 'ipc_defect', $data->ipc_defect_image, 'others') !!}
 
                                         </tr>
 
                                         {{-- Black Box --}}
 
                                         <tr>
-                                            <th rowspan="2">Black Box</th>
+                                            <th rowspan="2">{{__("messages.Black_Box")}}</th>
 
-                                            {!! getImage2('cracked', $data->blackbox_defect, 'blackbox_defect', $data->blackbox_defect_image, 'Kesan Bakar') !!}
+                                            {!! getImage2('cracked', $data->blackbox_defect, 'blackbox_defect', $data->blackbox_defect_image, 'Kesan_Bakar') !!}
 
                                         </tr>
 
                                         <tr>
-                                            {!! getImage2('other', $data->blackbox_defect, 'blackbox_defect', $data->blackbox_defect_image, 'Others') !!}
+                                            {!! getImage2('other', $data->blackbox_defect, 'blackbox_defect', $data->blackbox_defect_image, 'others') !!}
 
                                         </tr>
 
                                         {{-- Jumper --}}
 
                                         <tr>
-                                            <th rowspan="3">Jumper</th>
-                                            {!! getImage2('sleeve', $data->jumper, 'jumper', $data->jumper_image, 'No UV Sleeve') !!}
+                                            <th rowspan="3">{{__("messages.jumper")}}</th>
+                                            {!! getImage2('sleeve', $data->jumper, 'jumper', $data->jumper_image, 'no_uv_sleeve') !!}
 
                                         </tr>
                                         <tr>
@@ -530,48 +530,48 @@
 
 
                                         <tr>
-                                            {!! getImage2('other', $data->jumper, 'jumper', $data->jumper_image, 'Others') !!}
+                                            {!! getImage2('other', $data->jumper, 'jumper', $data->jumper_image, 'others') !!}
 
                                         </tr>
 
                                         {{-- Lightning catcher --}}
 
                                         <tr>
-                                            <th rowspan="2">Lightning catcher</th>
+                                            <th rowspan="2">{{__("messages.lightning_catcher")}}</th>
 
-                                            {!! getImage2('broken', $data->kilat_defect, 'kilat_defect', $data->kilat_defect_image, 'Broken') !!}
+                                            {!! getImage2('broken', $data->kilat_defect, 'kilat_defect', $data->kilat_defect_image, 'broken') !!}
 
                                         </tr>
 
                                         <tr>
 
-                                            {!! getImage2('other', $data->kilat_defect, 'kilat_defect', $data->kilat_defect_image, 'Others') !!}
+                                            {!! getImage2('other', $data->kilat_defect, 'kilat_defect', $data->kilat_defect_image, 'others') !!}
 
                                         </tr>
 
                                         {{-- Service --}}
 
                                         <tr>
-                                            <th rowspan="3">Service</th>
+                                            <th rowspan="3">{{__("messages.Service")}}</th>
 
                                             {!! getImage2(
                                                 'roof',
                                                 $data->servis_defect,
                                                 'servis_defect',
                                                 $data->servis_defect_image,
-                                                'The service line is on the roof',
+                                                'the_service_line_is_on_the_roof',
                                             ) !!}
 
                                         </tr>
 
                                         <tr>
-                                            {!! getImage2('won_piece', $data->servis_defect, 'servis_defect', $data->servis_defect_image, 'Won piece Dat') !!}
+                                            {!! getImage2('won_piece', $data->servis_defect, 'servis_defect', $data->servis_defect_image, 'won_piece_date') !!}
 
 
                                         </tr>
 
                                         <tr>
-                                            {!! getImage2('other', $data->servis_defect, 'servis_defect', $data->servis_defect_image, 'Others') !!}
+                                            {!! getImage2('other', $data->servis_defect, 'servis_defect', $data->servis_defect_image, 'others') !!}
 
                                         </tr>
 
@@ -579,33 +579,33 @@
                                         {{-- Grounding --}}
 
                                         <tr>
-                                            <th rowspan="2">Grounding</th>
+                                            <th rowspan="2">{{__("messages.grounding")}}</th>
 
                                             {!! getImage2(
                                                 'netural',
                                                 $data->pembumian_defect,
                                                 'pembumian_defect',
                                                 $data->pembumian_defect_image,
-                                                'No Connection to Neutral',
+                                                'no_connection_to_neutral',
                                             ) !!}
 
                                         </tr>
 
                                         <tr>
-                                            {!! getImage2('other', $data->pembumian_defect, 'pembumian_defect', $data->pembumian_defect_image, 'Others') !!}
+                                            {!! getImage2('other', $data->pembumian_defect, 'pembumian_defect', $data->pembumian_defect_image, 'others') !!}
 
                                         </tr>
 
                                         {{-- Signage - OFF Point / Two Way Supply --}}
                                         <tr>
-                                            <th rowspan="2">Signage - OFF Point / Two Way Supply</th>
+                                            <th rowspan="2">{{__("messages.signage_off_point_two_way_supply")}}</th>
 
                                             {!! getImage2(
                                                 'damage',
                                                 $data->bekalan_dua_defect,
                                                 'bekalan_dua_defect',
                                                 $data->bekalan_dua_defect_image,
-                                                'Faded / Damaged / Missing Signage',
+                                                'faded_damaged_missing_signage',
                                             ) !!}
 
                                         </tr>
@@ -616,7 +616,7 @@
                                                 $data->bekalan_dua_defect,
                                                 'bekalan_dua_defect',
                                                 $data->bekalan_dua_defect_image,
-                                                'Others',
+                                                'others',
                                             ) !!}
 
                                         </tr>
@@ -624,14 +624,14 @@
                                         {{-- Main Street --}}
 
                                         <tr>
-                                            <th rowspan="3">Main Street</th>
+                                            <th rowspan="3">{{__('messages.main_street')}}</th>
 
                                             {!! getImage2(
                                                 'date_wire',
                                                 $data->kaki_lima_defect,
                                                 'kaki_lima_defect',
                                                 $data->kaki_lima_defect_image,
-                                                'Date Wire',
+                                                'date_wire',
                                             ) !!}
 
                                         </tr>
@@ -641,12 +641,12 @@
                                                 $data->kaki_lima_defect,
                                                 'kaki_lima_defect',
                                                 $data->kaki_lima_defect_image,
-                                                'Junction Box Date / Burn Effect',
+                                                'junction_box_date_burn_effect',
                                             ) !!}
 
                                         </tr>
                                         <tr>
-                                            {!! getImage2('other', $data->kaki_lima_defect, 'kaki_lima_defect', $data->kaki_lima_defect_image, 'Others') !!}
+                                            {!! getImage2('other', $data->kaki_lima_defect, 'kaki_lima_defect', $data->kaki_lima_defect_image, 'others') !!}
 
                                         </tr>
                                     </table>
@@ -663,21 +663,21 @@
 
 
                                 <div class="row">
-                                    <div class="col-md-4"><label for="total_defects">Total Defects</label></div>
+                                    <div class="col-md-4"><label for="total_defects">{{__("messages.total_defects")}}</label></div>
                                     <div class="col-md-4"><input type="number" name="total_defects" id="total_defects"
                                             readonly value="{{ $data->total_defects }}" class="form-control"></div>
                                 </div>
 
 
                                 <div class="row">
-                                    <div class="col-md-4"><label for="planed_date">Planned Repair Date</label></div>
+                                    <div class="col-md-4"><label for="planed_date">{{__("messages.planned_repair_date")}}</label></div>
                                     <div class="col-md-4"><input type="date" name="planed_date" id="planed_date"
                                             value="{{ date('Y-m-d', strtotime($data->planed_date)) }}"
                                             class="form-control"></div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-4"><label for="actual_date">Date of Repair Performed</label></div>
+                                    <div class="col-md-4"><label for="actual_date">{{__("messages.date_of_repair_performed")}}</label></div>
                                     <div class="col-md-4"><input type="date" name="actual_date" id="actual_date"
                                             value="{{ date('Y-m-d', strtotime($data->actual_date)) }}"
                                             class="form-control"></div>
@@ -685,7 +685,7 @@
 
 
                                 <div class="row">
-                                    <div class="col-md-4"><label for="remarks">Remarks</label></div>
+                                    <div class="col-md-4"><label for="remarks">{{__("messages.remarks")}}</label></div>
                                     <div class="col-md-4">
                                         <textarea name="remarks" id="remarks" cols="30" rows="10" class="form-control">
                                             {{ $data->remarks }}
@@ -707,14 +707,14 @@
                             {{-- START Heigh Clearance (4) --}}
 
                             <fieldset class="form-input high-clearance">
-                                <h3>Heigh Clearance</h3>
+                                <h3>{{__("messages.Heigh_Clearance")}}</h3>
                                 <div class="table-responsive">
                                     <table class="table table-bordered w-100">
                                         <thead style="background-color: #E4E3E3 !important">
-                                            <th class="col-4">Title</th>
-                                            <th class="col-4">Defects</th>
-                                            <th class="col-3">Upload Images</th>
-                                            <th class="col-1">Images</th>
+                                            <th class="col-4">{{__("messages.title")}}</th>
+                                            <th class="col-4">{{__('messages.defects')}}</th>
+                                            <th class="col-3" colspan="2">{{__("messages.images")}}</th>
+
                                         </thead>
 
                                         <tbody>
@@ -722,12 +722,12 @@
                                             {{-- Site Conditions --}}
 
                                             <tr>
-                                                <th rowspan="3">Site Conditions</th>
+                                                <th rowspan="3">{{__("messages.Site_Conditions")}} </th>
                                                 <td class="d-flex">
                                                     <input type="checkbox" name="tapak_condition[road]" id="site_road"
                                                         class="form-check"
                                                         {{ checkCheckBox('road', $data->tapak_condition) }}>
-                                                    <label for="site_road">Crossing the Road</label>
+                                                    <label for="site_road">{{__("messages.Crossing_the_Road")}}</label>
                                                 </td>
                                                 <td>
                                                     <input type="file" name="tapak_road_img" id="site_road-img"
@@ -749,7 +749,7 @@
                                                     <input type="checkbox" name="tapak_condition[side_walk]"
                                                         id="side_walk" class="form-check"
                                                         {{ checkCheckBox('side_walk', $data->tapak_condition) }}>
-                                                    <label for="side_walk">Sidewalk</label>
+                                                    <label for="side_walk">{{__("messages.Sidewalk")}}</label>
                                                 </td>
                                                 <td>
                                                     <input type="file" name="tapak_sidewalk_img" id="side_walk-img"
@@ -771,7 +771,7 @@
                                                     <input type="checkbox" name="tapak_condition[vehicle_entry]"
                                                         id="vehicle_entry" class="form-check"
                                                         {{ checkCheckBox('vehicle_entry', $data->tapak_condition) }}>
-                                                    <label for="vehicle_entry">No vehicle entry area </label>
+                                                    <label for="vehicle_entry">{{__("messages.No_vehicle_entry_area")}} </label>
                                                 </td>
                                                 <td>
                                                     <input type="file" name="tapak_no_vehicle_entry_img"
@@ -792,11 +792,11 @@
 
                                             {{-- Area --}}
                                             <tr>
-                                                <th rowspan="4">Area</th>
+                                                <th rowspan="4">{{__("messages.Area")}}</th>
                                                 <td class="d-flex">
                                                     <input type="checkbox" name="kawasan[bend]" id="area_bend"
                                                         class="form-check" {{ checkCheckBox('bend', $data->kawasan) }}>
-                                                    <label for="area_bend">Bend</label>
+                                                    <label for="area_bend">{{__("messages.Bend")}}</label>
                                                 </td>
                                                 <td>
                                                     <input type="file" name="kawasan_bend_img" id="area_bend-img"
@@ -817,7 +817,7 @@
                                                 <td>
                                                     <input type="checkbox" name="kawasan[raod]" id="area_raod"
                                                         class="form-check" {{ checkCheckBox('raod', $data->kawasan) }}>
-                                                    <label for="area_raod"> Road</label>
+                                                    <label for="area_raod"> {{__("messages.Road")}}</label>
                                                 </td>
                                                 <td>
                                                     <input type="file" name="kawasan_road_img" id="area_raod-img"
@@ -838,7 +838,7 @@
                                                 <td>
                                                     <input type="checkbox" name="kawasan[forest]" id="area_forest"
                                                         class="form-check" {{ checkCheckBox('forest', $data->kawasan) }}>
-                                                    <label for="area_forest">Forest </label>
+                                                    <label for="area_forest">{{__("messages.Forest")}} </label>
                                                 </td>
                                                 <td>
                                                     <input type="file" name="kawasan_forest_img" id="area_forest-img"
@@ -859,7 +859,7 @@
                                                 <td>
                                                     <input type="checkbox" name="kawasan[other]" id="area_other"
                                                         class="form-check" {{ checkCheckBox('other', $data->kawasan) }}>
-                                                    <label for="area_other">others </label>
+                                                    <label for="area_other">{{__("messages.others")}} </label>
                                                     @if (checkCheckBox('other', $data->kawasan) != 'checked')
                                                     @endif
                                                     <input type="text" name="kawasan[other_input]"
@@ -894,7 +894,7 @@
 
 
                                 <div class="row">
-                                    <div class="col-md-4"><label for="jarak_kelegaan">Clearance Distance</label></div>
+                                    <div class="col-md-4"><label for="jarak_kelegaan">{{__("messages.Clearance_Distance")}}</label></div>
                                     <div class="col-md-4"><input type="number" name="jarak_kelegaan"
                                             value="{{ $data->jarak_kelegaan }}" id="jarak_kelegaan"
                                             class="form-control"></div>
@@ -902,7 +902,7 @@
 
 
                                 <div class="row">
-                                    <div class="col-md-4"><label for=""> Line clearance specifications</label>
+                                    <div class="col-md-4"><label for=""> {{__("messages.Line_clearance_specifications")}}</label>
                                     </div>
                                     <div class="col-md-8">
                                         <div class="row">
@@ -910,7 +910,7 @@
                                                 <input type="checkbox" name="talian_spec[comply]" id="line-comply"
                                                     {{ checkCheckBox('comply', $data->talian_spec) }}
                                                     class="form-check"><label for="line-comply">
-                                                    Comply</label>
+                                                    {{__("messages.Comply")}}</label>
                                             </div>
 
                                             <div class="col-md-4 d-flex">
@@ -918,7 +918,7 @@
                                                     {{ checkCheckBox('disobedient', $data->talian_spec) }}
                                                     id="line-disobedient" class="form-check"><label
                                                     for="line-disobedient">
-                                                    Disobedient</label>
+                                                    {{__("messages.Disobedient")}}</label>
                                             </div>
 
 
@@ -940,30 +940,29 @@
                             {{-- START Kebocoran Arus (5) --}}
 
                             <fieldset class="form-input">
-                                <h3>Kebocoran Arus</h3>
+                                <h3>{{__("messages.Kebocoran_Arus")}}</h3>
 
                                 <div class="row">
-                                    <div class="col-md-4"><label for="">Inspection of current leakage on the
-                                            pole</label></div>
+                                    <div class="col-md-4"><label for="">{{__("messages.Inspection_of_current_leakage_on_the_pole")}} </label></div>
                                     <div class="col-md-8">
                                         <div class="row">
                                             <div class="col-md-4 d-flex">
                                                 <input type="radio" name="arus_pada_tiang" id="arus_pada_tiang_no"
                                                     class="form-check" value="no"
                                                     {{ $data->arus_pada_tiang === 'no' ? 'checked' : '' }}>
-                                                <label for="arus_pada_tiang_no">No</label>
+                                                <label for="arus_pada_tiang_no">{{__("messages.no")}}</label>
                                             </div>
 
                                             <div class="col-md-4 d-flex">
                                                 <input type="radio" name="arus_pada_tiang" id="arus_pada_tiang_yes"
                                                     class="form-check" value="yes"
                                                     {{ $data->arus_pada_tiang === 'yes' ? 'checked' : '' }}>
-                                                <label for="arus_pada_tiang_yes">Yes</label>
+                                                <label for="arus_pada_tiang_yes">{{__("messages.yes")}}</label>
                                             </div>
 
                                             <div class="col-md-4 @if ($data->arus_pada_tiang == 'no' || $data->arus_pada_tiang == '') d-none @endif"
                                                 id="arus_pada_tiang_amp_div">
-                                                <label for="arus_pada_tiang_amp">(Amp)</label>
+                                                <label for="arus_pada_tiang_amp">{{__("messages.Amp")}}</label>
                                                 <input type="text" name="arus_pada_tiang_amp" id="arus_pada_tiang_amp"
                                                     class="form-control" value="{{ $data->arus_pada_tiang_amp }}"
                                                     required>

@@ -287,7 +287,8 @@ layerControl = L.control.groupedLayers(baseLayers, groupedOverlays, {
 
         function showModalData(data, id) {
             var str = '';
-
+            gid = id.split('.')
+            console.log(gid);
             $('#exampleModalLabel').html("Tiang Info")
             str = ` <tr>
         <tr><th>Ba</th><td>${data.ba}</td> </tr>
@@ -298,7 +299,7 @@ layerControl = L.control.groupedLayers(baseLayers, groupedOverlays, {
 
         <tr><th>Coordinate</th><td>${data.coordinate}</td> </tr>
         <tr><th>Created At</th><td>${data.created_at}</td> </tr>
-        <tr><th>Detail</th><td class="text-center">    <a href="/{{app()->getLocale()}}/tiang-talian-vt-and-vr/${data.id}" target="_blank" class="btn btn-sm btn-secondary">Detail</a>
+        <tr><th>Detail</th><td class="text-center">    <a href="/{{app()->getLocale()}}/tiang-talian-vt-and-vr/${gid[1]}" target="_blank" class="btn btn-sm btn-secondary">Detail</a>
             </td> </tr>
         `
             $("#my_data").html(str);

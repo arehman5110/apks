@@ -105,7 +105,7 @@
                 success: function callback(data1) {
 
                     data = JSON.parse(data1)
-
+                    // console.log(data.features[0].id);
                     if (data.features.length != 0) {
                         if ($('#select_layer').val() == 'substation') {
                             substationModal(data.features[0].properties, data.features[0].id);

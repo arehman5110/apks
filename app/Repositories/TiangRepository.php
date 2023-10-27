@@ -65,6 +65,7 @@ class TiangRepository
 
     public function getRecoreds($id)
     {
+        // dd($id);
         $data = Tiang::find($id);
         if ($data) {
             $data['abc_span'] = json_decode($data->abc_span);
@@ -103,5 +104,5 @@ class TiangRepository
         return $data;
     }
 
-    
+
 }
