@@ -6,7 +6,18 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
 
 
-    @include('partials.map-css')
+
+
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+
+
+    {{-- @include('partials.map-css') --}}
     <style>
         .error {
             color: red;
@@ -42,7 +53,6 @@
             font-size: 16px;
             line-height: 1.5;
             border: 1px solid #00000063;
-            ;
             border-radius: 0;
         }
 
@@ -286,67 +296,100 @@
                             </div>
 
 
-                            <div class="row">
+                            {{-- <div class="row">
                                 <div class="col-md-4"><label for="third-party-image-1">{{__('messages.third_party_image')}} 1</label></div>
                                 <div class="col-md-4"><input type="file" name="third_party_image_1" id="third-party-image-1" accept="image/*"
                                         class="form-control"  ></div>
+                                        <div class="col-md-4  " id="third-party-image-1-div">
+
+                                        </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-4"><label for="third-party-image-2">{{__('messages.third_party_image')}} 2</label></div>
                                 <div class="col-md-4"><input type="file" name="third_party_image_2" id="third-party-image-2" accept="image/*"
                                         class="form-control"  ></div>
-                            </div>
+                                        <div class="col-md-4  " id="third-party-image-2-div">
+
+                                        </div>
+                            </div> --}}
 
                             <div class="row">
                                 <div class="col-md-4"><label for="before_image1">{{__('messages.before_image_1')}}</label></div>
                                 <div class="col-md-4"><input type="file" name="before_image1" id="before_image1" accept="image/*"
                                         class="form-control"  ></div>
+                                        <div class="col-md-4  " id="before_image1-div">
+
+                                        </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="before_image2">{{__('messages.before_image_2')}}</label></div>
                                 <div class="col-md-4"><input type="file" name="before_image2" id="before_image2" accept="image/*"
                                         class="form-control"  ></div>
+                                        <div class="col-md-4  " id="before_image2-div">
+
+                                        </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-4"><label for="before_image3">{{__('messages.before_image_3')}}</label></div>
                                 <div class="col-md-4"><input type="file" name="before_image3" id="before_image3" accept="image/*"
                                         class="form-control"  ></div>
+                                        <div class="col-md-4  " id="before_image3-div">
+
+                                        </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-4"><label for="during_image1">{{__('messages.during_image_1')}}</label></div>
                                 <div class="col-md-4"><input type="file" name="during_image1" id="during_image1" accept="image/*"
                                         class="form-control"></div>
+                                        <div class="col-md-4  " id="during_image1-div">
+
+                                        </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-4"><label for="during_image1">{{__('messages.during_image_2')}}</label></div>
                                 <div class="col-md-4"><input type="file" name="during_image2" id="during_image2" accept="image/*"
                                         class="form-control"></div>
+                                        <div class="col-md-4  " id="during_image2-div">
+
+                                        </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-4"><label for="during_image1">{{__('messages.during_image_3')}}</label></div>
                                 <div class="col-md-4"><input type="file" name="during_image3" id="during_image3" accept="image/*"
                                         class="form-control"></div>
+                                        <div class="col-md-4  " id="during_image3-div">
+
+                                        </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-4"><label for="after_image1">{{__('messages.after_image_1')}}</label></div>
                                 <div class="col-md-4"><input type="file" name="after_image1" id="after_image1" accept="image/*"
                                         class="form-control"></div>
+                                        <div class="col-md-4  " id="after_image1-div">
+
+                                        </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="after_image2">{{__('messages.after_image_2')}}</label></div>
                                 <div class="col-md-4"><input type="file" name="after_image2" id="after_image2" accept="image/*"
                                         class="form-control"></div>
+                                        <div class="col-md-4  " id="after_image2-div">
+
+                                        </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="after_image3">{{__('messages.after_image_3')}}</label></div>
                                 <div class="col-md-4"><input type="file" name="after_image3" id="after_image3" accept="image/*"
                                         class="form-control"></div>
+                                        <div class="col-md-4 " id="after_image3-div">
+
+                                        </div>
                             </div>
 
                             <div class="row   road-d">
@@ -456,7 +499,38 @@
             $('#myModal').modal('hide');
         });
 
+        $('input[type="file"]').on('change',function(){
+            showUploadedImage(this)
+        })
+
+
+
+
      });
+
+
+
+     function showUploadedImage(param) {
+            const file = param.files[0];
+            const id = $(`#${param.id}-div`);
+
+            if (file) {
+                id.empty()
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    var img = `<a class="text-right"  href="${e.target.result}" data-lightbox="roadtrip"><span class="close-button" onclick="removeImage('${param.id}')">X</span><img src="${e.target.result}" style="height:50px;"/></a>`;
+                    id.append(img)
+                };
+
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function removeImage(id) {
+            console.log(id);
+            $(`#${id}`).val('');
+            $(`#${id}-div`).empty();
+        }
 
 
         function getBaPoints(param){

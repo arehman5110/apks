@@ -173,7 +173,7 @@
                             </div>
 
 
-                         
+
 
 
 
@@ -287,7 +287,7 @@
                                         class="form-control" required readonly></div>
                             </div>
 
-                            <div class="row">
+                            {{-- <div class="row">
                                 <div class="col-md-4"><label for="third-party-image-1">{{__("messages.third_party_image")}} 1</label></div>
                                 <div class="col-md-4"><input type="file" name="third_party_image_1" id="third-party-image-1"
                                         class="form-control" ></div>
@@ -317,7 +317,7 @@
                                     @endif
                                 </div>
 
-                            </div>
+                            </div> --}}
                             <div class="row">
                                 <div class="col-md-4"><label for="before_image1">{{__('messages.before_image_1')}}</label></div>
                                 <div class="col-md-4"><input type="file" name="before_image1" id="before_image1"

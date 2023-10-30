@@ -130,7 +130,7 @@
                             </div>
 
 
- 
+
 
 
 
@@ -230,7 +230,7 @@
                                 </div>
                             </div>
 
-                            <div class="row">
+                            {{-- <div class="row">
                                 <div class="col-md-4"><label for="third-party-image-1">{{__("messages.third_party_image")}} 1</label></div>
 
                                 <div class="col-md-4 text-center mb-3">
@@ -258,7 +258,7 @@
                                     @endif
                                 </div>
 
-                            </div>
+                            </div> --}}
 
                             <div class="row">
                                 <div class="col-md-4"><label for="before_image1">{{__('messages.before_image_1')}}</label></div>

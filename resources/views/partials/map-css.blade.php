@@ -28,12 +28,11 @@
 
     input {
         min-width: 16px !important;
-    }
+     }
 
 
 
-    .side-bar::-webkit-scrollbar,
-    .lb-outerContainer {
+    .side-bar::-webkit-scrollbar  {
         display: none;
     }
 
