@@ -6,7 +6,7 @@
 
     {{-- <link rel="stylesheet" href="{{ URL::asset('assets/test/css/style.css') }}" /> --}}
     <style>
-        
+
         input[type='checkbox'],
         input[type='radio'] {
             min-width: 16px !important;
@@ -211,6 +211,41 @@
                             <div class="col-md-4">
                                 <input readonly value="{{ $data->advertise_poster_status }}" class="form-control" required>
                             </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="image_pipe">{{ __('messages.substation') }} {{__('messages.images')}} </label>
+                            </div>
+                            <div class="col-md-8 row">
+
+                                    
+                                    <div class="col-md-6 text-center  ">
+                                        @if (file_exists(public_path($data->substation_image_1)) && $data->substation_image_1 != '')
+                                            <a href="{{ URL::asset($data->substation_image_1) }}" data-lightbox="roadtrip">
+                                                <img src="{{ URL::asset($data->substation_image_1) }}" alt=""
+                                                    height="70" class="adjust-height ml-5  "></a>
+                                        @else
+                                            <strong>{{ __('messages.no_image_found') }}</strong>
+                                        @endif
+                                    </div>
+
+
+
+
+
+                                    <div class="col-md-6 text-center  ">
+                                        @if (file_exists(public_path($data->substation_image_2)) && $data->substation_image_2 != '')
+                                            <a href="{{ URL::asset($data->substation_image_2) }}" data-lightbox="roadtrip">
+                                                <img src="{{ URL::asset($data->substation_image_2) }}" alt=""
+                                                    height="70" class="adjust-height ml-5  "></a>
+                                        @else
+                                            <strong>{{ __('messages.no_image_found') }}</strong>
+                                        @endif
+                                    </div>
+                                </div>
+
+
                         </div>
 
 

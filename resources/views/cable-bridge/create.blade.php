@@ -121,15 +121,10 @@
 
 
 
-                            <div class="row">
-                                <div class="col-md-4"><label for="team">{{__("messages.team_name")}}</label></div>
-                                <div class="col-md-4">
-                                    <input type="text" name="team" id="team" value="{{ $team }}"
+                                    <input type="hidden" name="team" id="team" value="{{ $team }}"
                                         class="form-control" readonly>
-                                </div>
-                            </div>
 
- 
+
                             <div class="row">
                                 <div class="col-md-4"><label for="start_date">{{__("messages.from")}}</label></div>
                                 <div class="col-md-4">
@@ -212,6 +207,17 @@
 
                                 </div>
                             </div>
+
+
+                            <div class="row">
+                                <div class="col-md-4"><label for="cable_bridge_image">{{__("messages.cable_bridge")}} {{__("messages.images")}} </label></div>
+                                <div class="col-md-4">
+                                    <input type="file" name="cable_bridge_image_1" id="cable_bridge_image_1" class="form-control" accept="image/*" required>
+                                    <input type="file" name="cable_bridge_image_2" id="cable_bridge_image_2" class="form-control" accept="image/*" required>
+
+                                </div>
+                            </div>
+
                             <div class="row">
                                 <div class="col-md-4"><label for="image_pipe">{{__("messages.image_pipe")}}</label></div>
                                 <div class="col-md-4">
@@ -307,16 +313,16 @@
                 ];
                 const userBa = "{{Auth::user()->ba}}";
                 $(document).ready(function() {
-       
-       
+
+
 
        if (userBa !== '') {
            getBaPoints(userBa)
        }
-       
+
     });
 
-      
+
        function getBaPoints(param){
            var baSelect = $('#ba_s')
                baSelect.empty();

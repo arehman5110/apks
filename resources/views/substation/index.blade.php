@@ -15,7 +15,7 @@
             background: #007BFF !important;
             color: white !important;
         }
-    < 
+    <
     </style>
 @endsection
 
@@ -98,12 +98,8 @@
                                                 <td>{{ $data->ba }}</td>
                                                 <td class="align-middle text-center">{{ $data->team }}</td>
                                                 <td class="align-middle text-center">
-                                                    @php
-                                                        $date = new DateTime($data->visit_date);
-                                                        $datePortion = $date->format('Y-m-d');
-
-                                                    @endphp
-                                                    {{ $datePortion }}
+                                                  
+                                                   {{ date('Y-m-d', strtotime($data->visit_date)) }}
                                                 </td>
                                                 <td class="text-center">
 

@@ -89,11 +89,11 @@ class TiangContoller extends Controller
             }
 
             $data->ba = $request->ba;
-            $data->name_contractor = $request->name_contractor;
-            $data->start_date = $request->start_date;
-            $data->end_date = $request->end_date;
+            // $data->name_contractor = $request->name_contractor;
+            // $data->start_date = $request->start_date;
+            // $data->end_date = $request->end_date;
             $data->fp_name = $request->fp_name;
-            $data->review_date = $request->review_date;
+            // $data->review_date = $request->review_date;
             $data->fp_road = $request->fp_road;
             $data->section_from = $request->section_from;
             $data->section_to = $request->section_to;
@@ -117,10 +117,10 @@ class TiangContoller extends Controller
             $data->bekalan_dua_defect = $request->has('bekalan_dua_defect') ? json_encode($request->bekalan_dua_defect) : null;
             $data->kaki_lima_defect = $request->has('kaki_lima_defect') ? json_encode($request->kaki_lima_defect) : null;
 
-            $data->total_defects = $request->total_defects;
-            $data->planed_date = $request->planed_date;
-            $data->actual_date = $request->actual_date;
-            $data->remarks = $request->remarks;
+            // $data->total_defects = $request->total_defects;
+            // $data->planed_date = $request->planed_date;
+            // $data->actual_date = $request->actual_date;
+            // $data->remarks = $request->remarks;
 
             $data->tapak_condition = $request->has('tapak_condition') ? json_encode($request->tapak_condition) : null;
             $data->kawasan = $request->has('kawasan') ? json_encode($request->kawasan) : null;

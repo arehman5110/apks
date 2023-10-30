@@ -102,14 +102,7 @@
 
 
 
-                        <div class="row">
-                            <div class="col-md-4"><label for="team">{{__('messages.team_name')}}</label></div>
-                            <div class="col-md-4">
-                                <input type="text" readonly class="form-control" value="{{ $data->team }}" readonly>
-                            </div>
-                        </div>
 
- 
                         <div class="row">
                             <div class="col-md-4"><label for="start_date">{{__('messages.from')}}</label></div>
                             <div class="col-md-4">
@@ -182,6 +175,36 @@
                                 <input readonly value="{{ $data->bushes_status }}" class="form-control" required>
                             </div>
                         </div>
+
+
+                        <div class="row">
+                            <div class="col-md-4"><label for="link_box_image">{{__("messages.link_box")}} {{__("messages.images")}} </label></div>
+
+
+
+
+                                <div class="col-md-4 text-center  ">
+                                    @if (file_exists(public_path($data->link_box_image_1)) && $data->link_box_image_1 != '')
+                                        <a href="{{ URL::asset($data->link_box_image_1) }}" data-lightbox="roadtrip">
+                                            <img src="{{ URL::asset($data->link_box_image_1) }}" alt="" height="70" class="adjust-height ml-5 ">
+                                        </a>
+                                    @else
+                                        <strong>{{ __('messages.no_image_found') }}</strong>
+                                    @endif
+                                </div>
+
+
+                                <div class="col-md-4 text-center  ">
+                                    @if (file_exists(public_path($data->link_box_image_2)) && $data->link_box_image_2 != '')
+                                        <a href="{{ URL::asset($data->link_box_image_2) }}" data-lightbox="roadtrip">
+                                            <img src="{{ URL::asset($data->link_box_image_2) }}" alt="" height="70" class="adjust-height ml-5  ">
+                                        </a>
+
+                                    @endif
+
+                            </div>
+                        </div>
+
                         <div class="row">
                             <div class="col-md-4"><label for="image_gate">{{__('messages.cover_image')}}</label></div>
 
@@ -191,7 +214,8 @@
                                         <img src="{{ URL::asset($data->image_cover) }}" alt="" height="70"
                                             class="adjust-height ml-5  "></a>
                                 @else
-                                <strong>{{__("messaages.no_image_found")}}</strong>
+                                <strong>{{ __('messages.no_image_found') }}</strong>
+
 
                                 @endif
 
@@ -202,7 +226,7 @@
                                     <a href="{{ URL::asset($data->image_cover_2) }}" data-lightbox="roadtrip">
                                         <img src="{{ URL::asset($data->image_cover_2) }}" alt="" height="70"
                                             class="adjust-height ml-5  "></a>
-                              
+
                                 @endif
 
                             </div>
@@ -216,7 +240,8 @@
                                         <img src="{{ URL::asset($data->image_vandalism) }}" alt=""
                                             height="70" class="adjust-height ml-5  "></a>
                                 @else
-                                <strong>{{__("messaages.no_image_found")}}</strong>
+                                <strong>{{ __('messages.no_image_found') }}</strong>
+
 
                                 @endif
                             </div>
@@ -226,7 +251,7 @@
                                     <a href="{{ URL::asset($data->image_vandalism_2) }}" data-lightbox="roadtrip">
                                         <img src="{{ URL::asset($data->image_vandalism_2) }}" alt=""
                                             height="70" class="adjust-height ml-5  "></a>
-                                
+
                                 @endif
                             </div>
                         </div>
@@ -239,7 +264,8 @@
                                         <img src="{{ URL::asset($data->image_leaning) }}" alt="" height="70"
                                             class="adjust-height ml-5  "></a>
                                 @else
-                                <strong>{{__("messaages.no_image_found")}}</strong>
+                                                                        <strong>{{ __('messages.no_image_found') }}</strong>
+
 
                                 @endif
                             </div>
@@ -249,7 +275,7 @@
                                     <a href="{{ URL::asset($data->image_leaning_2) }}" data-lightbox="roadtrip">
                                         <img src="{{ URL::asset($data->image_leaning_2) }}" alt="" height="70"
                                             class="adjust-height ml-5  "></a>
-                                 
+
                                 @endif
                             </div>
                         </div>
@@ -263,7 +289,8 @@
                                         <img src="{{ URL::asset($data->image_rust) }}" alt="" height="70"
                                             class="adjust-height ml-5  "></a>
                                 @else
-                                <strong>{{__("messaages.no_image_found")}}</strong>
+                                                                        <strong>{{ __('messages.no_image_found') }}</strong>
+
 
                                 @endif
                             </div>
@@ -273,7 +300,7 @@
                                     <a href="{{ URL::asset($data->image_rust) }}" data-lightbox="roadtrip">
                                         <img src="{{ URL::asset($data->image_rust) }}" alt="" height="70"
                                             class="adjust-height ml-5  "></a>
-                              
+
                                 @endif
                             </div>
                         </div>
@@ -288,7 +315,8 @@
                                         <img src="{{ URL::asset($data->images_advertise_poster) }}" alt=""
                                             height="70" class="adjust-height ml-5  "></a>
                                 @else
-                                <strong>{{__("messaages.no_image_found")}}</strong>
+                                                                        <strong>{{ __('messages.no_image_found') }}</strong>
+
 
                                 @endif
                             </div>
@@ -298,7 +326,7 @@
                                     <a href="{{ URL::asset($data->images_advertise_poster_2) }}" data-lightbox="roadtrip">
                                         <img src="{{ URL::asset($data->images_advertise_poster_2) }}" alt=""
                                             height="70" class="adjust-height ml-5  "></a>
-                                
+
                                 @endif
                             </div>
                         </div>
@@ -312,7 +340,8 @@
                                         <img src="{{ URL::asset($data->images_bushes) }}" alt="" height="70"
                                             class="adjust-height ml-5  "></a>
                                 @else
-                                <strong>{{__("messaages.no_image_found")}}</strong>
+                                                                        <strong>{{ __('messages.no_image_found') }}</strong>
+
 
                                 @endif
                             </div>
@@ -322,7 +351,7 @@
                                     <a href="{{ URL::asset($data->images_bushes_2) }}" data-lightbox="roadtrip">
                                         <img src="{{ URL::asset($data->images_bushes_2) }}" alt="" height="70"
                                             class="adjust-height ml-5  "></a>
-                                
+
                                 @endif
                             </div>
                         </div>
@@ -336,7 +365,8 @@
                                         <img src="{{ URL::asset($data->other_image) }}" alt="" height="70"
                                             class="adjust-height ml-5  "></a>
                                 @else
-                                    <strong>{{__("messaages.no_image_found")}}</strong>
+                                                                            <strong>{{ __('messages.no_image_found') }}</strong>
+
                                 @endif
                             </div>
                         </div>

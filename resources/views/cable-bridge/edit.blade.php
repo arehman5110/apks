@@ -117,14 +117,6 @@
                             </div>
 
 
-                            <div class="row">
-                                <div class="col-md-4"><label for="team">{{__("messages.team_name")}}</label></div>
-                                <div class="col-md-4">
-                                    <input type="text" name="team" id="team" class="form-control"
-                                        value="{{ $data->team }}" readonly>
-                                </div>
-                            </div>
-
 
 
                             <div class="row">
@@ -214,14 +206,51 @@
                                         <option value="Yes">Yes</option>
                                         <option value="No">No</option>
 
-                                    </select> 
+                                    </select>
                                 </div>
                             </div>
+
+                            <div class="row">
+                                <div class="col-md-4"><label for="cable_bridge_image">{{__("messages.cable_bridge")}} {{__("messages.images")}} </label></div>
+
+                                <div class="col-md-8 row">
+
+
+                                    <div class="col-md-6">
+                                        <input type="file" name="cable_bridge_image_1" id="cable_bridge_image_1" class="form-control" accept="image/*">
+                                    </div>
+
+                                    <div class="col-md-6 text-center  ">
+                                        @if (file_exists(public_path($data->cable_bridge_image_1)) && $data->cable_bridge_image_1 != '')
+                                            <a href="{{ URL::asset($data->cable_bridge_image_1) }}" data-lightbox="roadtrip">
+                                                <img src="{{ URL::asset($data->cable_bridge_image_1) }}" alt="" height="70" class="adjust-height ml-5  ">
+                                            </a>
+                                        @else
+                                            <strong>{{ __('messages.no_image_found') }}</strong>
+                                        @endif
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <input type="file" name="cable_bridge_image_2" id="cable_bridge_image_2" class="form-control" accept="image/*">
+                                    </div>
+
+                                    <div class="col-md-6 text-center  ">
+                                        @if (file_exists(public_path($data->cable_bridge_image_2)) && $data->cable_bridge_image_2 != '')
+                                            <a href="{{ URL::asset($data->cable_bridge_image_2) }}" data-lightbox="roadtrip">
+                                                <img src="{{ URL::asset($data->cable_bridge_image_2) }}" alt="" height="70" class="adjust-height ml-5 ">
+                                            </a>
+                                        @else
+                                            <strong>{{ __('messages.no_image_found') }}</strong>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="row">
                                 <div class="col-md-4"><label for="image_pipe">{{__("messages.image_pipe")}}</label></div>
 
-                                <div class="col-md-8 row">  
-                                    
+                                <div class="col-md-8 row">
+
 
                                     <div class="col-md-6">
                                         <input type="file" name="image_pipe" id="image_pipe" class="form-control" accept="image/*">
@@ -252,12 +281,12 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="row">
                                 <div class="col-md-4"><label for="image_vandalism">{{__("messages.image_vandalism")}}</label></div>
 
-                                <div class="col-md-8 row">  
-                                    
+                                <div class="col-md-8 row">
+
 
                                     <div class="col-md-6">
                                         <input type="file" name="image_vandalism" id="image_vandalism" class="form-control" accept="image/*">
@@ -292,8 +321,8 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="image_collapsed">{{__("messages.image_collapsed")}}</label></div>
 
-                                <div class="col-md-8 row">  
-                                    
+                                <div class="col-md-8 row">
+
 
                                     <div class="col-md-6">
                                         <input type="file" name="image_collapsed" id="image_collapsed" class="form-control" accept="image/*">
@@ -323,13 +352,13 @@
                                         @endif
                                     </div>
                                 </div>
-                                 
+
                             </div>
 
                             <div class="row">
                                 <div class="col-md-4"><label for="image_rust">{{__("messages.image_rust")}}</label></div>
 
-                                <div class="col-md-8 row">  
+                                <div class="col-md-8 row">
                                     <div class="col-md-6">
                                         <input type="file" name="image_rust" id="image_rust" class="form-control">
                                     </div>
@@ -365,7 +394,7 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="images_bushes">{{__("messages.image_bushes")}}</label></div>
 
-                                <div class="col-md-8 row">  
+                                <div class="col-md-8 row">
                                     <div class="col-md-6">
                                         <input type="file" name="images_bushes" id="images_bushes" class="form-control">
                                     </div>

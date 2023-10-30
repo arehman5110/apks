@@ -168,7 +168,7 @@ class FPController extends Controller
             $data = FeederPillar::find($id);
             $data->zone = $request->zone;
             $data->ba = $request->ba;
-            $data->team = $request->team;
+            // $data->team = $request->team;
             $data->visit_date = $request->visit_date;
             $data->patrol_time = $combinedDateTime;
 

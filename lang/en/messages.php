@@ -89,6 +89,7 @@ return [
     'update'=>'Update',
     'show' => 'Show',
     'no_image_found'=>'no image found',
+    'third_party_image'=>'Third Party Digging Image',
     //**********************3rd party end  */
 
 

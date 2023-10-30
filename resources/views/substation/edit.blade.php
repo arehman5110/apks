@@ -101,13 +101,7 @@
                                     </select></div>
                             </div>
 
-                            <div class="row">
-                                <div class="col-md-4"><label for="team">{{ __('messages.team_name') }}</label></div>
-                                <div class="col-md-4">
-                                    <input type="text" name="team" id="team" class="form-control"
-                                        value="{{ $data->team }}" readonly>
-                                </div>
-                            </div>
+
 
                             <div class="row">
                                 <div class="col-md-4"><label for="visit_date">{{ __('messages.visit_date') }}</label></div>
@@ -289,6 +283,47 @@
                                         <option value="No">No</option>
                                     </select>
                                 </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="image_pipe">{{ __('messages.substation') }} {{__('messages.images')}} </label>
+                                </div>
+                                <div class="col-md-8 row">
+
+                                        <div class="col-md-6">
+                                            <input type="file" accept="image/*" name="substation_image_1" id="substation_image_1"
+                                                class="form-control">
+                                        </div>
+                                        <div class="col-md-6 text-center  ">
+                                            @if (file_exists(public_path($data->substation_image_1)) && $data->substation_image_1 != '')
+                                                <a href="{{ URL::asset($data->substation_image_1) }}" data-lightbox="roadtrip">
+                                                    <img src="{{ URL::asset($data->substation_image_1) }}" alt=""
+                                                        height="70" class="adjust-height ml-5  "></a>
+                                            @else
+                                                <strong>{{ __('messages.no_image_found') }}</strong>
+                                            @endif
+                                        </div>
+
+
+
+
+                                        <div class="col-md-6">
+                                            <input type="file" accept="image/*" name="substation_image_2" id="substation_image_2"
+                                                class="form-control">
+                                        </div>
+                                        <div class="col-md-6 text-center  ">
+                                            @if (file_exists(public_path($data->substation_image_2)) && $data->substation_image_2 != '')
+                                                <a href="{{ URL::asset($data->substation_image_2) }}" data-lightbox="roadtrip">
+                                                    <img src="{{ URL::asset($data->substation_image_2) }}" alt=""
+                                                        height="70" class="adjust-height ml-5  "></a>
+                                            @else
+                                                <strong>{{ __('messages.no_image_found') }}</strong>
+                                            @endif
+                                        </div>
+                                    </div>
+
+
                             </div>
 
 

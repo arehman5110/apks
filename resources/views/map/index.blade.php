@@ -676,8 +676,8 @@
                 buffer: 10
             })
 
-            map.addLayer(substation)
-            substation.bringToFront()
+            // map.addLayer(substation)
+            // substation.bringToFront()
             addLayerControl()
         }
 
@@ -1087,7 +1087,7 @@
 
             $('#search_wp').select2();
 
- 
+
             option = {
                 success: callbackSuccess
             }

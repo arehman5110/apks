@@ -56,7 +56,7 @@
 
         <div class="container">
 
-            <div class=" ">
+            <div class="form-input ">
 
                 <div class=" card col-md-12 p-4 ">
                     <div class=" ">
@@ -156,14 +156,6 @@
 
 
 
-                            <div class="row">
-                                <div class="col-md-4"><label for="team_name">{{__('messages.team_name')}}</label></div>
-                                <div class="col-md-4">
-                                    <input type="text" class="form-control" name="team_name" value="{{ $data->team_name }}" readonly id="team_name">
-                                </div>
-                            </div>
-
-
 
                             <div class="row">
                                 <div class="col-md-4"><label for="survey_date">{{__('messages.survey_date')}}</label></div>
@@ -181,21 +173,8 @@
                             </div>
 
 
-                            <div class="row">
-                                <div class="col-md-4"><label for="project_name">{{__('messages.project_name')}}</label></div>
-                                <div class="col-md-4">
-                                    <input type="text" name="project_name" id="project_name" value="{{ $data->project_name }}" class="form-control" required>
-                                </div>
-                            </div>
+                         
 
-
-
-                            <div class="row">
-                                <div class="col-md-4"><label for="km_actual">{{__('messages.km_actual')}}</label></div>
-                                <div class="col-md-4">
-                                    <input type="number" name="km_actual" id="km_actual" value="{{ $data->km_actual }}" class="form-control" required>
-                                </div>
-                            </div>
 
 
 
@@ -306,6 +285,38 @@
                                 <div class="col-md-4"><input type="text" name="road_name"
                                         value="{{ $data->road_name }}" id="road_name"
                                         class="form-control" required readonly></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4"><label for="third-party-image-1">{{__("messages.third_party_image")}} 1</label></div>
+                                <div class="col-md-4"><input type="file" name="third_party_image_1" id="third-party-image-1"
+                                        class="form-control" ></div>
+                                <div class="col-md-4 text-center mb-3">
+                                    @if (file_exists(public_path($data->third_party_image_1)) && $data->third_party_image_1 != '')
+                                        <a href="{{ URL::asset($data->third_party_image_1) }}" data-lightbox="roadtrip">
+                                            <img src="{{ URL::asset($data->third_party_image_1) }}" alt=""
+                                                height="70" class="adjust-height ml-5  "></a>
+                                                @else
+                                                <strong>{{__('messages.no_image_found')}}</strong>
+                                    @endif
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4"><label for="third-party-image-2">{{__("messages.third_party_image")}} 2</label></div>
+                                <div class="col-md-4"><input type="file" name="third_party_image_1" id="third-party-image-2"
+                                        class="form-control" ></div>
+                                <div class="col-md-4 text-center mb-3">
+                                    @if (file_exists(public_path($data->third_party_image_2)) && $data->third_party_image_2 != '')
+                                        <a href="{{ URL::asset($data->third_party_image_2) }}" data-lightbox="roadtrip">
+                                            <img src="{{ URL::asset($data->third_party_image_2) }}" alt=""
+                                                height="70" class="adjust-height ml-5  "></a>
+                                                @else
+                                                <strong>{{__('messages.no_image_found')}}</strong>
+                                    @endif
+                                </div>
+
                             </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="before_image1">{{__('messages.before_image_1')}}</label></div>

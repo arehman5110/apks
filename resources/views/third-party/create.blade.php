@@ -169,13 +169,8 @@
 
 
 
-                            <div class="row">
-                                <div class="col-md-4"><label for="team_name">{{__('messages.team_name')}}</label></div>
-                                <div class="col-md-4">
-                                    <input type="text" class="form-control" name="team_name"
+                                    <input type="hidden" class="form-control" name="team_name"
                                         value="{{ $team }}" readonly id="team_name">
-                                </div>
-                            </div>
 
 
 
@@ -197,19 +192,19 @@
                                     class="form-control">
                             </div>
                             {{-- </div> --}}
-                            <div class="row">
+                            {{-- <div class="row">
                                 <div class="col-md-4"><label for="project_name">{{__('messages.project_name')}}</label></div>
                                 <div class="col-md-4"><input type="text" name="project_name" id="project_name"
                                         class="form-control" required></div>
-                            </div>
+                            </div> --}}
 
-
+{{--
                             <div class="row">
                                 <div class="col-md-4"><label for="km_actual">{{__('messages.km_actual')}}</label></div>
                                 <div class="col-md-4"><input type="number" name="km_actual" id="km_actual"
                                         class="form-control" required></div>
                             </div>
-
+ --}}
 
 
 
@@ -289,54 +284,68 @@
                                     </select>
                                 </div>
                             </div>
+
+
+                            <div class="row">
+                                <div class="col-md-4"><label for="third-party-image-1">{{__('messages.third_party_image')}} 1</label></div>
+                                <div class="col-md-4"><input type="file" name="third_party_image_1" id="third-party-image-1" accept="image/*"
+                                        class="form-control"  ></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4"><label for="third-party-image-2">{{__('messages.third_party_image')}} 2</label></div>
+                                <div class="col-md-4"><input type="file" name="third_party_image_2" id="third-party-image-2" accept="image/*"
+                                        class="form-control"  ></div>
+                            </div>
+
                             <div class="row">
                                 <div class="col-md-4"><label for="before_image1">{{__('messages.before_image_1')}}</label></div>
-                                <div class="col-md-4"><input type="file" name="before_image1" id="before_image1"
-                                        class="form-control" required></div>
+                                <div class="col-md-4"><input type="file" name="before_image1" id="before_image1" accept="image/*"
+                                        class="form-control"  ></div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="before_image2">{{__('messages.before_image_2')}}</label></div>
-                                <div class="col-md-4"><input type="file" name="before_image2" id="before_image2"
-                                        class="form-control" required></div>
+                                <div class="col-md-4"><input type="file" name="before_image2" id="before_image2" accept="image/*"
+                                        class="form-control"  ></div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-4"><label for="before_image3">{{__('messages.before_image_3')}}</label></div>
-                                <div class="col-md-4"><input type="file" name="before_image3" id="before_image3"
-                                        class="form-control" required></div>
+                                <div class="col-md-4"><input type="file" name="before_image3" id="before_image3" accept="image/*"
+                                        class="form-control"  ></div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-4"><label for="during_image1">{{__('messages.during_image_1')}}</label></div>
-                                <div class="col-md-4"><input type="file" name="during_image1" id="during_image1"
+                                <div class="col-md-4"><input type="file" name="during_image1" id="during_image1" accept="image/*"
                                         class="form-control"></div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-4"><label for="during_image1">{{__('messages.during_image_2')}}</label></div>
-                                <div class="col-md-4"><input type="file" name="during_image2" id="during_image2"
+                                <div class="col-md-4"><input type="file" name="during_image2" id="during_image2" accept="image/*"
                                         class="form-control"></div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-4"><label for="during_image1">{{__('messages.during_image_3')}}</label></div>
-                                <div class="col-md-4"><input type="file" name="during_image3" id="during_image3"
+                                <div class="col-md-4"><input type="file" name="during_image3" id="during_image3" accept="image/*"
                                         class="form-control"></div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-4"><label for="after_image1">{{__('messages.after_image_1')}}</label></div>
-                                <div class="col-md-4"><input type="file" name="after_image1" id="after_image1"
+                                <div class="col-md-4"><input type="file" name="after_image1" id="after_image1" accept="image/*"
                                         class="form-control"></div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="after_image2">{{__('messages.after_image_2')}}</label></div>
-                                <div class="col-md-4"><input type="file" name="after_image2" id="after_image2"
+                                <div class="col-md-4"><input type="file" name="after_image2" id="after_image2" accept="image/*"
                                         class="form-control"></div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="after_image3">{{__('messages.after_image_3')}}</label></div>
-                                <div class="col-md-4"><input type="file" name="after_image3" id="after_image3"
+                                <div class="col-md-4"><input type="file" name="after_image3" id="after_image3" accept="image/*"
                                         class="form-control"></div>
                             </div>
 
@@ -387,7 +396,7 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <form action="/{{app()->getLocale()}}/generate-notice" id="remove-foam" method="POST" target="_blank" >
-                    
+
                     @csrf
 
                     <div class="modal-body">
@@ -443,7 +452,7 @@
         }
 
         $('#remove-foam').on('submit', function () {
-            
+
             $('#myModal').modal('hide');
         });
 

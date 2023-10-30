@@ -230,8 +230,8 @@
                 buffer: 10
             })
 
-            map.addLayer(substation)
-            substation.bringToFront()
+            // map.addLayer(substation)
+            // substation.bringToFront()
 
 
 

@@ -92,7 +92,7 @@
     </section>
     <div class=" ">
 
-        <div class="container- m-2">
+        <div class="container ms-auto">
 
             <div class=" ">
 
@@ -104,11 +104,11 @@
                             enctype="multipart/form-data" style="display: none" method="POST"
                             onsubmit="return submitFoam()">
                             @csrf
-                            <h3>Info</h3>
+                            <h3>{{__('messages.info')}}</h3>
+
 
                             {{-- START Info (1) --}}
                             <fieldset class=" form-input">
-                                <h3>{{__('messages.info')}}</h3>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="ba">{{__('messages.ba')}}</label></div>
@@ -157,23 +157,6 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-md-4"><label for="name_contractor">{{__('messages.contractor')}}</label></div>
-                                    <div class="col-md-4"><input type="text" name="name_contractor" id="name_contractor"
-                                            readonly value="Arosynergy" class="form-control" required></div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-4"><label for="po_start_date">{{__('messages.po_start_date')}}</label></div>
-                                    <div class="col-md-4"><input type="date" name="start_date" id="po_start_date"
-                                            class="form-control"></div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-4"><label for="po_end_date">{{__('messages.po_end_date')}}</label></div>
-                                    <div class="col-md-4"><input type="date" name="end_date" id="po_end_date"
-                                            class="form-control"></div>
-                                </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="fp_name"> {{__("messages.name_of_substation")}} / {{__("messages.Name_of_Feeder_Pillar")}} </label></div>
@@ -181,11 +164,7 @@
                                             class="form-control" required></div>
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-md-4"><label for="review_date">{{__('messages.Review_Date')}}</label></div>
-                                    <div class="col-md-4"><input type="date" name="review_date" id="review_date"
-                                            value="{{ date('Y-m-d') }}" class="form-control"></div>
-                                </div>
+
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="fp_road"> {{__('messages.Feeder_Name')}} / {{__("messages.Street_Name")}}</label></div>
@@ -215,6 +194,29 @@
                                     <div class="col-md-4"><input type="text" name="tiang_no" id="tiang_no"
                                             class="form-control" required></div>
                                 </div>
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="pole_image-1">{{ __('messages.pole') }} Image 1
+                                        </label>
+                                    </div>
+                                    <div class="col-md-5 p-2 pr-5"><input type="file" name="pole_image_1" id="pole_image_1" required
+                                            class="form-control">
+                                    </div>
+
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="pole_image-2">{{ __('messages.pole') }} Image
+                                            2</label>
+                                    </div>
+                                    <div class="col-md-5 p-2 pr-5"><input type="file" name="pole_image_2" id="pole_image_2" required
+                                            class="form-control">
+                                    </div>
+
+                                </div>
+
+
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="cordinates">{{__("messages.coordinate")}}</label></div>

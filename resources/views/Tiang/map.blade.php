@@ -6,7 +6,7 @@
         #map {
             height: 700px;
         }
-       
+
 
         /* .main-sidebar{width: 220px }
             body:not(.sidebar-mini-md):not(.sidebar-mini-xs):not(.layout-top-nav) .main-header  {margin-left: 220px }
@@ -319,8 +319,9 @@
         <tr><th>Detail</th><td class="text-center">    <a href="/{{ app()->getLocale() }}/tiang-talian-vt-and-vr/${gid[1]}" target="_blank" class="btn btn-sm btn-secondary">Detail</a>
             </td> </tr>
         `
-            $("#my_data").html(str);
-            $('#myModal').modal('show');
+            // $("#my_data").html(str);
+            // $('#myModal').modal('show');
+            openDetails(gid[1])
 
         }
 

@@ -102,13 +102,8 @@
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col-md-4"><label for="team">{{__('messages.team_name')}}</label></div>
-                                <div class="col-md-4">
-                                    <input type="text" name="team" id="team" value="{{$team}}"
+                                    <input type="hidden" name="team" id="team" value="{{$team}}"
                                         class="form-control"  readonly>
-                                    </div>
-                            </div>
 
                             <div class="row">
                                 <div class="col-md-4"><label for="visit_date">{{__('messages.visit_date')}}</label></div>
@@ -239,6 +234,18 @@
                                        </select>
                                     </div>
                             </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="feeder_pillar_image">{{__("messages.feeder_pillar")}} {{__("messages.images")}} </label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="file" name="feeder_pillar_image_1" id="feeder_pillar_image_1" accept="image/*" class="form-control" required >
+                                    <input type="file" name="feeder_pillar_image_2" id="feeder_pillar_image_2" accept="image/*" class="form-control" required >
+                                </div>
+                            </div>
+
+
 
 
                             <div class="row">

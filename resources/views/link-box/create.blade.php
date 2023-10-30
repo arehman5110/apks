@@ -122,13 +122,10 @@
 
 
 
-                            <div class="row">
-                                <div class="col-md-4"><label for="team">{{__('messages.team_name')}}</label></div>
-                                <div class="col-md-4">
-                                    <input type="text" name="team" id="team" value="{{ $team }}"
+
+                                    <input type="hidden" name="team" id="team" value="{{ $team }}"
                                         class="form-control" readonly>
-                                </div>
-                            </div>
+
 
 
                             <div class="row">
@@ -230,6 +227,16 @@
 
                                 </div>
                             </div>
+
+                            <div class="row">
+                                <div class="col-md-4"><label for="link_box_image">{{__("messages.link_box")}} {{__('messages.images')}} </label></div>
+                                <div class="col-md-4">
+                                    <input type="file" name="link_box_image_1" id="link_box_image_1" class="form-control" accept="image/*" required>
+                                    <input type="file" name="link_box_image_2" id="link_box_image_2" class="form-control" accept="image/*" required>
+                                </div>
+                            </div>
+
+
                             <div class="row">
                                 <div class="col-md-4"><label for="image_gate">{{__('messages.cover_image')}}</label></div>
                                 <div class="col-md-4">

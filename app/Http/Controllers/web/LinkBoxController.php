@@ -139,7 +139,7 @@ class LinkBoxController extends Controller
             $data = LinkBox::find($id);
             $data->zone = $request->zone;
             $data->ba = $request->ba;
-            $data->team = $request->team;
+            // $data->team = $request->team;
             $data->visit_date = $request->visit_date;
             $data->patrol_time = $combinedDateTime;
             $data->feeder_involved = $request->feeder_involved;

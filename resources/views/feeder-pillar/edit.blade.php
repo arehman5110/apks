@@ -117,14 +117,6 @@
                                 </div>
                             </div>
 
-
-                            <div class="row">
-                                <div class="col-md-4"><label for="team">{{__('messages.team_name')}}</label></div>
-                                <div class="col-md-4">
-                                    <input type="text" name="team" id="team" class="form-control"
-                                        value="{{ $data->team }}" readonly>
-                                </div>
-                            </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="coordinate">{{__('messages.coordinate')}}</label></div>
                                 <div class="col-md-4">
@@ -255,13 +247,51 @@
                                 </div>
                             </div>
 
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="feeder_pillar_image">{{__('messages.feedar_piller')}} {{__("messages.images")}} </label>
+                                </div>
+
+                                <div class="col-md-8 row">
+                                    <div class="col-md-6">
+                                        <input type="file" accept="image/*" name="feeder_pillar_image_1" id="feeder_pillar_image_1" class="form-control">
+                                    </div>
+
+                                    <div class="col-md-6 text-center  ">
+                                        @if (file_exists(public_path($data->feeder_pillar_image_1)) && $data->feeder_pillar_image_1 != '')
+                                            <a href="{{ URL::asset($data->feeder_pillar_image_1) }}" data-lightbox="roadtrip">
+                                                <img src="{{ URL::asset($data->feeder_pillar_image_1) }}" alt="" height="70" class="adjust-height ml-5 ">
+                                            </a>
+                                        @else
+                                            <strong>{{ __('messages.no_image_found') }}</strong>
+                                        @endif
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <input type="file" accept="image/*" name="feeder_pillar_image_2" id="feeder_pillar_image_2" class="form-control">
+                                    </div>
+
+                                    <div class="col-md-6 text-center  ">
+                                        @if (file_exists(public_path($data->feeder_pillar_image_2)) && $data->feeder_pillar_image_2 != '')
+                                            <a href="{{ URL::asset($data->feeder_pillar_image_2) }}" data-lightbox="roadtrip">
+                                                <img src="{{ URL::asset($data->feeder_pillar_image_2) }}" alt="" height="70" class="adjust-height ml-5  ">
+                                            </a>
+                                        @else
+                                            <strong>{{ __('messages.no_image_found') }}</strong>
+                                        @endif
+                                    </div>
+                                </div>
+
+                            </div>
+
+
 
                             <div class="row">
                                 <div class="col-md-4">
                                     <label for="image_pipe">{{__('messages.image_gate')}}</label>
                                 </div>
 
-                                <div class="col-md-8 row">  
+                                <div class="col-md-8 row">
                                     <div class="col-md-6">
                                         <input type="file" accept="image/*" name="image_gate" id="image_gate" class="form-control">
                                     </div>
@@ -290,7 +320,7 @@
                                         @endif
                                     </div>
                                 </div>
-                                 
+
                             </div>
 
 
@@ -300,7 +330,7 @@
                                     <label for="image_vandalism">{{__('messages.image_vandalism')}}</label>
                                 </div>
 
-                                <div class="col-md-8 row">  
+                                <div class="col-md-8 row">
 
                                     <div class="col-md-6">
                                         <input type="file" accept="image/*" name="image_vandalism" id="image_vandalism" class="form-control">
@@ -340,7 +370,7 @@
                                     <label for="image_leaning">{{__('messages.image_leaning')}}</label>
                                 </div>
 
-                                <div class="col-md-8 row">  
+                                <div class="col-md-8 row">
 
                                     <div class="col-md-6">
                                         <input type="file" accept="image/*" name="image_leaning" id="image_leaning" class="form-control">
@@ -372,14 +402,14 @@
                                 </div>
 
                             </div>
-                            
+
 
                             <div class="row">
                                 <div class="col-md-4">
                                     <label for="image_rust">{{__("messages.image_rust")}}</label>
                                 </div>
 
-                                <div class="col-md-8 row">  
+                                <div class="col-md-8 row">
 
                                     <div class="col-md-6">
                                         <input type="file" accept="image/*" name="image_rust" id="image_rust" class="form-control">
@@ -409,7 +439,7 @@
                                         @endif
                                     </div>
                                 </div>
-                                 
+
                             </div>
 
 
@@ -419,7 +449,7 @@
                                     <label for="images_advertise_poster">{{__("messages.image_advertise_poster")}}</label>
                                 </div>
 
-                                <div class="col-md-8 row">  
+                                <div class="col-md-8 row">
 
                                     <div class="col-md-6">
                                         <input type="file" accept="image/*" name="images_advertise_poster" id="images_advertise_poster" class="form-control">
@@ -449,7 +479,7 @@
                                         @endif
                                     </div>
                                 </div>
-                               
+
                             </div>
 
 

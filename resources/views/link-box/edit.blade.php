@@ -119,13 +119,6 @@
 
 
 
-                            <div class="row">
-                                <div class="col-md-4"><label for="team">{{__('messages.team_name')}}</label></div>
-                                <div class="col-md-4">
-                                    <input type="text" name="team" id="team" class="form-control"
-                                        value="{{ $data->team }}" readonly>
-                                </div>
-                            </div>
 
 
 
@@ -243,10 +236,48 @@
 
                                 </div>
                             </div>
+
+
+                            <div class="row">
+                                <div class="col-md-4"><label for="link_box_image">{{__("messages.link_box")}} {{__("messages.images")}} </label></div>
+
+                                <div class="col-md-8 row">
+                                    <div class="col-md-6">
+                                        <input type="file" accept="image/*" name="link_box_image_1" id="link_box_image_1" class="form-control">
+                                    </div>
+
+                                    <div class="col-md-6 text-center  ">
+                                        @if (file_exists(public_path($data->link_box_image_1)) && $data->link_box_image_1 != '')
+                                            <a href="{{ URL::asset($data->link_box_image_1) }}" data-lightbox="roadtrip">
+                                                <img src="{{ URL::asset($data->link_box_image_1) }}" alt="" height="70" class="adjust-height ml-5 ">
+                                            </a>
+                                        @else
+                                            <strong>{{ __('messages.no_image_found') }}</strong>
+                                        @endif
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <input type="file" accept="image/*" name="link_box_image_2" id="link_box_image_2" class="form-control">
+                                    </div>
+
+                                    <div class="col-md-6 text-center  ">
+                                        @if (file_exists(public_path($data->link_box_image_2)) && $data->link_box_image_2 != '')
+                                            <a href="{{ URL::asset($data->link_box_image_2) }}" data-lightbox="roadtrip">
+                                                <img src="{{ URL::asset($data->link_box_image_2) }}" alt="" height="70" class="adjust-height ml-5  ">
+                                            </a>
+                                        @else
+                                            <strong>{{ __('messages.no_image_found') }}</strong>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+
+
+
                             <div class="row">
                                 <div class="col-md-4"><label for="image_gate">{{__('messages.cover_image')}}</label></div>
 
-                                <div class="col-md-8 row">  
+                                <div class="col-md-8 row">
                                     <div class="col-md-6">
                                         <input type="file" accept="image/*" name="image_cover" id="image_cover" class="form-control">
                                     </div>
@@ -281,7 +312,7 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="image_vandalism">{{__('messages.image_vandalism')}}</label></div>
 
-                                <div class="col-md-8 row">  
+                                <div class="col-md-8 row">
                                     <div class="col-md-6">
                                         <input type="file" accept="image/*" name="image_vandalism" id="image_vandalism" class="form-control">
                                     </div>
@@ -316,7 +347,7 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="image_leaning">{{__("messages.image_leaning")}}</label></div>
 
-                                <div class="col-md-8 row">  
+                                <div class="col-md-8 row">
                                     <div class="col-md-6">
                                         <input type="file" accept="image/*" name="image_leaning" id="image_leaning" class="form-control">
                                     </div>
@@ -350,7 +381,7 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="image_rust">{{__("messages.image_rust")}}</label></div>
 
-                                <div class="col-md-8 row">  
+                                <div class="col-md-8 row">
                                     <div class="col-md-6">
                                         <input type="file" accept="image/*" name="image_rust" id="image_rust" class="form-control">
                                     </div>
@@ -385,7 +416,7 @@
 
                             <div class="row">
                                 <div class="col-md-4"><label for="images_advertise_poster">{{__('messages.image_advertise_poster')}}</label></div>
-                                <div class="col-md-8 row">  
+                                <div class="col-md-8 row">
                                     <div class="col-md-6">
                                         <input type="file" accept="image/*" name="images_advertise_poster" id="images_advertise_poster" class="form-control">
                                     </div>
@@ -419,7 +450,7 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="images_bushes">{{__("messages.image_bushes")}}</label></div>
 
-                                <div class="col-md-8 row">  
+                                <div class="col-md-8 row">
                                     <div class="col-md-6">
                                         <input type="file" accept="image/*" name="images_bushes" id="images_bushes" class="form-control">
                                     </div>

@@ -99,13 +99,9 @@
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col-md-4"><label for="team">{{__('messages.team_name')}}</label></div>
-                                <div class="col-md-4">
-                                    <input type="text" name="team" id="team" value="{{$team}}"
+                                    <input type="hidden" name="team" id="team" value="{{$team}}"
                                         class="form-control"  readonly>
-                                    </div>
-                            </div>
+
 
                             <div class="row">
                                 <div class="col-md-4"><label for="visit_date">{{__('messages.visit_date')}}</label></div>
@@ -244,15 +240,28 @@
                             </div>
 
                             <div class="row">
+                                <div class="col-md-4"><label for="substation-image">{{__('messages.substation')}} {{__("messages.images")}} </label></div>
+                                <div class="col-md-4">
+                                    <input type="file" name="substation_image_1" id="substation_image_1" accept="image/*" required
+                                        class="form-control" >
+
+                                        <input type="file" name="substation_image_2" id="substation_image_2" accept="image/*" required
+                                            class="form-control" >
+                                    </div>
+
+                            </div>
+
+
+                            <div class="row">
                                 <div class="col-md-4"><label for="image_gate">{{__('messages.image_gate')}}</label></div>
                                 <div class="col-md-4">
                                     <input type="file" name="image_gate" id="image_gate" accept="image/*"
                                         class="form-control" >
-                                        
+
                                         <input type="file" name="image_gate_2" id="image_gate_2" accept="image/*"
                                             class="form-control" >
                                     </div>
-                                 
+
                             </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="image_grass">{{__('messages.image_grass')}}</label></div>
@@ -293,7 +302,7 @@
                                         class="form-control" >
                                     </div>
                             </div>
-{{-- 
+{{--
                             <div class="row">
                                 <div class="col-md-4"><label for="img_advertise_poster">{{__('messages.image_advertise_poster')}}</label></div>
                                 <div class="col-md-4">
@@ -309,7 +318,7 @@
                                 <div class="col-md-4">
                                     <input type="file" name="other_image" id="other_image" accept="image/*"
                                         class="form-control" >
-                                        
+
                                     </div>
                             </div>
 
@@ -318,7 +327,7 @@
                                 <div class="col-md-4">
                                     <input type="text" name="coordinate" id="coordinate" readonly
                                         class="form-control" required>
-                                         
+
                                     </div>
                             </div>
 

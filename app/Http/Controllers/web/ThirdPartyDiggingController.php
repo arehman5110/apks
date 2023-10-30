@@ -64,11 +64,11 @@ class ThirdPartyDiggingController extends Controller
             $data->team_name = $request->team_name;
             $data->survey_date = $request->survey_date;
             $data->patrolling_time = $combinedDateTime;
-            $data->project_name = $request->project_name;
+            // $data->project_name = $request->project_name;
             $data->road_name = $request->road_name;
 
 
-            $data->km_actual = $request->km_actual;
+            // $data->km_actual = $request->km_actual;
 
             $data->digging = $request->digging;
             $data->notice = $request->notice;
@@ -168,10 +168,10 @@ class ThirdPartyDiggingController extends Controller
             $data->ba = $request->ba;
             $data->survey_date = $request->survey_date;
             $data->patrolling_time = $combinedDateTime;
-            $data->project_name = $request->project_name;
+            // $data->project_name = $request->project_name;
             $data->feeder_involved = $request->feeder_involved;
 
-            $data->km_actual = $request->km_actual;
+            // $data->km_actual = $request->km_actual;
             $data->road_name = $request->road_name;
 
             $data->digging = $request->digging;
