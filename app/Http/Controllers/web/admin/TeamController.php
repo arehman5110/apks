@@ -16,7 +16,7 @@ class TeamController extends Controller
      */
     public function index()
     {
-        //
+
         $team = Team::withCount('teamUsers')->get();
         return view('admin.team.index', ['teams' => $team]);
     }

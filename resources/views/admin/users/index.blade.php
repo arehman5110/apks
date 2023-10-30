@@ -159,7 +159,7 @@
                     <h4 class="modal-title">Add User</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <form action="{{ route('team-users.store') }}" id="remove-foam" method="POST">
+                <form action="{{ route('team-users.store',app()->getLocale()) }}" id="remove-foam" method="POST">
 
                     @csrf
 
@@ -209,7 +209,7 @@
                 var button = $(event.relatedTarget);
                 var id = button.data('id');
                 var modal = $(this);
-                $('#remove-foam').attr('action', 'team-users/' + id)
+                $('#remove-foam').attr('action', '/{{app()->getLocale()}}/team-users/' + id)
             });
 
 

@@ -4,8 +4,13 @@
     @include('partials.map-css')
     <style>
         #map {
-            height: 600px;
+            height: 700px;
         }
+       
+
+        /* .main-sidebar{width: 220px }
+            body:not(.sidebar-mini-md):not(.sidebar-mini-xs):not(.layout-top-nav) .main-header  {margin-left: 220px }
+            .content-wrapper{margin-left: 220px !important} */
     </style>
 @endsection
 
@@ -42,7 +47,7 @@
     <div class="container-fluid bg-white pt-2">
 
 
-        <div class=" p-1 col-12 m-2">
+        <div class=" p-1  m-2">
             <div class="card p-0 mb-3">
                 <div class="card-body row">
 
@@ -81,20 +86,21 @@
 
 
 
+        <div class="p-3 form-input  w-25 ">
+            <label for="select_layer">Select Layer : </label>
+            <span class="text-danger" id="er-select-layer"></span>
+            <select name="select_layer" id="select_layer" onchange="selectLayer(this.value)" class="form-control">
+                <option value="" hidden>select layer</option>
+                <option value="substation">Substation</option>
+                <option value="pano">Pano</option>
+                <option value="tbl_savr">Tiang</option>
+            </select>
+        </div>
 
         <!--  START MAP CARD DIV -->
         <div class="row m-2">
 
-            <div class="p-3 form-input">
-                <label for="select_layer">Select Layer : </label>
-                <span class="text-danger" id="er-select-layer"></span>
-                <select name="select_layer" id="select_layer" onchange="selectLayer(this.value)" class="form-control">
-                    <option value="" hidden>select layer</option>
-                    <option value="substation">Substation</option>
-                    <option value="pano">Pano</option>
-                    <option value="tbl_savr">Tiang</option>
-                </select>
-            </div>
+
             <!-- START MAP SIDEBAR DIV -->
             {{-- <div class="col-2 p-0">
             <div class="card p-0 m-0"
@@ -137,7 +143,7 @@
             <!-- END MAP SIDEBAR DIV -->
 
             <!-- START MAP  DIV -->
-            <div class="col-12 p-0 ">
+            <div class="col-md-8 p-0 ">
                 <div class="card p-0 m-0"
                     style="border: 1px solid rgb(177, 175, 175) !important; border-radius: 0px !important;">
                     <div class="card-header text-center"><strong> MAP</strong></div>
@@ -148,6 +154,18 @@
                     </div>
                 </div>
 
+            </div>
+
+            <div class="col-md-4">
+                <div class="card p-0 m-0"
+                    style="border: 1px solid rgb(177, 175, 175) !important; border-radius: 0px !important;">
+
+                    <div class="card-header text-center"><strong>Detail</strong></div>
+
+                    <div class="card-body p-0" style="height: 700px ;overflow: hidden;" id='set-iframe'>
+
+                    </div>
+                </div>
             </div>
             <!-- END MAP  DIV -->
             <div id="wg" class="windowGroup">
@@ -183,107 +201,104 @@
             </div>
         </div>
     </div>
-
-
 @endsection
 
 @section('script')
+
     @include('partials.map-js')
 
 
     <script>
-
-
         // for add and remove layers
         function addRemoveBundary(param, paramY, paramX) {
 
-if (boundary !== '') {
-    map.removeLayer(boundary)
-}
+            if (boundary !== '') {
+                map.removeLayer(boundary)
+            }
 
 
-boundary = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-    layers: 'cite:ba',
-    format: 'image/png',
-    cql_filter: "station ILIKE '%" + param + "%'",
-    maxZoom: 21,
-    transparent: true
-}, {
-    buffer: 10
-})
-map.addLayer(boundary)
-boundary.bringToFront()
+            boundary = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:ba',
+                format: 'image/png',
+                cql_filter: "station ILIKE '%" + param + "%'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+            map.addLayer(boundary)
+            boundary.bringToFront()
 
-map.flyTo([parseFloat(paramY), parseFloat(paramX)], zoom, {
-    duration: 1.5, // Animation duration in seconds
-    easeLinearity: 0.25,
-});
-
-
-if (substation != '') {
-    map.removeLayer(substation)
-}
-
-substation = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-    layers: 'cite:tbl_substation',
-    format: 'image/png',
-    cql_filter: "ba ILIKE '%" + param + "%'",
-    maxZoom: 21,
-    transparent: true
-}, {
-    buffer: 10
-})
-
-map.addLayer(substation)
-substation.bringToFront()
+            map.flyTo([parseFloat(paramY), parseFloat(paramX)], zoom, {
+                duration: 1.5, // Animation duration in seconds
+                easeLinearity: 0.25,
+            });
 
 
+            if (substation != '') {
+                map.removeLayer(substation)
+            }
 
-if (tbl_savr != '') {
-    map.removeLayer(tbl_savr)
-}
+            substation = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:tbl_substation',
+                format: 'image/png',
+                cql_filter: "ba ILIKE '%" + param + "%'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
 
-tbl_savr = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-    layers: 'cite:tbl_savr',
-    format: 'image/png',
-    cql_filter: "ba ILIKE '%" + param + "%'",
-    maxZoom: 21,
-    transparent: true
-}, {
-    buffer: 10
-})
-
-map.addLayer(tbl_savr)
-tbl_savr.bringToFront()
-
-
-addGroupOverLays()
-
-}
+            // map.addLayer(substation)
+            // substation.bringToFront()
 
 
-// add group overlayes
-function addGroupOverLays() {
-if (layerControl != '') {
-    // console.log("inmsdanssdkjnasjnd");
-    map.removeControl(layerControl);
-}
-// console.log("sdfsdf");
-groupedOverlays = {
-    "POI": {
-        'BA': boundary,
-        'Substation': substation,
-        'Pano': pano_layer,
-        'Tiang' : tbl_savr,
-    }
-};
-//add layer control on top right corner of map
-layerControl = L.control.groupedLayers(baseLayers, groupedOverlays, {
-    collapsed: true,
-    position: 'topright'
-    // groupCheckboxes: true
-}).addTo(map);
-}
+
+            if (tbl_savr != '') {
+                map.removeLayer(tbl_savr)
+            }
+
+            tbl_savr = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:tbl_savr',
+                format: 'image/png',
+                cql_filter: "ba ILIKE '%" + param + "%'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+
+            map.addLayer(tbl_savr)
+            tbl_savr.bringToFront()
+
+
+            addGroupOverLays()
+
+        }
+
+
+        // add group overlayes
+        function addGroupOverLays() {
+            if (layerControl != '') {
+                // console.log("inmsdanssdkjnasjnd");
+                map.removeControl(layerControl);
+            }
+            // console.log("sdfsdf");
+            groupedOverlays = {
+                "POI": {
+                    'BA': boundary,
+                    'Substation': substation,
+                    'Pano': pano_layer,
+                    'Tiang': tbl_savr,
+                }
+            };
+            //add layer control on top right corner of map
+            layerControl = L.control.groupedLayers(baseLayers, groupedOverlays, {
+                collapsed: true,
+                position: 'topright'
+                // groupCheckboxes: true
+            }).addTo(map);
+        }
 
         function showModalData(data, id) {
             var str = '';
@@ -299,11 +314,22 @@ layerControl = L.control.groupedLayers(baseLayers, groupedOverlays, {
 
         <tr><th>Coordinate</th><td>${data.coordinate}</td> </tr>
         <tr><th>Created At</th><td>${data.created_at}</td> </tr>
-        <tr><th>Detail</th><td class="text-center">    <a href="/{{app()->getLocale()}}/tiang-talian-vt-and-vr/${gid[1]}" target="_blank" class="btn btn-sm btn-secondary">Detail</a>
+        <tr><th>Detail</th><td class="text-center">    <button type="button" onclick="openDetails(${gid[1]})" class="btn btn-sm btn-secondary">Edit</button>
+</td></tr>
+        <tr><th>Detail</th><td class="text-center">    <a href="/{{ app()->getLocale() }}/tiang-talian-vt-and-vr/${gid[1]}" target="_blank" class="btn btn-sm btn-secondary">Detail</a>
             </td> </tr>
         `
             $("#my_data").html(str);
             $('#myModal').modal('show');
+
+        }
+
+        function openDetails(id) {
+            $('#myModal').modal('hide');
+            $('#set-iframe').html('');
+
+            $('#set-iframe').html(`<iframe src="/{{app()->getLocale()}}/get-test-edit/${id}" frameborder="0" style="height:700px; width:100%" ></iframe>`)
+
 
         }
     </script>

@@ -25,6 +25,7 @@ use App\Http\Controllers\web\FPController;
 use App\Http\Controllers\web\GenerateNoticeController;
 use App\Http\Controllers\web\PatrollingController;
 use App\Http\Controllers\web\POController;
+use App\Http\Controllers\web\TiangMapController;
 use App\Models\ThirdPartyDiging;
 use Illuminate\Support\Facades\App;
 
@@ -160,9 +161,13 @@ Route::resource('po', POController::class);
 
     Route::get('/test-pagination/{id}/{status}',[MapController::class,'teswtpagination']);
     Route::get('/preNext/{id}/{status}',[MapController::class,'preNext']);
+    Route::get('/get-test-edit/{id}', [TiangMapController::class,'editMap'])->name('get-test-edit');
+    Route::post('/tiang-talian-vt-and-vr-map-edit/{id}', [TiangMapController::class,'editMapStore'])->name('tiang-talian-vt-and-vr-map-edit');
 
 });
 Route::view('/generate-pdf-for-notice','PDF.notice');
+
+
 
 // Route::get('/third-party-digging-mobile/{id}',[ThirdPartyDiggingController::class,'show']);
 Route::get('/get-work-package-detail/{id}', [WPController::class, 'detail'])->name('get-work-package-detail');

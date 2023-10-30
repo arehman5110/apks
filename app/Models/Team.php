@@ -13,7 +13,6 @@ class Team extends Model
     protected $fillable = ['team_name' , 'team_type'];
     public $timestamps = false;
 
-
     public function teamUsers(){
 
             return $this->hasMany(User::class, 'id_team');

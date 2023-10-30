@@ -90,28 +90,28 @@
                 <li class="nav-item">
                     <a href="/pencawang" class="nav-link ">
                         <i class="fas fa-building"></i>
-                        <p>{{__('messages.substation')}}</p>
-                        <i class="right fas fa-angle-left"></i>
+                        <p>{{__('messages.substation')}}
+                        <i class="right fas fa-angle-left"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
 
                         <li class="nav-item">
                             <a href="{{ route('substation.create', app()->getLocale()) }}" class="nav-link ">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>{{__('messages.create')}}</p>
+                                <p> <i class="far fa-circle nav-icon"></i>
+                               {{__('messages.create')}}</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('substation.index', app()->getLocale()) }}" class="nav-link ">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>{{__('messages.index')}}</p>
+                               <p> <i class="far fa-circle nav-icon"></i>
+                                {{__('messages.index')}}</p>
                             </a>
                         </li>
 
                         <li class="nav-item">
                             <a href="/{{app()->getLocale()}}/substation-map" class="nav-link ">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>{{__('messages.map')}}</p>
+                              <p>  <i class="far fa-circle nav-icon"></i>
+                                {{__('messages.map')}}</p>
                             </a>
                         </li>
 
@@ -120,8 +120,8 @@
                 <li class="nav-item">
                     <a href="/feeder-pillar" class="nav-link ">
                         <i class="fas fa-cube"></i>
-                        <p>{{__('messages.feeder_pillar')}}</p>
-                        <i class="right fas fa-angle-left"></i>
+                        <p>{{__('messages.feeder_pillar')}}
+                        <i class="right fas fa-angle-left"></i></p>
                     </a>
 
                     <ul class="nav nav-treeview">

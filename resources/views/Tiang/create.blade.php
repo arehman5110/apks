@@ -104,7 +104,7 @@
                             enctype="multipart/form-data" style="display: none" method="POST"
                             onsubmit="return submitFoam()">
                             @csrf
-                            <h3></h3>
+                            <h3>Info</h3>
 
                             {{-- START Info (1) --}}
                             <fieldset class=" form-input">
