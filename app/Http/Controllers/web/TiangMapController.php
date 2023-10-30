@@ -20,6 +20,7 @@ class TiangMapController extends Controller
     {
         // return $id;
         $data = $this->tiangRepository->getRecoreds($id);
+        // return $data->jenis_tiang;
 
         return $data ? view('Tiang.edit-form', ['data' => $data]) : abort(404);
     }

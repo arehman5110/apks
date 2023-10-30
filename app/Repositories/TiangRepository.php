@@ -67,6 +67,7 @@ class TiangRepository
     {
         // dd($id);
         $data = Tiang::find($id);
+        // dd($data);
         if ($data) {
             $data['abc_span'] = json_decode($data->abc_span);
             $data['size_tiang'] = json_decode($data->size_tiang);
