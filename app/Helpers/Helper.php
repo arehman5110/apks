@@ -161,6 +161,7 @@ function getImage2($key, $arr, $arr_name, $img_arr, $lab_name)
 
 function getImageShow($key, $arr, $arr_name, $img_arr, $lab_name)
 {
+    $lab_name =  __('messages.'.$lab_name);
     $html = '';
 
     // Check for checked checkbox
