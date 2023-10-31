@@ -40,7 +40,9 @@
             height: 400px;
             padding: 20px;
         }
-
+        input {
+        min-width: 16px !important;
+     }
         /* CSS for the Select2 dropdown to match form-control style */
         .select2-container {
             margin-top: 10px;

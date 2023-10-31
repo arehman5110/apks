@@ -87,7 +87,7 @@ return [
         'en',
         'my'
     ],
-     
+
 
     /*
     |--------------------------------------------------------------------------
@@ -201,6 +201,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Barryvdh\Snappy\ServiceProvider::class,
+        
 
     ],
 
