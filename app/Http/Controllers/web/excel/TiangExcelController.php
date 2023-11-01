@@ -36,18 +36,19 @@ class TiangExcelController extends Controller
                     if ($rec->size_tiang != '') {
                         $size_tiang = json_decode($rec->size_tiang);
 
-                        $worksheet->setCellValue('L' . $i, $size_tiang->st7);
-                        $worksheet->setCellValue('M' . $i, $size_tiang->st9);
-                        $worksheet->setCellValue('N' . $i, $size_tiang->st10);
+
+                        $worksheet->setCellValue('L' . $i, $size_tiang == 'st7' ? '1' : '0');
+                        $worksheet->setCellValue('M' . $i, $size_tiang == 'st9' ? '1' : '0');
+                        $worksheet->setCellValue('N' . $i, $size_tiang == 'st10' ? '1' : '0');
                     }
 
                     if ($rec->jenis_tiang != '') {
                         $jenis_tiang = json_decode($rec->jenis_tiang);
 
-                        $worksheet->setCellValue('O' . $i, $jenis_tiang->spun);
-                        $worksheet->setCellValue('P' . $i, $jenis_tiang->concrete);
-                        $worksheet->setCellValue('Q' . $i, $jenis_tiang->iron);
-                        $worksheet->setCellValue('R' . $i, $jenis_tiang->wood);
+                        $worksheet->setCellValue('O' . $i, $jenis_tiang == 'spun' ? '1' : '0');
+                        $worksheet->setCellValue('P' . $i, $jenis_tiang == 'concrete' ? '1' : '0');
+                        $worksheet->setCellValue('Q' . $i, $jenis_tiang == 'iron' ? '1' : '0');
+                        $worksheet->setCellValue('R' . $i, $jenis_tiang == 'wood' ? '1' : '0');
                     }
 
                     if ($rec->abc_span != '') {
@@ -94,7 +95,7 @@ class TiangExcelController extends Controller
                     $secondWorksheet->setCellValue('M' . $i, $rec->tiang_no);
 
                     if ($rec->tiang_defect != '') {
-                        
+
                         $secondWorksheet->setCellValue('N' . $i, excelCheckBOc('cracked', $rec->tiang_defect));
                         $secondWorksheet->setCellValue('O' . $i, excelCheckBOc('leaning', $rec->tiang_defect));
                         $secondWorksheet->setCellValue('P' . $i, excelCheckBOc('dim', $rec->tiang_defect));
@@ -184,7 +185,7 @@ class TiangExcelController extends Controller
 
                     $i++;
                 }
-                $thirdWorksheet->calculateColumnWidths();  
+                $thirdWorksheet->calculateColumnWidths();
                 $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
 
                 $writer->save(public_path('assets/updated-excels/') . 'qr-tiang-talian.xlsx');

@@ -66,9 +66,10 @@
         }
 
         .form-input .card {
-            border: 1px solid black !important;
+            /* border: 1px solid black !important; */
             border-radius: 0px !important
         }
+        span.number{display: none}
     </style>
 @endsection
 
@@ -220,12 +221,12 @@
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="cordinates">{{__("messages.coordinate")}}</label></div>
-                                    <div class="col-md-4"><input type="text" name="cordinates" id="cordinates"
+                                    <div class="col-md-4"><input type="text" name="cordinates" id="cordinates" accept="image/*"
                                             class="form-control" required readonly></div>
                                 </div>
 
                                 <input type="hidden" name="lat" id="lat" required class="form-control">
-                                <input type="hidden" name="log" id="log" class="form-control">
+                                <input type="hidden" name="log" id="log" class="form-control" accept="image/*">
 
                                 <div class="text-center">
                                     <strong> <span class="text-danger map-error"></span></strong>
@@ -238,36 +239,93 @@
 
                             </fieldset>
                             {{-- END Info (1) --}}
-                            <h3></h3>
+                            <h3> {{__("messages.Asset_Register")}} </h3>
+
 
                             {{-- START Asset Register (2) --}}
                             <fieldset class="form-input">
-                                <h3> {{__("messages.Asset_Register")}} </h3>
                                 <div class="row">
-                                    <div class="col-md-6 ">
-                                        <div class="card p-4 ">
+
+                                    <div class="col-md-6">
+                                        <div class="card p-4">
                                             <div class="row">
-                                                <div class="col-md-6"><label for="st7">
-                                                        {{__("messages.Pole_Size_Bill")}} 7.5</label></div>
-                                                <div class="col-md-6"><input type="number" name="size_tiang[st7]"
-                                                        id="st7" class="form-control" min="0"></div>
+                                                <div class="col-md-8"><label for="st7">
+                                                        {{ __('messages.Pole_Size_Bill') }}  </label>
+
+                                                        <div class="d-flex">
+                                                            <input type="radio" name="size_tiang"
+                                                            value="st7" id="st7"
+                                                            class="  "  >
+                                                            <label for="st7"> 7.5</label>
+
+                                                        </div>
+
+                                                        <div class="d-flex">
+                                                            <input type="radio" name="size_tiang"
+                                                            value="st9" id="st9"
+                                                            class=" ">
+                                                            <label for="st9"> 9</label>
+
+                                                        </div>
+
+                                                        <div class="d-flex">
+                                                            <input type="radio" name="size_tiang"
+                                                            value="st10" id="st10"
+                                                            class=" ">
+                                                            <label for="st10"> 10</label>
+
+
+                                                        </div></div>
+
                                             </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="card p-4">
+
+
                                             <div class="row">
-                                                <div class="col-md-6"><label for="st9">{{__("messages.Pole_Size_Bill")}} 9</label></div>
-                                                <div class="col-md-6"><input type="number" name="size_tiang[st9]"
-                                                        id="st9" class="form-control"></div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6"><label for="st10">{{__("messages.Pole_Size_Bill")}} 10</label>
+                                                <div class="col-md-8">
+                                                    <label for="">{{ __('messages.Pole_type_No') }} </label>
+
+                                                    <div class="d-flex">
+
+                                                        <input type="radio" name="jenis_tiang" value="spun" id="spun" class=" "   >
+                                                        <label for="spun">{{ __('messages.Spun') }}</label>
+
+                                                    </div>
+
+                                                    <div class="d-flex">
+
+                                                        <input type="radio" name="jenis_tiang" value="concrete" id="concrete" class=" "  >
+                                                        <label for="concrete">{{ __('messages.Concrete') }}</label>
+
+                                                    </div>
+
+
+                                                    <div class="d-flex">
+
+                                                        <input type="radio" name="jenis_tiang" value="iron" id="iron" class=" "  >
+                                                        <label for="iron">{{ __('messages.Pole_type_No') }}</label>
+
+                                                    </div>
+
+                                                    <div class="d-flex">
+
+                                                        <input type="radio" name="jenis_tiang" value="wood" id="wood" class=" "  >
+                                                        <label for="wood">{{ __('messages.Wood') }}</label>
+
+                                                    </div>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <input type="number" name="size_tiang[st10]" id="st10"
-                                                        class="form-control">
-                                                </div>
+
                                             </div>
+
+
 
                                         </div>
                                     </div>
+
                                     <div class="col-md-6 ">
                                         <div class="card p-4">
 
@@ -293,41 +351,31 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 ">
                                         <div class="card p-4">
+
                                             <div class="row">
-                                                <div class="col-md-6"><label for="spun">{{__("messages.Pole_type_No")}} {{__("messages.Spun")}} </label>
+                                                <div class="col-md-6"><label for="s7_173">{{__("messages.BARE_Span")}} 7/173</label>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <input type="number" name="jenis_tiang[spun]" id="spun"
-                                                        class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6"><label for="concrete">{{__("messages.Pole_type_No")}} {{__("messages.Concrete")}} </label>
-                                                </div>
-                                                <div class="col-md-6"><input type="number" name="jenis_tiang[concrete]"
-                                                        id="concrete" class="form-control">
-                                                </div>
+                                                <div class="col-md-6"><input type="number" name="bare_span[s7_173]"
+                                                        id="s7_173" class="form-control"></div>
                                             </div>
 
                                             <div class="row">
-                                                <div class="col-md-6"><label for="iron">{{__("messages.Pole_type_No")}} {{__("messages.Iron")}}</label>
+                                                <div class="col-md-6"><label for="s7_122">{{__("messages.BARE_Span")}} 7/122</label>
                                                 </div>
-                                                <div class="col-md-6"><input type="number" name="jenis_tiang[iron]"
-                                                        id="iron" class="form-control"></div>
+                                                <div class="col-md-6"><input type="number" name="bare_span[s7_122]"
+                                                        id="s7_122" class="form-control"></div>
                                             </div>
-
                                             <div class="row">
-                                                <div class="col-md-6"><label for="wood">{{__("messages.Pole_type_No")}} {{__("messages.Wood")}}</label>
+                                                <div class="col-md-6"><label for="s3_132">{{__("messages.BARE_Span")}} 3/132</label>
                                                 </div>
-                                                <div class="col-md-6"><input type="number" name="jenis_tiang[wood]"
-                                                        id="wood" class="form-control"></div>
+                                                <div class="col-md-6"><input type="number" name="bare_span[s3_132]"
+                                                        id="s3_132" class="form-control"></div>
                                             </div>
-
                                         </div>
-
                                     </div>
+
 
                                     <div class="col-md-6">
                                         <div class="card p-4">
@@ -357,30 +405,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6 ">
-                                        <div class="card p-4">
-
-                                            <div class="row">
-                                                <div class="col-md-6"><label for="s7_173">{{__("messages.BARE_Span")}} 7/173</label>
-                                                </div>
-                                                <div class="col-md-6"><input type="number" name="bare_span[s7_173]"
-                                                        id="s7_173" class="form-control"></div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-md-6"><label for="s7_122">{{__("messages.BARE_Span")}} 7/122</label>
-                                                </div>
-                                                <div class="col-md-6"><input type="number" name="bare_span[s7_122]"
-                                                        id="s7_122" class="form-control"></div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6"><label for="s3_132">{{__("messages.BARE_Span")}} 3/132</label>
-                                                </div>
-                                                <div class="col-md-6"><input type="number" name="bare_span[s3_132]"
-                                                        id="s3_132" class="form-control"></div>
-                                            </div>
-                                        </div>
-                                    </div>
 
 
 
@@ -396,10 +420,11 @@
                             {{-- END Asset Register (2) --}}
 
                             {{-- START Kejanggalan (3) --}}
-                            <h3></h3>
-                            <fieldset class="form-input defects">
+                            <h3>{{__("messages.kejanggalan")}}</h3>
 
+                            <fieldset class="form-input defects">
                                 <h3>{{__("messages.kejanggalan")}}</h3>
+
                                 <div class="table-responsive">
                                     <table class="table table-bordered w-100">
                                         <thead style="background-color: #E4E3E3 !important">
@@ -1033,48 +1058,11 @@
 
                             </fieldset>
 
-                            <h3></h3>
-                            {{-- START TOTAL DEFECTS (4) --}}
-
-                            <fieldset class="form-input">
-                                <div class="row">
-                                    <div class="col-md-4"><label for="total_defects">{{__('messages.total_defects')}}</label></div>
-                                    <div class="col-md-4"><input type="number" name="total_defects" id="total_defects"
-                                            class="form-control" readonly></div>
-                                </div>
-
-
-                                <div class="row">
-                                    <div class="col-md-4"><label for="planed_date">{{__('messages.planned_repair_date')}}</label></div>
-                                    <div class="col-md-4"><input type="date" name="planed_date" id="planed_date"
-                                            class="form-control"></div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-4"><label for="actual_date">{{__('messages.date_of_repair_performed')}}</label></div>
-                                    <div class="col-md-4"><input type="date" name="actual_date" id="actual_date"
-                                            class="form-control"></div>
-                                </div>
-
-
-                                <div class="row">
-                                    <div class="col-md-4"><label for="remarks">{{__('messages.remarks')}}</label></div>
-                                    <div class="col-md-4">
-                                        <textarea name="remarks" id="remarks" cols="30" rows="10" class="form-control"></textarea>
-
-                                    </div>
-
-
-                            </fieldset>
 
 
 
-                            </fieldset>
+                            <h3>{{__('messages.Heigh_Clearance')}}</h3>
 
-                            {{-- END Kejanggalan (3) --}}
-
-
-                            <h3></h3>
                             {{-- START Heigh Clearance (4) --}}
 
                             <fieldset class="form-input high-clearance">
@@ -1193,16 +1181,15 @@
                                     <div class="col-md-8">
                                         <div class="row">
                                             <div class="col-md-4 d-flex">
-                                                <input type="checkbox" name="talian_spec[comply]" id="line-comply"
+                                                <input type="radio" name="talian_spec" value="comply" id="line-comply"
                                                     class="form-check"><label for="line-comply">
                                                         {{__('messages.Comply')}}</label>
                                             </div>
 
                                             <div class="col-md-4 d-flex">
-                                                <input type="checkbox" name="talian_spec[disobedient]"
+                                                <input type="radio" name="talian_spec" value="uncomply"
                                                     id="line-disobedient" class="form-check"><label
-                                                    for="line-disobedient">
-                                                    {{__('messages.Disobedient')}}</label>
+                                                    for="line-disobedient">Uncomply</label>
                                             </div>
 
 
@@ -1216,7 +1203,8 @@
                             {{-- END Heigh Clearance (4) --}}
 
 
-                            <h3></h3>
+                            <h3>{{__('messages.Kebocoran_Arus')}}</h3>
+
 
                             {{-- START Kebocoran Arus (5) --}}
 
