@@ -33,6 +33,19 @@ function substaionCheckBox($key, $array)
     }
 }
 
+function getInputValue($key, $array)
+{
+    try {
+        if (is_array($array) || is_a($array, 'stdClass')) {
+            if (property_exists($array, $key) || array_key_exists($key, (array) $array)) {
+                return is_array($array) ? $array[$key] : $array->$key;
+            }
+        }
+        return '';
+    } catch (\Throwable $th) {
+    }
+}
+
 function excelCheckBOc($key, $array)
 {
     if ($array != null) {
@@ -91,7 +104,7 @@ function getImage($checkBox, $arr, $key)
 
 function getImage2($key, $arr, $arr_name, $img_arr, $lab_name)
 {
-    $lab_name =  __('messages.'.$lab_name);
+    $lab_name = __('messages.' . $lab_name);
     $html = '';
 
     // Check for checked checkbox
@@ -161,7 +174,7 @@ function getImage2($key, $arr, $arr_name, $img_arr, $lab_name)
 
 function getImageShow($key, $arr, $arr_name, $img_arr, $lab_name)
 {
-    $lab_name =  __('messages.'.$lab_name);
+    $lab_name = __('messages.' . $lab_name);
     $html = '';
 
     // Check for checked checkbox
@@ -170,13 +183,14 @@ function getImageShow($key, $arr, $arr_name, $img_arr, $lab_name)
     $id = $arr_name . '_' . $key;
     $name = $arr_name . '[' . $key . ']';
 
-
     // Check if $key is "other" to decide the CSS classes
     $class = $key != 'other' ? 'd-flex' : '';
 
     $html .=
         "<td class='$class'>
-                <input type='checkbox' name='$name' id='$id' " . ($key_exist ? 'checked' : '') ." class='form-check' disabled>
+                <input type='checkbox' name='$name' id='$id' " .
+        ($key_exist ? 'checked' : '') .
+        " class='form-check' disabled>
                 <label class='text-capitalize' for='$id'> $lab_name</label>";
 
     if ($key == 'other') {
@@ -191,15 +205,23 @@ function getImageShow($key, $arr, $arr_name, $img_arr, $lab_name)
     if ($img_arr != '') {
         if (array_key_exists($key, $img_arr) && file_exists(public_path($img_arr[$key])) && $img_arr[$key] != '') {
             $html .=
-                "<a href='" .URL::asset($img_arr[$key]) . "' data-lightbox='roadtrip'>
-                    <img src='" . URL::asset($img_arr[$key]) . "' class='adjust-height mb-1' style='height:30px; width:30px !important'>
+                "<a href='" .
+                URL::asset($img_arr[$key]) .
+                "' data-lightbox='roadtrip'>
+                    <img src='" .
+                URL::asset($img_arr[$key]) .
+                "' class='adjust-height mb-1' style='height:30px; width:30px !important'>
                 </a>";
         }
 
         if (array_key_exists($key . '_2', $img_arr) && file_exists(public_path($img_arr[$key . '_2'])) && $img_arr[$key . '_2'] != '') {
             $html .=
-                "<a href='" .  URL::asset($img_arr[$key . '_2']) . "' data-lightbox='roadtrip'>
-                    <img src='" .  URL::asset($img_arr[$key . '_2']) . "' class='adjust-height mb-1' style='height:30px; width:30px !important'>
+                "<a href='" .
+                URL::asset($img_arr[$key . '_2']) .
+                "' data-lightbox='roadtrip'>
+                    <img src='" .
+                URL::asset($img_arr[$key . '_2']) .
+                "' class='adjust-height mb-1' style='height:30px; width:30px !important'>
                 </a>";
         }
     }

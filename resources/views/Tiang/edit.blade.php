@@ -202,7 +202,7 @@
                                     <div class="col-md-4"><label for="pole_image-2">{{ __('messages.pole') }} Image
                                             2</label>
                                     </div>
-                                    <div class="col-md-5 p-2 pr-5"><input type="file" name="pole_image_2" id="pole_image_2" 
+                                    <div class="col-md-5 p-2 pr-5"><input type="file" name="pole_image_2" id="pole_image_2"
                                             class="form-control">
                                     </div>
                                     <div class="col-md-3">
@@ -320,7 +320,7 @@
                                         <div class="row">
                                             <div class="col-md-6"><label for="s19_064">{{__("messages.PVC_Span")}} 19/064</label></div>
                                             <div class="col-md-6"><input type="number" name="pvc_span[s19_064]"
-                                                    id="s19_064" value="{{ $data->pvc_span->s19_064 }}"
+                                                    id="s19_064" value="{{ getInputValue('s19_064' ,$data->pvc_span)}}"
                                                     class="form-control"></div>
                                         </div>
 
@@ -328,14 +328,14 @@
                                         <div class="row">
                                             <div class="col-md-6"><label for="s7_083">{{__("messages.PVC_Span")}} 7/083</label></div>
                                             <div class="col-md-6"><input type="number" name="pvc_span[s7_083]"
-                                                    id="s7_083" value="{{ $data->pvc_span->s7_083 }}"
+                                                    id="s7_083" value="{{getInputValue('s7_083' ,$data->pvc_span) }}"
                                                     class="form-control"></div>
                                         </div>
 
                                         <div class="row">
                                             <div class="col-md-6"><label for="s7_044">{{__("messages.PVC_Span")}} 7/044</label></div>
                                             <div class="col-md-6"><input type="number" name="pvc_span[s7_044]"
-                                                    id="s7_044" value="{{ $data->pvc_span->s7_044 }}"
+                                                    id="s7_044" value="{{getInputValue('s7_044' ,$data->pvc_span) }}"
                                                     class="form-control"></div>
                                         </div>
                                     </div>
@@ -346,20 +346,20 @@
                                         <div class="row">
                                             <div class="col-md-6"><label for="s7_173">{{__('messages.BARE_Span')}} 7/173</label></div>
                                             <div class="col-md-6"><input type="number" name="bare_span[s7_173]"
-                                                    id="s7_173" value="{{ $data->bare_span->s7_173 }}"
+                                                    id="s7_173" value="{{ getInputValue('s7_173' ,$data->bare_span)}}"
                                                     class="form-control"></div>
                                         </div>
 
                                         <div class="row">
                                             <div class="col-md-6"><label for="s7_122">{{__('messages.BARE_Span')}} 7/122</label></div>
                                             <div class="col-md-6"><input type="number" name="bare_span[s7_122]"
-                                                    id="s7_122" value="{{ $data->bare_span->s7_122 }}"
+                                                    id="s7_122" value="{{ getInputValue('s7_122' ,$data->bare_span) }}"
                                                     class="form-control"></div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6"><label for="s3_132">{{__('messages.BARE_Span')}} 3/132</label></div>
                                             <div class="col-md-6"><input type="number" name="bare_span[s3_132]"
-                                                    id="s3_132" value="{{ $data->bare_span->s3_132 }}"
+                                                    id="s3_132" value="{{ getInputValue('s3_132' ,$data->bare_span) }}"
                                                     class="form-control"></div>
                                         </div>
                                     </div>
@@ -373,25 +373,25 @@
                                         <div class="row">
                                             <div class="col-md-6"><label for="section_to">{{__('messages.ABC_Span')}} 3 X 185</label></div>
                                             <div class="col-md-6"><input type="number" name="abc_span[s3_185]"
-                                                    id="section_to" value="{{ $data->abc_span->s3_185 }}"
+                                                    id="section_to" value="{{ getInputValue('s3_185' ,$data->abc_span) }}"
                                                     class="form-control"></div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6"><label for="s3_95">{{__('messages.ABC_Span')}} 3 X 95</label></div>
                                             <div class="col-md-6"><input type="number" name="abc_span[s3_95]"
-                                                    id="s3_95" value="{{ $data->abc_span->s3_95 }}"
+                                                    id="s3_95" value="{{ getInputValue('s3_95' ,$data->abc_span) }}"
                                                     class="form-control"></div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6"><label for="s3_16">{{__('messages.ABC_Span')}} 3 X 16</label></div>
                                             <div class="col-md-6"><input type="number" name="abc_span[s3_16]"
-                                                    id="s3_16" value="{{ $data->abc_span->s3_16 }}"
+                                                    id="s3_16" value="{{ getInputValue('s3_16' ,$data->abc_span) }}"
                                                     class="form-control"></div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6"><label for="s1_16">{{__('messages.ABC_Span')}} 1 X 16</label></div>
                                             <div class="col-md-6"><input type="number" name="abc_span[s1_16]"
-                                                    id="s1_16" value="{{ $data->abc_span->s1_16 }}"
+                                                    id="s1_16" value="{{ getInputValue('s1_16' ,$data->abc_span) }}"
                                                     class="form-control"></div>
                                         </div>
 
