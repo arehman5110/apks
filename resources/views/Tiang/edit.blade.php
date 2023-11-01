@@ -161,7 +161,7 @@
                                     </div>
                                     <div class="col-md-4"><input type="text" name="section_from"
                                             value="{{ $data->section_from }}" id="section_from" class="form-control"
-                                            required></div>
+                                            ></div>
                                 </div>
 
                                 <div class="row">

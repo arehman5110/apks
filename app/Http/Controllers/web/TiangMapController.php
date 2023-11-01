@@ -63,7 +63,7 @@ class TiangMapController extends Controller
             $data->ba = $request->ba;
 
             $data->fp_name = $request->fp_name;
-
+            $data->total_defects = $request->total_defects;
             $data->fp_road = $request->fp_road;
             $data->section_from = $request->section_from;
             $data->section_to = $request->section_to;
