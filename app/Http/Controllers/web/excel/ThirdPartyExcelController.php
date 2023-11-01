@@ -58,7 +58,7 @@ class ThirdPartyExcelController extends Controller
                 $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
 
                 $writer->save(public_path('assets/updated-excels/') . 'qr-third-party-digging.xlsx');
-                ob_end_clean();
+               // ob_end_clean();
                 return response()->download(public_path('assets/updated-excels/') . 'qr-third-party-digging.xlsx');
             } else {
                 return redirect()
@@ -66,6 +66,7 @@ class ThirdPartyExcelController extends Controller
                     ->with('failed', 'No records found ');
             }
         } catch (\Throwable $th) {
+           // return $th->getMessage();
             return redirect()
                 ->back()
                 ->with('failed', 'Request Failed');

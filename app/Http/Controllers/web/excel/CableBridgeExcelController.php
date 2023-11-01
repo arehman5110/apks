@@ -50,7 +50,7 @@ class CableBridgeExcelController extends Controller
                     $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
 
                     $writer->save(public_path('assets/updated-excels/') . 'qr-cable-bridge.xlsx');
-                    ob_end_clean();
+                 //   ob_end_clean();
                     return response()->download(public_path('assets/updated-excels/') . 'qr-cable-bridge.xlsx');
                 } else {
                     return redirect()
