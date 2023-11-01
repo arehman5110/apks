@@ -32,7 +32,8 @@
 
 
 
-    .side-bar::-webkit-scrollbar  {
+    .side-bar::-webkit-scrollbar ,
+    .lb-outerContainer ,.lb-closeContainer {
         display: none;
     }
 

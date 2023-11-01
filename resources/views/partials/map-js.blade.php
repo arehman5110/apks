@@ -22,6 +22,7 @@
     var tbl_savr = '';
     var link_box = '';
     var cable_bridge = '';
+    var road = '';
 
 
     map = L.map('map').setView([2.75101756479656, 101.304931640625], 8);
@@ -65,6 +66,9 @@
             } else if (param == 'feeder_pillar') {
                 sel_lyr = feeder_pillar;
 
+            } else if (param == 'main_substation') {
+                sel_lyr = substation;
+
             } else if (param == 'tbl_savr') {
                 sel_lyr = tbl_savr;
 
@@ -73,6 +77,10 @@
 
             } else if (param == 'cable_bridge') {
                 sel_lyr = cable_bridge;
+
+            }
+            else if (param == 'road') {
+                sel_lyr = road;
 
             }
             callSelfLayer();
@@ -110,7 +118,10 @@
                         if ($('#select_layer').val() == 'substation') {
                             substationModal(data.features[0].properties, data.features[0].id);
 
-                        } else {
+                        }else if($('#select_layer').val() == 'road') {
+                            roadModal(data.features[0].properties, data.features[0].id)
+
+                        }else {
                             showModalData(data.features[0].properties, data.features[0].id);
                         }
                     }

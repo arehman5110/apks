@@ -23,7 +23,7 @@
 
         input,
         select {
-            color: black !important;
+            /* color: black !important; */
             margin-bottom: 0px !important;
             margin-top: 1rem;
         }
@@ -31,57 +31,46 @@
         .adjust-height {
             height: 70px;
         }
-        .form-input{border: 0}
-
+        .form-input{border : 0}
+        .navbar {
+            display: none !important
+        }
     </style>
 @endsection
 
 
 @section('content')
-    <section class="content-header">
-        <div class="container-  ">
-            <div class="row  " style="flex-wrap:nowrap">
-                <div class="col-sm-6">
-                    <h3>{{__('messages.cable_bridge')}}</h3>
-                </div>
-                <div class="col-sm-6 text-right">
-                    <ol class="breadcrumb float-right">
-                        <li class="breadcrumb-item"><a href="{{ route('cable-bridge.index',app()->getLocale()) }}">{{__("messages.index")}}</a></li>
-                        <li class="breadcrumb-item active">{{__('messages.edit')}}</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </section>
+
 
     <div class=" ">
 
-        <div class="container">
+        <div class="container-">
 
             <div class=" ">
 
-                <div class=" card col-md-12 p-4 ">
-                    <div class=" form-input">
-                        <h3 class="text-center p-2"></h3>
+                <div class=" card col-md-12 p-4 pt-0 ">
+                    <div class="form-input ">
+                     
 
-                        <form action="{{ route('cable-bridge.update', [app()->getLocale(),$data->id]) }} " id="myForm" method="POST"
-                            enctype="multipart/form-data">
-                            @method('PATCH')
+                        <form action="{{ route('update-feeder-pillar-map-edit', [app()->getLocale(), $data->id]) }} " id="myForm"
+                            method="POST" enctype="multipart/form-data">
+
                             @csrf
 
 
                             <div class="row">
-                                <div class="col-md-4"><label for="zone">{{__("messages.zone")}}</label></div>
+                                <div class="col-md-4"><label for="zone">{{__('messages.zone')}}</label></div>
                                 <div class="col-md-4">
                                     <select name="zone" id="search_zone" class="form-control" required>
 
                                         <option value="{{ $data->zone }}" hidden>{{ $data->zone }}</option>
-                                        @if ( Auth::user()->ba == '' )
-                                        <option value="W1">W1</option>
-                                        <option value="B1">B1</option>
-                                        <option value="B2">B2</option>
-                                        <option value="B4">B4</option>
+                                        @if (Auth::user()->ba == '')
+                                            <option value="W1">W1</option>
+                                            <option value="B1">B1</option>
+                                            <option value="B2">B2</option>
+                                            <option value="B4">B4</option>
                                         @endif
+
 
                                     </select>
                                 </div>
@@ -91,14 +80,14 @@
                                 <div class="col-md-4"><label for="ba">{{__('messages.ba')}}</label></div>
                                 <div class="col-md-4"><select name="ba" id="ba" class="form-control" required
                                         onchange="getWp(this)">
-                                        <option value="{{$data->ba}}" hidden>{{$data->ba}}</option>
+                                        <option value="{{ $data->ba }}" hidden>{{ $data->ba }}</option>
 
 
                                     </select></div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="visit_date">{{__("messages.visit_date")}}</label></div>
+                                <div class="col-md-4"><label for="visit_date">{{__('messages.visit_date')}}</label></div>
                                 <div class="col-md-4">
                                     <input type="date" name="visit_date" id="visit_date" class="form-control"
                                         value="{{ date('Y-m-d', strtotime($data->visit_date)) }}" required>
@@ -109,153 +98,157 @@
 
 
                             <div class="row">
-                                <div class="col-md-4"><label for="patrol_time">{{__("messages.patrol_time")}}</label></div>
+                                <div class="col-md-4"><label for="patrol_time">{{__('messages.patrol_time')}}</label></div>
                                 <div class="col-md-4">
                                     <input type="time" name="patrol_time" id="patrol_time" class="form-control"
                                         value="{{ date('H:i:s', strtotime($data->patrol_time)) }}" required>
                                 </div>
                             </div>
 
-
-
-
                             <div class="row">
-                                <div class="col-md-4"><label for="start_date">{{__("messages.from")}}</label></div>
+                                <div class="col-md-4"><label for="coordinate">{{__('messages.coordinate')}}</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="start_date" id="start_date" value="{{ $data->start_date }}"
-                                        class="form-control" >
+                                    <input type="text" name="coordinate" id="coordinate" value="{{ $data->coordinate }}"
+                                        class="form-control" required readonly>
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="end_date">{{__("messages.to")}}</label></div>
+                                <div class="col-md-4"><label for="size">{{__('messages.size')}}</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="end_date" id="end_date" value="{{ $data->end_date }}"
-                                        class="form-control" >
-                                </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="col-md-4"><label for="voltage">{{__("messages.voltage")}}</label></div>
-                                <div class="col-md-4">
-                                    <input type="text" name="voltage" id="voltage" value="{{ $data->voltage }}"
-                                        class="form-control" required>
-                                </div>
-                            </div>
-                                 
-
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4"><label for="pipe_staus">{{__("messages.pipe_broken")}}</label></div>
-                                <div class="col-md-4">
-                                    <select name="pipe_staus" id="pipe_staus" class="form-control" required>
-                                        <option value="{{ $data->pipe_staus }}" hidden>{{ $data->pipe_staus }}</option>
-                                        <option value="Yes">Yes</option>
-                                        <option value="No">No</option>
-
+                                    <select name="size" id="size" class="form-control" required>
+                                        <option value="{{ $data->size }}" hidden>{{ $data->size }}</option>
+                                        <option value="400">400</option>
+                                        <option value="800">800</option>
+                                        <option value="1600">1600</option>
                                     </select>
 
                                 </div>
                             </div>
+
+
+
                             <div class="row">
-                                <div class="col-md-4"><label for="vandalism_status">{{__("messages.vandalism")}} </label></div>
+                                <div class="col-md-4"><label for="name">{{__('messages.gate')}}</label></div>
+                                <div class="col-md-4">
+                                    <div class="  d-flex">
+                                        <input type="checkbox" name="gate_status[locked]"
+                                            {{ substaionCheckBox('locked', $data->gate_status) }} id="gate_status_locked">
+                                        <label for="gate_status_locked">{{(__('messages.locked'))}}</label>
+                                    </div>
+                                    <div class=" d-flex">
+                                        <input type="checkbox" name="gate_status[unlocked]"
+                                            {{ substaionCheckBox('unlocked', $data->gate_status) }}
+                                            id="gate_status_unlocked">
+                                        <label for="gate_status_unlocked">{{__("messages.unlocked")}}</label>
+                                    </div>
+                                    <div class=" d-flex">
+                                        <input type="checkbox" name="gate_status[demaged]"
+                                            {{ substaionCheckBox('demaged', $data->gate_status) }}
+                                            id="gate_status_demaged">
+                                        <label for="gate_status_demaged">{{__("messages.demaged")}}</label>
+                                    </div>
+
+                                    <div class="d-flex">
+                                        <input type="checkbox" name="gate_status[other]"
+                                            {{ substaionCheckBox('other', $data->gate_status) }} id="gate_status_others"
+                                            onclick="getStatus(this)">
+                                        <label for="gate_status_others">{{__("messages.other")}}</label>
+
+
+                                    </div>
+                                    <input type="text" name="gate_status[other_value]" id="gate_status_other"
+                                        class="form-control  @if (substaionCheckBox('other', $data->gate_status) !== 'checked') d-none @endif"
+                                        value="@if (substaionCheckBox('other', $data->gate_status) == 'checked') {{ $data->gate_status->other_value }} @endif"
+                                        placeholder="please enter other gate defect">
+
+                                </div>
+                            </div>
+
+
+
+                            <div class="row">
+                                <div class="col-md-4"><label for="type">{{__('messages.vandalism')}}</label></div>
                                 <div class="col-md-4">
                                     <select name="vandalism_status" id="vandalism_status" class="form-control" required>
-                                        <option value="{{ $data->vandalism_status }}" hidden>{{ $data->vandalism_status }}</option>
+                                        <option value="{{ $data->vandalism_status }}" hidden>
+                                            {{ $data->vandalism_status }}</option>
                                         <option value="Yes">Yes</option>
                                         <option value="No">No</option>
-
                                     </select>
 
                                 </div>
                             </div>
+
+
                             <div class="row">
-                                <div class="col-md-4"><label for="collapsed_status">{{__("messages.collapsed")}} </label></div>
+                                <div class="col-md-4"><label for="leaning_staus">{{__('messages.leaning')}} </label></div>
                                 <div class="col-md-4">
-                                    <select name="collapsed_status" id="collapsed_status" class="form-control" required>
-                                        <option value="{{ $data->collapsed_status }}" hidden>{{ $data->collapsed_status }}</option>
+                                    <select name="leaning_staus" id="leaning_staus" class="form-control" required
+                                        onchange="leaningStatus(this)">
+                                        <option value="{{ $data->leaning_staus }}" hidden>{{ $data->leaning_staus }}
+                                        </option>
                                         <option value="Yes">Yes</option>
                                         <option value="No">No</option>
-
                                     </select>
 
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-4"><label for="rust_status">{{__("messages.rusty")}}</label></div>
+
+                            <div class="row @if ($data->leaning_staus == 'No') d-none @endif " id="leaning-angle">
+                                <div class="col-md-4"><label for="leaning_angle">{{__('messages.leaning_angle')}}</label></div>
                                 <div class="col-md-4">
+                                    <input type="text" name="leaning_angle" id="leaning_angle"
+                                        value="{{ $data->leaning_angle }}" class="form-control">
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4"><label for="voltage">{{__('messages.rusty')}} </label></div>
+                                <div class="col-md-4">
+
                                     <select name="rust_status" id="rust_status" class="form-control" required>
                                         <option value="{{ $data->rust_status }}" hidden>{{ $data->rust_status }}</option>
                                         <option value="Yes">Yes</option>
                                         <option value="No">No</option>
-
                                     </select>
 
                                 </div>
                             </div>
 
+
                             <div class="row">
-                                <div class="col-md-4"><label for="bushes_status">{{__("messages.bushy")}}</label></div>
+                                <div class="col-md-4"><label for="advertise_poster_status">
+                                        {{__('messages.cleaning_illegal_ads_banners')}}</label>
+                                </div>
                                 <div class="col-md-4">
-                                    <select name="bushes_status" id="bushes_status" class="form-control" required>
-                                        <option value="{{ $data->bushes_status }}" hidden>{{ $data->bushes_status }}</option>
+                                    <select name="advertise_poster_status" id="advertise_poster_status"
+                                        class="form-control" required>
+                                        <option value="{{ $data->advertise_poster_status }}" hidden>
+                                            {{ $data->advertise_poster_status }}</option>
                                         <option value="Yes">Yes</option>
                                         <option value="No">No</option>
-
                                     </select>
+
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="cable_bridge_image">{{__("messages.cable_bridge")}} {{__("messages.images")}} </label></div>
-
-                                <div class="col-md-8 row">
-
-
-                                    <div class="col-md-6">
-                                        <input type="file" name="cable_bridge_image_1" id="cable_bridge_image_1" class="form-control" accept="image/*">
-                                    </div>
-
-                                    <div class="col-md-6 text-center  ">
-                                        @if (file_exists(public_path($data->cable_bridge_image_1)) && $data->cable_bridge_image_1 != '')
-                                            <a href="{{ URL::asset($data->cable_bridge_image_1) }}" data-lightbox="roadtrip">
-                                                <img src="{{ URL::asset($data->cable_bridge_image_1) }}" alt="" height="70" class="adjust-height ml-5  ">
-                                            </a>
-                                        @else
-                                            <strong>{{ __('messages.no_image_found') }}</strong>
-                                        @endif
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <input type="file" name="cable_bridge_image_2" id="cable_bridge_image_2" class="form-control" accept="image/*">
-                                    </div>
-
-                                    <div class="col-md-6 text-center  ">
-                                        @if (file_exists(public_path($data->cable_bridge_image_2)) && $data->cable_bridge_image_2 != '')
-                                            <a href="{{ URL::asset($data->cable_bridge_image_2) }}" data-lightbox="roadtrip">
-                                                <img src="{{ URL::asset($data->cable_bridge_image_2) }}" alt="" height="70" class="adjust-height ml-5 ">
-                                            </a>
-                                        @else
-                                            <strong>{{ __('messages.no_image_found') }}</strong>
-                                        @endif
-                                    </div>
+                                <div class="col-md-4">
+                                    <label for="feeder_pillar_image">{{__('messages.feedar_piller')}} {{__("messages.images")}} </label>
                                 </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-4"><label for="image_pipe">{{__("messages.image_pipe")}}</label></div>
 
                                 <div class="col-md-8 row">
-
-
                                     <div class="col-md-6">
-                                        <input type="file" name="image_pipe" id="image_pipe" class="form-control" accept="image/*">
+                                        <input type="file" accept="image/*" name="feeder_pillar_image_1" id="feeder_pillar_image_1" class="form-control">
                                     </div>
 
                                     <div class="col-md-6 text-center  ">
-                                        @if (file_exists(public_path($data->image_pipe)) && $data->image_pipe != '')
-                                            <a href="{{ URL::asset($data->image_pipe) }}" data-lightbox="roadtrip">
-                                                <img src="{{ URL::asset($data->image_pipe) }}" alt="" height="70" class="adjust-height ml-5  ">
+                                        @if (file_exists(public_path($data->feeder_pillar_image_1)) && $data->feeder_pillar_image_1 != '')
+                                            <a href="{{ URL::asset($data->feeder_pillar_image_1) }}" data-lightbox="roadtrip">
+                                                <img src="{{ URL::asset($data->feeder_pillar_image_1) }}" alt="" height="70" class="adjust-height ml-5 ">
                                             </a>
                                         @else
                                             <strong>{{ __('messages.no_image_found') }}</strong>
@@ -263,35 +256,78 @@
                                     </div>
 
                                     <div class="col-md-6">
-                                        <input type="file" name="image_pipe_2" id="image_pipe_2" class="form-control" accept="image/*">
+                                        <input type="file" accept="image/*" name="feeder_pillar_image_2" id="feeder_pillar_image_2" class="form-control">
                                     </div>
 
                                     <div class="col-md-6 text-center  ">
-                                        @if (file_exists(public_path($data->image_pipe_2)) && $data->image_pipe_2 != '')
-                                            <a href="{{ URL::asset($data->image_pipe_2) }}" data-lightbox="roadtrip">
-                                                <img src="{{ URL::asset($data->image_pipe_2) }}" alt="" height="70" class="adjust-height ml-5 ">
+                                        @if (file_exists(public_path($data->feeder_pillar_image_2)) && $data->feeder_pillar_image_2 != '')
+                                            <a href="{{ URL::asset($data->feeder_pillar_image_2) }}" data-lightbox="roadtrip">
+                                                <img src="{{ URL::asset($data->feeder_pillar_image_2) }}" alt="" height="70" class="adjust-height ml-5  ">
                                             </a>
                                         @else
                                             <strong>{{ __('messages.no_image_found') }}</strong>
                                         @endif
                                     </div>
                                 </div>
+
                             </div>
 
+
+
                             <div class="row">
-                                <div class="col-md-4"><label for="image_vandalism">{{__("messages.image_vandalism")}}</label></div>
+                                <div class="col-md-4">
+                                    <label for="image_pipe">{{__('messages.image_gate')}}</label>
+                                </div>
+
+                                <div class="col-md-8 row">
+                                    <div class="col-md-6">
+                                        <input type="file" accept="image/*" name="image_gate" id="image_gate" class="form-control">
+                                    </div>
+
+                                    <div class="col-md-6 text-center  ">
+                                        @if (file_exists(public_path($data->image_gate)) && $data->image_gate != '')
+                                            <a href="{{ URL::asset($data->image_gate) }}" data-lightbox="roadtrip">
+                                                <img src="{{ URL::asset($data->image_gate) }}" alt="" height="70" class="adjust-height ml-5 ">
+                                            </a>
+                                        @else
+                                            <strong>{{ __('messages.no_image_found') }}</strong>
+                                        @endif
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <input type="file" accept="image/*" name="image_gate_2" id="image_gate_2" class="form-control">
+                                    </div>
+
+                                    <div class="col-md-6 text-center  ">
+                                        @if (file_exists(public_path($data->image_gate_2)) && $data->image_gate_2 != '')
+                                            <a href="{{ URL::asset($data->image_gate_2) }}" data-lightbox="roadtrip">
+                                                <img src="{{ URL::asset($data->image_gate_2) }}" alt="" height="70" class="adjust-height ml-5  ">
+                                            </a>
+                                        @else
+                                            <strong>{{ __('messages.no_image_found') }}</strong>
+                                        @endif
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <div class="row">
+
+                                <div class="col-md-4">
+                                    <label for="image_vandalism">{{__('messages.image_vandalism')}}</label>
+                                </div>
 
                                 <div class="col-md-8 row">
 
-
                                     <div class="col-md-6">
-                                        <input type="file" name="image_vandalism" id="image_vandalism" class="form-control" accept="image/*">
+                                        <input type="file" accept="image/*" name="image_vandalism" id="image_vandalism" class="form-control">
                                     </div>
 
                                     <div class="col-md-6 text-center  ">
                                         @if (file_exists(public_path($data->image_vandalism)) && $data->image_vandalism != '')
                                             <a href="{{ URL::asset($data->image_vandalism) }}" data-lightbox="roadtrip">
-                                                <img src="{{ URL::asset($data->image_vandalism) }}" alt="" height="70" class="adjust-height ml-5  ">
+                                                <img src="{{ URL::asset($data->image_vandalism) }}" alt="" height="70" class="adjust-height ml-5 ">
                                             </a>
                                         @else
                                             <strong>{{ __('messages.no_image_found') }}</strong>
@@ -299,49 +335,13 @@
                                     </div>
 
                                     <div class="col-md-6">
-                                        <input type="file" name="image_vandalism_2" id="image_vandalism_2" class="form-control" accept="image/*">
+                                        <input type="file" accept="image/*" name="image_vandalism_2" id="image_vandalism_2" class="form-control">
                                     </div>
 
                                     <div class="col-md-6 text-center  ">
                                         @if (file_exists(public_path($data->image_vandalism_2)) && $data->image_vandalism_2 != '')
                                             <a href="{{ URL::asset($data->image_vandalism_2) }}" data-lightbox="roadtrip">
-                                                <img src="{{ URL::asset($data->image_vandalism_2) }}" alt="" height="70" class="adjust-height ml-5 ">
-                                            </a>
-                                        @else
-                                            <strong>{{ __('messages.no_image_found') }}</strong>
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-4"><label for="image_collapsed">{{__("messages.image_collapsed")}}</label></div>
-
-                                <div class="col-md-8 row">
-
-
-                                    <div class="col-md-6">
-                                        <input type="file" name="image_collapsed" id="image_collapsed" class="form-control" accept="image/*">
-                                    </div>
-
-                                    <div class="col-md-6 text-center  ">
-                                        @if (file_exists(public_path($data->image_collapsed)) && $data->image_collapsed != '')
-                                            <a href="{{ URL::asset($data->image_collapsed) }}" data-lightbox="roadtrip">
-                                                <img src="{{ URL::asset($data->image_collapsed) }}" alt="" height="70" class="adjust-height ml-5  ">
-                                            </a>
-                                        @else
-                                            <strong>{{ __('messages.no_image_found') }}</strong>
-                                        @endif
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <input type="file" name="image_collapsed_2" id="image_collapsed_2" class="form-control" accept="image/*">
-                                    </div>
-
-                                    <div class="col-md-6 text-center  ">
-                                        @if (file_exists(public_path($data->image_collapsed_2)) && $data->image_collapsed_2 != '')
-                                            <a href="{{ URL::asset($data->image_collapsed_2) }}" data-lightbox="roadtrip">
-                                                <img src="{{ URL::asset($data->image_collapsed_2) }}" alt="" height="70" class="adjust-height ml-5 ">
+                                                <img src="{{ URL::asset($data->image_vandalism_2) }}" alt="" height="70" class="adjust-height ml-5  ">
                                             </a>
                                         @else
                                             <strong>{{ __('messages.no_image_found') }}</strong>
@@ -351,12 +351,56 @@
 
                             </div>
 
+
                             <div class="row">
-                                <div class="col-md-4"><label for="image_rust">{{__("messages.image_rust")}}</label></div>
+
+                                <div class="col-md-4">
+                                    <label for="image_leaning">{{__('messages.image_leaning')}}</label>
+                                </div>
 
                                 <div class="col-md-8 row">
+
                                     <div class="col-md-6">
-                                        <input type="file" name="image_rust" id="image_rust" class="form-control">
+                                        <input type="file" accept="image/*" name="image_leaning" id="image_leaning" class="form-control">
+                                    </div>
+
+                                    <div class="col-md-6 text-center  ">
+                                        @if (file_exists(public_path($data->image_leaning)) && $data->image_leaning != '')
+                                            <a href="{{ URL::asset($data->image_leaning) }}" data-lightbox="roadtrip">
+                                                <img src="{{ URL::asset($data->image_leaning) }}" alt="" height="70" class="adjust-height ml-5 ">
+                                            </a>
+                                        @else
+                                            <strong>{{ __('messages.no_image_found') }}</strong>
+                                        @endif
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <input type="file" accept="image/*" name="image_leaning_2" id="image_leaning_2" class="form-control">
+                                    </div>
+
+                                    <div class="col-md-6 text-center  ">
+                                        @if (file_exists(public_path($data->image_leaning_2)) && $data->image_leaning_2 != '')
+                                            <a href="{{ URL::asset($data->image_leaning_2) }}" data-lightbox="roadtrip">
+                                                <img src="{{ URL::asset($data->image_leaning_2) }}" alt="" height="70" class="adjust-height ml-5  ">
+                                            </a>
+                                        @else
+                                            <strong>{{ __('messages.no_image_found') }}</strong>
+                                        @endif
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="image_rust">{{__("messages.image_rust")}}</label>
+                                </div>
+
+                                <div class="col-md-8 row">
+
+                                    <div class="col-md-6">
+                                        <input type="file" accept="image/*" name="image_rust" id="image_rust" class="form-control">
                                     </div>
 
                                     <div class="col-md-6 text-center  ">
@@ -370,7 +414,7 @@
                                     </div>
 
                                     <div class="col-md-6">
-                                        <input type="file" name="image_rust_2" id="image_rust_2" class="form-control" accept="image/*">
+                                        <input type="file" accept="image/*" name="image_rust_2" id="image_rust_2" class="form-control">
                                     </div>
 
                                     <div class="col-md-6 text-center  ">
@@ -383,22 +427,26 @@
                                         @endif
                                     </div>
                                 </div>
+
                             </div>
 
 
-
                             <div class="row">
-                                <div class="col-md-4"><label for="images_bushes">{{__("messages.image_bushes")}}</label></div>
+
+                                <div class="col-md-4">
+                                    <label for="images_advertise_poster">{{__("messages.image_advertise_poster")}}</label>
+                                </div>
 
                                 <div class="col-md-8 row">
+
                                     <div class="col-md-6">
-                                        <input type="file" name="images_bushes" id="images_bushes" class="form-control">
+                                        <input type="file" accept="image/*" name="images_advertise_poster" id="images_advertise_poster" class="form-control">
                                     </div>
 
                                     <div class="col-md-6 text-center  ">
-                                        @if (file_exists(public_path($data->images_bushes)) && $data->images_bushes != '')
-                                            <a href="{{ URL::asset($data->images_bushes) }}" data-lightbox="roadtrip">
-                                                <img src="{{ URL::asset($data->images_bushes) }}" alt="" height="70" class="adjust-height ml-5 ">
+                                        @if (file_exists(public_path($data->images_advertise_poster)) && $data->images_advertise_poster != '')
+                                            <a href="{{ URL::asset($data->images_advertise_poster) }}" data-lightbox="roadtrip">
+                                                <img src="{{ URL::asset($data->images_advertise_poster) }}" alt="" height="70" class="adjust-height ml-5 ">
                                             </a>
                                         @else
                                             <strong>{{ __('messages.no_image_found') }}</strong>
@@ -406,25 +454,27 @@
                                     </div>
 
                                     <div class="col-md-6">
-                                        <input type="file" name="images_bushes_2" id="images_bushes_2" class="form-control" accept="image/*">
+                                        <input type="file" accept="image/*" name="images_advertise_poster_2" id="images_advertise_poster_2" class="form-control">
                                     </div>
 
                                     <div class="col-md-6 text-center  ">
-                                        @if (file_exists(public_path($data->images_bushes_2)) && $data->images_bushes_2 != '')
-                                            <a href="{{ URL::asset($data->images_bushes_2) }}" data-lightbox="roadtrip">
-                                                <img src="{{ URL::asset($data->images_bushes_2) }}" alt="" height="70" class="adjust-height ml-5  ">
+                                        @if (file_exists(public_path($data->images_advertise_poster_2)) && $data->images_advertise_poster_2 != '')
+                                            <a href="{{ URL::asset($data->images_advertise_poster_2) }}" data-lightbox="roadtrip">
+                                                <img src="{{ URL::asset($data->images_advertise_poster_2) }}" alt="" height="70" class="adjust-height ml-5  ">
                                             </a>
                                         @else
                                             <strong>{{ __('messages.no_image_found') }}</strong>
                                         @endif
                                     </div>
                                 </div>
+
                             </div>
 
+
                             <div class="row">
-                                <div class="col-md-4"><label for="other_image">{{__("messages.other_image")}}</label></div>
+                                <div class="col-md-4"><label for="other_image">{{__('messages.other_image')}}</label></div>
                                 <div class="col-md-4">
-                                    <input type="file" name="other_image" id="other_image" class="form-control">
+                                    <input type="file" accept="image/*" name="other_image" id="other_image" class="form-control">
                                 </div>
                                 <div class="col-md-4 text-center mb-3">
                                     @if (file_exists(public_path($data->other_image)) && $data->other_image != '')
@@ -432,13 +482,13 @@
                                             <img src="{{ URL::asset($data->other_image) }}" alt=""
                                                 height="70" class="adjust-height ml-5  "></a>
                                     @else
-                                        <strong>{{__("messages.no_image_found")}}</strong>
+                                        <strong>{{__('messages.no_image_found')}}</strong>
                                     @endif
                                 </div>
                             </div>
 
 
-                            <div class="text-center p-4"><button class="btn btn-sm btn-success">{{__("messages.update")}}</button></div>
+                            <div class="text-center p-4"><button class="btn btn-sm btn-success">{{__('messages.update')}}</button></div>
                         </form>
                     </div>
                 </div>
@@ -451,7 +501,7 @@
 @section('script')
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js"></script>
     <script>
-        const userBa = "{{Auth::user()->ba}}";
+        const userBa = "{{ Auth::user()->ba }}";
         $(document).ready(function() {
 
 
@@ -459,6 +509,7 @@
             if (userBa == '') {
                 getBa();
             }
+
         });
 
         function getBa() {
@@ -494,6 +545,32 @@
             baValues.forEach((data) => {
                 areaSelect.append(`<option value="${data}">${data}</option>`);
             });
+
+        }
+
+
+
+        function leaningStatus(event) {
+            var val = event.value;
+            if (val == 'No') {
+                if (!$('#leaning-angle').hasClass('d-none')) {
+                    $('#leaning-angle').addClass('d-none')
+                }
+            } else {
+                $('#leaning-angle').removeClass('d-none')
+            }
+        }
+
+        function getStatus(event) {
+            var val = event.value;
+
+            if (!$('#gate_status_other').hasClass('d-none')) {
+                $('#gate_status_other').addClass('d-none')
+            } else {
+                $('#gate_status_other').removeClass('d-none')
+            }
+
+
 
         }
     </script>

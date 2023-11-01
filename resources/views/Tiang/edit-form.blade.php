@@ -11,6 +11,12 @@
             min-width: 16px !important;
             margin-right: 12px;
         }
+        input[type='radio'] {
+            border-radius: 50% !important;
+        }
+        .fw-400{
+            font-weight: 400 !important;
+        }
 
         input[type='file'],
         table input {
@@ -177,7 +183,7 @@
                                     <div class="col-md-4"><label for="pole_image-1">{{ __('messages.pole') }} Image 1
                                         </label>
                                     </div>
-                                    <div class="col-md-4"><input type="file" name="pole_image_1" id="pole_image_1"
+                                    <div class="col-md-4"><input type="file" name="pole_image_1" id="pole_image_1" accept="image/*"
                                             class="form-control">
                                     </div>
 
@@ -197,7 +203,7 @@
                                     <div class="col-md-4"><label for="pole_image-2">{{ __('messages.pole') }} Image
                                             2</label>
                                     </div>
-                                    <div class="col-md-4"><input type="file" name="pole_image_2" id="pole_image_2"
+                                    <div class="col-md-4"><input type="file" name="pole_image_2" id="pole_image_2" accept="image/*"
                                             class="form-control">
                                     </div>
                                     <div class="col-md-4">
@@ -228,31 +234,31 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="card p-4">
+                                            <label for="st7">{{ __('messages.Pole_Size_Bill') }}  </label>
                                             <div class="row">
-                                                <div class="col-md-6"><label for="st7">
-                                                        {{ __('messages.Pole_Size_Bill') }}  </label>
+                                                <div class="col-md-12 row">
 
-                                                        <div class="d-flex">
+                                                        <div class="d-flex col-md-4">
                                                             <input type="radio" name="size_tiang"
                                                             value="st7" id="st7" {{$data->size_tiang == 'st7' ? 'checked' : ''}}
                                                             class="  "  >
-                                                            <label for="st7"> 7.5</label>
+                                                            <label for="st7"  class="fw-400"> 7.5</label>
 
                                                         </div>
 
-                                                        <div class="d-flex">
+                                                        <div class="d-flex col-md-4">
                                                             <input type="radio" name="size_tiang"
                                                             value="st9" id="st9" {{$data->size_tiang == 'st9' ? 'checked' : ''}}
                                                             class=" ">
-                                                            <label for="st9"> 9</label>
+                                                            <label for="st9"  class="fw-400"> 9</label>
 
                                                         </div>
 
-                                                        <div class="d-flex">
+                                                        <div class="d-flex col-md-4">
                                                             <input type="radio" name="size_tiang"
                                                             value="st10" id="st10" {{$data->size_tiang == 'st10' ? 'checked' : ''}}
                                                             class=" ">
-                                                            <label for="st10"> 10</label>
+                                                            <label for="st10"  class="fw-400"> 10</label>
 
 
                                                         </div></div>
@@ -263,38 +269,38 @@
 
                                     <div class="col-md-6">
                                         <div class="card p-4">
-
+<label for="">{{ __('messages.Pole_type_No') }} </label>
 
                                             <div class="row">
-                                                <div class="col-md-4">
-                                                    <label for="">{{ __('messages.Pole_type_No') }} </label>
+                                                <div class="col-md-12 row">
 
-                                                    <div class="d-flex">
+
+                                                    <div class="d-flex col-md-4">
 
                                                         <input type="radio" name="jenis_tiang" value="spun" id="spun" class=" "  {{$data->jenis_tiang == 'spun' ? 'checked' : ''}}>
-                                                        <label for="spun">{{ __('messages.Spun') }}</label>
+                                                        <label for="spun"  class="fw-400">{{ __('messages.Spun') }}</label>
 
                                                     </div>
 
-                                                    <div class="d-flex">
+                                                    <div class="d-flex col-md-4">
 
                                                         <input type="radio" name="jenis_tiang" value="concrete" id="concrete" class=" " {{$data->jenis_tiang == 'concrete' ? 'checked' : ''}}>
-                                                        <label for="concrete">{{ __('messages.Concrete') }}</label>
+                                                        <label for="concrete"  class="fw-400">{{ __('messages.Concrete') }}</label>
 
                                                     </div>
 
 
-                                                    <div class="d-flex">
+                                                    <div class="d-flex col-md-4">
 
                                                         <input type="radio" name="jenis_tiang" value="iron" id="iron" class=" " {{$data->jenis_tiang == 'iron' ? 'checked' : ''}}>
-                                                        <label for="iron">{{ __('messages.Pole_type_No') }}</label>
+                                                        <label for="iron"  class="fw-400">{{ __('messages.Iron') }}</label>
 
                                                     </div>
 
-                                                    <div class="d-flex">
+                                                    <div class="d-flex col-md-4">
 
                                                         <input type="radio" name="jenis_tiang" value="wood" id="wood" class=" " {{$data->jenis_tiang == 'wood' ? 'checked' : ''}}>
-                                                        <label for="wood">{{ __('messages.Wood') }}</label>
+                                                        <label for="wood"  class="fw-400">{{ __('messages.Wood') }}</label>
 
                                                     </div>
                                                 </div>
@@ -402,7 +408,7 @@
 
                                 <h3>{{ __('messages.kejanggalan') }}</h3>
                                 <div class="table-responsive">
-                                    <table class="table table-bordered w-100">
+                                    <table class="table table-bordered ">
                                         <thead style="background-color: #E4E3E3 !important">
                                             <th class="col-4">{{ __('messages.title') }}</th>
                                             <th class="col-4">{{ __('messages.defects') }}</th>

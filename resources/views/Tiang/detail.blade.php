@@ -11,7 +11,12 @@
             min-width: 16px !important;
             margin-right: 12px;
         }
-
+        input[type='radio'] {
+            border-radius: 50% !important;
+        }
+        .fw-400{
+            font-weight: 400 !important;
+        }
         input[type='file'],
         table input {
             margin: 0px !important;
@@ -171,78 +176,78 @@
                                 <div class="row">
                                 <div class="col-md-6">
                                     <div class="card p-4">
+                                        <label for="st7"> {{ __('messages.Pole_Size_Bill') }}  </label>
                                         <div class="row">
-                                            <div class="col-md-8"><label for="st7">
-                                                    {{ __('messages.Pole_Size_Bill') }}  </label>
 
-                                                    <div class="d-flex">
+
+                                                    <div class="d-flex col-md-4">
                                                         <input type="radio" name="size_tiang"
                                                         value="st7" id="st7" {{$data->size_tiang == 'st7' ? 'checked' : ''}} disabled
                                                         class="  "  >
-                                                        <label for="st7"> 7.5</label>
+                                                        <label for="st7" class="fw-400"> 7.5</label>
 
                                                     </div>
 
-                                                    <div class="d-flex">
+                                                    <div class="d-flex col-md-4">
                                                         <input type="radio" name="size_tiang"
                                                         value="st9" id="st9" {{$data->size_tiang == 'st9' ? 'checked' : ''}} disabled
                                                         class=" ">
-                                                        <label for="st9"> 9</label>
+                                                        <label for="st9" class="fw-400"> 9</label>
 
                                                     </div>
 
-                                                    <div class="d-flex">
+                                                    <div class="d-flex col-md-4">
                                                         <input type="radio" name="size_tiang"
                                                         value="st10" id="st10" {{$data->size_tiang == 'st10' ? 'checked' : ''}} disabled
                                                         class=" ">
-                                                        <label for="st10"> 10</label>
+                                                        <label for="st10"  class="fw-400"> 10</label>
 
 
                                                     </div></div>
 
-                                        </div>
+
                                     </div>
                                 </div>
 
                                 <div class="col-md-6">
                                     <div class="card p-4">
 
-
+ <label for="">{{ __('messages.Pole_type_No') }} </label>
                                         <div class="row">
-                                            <div class="col-md-8">
-                                                <label for="">{{ __('messages.Pole_type_No') }} </label>
 
-                                                <div class="d-flex">
+
+
+                                                <div class="d-flex col-md-4">
 
                                                     <input type="radio" name="jenis_tiang" value="spun" id="spun" class=" "  {{$data->jenis_tiang == 'spun' ? 'checked' : ''}} disabled>
-                                                    <label for="spun">{{ __('messages.Spun') }}</label>
+                                                    <label for="spun" class="fw-400">{{ __('messages.Spun') }}</label>
 
                                                 </div>
 
-                                                <div class="d-flex">
+                                                <div class="d-flex col-md-4">
 
                                                     <input type="radio" name="jenis_tiang" value="concrete" id="concrete" class=" " {{$data->jenis_tiang == 'concrete' ? 'checked' : ''}} disabled>
-                                                    <label for="concrete">{{ __('messages.Concrete') }}</label>
+                                                    <label for="concrete" class="fw-400">{{ __('messages.Concrete') }}</label>
 
                                                 </div>
 
 
-                                                <div class="d-flex">
+                                                <div class="d-flex col-md-4">
 
                                                     <input type="radio" name="jenis_tiang" value="iron" id="iron" class=" " {{$data->jenis_tiang == 'iron' ? 'checked' : ''}} disabled>
-                                                    <label for="iron">{{ __('messages.Pole_type_No') }}</label>
+                                                    <label for="iron"  class="fw-400">{{ __('messages.Iron') }}</label>
 
                                                 </div>
 
-                                                <div class="d-flex">
+                                                <div class="d-flex col-md-4">
 
                                                     <input type="radio" name="jenis_tiang" value="wood" id="wood" class=" " {{$data->jenis_tiang == 'wood' ? 'checked' : ''}} disabled>
-                                                    <label for="wood">{{ __('messages.Wood') }}</label>
+                                                    <label for="wood"  class="fw-400">{{ __('messages.Wood') }}</label>
 
                                                 </div>
                                             </div>
 
-                                        </div>
+
 
 
 

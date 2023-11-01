@@ -210,7 +210,7 @@ class ThirdPartyDiggingController extends Controller
 
             return redirect()
                 ->route('third-party-digging.index',app()->getLocale())
-                ->with('success', 'Form Intserted');
+                ->with('success', 'Form Update');
         } catch (\Throwable $th) {
              return $th->getMessage();
             return redirect()

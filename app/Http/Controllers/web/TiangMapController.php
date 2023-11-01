@@ -99,11 +99,11 @@ class TiangMapController extends Controller
 
             $data->update();
 
-            return view('components.map-messages',['id'=>$id,'success'=>true])
+            return view('components.map-messages',['id'=>$id,'success'=>true , 'url'=>'tiang-talian-vt-and-vr'])
                 ->with('success', 'Form Update');
         } catch (\Throwable $th) {
             return $th->getMessage();
-            return view('components.map-messages',['id'=>$id,'success'=>false])
+            return view('components.map-messages',['id'=>$id,'success'=>false , 'url'=>'tiang-talian-vt-and-vr'])
 
                 ->with('failed', 'Form Update Failed');
         }

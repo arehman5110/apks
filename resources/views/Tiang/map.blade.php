@@ -9,8 +9,8 @@
 
 
         /* .main-sidebar{width: 220px }
-            body:not(.sidebar-mini-md):not(.sidebar-mini-xs):not(.layout-top-nav) .main-header  {margin-left: 220px }
-            .content-wrapper{margin-left: 220px !important} */
+                body:not(.sidebar-mini-md):not(.sidebar-mini-xs):not(.layout-top-nav) .main-header  {margin-left: 220px }
+                .content-wrapper{margin-left: 220px !important} */
     </style>
 @endsection
 
@@ -94,6 +94,8 @@
                 <option value="substation">Substation</option>
                 <option value="pano">Pano</option>
                 <option value="tbl_savr">Tiang</option>
+                <option value="road">Roads</option>
+
             </select>
         </div>
 
@@ -204,7 +206,6 @@
 @endsection
 
 @section('script')
-
     @include('partials.map-js')
 
 
@@ -251,7 +252,17 @@
 
             // map.addLayer(substation)
             // substation.bringToFront()
-
+            road = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:tbl_roads',
+                format: 'image/png',
+                cql_filter: "ba ILIKE '%" + param + "%'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+            // map.addLayer(road)
+            // road.bringToFront()
 
 
             if (tbl_savr != '') {
@@ -290,6 +301,7 @@
                     'Substation': substation,
                     'Pano': pano_layer,
                     'Tiang': tbl_savr,
+                    'Roads': road,
                 }
             };
             //add layer control on top right corner of map
@@ -298,6 +310,28 @@
                 position: 'topright'
                 // groupCheckboxes: true
             }).addTo(map);
+        }
+
+        function roadModal(data, id) {
+
+            var str = '';
+            gid = id.split('.')
+
+            $('#exampleModalLabel').html("Road Info")
+            str = ` <tr>
+        <tr><th>Road Name</th><td>${data.road_name}</td> </tr>
+        <tr><th>KM</th><td>${data.km}</td> </tr>
+
+        <tr><th>Totoal Digging</th><td>${data.total_digging}</td> </tr>
+        <tr><th>Total Notice</th><td>${data.total_notice}</td> </tr>
+        <th>Total Supervision</th><td>${data.total_supervision}</td> </tr>
+
+        <tr><th>Detail</th><td class="text-center"><a href="/{{ app()->getLocale() }}/patrolling-detail/${gid[1]}" target="_blank" class="btn btn-sm btn-secondary">Detail</a>
+            </td> </tr>
+
+        `;
+            $("#my_data").html(str);
+            $('#myModal').modal('show');
         }
 
         function showModalData(data, id) {
@@ -326,10 +360,12 @@
         }
 
         function openDetails(id) {
-            $('#myModal').modal('hide');
+            // $('#myModal').modal('hide');
             $('#set-iframe').html('');
 
-            $('#set-iframe').html(`<iframe src="/{{app()->getLocale()}}/get-test-edit/${id}" frameborder="0" style="height:700px; width:100%" ></iframe>`)
+            $('#set-iframe').html(
+                `<iframe src="/{{ app()->getLocale() }}/get-tiang-edit/${id}" frameborder="0" style="height:700px; width:100%" ></iframe>`
+                )
 
 
         }

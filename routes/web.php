@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\web\admin\TeamController;
 use App\Http\Controllers\web\admin\TeamUsersController;
 use App\Http\Controllers\web\CableBridgeController;
+use App\Http\Controllers\web\CableBridgeMapController;
 use App\Http\Controllers\web\Dashboard;
 use App\Http\Controllers\web\excel\CableBridgeExcelController;
 use App\Http\Controllers\web\excel\DigingExcelController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\web\excel\LinkBoxExcelController;
 use App\Http\Controllers\web\excel\SubstationExcelController;
 use App\Http\Controllers\web\excel\ThirdPartyExcelController;
 use App\Http\Controllers\web\excel\TiangExcelController;
+use App\Http\Controllers\web\FeederPillarMapController;
 use App\Http\Controllers\web\LinkBoxController;
 use App\Http\Controllers\web\map\GeneratePDFController;
 use Illuminate\Support\Facades\Route;
@@ -24,8 +26,10 @@ use App\Http\Controllers\web\ThirdPartyDiggingController;
 use App\Http\Controllers\web\SubstationController;
 use App\Http\Controllers\web\FPController;
 use App\Http\Controllers\web\GenerateNoticeController;
+use App\Http\Controllers\web\LinkBoxMapController;
 use App\Http\Controllers\web\PatrollingController;
 use App\Http\Controllers\web\POController;
+use App\Http\Controllers\web\SubstationMapController;
 use App\Http\Controllers\web\TiangMapController;
 use App\Models\ThirdPartyDiging;
 use Illuminate\Support\Facades\App;
@@ -96,16 +100,22 @@ Route::group(
                 Route::get('generate-tiang-talian-vt-and-vr-excel', [TiangExcelController::class, 'generateTiangExcel'])->name('generate-tiang-talian-vt-and-vr-excel');
                 Route::view('/tiang-talian-vt-and-vr-map', 'Tiang.map')->name('tiang-talian-vt-and-vr-map');
 
+
                 //// Link Box
                 Route::resource('link-box-pelbagai-voltan', LinkBoxController::class);
                 Route::get('generate-link-box-excel', [LinkBoxExcelController::class, 'generateLinkBoxExcel'])->name('generate-link-box-excel');
                 Route::view('/link-box-pelbagai-voltan-map', 'link-box.map')->name('link-box-pelbagai-voltan-map');
+                Route::get('/get-link-box-edit/{id}', [LinkBoxMapController::class, 'editMap'])->name('get-link-box-edit');
+                Route::post('/update-link-box-map-edit/{id}', [LinkBoxMapController::class, 'update'])->name('update-link-box-map-edit');
 
                 //// Cable Bridge
 
                 Route::resource('cable-bridge', CableBridgeController::class);
                 Route::get('generate-cable-bridge-excel', [CableBridgeExcelController::class, 'generateCableBridgeExcel'])->name('generate-cable-bridge-excel');
                 Route::view('/cable-bridge-map', 'cable-bridge.map')->name('cable-bridge-map');
+                Route::get('/get-cable-bridge-edit/{id}', [CableBridgeMapController::class, 'editMap'])->name('get-cable-bridge-edit');
+                Route::post('/update-cable-bridge-map-edit/{id}', [CableBridgeMapController::class, 'update'])->name('update-cable-bridge-map-edit');
+
 
                 ////third party digging routes
                 Route::resource('third-party-digging', ThirdPartyDiggingController::class);
@@ -115,11 +125,16 @@ Route::group(
                 Route::resource('substation', SubstationController::class);
                 Route::view('/substation-map', 'substation.map')->name('substation-map');
                 Route::get('generate-substation-excel', [SubstationExcelController::class, 'generateSubstationExcel'])->name('generate-substation-excel');
+                Route::get('/substation-paginate/{name}',[SubstationController::class,'paginate'])->name("substation-paginate");
+                Route::get('/get-substation-edit/{id}', [SubstationMapController::class, 'editMap'])->name('get-substation-edit');
+                Route::post('/update-substation-map-edit/{id}', [SubstationMapController::class, 'update'])->name('update-substation-map-edit');
 
                 ////feeder-piller routes
                 Route::resource('feeder-pillar', FPController::class);
                 Route::view('/feeder-pillar-map', 'feeder-pillar.map')->name('feeder-pillar-map');
                 Route::get('generate-feeder-pillar-excel', [FeederPillarExcelController::class, 'generateFeederPillarExcel'])->name('generate-feeder-pillar-excel');
+                Route::get('/get-feeder-pillar-edit/{id}', [FeederPillarMapController::class, 'editMap'])->name('get-feeder-pillar-edit');
+                Route::post('/update-feeder-pillar-map-edit/{id}', [FeederPillarMapController::class, 'update'])->name('update-feeder-pillar-map-edit');
 
                 //generate notice pdf
                 Route::get('/generate-notice/{id}', [GenerateNoticeController::class, 'generateNotice']);
@@ -147,7 +162,7 @@ Route::group(
 
                 Route::get('/test-pagination/{id}/{status}', [MapController::class, 'teswtpagination']);
                 Route::get('/preNext/{id}/{status}', [MapController::class, 'preNext']);
-                Route::get('/get-test-edit/{id}', [TiangMapController::class, 'editMap'])->name('get-test-edit');
+                Route::get('/get-tiang-edit/{id}', [TiangMapController::class, 'editMap'])->name('get-tiang-edit');
                 Route::post('/tiang-talian-vt-and-vr-map-edit/{id}', [TiangMapController::class, 'editMapStore'])->name('tiang-talian-vt-and-vr-map-edit');
             });
 
@@ -167,4 +182,4 @@ Route::prefix('admin')->group(function () {
     },
 );
 
-Route::get('/generate-third-party-pdf/{id}', [GeneratePDFController::class, 'generateP']);
+// Route::get('/generate-third-party-pdf/{id}', [GeneratePDFController::class, 'generateP']);

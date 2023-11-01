@@ -32,31 +32,19 @@
             height: 70px;
         }
         .form-input{border: 0}
-
+        .navbar {
+            display: none !important
+        }
     </style>
 @endsection
 
 
 @section('content')
-    <section class="content-header">
-        <div class="container-  ">
-            <div class="row  " style="flex-wrap:nowrap">
-                <div class="col-sm-6">
-                    <h3>{{__('messages.cable_bridge')}}</h3>
-                </div>
-                <div class="col-sm-6 text-right">
-                    <ol class="breadcrumb float-right">
-                        <li class="breadcrumb-item"><a href="{{ route('cable-bridge.index',app()->getLocale()) }}">{{__("messages.index")}}</a></li>
-                        <li class="breadcrumb-item active">{{__('messages.edit')}}</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </section>
+
 
     <div class=" ">
 
-        <div class="container">
+        <div class="container-">
 
             <div class=" ">
 
@@ -64,9 +52,9 @@
                     <div class=" form-input">
                         <h3 class="text-center p-2"></h3>
 
-                        <form action="{{ route('cable-bridge.update', [app()->getLocale(),$data->id]) }} " id="myForm" method="POST"
+                        <form action="{{ route('update-cable-bridge-map-edit', [app()->getLocale(),$data->id]) }} " id="myForm" method="POST"
                             enctype="multipart/form-data">
-                            @method('PATCH')
+
                             @csrf
 
 
@@ -142,7 +130,7 @@
                                         class="form-control" required>
                                 </div>
                             </div>
-                                 
+
 
                             </div>
                             <div class="row">
@@ -356,7 +344,7 @@
 
                                 <div class="col-md-8 row">
                                     <div class="col-md-6">
-                                        <input type="file" name="image_rust" id="image_rust" class="form-control">
+                                        <input type="file" name="image_rust" id="image_rust" class="form-control" accept="image/*">
                                     </div>
 
                                     <div class="col-md-6 text-center  ">
@@ -392,7 +380,7 @@
 
                                 <div class="col-md-8 row">
                                     <div class="col-md-6">
-                                        <input type="file" name="images_bushes" id="images_bushes" class="form-control">
+                                        <input type="file" name="images_bushes" id="images_bushes" class="form-control" accept="image/*">
                                     </div>
 
                                     <div class="col-md-6 text-center  ">
@@ -424,7 +412,7 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="other_image">{{__("messages.other_image")}}</label></div>
                                 <div class="col-md-4">
-                                    <input type="file" name="other_image" id="other_image" class="form-control">
+                                    <input type="file" name="other_image" id="other_image" class="form-control" accept="image/*">
                                 </div>
                                 <div class="col-md-4 text-center mb-3">
                                     @if (file_exists(public_path($data->other_image)) && $data->other_image != '')
@@ -438,7 +426,7 @@
                             </div>
 
 
-                            <div class="text-center p-4"><button class="btn btn-sm btn-success">{{__("messages.update")}}</button></div>
+                            <div class="text-center p-4"><button class="btn btn-sm btn-success" name="submit" value="map-edit">{{__("messages.update")}}</button></div>
                         </form>
                     </div>
                 </div>

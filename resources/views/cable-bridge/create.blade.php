@@ -274,7 +274,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="coordinate">{{__("messages.image_collapsed")}}</label></div>
+                                <div class="col-md-4"><label for="coordinate">{{__("messages.coordinate")}}</label></div>
                                 <div class="col-md-4">
                                     <input type="text" name="coordinate" id="coordinate" class="form-control" readonly
                                         required>

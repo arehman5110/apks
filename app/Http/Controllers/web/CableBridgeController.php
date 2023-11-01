@@ -21,7 +21,7 @@ class CableBridgeController extends Controller
     {
         //
 
-        $ba = Auth::user()->ba ;
+        $ba = Auth::user()->ba;
         $data = CableBridge::where('ba', 'LIKE', '%' . $ba . '%')->get();
         return view('cable-bridge.index', ['datas' => $data]);
     }
@@ -89,12 +89,12 @@ class CableBridgeController extends Controller
             $data->save();
 
             return redirect()
-                ->route('cable-bridge.index',app()->getLocale())
+                ->route('cable-bridge.index', app()->getLocale())
                 ->with('success', 'Form Intserted');
         } catch (\Throwable $th) {
             return $th->getMessage();
             return redirect()
-                ->route('cable-bridge.index',app()->getLocale())
+                ->route('cable-bridge.index', app()->getLocale())
                 ->with('failed', 'Form Intserted Failed');
         }
     }
@@ -105,11 +105,11 @@ class CableBridgeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($language,$id)
+    public function show($language, $id)
     {
         //
         $data = CableBridge::find($id);
-        return view('cable-bridge.show', ['data' => $data]);
+        return $data ? view('cable-bridge.show', ['data' => $data]) : abort(404);
     }
 
     /**
@@ -118,11 +118,11 @@ class CableBridgeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($language,$id)
+    public function edit($language, $id)
     {
         //
         $data = CableBridge::find($id);
-        return view('cable-bridge.edit', ['data' => $data]);
+        return $data ? view('cable-bridge.edit', ['data' => $data]) : abort(404);
     }
 
     /**
@@ -132,7 +132,7 @@ class CableBridgeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$language, $id)
+    public function update(Request $request, $language, $id)
     {
         //
 
@@ -152,7 +152,7 @@ class CableBridgeController extends Controller
             $data->end_date = $request->end_date;
 
             $data->voltage = $request->voltage;
-            $data->coordinate = $request->coordinate;
+            // $data->coordinate = $request->coordinate;
             $data->pipe_staus = $request->pipe_staus;
             $data->collapsed_status = $request->collapsed_status;
             $data->vandalism_status = $request->vandalism_status;
@@ -174,13 +174,15 @@ class CableBridgeController extends Controller
 
             $data->save();
 
-            return redirect()
-                ->route('cable-bridge.index',app()->getLocale())
-                ->with('success', 'Form Update');
+
+                return redirect()
+                    ->route('cable-bridge.index', app()->getLocale())
+                    ->with('success', 'Form Update');
+
         } catch (\Throwable $th) {
             return $th->getMessage();
             return redirect()
-                ->route('cable-bridge.index',app()->getLocale())
+                ->route('cable-bridge.index', app()->getLocale())
                 ->with('failed', 'Form Intserted Failed');
         }
     }
@@ -191,18 +193,18 @@ class CableBridgeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($language,$id)
+    public function destroy($language, $id)
     {
         try {
             CableBridge::find($id)->delete();
 
             return redirect()
-                ->route('cable-bridge.index',app()->getLocale())
+                ->route('cable-bridge.index', app()->getLocale())
                 ->with('success', 'Recored Removed');
         } catch (\Throwable $th) {
             // return $th->getMessage();
             return redirect()
-                ->route('cable-bridge.index',app()->getLocale())
+                ->route('cable-bridge.index', app()->getLocale())
                 ->with('failed', 'Request Failed');
         }
     }

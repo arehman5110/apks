@@ -101,7 +101,7 @@
 
 
 
-                        
+
 
 
 
@@ -133,7 +133,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4"><label for="pipe_staus">{{__("messages.pipe")}}</label></div>
+                            <div class="col-md-4"><label for="pipe_staus">{{__("messages.pipe_broken")}}</label></div>
                             <div class="col-md-4">
                                 <input readonly value="{{ $data->pipe_staus }}" class="form-control" required>
                             </div>

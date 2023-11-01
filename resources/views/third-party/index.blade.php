@@ -71,7 +71,7 @@
                                             <th>WP NAME</th>
                                             <th>ZONE</th>
                                             <th>BA</th>
-                                            <th>TEAM</th>
+                                            {{-- <th>TEAM</th> --}}
                                             <th>SURVEY DATE</th>
                                             <th>ACTION</th>
 
@@ -84,7 +84,7 @@
                                                 <td class="align-middle">{{ $data->wp_name }}</td>
                                                 <td class="align-middle">{{ $data->zone }}</td>
                                                 <td>{{ $data->ba }}</td>
-                                                <td class="align-middle text-center">{{ $data->team_name }}</td>
+                                                {{-- <td class="align-middle text-center">{{ $data->team_name }}</td> --}}
                                                 <td class="align-middle text-center">
                                                     @php
                                                         $date = new DateTime($data->survey_date);
@@ -185,7 +185,7 @@
         $(document).ready(function() {
             $('#myTable').DataTable({
                 aaSorting: [
-                    [0, 'asc']
+                    [3, 'desc']
                 ],
                 "lengthMenu": [
                     [10, 25, 50, -1],

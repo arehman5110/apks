@@ -27,6 +27,9 @@
             margin-bottom: 0px !important;
             margin-top: 1rem;
         }
+        input[type='radio'] {
+            border-radius: 50% !important;
+        }
 
         input,
         select {
@@ -131,39 +134,44 @@
 
                             <div class="row">
                                 <div class="col-md-4"><label for="digging">{{__("messages.digging")}}</label></div>
-                                <div class="col-md-4">
+                                <div class="col-md-2">
+                                    <input type="radio" name="digging"   id="digging_yes" class="mt-0" value="yes">
+                                    <label for="digging_yes" >Yes</label>
 
-                                    <select name="digging" id="digging" class="form-control" required>
-                                        <option value="" hidden>select digging</option>
-                                        <option value="yes">yes</option>
-                                        <option value="no">no</option>
-                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="radio" name="digging"   id="digging_no" class="mt-0" value="no">
+                                    <label for="digging_no" >No</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="notice">{{__('messages.notice')}}</label></div>
-                                <div class="col-md-4">
-                                    <select name="notice" id="notice" class="form-control" required  >
-                                        <option value="" hidden>select notice</option>
-                                        <option value="yes">yes</option>
-                                        <option value="no">no</option>
-                                    </select>
+                                <div class="col-md-2">
+                                    <input type="radio" name="notice"   id="notice_yes" class="mt-0" value="yes">
+                                    <label for="notice_yes" >Yes</label>
+
                                 </div>
+                                <div class="col-md-2">
+                                    <input type="radio" name="notice"   id="notice_no" class="mt-0" value="no">
+                                    <label for="notice_no" >No</label>
+                                </div>
+
                                 {{-- <div class="col-md-4 text-center pt-3 ">
                                     <button type="button" class="btn btn-sm btn-success d-none" id="generate-notice" data-toggle="modal" data-target="#myModal">{{__('messages.generate_notice')}}</button>
                                 </div> --}}
                             </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="supervision">{{__('messages.supervision')}}</label></div>
-                                <div class="col-md-4">
-
-                                    <select name="supervision" id="supervision" class="form-control" required>
-                                        <option value="" hidden>select supervision</option>
-                                        <option value="yes">yes</option>
-                                        <option value="no">no</option>
-                                    </select>
+                                <div class="col-md-2">
+                                    <input type="radio" name="supervision"   id="supervision_yes" class="mt-0" value="yes">
+                                    <label for="supervision_yes" >Yes</label>
 
                                 </div>
+                                <div class="col-md-2">
+                                    <input type="radio" name="supervision"   id="supervision_no" class="mt-0" value="no">
+                                    <label for="supervision_no" >No</label>
+                                </div>
+
                             </div>
 
 

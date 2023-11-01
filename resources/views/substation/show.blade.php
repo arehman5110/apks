@@ -199,9 +199,10 @@
                                     <label for="building_status_other">{{__('messages.others')}}</label>
                                 </div>
 
-                                <input type="text" name="building_status[other_value]" id="other_building_defects" placeholder="please enter other buliding defects"disabled class="form-control @if(substaionCheckBox('other', $data->building_status)   !== 'checked' ) d-none @endif"
-                                value="@if(substaionCheckBox('other_value', $data->building_status)   == 'checked' ) {{$data->building_status->other_value}} @endif"
-                                >
+                                <input type="text" name="building_status[other_value]" id="other_building_defects"
+                                placeholder="please enter other buliding defects"
+                                class="form-control @if (substaionCheckBox('other', $data->building_status) !== 'checked') d-none @endif"
+                                value="@if (substaionCheckBox('other', $data->building_status) == 'checked') {{ $data->building_status->other_value }} @endif" disabled>
 
                                 </div>
                         </div>

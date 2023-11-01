@@ -31,7 +31,7 @@
         </div>
     </section>
 
-    <h6>For detail click on detail button <a href="{{ route('tiang-talian-vt-and-vr.show', [app()->getLocale(), $id]) }}"
+    <h6>For detail click on detail button <a href="{{ route($url.'.show', [app()->getLocale(), $id]) }}"
             target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-secondary">Detail</a>
     </h6>
 @endsection

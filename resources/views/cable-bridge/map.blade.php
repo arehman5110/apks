@@ -4,7 +4,7 @@
     @include('partials.map-css')
     <style>
         #map {
-            height: 600px;
+            height: 700px;
         }
     </style>
 @endsection
@@ -83,19 +83,19 @@
 
 
 
-
+        <div class="p-3 form-input w-25">
+            <label for="select_layer">Select : </label>
+            <span class="text-danger" id="er-select-layer"></span>
+            <select name="select_layer" id="select_layer" onchange="selectLayer(this.value)" class="form-control">
+                <option value="" hidden>select </option>
+                <option value="substation">Substation</option>
+                <option value="pano">Pano</option>
+                <option value="cable_bridge">Cable Bridge</option>
+            </select>
+        </div>
         <!--  START MAP CARD DIV -->
         <div class="row m-2">
-            <div class="p-3 form-input">
-                <label for="select_layer">Select Layer : </label>
-                <span class="text-danger" id="er-select-layer"></span>
-                <select name="select_layer" id="select_layer" onchange="selectLayer(this.value)" class="form-control">
-                    <option value="" hidden>select layer</option>
-                    <option value="substation">Substation</option>
-                    <option value="pano">Pano</option>
-                    <option value="cable_bridge">Cable Bridge</option>
-                </select>
-            </div>
+
 
             <!-- START MAP SIDEBAR DIV -->
             {{-- <div class="col-2 p-0">
@@ -132,7 +132,7 @@
             <!-- END MAP SIDEBAR DIV -->
 
             <!-- START MAP  DIV -->
-            <div class="col-12 p-0 ">
+            <div class="col-md-8 p-0 ">
                 <div class="card p-0 m-0"
                     style="border: 1px solid rgb(177, 175, 175) !important; border-radius: 0px !important;">
                     <div class="card-header text-center"><strong> MAP</strong></div>
@@ -143,6 +143,18 @@
                     </div>
                 </div>
 
+            </div>
+
+            <div class="col-md-4">
+                <div class="card p-0 m-0"
+                    style="border: 1px solid rgb(177, 175, 175) !important; border-radius: 0px !important;">
+
+                    <div class="card-header text-center"><strong>Detail</strong></div>
+
+                    <div class="card-body p-0" style="height: 700px ;overflow: hidden;" id='set-iframe'>
+
+                    </div>
+                </div>
             </div>
             <!-- END MAP  DIV -->
             <div id="wg" class="windowGroup">
@@ -184,10 +196,6 @@
     @include('partials.map-js')
 
     <script>
-
-
-
-
         // for add and remove layers
         function addRemoveBundary(param, paramY, paramX) {
 
@@ -299,22 +307,51 @@
 
             $('#exampleModalLabel').html("Cable Bridge Info")
             str = `
-                <tr><th>Zone</th><td>${data.zone}</td> </tr>
-        <tr><th>Ba</th><td>${data.ba}</td> </tr>
-        <tr><th>Area</th><td>${data.area}</td> </tr>
+                <tr>
+                    <th>Zone</th>
+                    <td>${data.zone}</td>
+                </tr>
+                <tr>
+                    <th>Ba</th>
+                    <td>${data.ba}</td>
+                </tr>
+                <tr>
+                    <th>Area</th>
+                    <td>${data.area}</td>
+                </tr>
+                <tr>
+                    <th>Visit Date</th>
+                    <td>${vDS}</td>
+                </tr>
+                <tr>
+                    <th>Patrol TIme</th>
+                    <td>${vTM}</td>
+                </tr>
+                <tr>
+                    <th>Coordinate</th>
+                    <td>${data.coordinate}</td>
+                </tr>
+                <tr>
+                    <th>Created At</th>
+                    <td>${data.created_at}</td>
+                </tr>
+                <tr>
+                    <th>Detail</th>
+                    <td class="text-center">  <a href="/{{ app()->getLocale() }}/cable-bridge/${idSp[1]}" target="_blank" class="btn btn-sm btn-secondary">Detail</a></td>
+                </tr>`;
 
-        <tr><th>Visit Date</th><td>${vDS}</td> </tr>
-        <th>Patrol TIme</th><td>${vTM}</td> </tr>
+            // $("#my_data").html(str);
+            // $('#myModal').modal('show');
+            openDetails(idSp[1]);
 
-        <tr><th>Coordinate</th><td>${data.coordinate}</td> </tr>
-        <tr><th>Created At</th><td>${data.created_at}</td> </tr>
-        <tr><th>Detail</th><td class="text-center">    <a href="/{{ app()->getLocale() }}/cable-bridge/${idSp[1]}" target="_blank" class="btn btn-sm btn-secondary">Detail</a>
-            </td> </tr>
+        }
 
-        `
+        function openDetails(id) {
+            // $('#myModal').modal('hide');
+            $('#set-iframe').html('');
 
-            $("#my_data").html(str);
-            $('#myModal').modal('show');
+            $('#set-iframe').html(`<iframe src="/{{app()->getLocale()}}/get-cable-bridge-edit/${id}" frameborder="0" style="height:700px; width:100%" ></iframe>`)
+
 
         }
     </script>
