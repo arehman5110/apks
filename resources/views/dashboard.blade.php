@@ -140,7 +140,7 @@
 
             <div class="col-md-6">
                 <div class="card card-success">
-                    <div class="card-header">{{__("messages.total_feeder_pillar_visited")}}</div>
+                    <div class="card-header">{{__("messages.tiang")}}</div>
                     <div class="card-body">
                         <div class="row">
 
@@ -225,7 +225,7 @@
             </div>
         </div>
 
-        <div class="accordion row" id="accordionExample">
+        {{-- <div class="accordion row" id="accordionExample">
 
             <div class="col-md-4">
                 <div class="card ">
@@ -430,7 +430,7 @@
                 </div>
             </div>
 
-        </div>
+        </div> --}}
         {{-- <div class="row ">
         <div class="col-md-4">
             <a href="{{route('third-party-digging.index')}}">
