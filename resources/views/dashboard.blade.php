@@ -53,7 +53,7 @@
                                 <div class="card p-3">
 
                                     <h3 class="text-center"> {{__("messages.total_patrollig_done")}}</h3>
-                                    <p class="text-center mb-0 pb-0"><span>0 KM</span></p>
+                                    <p class="text-center mb-0 pb-0"><span>{{ number_format($data->total_km, 2) }} KM</span></p>
 
                                 </div>
                             </div>
@@ -62,7 +62,7 @@
                                 <div class="card p-3">
 
                                     <h3 class="text-center">{{__("messages.total_notice_generated")}} </h3>
-                                    <p class="text-center mb-0 pb-0"><span>0</span></p>
+                                    <p class="text-center mb-0 pb-0"><span>{{$data->total_notice}}</span></p>
 
                                 </div>
                             </div>
@@ -71,7 +71,7 @@
                                 <div class="card p-3">
 
                                     <h3 class="text-center"> {{__("messages.total_supervision")}} </h3>
-                                    <p class="text-center mb-0 pb-0"><span>0</span></p>
+                                    <p class="text-center mb-0 pb-0"><span>{{$data->total_supervision}}</span></p>
 
                                 </div>
                             </div>
@@ -90,7 +90,7 @@
                                 <div class="card p-3">
 
                                     <h3 class="text-center"> {{__("messages.total_substation_visited")}}</h3>
-                                    <p class="text-center mb-0 pb-0"><span>0</span></p>
+                                    <p class="text-center mb-0 pb-0"><span>{{$data->substation}}</span></p>
 
                                 </div>
                             </div>
@@ -118,7 +118,7 @@
                                 <div class="card p-3">
 
                                     <h3 class="text-center">{{__("messages.total_feeder_pillar_visited")}}</h3>
-                                    <p class="text-center mb-0 pb-0"><span>0</span></p>
+                                    <p class="text-center mb-0 pb-0"><span>{{$data->feeder_pillar}}</span></p>
 
                                 </div>
                             </div>
@@ -148,7 +148,7 @@
                                 <div class="card p-3">
 
                                     <h3 class="text-center">{{__("messages.total_tiang_visited")}} </h3>
-                                    <p class="text-center mb-0 pb-0"><span>0</span></p>
+                                    <p class="text-center mb-0 pb-0"><span>{{$data->tiang}}</span></p>
 
                                 </div>
                             </div>
@@ -177,7 +177,7 @@
                                 <div class="card p-3">
 
                                     <h3 class="text-center"> {{__("messages.total_link_box_visited")}} </h3>
-                                    <p class="text-center mb-0 pb-0"><span>0</span></p>
+                                    <p class="text-center mb-0 pb-0"><span>{{$data->link_box}}</span></p>
 
                                 </div>
                             </div>
@@ -206,7 +206,7 @@
                                 <div class="card p-3">
 
                                     <h3 class="text-center"> {{__("messages.total_cable_bridge_visited")}}</h3>
-                                    <p class="text-center mb-0 pb-0"><span>0</span></p>
+                                    <p class="text-center mb-0 pb-0"><span>{{$data->cable_bridge}}</span></p>
 
                                 </div>
                             </div>

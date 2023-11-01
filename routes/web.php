@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\web\admin\TeamController;
 use App\Http\Controllers\web\admin\TeamUsersController;
 use App\Http\Controllers\web\CableBridgeController;
+use App\Http\Controllers\web\Dashboard;
 use App\Http\Controllers\web\excel\CableBridgeExcelController;
 use App\Http\Controllers\web\excel\DigingExcelController;
 use App\Http\Controllers\web\excel\FeederPillarExcelController;
@@ -140,7 +141,7 @@ Route::group(
                 Route::get('/edit-patrolling/{id}', [PatrollingController::class, 'editRoad']);
                 Route::get('/patrolling-detail/{id}', [PatrollingController::class, 'getRoad'])->name('patrolling-detail');
 
-                Route::view('/dashboard', 'dashboard')->name('dashboard');
+                Route::get('/dashboard', [Dashboard::class,'index'])->name('dashboard');
 
                 Route::view('/map-2', 'map')->name('map-2');
 
