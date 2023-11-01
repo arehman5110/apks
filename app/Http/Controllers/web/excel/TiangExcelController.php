@@ -188,7 +188,7 @@ class TiangExcelController extends Controller
                 $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
 
                 $writer->save(public_path('assets/updated-excels/') . 'qr-tiang-talian.xlsx');
-                ob_end_clean();
+              //  ob_end_clean();
                 return response()->download(public_path('assets/updated-excels/') . 'qr-tiang-talian.xlsx');
             } else {
                 return redirect()

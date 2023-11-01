@@ -52,7 +52,7 @@ class LinkBoxExcelController extends Controller
                 $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
 
                 $writer->save(public_path('assets/updated-excels/') . 'qr-link-box.xlsx');
-                ob_end_clean();
+             //   ob_end_clean();
                 return response()->download(public_path('assets/updated-excels/') . 'qr-link-box.xlsx');
             } else {
                 return redirect()
