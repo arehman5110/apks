@@ -130,14 +130,14 @@
                             </div>
                         </div>
 
-                        <div class="row">
+                        {{-- <div class="row">
                             <div class="col-md-4"><label for="voltage">{{__('messages.coordinate')}}</label></div>
                             <div class="col-md-4">
                                 <input readonly value="{{ $data->coordinate }}" class="form-control" required>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="row">
-                            <div class="col-md-4"><label for="coordinate">{{__('messages.gate')}}</label></div>
+                            <div class="col-md-4"><label for="gate">{{__('messages.gate')}}</label></div>
                             <div class="col-md-4">
                                 <div class="  d-flex">
                                     <input type="checkbox" name="gate_status[locked]"  {{substaionCheckBox('locked', $data->gate_status)}} id="gate_status_locked" disabled>
@@ -219,7 +219,7 @@
                             </div>
                             <div class="col-md-8 row">
 
-                                    
+
                                     <div class="col-md-6 text-center  ">
                                         @if (file_exists(public_path($data->substation_image_1)) && $data->substation_image_1 != '')
                                             <a href="{{ URL::asset($data->substation_image_1) }}" data-lightbox="roadtrip">

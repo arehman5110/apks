@@ -690,6 +690,8 @@
                                     </table>
                                 </div>
 
+                                <input type="hidden" name="total_defects" id="total_defects">
+
                             </fieldset>
 
 
@@ -1079,7 +1081,7 @@
 
         });
 
-        // var total_defects = parseInt({{ $data->total_defects }});
+        var total_defects = parseInt({{ $data->total_defects }});
 
         function addReomveImageField(checkbox) {
             var element = $(checkbox);
@@ -1093,7 +1095,7 @@
                     input.removeClass('d-none');
                     input_2.removeClass('d-none');
                     input_val.removeClass('d-none');
-                    // total_defects += 1;
+                    total_defects += 1;
                 }
             } else {
 
@@ -1102,7 +1104,7 @@
                     input_2.addClass('d-none');
                     input_val.addClass('d-none');
 
-                    // total_defects -= 1;
+                    total_defects -= 1;
                     if (input.hasClass('error')) {
                         input.removeClass('error')
                         input_2.removeClass('error')
@@ -1119,7 +1121,7 @@
                 console.log('unchecked');
             }
 
-            // $('#total_defects').val(total_defects)
+            $('#total_defects').val(total_defects)
 
         }
 

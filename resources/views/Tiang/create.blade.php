@@ -206,7 +206,7 @@
                                     <div class="col-md-4"><label for="pole_image-1">{{ __('messages.pole') }} Image 1
                                         </label>
                                     </div>
-                                    <div class="col-md-5 p-2 pr-5"><input type="file" name="pole_image_1" id="pole_image_1" required
+                                    <div class="col-md-5 p-2 pr-5"><input type="file" name="pole_image_1" id="pole_image_1" required accept="image/*"
                                             class="form-control">
                                     </div>
 
@@ -217,7 +217,7 @@
                                     <div class="col-md-4"><label for="pole_image-2">{{ __('messages.pole') }} Image
                                             2</label>
                                     </div>
-                                    <div class="col-md-5 p-2 pr-5"><input type="file" name="pole_image_2" id="pole_image_2" required
+                                    <div class="col-md-5 p-2 pr-5"><input type="file" name="pole_image_2" id="pole_image_2" required accept="image/*"
                                             class="form-control">
                                     </div>
 
@@ -227,12 +227,12 @@
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="cordinates">{{__("messages.coordinate")}}</label></div>
-                                    <div class="col-md-4"><input type="text" name="cordinates" id="cordinates" accept="image/*"
+                                    <div class="col-md-4"><input type="text" name="cordinates" id="cordinates"
                                             class="form-control" required readonly></div>
                                 </div>
 
                                 <input type="hidden" name="lat" id="lat" required class="form-control">
-                                <input type="hidden" name="log" id="log" class="form-control" accept="image/*">
+                                <input type="hidden" name="log" id="log" class="form-control" >
 
                                 <div class="text-center">
                                     <strong> <span class="text-danger map-error"></span></strong>
@@ -1061,6 +1061,7 @@
                                         </tr>
                                     </table>
                                 </div>
+                                <input type="hidden" name="total_defects" id="total_defects">
 
                             </fieldset>
 

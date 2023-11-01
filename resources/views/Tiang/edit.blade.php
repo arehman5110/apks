@@ -202,7 +202,7 @@
                                     <div class="col-md-4"><label for="pole_image-2">{{ __('messages.pole') }} Image
                                             2</label>
                                     </div>
-                                    <div class="col-md-5 p-2 pr-5"><input type="file" name="pole_image_2" id="pole_image_2"
+                                    <div class="col-md-5 p-2 pr-5"><input type="file" name="pole_image_2" id="pole_image_2" 
                                             class="form-control">
                                     </div>
                                     <div class="col-md-3">
@@ -683,6 +683,7 @@
                                         </tr>
                                     </table>
                                 </div>
+                                <input type="hidden" name="total_defects" id="total_defects">
 
                             </fieldset>
 

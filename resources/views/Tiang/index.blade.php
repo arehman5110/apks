@@ -88,7 +88,7 @@
                                         <tr>
                                             <th>TIANG NO</th>
                                             <th>BA</th>
-                                            <th>CONTRACTOR</th>
+                                            {{-- <th>CONTRACTOR</th> --}}
                                             <th>REVIEW DATE</th>
                                             <th>ACTION</th>
 
@@ -100,8 +100,8 @@
                                             <tr>
                                                 <td>{{$data->tiang_no}}</td>
                                                 <td class="align-middle">{{ $data->ba }}</td>
-                                                <td class="align-middle">
-                                                    {{ $data->name_contractor }}</td>
+                                                {{-- <td class="align-middle">
+                                                    {{ $data->name_contractor }}</td> --}}
 
 
                                                 <td class="align-middle text-center">

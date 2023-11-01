@@ -193,7 +193,7 @@ class SubstationController extends Controller
             $data->voltage = $request->voltage;
             $data->name = $request->name;
             $data->type = $request->type;
-            $data->coordinate = $request->coordinate;
+            // $data->coordinate = $request->coordinate;
             $data->grass_status = $request->grass_status;
             $data->tree_branches_status = $request->tree_branches_status;
 

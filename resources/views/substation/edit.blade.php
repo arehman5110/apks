@@ -152,14 +152,14 @@
                             </div>
 
 
-                            <div class="row">
+                            {{-- <div class="row">
                                 <div class="col-md-4"><label for="coordinate">{{ __('messages.coordinate') }}</label>
                                 </div>
                                 <div class="col-md-4">
                                     <input type="text" name="coordinate" id="coordinate"
                                         value="{{ $data->coordinate }}" class="form-control" required readonly>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="row">
                                 <div class="col-md-4"><label for="pipe_staus">{{ __('messages.gate') }}</label></div>
                                 <div class="col-md-4">

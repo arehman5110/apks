@@ -117,7 +117,7 @@ class TiangContoller extends Controller
             $data->bekalan_dua_defect = $request->has('bekalan_dua_defect') ? json_encode($request->bekalan_dua_defect) : null;
             $data->kaki_lima_defect = $request->has('kaki_lima_defect') ? json_encode($request->kaki_lima_defect) : null;
 
-            // $data->total_defects = $request->total_defects;
+            $data->total_defects = $request->total_defects;
             // $data->planed_date = $request->planed_date;
             // $data->actual_date = $request->actual_date;
             // $data->remarks = $request->remarks;
@@ -257,7 +257,7 @@ class TiangContoller extends Controller
             $data->bekalan_dua_defect = $request->has('bekalan_dua_defect') ? json_encode($request->bekalan_dua_defect) : null;
             $data->kaki_lima_defect = $request->has('kaki_lima_defect') ? json_encode($request->kaki_lima_defect) : null;
 
-            // $data->total_defects = $request->total_defects;
+            $data->total_defects = $request->total_defects;
             // $data->planed_date = $request->planed_date;
             // $data->actual_date = $request->actual_date;
             // $data->remarks = $request->remarks;
