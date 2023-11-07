@@ -34,6 +34,7 @@
         input[type='radio'] {
             border-radius: 50% !important;
         }
+        .card{border: 0px}
     </style>
 @endsection
 
