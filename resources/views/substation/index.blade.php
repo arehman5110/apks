@@ -160,6 +160,7 @@
             });
 
             var name = '%';
+            name = encodeURIComponent(name)
 
             $(document).on('click', 'span a', function(event)
 
