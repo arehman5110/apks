@@ -193,10 +193,11 @@
                 {
                    name = encodeURIComponent(this.value);
                     //  name = this.value;
+                    name = name == '' ? '%' : name;
                     name = encodeURIComponent(name);
                     console.log(name);
 
-                    name = name == '' ? '%' : name;
+                    
                     // name = JSON.stringify(name);
 
                     $('span a').removeClass('active')
