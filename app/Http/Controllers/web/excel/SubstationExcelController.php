@@ -38,11 +38,11 @@ class SubstationExcelController extends Controller
                     $worksheet->setCellValue('J' . $i, $rec->type);
                     $worksheet->setCellValue('K' . $i, $rec->coordinate);
 
-                    $worksheet->setCellValue('L' . $i, $rec->gate_status);
+                    // $worksheet->setCellValue('L' . $i, $rec->gate_status);
                     $worksheet->setCellValue('M' . $i, $rec->grass_status);
                     $worksheet->setCellValue('N' . $i, $rec->tree_branches_status);
 
-                    $worksheet->setCellValue('O' . $i, $rec->building_status);
+                    // $worksheet->setCellValue('O' . $i, $rec->building_status);
                     $worksheet->setCellValue('P' . $i, $rec->advertise_poster_status);
 
                     $i++;

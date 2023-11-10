@@ -96,8 +96,8 @@
         var lat = e.latlng.lat;
         var lng = e.latlng.lng;
 
-        $('#lat').val(lat);
-        $('#log').val(lng);
+        $('#lat').val(lat.toFixed(2));
+        $('#log').val(lng.toFixed(2));
         var coordinate = $('#coordinate')
 
         if (coordinate.length > 0) {
