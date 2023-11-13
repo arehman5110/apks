@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Substation;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use Illuminate\Support\Facades\Auth;
 
 class SubstationExcelController extends Controller
 {
@@ -14,8 +15,10 @@ class SubstationExcelController extends Controller
 
     public function generateSubstationExcel()
     {
-        try {
-          $recored = Substation::take(100)->get();;
+        $userBa = Auth::user()->ba;
+            try {
+                // $recored = Substation::where('ba' ,  'LIKE', '%' . $userBa . '%')->get();
+                $recored = Substation::take(100)->get();
 
             if (sizeof($recored) > 0) {
                 $excelFile = public_path('assets/excel-template/substation.xlsx');

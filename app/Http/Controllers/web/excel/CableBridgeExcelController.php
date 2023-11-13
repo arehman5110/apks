@@ -7,14 +7,17 @@ use App\Models\CableBridge;
 use Illuminate\Http\Request;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use Illuminate\Support\Facades\Auth;
 
 class CableBridgeExcelController extends Controller
 {
 
         public function generateCableBridgeExcel()
         {
+
+            $userBa = Auth::user()->ba;
             try {
-                $recored = CableBridge::all();
+                $recored = CableBridge::where('ba' ,  'LIKE', '%' . $userBa . '%')->get();
                 // return $recored;
                 if (sizeof($recored) > 0) {
                     $excelFile = public_path('assets/excel-template/cable-bridge.xlsx');
@@ -59,6 +62,7 @@ class CableBridgeExcelController extends Controller
                 }
 
             } catch (\Throwable $th) {
+                return $th->getMessage();
                 return redirect()
                     ->back()
                     ->with('failed', 'Request Failed');

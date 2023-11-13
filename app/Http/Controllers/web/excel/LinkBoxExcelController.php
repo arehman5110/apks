@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\LinkBox;
 use Illuminate\Http\Request;
 use PhpOffice\PhpSpreadsheet\IOFactory;
+use Illuminate\Support\Facades\Auth;
 
 
 class LinkBoxExcelController extends Controller
@@ -13,8 +14,9 @@ class LinkBoxExcelController extends Controller
     //
 
     public function generateLinkBoxExcel(){
+        $userBa = Auth::user()->ba;
         try {
-            $recored = LinkBox::all();
+            $recored = LinkBox::where('ba' ,  'LIKE', '%' . $userBa . '%')->get();
             // return $recored;
             if (sizeof($recored) > 0) {
                 $excelFile = public_path('assets/excel-template/link-box.xlsx');

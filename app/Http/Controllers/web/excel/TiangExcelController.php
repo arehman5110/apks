@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use Illuminate\Support\Facades\Auth;
 
 class TiangExcelController extends Controller
 {
@@ -15,8 +16,9 @@ class TiangExcelController extends Controller
 
     public function generateTiangExcel()
     {
-        try {
-            $recored = Tiang::all();
+        $userBa = Auth::user()->ba;
+            try {
+                $recored = Tiang::where('ba' ,  'LIKE', '%' . $userBa . '%')->get();
             // return $recored;
             if (sizeof($recored) > 0) {
                 $excelFile = public_path('assets/excel-template/QR TIANG.xlsx');

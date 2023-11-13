@@ -6,13 +6,15 @@ use App\Http\Controllers\Controller;
 use App\Models\ThirdPartyDiging;
 use Illuminate\Http\Request;
 use PhpOffice\PhpSpreadsheet\IOFactory;
+use Illuminate\Support\Facades\Auth;
 
 class ThirdPartyExcelController extends Controller
 {
     public function generateThirdPartExcel()
     {
+        $userBa = Auth::user()->ba;
         try {
-            $recored = ThirdPartyDiging::all();
+            $recored = ThirdPartyDiging::where('ba' ,  'LIKE', '%' . $userBa . '%')->get();
             // return $recored;
             if (sizeof($recored) > 0) {
                 $excelFile = public_path('assets/excel-template/test.xlsx');

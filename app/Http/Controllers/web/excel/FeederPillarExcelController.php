@@ -6,14 +6,16 @@ use App\Http\Controllers\Controller;
 use App\Models\FeederPillar;
 use Illuminate\Http\Request;
 use PhpOffice\PhpSpreadsheet\IOFactory;
+use Illuminate\Support\Facades\Auth;
 
 class FeederPillarExcelController extends Controller
 {
     //
     public function generateFeederPillarExcel()
     {
+        $userBa = Auth::user()->ba;
         try {
-            $recored = FeederPillar::all();
+            $recored = FeederPillar::where('ba' ,  'LIKE', '%' . $userBa . '%')->get();
             // return $recored;
             if (sizeof($recored) > 0) {
                 $excelFile = public_path('assets/excel-template/feeder-pillar.xlsx');

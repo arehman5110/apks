@@ -25,14 +25,14 @@ class PatrollingController extends Controller
     {
         try {
             $currentDate = Carbon::now()->toDateString();
-            $time_petrol = $currentDate . ' ' . $request->time_petrol;
+            $time_patrol = $currentDate . ' ' . $request->time_petrol;
 
             $road = Road::find($request->road_id);
             $road->road_name = $request->road_name;
             $road->date_patrol = $request->date_patrol;
             $road->fidar = $request->fidar;
             $road->name_project = $request->name_project;
-            $road->time_petrol = $time_petrol;
+            $road->time_patrol = $time_patrol;
             $road->actual_km = $request->actual_km;
             $road->total_digging = $request->total_digging;
             $road->total_notice = $request->total_notice;
@@ -42,6 +42,7 @@ class PatrollingController extends Controller
             return redirect()->route('get-all-work-packages',app()->getLocale())
                 ->with('success', 'Request Success');
         } catch (\Throwable $th) {
+            return $th->getMessage();
             return redirect()->route('get-all-work-packages',app()->getLocale())
                 ->with('failed', 'Request Failed');
         }
@@ -70,7 +71,7 @@ class PatrollingController extends Controller
     public function getRoadsByID($language,$id)
     {
         $road = Road::where('id', $id)
-            ->select('id', 'road_name', 'km', 'date_patrol', 'time_petrol', 'name_project', 'actual_km', 'fidar', 'total_digging', 'total_notice', 'total_supervision')
+            ->select('id', 'road_name', 'km', 'date_patrol', 'time_patrol', 'name_project', 'actual_km', 'fidar', 'total_digging', 'total_notice', 'total_supervision')
             ->first();
         $road->time_petrol = date('H:i:s', strtotime($road->time_petrol));
         return $road;
