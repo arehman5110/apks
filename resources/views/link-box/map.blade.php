@@ -296,13 +296,13 @@
             var str = '';
             var idSp = id.split('.');
             var vDS = '';
-            if (data.visit_date != '') {
+            if (data.visit_date != '' && data.visit_date != null) {
                 var sDate = data.visit_date.split('T');
                 console.log(sDate[0]);
                 vDS = sDate[0]
             }
             var vTM = '';
-            if (data.visit_date != '') {
+            if (data.patrol_time != '' && data.patrol_time != null) {
                 var VTime = data.patrol_time.split('T');
 
                 vTM = VTime[1]
