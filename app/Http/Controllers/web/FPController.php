@@ -20,7 +20,8 @@ class FPController extends Controller
     public function index()
     {
         $ba = Auth::user()->ba ;
-        $data = FeederPillar::where('ba', 'LIKE', '%' . $ba . '%')->get();
+        $zone = Auth::user()->zone;
+        $data = FeederPillar::where('ba', 'LIKE', '%' . $ba . '%')->where('zone', 'LIKE', '%' . $zone . '%')->get();
         return view('feeder-pillar.index', ['datas' => $data]);
     }
 

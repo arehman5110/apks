@@ -23,7 +23,8 @@ class ThirdPartyDiggingController extends Controller
     {
         // return ThirdPartyDiging::all();
         $ba = Auth::user()->ba ;
-        $datas = ThirdPartyDiging::where('ba', 'LIKE', '%' . $ba . '%')->get();
+        $zone = Auth::user()->zone;
+        $datas = ThirdPartyDiging::where('ba', 'LIKE', '%' . $ba . '%')->where('zone', 'LIKE', '%' . $zone . '%')->get();
 
         return view('third-party.index', ['datas' => $datas]);
     }

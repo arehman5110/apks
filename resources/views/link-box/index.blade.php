@@ -25,7 +25,7 @@
                 </div>
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
-                        <li class="breadcrumb-item"><a href="#">{{__("messages.dashboard")}}</a></li>
+                        <li class="breadcrumb-item"><a href="/{{app()->getLocale()}}/dashboard">{{__("messages.dashboard")}}</a></li>
                         <li class="breadcrumb-item active">{{__("messages.index")}}</li>
                     </ol>
                 </div>

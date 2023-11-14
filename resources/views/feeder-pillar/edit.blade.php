@@ -166,7 +166,7 @@
                                         <input type="checkbox" name="gate_status[other]"
                                             {{ substaionCheckBox('other', $data->gate_status) }} id="gate_status_others"
                                             onclick="getStatus(this)">
-                                        <label for="gate_status_others">{{__("messages.other")}}</label>
+                                        <label for="gate_status_others">{{__("messages.others")}}</label>
 
 
                                     </div>

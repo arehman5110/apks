@@ -50,7 +50,7 @@
 
                 <div class=" card col-md-12 p-4 pt-0 ">
                     <div class="form-input ">
-                     
+
 
                         <form action="{{ route('update-feeder-pillar-map-edit', [app()->getLocale(), $data->id]) }} " id="myForm"
                             method="POST" enctype="multipart/form-data">
@@ -154,7 +154,7 @@
                                         <input type="checkbox" name="gate_status[other]"
                                             {{ substaionCheckBox('other', $data->gate_status) }} id="gate_status_others"
                                             onclick="getStatus(this)">
-                                        <label for="gate_status_others">{{__("messages.other")}}</label>
+                                        <label for="gate_status_others">{{__("messages.others")}}</label>
 
 
                                     </div>
