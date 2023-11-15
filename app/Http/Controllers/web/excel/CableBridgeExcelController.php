@@ -12,12 +12,18 @@ use Illuminate\Support\Facades\Auth;
 class CableBridgeExcelController extends Controller
 {
 
-        public function generateCableBridgeExcel()
+        public function generateCableBridgeExcel(Request $req)
         {
 
-            $userBa = Auth::user()->ba;
+            $userBa = Auth::user()->ba == '' ? $req->excelBa : Auth::user()->ba;
+            $zone = Auth::user()->zone == '' ? $req->excelZone : Auth::user()->zone;
+            $surveyDate_from = $req->excel_from_date == '' ? CableBridge::min('visit_date') : $req->excel_from_date;
+            $surveyDate_to = $req->excel_to_date == '' ? CableBridge::max('visit_date') : $req->excel_to_date;
             try {
-                $recored = CableBridge::where('ba' ,  'LIKE', '%' . $userBa . '%')->get();
+                $recored = CableBridge::where('ba' ,  'LIKE', '%' . $userBa . '%')
+                ->where('zone', 'LIKE', '%' . $zone . '%')
+                ->whereDate('visit_date', '>=', $surveyDate_from)
+                ->whereDate('visit_date', '<=', $surveyDate_to)->get();
                 // return $recored;
                 if (sizeof($recored) > 0) {
                     $excelFile = public_path('assets/excel-template/cable-bridge.xlsx');

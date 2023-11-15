@@ -16,7 +16,9 @@
             color: white !important;
         }
 
-        <
+        .collapse {
+            visibility: visible;
+        }
     </style>
 @endsection
 
@@ -50,6 +52,8 @@
 
 
             <div class="row">
+                @include('components.qr-filter',['url'=>"generate-substation-excel"])
+
                 <div class="col-12">
                     <div class="card">
 
@@ -59,9 +63,15 @@
                                 <a href="{{ route('substation.create', app()->getLocale()) }}"><button
                                         class="btn text-white btn-success  btn-sm mr-4">Add Substation</button></a>
 
-                                <a href="{{ route('generate-substation-excel', app()->getLocale()) }}"> <button
+
+                    <button class="btn text-white  btn-sm mr-4" type="button" data-toggle="collapse"
+                    style="background-color: #708090" data-target="#collapseQr" aria-expanded="false"
+                    aria-controls="collapseQr">
+                    QR Substation
+                </button>
+                  {{--               <a href="{{ route('generate-substation-excel', app()->getLocale()) }}"> <button
                                         class="btn text-white  btn-sm mr-4" style="background-color: #708090">QR
-                                        Substation</button></a>
+                                        Substation</button></a> --}}
                             </div>
                         </div>
 
@@ -73,20 +83,20 @@
 
 
 
-                                {{-- <table id="pagination" class="table table-bordered table-hover"> --}}
-                                <div class="">
-                                    <div class="d-flex justify-content-end input-group mb-2">
-                                        <input type="search" name="substation" id="substation" class="mb-0"
-                                            placeholder="Search by name">
-                                        <div class="input-group-append">
-                                            <button type="submit" class="input-group-text">
-                                                <i class="fa fa-search"></i>
-                                                <!-- You can use a different search icon class if needed -->
-                                            </button>
-                                        </div>
+                            {{-- <table id="pagination" class="table table-bordered table-hover"> --}}
+                            <div class="">
+                                <div class="d-flex justify-content-end input-group mb-2">
+                                    <input type="search" name="substation" id="substation" class="mb-0"
+                                        placeholder="Search by name">
+                                    <div class="input-group-append">
+                                        <button type="submit" class="input-group-text">
+                                            <i class="fa fa-search"></i>
+                                            <!-- You can use a different search icon class if needed -->
+                                        </button>
                                     </div>
-                               </div>
- <div class="table-responsive add-substation" id="add-substation">
+                                </div>
+                            </div>
+                            <div class="table-responsive add-substation" id="add-substation">
                                 @include('substation.pagination')
                             </div>
 
@@ -137,6 +147,7 @@
 @section('script')
     <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{asset('assets/js/generate-qr.js')}}"></script>
 
 
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.3/datatables.min.js"></script>
@@ -175,7 +186,7 @@
 
                     var page = $(this).attr('href').split('page=')[1];
                     $.ajax({
-                        url: `/{{app()->getLocale()}}/substation-paginate/${name}?page=${page}`,
+                        url: `/{{ app()->getLocale() }}/substation-paginate/${name}?page=${page}`,
                         dataType: 'html',
                         method: 'GET',
                         async: false,
@@ -190,40 +201,41 @@
 
                 })
 
-                $(document).on('change', '#substation', function(event)
-                {
-                   name = encodeURIComponent(this.value);
-                    //  name = this.value;
-                    name = name == '' ? '%' : name;
-                    name = encodeURIComponent(name);
-                    console.log(name);
-
-                    
-                    // name = JSON.stringify(name);
-
-                    $('span a').removeClass('active')
-
-                    $(this).addClass('active');
-
-                    event.preventDefault();
+            $(document).on('change', '#substation', function(event) {
+                name = encodeURIComponent(this.value);
+                //  name = this.value;
+                name = name == '' ? '%' : name;
+                name = encodeURIComponent(name);
+                console.log(name);
 
 
-                    $.ajax({
-                        url: `/{{app()->getLocale()}}/substation-paginate/${name}`,
-                        dataType: 'html',
-                        method: 'GET',
-                        async: false,
-                    }).done(function(data) {
+                // name = JSON.stringify(name);
 
-                        $("#add-substation").empty().html(data);
+                $('span a').removeClass('active')
 
+                $(this).addClass('active');
+
+                event.preventDefault();
+
+
+                $.ajax({
+                    url: `/{{ app()->getLocale() }}/substation-paginate/${name}`,
+                    dataType: 'html',
+                    method: 'GET',
+                    async: false,
+                }).done(function(data) {
+
+                    $("#add-substation").empty().html(data);
 
 
 
-                    })
 
                 })
+
+            })
 
         });
+
+
     </script>
 @endsection

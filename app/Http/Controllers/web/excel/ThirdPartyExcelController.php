@@ -10,11 +10,22 @@ use Illuminate\Support\Facades\Auth;
 
 class ThirdPartyExcelController extends Controller
 {
-    public function generateThirdPartExcel()
+    public function generateThirdPartExcel(Request $req)
     {
-        $userBa = Auth::user()->ba;
+
+        // return $req;
+        $userBa = Auth::user()->ba == '' ? $req->excelBa : Auth::user()->ba;
+        $zone = Auth::user()->zone  == '' ? $req->excelZone : Auth::user()->zone;
+        $surveyDate_from = $req->excel_from_date == "" ? ThirdPartyDiging::min('survey_date') : $req->excel_from_date;
+        $surveyDate_to = $req->excel_to_date == "" ? ThirdPartyDiging::max('survey_date') : $req->excel_to_date;
+
+        // return $surveyDate_to;
         try {
-            $recored = ThirdPartyDiging::where('ba' ,  'LIKE', '%' . $userBa . '%')->get();
+            $recored = ThirdPartyDiging::where('ba' ,  'LIKE', '%' . $userBa . '%')
+                    ->where('zone' ,  'LIKE', '%' . $zone . '%')
+                    ->whereDate("survey_date" ,">=" , $surveyDate_from)
+                    ->whereDate("survey_date" ,"<=" , $surveyDate_to)
+                    ->get();
             // return $recored;
             if (sizeof($recored) > 0) {
                 $excelFile = public_path('assets/excel-template/test.xlsx');
@@ -30,8 +41,8 @@ class ThirdPartyExcelController extends Controller
                     $worksheet->setCellValue('C' . $i, $rec->zone);
                     $worksheet->setCellValue('D' . $i, $rec->ba);
                     $worksheet->setCellValue('E' . $i, $rec->team_name);
-                    $worksheet->setCellValue('F' . $i, $rec->survey_date);
-                    $worksheet->setCellValue('G' . $i, date('H:i:s', strtotime($rec->patrol_time)));
+                    $worksheet->setCellValue('F' . $i, date('Y-m-d', strtotime($rec->survey_date)));
+                    $worksheet->setCellValue('G' . $i, date('H:i:s', strtotime($rec->patrolling_time)));
                     $worksheet->setCellValue('H' . $i, $rec->road_name);
                     $worksheet->setCellValue('I' . $i, $rec->project_name);
                     $worksheet->setCellValue('J' . $i, $rec->feeder_involved);

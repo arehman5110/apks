@@ -10,6 +10,9 @@
         div#roads_length {
             display: none;
         }
+        .collapse {
+            visibility: visible;
+        }
     </style>
 @endsection
 
@@ -43,6 +46,7 @@
 
 
             <div class="row">
+                @include('components.qr-filter',['url'=>"generate-link-box-excel"])
                 <div class="col-12">
                     <div class="card">
 
@@ -53,7 +57,12 @@
                                 <div class="d-flex ml-auto">
                                 <a href="{{route('link-box-pelbagai-voltan.create', app()->getLocale())}}"><button class="btn text-white btn-success  btn-sm mr-4"  >Add Link Box</button></a>
 
-                               <a href="{{route('generate-link-box-excel', app()->getLocale())}}"> <button class="btn text-white  btn-sm mr-4" style="background-color: #708090">QR Link Box</button></a>
+                                <button class="btn text-white  btn-sm mr-4" type="button" data-toggle="collapse"
+                                style="background-color: #708090" data-target="#collapseQr" aria-expanded="false"
+                                aria-controls="collapseQr">
+                                QR Link Box
+                            </button>
+                               {{-- <a href="{{route('generate-link-box-excel', app()->getLocale())}}"> <button class="btn text-white  btn-sm mr-4" style="background-color: #708090">QR Link Box</button></a> --}}
                             </div>
                             </div>
 
@@ -178,7 +187,7 @@
 @section('script')
     <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-
+    <script src="{{asset('assets/js/generate-qr.js')}}"></script>
 
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.3/datatables.min.js"></script>
 
@@ -201,5 +210,7 @@
             });
 
         });
+
+
     </script>
 @endsection

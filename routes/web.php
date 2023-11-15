@@ -103,7 +103,7 @@ Route::group(
 
                 //// Link Box
                 Route::resource('link-box-pelbagai-voltan', LinkBoxController::class);
-                Route::get('generate-link-box-excel', [LinkBoxExcelController::class, 'generateLinkBoxExcel'])->name('generate-link-box-excel');
+                Route::post('generate-link-box-excel', [LinkBoxExcelController::class, 'generateLinkBoxExcel'])->name('generate-link-box-excel');
                 Route::view('/link-box-pelbagai-voltan-map', 'link-box.map')->name('link-box-pelbagai-voltan-map');
                 Route::get('/get-link-box-edit/{id}', [LinkBoxMapController::class, 'editMap'])->name('get-link-box-edit');
                 Route::post('/update-link-box-map-edit/{id}', [LinkBoxMapController::class, 'update'])->name('update-link-box-map-edit');
@@ -111,7 +111,7 @@ Route::group(
                 //// Cable Bridge
 
                 Route::resource('cable-bridge', CableBridgeController::class);
-                Route::get('generate-cable-bridge-excel', [CableBridgeExcelController::class, 'generateCableBridgeExcel'])->name('generate-cable-bridge-excel');
+                Route::post('generate-cable-bridge-excel', [CableBridgeExcelController::class, 'generateCableBridgeExcel'])->name('generate-cable-bridge-excel');
                 Route::view('/cable-bridge-map', 'cable-bridge.map')->name('cable-bridge-map');
                 Route::get('/get-cable-bridge-edit/{id}', [CableBridgeMapController::class, 'editMap'])->name('get-cable-bridge-edit');
                 Route::post('/update-cable-bridge-map-edit/{id}', [CableBridgeMapController::class, 'update'])->name('update-cable-bridge-map-edit');
@@ -119,12 +119,12 @@ Route::group(
 
                 ////third party digging routes
                 Route::resource('third-party-digging', ThirdPartyDiggingController::class);
-                Route::get('generate-third-party-digging-excel', [ThirdPartyExcelController::class, 'generateThirdPartExcel'])->name('generate-third-party-digging-excel');
+                Route::post('generate-third-party-digging-excel', [ThirdPartyExcelController::class, 'generateThirdPartExcel'])->name('generate-third-party-digging-excel');
 
                 ////substation routes
                 Route::resource('substation', SubstationController::class);
                 Route::view('/substation-map', 'substation.map')->name('substation-map');
-                Route::get('generate-substation-excel', [SubstationExcelController::class, 'generateSubstationExcel'])->name('generate-substation-excel');
+                Route::post('generate-substation-excel', [SubstationExcelController::class, 'generateSubstationExcel'])->name('generate-substation-excel');
                 Route::get('/substation-paginate/{name}',[SubstationController::class,'paginate'])->name("substation-paginate");
                 Route::get('/get-substation-edit/{id}', [SubstationMapController::class, 'editMap'])->name('get-substation-edit');
                 Route::post('/update-substation-map-edit/{id}', [SubstationMapController::class, 'update'])->name('update-substation-map-edit');
@@ -132,7 +132,7 @@ Route::group(
                 ////feeder-piller routes
                 Route::resource('feeder-pillar', FPController::class);
                 Route::view('/feeder-pillar-map', 'feeder-pillar.map')->name('feeder-pillar-map');
-                Route::get('generate-feeder-pillar-excel', [FeederPillarExcelController::class, 'generateFeederPillarExcel'])->name('generate-feeder-pillar-excel');
+                Route::post('generate-feeder-pillar-excel', [FeederPillarExcelController::class, 'generateFeederPillarExcel'])->name('generate-feeder-pillar-excel');
                 Route::get('/get-feeder-pillar-edit/{id}', [FeederPillarMapController::class, 'editMap'])->name('get-feeder-pillar-edit');
                 Route::post('/update-feeder-pillar-map-edit/{id}', [FeederPillarMapController::class, 'update'])->name('update-feeder-pillar-map-edit');
 

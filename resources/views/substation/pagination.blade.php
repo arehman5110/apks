@@ -22,7 +22,7 @@
                     <td class="align-middle text-center">{{ $data->team }}</td>
                     <td class="align-middle text-center">
 
-                        {{ date('Y-m-d', strtotime($data->visit_date)) }}
+                        {{$data->visit_date != "" ?  date('Y-m-d', strtotime($data->visit_date))  : "-"}}
                     </td>
                     <td class="text-center">
 

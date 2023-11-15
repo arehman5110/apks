@@ -11,11 +11,18 @@ use Illuminate\Support\Facades\Auth;
 class FeederPillarExcelController extends Controller
 {
     //
-    public function generateFeederPillarExcel()
+    public function generateFeederPillarExcel(Request $req)
     {
-        $userBa = Auth::user()->ba;
+        $userBa = Auth::user()->ba == '' ? $req->excelBa : Auth::user()->ba;
+        $zone = Auth::user()->zone == '' ? $req->excelZone : Auth::user()->zone;
+        $surveyDate_from = $req->excel_from_date == '' ? FeederPillar::min('visit_date') : $req->excel_from_date;
+        $surveyDate_to = $req->excel_to_date == '' ? FeederPillar::max('visit_date') : $req->excel_to_date;
+
         try {
-            $recored = FeederPillar::where('ba' ,  'LIKE', '%' . $userBa . '%')->get();
+            $recored = FeederPillar::where('ba' ,  'LIKE', '%' . $userBa . '%')
+            ->where('zone', 'LIKE', '%' . $zone . '%')
+            ->whereDate('visit_date', '>=', $surveyDate_from)
+            ->whereDate('visit_date', '<=', $surveyDate_to)->get();
             // return $recored;
             if (sizeof($recored) > 0) {
                 $excelFile = public_path('assets/excel-template/feeder-pillar.xlsx');

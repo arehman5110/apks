@@ -13,10 +13,16 @@ class LinkBoxExcelController extends Controller
 {
     //
 
-    public function generateLinkBoxExcel(){
-        $userBa = Auth::user()->ba;
+    public function generateLinkBoxExcel(Request $req){
+        $userBa = Auth::user()->ba == '' ? $req->excelBa : Auth::user()->ba;
+        $zone = Auth::user()->zone == '' ? $req->excelZone : Auth::user()->zone;
+        $surveyDate_from = $req->excel_from_date == '' ? LinkBox::min('visit_date') : $req->excel_from_date;
+        $surveyDate_to = $req->excel_to_date == '' ? LinkBox::max('visit_date') : $req->excel_to_date;
         try {
-            $recored = LinkBox::where('ba' ,  'LIKE', '%' . $userBa . '%')->get();
+            $recored = LinkBox::where('ba' ,  'LIKE', '%' . $userBa . '%')
+             ->where('zone', 'LIKE', '%' . $zone . '%')
+            ->whereDate('visit_date', '>=', $surveyDate_from)
+            ->whereDate('visit_date', '<=', $surveyDate_to)->get();
             // return $recored;
             if (sizeof($recored) > 0) {
                 $excelFile = public_path('assets/excel-template/link-box.xlsx');

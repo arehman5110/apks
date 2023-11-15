@@ -10,6 +10,9 @@
         div#roads_length {
             display: none;
         }
+        .collapse {
+            visibility: visible;
+        }
     </style>
 @endsection
 
@@ -43,6 +46,7 @@
 
 
             <div class="row">
+                @include('components.qr-filter',['url'=>"generate-cable-bridge-excel"])
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header d-flex justify-content-between ">
@@ -50,7 +54,12 @@
                             <div class="d-flex ml-auto">
                             <a href="{{route('cable-bridge.create',app()->getLocale())}}"><button class="btn text-white btn-success  btn-sm mr-4"  >Add Cable Bridge</button></a>
 
-                           <a href="{{route('generate-cable-bridge-excel',app()->getLocale())}}"> <button class="btn text-white  btn-sm mr-4" style="background-color: #708090">QR Cable Bridge</button></a>
+                            <button class="btn text-white  btn-sm mr-4" type="button" data-toggle="collapse"
+                            style="background-color: #708090" data-target="#collapseQr" aria-expanded="false"
+                            aria-controls="collapseQr">
+                            QR Cable Bridge
+                        </button>
+                           {{-- <a href="{{route('generate-cable-bridge-excel',app()->getLocale())}}"> <button class="btn text-white  btn-sm mr-4" style="background-color: #708090">QR Cable Bridge</button></a> --}}
                         </div>
                         </div>
                         <div class="card-body">
@@ -171,7 +180,7 @@
 @section('script')
     <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-
+    <script src="{{asset('assets/js/generate-qr.js')}}"></script>
 
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.3/datatables.min.js"></script>
 
@@ -194,5 +203,7 @@
             });
 
         });
+
+
     </script>
 @endsection
