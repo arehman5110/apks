@@ -30,7 +30,7 @@ class TiangContoller extends Controller
         //
         $ba = Auth::user()->ba ;
         $zone = Auth::user()->zone;
-        $datas = Tiang::where('ba', 'LIKE', '%' . $ba . '%')->where('zone', 'LIKE', '%' . $zone . '%')->get();
+        $datas = Tiang::where('ba', 'LIKE', '%' . $ba . '%')->get();
 
         return view('Tiang.index', ['datas' => $datas]);
     }
