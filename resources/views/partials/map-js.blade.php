@@ -83,14 +83,14 @@
                 sel_lyr = road;
 
             }
-            callSelfLayer();
+            callSelfLayer(param);
         }
     }
 
 
 
 
-    function callSelfLayer() {
+    function callSelfLayer(param) {
         // console.log("asdasdasdasdas");
         console.log(sel_lyr);
         map.off('click');
@@ -115,10 +115,10 @@
                     data = JSON.parse(data1)
                     // console.log(data.features[0].id);
                     if (data.features.length != 0) {
-                        if ($('#select_layer').val() == 'substation') {
+                        if (param == 'substation') {
                             substationModal(data.features[0].properties, data.features[0].id);
 
-                        }else if($('#select_layer').val() == 'road') {
+                        }else if(param == 'road') {
                             roadModal(data.features[0].properties, data.features[0].id)
 
                         }else {
@@ -208,6 +208,7 @@
         map.on('click', function(e) {
             //map.off('click');
             $("#wg").html('');
+            $('.windowTitle').html('Pano Images')
             // Build the URL for a GetFeatureInfo
             var url = getFeatureInfoUrl(
                 map,
@@ -217,6 +218,7 @@
                     'propertyName': 'NAME,AREA_CODE,DESCRIPTIO'
                 }
             );
+
             var secondUrl = encodeURIComponent(url)
 
             $.ajax({
@@ -246,6 +248,12 @@
 
                         createWindow(1);
                         selectedId = deco.features[0].id.split('.')[1];
+                        var windowPosition = map.latLngToContainerPoint(e.latlng);
+        $('#window1').css({
+            'position': 'absolute',
+            'left': windowPosition.x -50 + 'px',
+            'top': windowPosition.y-50 + 'px'
+        });
 
                         pannellum.viewer('panorama', {
                             "type": "equirectangular",
@@ -259,6 +267,7 @@
                         }
 
                         identifyme = L.geoJSON(deco.features[0].geometry).addTo(map);
+                        $('.windowTitle').html(`Pano Images ( LAT : ${(e.latlng.lat).toFixed(2)} , LNG : ${(e.latlng.lng).toFixed(2)} )`)
                     } else {
                         console.log(
                             'Data or data.features is undefined or does not have a valid length property.'

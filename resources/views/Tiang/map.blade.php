@@ -86,17 +86,38 @@
 
 
 
-        <div class="p-3 form-input  w-25 ">
+        <div class="p-3 form-input    ">
             <label for="select_layer">Select Layer : </label>
             <span class="text-danger" id="er-select-layer"></span>
-            <select name="select_layer" id="select_layer" onchange="selectLayer(this.value)" class="form-control">
+            <div class="d-sm-flex">
+                <div class="">
+                    <input type="radio" name="select_layer" id="select_layer_substation" value="substation" onchange="selectLayer(this.value)">
+                    <label for="select_layer_substation">Substation</label>
+                </div>
+
+                <div class=" mx-4">
+                    <input type="radio" name="select_layer" id="select_layer_pano" value="pano" onchange="selectLayer(this.value)">
+                    <label for="select_layer_pano">Pano</label>
+                </div>
+
+                <div class=" mx-4">
+                    <input type="radio" name="select_layer" id="tbl_savr" value="tbl_savr" onchange="selectLayer(this.value)">
+                    <label for="tbl_savr">Tiang</label>
+                </div>
+
+                <div class=" mx-4">
+                    <input type="radio" name="select_layer" id="road" value="road" onchange="selectLayer(this.value)">
+                    <label for="road">Roads</label>
+                </div>
+            </div>
+            {{-- <select name="select_layer" id="select_layer" onchange="selectLayer(this.value)" class="form-control">
                 <option value="" hidden>select layer</option>
                 <option value="substation">Substation</option>
                 <option value="pano">Pano</option>
                 <option value="tbl_savr">Tiang</option>
                 <option value="road">Roads</option>
 
-            </select>
+            </select> --}}
         </div>
 
         <!--  START MAP CARD DIV -->

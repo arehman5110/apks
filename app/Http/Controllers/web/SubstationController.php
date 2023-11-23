@@ -71,14 +71,17 @@ class SubstationController extends Controller
                 $gateStatus = $request->gate_status;
 
                 foreach ($gate as $key => $value) {
-                    if (array_key_exists($key, $gateStatus)) {
                         if ($key == 'other_value') {
                             $gate['other_value'] = $request->gate_status['other_value'];
                         } else {
-                            $gate[$key] = 'true';
+                            if ($key == 'locked' || $key == 'unlocked') {
+                                $gate[$key] = array_key_exists('locked', $gateStatus) && $gateStatus['locked'] == $key ? "true" : "false";
+                            }else{
+                            $gate[$key] = array_key_exists($key, $gateStatus) ? 'true' : "false";
+                            }
                         }
-                    }
                 }
+
             }
 
             $data->gate_status = json_encode($gate);
@@ -199,16 +202,18 @@ class SubstationController extends Controller
                 $gateStatus = $request->gate_status;
 
                 foreach ($gate as $key => $value) {
-                    if (array_key_exists($key, $gateStatus)) {
                         if ($key == 'other_value') {
                             $gate['other_value'] = $request->gate_status['other_value'];
                         } else {
-                            $gate[$key] = 'true';
+                            if ($key == 'locked' || $key == 'unlocked') {
+                                $gate[$key] = array_key_exists('locked', $gateStatus) && $gateStatus['locked'] == $key ? "true" : "false";
+                            }else{
+                            $gate[$key] = array_key_exists($key, $gateStatus) ? 'true' : "false";
+                            }
                         }
-                    }
                 }
-            }
 
+            }
             $data->gate_status = json_encode($gate);
 
             $building = ['broken_roof' => 'false', 'broken_gutter' => 'false', 'broken_base' => 'false', 'other' => 'false', 'other_value' => ''];

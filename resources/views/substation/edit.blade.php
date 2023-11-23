@@ -164,14 +164,14 @@
                                 <div class="col-md-4"><label for="pipe_staus">{{ __('messages.gate') }}</label></div>
                                 <div class="col-md-4">
                                     <div class="  d-flex">
-                                        <input type="checkbox" name="gate_status[locked]"
-                                            {{ substaionCheckBox('locked', $data->gate_status) }} id="gate_status_locked">
+                                        <input type="radio" name="gate_status[locked]"
+                                            {{ substaionCheckBox('locked', $data->gate_status) }} id="gate_status_locked" value="locked" >
                                         <label for="gate_status_locked">{{ __('messages.locked') }}</label>
                                     </div>
                                     <div class=" d-flex">
-                                        <input type="checkbox" name="gate_status[unlocked]"
+                                        <input type="radio" name="gate_status[locked]"
                                             {{ substaionCheckBox('unlocked', $data->gate_status) }}
-                                            id="gate_status_unlocked">
+                                            id="gate_status_unlocked" value="unlocked" >
                                         <label for="gate_status_unlocked">{{ __('messages.unlocked') }}</label>
                                     </div>
                                     <div class=" d-flex">

@@ -49,4 +49,7 @@
     .form-input {
         border: 0
     }
+    input[type="radio"]{
+        border-radius: 50% !important;
+    }
 </style>

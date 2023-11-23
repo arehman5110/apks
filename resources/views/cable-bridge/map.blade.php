@@ -83,15 +83,33 @@
 
 
 
-        <div class="p-3 form-input w-25">
+        <div class="p-3 form-input  ">
             <label for="select_layer">Select : </label>
             <span class="text-danger" id="er-select-layer"></span>
-            <select name="select_layer" id="select_layer" onchange="selectLayer(this.value)" class="form-control">
+
+            <div class="d-sm-flex">
+                <div class="">
+                    <input type="radio" name="select_layer" id="select_layer_substation" value="substation" onchange="selectLayer(this.value)">
+                    <label for="select_layer_substation">Substation</label>
+                </div>
+
+                <div class=" mx-4">
+                    <input type="radio" name="select_layer" id="select_layer_pano" value="pano" onchange="selectLayer(this.value)">
+                    <label for="select_layer_pano">Pano</label>
+                </div>
+
+
+                <div class=" mx-4">
+                    <input type="radio" name="select_layer" id="cable_bridge" value="cable_bridge" onchange="selectLayer(this.value)">
+                    <label for="cable_bridge">Cable Bridge</label>
+                </div>
+            </div>
+            {{-- <select name="select_layer" id="select_layer" onchange="selectLayer(this.value)" class="form-control">
                 <option value="" hidden>select </option>
                 <option value="substation">Substation</option>
                 <option value="pano">Pano</option>
                 <option value="cable_bridge">Cable Bridge</option>
-            </select>
+            </select> --}}
         </div>
         <!--  START MAP CARD DIV -->
         <div class="row m-2">

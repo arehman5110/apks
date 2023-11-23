@@ -124,6 +124,9 @@
             outline: 0;
             box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
         }
+        input[type="radio"]{
+            border-radius: 50% !important;
+        }
     </style>
 @endsection
 
@@ -258,7 +261,40 @@
                         <div class="side-bar" style="height: 569px !important; overflow-y: scroll;">
                             <div class="col-md-12 mb-2" class="form-group">
                                 <label>Select Info Layer :</label>
-                                <select class="form-select" id="tableLayer" onchange="activeSelectedLayerOther(this.value)">
+
+
+                                    <div class="">
+                                        <input type="radio" name="select_layer" id="select_layer_wp" value="wp" onchange="selectLayer(this.value)">
+                                        <label for="select_layer_wp">Work Package</label>
+                                    </div>
+
+                                    <div class="  ">
+                                        <input type="radio" name="select_layer" id="select_layer_rd" value="rd" onchange="activeSelectedLayerOther(this.value)">
+                                        <label for="select_layer_rd">Road</label>
+                                    </div>
+
+
+                                    <div class=" ">
+                                        <input type="radio" name="select_layer" id="select_layer_notice" value="notice" onchange="activeSelectedLayerOther(this.value)">
+                                        <label for="select_layer_notice">Notice</label>
+                                    </div>
+
+                                    <div class=" ">
+                                        <input type="radio" name="select_layer" id="select_layer_supervise" value="supervise" onchange="activeSelectedLayerOther(this.value)">
+                                        <label for="select_layer_supervise">Supervise</label>
+                                    </div>
+
+                                    <div class=" ">
+                                        <input type="radio" name="select_layer" id="select_layer_pano" value="pano" onchange="activeSelectedLayerOther(this.value)">
+                                        <label for="select_layer_pano">Pano</label>
+                                    </div>
+
+                                    <div class="  ">
+                                        <input type="radio" name="select_layer" id="select_layer_substation" value="substation" onchange="activeSelectedLayerOther(this.value)">
+                                        <label for="select_layer_substation">Substation</label>
+                                    </div>
+
+                                {{-- <select class="form-select" id="tableLayer" onchange="activeSelectedLayerOther(this.value)">
                                     <option value="" hidden>Select Layer</option>
                                     <option value="wp">Work Package</option>
                                     <option value="rd">Road</option>
@@ -268,7 +304,7 @@
                                     <option value="substation">Substation</option>
 
 
-                                </select>
+                                </select> --}}
                             </div>
 
                             <!-- START MAP SIDEBAR DETAILS -->
@@ -721,6 +757,7 @@
                         "compass": true,
                         "autoLoad": true
                     });
+                    $('.windowTitle').html(`Pano Images ( LAT : ${(e.latlng.lat).toFixed(2)} , LNG : ${(e.latlng.lng).toFixed(2)} )`)
 
                     if (identifyme != '') {
                         map.removeLayer(identifyme)
@@ -781,9 +818,19 @@
                             '</div>'
 
                             $("#wg").html(str);
+
+
+
                             //   console.log(data)
                             //if(deco.features.length!=0){
                             createWindow(1);
+
+                            var windowPosition = map.latLngToContainerPoint(e.latlng);
+        $('#window1').css({
+            'position': 'absolute',
+            'left': windowPosition.x + 'px',
+            'top': windowPosition.y + 'px'
+        });
                             selectedId = deco.features[0].id.split('.')[1];
 
                             pannellum.viewer('panorama', {
@@ -796,6 +843,7 @@
                             if (identifyme !== '') {
                                 map.removeLayer(identifyme);
                             }
+                            $('.windowTitle').html(`Pano Images ( LAT : ${(e.latlng.lat).toFixed(2)} , LNG : ${(e.latlng.lng).toFixed(2)} )`)
 
                             identifyme = L.geoJSON(deco.features[0].geometry).addTo(map);
                         } else {

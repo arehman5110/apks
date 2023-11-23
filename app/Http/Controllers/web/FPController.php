@@ -72,17 +72,18 @@ class FPController extends Controller
                 $gateStatus = $request->gate_status;
 
                 foreach ($gate as $key => $value) {
-                    if (array_key_exists($key, $gateStatus)) {
                         if ($key == 'other_value') {
-                            $gate['other_value'] =$request->gate_status['other_value'];
-                        }else{
-                             $gate[$key] = 'true';
+                            $gate['other_value'] = $request->gate_status['other_value'];
+                        } else {
+                            if ($key == 'locked' || $key == 'unlocked') {
+                                $gate[$key] = array_key_exists('locked', $gateStatus) && $gateStatus['locked'] == $key ? "true" : "false";
+                            }else{
+                            $gate[$key] = array_key_exists($key, $gateStatus) ? 'true' : "false";
+                            }
                         }
-
-                    }
                 }
-            }
 
+            }
             $data->gate_status = json_encode($gate) ;
 
             $destinationPath = 'assets/images/cable-bridge/';
@@ -186,17 +187,18 @@ class FPController extends Controller
                 $gateStatus = $request->gate_status;
 
                 foreach ($gate as $key => $value) {
-                    if (array_key_exists($key, $gateStatus)) {
                         if ($key == 'other_value') {
-                            $gate['other_value'] =$request->gate_status['other_value'];
-                        }else{
-                             $gate[$key] = 'true';
+                            $gate['other_value'] = $request->gate_status['other_value'];
+                        } else {
+                            if ($key == 'locked' || $key == 'unlocked') {
+                                $gate[$key] = array_key_exists('locked', $gateStatus) && $gateStatus['locked'] == $key ? "true" : "false";
+                            }else{
+                            $gate[$key] = array_key_exists($key, $gateStatus) ? 'true' : "false";
+                            }
                         }
-
-                    }
                 }
-            }
 
+            }
             $data->gate_status = json_encode($gate) ;
             $destinationPath = 'assets/images/cable-bridge/';
 
