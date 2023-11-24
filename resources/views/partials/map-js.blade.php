@@ -24,6 +24,8 @@
     var cable_bridge = '';
     var road = '';
 
+    var popup = L.popup();
+
 
     map = L.map('map').setView([2.75101756479656, 101.304931640625], 8);
 
@@ -95,6 +97,10 @@
         console.log(sel_lyr);
         map.off('click');
         map.on('click', function(e) {
+            popup
+        .setLatLng(e.latlng)
+        .setContent("You clicked the map at " + e.latlng.toString())
+        .openOn(map);
             var url = getFeatureInfoUrl(
                 map,
                 sel_lyr,
@@ -128,6 +134,8 @@
 
                 }
             });
+
+
 
 
         });
@@ -249,11 +257,11 @@
                         createWindow(1);
                         selectedId = deco.features[0].id.split('.')[1];
                         var windowPosition = map.latLngToContainerPoint(e.latlng);
-        $('#window1').css({
-            'position': 'absolute',
-            'left': windowPosition.x -50 + 'px',
-            'top': windowPosition.y-50 + 'px'
-        });
+        // $('#window1').css({
+        //     'position': 'absolute',
+        //     'left': windowPosition.x -50 + 'px',
+        //     'top': windowPosition.y-50 + 'px'
+        // });
 
                         pannellum.viewer('panorama', {
                             "type": "equirectangular",

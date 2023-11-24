@@ -494,6 +494,8 @@
         var groupedOverlays = '';
         var layerControl = '';
 
+        var popup = L.popup();
+
         map = L.map('map').setView([3.016603, 101.858382], 5);
 
         var st1 = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
@@ -780,6 +782,8 @@
             map.off('click');
 
             map.on('click', function(e) {
+
+
                 //map.off('click');
                 $("#wg").html('');
                 // Build the URL for a GetFeatureInfo
@@ -826,11 +830,11 @@
                             createWindow(1);
 
                             var windowPosition = map.latLngToContainerPoint(e.latlng);
-        $('#window1').css({
-            'position': 'absolute',
-            'left': windowPosition.x + 'px',
-            'top': windowPosition.y + 'px'
-        });
+        // $('#window1').css({
+        //     'position': 'absolute',
+        //     'left': windowPosition.x + 'px',
+        //     'top': windowPosition.y + 'px'
+        // });
                             selectedId = deco.features[0].id.split('.')[1];
 
                             pannellum.viewer('panorama', {
@@ -895,6 +899,12 @@
             }
             map.off('click');
             map.on('click', function(e) {
+                if (val == 'substation' || val == 'supervise' || val == 'notice') {
+                popup
+        .setLatLng(e.latlng)
+        .setContent("You clicked the map at " + e.latlng.toString())
+        .openOn(map);
+                }
                 var url = getFeatureInfoUrl(
                     map,
                     sel_lyr,
