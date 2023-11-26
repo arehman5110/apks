@@ -112,7 +112,7 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="visit_date">{{__('messages.visit_date')}}</label></div>
                                 <div class="col-md-4">
-                                    <input type="date" name="visit_date" id="visit_date" value="{{date('Y-m-d')}}"
+                                    <input type="date" name="visit_date" id="visit_date" value="{{now('Asia/Kuala_Lumpur')->format('Y-m-d')}}"
                                         class="form-control" required>
                                     </div>
                             </div>
@@ -123,7 +123,7 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="patrol_time">{{__('messages.patrol_time')}}</label></div>
                                 <div class="col-md-4">
-                                    <input type="time" name="patrol_time" id="patrol_time" value="{{date('H:i')}}"
+                                    <input type="time" name="patrol_time" id="patrol_time" value="{{now('Asia/Kuala_Lumpur')->format('H:i')}}"
                                         class="form-control" required>
                                     </div>
                             </div>
@@ -133,9 +133,13 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="voltage">{{__('messages.voltage')}}</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="voltage" id="voltage"
-                                        class="form-control" >
-                                    </div>
+                                    <select name="voltage" id="voltage" class="form-control">
+                                        <option value="" hidden>select</option>
+                                        <option value="11kw">11kw</option>
+                                        <option value="13kw">13kw</option>
+                                    </select>
+                                </div>
+
                             </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="name">{{__('messages.name')}}</label></div>
@@ -148,9 +152,16 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="type">{{__('messages.type')}}</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="type" id="type"
-                                        class="form-control" required>
-                                    </div>
+                                    <select name="type" id="type" class="form-control">
+                                        <option value="" hidden>select</option>
+                                        <option value="Indoor">Indoor</option>
+                                        <option value="Attach Building">Attach Building</option>
+                                        <option value="Outdoor">Outdoor</option>
+                                        <option value="Padat">Padat</option>
+                                        <option value="Pencawang Atas Tiang (PAT)">Pencawang Atas Tiang (PAT)</option>
+                                    </select>
+                                </div>
+
                             </div>
 
 

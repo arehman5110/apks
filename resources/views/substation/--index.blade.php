@@ -19,9 +19,6 @@
         .collapse {
             visibility: visible;
         }
-        .table-responsive::-webkit-scrollbar {
-  display: none;
-}
     </style>
 @endsection
 
@@ -87,30 +84,20 @@
 
 
                             {{-- <table id="pagination" class="table table-bordered table-hover"> --}}
-
+                            <div class="">
+                                <div class="d-flex justify-content-end input-group mb-2">
+                                    <input type="search" name="substation" id="substation" class="mb-0"
+                                        placeholder="Search by name">
+                                    <div class="input-group-append">
+                                        <button type="submit" class="input-group-text">
+                                            <i class="fa fa-search"></i>
+                                            <!-- You can use a different search icon class if needed -->
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="table-responsive add-substation" id="add-substation">
-                                <table id="" class="table table-bordered  table-hover data-table">
-
-
-                                    <thead style="background-color: #E4E3E3 !important">
-                                        <tr>
-                                            <th>NAME</th>
-                                            <th>VOLTAGE</th>
-                                            <th>TOTAL DEFECTS</th>
-                                            <th>VISIT DATE</th>
-                                            <th>PATROL TIME</th>
-                                            <th>ACTION</th>
-
-                                           {{--  <th>TEAM</th>
-                                            <th>VISIT DATE</th>
-                                            <th>ACTION</th> --}}
-
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-
-                                    </tbody>
-                                </table>
+                                @include('substation.pagination')
                             </div>
 
 
@@ -164,52 +151,90 @@
 
 
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.3/datatables.min.js"></script>
-    <script src="https://cdn.datatables.net/select/1.3.3/js/dataTables.select.min.js"></script>
 
     <script>
-         $(function () {
-
-var table = $('.data-table').DataTable({
-    processing: true,
-    serverSide: true,
-    ajax: "{{ route('substation-paginate',app()->getLocale() ) }}",
-    columns: [
-        {data: 'name', name: 'name'},
-        {data: 'voltage', name:'voltage'},
-        {data: 'total_defects', name:'total_defects'},
-        {data: 'visit_date', name: 'visit_date'},
-        {data: 'patrol_time', name: 'patrol_time'},
-        { render: function (data, type, full, meta) {
-            var id = full.id;
-                    return  `<button type="button" class="btn  " data-toggle="dropdown">
-                            <img
-                                src="{{ URL::asset('assets/web-images/three-dots-vertical.svg') }}">
-                        </button>
-                        <div class="dropdown-menu" role="menu">
-                            <form action="/{{app()->getLocale()}}/substation/${id}" method="get">
-
-                                <button type="submit" class="dropdown-item pl-3 w-100 text-left">Detail</button>
-                            </form>
-                            <form action="/{{app()->getLocale()}}/substation/${id}/edit" method="get">
-
-                                <button type="submit" class="dropdown-item pl-3 w-100 text-left">Edit</button>
-                            </form>
-                            <button type="button" class="btn btn-primary dropdown-item" data-id="${id}" data-toggle="modal" data-target="#myModal">
-                                Remove
-                            </button>
-                        </div>
-                        `  ;}}
-
-    ]
-});
-
-$('#myModal').on('show.bs.modal', function(event) {
+        $(document).ready(function() {
+            $('#myTable').DataTable({
+                aaSorting: [
+                    [3, 'desc']
+                ],
+                "lengthMenu": [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, "All"]
+                ],
+            });
+            $('#myModal').on('show.bs.modal', function(event) {
                 var button = $(event.relatedTarget);
                 var id = button.data('id');
                 var modal = $(this);
                 $('#remove-foam').attr('action', '/en/substation/' + id)
             });
-});
+
+            var name = '%';
+            name = encodeURIComponent(name)
+
+            $(document).on('click', 'span a', function(event)
+
+                {
+
+
+                    $('span a').removeClass('active')
+
+                    $(this).addClass('active');
+
+                    event.preventDefault();
+
+                    var page = $(this).attr('href').split('page=')[1];
+                    $.ajax({
+                        url: `/{{ app()->getLocale() }}/substation-paginate/${name}?page=${page}`,
+                        dataType: 'html',
+                        method: 'GET',
+                        async: false,
+                    }).done(function(data) {
+
+                        $("#add-substation").empty().html(data);
+
+
+
+
+                    })
+
+                })
+
+            $(document).on('change', '#substation', function(event) {
+                name = encodeURIComponent(this.value);
+                //  name = this.value;
+                name = name == '' ? '%' : name;
+                name = encodeURIComponent(name);
+                console.log(name);
+
+
+                // name = JSON.stringify(name);
+
+                $('span a').removeClass('active')
+
+                $(this).addClass('active');
+
+                event.preventDefault();
+
+
+                $.ajax({
+                    url: `/{{ app()->getLocale() }}/substation-paginate/${name}`,
+                    dataType: 'html',
+                    method: 'GET',
+                    async: false,
+                }).done(function(data) {
+
+                    $("#add-substation").empty().html(data);
+
+
+
+
+                })
+
+            })
+
+        });
 
 
     </script>

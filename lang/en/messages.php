@@ -32,7 +32,7 @@ return [
     'dashboard' =>"Dashboard",
     '3rd_party_digging'=>"3rd Party Digging",
         'create'=>'Create',
-        'index'=>'Index',
+        'index'=>'qr',
         'patrolling'=>'Patrolling',
         'map'=>'Map',
         'sbum_approval_and_detail'=>'SBUM Approval and Deatil',
@@ -104,7 +104,7 @@ return [
     'gate' => 'Gate',
     'locked' => 'Locked',
     'unlocked' => 'Unlocked',
-    'demaged' => 'Demaged',
+    'demaged' => 'Damaged',
     'others' => 'Others',
     'long_grass' => 'Long Grass',
     'tree_branches_in_PE' => 'Tree Branches in PE',
@@ -300,7 +300,7 @@ return [
 
 
 
-
+    'qr'=>'qr',
 
 
 

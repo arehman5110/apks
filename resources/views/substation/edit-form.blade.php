@@ -57,7 +57,7 @@
 
                         <form action="{{ route('update-substation-map-edit', [app()->getLocale(), $data->id]) }} " id="myForm"
                             method="POST" enctype="multipart/form-data">
-                          
+
                             @csrf
 
 
@@ -118,8 +118,11 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="area">{{ __('messages.voltage') }}</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="voltage" id="voltage" value="{{ $data->voltage }}"
-                                        class="form-control">
+                                    <select name="voltage" id="voltage" class="form-control">
+                                        <option value="{{$data->voltage}}" hidden>{{$data->voltage == '' ? 'select' : $data->voltage}}select</option>
+                                        <option value="11kw">11kw</option>
+                                        <option value="13kw">13kw</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="row">
@@ -133,8 +136,14 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="type">{{ __('messages.type') }}</label></div>
                                 <div class="col-md-4">
-                                    <input type="text" name="type" id="type" value="{{ $data->type }}"
-                                        class="form-control" required>
+                                    <select name="type" id="type" class="form-control">
+                                        <option value="{{$data->type}}" hidden>{{$data->type == '' ? 'select' : $data->type}}select</option>
+                                        <option value="Indoor">Indoor</option>
+                                        <option value="Attach Building">Attach Building</option>
+                                        <option value="Outdoor">Outdoor</option>
+                                        <option value="Padat">Padat</option>
+                                        <option value="Pencawang Atas Tiang (PAT)">Pencawang Atas Tiang (PAT)</option>
+                                    </select>
                                 </div>
                             </div>
 

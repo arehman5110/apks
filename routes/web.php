@@ -125,7 +125,7 @@ Route::group(
                 Route::resource('substation', SubstationController::class);
                 Route::view('/substation-map', 'substation.map')->name('substation-map');
                 Route::post('generate-substation-excel', [SubstationExcelController::class, 'generateSubstationExcel'])->name('generate-substation-excel');
-                Route::get('/substation-paginate/{name}',[SubstationController::class,'paginate'])->name("substation-paginate");
+                Route::get('/substation-paginate',[SubstationController::class,'paginate'])->name("substation-paginate");
                 Route::get('/get-substation-edit/{id}', [SubstationMapController::class, 'editMap'])->name('get-substation-edit');
                 Route::post('/update-substation-map-edit/{id}', [SubstationMapController::class, 'update'])->name('update-substation-map-edit');
 
@@ -139,6 +139,8 @@ Route::group(
                 //generate notice pdf
                 Route::get('/generate-notice/{id}', [GenerateNoticeController::class, 'generateNotice']);
                 Route::get('/notice', [GenerateNoticeController::class, 'index'])->name('notice');
+                Route::get('/download-notice/{id}', [GenerateNoticeController::class, 'download'])->name('download-notice');
+                Route::post('/upload-notice', [GenerateNoticeController::class, 'store'])->name('upload-notice');
 
                 //PO routes
 

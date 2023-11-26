@@ -201,7 +201,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Barryvdh\Snappy\ServiceProvider::class,
-        
+        Yajra\DataTables\DataTablesServiceProvider::class,
+
 
     ],
 
@@ -220,7 +221,8 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
-'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
+        'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
+        'DataTables' => Yajra\DataTables\Facades\DataTables::class,
     ])->toArray(),
 
 ];

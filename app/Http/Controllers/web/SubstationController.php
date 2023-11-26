@@ -18,12 +18,10 @@ class SubstationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request )
     {
-        $ba = Auth::user()->ba;
-        $zone = Auth::user()->zone;
-        $data = Substation::where('ba', 'LIKE', '%' . $ba . '%')->where('zone', 'LIKE', '%' . $zone . '%')->paginate(10);
-        return view('substation.index', ['datas' => $data]);
+
+        return view('substation.index');
     }
 
     /**
@@ -87,7 +85,7 @@ class SubstationController extends Controller
             $data->gate_status = json_encode($gate);
 
             $building = ['broken_roof' => 'false', 'broken_gutter' => 'false', 'broken_base' => 'false', 'other' => 'false', 'other_value' => ''];
-
+            $total_defects = 0;
             if ($request->has('building_status')) {
                 $buildingStatus = $request->building_status;
 
@@ -97,12 +95,13 @@ class SubstationController extends Controller
                             $building['other_value'] = $request->building_status['other_value'];
                         } else {
                             $building[$key] = 'true';
+                            $total_defects ++;
                         }
                     }
                 }
             }
             $data->building_status = json_encode($building);
-
+            $data->total_defects = $total_defects;
             $destinationPath = 'assets/images/link-box/';
 
             foreach ($request->all() as $key => $file) {
@@ -217,7 +216,7 @@ class SubstationController extends Controller
             $data->gate_status = json_encode($gate);
 
             $building = ['broken_roof' => 'false', 'broken_gutter' => 'false', 'broken_base' => 'false', 'other' => 'false', 'other_value' => ''];
-
+            $total_defects = 0;
             if ($request->has('building_status')) {
                 $buildingStatus = $request->building_status;
 
@@ -227,12 +226,14 @@ class SubstationController extends Controller
                             $building['other_value'] = $request->building_status['other_value'];
                         } else {
                             $building[$key] = 'true';
+                            $total_defects ++;
                         }
                     }
                 }
+
             }
             $data->building_status = json_encode($building);
-            // return $data;
+            $data->total_defects = $total_defects;
 
             $destinationPath = 'assets/images/link-box/';
 
@@ -284,18 +285,29 @@ class SubstationController extends Controller
         }
     }
 
-    public function paginate($language, $name)
+    public function paginate(Request $request , $language)
     {
-        try {
-            $name = rawurldecode($name);
-            // return rawurldecode($name);
-            $ba = Auth::user()->ba;
-            $data = Substation::where('ba', 'LIKE', '%' . $ba . '%')
-                ->where('name', 'LIKE', '%' . $name . '%')
-                ->paginate(10);
-            return view('substation.pagination', ['datas' => $data])->render();
-        } catch (\Throwable $th) {
-            return redirect()->route('substation-map.index', app()->getLocale());
+
+
+        $ba = Auth::user()->ba;
+
+        if ($request->ajax()) {
+
+
+
+            return datatables()->of(Substation::where('ba', 'LIKE', '%' . $ba . '%')->select('id','visit_date','patrol_time','voltage','name','total_defects')->get())->toJson();
         }
+        return view('substation.index');
+        // try {
+        //     $name = rawurldecode($name);
+        //     // return rawurldecode($name);
+        //     $ba = Auth::user()->ba;
+        //     $data = Substation::where('ba', 'LIKE', '%' . $ba . '%')
+        //         ->where('name', 'LIKE', '%' . $name . '%')
+        //         ->paginate(10);
+        //     return view('substation.pagination', ['datas' => $data])->render();
+        // } catch (\Throwable $th) {
+        //     return redirect()->route('substation-map.index', app()->getLocale());
+        // }
     }
 }

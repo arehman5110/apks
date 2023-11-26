@@ -47,7 +47,7 @@
                         <li class="nav-item">
                             <a href="{{ route('third-party-digging.create', app()->getLocale()) }}" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>{{__('messages.create')}}</p>
+                                <p>{{__('messages.create')}} {{__('messages.notice')}}</p>
                             </a>
                         </li>
 
@@ -61,7 +61,7 @@
                         <li class="nav-item">
                             <a href="{{route('notice', app()->getLocale())}}" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>{{__('messages.notice')}}</p>
+                                <p>{{__('messages.update')}} {{__('messages.notice')}}</p>
                             </a>
                         </li>
 
@@ -104,7 +104,7 @@
                         <li class="nav-item">
                             <a href="{{ route('substation.index', app()->getLocale()) }}" class="nav-link ">
                                <p> <i class="far fa-circle nav-icon"></i>
-                                {{__('messages.index')}}</p>
+                                {{__('messages.qr')}}</p>
                             </a>
                         </li>
 
