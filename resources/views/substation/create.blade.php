@@ -13,9 +13,6 @@
     {{-- @include('partials.map-css') --}}
 
     <style>
-
-
-
         input[type='checkbox'],
         input[type='radio'] {
             min-width: 16px !important;
@@ -69,7 +66,7 @@
             </div>
         </div>
     </section>
-    
+
     {{-- <input type="text" name="" id="" class="typeahead"> --}}
     {{-- <div id="search-results"></div> --}}
     {{-- <div class="dwcontent" id="content-main" title="Main content" data-settings="unwrap: true; template:moduleonly.html"></div> --}}
@@ -186,22 +183,23 @@
                                 <div class="col-md-4">
                                     <div class="  d-flex">
                                         <input type="radio" name="gate_status[locked]" id="gate_status_locked"
-                                            value="locked">
+                                            class="defects" value="locked">
                                         <label for="gate_status_locked">{{ __('messages.locked') }}</label>
                                     </div>
                                     <div class=" d-flex">
                                         <input type="radio" name="gate_status[locked]" id="gate_status_unlocked"
-                                            value="unlocked">
+                                            class="defects" value="unlocked">
                                         <label for="gate_status_unlocked">{{ __('messages.unlocked') }}</label>
                                     </div>
                                     <div class=" d-flex">
-                                        <input type="checkbox" name="gate_status[demaged]" id="gate_status_demaged">
+                                        <input type="checkbox" name="gate_status[demaged]" id="gate_status_demaged"
+                                            class="defects">
                                         <label for="gate_status_demaged">{{ __('messages.demaged') }}</label>
                                     </div>
 
                                     <div class="d-flex">
                                         <input type="checkbox" name="gate_status[other]" id="gate_status_others"
-                                            onclick="getStatus(this)">
+                                            class="defects" onclick="getStatus(this)">
                                         <label for="gate_status_others">{{ __('messages.others') }}</label>
 
 
@@ -216,7 +214,7 @@
                                 <div class="col-md-4"><label for="grass_status">{{ __('messages.long_grass') }} </label>
                                 </div>
                                 <div class="col-md-4">
-                                    <select name="grass_status" id="grass_status" class="form-control" required>
+                                    <select name="grass_status" id="grass_status" class="form-control defects-select" required>
                                         <option value="" hidden>select status</option>
                                         <option value="Yes">Yes</option>
                                         <option value="No">No</option>
@@ -228,8 +226,8 @@
                                         for="tree_branches_status">{{ __('messages.tree_branches_in_PE') }} </label></div>
                                 <div class="col-md-4">
 
-                                    <select name="tree_branches_status" id="tree_branches_status" class="form-control"
-                                        required>
+                                    <select name="tree_branches_status" id="tree_branches_status"
+                                        class="form-control defects-select" required>
                                         <option value="" hidden>select status</option>
                                         <option value="Yes">Yes</option>
                                         <option value="No">No</option>
@@ -241,27 +239,27 @@
                                         for="building_status">{{ __('messages.building_defects') }}</label></div>
                                 <div class="col-md-4">
                                     <div class="d-flex">
-                                        <input type="checkbox" name="building_status[broken_roof]"
+                                        <input type="checkbox" name="building_status[broken_roof]" class="defects"
                                             id="building_status_broken_roof">
                                         <label for="building_status_broken_roof">{{ __('messages.broken_roof') }}</label>
                                     </div>
 
                                     <div class="d-flex">
-                                        <input type="checkbox" name="building_status[broken_gutter]"
+                                        <input type="checkbox" name="building_status[broken_gutter]" class="defects"
                                             id="building_status_broken_gutter">
                                         <label
                                             for="building_status_broken_gutter">{{ __('messages.broken_gutter') }}</label>
                                     </div>
 
                                     <div class="d-flex">
-                                        <input type="checkbox" name="building_status[broken_base]"
+                                        <input type="checkbox" name="building_status[broken_base]" class="defects"
                                             id="building_status_broken_base">
                                         <label for="building_status_broken_base">{{ __('messages.broken_base') }}</label>
                                     </div>
 
                                     <div class="d-flex">
                                         <input type="checkbox" name="building_status[other]" id="building_status_other"
-                                            onclick="bulidingStatus(this)">
+                                            class="defects" onclick="bulidingStatus(this)">
                                         <label for="building_status_other">{{ __('messages.others') }}</label>
                                     </div>
 
@@ -278,14 +276,14 @@
                                 </div>
                                 <div class="col-md-4">
                                     <select name="advertise_poster_status" id="advertise_poster_status"
-                                        class="form-control" required>
+                                        class="form-control defects-select" required>
                                         <option value="" hidden>select status</option>
                                         <option value="Yes">Yes</option>
                                         <option value="No">No</option>
                                     </select>
                                 </div>
                             </div>
-
+                            <input type="hidden" name="total_defects" id="total_defects">
                             <div class="row">
                                 <div class="col-md-4"><label for="substation-image">{{ __('messages.substation') }}
                                         {{ __('messages.images') }} </label></div>
@@ -408,7 +406,6 @@
 
 
 @section('script')
-
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js"></script>
     <script src="{{ URL::asset('map/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js') }}"></script>
     @include('partials.form-map-js')
@@ -428,6 +425,7 @@
             ['B4', 'PUTRAJAYA & CYBERJAYA', 2.92875032271019, 101.675338316575]
         ];
         const userBa = "{{ Auth::user()->ba }}";
+        var totalDefects = 0
         $(document).ready(function() {
 
 
@@ -435,6 +433,26 @@
             if (userBa !== '') {
                 getBaPoints(userBa)
             }
+
+            $('.defects').on('change', function() {
+                
+                if ($(this).prop('checked') == true) {
+                    totalDefects++;
+                } else {
+                    totalDefects--;
+                }
+                $('#total_defects').val(totalDefects);
+            })
+
+            $('.defects-select').on('change', function() {
+                console.log(this.value);
+                if (this.value == 'Yes') {
+                    totalDefects++;
+                } else if(this.value == 'No') {
+                    totalDefects--;
+                }
+                $('#total_defects').val(totalDefects);
+            })
 
         });
 

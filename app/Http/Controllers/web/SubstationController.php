@@ -57,6 +57,11 @@ class SubstationController extends Controller
             $data->name = $request->name;
             $data->type = $request->type;
             $data->coordinate = $request->coordinate;
+$total_defects = 0;
+              $request->grass_status == 'Yes' ? $total_defects ++ : '';
+            $request->tree_branches_status == 'Yes' ? $total_defects ++  : '';
+             $request->advertise_poster_status == 'Yes' ? $total_defects ++ : '';
+
 
             $data->grass_status = $request->grass_status;
             $data->tree_branches_status = $request->tree_branches_status;
@@ -73,17 +78,29 @@ class SubstationController extends Controller
                     } else {
                         if ($key == 'locked' || $key == 'unlocked') {
                             $gate[$key] = array_key_exists('locked', $gateStatus) && $gateStatus['locked'] == $key ? 'true' : 'false';
+
+
+
+
                         } else {
-                            $gate[$key] = array_key_exists($key, $gateStatus) ? 'true' : 'false';
+                            if (array_key_exists($key, $gateStatus)) {
+
+                                $gate[$key] = 'true';
+
+                                $total_defects++;
+                            } else {
+                                $gate[$key] = 'false';
+                            }
                         }
                     }
                 }
+                $gate['unlocked'] == "true" ? $total_defects++ : '';
             }
 
             $data->gate_status = json_encode($gate);
 
             $building = ['broken_roof' => 'false', 'broken_gutter' => 'false', 'broken_base' => 'false', 'other' => 'false', 'other_value' => ''];
-            $total_defects = 0;
+
             if ($request->has('building_status')) {
                 $buildingStatus = $request->building_status;
 
@@ -121,7 +138,7 @@ class SubstationController extends Controller
                 ->route('substation.index', app()->getLocale())
                 ->with('success', 'Form Intserted');
         } catch (\Throwable $th) {
-            // return $th->getMessage();
+            return $th->getMessage();
             return redirect()
                 ->route('substation.index', app()->getLocale())
                 ->with('failed', 'Form Intserted Failed');
@@ -188,7 +205,12 @@ class SubstationController extends Controller
             $data->voltage = $request->voltage;
             $data->name = $request->name;
             $data->type = $request->type;
-            // $data->coordinate = $request->coordinate;
+            $total_defects = 0;
+            $request->grass_status == 'Yes' ? $total_defects ++ : '';
+            $request->tree_branches_status == 'Yes' ? $total_defects ++  : '';
+             $request->advertise_poster_status == 'Yes' ? $total_defects ++ : '';
+
+
             $data->grass_status = $request->grass_status;
             $data->tree_branches_status = $request->tree_branches_status;
 
@@ -204,16 +226,28 @@ class SubstationController extends Controller
                     } else {
                         if ($key == 'locked' || $key == 'unlocked') {
                             $gate[$key] = array_key_exists('locked', $gateStatus) && $gateStatus['locked'] == $key ? 'true' : 'false';
+
+
                         } else {
-                            $gate[$key] = array_key_exists($key, $gateStatus) ? 'true' : 'false';
+                            if (array_key_exists($key, $gateStatus)) {
+
+                                $gate[$key] = 'true';
+
+                                $total_defects++;
+                                echo $total_defects . "   \n";
+                            } else {
+                                $gate[$key] = 'false';
+                            }
                         }
                     }
                 }
+                $gate['unlocked'] == "true" ? $total_defects++ : '';
             }
+          
             $data->gate_status = json_encode($gate);
 
             $building = ['broken_roof' => 'false', 'broken_gutter' => 'false', 'broken_base' => 'false', 'other' => 'false', 'other_value' => ''];
-            $total_defects = 0;
+
             if ($request->has('building_status')) {
                 $buildingStatus = $request->building_status;
 
@@ -302,8 +336,9 @@ class SubstationController extends Controller
                     'grass_status',
                     'tree_branches_status',
                     'advertise_poster_status',
-                    'total_defects' 
-                    )->get();
+                    'total_defects',
+                )
+                ->get();
 
             return datatables()
                 ->of($data)

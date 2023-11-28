@@ -113,7 +113,7 @@ th{
                                         </tr>
                                         <tr class="lower-header">
                                             <th>{{__('messages.unlocked')}}</th>
-                                            <th>{{__('messages.broken')}}</th>
+                                            <th>{{__('messages.demaged')}}</th>
                                             <th>{{__('messages.others')}} </th>
                                             <th>{{__("messages.long_grass")}} </th>
                                             <th>{{__("messages.tree_branches_in_PE")}} </th>

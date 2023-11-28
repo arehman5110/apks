@@ -33,6 +33,12 @@ class SubstationMapController extends Controller
             $data->name = $request->name;
             $data->type = $request->type;
             // $data->coordinate = $request->coordinate;
+            $total_defects = 0;
+            $request->grass_status == 'Yes' ? $total_defects ++ : '';
+            $request->tree_branches_status == 'Yes' ? $total_defects ++  : '';
+             $request->advertise_poster_status == 'Yes' ? $total_defects ++ : '';
+
+
             $data->grass_status = $request->grass_status;
             $data->tree_branches_status = $request->tree_branches_status;
 
@@ -43,15 +49,28 @@ class SubstationMapController extends Controller
                 $gateStatus = $request->gate_status;
 
                 foreach ($gate as $key => $value) {
-                    if (array_key_exists($key, $gateStatus)) {
-                        if ($key == 'other_value') {
-                            $gate['other_value'] = $request->gate_status['other_value'];
+                    if ($key == 'other_value') {
+                        $gate['other_value'] = $request->gate_status['other_value'];
+                    } else {
+                        if ($key == 'locked' || $key == 'unlocked') {
+                            $gate[$key] = array_key_exists('locked', $gateStatus) && $gateStatus['locked'] == $key ? 'true' : 'false';
+
+
                         } else {
-                            $gate[$key] = 'true';
+                            if (array_key_exists($key, $gateStatus)) {
+
+                                $gate[$key] = 'true';
+
+                                $total_defects++;
+                            } else {
+                                $gate[$key] = 'false';
+                            }
                         }
                     }
                 }
+                $gate['unlocked'] == "true" ? $total_defects++ : '';
             }
+
 
             $data->gate_status = json_encode($gate);
 
