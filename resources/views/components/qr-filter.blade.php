@@ -40,7 +40,7 @@
                     <div class="col-md-1 pt-2">
 
                         <button type="submit" class="btn text-white btn-sm mt-4 " class="form-control"
-                            style="background-color: #708090">Download Qr </button>
+                            style="background-color: #708090">Download QR </button>
                     </div>
 
             </form>

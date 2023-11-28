@@ -5,7 +5,68 @@
     <style>
         #map {
             height: 700px;
+            z-index: 1;
         }
+
+        .tt-query,
+        /* UPDATE: newer versions use tt-input instead of tt-query */
+        .tt-hint {
+            width: 396px;
+            height: 30px;
+            padding: 8px 12px;
+            font-size: 24px;
+            line-height: 30px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            outline: none;
+        }
+
+        .tt-query {
+            /* UPDATE: newer versions use tt-input instead of tt-query */
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        }
+
+        .tt-hint {
+            color: #999;
+        }
+
+        .tt-menu {
+            /* UPDATE: newer versions use tt-menu instead of tt-dropdown-menu */
+            width: 422px;
+            margin-top: 12px;
+            padding: 8px 0;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+        }
+
+        .tt-suggestion {
+            padding: 3px 20px;
+            font-size: 18px;
+            line-height: 24px;
+            cursor: pointer;
+        }
+
+        .tt-suggestion:hover {
+            color: #f0f0f0;
+            background-color: #0097cf;
+        }
+
+        .tt-suggestion p {
+            margin: 0;
+        }
+
+        input.typeahead.tt-hint {
+            border: 0px !important;
+            background: transparent !important;
+            padding: 20px 14px;
+    font-size: 15px !important;
+
+        }
+
+
     </style>
 @endsection
 
@@ -81,27 +142,42 @@
         </div>
 
 
-<div class="p-3 form-input w-25">
-                <label for="select_layer">Select Layer : </label>
-                <span class="text-danger" id="er-select-layer"></span>
-                <div class="d-sm-flex">
-                    <div class="">
-                        <input type="radio" name="select_layer" id="select_layer_main" value="main_substation" onchange="selectLayer(this.value)">
-                        <label for="select_layer_main">Substation</label>
-                    </div>
-
-                    <div class=" mx-4">
-                        <input type="radio" name="select_layer" id="select_layer_pano" value="pano" onchange="selectLayer(this.value)">
-                        <label for="select_layer_pano">Pano</label>
-                    </div>
-
+        <div class="p-3 form-input  ">
+            <label for="select_layer">Select Layer : </label>
+            <span class="text-danger" id="er-select-layer"></span>
+            <div class="d-sm-flex">
+                <div class="">
+                    <input type="radio" name="select_layer" id="select_layer_main" value="main_substation"
+                        onchange="selectLayer(this.value)">
+                    <label for="select_layer_main">Substation Surveyed</label>
                 </div>
-                {{-- <select name="select_layer" id="select_layer" onchange="selectLayer(this.value)" class="form-control">
+                <div class=" mx-4">
+                    <input type="radio" name="select_layer" id="select_layer_unsurveyed" value="unsurveyed"
+                        onchange="selectLayer(this.value)">
+                    <label for="select_layer_unsurveyed">Substation Unsurveyed </label>
+                </div>
+
+
+                <div class=" mx-4">
+                    <input type="radio" name="select_layer" id="select_layer_pano" value="pano"
+                        onchange="selectLayer(this.value)">
+                    <label for="select_layer_pano">Pano</label>
+                </div>
+                <div class="mx-4">
+                    <div id="the-basics">
+                        <input class="typeahead" type="text" placeholder="search substation" class="form-control">
+                    </div>
+                </div>
+
+
+            </div>
+
+            {{-- <select name="select_layer" id="select_layer" onchange="selectLayer(this.value)" class="form-control">
                     <option value="" hidden>select layer</option>
                     <option value="main_substation">Substation</option>
                     <option value="pano">Pano</option>
                 </select> --}}
-            </div>
+        </div>
 
         <!--  START MAP CARD DIV -->
         <div class="row m-2">
@@ -205,12 +281,75 @@
 @endsection
 
 @section('script')
-    @include('partials.map-js')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
 
+    @include('partials.map-js')
+    <script>
+        var substringMatcher = function(strs) {
+
+            return function findMatches(q, cb) {
+
+                var matches;
+
+                matches = [];
+                $.ajax({
+                    url: '/{{ app()->getLocale() }}/search/find-substation/' + q,
+                    dataType: 'JSON',
+                    //data: data,
+                    method: 'GET',
+                    async: false,
+                    success: function callback(data) {
+                        $.each(data, function(i, str) {
+
+                            matches.push(str.name);
+
+                        });
+                    }
+                })
+
+                cb(matches);
+            };
+        };
+
+
+        var marker = '';
+        $('#the-basics .typeahead').typeahead({
+            hint: true,
+            highlight: true,
+            minLength: 1
+        }, {
+            name: 'states',
+            source: substringMatcher()
+        });
+
+        $('.typeahead').on('typeahead:select', function(event, suggestion) {
+            var name = encodeURIComponent(suggestion);
+
+            if (marker != '') {
+                map.removeLayer(marker)
+            }
+            $.ajax({
+                url: '/{{ app()->getLocale() }}/search/find-substation-cordinated/' + encodeURIComponent(name),
+                dataType: 'JSON',
+                //data: data,
+                method: 'GET',
+                async: false,
+                success: function callback(data) {
+                    console.log(data);
+                    map.flyTo([parseFloat(data.y), parseFloat(data.x)], 16, {
+                        duration: 1.5, // Animation duration in seconds
+                        easeLinearity: 0.25,
+                    });
+
+                    marker = new L.Marker([data.y, data.x]);
+                    map.addLayer(marker);
+                }
+            })
+
+        });
+    </script>
 
     <script>
-
-
         // for add and remove layers
         function addRemoveBundary(param, paramY, paramX) {
 
@@ -242,7 +381,7 @@
             }
 
             substation = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-                layers: 'cite:tbl_substation',
+                layers: 'cite:substation_surveyed',
                 format: 'image/png',
                 cql_filter: "ba ILIKE '%" + param + "%'",
                 maxZoom: 21,
@@ -254,32 +393,48 @@
             map.addLayer(substation)
             substation.bringToFront()
 
+            unservey = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:substation_unsurveyed',
+                format: 'image/png',
+                cql_filter: "ba ILIKE '%" + param + "%'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+
+            map.addLayer(unservey)
+            unservey.bringToFront()
+
+
+
             addGroupOverLays()
 
         }
 
 
-   // add group overlayes
-   function addGroupOverLays() {
-        if (layerControl != '') {
-            // console.log("inmsdanssdkjnasjnd");
-            map.removeControl(layerControl);
-        }
-        // console.log("sdfsdf");
-        groupedOverlays = {
-            "POI": {
-                'BA': boundary,
-                'Substation': substation,
-                'Pano': pano_layer
+        // add group overlayes
+        function addGroupOverLays() {
+            if (layerControl != '') {
+                // console.log("inmsdanssdkjnasjnd");
+                map.removeControl(layerControl);
             }
-        };
-        //add layer control on top right corner of map
-        layerControl = L.control.groupedLayers(baseLayers, groupedOverlays, {
-            collapsed: true,
-            position: 'topright'
-            // groupCheckboxes: true
-        }).addTo(map);
-    }
+            // console.log("sdfsdf");
+            groupedOverlays = {
+                "POI": {
+                    'BA': boundary,
+                    'Substation Surveyed': substation,
+                    'Substation Unsurveyed': unservey,
+                    'Pano': pano_layer
+                }
+            };
+            //add layer control on top right corner of map
+            layerControl = L.control.groupedLayers(baseLayers, groupedOverlays, {
+                collapsed: true,
+                position: 'topright'
+                // groupCheckboxes: true
+            }).addTo(map);
+        }
 
 
 
@@ -307,15 +462,17 @@
             // $('#myModal').modal('show');
             openDetails(idSp[1]);
 
-}
+        }
 
-function openDetails(id) {
-    // $('#myModal').modal('hide');
-    $('#set-iframe').html('');
+        function openDetails(id) {
+            // $('#myModal').modal('hide');
+            $('#set-iframe').html('');
 
-    $('#set-iframe').html(`<iframe src="/{{app()->getLocale()}}/get-substation-edit/${id}" frameborder="0" style="height:700px; width:100%" ></iframe>`)
+            $('#set-iframe').html(
+                `<iframe src="/{{ app()->getLocale() }}/get-substation-edit/${id}" frameborder="0" style="height:700px; width:100%" ></iframe>`
+            )
 
 
-}
+        }
     </script>
 @endsection

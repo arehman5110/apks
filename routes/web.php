@@ -128,6 +128,9 @@ Route::group(
                 Route::get('/substation-paginate',[SubstationController::class,'paginate'])->name("substation-paginate");
                 Route::get('/get-substation-edit/{id}', [SubstationMapController::class, 'editMap'])->name('get-substation-edit');
                 Route::post('/update-substation-map-edit/{id}', [SubstationMapController::class, 'update'])->name('update-substation-map-edit');
+                Route::get('/search/find-substation/{q}',[SubstationMapController::class,'seacrh'])->name('subsation-search');
+                Route::get('/search/find-substation-cordinated/{q}',[SubstationMapController::class,'seacrhCoordinated'])->name('subsation-coordinated');
+
 
                 ////feeder-piller routes
                 Route::resource('feeder-pillar', FPController::class);

@@ -18,9 +18,8 @@ class SubstationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request )
+    public function index(Request $request)
     {
-
         return view('substation.index');
     }
 
@@ -69,17 +68,16 @@ class SubstationController extends Controller
                 $gateStatus = $request->gate_status;
 
                 foreach ($gate as $key => $value) {
-                        if ($key == 'other_value') {
-                            $gate['other_value'] = $request->gate_status['other_value'];
+                    if ($key == 'other_value') {
+                        $gate['other_value'] = $request->gate_status['other_value'];
+                    } else {
+                        if ($key == 'locked' || $key == 'unlocked') {
+                            $gate[$key] = array_key_exists('locked', $gateStatus) && $gateStatus['locked'] == $key ? 'true' : 'false';
                         } else {
-                            if ($key == 'locked' || $key == 'unlocked') {
-                                $gate[$key] = array_key_exists('locked', $gateStatus) && $gateStatus['locked'] == $key ? "true" : "false";
-                            }else{
-                            $gate[$key] = array_key_exists($key, $gateStatus) ? 'true' : "false";
-                            }
+                            $gate[$key] = array_key_exists($key, $gateStatus) ? 'true' : 'false';
                         }
+                    }
                 }
-
             }
 
             $data->gate_status = json_encode($gate);
@@ -95,7 +93,7 @@ class SubstationController extends Controller
                             $building['other_value'] = $request->building_status['other_value'];
                         } else {
                             $building[$key] = 'true';
-                            $total_defects ++;
+                            $total_defects++;
                         }
                     }
                 }
@@ -201,17 +199,16 @@ class SubstationController extends Controller
                 $gateStatus = $request->gate_status;
 
                 foreach ($gate as $key => $value) {
-                        if ($key == 'other_value') {
-                            $gate['other_value'] = $request->gate_status['other_value'];
+                    if ($key == 'other_value') {
+                        $gate['other_value'] = $request->gate_status['other_value'];
+                    } else {
+                        if ($key == 'locked' || $key == 'unlocked') {
+                            $gate[$key] = array_key_exists('locked', $gateStatus) && $gateStatus['locked'] == $key ? 'true' : 'false';
                         } else {
-                            if ($key == 'locked' || $key == 'unlocked') {
-                                $gate[$key] = array_key_exists('locked', $gateStatus) && $gateStatus['locked'] == $key ? "true" : "false";
-                            }else{
-                            $gate[$key] = array_key_exists($key, $gateStatus) ? 'true' : "false";
-                            }
+                            $gate[$key] = array_key_exists($key, $gateStatus) ? 'true' : 'false';
                         }
+                    }
                 }
-
             }
             $data->gate_status = json_encode($gate);
 
@@ -226,11 +223,10 @@ class SubstationController extends Controller
                             $building['other_value'] = $request->building_status['other_value'];
                         } else {
                             $building[$key] = 'true';
-                            $total_defects ++;
+                            $total_defects++;
                         }
                     }
                 }
-
             }
             $data->building_status = json_encode($building);
             $data->total_defects = $total_defects;
@@ -285,29 +281,34 @@ class SubstationController extends Controller
         }
     }
 
-    public function paginate(Request $request , $language)
+    public function paginate(Request $request, $language)
     {
-
-
         $ba = Auth::user()->ba;
 
         if ($request->ajax()) {
+            $data = Substation::where('ba', 'LIKE', '%' . $ba . '%')
 
+                ->select(
+                    'id',
+                    'name',
+                    \DB::raw("CASE WHEN (gate_status->>'unlocked')::text='true' THEN 'yes' ELSE '' END as unlocked"),
+                    \DB::raw("CASE WHEN (gate_status->>'demaged')::text='true' THEN 'yes' ELSE '' END as demaged"),
+                    \DB::raw("CASE WHEN (gate_status->>'other')::text='true' THEN 'yes' ELSE '' END as other_gate"),
 
+                    \DB::raw("CASE WHEN (building_status->>'broken_roof')::text='true' THEN 'yes' ELSE '' END as broken_roof"),
+                    \DB::raw("CASE WHEN (building_status->>'broken_gutter')::text='true' THEN 'yes' ELSE '' END as broken_gutter"),
+                    \DB::raw("CASE WHEN (building_status->>'broken_base')::text='true' THEN 'yes' ELSE '' END as broken_base"),
+                    \DB::raw("CASE WHEN (building_status->>'other')::text='true' THEN 'yes' ELSE '' END as building_other"),
+                    'grass_status',
+                    'tree_branches_status',
+                    'advertise_poster_status',
+                    'total_defects' 
+                    )->get();
 
-            return datatables()->of(Substation::where('ba', 'LIKE', '%' . $ba . '%')->select('id','visit_date','patrol_time','voltage','name','total_defects')->get())->toJson();
+            return datatables()
+                ->of($data)
+                ->toJson();
         }
         return view('substation.index');
-        // try {
-        //     $name = rawurldecode($name);
-        //     // return rawurldecode($name);
-        //     $ba = Auth::user()->ba;
-        //     $data = Substation::where('ba', 'LIKE', '%' . $ba . '%')
-        //         ->where('name', 'LIKE', '%' . $name . '%')
-        //         ->paginate(10);
-        //     return view('substation.pagination', ['datas' => $data])->render();
-        // } catch (\Throwable $th) {
-        //     return redirect()->route('substation-map.index', app()->getLocale());
-        // }
     }
 }

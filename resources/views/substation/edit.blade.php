@@ -119,7 +119,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <input type="time" name="patrol_time" id="patrol_time" class="form-control"
-                                        value="{{ date('H:i:s', strtotime($data->patrol_time)) }}" required>
+                                        value="{{ $data->patrol_time =='' ? now('Asia/Kuala_Lumpur')->format('H:i') : date('H:i:s', strtotime($data->patrol_time)) }}" required>
                                 </div>
                             </div>
 

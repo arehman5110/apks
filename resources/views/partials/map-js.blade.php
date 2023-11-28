@@ -23,6 +23,7 @@
     var link_box = '';
     var cable_bridge = '';
     var road = '';
+    var unservey = '';
 
     var popup = L.popup();
 
@@ -84,6 +85,8 @@
             else if (param == 'road') {
                 sel_lyr = road;
 
+            }else if(param == 'unsurveyed'){
+                sel_lyr =  unservey;
             }
             callSelfLayer(param);
         }

@@ -22,6 +22,14 @@
         .table-responsive::-webkit-scrollbar {
   display: none;
 }
+.lower-header th , td{
+    font-size: 14px !important;
+    padding: 5px !important;
+}
+
+th{
+    font-size: 15px !important
+}
     </style>
 @endsection
 
@@ -94,18 +102,28 @@
 
                                     <thead style="background-color: #E4E3E3 !important">
                                         <tr>
-                                            <th>NAME</th>
-                                            <th>VOLTAGE</th>
-                                            <th>TOTAL DEFECTS</th>
-                                            <th>VISIT DATE</th>
-                                            <th>PATROL TIME</th>
-                                            <th>ACTION</th>
-
-                                           {{--  <th>TEAM</th>
-                                            <th>VISIT DATE</th>
-                                            <th>ACTION</th> --}}
+                                            <th rowspan="2">{{__('messages.name')}}</th>
+                                            <th colspan="3" class="text-center">{{__('messages.gate')}}</th>
+                                            <th colspan="2" class="text-center">{{__('messages.tree')}}</th>
+                                            <th colspan="4" class="text-center">{{__("messages.building_defects")}}</th>
+                                            <th>{{__('messages.add_clean_up')}}</th>
+                                            <th rowspan="2">{{__('messages.total_defects')}} </th>
+                                            <th rowspan="2">ACTION</th>
 
                                         </tr>
+                                        <tr class="lower-header">
+                                            <th>{{__('messages.unlocked')}}</th>
+                                            <th>{{__('messages.broken')}}</th>
+                                            <th>{{__('messages.others')}} </th>
+                                            <th>{{__("messages.long_grass")}} </th>
+                                            <th>{{__("messages.tree_branches_in_PE")}} </th>
+                                            <th>{{__('messages.broken_roof')}} </th>
+                                            <th>{{__('messages.broken_gutter')}} </th>
+                                            <th>{{__("messages.broken_base")}} </th>
+                                            <th>{{__("messages.others")}} </th>
+                                            <th>{{__("messages.cleaning_illegal_ads_banners")}} </th>
+                                        </tr>
+
                                     </thead>
                                     <tbody>
 
@@ -158,13 +176,14 @@
 
 
 @section('script')
+<script src="https://cdn.datatables.net/select/1.3.3/js/dataTables.select.min.js"></script>
     <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{asset('assets/js/generate-qr.js')}}"></script>
 
 
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.3/datatables.min.js"></script>
-    <script src="https://cdn.datatables.net/select/1.3.3/js/dataTables.select.min.js"></script>
+
 
     <script>
          $(function () {
@@ -175,11 +194,21 @@ var table = $('.data-table').DataTable({
     ajax: "{{ route('substation-paginate',app()->getLocale() ) }}",
     columns: [
         {data: 'name', name: 'name'},
-        {data: 'voltage', name:'voltage'},
-        {data: 'total_defects', name:'total_defects'},
-        {data: 'visit_date', name: 'visit_date'},
-        {data: 'patrol_time', name: 'patrol_time'},
-        { render: function (data, type, full, meta) {
+        {data: 'unlocked', name: 'unlocked'},
+        {data: 'demaged', name: 'demaged'},
+
+        {data: 'other_gate', name:'other_gate'},
+        {data: 'grass_status', name:'grass_status'},
+        {data: 'tree_branches_status', name: 'tree_branches_status'},
+        {data: 'broken_roof', name: 'broken_roof'},
+        {data: 'broken_gutter', name: 'broken_gutter'},
+        {data: 'broken_base', name: 'broken_base'},
+        {data: 'building_other', name: 'building_other'},
+
+        {data: 'advertise_poster_status', name: 'advertise_poster_status'},
+        {data: 'total_defects', name: 'total_defects'},
+        { render: function (data, type, full) {
+
             var id = full.id;
                     return  `<button type="button" class="btn  " data-toggle="dropdown">
                             <img
@@ -200,7 +229,22 @@ var table = $('.data-table').DataTable({
                         </div>
                         `  ;}}
 
-    ]
+    ],
+    createdRow: function (row, data, dataIndex) {
+        $(row).find('td:eq(1)').addClass('text-center');
+        $(row).find('td:eq(2)').addClass('text-center');
+        $(row).find('td:eq(3)').addClass('text-center');
+        $(row).find('td:eq(4)').addClass('text-center');
+        $(row).find('td:eq(5)').addClass('text-center');
+        $(row).find('td:eq(6)').addClass('text-center');
+        $(row).find('td:eq(7)').addClass('text-center');
+        $(row).find('td:eq(8)').addClass('text-center');
+        $(row).find('td:eq(9)').addClass('text-center');
+        $(row).find('td:eq(10)').addClass('text-center');
+        $(row).find('td:eq(11)').addClass('text-center');
+        $(row).find('td:eq(12)').addClass('text-center');
+
+    }
 });
 
 $('#myModal').on('show.bs.modal', function(event) {

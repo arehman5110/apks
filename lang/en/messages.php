@@ -301,6 +301,8 @@ return [
 
 
     'qr'=>'qr',
+    'tree'=>'Tree',
+    'add_clean_up'=>'Add clean up'
 
 
 

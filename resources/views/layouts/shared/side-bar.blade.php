@@ -51,12 +51,12 @@
                             </a>
                         </li>
 
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a href="/{{app()->getLocale()}}/create-patrolling" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>{{__('messages.patrolling')}}</p>
                             </a>
-                        </li>
+                        </li> --}}
 
                         <li class="nav-item">
                             <a href="{{route('notice', app()->getLocale())}}" class="nav-link ">
@@ -65,12 +65,7 @@
                             </a>
                         </li>
 
-                        <li class="nav-item">
-                            <a href="{{ route('third-party-digging.index', app()->getLocale()) }}" class="nav-link ">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>{{__('messages.index')}}</p>
-                            </a>
-                        </li>
+
                         <li class="nav-item">
                             <a href="/{{app()->getLocale()}}/map-1" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
@@ -81,6 +76,13 @@
                             <a href="/{{app()->getLocale()}}/get-all-work-packages" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>{{__('messages.sbum_approval_and_detail')}}</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('third-party-digging.index', app()->getLocale()) }}" class="nav-link ">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>{{__('messages.index')}} {{__('messages.notice')}}</p>
                             </a>
                         </li>
                     </ul>
@@ -98,20 +100,22 @@
                         <li class="nav-item">
                             <a href="{{ route('substation.create', app()->getLocale()) }}" class="nav-link ">
                                 <p> <i class="far fa-circle nav-icon"></i>
-                               {{__('messages.create')}}</p>
+                               {{__('messages.create')}} {{__('messages.substation')}}</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{ route('substation.index', app()->getLocale()) }}" class="nav-link ">
-                               <p> <i class="far fa-circle nav-icon"></i>
-                                {{__('messages.qr')}}</p>
-                            </a>
-                        </li>
+
 
                         <li class="nav-item">
                             <a href="/{{app()->getLocale()}}/substation-map" class="nav-link ">
                               <p>  <i class="far fa-circle nav-icon"></i>
                                 {{__('messages.map')}}</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('substation.index', app()->getLocale()) }}" class="nav-link ">
+                               <p> <i class="far fa-circle nav-icon"></i>
+                                {{__('messages.qr')}}</p>
                             </a>
                         </li>
 
@@ -129,19 +133,21 @@
                         <li class="nav-item">
                             <a href="{{ route('feeder-pillar.create', app()->getLocale()) }}" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>{{__('messages.create')}}</p>
+                                <p>{{__('messages.create')}} {{__('messages.feeder_pillar')}}</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{ route('feeder-pillar.index', app()->getLocale()) }}" class="nav-link ">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>{{__('messages.index')}}</p>
-                            </a>
-                        </li>
+
                         <li class="nav-item">
                             <a href="/{{app()->getLocale()}}/feeder-pillar-map" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>{{__('messages.map')}}</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('feeder-pillar.index', app()->getLocale()) }}" class="nav-link ">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>{{__('messages.index')}}</p>
                             </a>
                         </li>
                     </ul>
@@ -160,19 +166,21 @@
                         <li class="nav-item">
                             <a href="{{route('tiang-talian-vt-and-vr.create', app()->getLocale())}}" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>{{__('messages.create')}}</p>
+                                <p>{{__('messages.create')}} SAVR</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{route('tiang-talian-vt-and-vr.index', app()->getLocale())}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>{{__('messages.index')}}</p>
-                            </a>
-                        </li>
+
                         <li class="nav-item">
                             <a href="/{{app()->getLocale()}}/tiang-talian-vt-and-vr-map" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>{{__('messages.map')}}</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{route('tiang-talian-vt-and-vr.index', app()->getLocale())}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>{{__('messages.index')}}</p>
                             </a>
                         </li>
                     </ul>
@@ -190,20 +198,22 @@
                         <li class="nav-item">
                             <a href="{{route('link-box-pelbagai-voltan.create', app()->getLocale())}}" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>{{__('messages.create')}}</p>
+                                <p>{{__('messages.create')}}  {{__('messages.link_box_pelbagai_voltan')}}</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{route('link-box-pelbagai-voltan.index', app()->getLocale())}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>{{__('messages.index')}}</p>
-                            </a>
-                        </li>
+
 
                         <li class="nav-item">
                             <a href="/{{app()->getLocale()}}/link-box-pelbagai-voltan-map" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>{{__('messages.map')}}</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{route('link-box-pelbagai-voltan.index', app()->getLocale())}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>{{__('messages.index')}}</p>
                             </a>
                         </li>
                     </ul>
@@ -221,20 +231,22 @@
                         <li class="nav-item">
                             <a href="{{route('cable-bridge.create', app()->getLocale())}}" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>{{__('messages.create')}}</p>
+                                <p>{{__('messages.create')}}  {{__('messages.cable_bridge')}}</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{route('cable-bridge.index', app()->getLocale())}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>{{__('messages.index')}}</p>
-                            </a>
-                        </li>
+
 
                         <li class="nav-item">
                             <a href="/{{app()->getLocale()}}/cable-bridge-map" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>{{__('messages.map')}}</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{route('cable-bridge.index', app()->getLocale())}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>{{__('messages.index')}}</p>
                             </a>
                         </li>
                     </ul>
