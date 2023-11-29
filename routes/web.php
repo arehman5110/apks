@@ -153,6 +153,10 @@ Route::group(
                 Route::get('/create-patrolling', [PatrollingController::class, 'create'])->name('create-patrolling');
                 Route::post('/patrolling-update', [PatrollingController::class, 'updateRoads']);
 
+                Route::get('/patrolling',[PatrollingController::class, 'index'])->name('patroling.index');
+                Route::get('/patrolling-paginate',[PatrollingController::class,'paginate'])->name("patrolling-paginate");
+
+
                 Route::get('/get-roads-name/{id}', [PatrollingController::class, 'getRoads']);
                 Route::get('/get-roads-id/{id}', [PatrollingController::class, 'getRoadsByID']);
 

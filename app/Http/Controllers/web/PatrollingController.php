@@ -8,10 +8,22 @@ use App\Models\Team;
 use App\Models\WorkPackage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\DataTables;
+
+
+
 
 class PatrollingController extends Controller
 {
     //
+
+
+    public function index()
+    {
+        return view('patrolling.index');
+    }
 
     public function create()
     {
@@ -86,4 +98,28 @@ class PatrollingController extends Controller
         $road->time_petrol = date('H:i:s', strtotime($road->time_petrol));
         return view('patrolling.show-road', ['road' => $road]);
     }
+
+
+    public function paginate(Request $request, $language)
+{
+    $ba = Auth::user()->ba;
+
+    if ($request->ajax()) {
+        $query = Road::where('ba', 'LIKE', '%' . $ba . '%')
+                ->select(
+                    'id',
+                    'road_name',
+                    'ba',
+                    'zone',
+                    'total_digging',
+                    'total_notice',
+                    'total_supervision',
+                );
+
+        return Datatables::of($query)->make(true);
+    }
+
+    return view('patrolling.index');
+}
+
 }

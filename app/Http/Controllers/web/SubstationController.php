@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use PhpParser\Node\Stmt\Return_;
+use Yajra\DataTables\DataTables;
 
 class SubstationController extends Controller
 {
@@ -243,7 +244,7 @@ $total_defects = 0;
                 }
                 $gate['unlocked'] == "true" ? $total_defects++ : '';
             }
-          
+
             $data->gate_status = json_encode($gate);
 
             $building = ['broken_roof' => 'false', 'broken_gutter' => 'false', 'broken_base' => 'false', 'other' => 'false', 'other_value' => ''];

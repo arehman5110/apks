@@ -252,6 +252,14 @@
                     </ul>
                 </li>
 
+
+                <li class="nav-item">
+                            <a href="{{route('patroling.index', app()->getLocale())}}" class="nav-link ">
+                                <i class="fas fa-bolt"></i>
+
+                                <p>{{__('messages.patrolling')}}</p>
+                            </a>
+                        </li>
                 {{-- <li class="nav-item ">
                     <a href="#" class="nav-link">
                         <i class="fas fa-road"></i>
