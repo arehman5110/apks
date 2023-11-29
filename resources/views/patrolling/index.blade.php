@@ -92,10 +92,10 @@ th{
                                         <tr>
                                             <th class="text-center">WP NAME</th>
                                             <th class="text-center">CYCLE</th>
-                                            <th class="text-center">KM</th>
-                                            <th class="text-center">DATE</th>
-                                            <th class="text-center">TIME</th>
-                                            <th>ACTION</th>
+                                            <th class="text-center">TOATL PATROLLING (KM)</th>
+                                            <th class="text-center">PATROLLING DATE</th>
+                                            <th class="text-center">PATROLLING TIME</th>
+                                            <th class="text-center">PATROLLING PATH</th>
 
 
                                         </tr>
@@ -236,6 +236,7 @@ th{
         var layerControl = '';
         var boundary = '';
         var zoom = 8;
+        var patroling = '';
 
 
         var popup = L.popup();
@@ -283,6 +284,24 @@ th{
             });
 
 
+            if (patroling !== '') {
+                map.removeLayer(patroling)
+            }
+
+
+            patroling = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:patroling',
+                format: 'image/png',
+                cql_filter: "ba ILIKE '%" + param + "%'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+            map.addLayer(patroling)
+            patroling.bringToFront()
+
+
             addGroupOverLays()
 
         }
@@ -297,7 +316,8 @@ th{
             // console.log("sdfsdf");
             groupedOverlays = {
                 "POI": {
-
+                    'Boundary' : boundary,
+                    'Patrolling' : patroling,
                 }
             };
             //add layer control on top right corner of map
