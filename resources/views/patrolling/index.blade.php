@@ -90,12 +90,11 @@ th{
 
                                     <thead style="background-color: #E4E3E3 !important">
                                         <tr>
-                                            <th>{{ __('messages.zone') }}</th>
-                                            <th class="text-center">{{ __('messages.ba') }}</th>
-                                            <th class="text-center">{{ __('messages.Road_Name') }}</th>
-                                            <th class="text-center">{{ __('messages.Total_Supervision') }}</th>
-                                            <th class="text-center">{{ __('messages.Total_Digging') }}</th>
-                                            <th class="text-center">{{ __('messages.Total_Digging') }}</th>
+                                            <th class="text-center">WP NAME</th>
+                                            <th class="text-center">CYCLE</th>
+                                            <th class="text-center">KM</th>
+                                            <th class="text-center">DATE</th>
+                                            <th class="text-center">TIME</th>
                                             <th>ACTION</th>
 
 
@@ -288,7 +287,7 @@ th{
 
         }
 
-        addGroupOverLays()
+
 
         function addGroupOverLays() {
             if (layerControl != '') {
@@ -376,34 +375,31 @@ const b1Options = [
                 serverSide: true,
                 ajax: "{{ route('patrolling-paginate', app()->getLocale()) }}",
                 columns: [{
-                        data: 'zone',
-                        name: 'zone'
+                        data: 'wp_name',
+                        name: 'wp_name'
                     },
                     {
-                        data: 'ba',
-                        name: 'ba'
+                        data: 'cycle',
+                        name: 'cycle'
                     },
                     {
-                        data: 'road_name',
-                        name: 'road_name'
+                        data: 'km',
+                        name: 'km'
                     },
                     {
-                        data: 'total_supervision',
-                        name: 'total_supervision'
+                        data: 'date',
+                        name: 'date'
                     },
                     {
-                        data: 'total_notice',
-                        name: 'total_notice'
+                        data: 'time',
+                        name: 'time'
                     },
-                    {
-                        data: 'total_digging',
-                        name: 'total_digging'
-                    },
+
                     { render: function (data, type, full) {
 
 var id = full.id;
-        return  `<button type="button" class="btn  " data-toggle="dropdown">
-                <img
+        return  `<button type="button" class="btn  " data-toggle="dropdown" onclick="alert('asdf')">
+
                 <i class="fa fa-eye" aria-hidden="true"></i>
             </button>
 
@@ -417,6 +413,8 @@ var id = full.id;
                     $(row).find('td:eq(2)').addClass('text-center');
                     $(row).find('td:eq(3)').addClass('text-center');
                     $(row).find('td:eq(4)').addClass('text-center');
+                    $(row).find('td:eq(5)').addClass('text-center');
+
 
 
                 }

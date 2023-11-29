@@ -6,19 +6,17 @@ use App\Http\Controllers\Controller;
 use App\Models\Road;
 use App\Models\Team;
 use App\Models\WorkPackage;
+use App\Models\Patroling;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
 
-
-
-
 class PatrollingController extends Controller
 {
     //
-
 
     public function index()
     {
@@ -51,27 +49,28 @@ class PatrollingController extends Controller
             $road->total_supervision = $request->total_supervision;
             $road->update();
 
-            return redirect()->route('get-all-work-packages',app()->getLocale())
+            return redirect()
+                ->route('get-all-work-packages', app()->getLocale())
                 ->with('success', 'Request Success');
         } catch (\Throwable $th) {
             return $th->getMessage();
-            return redirect()->route('get-all-work-packages',app()->getLocale())
+            return redirect()
+                ->route('get-all-work-packages', app()->getLocale())
                 ->with('failed', 'Request Failed');
         }
     }
 
-    public function editRoad($language,$id)
+    public function editRoad($language, $id)
     {
         try {
             $road = Road::find($id);
             return $road ? view('patrolling.update-road', ['road' => $road]) : abort(404);
         } catch (\Throwable $th) {
-            return redirect('/get-all-work-packages')
-                ->with('failed', 'Request Failed');
+            return redirect('/get-all-work-packages')->with('failed', 'Request Failed');
         }
     }
 
-    public function getRoads($language,$id)
+    public function getRoads($language, $id)
     {
         $roads = Road::where('id_workpackage', $id)
             ->select('id', 'road_name')
@@ -80,7 +79,7 @@ class PatrollingController extends Controller
         return $roads;
     }
 
-    public function getRoadsByID($language,$id)
+    public function getRoadsByID($language, $id)
     {
         $road = Road::where('id', $id)
             ->select('id', 'road_name', 'km', 'date_patrol', 'time_patrol', 'name_project', 'actual_km', 'fidar', 'total_digging', 'total_notice', 'total_supervision')
@@ -89,7 +88,7 @@ class PatrollingController extends Controller
         return $road;
     }
 
-    public function getRoad($language,$id)
+    public function getRoad($language, $id)
     {
         $road = Road::where('id', $id)
             ->with('workPackage')
@@ -99,27 +98,16 @@ class PatrollingController extends Controller
         return view('patrolling.show-road', ['road' => $road]);
     }
 
-
     public function paginate(Request $request, $language)
-{
-    $ba = Auth::user()->ba;
+    {
+        $ba = Auth::user()->ba;
 
-    if ($request->ajax()) {
-        $query = Road::where('ba', 'LIKE', '%' . $ba . '%')
-                ->select(
-                    'id',
-                    'road_name',
-                    'ba',
-                    'zone',
-                    'total_digging',
-                    'total_notice',
-                    'total_supervision',
-                );
+        if ($request->ajax()) {
+            $query = Patroling::select('cycle', 'date', 'time', 'km', 'wp_name');
 
-        return Datatables::of($query)->make(true);
+            return Datatables::of($query)->make(true);
+        }
+
+        return view('patrolling.index');
     }
-
-    return view('patrolling.index');
-}
-
 }
