@@ -152,7 +152,7 @@ Route::group(
                 // Patrolling
                 Route::get('/create-patrolling', [PatrollingController::class, 'create'])->name('create-patrolling');
                 Route::post('/patrolling-update', [PatrollingController::class, 'updateRoads']);
-
+                Route::get('/get-patrolling-json/{id}',[PatrollingController::class ,'getGeoJson'])->name('get-patrolling-json');
                 Route::get('/patrolling',[PatrollingController::class, 'index'])->name('patroling.index');
                 Route::get('/patrolling-paginate',[PatrollingController::class,'paginate'])->name("patrolling-paginate");
 

@@ -24,14 +24,16 @@
         #map {
             height: 700px;
         }
-        .lower-header th , td{
-    font-size: 14px !important;
-    padding: 5px !important;
-}
 
-th{
-    font-size: 15px !important
-}
+        .lower-header th,
+        td {
+            font-size: 14px !important;
+            padding: 5px !important;
+        }
+
+        th {
+            font-size: 15px !important
+        }
     </style>
 @endsection
 
@@ -65,112 +67,112 @@ th{
 
 
 
-                        {{-- DATA TABLE --}}
-                <div class="col-12">
-                    <div class="card">
+            {{-- DATA TABLE --}}
+            <div class="col-12">
+                <div class="card">
 
-                        <div class="card-header d-flex justify-content-between ">
-                            <p class="mb-0">{{ __('messages.Patrolling') }}</p>
-                            <div class="d-flex ml-auto">
-
-                            </div>
-                        </div>
-
-
-                        <div class="card-body">
-                            <div class="text-right mb-4">
-
-                            </div>
-
-
-
-                            <div class="table-responsive add-substation" id="add-substation">
-                                <table id="" class="table table-bordered  table-hover data-table">
-
-
-                                    <thead style="background-color: #E4E3E3 !important">
-                                        <tr>
-                                            <th class="text-center">WP NAME</th>
-                                            <th class="text-center">CYCLE</th>
-                                            <th class="text-center">TOATL PATROLLING (KM)</th>
-                                            <th class="text-center">PATROLLING DATE</th>
-                                            <th class="text-center">PATROLLING TIME</th>
-                                            <th class="text-center">PATROLLING PATH</th>
-
-
-                                        </tr>
-
-                                    </thead>
-                                    <tbody>
-
-                                    </tbody>
-                                </table>
-                            </div>
-
-
-
-
-
+                    <div class="card-header d-flex justify-content-between ">
+                        <p class="mb-0">{{ __('messages.Patrolling') }}</p>
+                        <div class="d-flex ml-auto">
 
                         </div>
                     </div>
 
 
-
-                </div>
-
-
-
-                         {{-- BA ZONE SEARCH FILTER --}}
-                <div class="   col-12  w-100">
-                    <div class="card p-0 mb-3">
-                        <div class="card-body row">
-
-                            <div class="col-md-3">
-                                <label for="search_zone">Zone</label>
-                                <select name="search_zone" id="search_zone" class="form-control"
-                                    onchange="onChangeZone(this.value)">
-
-                                    @if (Auth::user()->zone == '')
-                                        <option value="" hidden>select zone</option>
-                                        <option value="W1">W1</option>
-                                        <option value="B1">B1</option>
-                                        <option value="B2">B2</option>
-                                        <option value="B4">B4</option>
-                                    @else
-                                        <option value="{{ Auth::user()->zone }}" hidden>{{ Auth::user()->zone }}</option>
-                                    @endif
-                                </select>
-                            </div>
-                            <div class="col-md-3">
-                                <label for="search_ba">BA</label>
-                                <select name="search_ba" id="search_ba" class="form-control" onchange="callLayers(this.value)">
-
-                                    <option value="{{ Auth::user()->ba }}" hidden>
-                                        {{ Auth::user()->ba != '' ? Auth::user()->ba : 'Select BA' }}</option>
-                                </select>
-                            </div>
-
+                    <div class="card-body">
+                        <div class="text-right mb-4">
 
                         </div>
+
+
+
+                        <div class="table-responsive add-substation" id="add-substation">
+                            <table id="" class="table table-bordered  table-hover data-table">
+
+
+                                <thead style="background-color: #E4E3E3 !important">
+                                    <tr>
+                                        <th class="text-center">WP NAME</th>
+                                        <th class="text-center">CYCLE</th>
+                                        <th class="text-center">TOATL PATROLLING (KM)</th>
+                                        <th class="text-center">PATROLLING DATE</th>
+                                        <th class="text-center">PATROLLING TIME</th>
+                                        <th class="text-center">PATROLLING PATH</th>
+
+
+                                    </tr>
+
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+
+
+
+
+
                     </div>
                 </div>
 
 
 
-                        {{-- MAP --}}
-                <div class="w-100 p-0 ">
-                    <div class="card p-0 m-0"
-                        style="border: 1px solid rgb(177, 175, 175) !important; border-radius: 0px !important;">
-                        <div class="card-header text-center"><strong> MAP</strong></div>
-                        <div class="card-body p-0">
-                            <div id="map">
+            </div>
 
-                            </div>
+
+
+            {{-- BA ZONE SEARCH FILTER --}}
+            <div class="   col-12  w-100">
+                <div class="card p-0 mb-3">
+                    <div class="card-body row">
+
+                        <div class="col-md-3">
+                            <label for="search_zone">Zone</label>
+                            <select name="search_zone" id="search_zone" class="form-control"
+                                onchange="onChangeZone(this.value)">
+
+                                @if (Auth::user()->zone == '')
+                                    <option value="" hidden>select zone</option>
+                                    <option value="W1">W1</option>
+                                    <option value="B1">B1</option>
+                                    <option value="B2">B2</option>
+                                    <option value="B4">B4</option>
+                                @else
+                                    <option value="{{ Auth::user()->zone }}" hidden>{{ Auth::user()->zone }}</option>
+                                @endif
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="search_ba">BA</label>
+                            <select name="search_ba" id="search_ba" class="form-control" onchange="callLayers(this.value)">
+
+                                <option value="{{ Auth::user()->ba }}" hidden>
+                                    {{ Auth::user()->ba != '' ? Auth::user()->ba : 'Select BA' }}</option>
+                            </select>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+
+
+            {{-- MAP --}}
+            <div class="w-100 p-0 ">
+                <div class="card p-0 m-0"
+                    style="border: 1px solid rgb(177, 175, 175) !important; border-radius: 0px !important;">
+                    <div class="card-header text-center"><strong> MAP</strong></div>
+                    <div class="card-body p-0">
+                        <div id="map">
+
                         </div>
                     </div>
-
                 </div>
+
+            </div>
 
 
 
@@ -316,8 +318,8 @@ th{
             // console.log("sdfsdf");
             groupedOverlays = {
                 "POI": {
-                    'Boundary' : boundary,
-                    'Patrolling' : patroling,
+                    'Boundary': boundary,
+                    'Patrolling': patroling,
                 }
             };
             //add layer control on top right corner of map
@@ -329,65 +331,64 @@ th{
         }
     </script>
     <script>
+        const b1Options = [
+            ['W1', 'KUALA LUMPUR PUSAT', 3.14925905877391, 101.754098819705],
+            ['B1', 'PETALING JAYA', 3.1128074178475, 101.605270457169],
+            ['B1', 'RAWANG', 3.47839445121726, 101.622905486475],
+            ['B1', 'KUALA SELANGOR', 3.40703209426401, 101.317426926947],
+            ['B2', 'KLANG', 3.08428642705789, 101.436185279023],
+            ['B2', 'PELABUHAN KLANG', 2.98188527916042, 101.324234779569],
+            ['B4', 'CHERAS', 3.14197346621987, 101.849883983416],
+            ['B4', 'BANTING', 2.82111390453244, 101.505890775541],
+            ['B4', 'BANGI', 2.965810949933260, 101.81881303103104],
+            ['B4', 'PUTRAJAYA & CYBERJAYA', 2.92875032271019, 101.675338316575]
+        ];
 
-const b1Options = [
-        ['W1', 'KUALA LUMPUR PUSAT', 3.14925905877391, 101.754098819705],
-        ['B1', 'PETALING JAYA', 3.1128074178475, 101.605270457169],
-        ['B1', 'RAWANG', 3.47839445121726, 101.622905486475],
-        ['B1', 'KUALA SELANGOR', 3.40703209426401, 101.317426926947],
-        ['B2', 'KLANG', 3.08428642705789, 101.436185279023],
-        ['B2', 'PELABUHAN KLANG', 2.98188527916042, 101.324234779569],
-        ['B4', 'CHERAS', 3.14197346621987, 101.849883983416],
-        ['B4', 'BANTING', 2.82111390453244, 101.505890775541],
-        ['B4', 'BANGI', 2.965810949933260, 101.81881303103104],
-        ['B4', 'PUTRAJAYA & CYBERJAYA', 2.92875032271019, 101.675338316575]
-    ];
-
-    var ba = "{{ Auth::user()->ba }}";
-
-
-    // on page load
-    $(document).ready(function() {
-
-        // check ba is empty or not
-        if (ba == '') {
-            addRemoveBundary('', 2.75101756479656, 101.304931640625)
-        } else {
-            callLayers(ba);
-        }
-
-    });
+        var ba = "{{ Auth::user()->ba }}";
 
 
-    // if ba is not empty
-    function callLayers(param) {
-        var userBa = '';
-        for (const data of b1Options) {
-            if (data[1] == param) {
-                userBa = data;
-                break;
+        // on page load
+        $(document).ready(function() {
+
+            // check ba is empty or not
+            if (ba == '') {
+                addRemoveBundary('', 2.75101756479656, 101.304931640625)
+            } else {
+                callLayers(ba);
             }
-        }
-        zoom = 11;
-        addRemoveBundary(userBa[1], userBa[2], userBa[3])
-    }
 
-
-    function onChangeZone(param) {
-        const areaSelect = $('#search_ba');
-
-        // Clear previous options
-        areaSelect.empty();
-        areaSelect.append(`<option value="" hidden>Select ba</option>`)
-
-
-        b1Options.map((data) => {
-            if (data[0] == param) {
-                areaSelect.append(`<option value="${data[1]}">${data[1]}</option>`)
-            }
         });
 
-    }
+
+        // if ba is not empty
+        function callLayers(param) {
+            var userBa = '';
+            for (const data of b1Options) {
+                if (data[1] == param) {
+                    userBa = data;
+                    break;
+                }
+            }
+            zoom = 11;
+            addRemoveBundary(userBa[1], userBa[2], userBa[3])
+        }
+
+
+        function onChangeZone(param) {
+            const areaSelect = $('#search_ba');
+
+            // Clear previous options
+            areaSelect.empty();
+            areaSelect.append(`<option value="" hidden>Select ba</option>`)
+
+
+            b1Options.map((data) => {
+                if (data[0] == param) {
+                    areaSelect.append(`<option value="${data[1]}">${data[1]}</option>`)
+                }
+            });
+
+        }
         $(function() {
 
             var table = $('.data-table').DataTable({
@@ -415,15 +416,18 @@ const b1Options = [
                         name: 'time'
                     },
 
-                    { render: function (data, type, full) {
+                    {
+                        render: function(data, type, full) {
 
-var id = full.id;
-        return  `<button type="button" class="btn  " data-toggle="dropdown" onclick="alert('asdf')">
+                            var id = full.id;
+                            return `<button type="button" class="btn  " onclick="getGeoJson(${full.id})" data-toggle="dropdown" >
 
                 <i class="fa fa-eye" aria-hidden="true"></i>
             </button>
 
-            `  ;}}
+            `;
+                        }
+                    }
 
 
 
@@ -447,5 +451,33 @@ var id = full.id;
                 $('#remove-foam').attr('action', '/en/substation/' + id)
             });
         });
+
+        var patrol = '';
+        function getGeoJson(param){
+            $.ajax({
+                url: '/{{ app()->getLocale() }}/get-patrolling-json/' + param,
+                dataType: 'JSON',
+                //data: data,
+                method: 'GET',
+                async: false,
+                success: function callback(data) {
+                    var data1 = JSON.parse(data[0].geojson)
+
+
+                    if (patrol) {
+                        map.removeLayer(patrol)
+                    }
+
+                    var geom = L.GeoJSON.coordsToLatLngs(data1.features[0].geometry);
+                    var line = L.polyline(geom);
+                    map.fitBounds(line.getBounds());
+
+                  patrol =   L.geoJSON(data1.features[0].geometry);
+                    map.addLayer(patrol)
+
+
+                }
+            })
+        }
     </script>
 @endsection

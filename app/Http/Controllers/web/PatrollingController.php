@@ -103,11 +103,42 @@ class PatrollingController extends Controller
         $ba = Auth::user()->ba;
 
         if ($request->ajax()) {
-            $query = Patroling::select('cycle', 'date', 'time', 'km', 'wp_name');
+            $query = Patroling::select('id','cycle', 'date', 'time', 'km', 'wp_name' );
 
             return Datatables::of($query)->make(true);
         }
 
         return view('patrolling.index');
+    }
+
+
+    public function getGeoJson($landg, $id)
+    {
+
+
+            $query =DB::select("SELECT json_build_object(
+                'type', 'FeatureCollection',
+                'crs', json_build_object(
+                    'type', 'name',
+                    'properties', json_build_object('name', 'EPSG:4326')
+                ),
+                'features', json_agg(json_build_object(
+                    'type', 'Feature',
+                    'id', id,
+                    'geometry', ST_AsGeoJSON(geom)::json,
+                    'properties', json_build_object(
+                        'id',id
+
+                    )
+                ))) AS geojson
+            FROM (
+                SELECT id, geom
+                FROM patroling
+                WHERE id = '$id'
+            ) AS tbl1;
+             ");
+
+             return response()->json($query, 200);
+
     }
 }
