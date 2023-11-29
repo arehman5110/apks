@@ -66,6 +66,7 @@
             @include('components.message')
 
 
+            @include('components.qr-filter',['url'=>"generate-patrolling-excel"])
 
             {{-- DATA TABLE --}}
             <div class="col-12">
@@ -74,7 +75,11 @@
                     <div class="card-header d-flex justify-content-between ">
                         <p class="mb-0">{{ __('messages.Patrolling') }}</p>
                         <div class="d-flex ml-auto">
-
+                            <button class="btn text-white  btn-sm mr-4" type="button" data-toggle="collapse"
+                            style="background-color: #708090" data-target="#collapseQr" aria-expanded="false"
+                            aria-controls="collapseQr">
+                            QR Feeder Pillar
+                        </button>
                         </div>
                     </div>
 
@@ -229,6 +234,7 @@
     <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
 
+    <script src="{{asset('assets/js/generate-qr.js')}}"></script>
 
 
 
