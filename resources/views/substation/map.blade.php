@@ -460,7 +460,7 @@
 
             // $("#my_data").html(str);
             // $('#myModal').modal('show');
-            console.log(data);
+            console.log(data.id);
             openDetails(data.id);
 
         }
