@@ -468,7 +468,7 @@
                         map.removeLayer(patrol)
                     }
 
-                    var geom = L.GeoJSON.coordsToLatLngs(data1.features[0].geometry);
+                    var geom = L.GeoJSON.coordsToLatLngs(data1.features[0].geometry.coordinates);
                     var line = L.polyline(geom);
                     map.fitBounds(line.getBounds());
 
