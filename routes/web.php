@@ -33,6 +33,8 @@ use App\Http\Controllers\web\SubstationMapController;
 use App\Http\Controllers\web\TiangMapController;
 use App\Models\ThirdPartyDiging;
 use Illuminate\Support\Facades\App;
+use App\Http\Controllers\web\excel\PatrollingExcelController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -155,6 +157,8 @@ Route::group(
                 Route::get('/get-patrolling-json/{id}',[PatrollingController::class ,'getGeoJson'])->name('get-patrolling-json');
                 Route::get('/patrolling',[PatrollingController::class, 'index'])->name('patroling.index');
                 Route::get('/patrolling-paginate',[PatrollingController::class,'paginate'])->name("patrolling-paginate");
+                Route::post('/generate-patrolling-excel', [PatrollingExcelController::class, 'generateExcel'])->name('generate-patrolling-excel');
+
 
 
                 Route::get('/get-roads-name/{id}', [PatrollingController::class, 'getRoads']);

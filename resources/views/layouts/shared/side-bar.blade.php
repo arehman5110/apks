@@ -33,14 +33,27 @@
                     </a>
                 </li>
 
+
                 <li class="nav-item">
-                    <a href="{{route('patroling.index', app()->getLocale())}}" class="nav-link ">
+                    <a href="/pencawang" class="nav-link ">
                         <i class="fas fa-road"></i>
 
                         <p>{{__('messages.patrolling')}}</p>
-                    </a>
-                </li>
 
+                        <i class="right fas fa-angle-left"></i></p>
+                    </a>
+                    <ul class="nav nav-treeview">
+
+
+                        <li class="nav-item">
+                            <a href="{{ route('patroling.index', app()->getLocale()) }}" class="nav-link ">
+                               <p> <i class="far fa-circle nav-icon"></i>
+                                {{__('messages.qr')}}</p>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
                 <li class="nav-item ">
                     <a href="#" class="nav-link">
                         <i class="fas fa-tools"></i>
