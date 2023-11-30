@@ -460,7 +460,8 @@
 
             // $("#my_data").html(str);
             // $('#myModal').modal('show');
-            openDetails(idSp[1]);
+            console.log(data);
+            openDetails(data.id);
 
         }
 
