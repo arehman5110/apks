@@ -60,6 +60,7 @@ class WPController extends Controller
     public function getRoadInfo(Request $req)
     {
         $geom = $req->geom;
+         
         $result = DB::select("SELECT id, package_name , ba , zone FROM tbl_workpackage WHERE ST_Intersects(geom, ST_GeomFromGeoJSON('$geom'))");
         return response()->json(['data' => $result, 'status' => '200'], 200);
     }
