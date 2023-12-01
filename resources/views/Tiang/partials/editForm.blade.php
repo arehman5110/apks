@@ -254,7 +254,7 @@
                                              <label for="s7_083"  >{{ __('messages.PVC_Span') }}
                                                         7/083</label>
                                                         {!! tiangSpanRadio($data->pvc_span, 'pvc_span', 's7_083',  true) !!}
-                                             
+
                                                     <label for="s7_044"  >{{ __('messages.PVC_Span') }}
                                                         7/044</label>
 
@@ -365,7 +365,7 @@
 
 
                                         <tr>
-                                            {!! getImage2('other', $data->tiang_defect, 'tiang_defect', $data->tiang_defect_image, 'other') !!}
+                                            {!! getImage2('other', $data->tiang_defect, 'tiang_defect', $data->tiang_defect_image, 'others') !!}
 
                                         </tr>
 
