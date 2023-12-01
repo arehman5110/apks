@@ -229,3 +229,54 @@ function getImageShow($key, $arr, $arr_name, $img_arr, $lab_name)
 
     return $html;
 }
+
+
+function tiangSpanRadio($value , $key , $subkey , $status)
+{
+
+    $html = '';
+
+    $name = $key ."_".$subkey;
+    $disable = $status ? '' : 'disabled';
+
+    $other_key  =  isset($value->$subkey) && !in_array($value->$subkey, [1, 2, 3, 4]) && $value->$subkey != '' ? true : false;
+    $html .= "<div class='row mb-3'>
+                    <div class='col-md-2 d-flex'>
+                        <input type='radio' name='".$name."' id='".$name."_1' value='1' class='select-radio-value' ". (isset($value->$subkey) && $value->$subkey == 1 ? 'checked' : '') ." $disable>
+                        <label for='".$name."_1' class='fw-400'>1</label>
+                    </div>
+
+                    <div class='col-md-2 d-flex'>
+                        <input type='radio' name='".$name."' id='".$name."_2' value='2' class='select-radio-value' ". (isset($value->$subkey) && $value->$subkey == 2 ? 'checked' : '') ." $disable>
+                        <label for='".$name."_2' class='fw-400'>2</label>
+                    </div>
+
+                    <div class='col-md-2 d-flex'>
+                        <input type='radio' name='".$name."' id='".$name."_3' value='3' class='select-radio-value'  ". (isset($value->$subkey) && $value->$subkey == 3 ? 'checked' : '') ." $disable>
+                        <label for='".$name."_3' class='fw-400'>3</label>
+                    </div>
+
+                    <div class='col-md-2 d-flex'>
+                        <input type='radio' name='".$name."' id='".$name."_4' value='4' class='select-radio-value' ". (isset($value->$subkey) && $value->$subkey == 4 ? 'checked' : '') ." $disable>
+                        <label for='".$name."_4' class='fw-400'>4</label>
+                    </div>
+
+                    <div class='col-md-2 d-flex'>
+                        <input type='radio' name='".$name."' id='".$name."_other' value='other' class='select-radio-value' ". ($other_key  ? 'checked' : '') ." $disable>
+                        <label for='".$name."_other' class='fw-400'>other</label>
+                    </div>
+              </div>
+              <div class='col-md-6'><input type='number' name='".$key."[".$subkey."]' placeholder='enter other value'
+                                                        id='".$name."_input' value='".($other_key ? $value->$subkey : '' )."' class='form-control   ".($other_key  ? '' : 'd-none' )." '$disable></div>
+    ";
+    return $html;
+
+
+
+
+
+
+
+
+
+}

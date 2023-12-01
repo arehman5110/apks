@@ -85,6 +85,8 @@
                 <div class=" card row   ">
                     <div class=" ">
                         {{-- <h3 class="text-center p-2">{{ __('messages.qr_savr') }}</h3> --}}
+
+                        @include('Tiang.partials.editForm', ['data' $data , 'url' =>"route('tiang-talian-vt-and-vr-map-edit', [app()->getLocale(), $data->id])" ])
                         <form id="framework-wizard-form"
                             action="{{ route('tiang-talian-vt-and-vr-map-edit', [app()->getLocale(), $data->id]) }}"
                             enctype="multipart/form-data" style="display: none" method="POST">
@@ -1070,6 +1072,22 @@
                     }
                 }
             })
+
+            $('.select-radio-value').on('change',function(){
+                var val = this.value;
+                var id = `${this.name}_input`;
+                var input = $(`#${id}`)
+                if (val === 'other') {
+                    input.val('');
+                    input.removeClass('d-none');
+                }else{
+                    input.val(val);
+                    if (!input.hasClass('d-none')) {
+                        input.addClass('d-none')
+                    }
+                }
+            });
+
 
 
         });

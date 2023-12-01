@@ -66,7 +66,7 @@
             @include('components.message')
 
 
-            @include('components.qr-filter',['url'=>"generate-patrolling-excel"])
+            @include('components.qr-filter', ['url' => 'generate-patrolling-excel'])
 
             {{-- DATA TABLE --}}
             <div class="col-12">
@@ -76,10 +76,10 @@
                         <p class="mb-0">{{ __('messages.Patrolling') }}</p>
                         <div class="d-flex ml-auto">
                             <button class="btn text-white  btn-sm mr-4" type="button" data-toggle="collapse"
-                            style="background-color: #708090" data-target="#collapseQr" aria-expanded="false"
-                            aria-controls="collapseQr">
-                            QR Feeder Pillar
-                        </button>
+                                style="background-color: #708090" data-target="#collapseQr" aria-expanded="false"
+                                aria-controls="collapseQr">
+                                QR Feeder Pillar
+                            </button>
                         </div>
                     </div>
 
@@ -99,10 +99,21 @@
                                     <tr>
                                         <th class="text-center">WP NAME</th>
                                         <th class="text-center">CYCLE</th>
+                                        <th class="text-center">READING START</th>
+                                        <th class="text-center">READING END</th>
                                         <th class="text-center">TOATL PATROLLING (KM)</th>
                                         <th class="text-center">PATROLLING DATE</th>
                                         <th class="text-center">PATROLLING TIME</th>
+                                        <th>STATUS</th>
+
+                                        <th class="tex-center">IMAGE READING START</th>
+                                        <th class="tex-center">IMAGE READING END</th>
+                                        <th class="text-center">PATROLLING PATH START</th>
+                                        <th class="text-center">PATROLLING PATH END</th>
+
                                         <th class="text-center">PATROLLING PATH</th>
+
+
 
 
                                     </tr>
@@ -234,7 +245,7 @@
     <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
 
-    <script src="{{asset('assets/js/generate-qr.js')}}"></script>
+    <script src="{{ asset('assets/js/generate-qr.js') }}"></script>
 
 
 
@@ -410,6 +421,14 @@
                         name: 'cycle'
                     },
                     {
+                        data: 'reading_start',
+                        name: 'reading_start'
+                    },
+                    {
+                        data: 'reading_end',
+                        name: 'reading_end'
+                    },
+                    {
                         data: 'km',
                         name: 'km'
                     },
@@ -421,7 +440,52 @@
                         data: 'time',
                         name: 'time'
                     },
+                    {
+                        data: 'status',
+                        name: 'status'
+                    },
+                    {
+                        render: function(data, type, full) {
+                            if (full.image_reading_start !== '') {
+                                return `<img src="{{ URL::asset('${full.image_reading_start}') }}" >`;
+                            }
+                            return `<td></td>`;
+                        },
+                        name: 'image_reading_start'
+                    },
+                    {
+                        render: function(data, type, full) {
+                            if (full.image_reading_end !== '') {
+                                return `<img src="{{ URL::asset('${full.image_reading_end}') }}" >`;
+                            }
+                            return `<td></td>`;
+                        },
+                        name: 'image_reading_end'
+                    },
+                    {
+                        render: function(data, type, full) {
 
+                            var id = full.id;
+                            return `<button type="button" class="btn  " onclick="getPoint(${full.start_x , full.start_y})" data-toggle="dropdown" >
+
+                <i class="fa fa-eye" aria-hidden="true"></i>
+            </button>
+
+            `;
+                        }
+                    },
+                    {
+                        render: function(data, type, full) {
+
+                            var id = full.id;
+                            return `<button type="button" class="btn  " onclick="getPoint(${full.end_x , full.end_y})" data-toggle="dropdown" >
+
+                <i class="fa fa-eye" aria-hidden="true"></i>
+            </button>
+
+            `;
+                        }
+                    },
                     {
                         render: function(data, type, full) {
 
@@ -459,7 +523,8 @@
         });
 
         var patrol = '';
-        function getGeoJson(param){
+
+        function getGeoJson(param) {
             $.ajax({
                 url: '/{{ app()->getLocale() }}/get-patrolling-json/' + param,
                 dataType: 'JSON',
@@ -478,7 +543,7 @@
                     var line = L.polyline(geom);
                     map.fitBounds(line.getBounds());
 
-                  patrol =   L.geoJSON(data1.features[0].geometry);
+                    patrol = L.geoJSON(data1.features[0].geometry);
                     map.addLayer(patrol)
 
 
