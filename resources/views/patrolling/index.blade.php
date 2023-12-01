@@ -466,7 +466,7 @@
                         render: function(data, type, full) {
 
                             var id = full.id;
-                            return `<button type="button" class="btn  " onclick="getPoint(${full.start_x , full.start_y})" data-toggle="dropdown" >
+                            return `<button type="button" class="btn  " onclick="showPoint(${full.start_x} , ${full.start_y})" data-toggle="dropdown" >
 
                 <i class="fa fa-eye" aria-hidden="true"></i>
             </button>
@@ -478,7 +478,7 @@
                         render: function(data, type, full) {
 
                             var id = full.id;
-                            return `<button type="button" class="btn  " onclick="getPoint(${full.end_x , full.end_y})" data-toggle="dropdown" >
+                            return `<button type="button" class="btn  " onclick="showPoint(${full.end_x} , ${full.end_y})" data-toggle="dropdown" >
 
                 <i class="fa fa-eye" aria-hidden="true"></i>
             </button>
@@ -549,6 +549,23 @@
 
                 }
             })
+        }
+
+        var marker = '';
+
+
+        function showPoint(param_x , param_y){
+            if (marker != '') {
+                map.removeLayer(marker)
+            }
+            marker = new L.Marker([param_y, param_x]);
+                    map.addLayer(marker);
+
+                    map.flyTo([parseFloat(param_y), parseFloat(param_x)], zoom, {
+                duration: 1.5, // Animation duration in seconds
+                easeLinearity: 0.25,
+            });
+
         }
     </script>
 @endsection
