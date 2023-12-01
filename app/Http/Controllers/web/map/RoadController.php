@@ -25,7 +25,7 @@ class RoadController extends Controller
             return redirect('map-1');
             return $th->getMessage();
         }
-        return redirect('map-1');
+        return $data;
     }
 
     public function removeRoad($id)

@@ -371,7 +371,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="/save-work-package" method="post" id="save_wp" onsubmit="return submitFoam()">
+                <form action="/{{app()->getLocale()}}/save-work-package" method="post" id="save_wp" onsubmit="return submitFoam()">
                     @csrf
                     <div class="modal-body ">
 
@@ -439,7 +439,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="/save-road" method="post" id="road-form" onsubmit="return submitFoam2()">
+                <form action="/{{app()->getLocale()}}/save-road" method="post" id="road-form" onsubmit="return submitFoam2()">
                     @csrf
                     <div class="modal-body ">
                         <label for="ba">Road Name</label>
@@ -558,6 +558,7 @@
 
                 $('#polyLineModal').modal('show');
                 $('#road-geom').val(JSON.stringify(data.geometry));
+
                 getRoadInfo(JSON.stringify(data.geometry));
 
             } else {
@@ -1162,6 +1163,7 @@
                 console.log(rs);
                 alert("foam submitted!");
                 $('#geomModal').modal('hide');
+                $("#pw-name").val('')
                 map.removeLayer(drawnItems);
             }
 
@@ -1170,9 +1172,9 @@
             $jq('#road-form').ajaxForm(function() {
                 alert("foam submitted!");
                 $('#polyLineModal').modal('hide');
+                $('#road_name').val('')
                 map.removeLayer(drawnItems);
             });
-
 
 
 
@@ -1299,7 +1301,7 @@
         function getBaInfo(param) {
             // console.log(param);
             $.ajax({
-                url: `/get-ba-info`,
+                url: `/{{app()->getLocale()}}/get-ba-info`,
                 dataType: 'JSON',
                 method: 'POST',
                 async: false,
@@ -1327,7 +1329,7 @@
         function getRoadInfo(param) {
             console.log(param);
             $.ajax({
-                url: `/get-raod-info`,
+                url: `/{{app()->getLocale()}}/get-raod-info`,
                 dataType: 'JSON',
                 method: 'POST',
                 async: false,

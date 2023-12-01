@@ -47,11 +47,11 @@ class TeamController extends Controller
             ]);
 
             return redirect()
-                ->route('team.index')
+                ->route('team.index',app()->getLocale())
                 ->with('success', 'Team Added');
         } catch (\Throwable $th) {
             return redirect()
-                ->route('team.index')
+                ->route('team.index' ,app()->getLocale())
                 ->with('failed', 'Request Failed');
         }
     }
@@ -96,7 +96,7 @@ class TeamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($lang ,$id)
     {
         //
         try {
@@ -104,12 +104,12 @@ class TeamController extends Controller
 
             Team::find($id)->delete();
             return redirect()
-            ->route('team.index')
+            ->route('team.index' ,app()->getLocale())
             ->with('success', 'Team Removed');
     } catch (\Throwable $th) {
-        return $th->getMessage();
+        // return $th->getMessage();
         return redirect()
-            ->route('team.index')
+            ->route('team.index' ,app()->getLocale())
             ->with('failed', 'Request Failed');
     }
     }

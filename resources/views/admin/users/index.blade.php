@@ -63,11 +63,13 @@
 
                                     <thead style="background-color: #E4E3E3 !important">
                                         <tr>
-                                            <th>User Name</th>
-                                            <th>User Email</th>
-                                            <th>Team Name</th>
-                                            <th>Team Type</th>
-                                            <th>Action</th>
+                                            <th>USER NAME</th>
+                                            <th>ZONE</th>
+                                            <th>BA</th>
+                                            <th>USER EMAIL</th>
+                                            <th>TEAM NAME</th>
+                                            <th>TEAM TYPE</th>
+                                            <th>ACTION</th>
 
                                         </tr>
                                     </thead>
@@ -76,6 +78,11 @@
                                         @foreach ($users as $data)
                                             <tr>
                                                 <td class="align-middle">{{ $data->name }}</td>
+
+                                                <td class="align-middle">{{ $data->zone }}</td>
+
+                                                <td class="align-middle">{{ $data->ba }}</td>
+
                                                 <td class="align-middle">{{ $data->email }}</td>
 
                                                 <td>{{ $data->userTeam->team_name }}</td>
@@ -156,36 +163,99 @@
 
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">Add User</h4>
+                    <h6 class="modal-title">Add User</h6>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <form action="{{ route('team-users.store',app()->getLocale()) }}" id="remove-foam" method="POST">
+                <form action="{{ route('team-users.store', app()->getLocale()) }}" id="addUser" method="POST">
 
                     @csrf
 
                     <div class="modal-body form-input">
-                        <label for="name">Username</label>
-                        <input type="text" name="name" id="name" class="form-control" required>
 
-                        <label for="email">Email</label>
-                        <input type="email" name="email" id="email" class="form-control" required>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="name">Username</label>
+                            </div>
 
-                        <label for="team-name">Team</label>
-                        <select name="id_team" id="team-id" class="form-control " required>
-                            <option value="" hidden>Select team</option>
-                            @foreach ($teams as $team)
-                                <option value="{{ $team->id }}">{{ $team->team_name }}</option>
-                            @endforeach
-                        </select>
+                            <div class="col-md-8"> <input type="text" name="name" id="name" class=" form-control"
+                                    required></div>
+                        </div>
 
-                        <label for="email">Password</label>
-                        <input type="text" name="password" id="email" class="form-control" required>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="email">Email</label>
 
-                        <button type="submit" class="btn btn-success">Submit</button>
-                    </div>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="email" name="email" id="email" class="form-control" required>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="team-name">Team</label>
+
+                            </div>
+                            <div class="col-md-8">
+                                <select name="id_team" id="team-id" class="form-control " required>
+                                    <option value="" hidden>Select team</option>
+                                    @foreach ($teams as $team)
+                                        <option value="{{ $team->id }}">{{ $team->team_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="zone">{{ __('messages.zone') }}</label>
+
+                            </div>
+                            <div class="col-md-8">
+                                <select name="zone" id="search_zone" class="form-control" required>
+
+                                    <option value="" hidden>select zone</option>
+                                    <option value="W1">W1</option>
+                                    <option value="B1">B1</option>
+                                    <option value="B2">B2</option>
+                                    <option value="B4">B4</option>
+
+
+                                </select>
+
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="ba">{{ __('messages.ba') }}</label>
+
+                            </div>
+                            <div class="col-md-8">
+                                <select name="ba" id="ba" class="form-control" required>
+                                    <option value="" hidden>select BA</option>
+
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="email">Password</label>
+
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text" name="password" id="password" class="form-control" required>
+
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
                 </form>
 
             </div>
@@ -203,13 +273,48 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.3/datatables.min.js"></script>
 
     <script>
+        const b10ptions = [
+            ['W1', 'KUALA LUMPUR PUSAT', 3.14925905877391, 101.754098819705],
+            ['B1', 'PETALING JAYA', 3.1128074178475, 101.605270457169],
+            ['B1', 'RAWANG', 3.47839445121726, 101.622905486475],
+            ['B1', 'KUALA SELANGOR', 3.40703209426401, 101.317426926947],
+            ['B2', 'KLANG', 3.08428642705789, 101.436185279023],
+            ['B2', 'PELABUHAN KLANG', 2.98188527916042, 101.324234779569],
+            ['B4', 'CHERAS', 3.14197346621987, 101.849883983416],
+            ['B4', 'BANTING', 2.82111390453244, 101.505890775541],
+            ['B4', 'BANGI', 2.965810949933260, 101.81881303103104],
+            ['B4', 'PUTRAJAYA & CYBERJAYA', 2.92875032271019, 101.675338316575]
+        ];
         $(document).ready(function() {
+
+            $("#myForm").validate();
             $('#myTable').DataTable();
+
+            $('#search_zone').on('change', function() {
+                const selectedValue = this.value;
+                const areaSelect = $('#ba');
+
+                // Clear previous options
+                areaSelect.empty();
+                areaSelect.append(`<option value="" hidden>Select ba</option>`)
+
+                b10ptions.forEach((data) => {
+                    if (selectedValue == data[0]) {
+                        areaSelect.append(`<option value="${data[1]}">${data[1]}</option>`);
+                    }
+                });
+
+                $('#search_wp').empty();
+                $('#search_wp').append(`<option value="" hidden>Select Work Package</option>`);
+
+            })
+
+
             $('#myModal').on('show.bs.modal', function(event) {
                 var button = $(event.relatedTarget);
                 var id = button.data('id');
                 var modal = $(this);
-                $('#remove-foam').attr('action', '/{{app()->getLocale()}}/team-users/' + id)
+                $('#remove-foam').attr('action', '/{{ app()->getLocale() }}/admin/team-users/' + id)
             });
 
 

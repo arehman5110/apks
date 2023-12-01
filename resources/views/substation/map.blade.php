@@ -458,8 +458,7 @@
             </td> </tr>
         `
 
-            // $("#my_data").html(str);
-            // $('#myModal').modal('show');
+ 
             console.log(data.id);
             openDetails(data.id);
 

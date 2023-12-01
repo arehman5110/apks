@@ -35,7 +35,6 @@ use App\Models\ThirdPartyDiging;
 use Illuminate\Support\Facades\App;
 use App\Http\Controllers\web\excel\PatrollingExcelController;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -72,7 +71,7 @@ Route::group(
             Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
             Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-            Route::middleware("isAdmin:".false)->group(function () {
+            Route::middleware('isAdmin:' . false)->group(function () {
                 Route::get('/map-1', [MapController::class, 'index'])->name('map-1');
                 Route::get('/get-all-work-packages', [MapController::class, 'allWP'])->name('get-all-work-packages');
                 Route::get('/proxy/{url}', [MapController::class, 'proxy'])->name('proxy');
@@ -102,7 +101,6 @@ Route::group(
                 Route::get('generate-tiang-talian-vt-and-vr-excel', [TiangExcelController::class, 'generateTiangExcel'])->name('generate-tiang-talian-vt-and-vr-excel');
                 Route::view('/tiang-talian-vt-and-vr-map', 'Tiang.map')->name('tiang-talian-vt-and-vr-map');
 
-
                 //// Link Box
                 Route::resource('link-box-pelbagai-voltan', LinkBoxController::class);
                 Route::post('generate-link-box-excel', [LinkBoxExcelController::class, 'generateLinkBoxExcel'])->name('generate-link-box-excel');
@@ -118,7 +116,6 @@ Route::group(
                 Route::get('/get-cable-bridge-edit/{id}', [CableBridgeMapController::class, 'editMap'])->name('get-cable-bridge-edit');
                 Route::post('/update-cable-bridge-map-edit/{id}', [CableBridgeMapController::class, 'update'])->name('update-cable-bridge-map-edit');
 
-
                 ////third party digging routes
                 Route::resource('third-party-digging', ThirdPartyDiggingController::class);
                 Route::post('generate-third-party-digging-excel', [ThirdPartyExcelController::class, 'generateThirdPartExcel'])->name('generate-third-party-digging-excel');
@@ -127,12 +124,11 @@ Route::group(
                 Route::resource('substation', SubstationController::class);
                 Route::view('/substation-map', 'substation.map')->name('substation-map');
                 Route::post('generate-substation-excel', [SubstationExcelController::class, 'generateSubstationExcel'])->name('generate-substation-excel');
-                Route::get('/substation-paginate',[SubstationController::class,'paginate'])->name("substation-paginate");
+                Route::get('/substation-paginate', [SubstationController::class, 'paginate'])->name('substation-paginate');
                 Route::get('/get-substation-edit/{id}', [SubstationMapController::class, 'editMap'])->name('get-substation-edit');
                 Route::post('/update-substation-map-edit/{id}', [SubstationMapController::class, 'update'])->name('update-substation-map-edit');
-                Route::get('/search/find-substation/{q}',[SubstationMapController::class,'seacrh'])->name('subsation-search');
-                Route::get('/search/find-substation-cordinated/{q}',[SubstationMapController::class,'seacrhCoordinated'])->name('subsation-coordinated');
-
+                Route::get('/search/find-substation/{q}', [SubstationMapController::class, 'seacrh'])->name('subsation-search');
+                Route::get('/search/find-substation-cordinated/{q}', [SubstationMapController::class, 'seacrhCoordinated'])->name('subsation-coordinated');
 
                 ////feeder-piller routes
                 Route::resource('feeder-pillar', FPController::class);
@@ -154,12 +150,10 @@ Route::group(
                 // Patrolling
                 Route::get('/create-patrolling', [PatrollingController::class, 'create'])->name('create-patrolling');
                 Route::post('/patrolling-update', [PatrollingController::class, 'updateRoads']);
-                Route::get('/get-patrolling-json/{id}',[PatrollingController::class ,'getGeoJson'])->name('get-patrolling-json');
-                Route::get('/patrolling',[PatrollingController::class, 'index'])->name('patroling.index');
-                Route::get('/patrolling-paginate',[PatrollingController::class,'paginate'])->name("patrolling-paginate");
+                Route::get('/get-patrolling-json/{id}', [PatrollingController::class, 'getGeoJson'])->name('get-patrolling-json');
+                Route::get('/patrolling', [PatrollingController::class, 'index'])->name('patroling.index');
+                Route::get('/patrolling-paginate', [PatrollingController::class, 'paginate'])->name('patrolling-paginate');
                 Route::post('/generate-patrolling-excel', [PatrollingExcelController::class, 'generateExcel'])->name('generate-patrolling-excel');
-
-
 
                 Route::get('/get-roads-name/{id}', [PatrollingController::class, 'getRoads']);
                 Route::get('/get-roads-id/{id}', [PatrollingController::class, 'getRoadsByID']);
@@ -169,7 +163,7 @@ Route::group(
                 Route::get('/edit-patrolling/{id}', [PatrollingController::class, 'editRoad']);
                 Route::get('/patrolling-detail/{id}', [PatrollingController::class, 'getRoad'])->name('patrolling-detail');
 
-                Route::get('/dashboard', [Dashboard::class,'index'])->name('dashboard');
+                Route::get('/dashboard', [Dashboard::class, 'index'])->name('dashboard');
 
                 Route::view('/map-2', 'map')->name('map-2');
 
@@ -179,9 +173,9 @@ Route::group(
                 Route::post('/tiang-talian-vt-and-vr-map-edit/{id}', [TiangMapController::class, 'editMapStore'])->name('tiang-talian-vt-and-vr-map-edit');
             });
 
-                Route::middleware('isAdmin:'.true)->group(function () {
-                    //// Admin side
-Route::prefix('admin')->group(function () {
+            Route::middleware('isAdmin:' . true)->group(function () {
+                //// Admin side
+                Route::prefix('admin')->group(function () {
                     Route::resource('/team', TeamController::class);
                     Route::resource('team-users', TeamUsersController::class);
                 });
@@ -189,7 +183,7 @@ Route::prefix('admin')->group(function () {
         });
         Route::view('/generate-pdf-for-notice', 'PDF.notice');
 
-        Route::get('/third-party-digging-mobile/{id}',[ThirdPartyDiggingController::class,'show']);
+        Route::get('/third-party-digging-mobile/{id}', [ThirdPartyDiggingController::class, 'show']);
         Route::get('/get-work-package-detail/{id}', [WPController::class, 'detail'])->name('get-work-package-detail');
         require __DIR__ . '/auth.php';
     },
