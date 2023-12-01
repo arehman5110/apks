@@ -198,7 +198,7 @@
                 var button = $(event.relatedTarget);
                 var id = button.data('id');
                 var modal = $(this);
-                $('#remove-foam').attr('action', '/{{app()->getLocale()}}/team/' + id)
+                $('#remove-foam').attr('action', '/{{app()->getLocale()}}/admin/team/' + id)
             });
 
 

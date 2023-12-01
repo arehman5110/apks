@@ -19,7 +19,7 @@ class TeamUsersController extends Controller
     {
         //
         $user = User::with('userTeam')
-            ->where('is_admin', '0')
+            ->where('is_admin', '0')->where('ba' ,'!=' , '')
             ->get();
         return view('admin.users.index', ['users' => $user, 'teams' => Team::all()]);
     }
@@ -47,7 +47,8 @@ class TeamUsersController extends Controller
             $email = User::where('email',$request->email)->orWhere('name',$request->name)->first();
             if ($email) {
                 return redirect()
-                ->route('team-users.index')
+                ->route('team-users.index' , app()->getLocale())
+
                 ->with('failed', 'Request Failed ! Email or Username is already in use');
             }
             $user = User::create([
@@ -56,14 +57,18 @@ class TeamUsersController extends Controller
                 'id_team' => $request->id_team,
                 'password' => Hash::make($request->password),
                 'is_admin' => false,
+                'zone'=>$request->zone,
+                'ba'=>$request->ba,
+
             ]);
             return redirect()
-                ->route('team-users.index')
+                ->route('team-users.index' , app()->getLocale())
                 ->with('success', 'User Added');
         } catch (\Throwable $th) {
-            return $th->getMessage();
+            // return $th->getMessage();
             return redirect()
-                ->route('team-users.index')
+            ->route('team-users.index' , app()->getLocale())
+
                 ->with('failed', 'Request Failed');
         }
     }
@@ -108,17 +113,19 @@ class TeamUsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($lang ,$id)
     {
         try {
             User::find($id)->delete();
             return redirect()
-                ->route('team-users.index')
+            ->route('team-users.index' , app()->getLocale())
+
                 ->with('success', 'User Removed');
         } catch (\Throwable $th) {
-            return $th->getMessage();
+            // return $th->getMessage();
             return redirect()
-                ->route('team-users.index')
+            ->route('team-users.index' , app()->getLocale())
+
                 ->with('failed', 'Request Failed');
         }
     }
