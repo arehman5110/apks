@@ -32,7 +32,7 @@ return [
     'dashboard' =>"Dashboard",
     '3rd_party_digging'=>"3rd Party Digging",
         'create'=>'Create',
-        'index'=>'qr',
+        'index'=>'QR',
         'patrolling'=>'Patrolling',
         'map'=>'Map',
         'sbum_approval_and_detail'=>'SBUM Approval and Deatil',
@@ -300,7 +300,7 @@ return [
 
 
 
-    'qr'=>'qr',
+    'qr'=>'QR',
     'tree'=>'Tree',
     'add_clean_up'=>'Add clean up'
 

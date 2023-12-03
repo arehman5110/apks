@@ -184,6 +184,7 @@ class TiangContoller extends Controller
 
 
         $data =  $this->tiangRepository->getRecoreds($id);
+      
 
         return $data ?  view('Tiang.edit',['data'=>$data]) : abort(404);
     }
