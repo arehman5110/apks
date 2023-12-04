@@ -103,11 +103,8 @@ class PatrollingController extends Controller
         $ba = Auth::user()->ba;
 
         if ($request->ajax()) {
-    //         $query = Patroling::select('*')
-    // ->orderByDesc('date')
-    // ->get()
-    // ->makeHidden(['geom']);
-    $query = Patroling::select(
+
+    $query = Patroling::where('ba', 'LIKE', '%' . $ba . '%')-> select(
         '*',
         \DB::raw("st_x(geom_start) as start_x"),
         \DB::raw("st_y(geom_start) as start_y"),
