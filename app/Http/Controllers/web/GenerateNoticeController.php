@@ -15,10 +15,11 @@ class GenerateNoticeController extends Controller
         return view('third-party.generatenotice');
     }
 
-    function index() : View {
+    public function index()  {
         $ba = Auth::user()->ba;
         $datas = ThirdPartyDiging::where('ba','LIKE', '%' . $ba . '%')->where('notice','yes')->get();
 
+        // return $datas;
         return view('notice.index',['datas'=>$datas]);
 
     }

@@ -20,7 +20,46 @@ class SubstationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
+
     {
+
+
+$ba = Auth::user()->ba;
+
+
+        if ($request->ajax()) {
+
+            if ($request->filled('from_date') || $request->filled('to_date')) {
+                $from_date = $request->filled('from_date') ? $request->from_date : Substation::min('visit_date');
+                $to_date = $request->filled('to_date') ? $request->to_date : Substation::max('visit_date');
+                $result = Substation::where('ba', 'LIKE', '%' . $ba . '%')
+                ->where('visit_date', '>=', $from_date)
+                ->where('visit_date', '<=', $to_date);
+            }else{
+                $result = Substation::where('ba', 'LIKE', '%' . $ba . '%');
+            }
+
+          $data=  $result->select(
+                    'id',
+                    'name',
+                    \DB::raw("CASE WHEN (gate_status->>'unlocked')::text='true' THEN 'yes' ELSE '' END as unlocked"),
+                    \DB::raw("CASE WHEN (gate_status->>'demaged')::text='true' THEN 'yes' ELSE '' END as demaged"),
+                    \DB::raw("CASE WHEN (gate_status->>'other')::text='true' THEN 'yes' ELSE '' END as other_gate"),
+
+                    \DB::raw("CASE WHEN (building_status->>'broken_roof')::text='true' THEN 'yes' ELSE '' END as broken_roof"),
+                    \DB::raw("CASE WHEN (building_status->>'broken_gutter')::text='true' THEN 'yes' ELSE '' END as broken_gutter"),
+                    \DB::raw("CASE WHEN (building_status->>'broken_base')::text='true' THEN 'yes' ELSE '' END as broken_base"),
+                    \DB::raw("CASE WHEN (building_status->>'other')::text='true' THEN 'yes' ELSE '' END as building_other"),
+                    'grass_status',
+                    'tree_branches_status',
+                    'advertise_poster_status',
+                    'total_defects',
+                )
+                ->get();
+
+            return datatables()
+                ->of($data)->make(true);
+        }
         return view('substation.index');
     }
 
@@ -342,8 +381,7 @@ $total_defects = 0;
                 ->get();
 
             return datatables()
-                ->of($data)
-                ->toJson();
+                ->of($data)->make(true);
         }
         return view('substation.index');
     }

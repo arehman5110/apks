@@ -46,25 +46,25 @@ class ThirdPartyExcelController extends Controller
                     $worksheet->setCellValue('H' . $i, $rec->road_name);
                     $worksheet->setCellValue('I' . $i, $rec->project_name);
                     $worksheet->setCellValue('J' . $i, $rec->feeder_involved);
-                    $worksheet->setCellValue('K' . $i, $rec->km_plan);
-                    $worksheet->setCellValue('L' . $i, $rec->km_actual);
-                    $worksheet->setCellValue('M' . $i, $rec->digging);
-                    $worksheet->setCellValue('N' . $i, $rec->notice);
+                    // $worksheet->setCellValue('K' . $i, $rec->km_plan);
+                    // $worksheet->setCellValue('L' . $i, $rec->km_actual);
+                    $worksheet->setCellValue('K' . $i, $rec->digging);
+                    $worksheet->setCellValue('L' . $i, $rec->notice);
 
-                    $worksheet->setCellValue('O' . $i, $rec->supervision);
-                    $worksheet->setCellValue('P' . $i, $rec->company_name);
-                    $worksheet->setCellValue('Q' . $i, $rec->office_phone_no);
+                    $worksheet->setCellValue('M' . $i, $rec->supervision);
+                    $worksheet->setCellValue('N' . $i, $rec->company_name);
+                    $worksheet->setCellValue('O' . $i, $rec->office_phone_no);
 
-                    $worksheet->setCellValue('R' . $i, $rec->main_contractor);
+                    $worksheet->setCellValue('P' . $i, $rec->main_contractor);
 
-                    $worksheet->setCellValue('S' . $i, $rec->developer_phone_no);
+                    $worksheet->setCellValue('Q' . $i, $rec->developer_phone_no);
 
-                    $worksheet->setCellValue('T' . $i, $rec->contractor_company_name);
+                    $worksheet->setCellValue('R' . $i, $rec->contractor_company_name);
 
-                    $worksheet->setCellValue('U' . $i, $rec->site_supervisor_name);
-                    $worksheet->setCellValue('V' . $i, $rec->site_supervisor_phone_no);
-                    $worksheet->setCellValue('W' . $i, $rec->excavator_operator_name);
-                    $worksheet->setCellValue('X' . $i, $rec->excavator_machinery_reg_no);
+                    $worksheet->setCellValue('S' . $i, $rec->site_supervisor_name);
+                    $worksheet->setCellValue('T' . $i, $rec->site_supervisor_phone_no);
+                    $worksheet->setCellValue('U' . $i, $rec->excavator_operator_name);
+                    $worksheet->setCellValue('V' . $i, $rec->excavator_machinery_reg_no);
 
                     $i++;
                 }

@@ -176,7 +176,7 @@
                         </div>
                         <div class="row mb-2">
                             <div class="col-md-4"><label for="upload_notice">Generate Notice</label></div>
-                            <div class="col-md-8"><a href="/{{app()->getLocale()}}/generate-third-party-pdf/{{$data->id}}" target="_blank" rel="noopener noreferrer" >
+                            <div class="col-md-8"><a href="" target="_blank" id="generate-notice-button" rel="noopener noreferrer" >
                                 <button type="button" class="btn-sm text-white btn" style="background-color: #708090">Generate Notice</button>
                             </a></div>
                         </div>
@@ -224,6 +224,7 @@
                 var id = button.data('id');
                 $('#modal_id').val(id);
                 $('#wp_name').val(button.data('wp_name'))
+                $('#generate-notice-button').attr('href' , '/{{app()->getLocale()}}/generate-third-party-pdf/'+id)
 
                 var modal = $(this);
                 $('#remove-foam').attr('action', '/' + langs + '/third-party-digging/' + id)
