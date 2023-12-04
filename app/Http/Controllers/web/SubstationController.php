@@ -21,19 +21,24 @@ class SubstationController extends Controller
      */
     public function index(Request $request)
     {
-        $ba = Auth::user()->ba;
+
 
         if ($request->ajax()) {
+
+            $ba = $request->filled('ba') ? $request->ba : Auth::user()->ba ;
+
+
             if ($request->filled('from_date') || $request->filled('to_date')) {
                 $from_date = $request->filled('from_date') ? $request->from_date : Substation::min('visit_date');
                 $to_date = $request->filled('to_date') ? $request->to_date : Substation::max('visit_date');
                 $result = Substation::where('ba', 'LIKE', '%' . $ba . '%')
-                    ->where('ba', '<>', '')
+
                     ->where('visit_date', '>=', $from_date)
                     ->where('visit_date', '<=', $to_date);
             } else {
-                $result = Substation::where('ba', 'LIKE', '%' . $ba . '%')->where('ba', '<>', '');
+                $result = Substation::where('ba', 'LIKE', '%' . $ba . '%');
             }
+
 
             $data = $result
                 ->select(
@@ -52,16 +57,18 @@ class SubstationController extends Controller
                     'advertise_poster_status',
                     'total_defects',
                     'visit_date',
-                    'qa_status',
+                    // 'qa_status',
                     'substation_image_1',
                     'substation_image_2',
                 )
-                ->orderBy('visit_date')
+
                 ->get();
 
-            return datatables()
+                return datatables()
                 ->of($data)
                 ->make(true);
+
+
         }
         return view('substation.index');
     }
