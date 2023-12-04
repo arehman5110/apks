@@ -62,11 +62,9 @@
             border: 0px !important;
             background: transparent !important;
             padding: 20px 14px;
-    font-size: 15px !important;
+            font-size: 15px !important;
 
         }
-
-
     </style>
 @endsection
 
@@ -150,6 +148,12 @@
                     <input type="radio" name="select_layer" id="select_layer_main" value="substation_with_defects"
                         onchange="selectLayer(this.value)">
                     <label for="select_layer_main">Substation with defects</label>
+                </div>
+
+                <div class="">
+                    <input type="radio" name="select_layer" id="select_layer_main" value="substation_without_defects"
+                        onchange="selectLayer(this.value)">
+                    <label for="select_layer_main">Substation without defects</label>
                 </div>
                 <div class=" mx-4">
                     <input type="radio" name="select_layer" id="select_layer_unsurveyed" value="unsurveyed"
@@ -329,7 +333,8 @@
                 map.removeLayer(marker)
             }
             $.ajax({
-                url: '/{{ app()->getLocale() }}/search/find-substation-cordinated/' + encodeURIComponent(name),
+                url: '/{{ app()->getLocale() }}/search/find-substation-cordinated/' + encodeURIComponent(
+                    name),
                 dataType: 'JSON',
                 //data: data,
                 method: 'GET',
@@ -390,9 +395,13 @@
                 buffer: 10
             })
 
+
             map.addLayer(substation_with_defects)
             substation_with_defects.bringToFront()
 
+            if (unservey != '') {
+                map.removeLayer(unservey)
+            }
             unservey = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
                 layers: 'cite:substation_unsurveyed',
                 format: 'image/png',
@@ -407,6 +416,36 @@
             unservey.bringToFront()
 
 
+            if (substation_without_defects != '') {
+                map.removeLayer(substation_without_defects)
+            }
+            substation_without_defects = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:substation_without_defects',
+                format: 'image/png',
+                cql_filter: "ba ILIKE '%" + param + "%'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+
+            map.addLayer(substation_without_defects)
+            substation_without_defects.bringToFront()
+
+            if (pano_layer !== '') {
+                map.removeLayer(pano_layer)
+            }
+            pano_layer = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+        layers: 'cite:pano_apks',
+        format: 'image/png',
+        cql_filter: "ba ILIKE '%" + param + "%'",
+        maxZoom: 21,
+        transparent: true
+    }, {
+        buffer: 10
+    });
+    map.addLayer(pano_layer);
+    map.addLayer(pano_layer)
 
             addGroupOverLays()
 
@@ -423,10 +462,10 @@
             groupedOverlays = {
                 "POI": {
                     'BA': boundary,
-                    'Substation with defects': substation_with_defects,
-                    'Substation Unsurveyed': unservey,
-
-                    // 'Pano': pano_layer
+                    'With defects': substation_with_defects,
+                    'Without defects' : substation_without_defects,
+                    'Unsurveyed': unservey,
+                    'Pano': pano_layer,
                 }
             };
             //add layer control on top right corner of map
