@@ -103,6 +103,11 @@
                             </select>
                         </div>
 
+                        <div class="col-md-2">
+                            <br>
+                            <button class="btn btn-secondary btn-sm mt-2    " type="button" onclick="removePoint()">Clear Points</button>
+                        </div>
+
 
                     </div>
                 </div>
@@ -545,21 +550,27 @@
             })
         }
 
-        var marker = '';
-
+        var marker = [];
+        var layer_index = 0;
 
         function showPoint(param_x , param_y){
-            if (marker != '') {
-                map.removeLayer(marker)
-            }
-            marker = new L.Marker([param_y, param_x]);
-                    map.addLayer(marker);
 
-                    map.flyTo([parseFloat(param_y), parseFloat(param_x)], zoom, {
+            marker[layer_index] = new L.Marker([param_y, param_x]);
+                    map.addLayer(marker[layer_index]);
+                layer_index++;
+                    map.flyTo([parseFloat(param_y), parseFloat(param_x)], 18, {
                 duration: 1.5, // Animation duration in seconds
                 easeLinearity: 0.25,
             });
 
+        }
+
+        function removePoint(){
+           for(let i = 0 ; i < layer_index ; i++){
+            if (marker[i] != '') {
+                map.removeLayer(marker[i])
+            }
+           }
         }
     </script>
 @endsection
