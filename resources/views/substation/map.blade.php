@@ -147,9 +147,9 @@
             <span class="text-danger" id="er-select-layer"></span>
             <div class="d-sm-flex">
                 <div class="">
-                    <input type="radio" name="select_layer" id="select_layer_main" value="main_substation"
+                    <input type="radio" name="select_layer" id="select_layer_main" value="substation_with_defects"
                         onchange="selectLayer(this.value)">
-                    <label for="select_layer_main">Substation Surveyed</label>
+                    <label for="select_layer_main">Substation with defects</label>
                 </div>
                 <div class=" mx-4">
                     <input type="radio" name="select_layer" id="select_layer_unsurveyed" value="unsurveyed"
@@ -376,12 +376,12 @@
             });
 
 
-            if (substation != '') {
-                map.removeLayer(substation)
+            if (substation_with_defects != '') {
+                map.removeLayer(substation_with_defects)
             }
 
-            substation = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-                layers: 'cite:substation_surveyed',
+            substation_with_defects = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:surved_with_defects',
                 format: 'image/png',
                 cql_filter: "ba ILIKE '%" + param + "%'",
                 maxZoom: 21,
@@ -390,8 +390,8 @@
                 buffer: 10
             })
 
-            map.addLayer(substation)
-            substation.bringToFront()
+            map.addLayer(substation_with_defects)
+            substation_with_defects.bringToFront()
 
             unservey = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
                 layers: 'cite:substation_unsurveyed',
@@ -423,9 +423,10 @@
             groupedOverlays = {
                 "POI": {
                     'BA': boundary,
-                    'Substation Surveyed': substation,
+                    'Substation with defects': substation_with_defects,
                     'Substation Unsurveyed': unservey,
-                    'Pano': pano_layer
+
+                    // 'Pano': pano_layer
                 }
             };
             //add layer control on top right corner of map
@@ -458,7 +459,7 @@
             </td> </tr>
         `
 
- 
+
             console.log(data.id);
             openDetails(data.id);
 

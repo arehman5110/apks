@@ -25,6 +25,7 @@
     var road = '';
     var unservey = '';
     var pano_layer = '';
+    var  substation_with_defects = '';
 
     var popup = L.popup();
 
@@ -57,8 +58,8 @@
             addpanolayer();
         } else {
 
-            if (param == 'substation') {
-                sel_lyr = substation;
+            if (param == 'substation_with_defects') {
+                sel_lyr = substation_with_defects;
 
             } else if (param == 'feeder_pillar') {
                 sel_lyr = feeder_pillar;
