@@ -32,11 +32,11 @@ $ba = Auth::user()->ba;
             if ($request->filled('from_date') || $request->filled('to_date')) {
                 $from_date = $request->filled('from_date') ? $request->from_date : Substation::min('visit_date');
                 $to_date = $request->filled('to_date') ? $request->to_date : Substation::max('visit_date');
-                $result = Substation::where('ba', 'LIKE', '%' . $ba . '%')
+                $result = Substation::where('ba', 'LIKE', '%' . $ba . '%')->where('ba', '<>' , '')
                 ->where('visit_date', '>=', $from_date)
                 ->where('visit_date', '<=', $to_date);
             }else{
-                $result = Substation::where('ba', 'LIKE', '%' . $ba . '%');
+                $result = Substation::where('ba', 'LIKE', '%' . $ba . '%')->where('ba', '<>' , '');
             }
 
           $data=  $result->select(
