@@ -26,6 +26,7 @@
     var unservey = '';
     var pano_layer = '';
     var  substation_with_defects = '';
+    var substation_without_defects ='';
 
     var popup = L.popup();
 
@@ -61,7 +62,12 @@
             if (param == 'substation_with_defects') {
                 sel_lyr = substation_with_defects;
 
-            } else if (param == 'feeder_pillar') {
+            }
+            else if (param == 'substation_without_defects') {
+                sel_lyr = substation_without_defects;
+
+            }
+            else if (param == 'feeder_pillar') {
                 sel_lyr = feeder_pillar;
 
             } else if (param == 'main_substation') {
