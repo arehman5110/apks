@@ -20,7 +20,9 @@
         /* .table-responsive::-webkit-scrollbar {
             display: none;
         } */
-
+        .lb-outerContainer ,.lb-closeContainer {
+        display: block !important;
+    }
         #map {
             height: 800px;
         }
