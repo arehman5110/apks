@@ -14,6 +14,10 @@
         .collapse {
             visibility: visible;
         }
+
+        .table-responsive::-webkit-scrollbar {
+            display: none;
+        }
     </style>
 @endsection
 
@@ -47,7 +51,7 @@
 
 
             <div class="row">
-                    @include('components.qr-filter',['url'=>"generate-third-party-digging-excel"])
+                @include('components.qr-filter', ['url' => 'generate-third-party-digging-excel'])
                 <div class="card">
 
                     <div class="card-header d-flex justify-content-between ">
@@ -78,7 +82,7 @@
 
                         </div>
                         <div class="table-responsive">
-                            <table id="myTable" class="table table-bordered table-hover">
+                            <table id="myTable" class="table table-bordered table-hover data-table">
 
 
                                 <thead style="background-color: #E4E3E3 !important">
@@ -86,63 +90,18 @@
                                         <th>WP NAME</th>
                                         <th>ZONE</th>
                                         <th>BA</th>
-                                        {{-- <th>TEAM</th> --}}
                                         <th>SURVEY DATE</th>
+                                        <th>PATROLLING TIME</th>
+                                        <th>NOTICE</th>
+                                        <th>SUPERVISION</th>
+                                        <th>SURVEY STATUS</th>
+                                        <th>NOTICE</th>
                                         <th>ACTION</th>
 
                                     </tr>
                                 </thead>
                                 <tbody>
 
-                                    @foreach ($datas as $data)
-                                        <tr>
-                                            <td class="align-middle">{{ $data->wp_name }}</td>
-                                            <td class="align-middle">{{ $data->zone }}</td>
-                                            <td>{{ $data->ba }}</td>
-                                            {{-- <td class="align-middle text-center">{{ $data->team_name }}</td> --}}
-                                            <td class="align-middle text-center">
-                                                @php
-                                                    $date = new DateTime($data->survey_date);
-                                                    $datePortion = $date->format('Y-m-d');
-
-                                                @endphp
-                                                {{ $datePortion }}
-                                            </td>
-                                            <td class="text-center">
-
-                                                <button type="button" class="btn  " data-toggle="dropdown">
-                                                    <img
-                                                        src="{{ URL::asset('assets/web-images/three-dots-vertical.svg') }}">
-                                                </button>
-                                                <div class="dropdown-menu" role="menu">
-
-                                                    <form
-                                                        action="{{ route('third-party-digging.show', [app()->getLocale(), $data->id]) }}"
-                                                        method="get">
-                                                        <button type="submit"
-                                                            class="dropdown-item pl-3 w-100 text-left">Detail</button>
-                                                    </form>
-
-                                                    <form
-                                                        action="{{ route('third-party-digging.edit', [app()->getLocale(), $data->id]) }}"
-                                                        method="get">
-                                                        <button type="submit"
-                                                            class="dropdown-item pl-3 w-100 text-left">Edit</button>
-                                                    </form>
-
-
-                                                    <button type="button" class="btn btn-primary dropdown-item"
-                                                        data-id="{{ $data->id }}" data-toggle="modal"
-                                                        data-target="#myModal">
-                                                        Remove
-                                                    </button>
-
-
-                                                </div>
-                                            </td>
-
-                                        </tr>
-                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -194,20 +153,134 @@
 @section('script')
     <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{asset('assets/js/generate-qr.js')}}"></script>
+    <script src="{{ asset('assets/js/generate-qr.js') }}"></script>
 
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.3/datatables.min.js"></script>
 
     <script>
+        var from_date = '';
+        var to_date = '';
         $(document).ready(function() {
-            $('#myTable').DataTable({
-                aaSorting: [
+
+
+
+            var table = $('.data-table').DataTable({
+
+                processing: true,
+                serverSide: true,
+
+                ajax: {
+                    url: "{{ route('third-party-digging.index', app()->getLocale()) }}",
+                    type: "GET",
+                    data: function(d) {
+
+                        if (from_date) {
+                            d.from_date = from_date;
+                        }
+
+                        if (to_date) {
+                            d.to_date = to_date;
+                        }
+                    }
+                },
+                columns: [{
+                        data: 'wp_name',
+                        name: 'wop_name '
+                    },
+                    {
+                        data: 'zone',
+                        name: 'zone',
+                    },
+                    {
+                        data: 'ba',
+                        name: 'ba'
+                    },
+                    {
+                        render: function(data, type, full) {
+                            var surveyDate = new Date(full.survey_date);
+                            var formattedDate = surveyDate.toLocaleDateString('en-US');
+                            return formattedDate;
+                        },
+                        name: 'survey_date'
+                    },
+                    {
+                        render: function(data, type, full) {
+                            var patrollingTime = new Date(full.patrolling_time);
+                            var formattedTime = patrollingTime.toLocaleTimeString('en-US', {
+                                hour12: false
+                            });
+                            return formattedTime;
+                        },
+                        name: 'patrolling_time'
+                    },
+                    {
+                        data: 'digging',
+                        name: 'digging'
+                    },
+                    {
+                        data: 'supervision',
+                        name: 'supervision'
+                    },
+                    {
+                        data: 'survey_status',
+                        name: 'survey_status',
+                    },
+                    {
+                        data: 'notice',
+                        name: 'notice'
+                    },
+
+
+                    {
+                        render: function(data, type, full) {
+
+                            var id = full.id;
+                            return `<button type="button" class="btn  " data-toggle="dropdown">
+                            <img
+                                src="{{ URL::asset('assets/web-images/three-dots-vertical.svg') }}">
+                        </button>
+                        <div class="dropdown-menu" role="menu">
+                            <form action="/{{ app()->getLocale() }}/third-party-digging/${id}" method="get">
+
+                                <button type="submit" class="dropdown-item pl-3 w-100 text-left">Detail</button>
+                            </form>
+                            <form action="/{{ app()->getLocale() }}/third-party-digging/${id}/edit" method="get">
+
+                                <button type="submit" class="dropdown-item pl-3 w-100 text-left">Edit</button>
+                            </form>
+                            <button type="button" class="btn btn-primary dropdown-item" data-id="${id}" data-toggle="modal" data-target="#myModal">
+                                Remove
+                            </button>
+                        </div>
+                        `;
+                        }
+                    }
+
+                ],
+                order: [
                     [3, 'desc']
                 ],
-                "lengthMenu": [
-                    [10, 25, 50, -1],
-                    [10, 25, 50, "All"]
-                ],
+                createdRow: function(row, data, dataIndex) {
+                    $(row).find('td:eq(1)').addClass('text-center');
+                    $(row).find('td:eq(2)').addClass('text-center');
+                    $(row).find('td:eq(3)').addClass('text-center');
+                    $(row).find('td:eq(4)').addClass('text-center');
+                }
+            })
+
+
+            $('#excel_from_date').on('change', function() {
+                from_date = $(this).val();
+                table.ajax.reload(function() {
+                    table.draw('page');
+                });
+            })
+
+            $('#excel_to_date').on('change', function() {
+                to_date = $(this).val();
+                table.ajax.reload(function() {
+                    table.draw('page');
+                });
             });
             $('#myModal').on('show.bs.modal', function(event) {
                 var button = $(event.relatedTarget);
@@ -218,7 +291,5 @@
             });
 
         });
-
-
     </script>
 @endsection

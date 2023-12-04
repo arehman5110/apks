@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Yajra\DataTables\DataTables;
+
 
 class ThirdPartyDiggingController extends Controller
 {
@@ -18,15 +20,29 @@ class ThirdPartyDiggingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-
+    public function index(Request $request)
     {
-        // return ThirdPartyDiging::all();
-        $ba = Auth::user()->ba ;
-        $zone = Auth::user()->zone;
-        $datas = ThirdPartyDiging::where('ba', 'LIKE', '%' . $ba . '%')->where('zone', 'LIKE', '%' . $zone . '%')->get();
+        $ba = Auth::user()->ba;
 
-        return view('third-party.index', ['datas' => $datas]);
+
+
+        if ($request->ajax()) {
+            $query = ThirdPartyDiging::where('ba', 'LIKE', '%' . $ba . '%');
+
+            if ($request->filled('from_date') || $request->filled('to_date')) {
+                $from_date = $request->filled('from_date') ? $request->from_date : ThirdPartyDiging::min('visit_date');
+                $to_date = $request->filled('to_date') ? $request->to_date : ThirdPartyDiging::max('visit_date');
+                $query = $query
+                    ->where('visit_date', '>=', $from_date)
+                    ->where('visit_date', '<=', $to_date);
+            }
+            $data = $query->select('wp_name', 'zone', 'ba', 'survey_date', 'id' , 'patrolling_time' , 'supervision','notice' , 'survey_status','digging')->get();
+            return datatables()
+                ->of($data)
+                ->make(true);
+        }
+
+        return view('third-party.index');
     }
 
     /**
@@ -37,7 +53,7 @@ class ThirdPartyDiggingController extends Controller
     public function create()
     {
         $ba = Auth::user()->ba;
-        $sql =  DB::select("SELECT ppb_zone FROM ba where station = '$ba'");
+        $sql = DB::select("SELECT ppb_zone FROM ba where station = '$ba'");
 
         $team_id = auth()->user()->id_team;
         $team = Team::find($team_id)->team_name;
@@ -67,7 +83,6 @@ class ThirdPartyDiggingController extends Controller
             $data->patrolling_time = $combinedDateTime;
             // $data->project_name = $request->project_name;
             $data->road_name = $request->road_name;
-
 
             // $data->km_actual = $request->km_actual;
 
@@ -101,17 +116,17 @@ class ThirdPartyDiggingController extends Controller
                 }
             }
 
-            $data->geom = DB::raw("ST_GeomFromText('POINT(".$request->log." ".$request->lat.")',4326)");
+            $data->geom = DB::raw("ST_GeomFromText('POINT(" . $request->log . ' ' . $request->lat . ")',4326)");
 
             $data->save();
 
             return redirect()
-                ->route('third-party-digging.index',app()->getLocale())
+                ->route('third-party-digging.index', app()->getLocale())
                 ->with('success', 'Form Intserted');
         } catch (\Throwable $th) {
             return $th->getMessage();
             return redirect()
-                ->route('third-party-digging.index',app()->getLocale())
+                ->route('third-party-digging.index', app()->getLocale())
                 ->with('failed', 'Form Intserted Failed');
         }
     }
@@ -122,15 +137,13 @@ class ThirdPartyDiggingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($language,$id)
+    public function show($language, $id)
     {
         $data = ThirdPartyDiging::find($id);
         if ($data) {
             return view('third-party.show', ['data' => $data]);
         }
         return abort(404);
-
-
     }
 
     /**
@@ -139,14 +152,12 @@ class ThirdPartyDiggingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($language,$id)
+    public function edit($language, $id)
     {
-
-
         $wp = WorkPackage::all();
         $data = ThirdPartyDiging::find($id);
 
-        return view('third-party.edit', ['data' => $data,'wp'=>$wp]);
+        return view('third-party.edit', ['data' => $data, 'wp' => $wp]);
     }
 
     /**
@@ -156,10 +167,9 @@ class ThirdPartyDiggingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$language, $id)
+    public function update(Request $request, $language, $id)
     {
         try {
-
             $currentDate = Carbon::now()->toDateString();
             $combinedDateTime = $currentDate . ' ' . $request->patrolling_time;
 
@@ -205,17 +215,15 @@ class ThirdPartyDiggingController extends Controller
                 }
             }
 
-
-
             $data->update();
 
             return redirect()
-                ->route('third-party-digging.index',app()->getLocale())
+                ->route('third-party-digging.index', app()->getLocale())
                 ->with('success', 'Form Update');
         } catch (\Throwable $th) {
-             return $th->getMessage();
+            return $th->getMessage();
             return redirect()
-                ->route('third-party-digging.index',app()->getLocale())
+                ->route('third-party-digging.index', app()->getLocale())
                 ->with('failed', 'Form Intserted Failed');
         }
     }
@@ -226,18 +234,18 @@ class ThirdPartyDiggingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($language,$id)
+    public function destroy($language, $id)
     {
         try {
             ThirdPartyDiging::find($id)->delete();
 
             return redirect()
-                ->route('third-party-digging.index',app()->getLocale())
+                ->route('third-party-digging.index', app()->getLocale())
                 ->with('success', 'Recored Removed');
         } catch (\Throwable $th) {
             // return $th->getMessage();
             return redirect()
-                ->route('third-party-digging.index',app()->getLocale())
+                ->route('third-party-digging.index', app()->getLocale())
                 ->with('failed', 'Request Failed');
         }
     }

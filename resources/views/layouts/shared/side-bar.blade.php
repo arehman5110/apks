@@ -38,7 +38,7 @@
                     <a href="/pencawang" class="nav-link ">
                         <i class="fas fa-road"></i>
 
-                        <p>{{__('messages.patrolling')}}</p>
+                        <p>{{__('messages.patrolling')}} 
 
                         <i class="right fas fa-angle-left"></i></p>
                     </a>
