@@ -106,6 +106,7 @@
                                     <thead style="background-color: #E4E3E3 !important">
                                         <tr>
                                             <th rowspan="2">{{ __('messages.name') }}</th>
+                                            <th rowspan="2">{{__('messages.visit_date')}} </th>
                                             <th colspan="3" class="text-center">{{ __('messages.gate') }}</th>
                                             <th colspan="2" class="text-center">{{ __('messages.tree') }}</th>
                                             <th colspan="4" class="text-center">{{ __('messages.building_defects') }}
@@ -219,6 +220,11 @@
                         name: 'name'
                     },
                     {
+                        data:'visit_date',
+                        name:'visit_date',
+                        orderable: true
+                    },
+                    {
                         data: 'unlocked',
                         name: 'unlocked'
                     },
@@ -290,6 +296,9 @@
                     }
 
                 ],
+                order: [
+            [1, 'desc']
+        ],
                 createdRow: function(row, data, dataIndex) {
                     $(row).find('td:eq(1)').addClass('text-center');
                     $(row).find('td:eq(2)').addClass('text-center');
@@ -322,6 +331,8 @@
         });
     });
 
+    var order = table.order();
+    var sortOrder = order[0][1];
 
             $('#myModal').on('show.bs.modal', function(event) {
                 var button = $(event.relatedTarget);

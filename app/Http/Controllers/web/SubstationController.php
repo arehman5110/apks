@@ -54,7 +54,8 @@ $ba = Auth::user()->ba;
                     'tree_branches_status',
                     'advertise_poster_status',
                     'total_defects',
-                )
+                    'visit_date',
+                ) ->orderBy('visit_date')
                 ->get();
 
             return datatables()

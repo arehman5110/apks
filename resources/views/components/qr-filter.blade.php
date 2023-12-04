@@ -1,3 +1,8 @@
+<style>
+    .row{
+        border: 0px;
+    }
+</style>
 <div class="col-12">
     <div class="collapse" id="collapseQr">
         <div class="card card-body">
@@ -37,7 +42,7 @@
                         <label for="excel_to_date">To Date : </label>
                         <input type="date" name="excel_to_date" id="excel_to_date" onchange="setMaxDate(this.value)" class="form-control">
                     </div>
-                   
+
                     <div class="col-md-1 pt-2 ">
 
                         <button type="submit" class="btn text-white btn-sm mt-4 " class="form-control"
