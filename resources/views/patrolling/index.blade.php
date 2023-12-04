@@ -17,12 +17,12 @@
             visibility: visible;
         }
 
-        .table-responsive::-webkit-scrollbar {
+        /* .table-responsive::-webkit-scrollbar {
             display: none;
-        }
+        } */
 
         #map {
-            height: 700px;
+            height: 800px;
         }
 
         .lower-header th,
@@ -69,73 +69,7 @@
             @include('components.qr-filter', ['url' => 'generate-patrolling-excel'])
 
             {{-- DATA TABLE --}}
-            <div class="col-12">
-                <div class="card">
 
-                    <div class="card-header d-flex justify-content-between ">
-                        <p class="mb-0">{{ __('messages.Patrolling') }}</p>
-                        <div class="d-flex ml-auto">
-                            <button class="btn text-white  btn-sm mr-4" type="button" data-toggle="collapse"
-                                style="background-color: #708090" data-target="#collapseQr" aria-expanded="false"
-                                aria-controls="collapseQr">
-                                QR Feeder Pillar
-                            </button>
-                        </div>
-                    </div>
-
-
-                    <div class="card-body">
-                        <div class="text-right mb-4">
-
-                        </div>
-
-
-
-                        <div class="table-responsive add-substation" id="add-substation">
-                            <table id="" class="table table-bordered  table-hover data-table">
-
-
-                                <thead style="background-color: #E4E3E3 !important">
-                                    <tr>
-                                        <th class="text-center">WP NAME</th>
-                                        <th class="text-center">CYCLE</th>
-                                        <th class="text-center">READING START</th>
-                                        <th class="text-center">READING END</th>
-                                        <th class="text-center">TOATL PATROLLING (KM)</th>
-                                        <th class="text-center">PATROLLING DATE</th>
-                                        <th class="text-center">PATROLLING TIME</th>
-                                        <th>STATUS</th>
-
-                                        <th class="tex-center">IMAGE READING START</th>
-                                        <th class="tex-center">IMAGE READING END</th>
-                                        <th class="text-center">PATROLLING PATH START</th>
-                                        <th class="text-center">PATROLLING PATH END</th>
-
-                                        <th class="text-center">PATROLLING PATH</th>
-
-
-
-
-                                    </tr>
-
-                                </thead>
-                                <tbody>
-
-                                </tbody>
-                            </table>
-                        </div>
-
-
-
-
-
-
-                    </div>
-                </div>
-
-
-
-            </div>
 
 
 
@@ -175,9 +109,11 @@
             </div>
 
 
+            <div class="row">
+
 
             {{-- MAP --}}
-            <div class="w-100 p-0 ">
+            <div class="col-md-8 p-0 ">
                 <div class="card p-0 m-0"
                     style="border: 1px solid rgb(177, 175, 175) !important; border-radius: 0px !important;">
                     <div class="card-header text-center"><strong> MAP</strong></div>
@@ -191,7 +127,76 @@
             </div>
 
 
+            <div class="col-md-4">
+                <div class="card">
 
+                    <div class="card-header d-flex justify-content-between ">
+                        <p class="mb-0">{{ __('messages.Patrolling') }}</p>
+                        <div class="d-flex ml-auto">
+                            <button class="btn text-white  btn-sm mr-4" type="button" data-toggle="collapse"
+                                style="background-color: #708090" data-target="#collapseQr" aria-expanded="false"
+                                aria-controls="collapseQr">
+                                QR Feeder Pillar
+                            </button>
+                        </div>
+                    </div>
+
+
+                    <div class="card-body">
+                        <div class="text-right mb-4">
+
+                        </div>
+
+
+
+                        <div class="table-responsive add-substation" id="add-substation">
+                            <table id="" class="table table-bordered  table-hover data-table">
+
+
+                                <thead style="background-color: #E4E3E3 !important">
+                                    <tr>
+                                        <th class="text-center">WP NAME</th>
+                                        <th class="text-center">CYCLE</th>
+                                        <th class="text-center">READING START</th>
+                                        <th class="text-center">READING END</th>
+                                        <th class="text-center">TOATL PATROLLING (KM)</th>
+                                        <th class="text-center">PATROLLING DATE</th>
+                                        <th class="text-center">PATROLLING TIME</th>
+                                        <th>STATUS</th>
+
+                                        <th class="tex-center">IMAGE READING START</th>
+                                        <th class="tex-center">IMAGE READING END</th>
+                                        {{-- <th class="text-center">PATROLLING PATH START</th>
+                                        <th class="text-center">PATROLLING PATH END</th> --}}
+
+                                        <th class="text-center">PATROLLING PATH</th>
+
+
+
+
+                                    </tr>
+
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+
+
+
+
+
+                    </div>
+                </div>
+
+
+
+            </div>
+
+
+ </div>
 
         </div>
     </section>
@@ -462,38 +467,51 @@
                         },
                         name: 'image_reading_end'
                     },
+            //         {
+            //             render: function(data, type, full) {
+
+            //                 var id = full.id;
+            //                 return `<button type="button" class="btn  " onclick="showPoint(${full.start_x} , ${full.start_y})" data-toggle="dropdown" >
+
+            //     <i class="fa fa-eye" aria-hidden="true"></i>
+            // </button>
+
+            // `;
+            //             }
+            //         },
+            //         {
+            //             render: function(data, type, full) {
+
+            //                 var id = full.id;
+            //                 return `<button type="button" class="btn  " onclick="showPoint(${full.end_x} , ${full.end_y})" data-toggle="dropdown" >
+
+            //     <i class="fa fa-eye" aria-hidden="true"></i>
+            // </button>
+
+            // `;
+            //             }
+            //         },
                     {
                         render: function(data, type, full) {
 
                             var id = full.id;
-                            return `<button type="button" class="btn  " onclick="showPoint(${full.start_x} , ${full.start_y})" data-toggle="dropdown" >
+                            return `<button type="button" class="btn  " data-toggle="dropdown">
+                                <i class="fa fa-eye" aria-hidden="true"></i>
+                        </button>
+                        <div class="dropdown-menu" role="menu">
 
-                <i class="fa fa-eye" aria-hidden="true"></i>
-            </button>
 
-            `;
-                        }
-                    },
-                    {
-                        render: function(data, type, full) {
+                                <button type="button" onclick="getGeoJson(${full.id})" class="dropdown-item pl-3 w-100 text-left">Full Path</button>
 
-                            var id = full.id;
-                            return `<button type="button" class="btn  " onclick="showPoint(${full.end_x} , ${full.end_y})" data-toggle="dropdown" >
 
-                <i class="fa fa-eye" aria-hidden="true"></i>
-            </button>
+                                <button type="button" class="btn btn-primary dropdown-item" onclick="showPoint(${full.start_x} , ${full.start_y})"  >
+                                Starting Point
+                            </button>
+                                <button type="button" onclick="showPoint(${full.end_x} , ${full.end_y})" class="dropdown-item pl-3 w-100 text-left">End Point</button>
 
-            `;
-                        }
-                    },
-                    {
-                        render: function(data, type, full) {
 
-                            var id = full.id;
-                            return `<button type="button" class="btn  " onclick="getGeoJson(${full.id})" data-toggle="dropdown" >
+                        </div>
 
-                <i class="fa fa-eye" aria-hidden="true"></i>
-            </button>
 
             `;
                         }
@@ -508,6 +526,8 @@
                     $(row).find('td:eq(3)').addClass('text-center');
                     $(row).find('td:eq(4)').addClass('text-center');
                     $(row).find('td:eq(5)').addClass('text-center');
+                    $(row).find('td:eq(10)').addClass('text-center');
+
 
 
 
