@@ -150,10 +150,10 @@
                     <label for="select_layer_main">Substation with defects</label>
                 </div>
 
-                <div class="">
-                    <input type="radio" name="select_layer" id="select_layer_main" value="substation_without_defects"
+                <div class="mx-4">
+                    <input type="radio" name="select_layer" id="substation_without_defects" value="substation_without_defects"
                         onchange="selectLayer(this.value)">
-                    <label for="select_layer_main">Substation without defects</label>
+                    <label for="substation_without_defects">Substation without defects</label>
                 </div>
                 <div class=" mx-4">
                     <input type="radio" name="select_layer" id="select_layer_unsurveyed" value="unsurveyed"

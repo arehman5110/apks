@@ -113,6 +113,8 @@
                                             </th>
                                             <th>{{ __('messages.add_clean_up') }}</th>
                                             <th rowspan="2">{{ __('messages.total_defects') }} </th>
+                                            {{-- <th rowspan="2">QA Status</th> --}}
+
                                             <th rowspan="2">ACTION</th>
 
                                         </tr>
@@ -166,6 +168,54 @@
                     <div class="modal-body">
                         Are You Sure ?
                         <input type="hidden" name="id" id="modal-id">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                        <button type="submit" class="btn btn-danger">Remove</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="qaStatusModal">
+        <div class="modal-dialog">
+            <div class="modal-content ">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Update Status</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <form action="" id="remove-foam" method="POST">
+
+                    @csrf
+
+                    <div class="modal-body form-input">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="name">Name</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text" name="" id="modal-name" disabled readonly >
+                            </div>
+
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="name">Total defects</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text" name="" id="modal-defects" disabled readonly >
+                            </div>
+
+
+                        </div>
+                        <input type="hidden" name="id" id="status-modal-id">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -270,6 +320,21 @@
                         data: 'total_defects',
                         name: 'total_defects'
                     },
+                    // {
+                    //     render:function(data , type , full){
+                    //         if (full.visit_date != '' && full.substation_image_1 != '' && full.substation_image_2 != '') {
+                    //             if (full.qa_status == '' ) {
+                    //                 return ` <button type="button" class="btn btn-primary "
+                    //                                         data-id="${full.id}" data-name="${full.name}" data-total_defects="${full.total_defects}" data-toggle="modal"
+                    //                                         data-target="#qaStatusModal">
+                    //                                         QA Status
+                    //                                     </button>`;
+                    //             }
+                    //         }else{
+                    //             return `<td></td>`;
+                    //         }
+                    //     }
+                    // },
                     {
                         render: function(data, type, full) {
 
@@ -337,6 +402,17 @@
             $('#myModal').on('show.bs.modal', function(event) {
                 var button = $(event.relatedTarget);
                 var id = button.data('id');
+                var modal = $(this);
+                $('#remove-foam').attr('action', '/en/substation/' + id)
+            });
+
+            $('#qaStatusModal').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget);
+                var id = button.data('id');
+
+                $('#modal-name').val(button.data('name'));
+                $('#modal-defects').val(button.data('total_defects'));
+                $('#status-modal-id').val(id)
                 var modal = $(this);
                 $('#remove-foam').attr('action', '/en/substation/' + id)
             });
