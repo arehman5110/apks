@@ -55,6 +55,10 @@ $ba = Auth::user()->ba;
                     'advertise_poster_status',
                     'total_defects',
                     'visit_date',
+                    'qa_status',
+                    'substation_image_1',
+                    'substation_image_2'
+
                 ) ->orderBy('visit_date')
                 ->get();
 
