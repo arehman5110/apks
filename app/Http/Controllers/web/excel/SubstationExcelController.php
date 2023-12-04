@@ -33,7 +33,7 @@ class SubstationExcelController extends Controller
                 ->whereDate('visit_date', '<=', $surveyDate_to)
                 ->select('*' , \DB::raw('ST_X(geom) as x'), \DB::raw('ST_Y(geom) as y'),)
                 ->get();
- 
+
 
             }else{
 
@@ -67,9 +67,9 @@ class SubstationExcelController extends Controller
                     $worksheet->setCellValue('K' . $i, number_format( $rec->y, 2) .",". number_format( $rec->x , 2));
                     if ($rec->gate_status) {
                         $gate_status = json_decode($rec->gate_status);
-                        $worksheet->setCellValue('R' . $i, substaionCheckBox('unlocked', $gate_status ) == 'checked' ? 'yes' : 'no' );
-                        $worksheet->setCellValue('R' . $i, substaionCheckBox('demaged', $gate_status ) == 'checked' ? 'yes' : 'no' );
-                        $worksheet->setCellValue('R' . $i, substaionCheckBox('other', $gate_status ) == 'checked' ? 'yes' : 'no' );
+                        $worksheet->setCellValue('L' . $i, substaionCheckBox('unlocked', $gate_status ) == 'checked' ? 'yes' : 'no' );
+                        $worksheet->setCellValue('M' . $i, substaionCheckBox('demaged', $gate_status ) == 'checked' ? 'yes' : 'no' );
+                        $worksheet->setCellValue('N' . $i, substaionCheckBox('other', $gate_status ) == 'checked' ? 'yes' : 'no' );
 
 
                     }
