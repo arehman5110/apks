@@ -1,40 +1,46 @@
 @extends('layouts.app', ['page_title' => 'Index'])
 
 @section('css')
-    @include('partials.map-css')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
     <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
 
     <style>
-        div#data-table_length,
-        div.data-table_length {
-            display: none;
-        }
 
+        select.custom-select.custom-select-sm.form-control.form-control-sm {
+                width: 65px !important;
+                min-width: 20px !important;
+            }
 
         .collapse {
             visibility: visible;
         }
+        input {
+        min-width: 16px !important;
+     }
 
-        /* .table-responsive::-webkit-scrollbar {
-            display: none;
-        } */
-        .lb-outerContainer ,.lb-closeContainer {
-        display: block !important;
-    }
+
         #map {
             height: 800px;
         }
 
-        .lower-header th,
+         th,
         td {
-            font-size: 14px !important;
+            font-size: 13px !important;
             padding: 5px !important;
         }
 
         th {
-            font-size: 15px !important
+            font-size: 14px !important
         }
     </style>
 @endsection
@@ -76,8 +82,8 @@
 
 
             {{-- BA ZONE SEARCH FILTER --}}
-            <div class="   col-12  w-100">
-                <div class="card p-0 mb-3">
+
+                <div class="form-input card p-0 mb-3">
                     <div class="card-body row">
 
                         <div class="col-md-3">
@@ -113,7 +119,7 @@
 
                     </div>
                 </div>
-            </div>
+
 
 
             <div class="row">

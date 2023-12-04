@@ -24,6 +24,7 @@
     var cable_bridge = '';
     var road = '';
     var unservey = '';
+    var pano_layer = '';
 
     var popup = L.popup();
 
@@ -45,7 +46,7 @@
 
 
 
-    
+
 
 
 
