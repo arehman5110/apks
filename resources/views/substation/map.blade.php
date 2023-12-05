@@ -151,8 +151,8 @@
                 </div>
 
                 <div class="mx-4">
-                    <input type="radio" name="select_layer" id="substation_without_defects" value="substation_without_defects"
-                        onchange="selectLayer(this.value)">
+                    <input type="radio" name="select_layer" id="substation_without_defects"
+                        value="substation_without_defects" onchange="selectLayer(this.value)">
                     <label for="substation_without_defects">Substation without defects</label>
                 </div>
                 <div class=" mx-4">
@@ -436,16 +436,16 @@
                 map.removeLayer(pano_layer)
             }
             pano_layer = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-        layers: 'cite:pano_apks',
-        format: 'image/png',
-        cql_filter: "ba ILIKE '%" + param + "%'",
-        maxZoom: 21,
-        transparent: true
-    }, {
-        buffer: 10
-    });
-    map.addLayer(pano_layer);
-    map.addLayer(pano_layer)
+                layers: 'cite:pano_apks',
+                format: 'image/png',
+                cql_filter: "ba ILIKE '%" + param + "%'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            });
+            map.addLayer(pano_layer);
+            map.addLayer(pano_layer)
 
             addGroupOverLays()
 
@@ -463,7 +463,7 @@
                 "POI": {
                     'BA': boundary,
                     'With defects': substation_with_defects,
-                    'Without defects' : substation_without_defects,
+                    'Without defects': substation_without_defects,
                     'Unsurveyed': unservey,
                     'Pano': pano_layer,
                 }

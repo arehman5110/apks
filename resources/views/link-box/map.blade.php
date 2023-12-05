@@ -82,7 +82,7 @@
         <div class="p-3 form-input  ">
             <label for="select_layer">Select Layer : </label>
             <span class="text-danger" id="er-select-layer"></span>
- 
+
             <div class="d-sm-flex">
                 <div class="">
                     <input type="radio" name="select_layer" id="select_layer_substation" value="substation" onchange="selectLayer(this.value)">
@@ -281,7 +281,22 @@
             map.addLayer(link_box)
             link_box.bringToFront()
 
+            if (pano_layer !== '') {
+                map.removeLayer(pano_layer)
+            }
+            pano_layer = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:pano_apks',
+                format: 'image/png',
+                cql_filter: "ba ILIKE '%" + param + "%'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            });
+            map.addLayer(pano_layer);
+            map.addLayer(pano_layer)
 
+            
             addGroupOverLays()
 
         }

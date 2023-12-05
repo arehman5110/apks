@@ -243,6 +243,7 @@
     <script>
         var from_date = $('#excel_from_date').val();
         var to_date = $('#excel_to_date').val();
+        var excel_ba = $('#excelBa').val();
 
         $(document).ready(function() {
 
@@ -259,6 +260,10 @@
 
                 if (from_date) {
                     d.from_date = from_date;
+                }
+
+                if (excel_ba) {
+                    d.ba = excel_ba;
                 }
 
                 if (to_date) {
@@ -382,7 +387,15 @@
             })
 
 
-            $('#excel_from_date').on('change', function () {
+            $('#excelBa').on('change', function () {
+                excel_ba = $(this).val();
+        table.ajax.reload(function () {
+            table.draw('page');
+        });
+    })
+
+
+    $('#excel_from_date').on('change', function () {
                 from_date = $(this).val();
         table.ajax.reload(function () {
             table.draw('page');
@@ -396,8 +409,6 @@
         });
     });
 
-    var order = table.order();
-    var sortOrder = order[0][1];
 
             $('#myModal').on('show.bs.modal', function(event) {
                 var button = $(event.relatedTarget);

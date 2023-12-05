@@ -20,26 +20,28 @@ class SubstationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-
     {
-
-
-$ba = Auth::user()->ba;
 
 
         if ($request->ajax()) {
 
+            $ba = $request->filled('ba') ? $request->ba : Auth::user()->ba ;
+
+
             if ($request->filled('from_date') || $request->filled('to_date')) {
                 $from_date = $request->filled('from_date') ? $request->from_date : Substation::min('visit_date');
                 $to_date = $request->filled('to_date') ? $request->to_date : Substation::max('visit_date');
-                $result = Substation::where('ba', 'LIKE', '%' . $ba . '%')->where('ba', '<>' , '')
-                ->where('visit_date', '>=', $from_date)
-                ->where('visit_date', '<=', $to_date);
-            }else{
-                $result = Substation::where('ba', 'LIKE', '%' . $ba . '%')->where('ba', '<>' , '');
+                $result = Substation::where('ba', 'LIKE', '%' . $ba . '%')
+
+                    ->where('visit_date', '>=', $from_date)
+                    ->where('visit_date', '<=', $to_date);
+            } else {
+                $result = Substation::where('ba', 'LIKE', '%' . $ba . '%');
             }
 
-          $data=  $result->select(
+
+            $data = $result
+                ->select(
                     'id',
                     'name',
                     \DB::raw("CASE WHEN (gate_status->>'unlocked')::text='true' THEN 'yes' ELSE '' END as unlocked"),
@@ -55,15 +57,18 @@ $ba = Auth::user()->ba;
                     'advertise_poster_status',
                     'total_defects',
                     'visit_date',
-                    'qa_status',
+                    // 'qa_status',
                     'substation_image_1',
-                    'substation_image_2'
+                    'substation_image_2',
+                )
 
-                ) ->orderBy('visit_date')
                 ->get();
 
-            return datatables()
-                ->of($data)->make(true);
+                return datatables()
+                ->of($data)
+                ->make(true);
+
+
         }
         return view('substation.index');
     }
@@ -102,11 +107,10 @@ $ba = Auth::user()->ba;
             $data->name = $request->name;
             $data->type = $request->type;
             $data->coordinate = $request->coordinate;
-$total_defects = 0;
-              $request->grass_status == 'Yes' ? $total_defects ++ : '';
-            $request->tree_branches_status == 'Yes' ? $total_defects ++  : '';
-             $request->advertise_poster_status == 'Yes' ? $total_defects ++ : '';
-
+            $total_defects = 0;
+            $request->grass_status == 'Yes' ? $total_defects++ : '';
+            $request->tree_branches_status == 'Yes' ? $total_defects++ : '';
+            $request->advertise_poster_status == 'Yes' ? $total_defects++ : '';
 
             $data->grass_status = $request->grass_status;
             $data->tree_branches_status = $request->tree_branches_status;
@@ -123,13 +127,8 @@ $total_defects = 0;
                     } else {
                         if ($key == 'locked' || $key == 'unlocked') {
                             $gate[$key] = array_key_exists('locked', $gateStatus) && $gateStatus['locked'] == $key ? 'true' : 'false';
-
-
-
-
                         } else {
                             if (array_key_exists($key, $gateStatus)) {
-
                                 $gate[$key] = 'true';
 
                                 $total_defects++;
@@ -139,7 +138,7 @@ $total_defects = 0;
                         }
                     }
                 }
-                $gate['unlocked'] == "true" ? $total_defects++ : '';
+                $gate['unlocked'] == 'true' ? $total_defects++ : '';
             }
 
             $data->gate_status = json_encode($gate);
@@ -251,10 +250,9 @@ $total_defects = 0;
             $data->name = $request->name;
             $data->type = $request->type;
             $total_defects = 0;
-            $request->grass_status == 'Yes' ? $total_defects ++ : '';
-            $request->tree_branches_status == 'Yes' ? $total_defects ++  : '';
-             $request->advertise_poster_status == 'Yes' ? $total_defects ++ : '';
-
+            $request->grass_status == 'Yes' ? $total_defects++ : '';
+            $request->tree_branches_status == 'Yes' ? $total_defects++ : '';
+            $request->advertise_poster_status == 'Yes' ? $total_defects++ : '';
 
             $data->grass_status = $request->grass_status;
             $data->tree_branches_status = $request->tree_branches_status;
@@ -271,11 +269,8 @@ $total_defects = 0;
                     } else {
                         if ($key == 'locked' || $key == 'unlocked') {
                             $gate[$key] = array_key_exists('locked', $gateStatus) && $gateStatus['locked'] == $key ? 'true' : 'false';
-
-
                         } else {
                             if (array_key_exists($key, $gateStatus)) {
-
                                 $gate[$key] = 'true';
 
                                 $total_defects++;
@@ -286,7 +281,7 @@ $total_defects = 0;
                         }
                     }
                 }
-                $gate['unlocked'] == "true" ? $total_defects++ : '';
+                $gate['unlocked'] == 'true' ? $total_defects++ : '';
             }
 
             $data->gate_status = json_encode($gate);
@@ -386,7 +381,8 @@ $total_defects = 0;
                 ->get();
 
             return datatables()
-                ->of($data)->make(true);
+                ->of($data)
+                ->make(true);
         }
         return view('substation.index');
     }

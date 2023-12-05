@@ -149,7 +149,7 @@
                             <button class="btn text-white  btn-sm mr-4" type="button" data-toggle="collapse"
                                 style="background-color: #708090" data-target="#collapseQr" aria-expanded="false"
                                 aria-controls="collapseQr">
-                                QR Feeder Pillar
+                                QR Patrolling
                             </button>
                         </div>
                     </div>

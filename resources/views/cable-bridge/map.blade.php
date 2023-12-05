@@ -276,6 +276,22 @@
             map.addLayer(cable_bridge)
             cable_bridge.bringToFront()
 
+            if (pano_layer !== '') {
+                map.removeLayer(pano_layer)
+            }
+            pano_layer = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:pano_apks',
+                format: 'image/png',
+                cql_filter: "ba ILIKE '%" + param + "%'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            });
+            map.addLayer(pano_layer);
+            map.addLayer(pano_layer)
+
+
 
             addGroupOverLays()
 
