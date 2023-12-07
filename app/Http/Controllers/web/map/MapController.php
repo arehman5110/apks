@@ -27,7 +27,7 @@ class MapController extends Controller
     {
         // return WorkPackage::all();
         $ba = Auth::user()->ba;
-        $datas = WorkPackage::where('ba', 'LIKE', '%' . $ba . '%')->get();
+        $datas = WorkPackage::where('ba', $ba)->get();
 
         $roads = [];
 
