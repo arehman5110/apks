@@ -127,7 +127,7 @@
                                 <div class="card p-3">
 
                                     <h3 class="text-center"> {{__("messages.total_feeder_pillar_defects")}}</h3>
-                                    <p class="text-center mb-0 pb-0"><span>0</span></p>
+                                    <p class="text-center mb-0 pb-0"><span>{{$data->fp_defects}}</span></p>
 
                                 </div>
                             </div>
