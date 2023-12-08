@@ -27,8 +27,8 @@ class SubstationExcelController extends Controller
                 $surveyDate_from = $req->excel_from_date == '' ? Substation::min('visit_date') : $req->excel_from_date;
                 $surveyDate_to = $req->excel_to_date == '' ? Substation::max('visit_date') : $req->excel_to_date;
 
-                $recored = Substation::where('ba', 'LIKE', '%' . $userBa . '%')
-                ->where('zone', 'LIKE', '%' . $zone . '%')
+                $recored = Substation::where('ba',$userBa)
+                ->where('zone',$zone)
                 ->whereDate('visit_date', '>=', $surveyDate_from)
                 ->whereDate('visit_date', '<=', $surveyDate_to)
                 ->select('*' , \DB::raw('ST_X(geom) as x'), \DB::raw('ST_Y(geom) as y'),)
@@ -37,8 +37,8 @@ class SubstationExcelController extends Controller
 
             }else{
 
-               $recored = Substation::where('ba', 'LIKE', '%' . $userBa . '%')
-                ->where('zone', 'LIKE', '%' . $zone . '%')
+               $recored = Substation::where('ba', $userBa)
+                ->where('zone', $zone)
                 ->select('*' , \DB::raw('ST_X(geom) as x'), \DB::raw('ST_Y(geom) as y'),)
                 ->get();
             }
