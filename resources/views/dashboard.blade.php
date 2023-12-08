@@ -44,7 +44,7 @@
           </div>
     </div> --}}
 
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="card card-success">
                     <div class="card-header">{{__("messages.patroling")}}</div>
                     <div class="card-body">
@@ -81,7 +81,7 @@
             </div>
 
 
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="card card-warning">
                     <div class="card-header text-white">{{__("messages.substation")}}</div>
                     <div class="card-body">
@@ -99,7 +99,7 @@
                                 <div class="card p-3">
 
                                     <h3 class="text-center"> {{__("messages.total_substation_defects")}}</h3>
-                                    <p class="text-center mb-0 pb-0"><span>0</span></p>
+                                    <p class="text-center mb-0 pb-0"><span>{{$data->substation_defects}}</span></p>
 
                                 </div>
                             </div>
@@ -109,7 +109,7 @@
                 </div>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="card card-info">
                     <div class="card-header">{{__("messages.feeder_pillar")}}</div>
                     <div class="card-body">
@@ -138,7 +138,7 @@
             </div>
 
 
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="card card-success">
                     <div class="card-header">{{__("messages.tiang")}}</div>
                     <div class="card-body">
@@ -168,7 +168,7 @@
                 </div>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="card card-primary">
                     <div class="card-header">{{__("messages.link_box")}}</div>
                     <div class="card-body">
@@ -197,7 +197,7 @@
             </div>
 
 
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="card card-danger">
                     <div class="card-header"> {{__("messages.cable_bridge")}}</div>
                     <div class="card-body">

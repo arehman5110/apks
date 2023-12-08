@@ -20,7 +20,7 @@ class Dashboard extends Controller
         if(!$ba){
             $ba='%'; 
         } 
-        $query="select dig as total_notice,sup as total_supervision,dis as total_km  , feeder_pillar , tiang , link_box , cable_bridge ,  substation from
+        $query="select dig as total_notice,sup as total_supervision,dis as total_km  , feeder_pillar , tiang , link_box , cable_bridge ,  substation,substation_defects from
         (select
         sum(case
             when notice='yes' Then 1 else 0
@@ -34,7 +34,42 @@ class Dashboard extends Controller
             when supervision='yes' Then 1 else 0
         end) as sup
         from tbl_third_party_diging_patroling where ba='$ba') as a,
-        (select km as dis from patroling where ba='$ba') as b";
+        (select km as dis from patroling where ba='$ba') as b,
+        (select (hh.a+hh.b+hh.c+hh.d+hh.e+hh.f+hh.g+hh.h+hh.l+hh.m) as counts from(
+            select 	
+            sum(case 
+                when grass_status='Yes' Then 1 else 0
+            end) as a,
+            sum(case 
+                when tree_branches_status='Yes' Then 1 else 0
+            end) as b,
+            sum(case 
+                when (gate_status->'locked')::text='false' Then 1 else 0
+            end) as c,
+            sum(case 
+                when (gate_status->'demaged')::text='true' Then 1 else 0
+            end) as d,
+            sum(case 
+                when (gate_status->'other')::text='true' Then 1 else 0
+            end) as e,
+            sum(case 
+                when (building_status->'broken_roof')::text='true' Then 1 else 0
+            end) as f,
+            sum(case 
+                when (building_status->'broken_gutter')::text='true' Then 1 else 0
+            end) as l,
+            sum(case 
+                when (building_status->'broken_base')::text='true' Then 1 else 0
+            end) as g,
+            sum(case 
+                when (building_status->'other')::text='true' Then 1 else 0
+            end) as h,
+            sum(case 
+                when advertise_poster_status='Yes' Then 1 else 0
+            end) as m	
+            from tbl_substation  where ba='PETALING JAYA' and substation_image_1 is not null
+            and substation_image_2 is not null 
+            ) as hh) as substation_defects";
        // return $query; 
         $data = DB::select($query);
 

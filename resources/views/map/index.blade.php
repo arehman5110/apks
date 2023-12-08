@@ -1229,7 +1229,7 @@
                 success: function callback(data) {
                     console.log(data);
                     $('#search_wp').empty();
-                    $('#search_wp').append(`<option value="" hidden>Select Work Package</option>`);
+                    $('#search_wp').append(`<option value="%,101.07054901123,2.59340882301331,%" hidden>Select Work Package</option>`);
                     data.forEach((val) => {
 
                         $('#search_wp').append(
