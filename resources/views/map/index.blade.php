@@ -1233,7 +1233,7 @@
                     data.forEach((val) => {
 
                         $('#search_wp').append(
-                            `<option value="${val.id} ,${val.x} ,${val.y}">${val.package_name}</option>`
+                            `<option value="${val.id},${val.x},${val.y},${val.package_name}">${val.package_name}</option>`
                         );
                     });
                     $('#for-excel').html('')
@@ -1258,12 +1258,12 @@
 
         }
 
-
+        var filter_wp='';
         $('#search_wp').on('change', function() {
             const selectedValue = this.value;
             var spiltVal = selectedValue.split(',');
 
-            zoomToxy(parseFloat(spiltVal[1]), parseFloat(spiltVal[2]))
+           zoomToxy(parseFloat(spiltVal[1]), parseFloat(spiltVal[2]))
 
             $('#for-excel').html(`<a class="mt-4" href="/{{ app()->getLocale() }}/generate-third-party-diging-excel/${spiltVal[0]}"><button class="btn-sm mt-2
                 btn btn-primary">Download Qr</button></a>`)
@@ -1284,6 +1284,25 @@
             })
             map.addLayer(rd)
             rd.bringToFront()
+
+        if(wp){
+        map.removeLayer(wp);
+        }
+        if(filter_wp){
+            map.removeLayer(filter_wp);
+        }
+            filter_wp = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:tbl_workpackage',
+                format: 'image/png',
+                cql_filter: "package_name='" + spiltVal[3] + "'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+            map.addLayer(filter_wp)
+            filter_wp.bringToFront()
+
 
 
         })

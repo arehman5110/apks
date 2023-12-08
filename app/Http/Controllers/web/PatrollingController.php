@@ -104,7 +104,7 @@ class PatrollingController extends Controller
 
         if ($request->ajax()) {
 
-    $query = Patroling::where('ba', 'LIKE', '%' . $ba . '%')-> select(
+    $query = Patroling::where('ba',  $ba)-> select(
         '*',
         \DB::raw("st_x(geom_start) as start_x"),
         \DB::raw("st_y(geom_start) as start_y"),
