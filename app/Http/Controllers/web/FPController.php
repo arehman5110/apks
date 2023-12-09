@@ -17,12 +17,38 @@ class FPController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $ba = Auth::user()->ba ;
-        $zone = Auth::user()->zone;
-        $data = FeederPillar::where('ba', 'LIKE', '%' . $ba . '%')->where('zone', 'LIKE', '%' . $zone . '%')->get();
-        return view('feeder-pillar.index', ['datas' => $data]);
+        if ($request->ajax()) {
+            $ba = $request->filled('ba') ? $request->ba : Auth::user()->ba;
+            $result = FeederPillar::query();
+
+            if ($ba != '') {
+                $result->where('ba', $ba);
+            }
+
+            if ($request->filled('from_date') || $request->filled('to_date')) {
+                $from_date = $request->filled('from_date') ? $request->from_date : FeederPillar::min('visit_date');
+                $to_date = $request->filled('to_date') ? $request->to_date : FeederPillar::max('visit_date');
+
+                $result->where('visit_date', '>=', $from_date)
+                    ->where('visit_date', '<=', $to_date);
+            }
+
+            $result->when(true, function ($query) {
+                return $query->select(
+                    'id',
+                    'ba',
+                    'zone',
+                    'team',
+
+                    'visit_date'
+                );
+            });
+
+            return datatables()->of($result->get())->make(true);
+        }
+        return view('feeder-pillar.index');
     }
 
     /**

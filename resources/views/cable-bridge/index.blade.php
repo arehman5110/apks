@@ -79,7 +79,7 @@
                                             <th>ACTION</th>
 
                                         </tr>
-                                    </thead>
+                                    </thead>    
                                     <tbody>
 
                                         @foreach ($datas as $data)

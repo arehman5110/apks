@@ -24,24 +24,23 @@ class SubstationController extends Controller
 
 
         if ($request->ajax()) {
+            $ba = $request->filled('ba') ? $request->ba : Auth::user()->ba;
+            $result = Substation::query();
 
-            $ba = $request->filled('ba') ? $request->ba : Auth::user()->ba ;
-
+            if ($ba != '') {
+                $result->where('ba', $ba);
+            }
 
             if ($request->filled('from_date') || $request->filled('to_date')) {
                 $from_date = $request->filled('from_date') ? $request->from_date : Substation::min('visit_date');
                 $to_date = $request->filled('to_date') ? $request->to_date : Substation::max('visit_date');
-                $result = Substation::where('ba', 'LIKE', '%' . $ba . '%')
 
-                    ->where('visit_date', '>=', $from_date)
+                $result->where('visit_date', '>=', $from_date)
                     ->where('visit_date', '<=', $to_date);
-            } else {
-                $result = Substation::where('ba', 'LIKE', '%' . $ba . '%');
             }
 
-
-            $data = $result
-                ->select(
+            $result->when(true, function ($query) {
+                return $query->select(
                     'id',
                     'name',
                     \DB::raw("CASE WHEN (gate_status->>'unlocked')::text='true' THEN 'yes' ELSE '' END as unlocked"),
@@ -57,19 +56,14 @@ class SubstationController extends Controller
                     'advertise_poster_status',
                     'total_defects',
                     'visit_date',
-                    // 'qa_status',
                     'substation_image_1',
-                    'substation_image_2',
-                )
+                    'substation_image_2'
+                );
+            });
 
-                ->get();
-
-                return datatables()
-                ->of($data)
-                ->make(true);
-
-
+            return datatables()->of($result->get())->make(true);
         }
+
         return view('substation.index');
     }
 

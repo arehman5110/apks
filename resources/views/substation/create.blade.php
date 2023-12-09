@@ -148,8 +148,8 @@
                                 <div class="col-md-4">
                                     <select name="voltage" id="voltage" class="form-control">
                                         <option value="" hidden>select</option>
-                                        <option value="11kw">11kw</option>
-                                        <option value="13kw">13kw</option>
+                                        <option value="11kw">11kv</option>
+                                        <option value="13kw">13kv</option>
                                     </select>
                                 </div>
 
@@ -435,7 +435,7 @@
             }
 
             $('.defects').on('change', function() {
-                
+
                 if ($(this).prop('checked') == true) {
                     totalDefects++;
                 } else {

@@ -21,9 +21,9 @@ class CableBridgeController extends Controller
     {
         //
 
-        $ba = Auth::user()->ba;
-        $zone = Auth::user()->zone;
-        $data = CableBridge::where('ba', 'LIKE', '%' . $ba . '%')->where('zone', 'LIKE', '%' . $zone . '%')->get();
+        $ba = Auth::user()->ba != '' ?? '%';
+        $zone = Auth::user()->zone != '' ?? '%';
+        $data = CableBridge::where('ba', 'LIKE',  $ba)->where('zone', 'LIKE',  $zone )->get();
         return view('cable-bridge.index', ['datas' => $data]);
     }
 

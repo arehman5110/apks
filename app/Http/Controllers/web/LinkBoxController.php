@@ -20,9 +20,9 @@ class LinkBoxController extends Controller
     public function index()
     {
         //
-        $ba = Auth::user()->ba ;
-        $zone = Auth::user()->zone;
-        $data = LinkBox::where('ba', 'LIKE', '%' . $ba . '%')->where('zone', 'LIKE', '%' . $zone . '%')->get();
+        $ba = Auth::user()->ba != '' ?? '%';
+        $zone = Auth::user()->zone != '' ?? '%';
+        $data = LinkBox::where('ba', 'LIKE', $ba )->where('zone', 'LIKE',  $zone )->get();
         return view('link-box.index', ['datas' => $data]);
     }
 

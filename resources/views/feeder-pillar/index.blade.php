@@ -70,7 +70,7 @@
 
                             </div>
                             <div class="table-responsive">
-                                <table id="myTable" class="table table-bordered table-hover">
+                                <table id="myTable" class="table table-bordered table-hover data-table">
 
 
                                     <thead style="background-color: #E4E3E3 !important">
@@ -85,61 +85,9 @@
                                     </thead>
                                     <tbody>
 
-                                        @foreach ($datas as $data)
-                                            <tr>
-                                                <td class="align-middle">{{ $data->zone }}</td>
-                                                <td>{{ $data->ba }}</td>
-                                                <td class="align-middle text-center">{{ $data->team }}</td>
-                                                <td class="align-middle text-center">
-                                                    @php
-                                                        $date = new DateTime($data->visit_date);
-                                                        $datePortion = $date->format('Y-m-d');
-
-                                                    @endphp
-                                                    {{ $datePortion }}
-                                                </td>
-                                                <td class="text-center">
-
-                                                    <button type="button" class="btn  " data-toggle="dropdown">
-                                                        <img
-                                                            src="{{ URL::asset('assets/web-images/three-dots-vertical.svg') }}">
-                                                    </button>
-                                                    <div class="dropdown-menu" role="menu">
-
-                                                        <form action="{{ route('feeder-pillar.show', [app()->getLocale(),$data->id]) }}"
-                                                            method="get">
-                                                            <button type="submit"
-                                                                class="dropdown-item pl-3 w-100 text-left">Detail</button>
-                                                        </form>
-
-                                                        <form
-                                                            action="{{ route('feeder-pillar.edit', [app()->getLocale(),$data->id]) }}"
-                                                            method="get">
-                                                            <button type="submit"
-                                                                class="dropdown-item pl-3 w-100 text-left">Edit</button>
-                                                        </form>
-
-
-                                                        <button type="button" class="btn btn-primary dropdown-item"
-                                                            data-id="{{ $data->id }}" data-toggle="modal"
-                                                            data-target="#myModal">
-                                                            Remove
-                                                        </button>
-
-
-                                                    </div>
-                                                </td>
-
-                                            </tr>
-                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
-
-
-
-
-
 
                         </div>
                     </div>
@@ -188,16 +136,121 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.3/datatables.min.js"></script>
 
     <script>
+
+var from_date = $('#excel_from_date').val();
+        var to_date = $('#excel_to_date').val();
+        var excel_ba = $('#excelBa').val();
         $(document).ready(function() {
-            $('#myTable').DataTable({
-                aaSorting: [
-                    [3, 'desc']
+            var table = $('.data-table').DataTable({
+                processing: true,
+                serverSide: true,
+
+                ajax: {
+                    url: '{{ route('feeder-pillar.index', app()->getLocale()) }}',
+                    type: "GET",
+                    data:function (d) {
+
+                if (from_date) {
+                    d.from_date = from_date;
+                }
+
+                if (excel_ba) {
+                    d.ba = excel_ba;
+                }
+
+                if (to_date) {
+                    d.to_date = to_date;
+                }}
+                },
+                columns: [{
+                        data: 'zone',
+                        name: 'zone'
+                    },
+                    {
+                        data:'ba',
+                        name:'ba',
+                        orderable: true
+                    },
+                    {
+                        data: 'team',
+                        name: 'team'
+                    },
+                    {
+                        data: 'visit_date',
+                        name: 'visit_date'
+                    },
+
+
+
+                    {
+                        render: function(data, type, full) {
+
+                            var id = full.id;
+                            return `<button type="button" class="btn  " data-toggle="dropdown">
+                            <img
+                                src="{{ URL::asset('assets/web-images/three-dots-vertical.svg') }}">
+                        </button>
+                        <div class="dropdown-menu" role="menu">
+                            <form action="/{{ app()->getLocale() }}/feeder-pillar/${id}" method="get">
+
+                                <button type="submit" class="dropdown-item pl-3 w-100 text-left">Detail</button>
+                            </form>
+                            <form action="/{{ app()->getLocale() }}/feeder-pillar/${id}/edit" method="get">
+
+                                <button type="submit" class="dropdown-item pl-3 w-100 text-left">Edit</button>
+                            </form>
+                            <button type="button" class="btn btn-primary dropdown-item" data-id="${id}" data-toggle="modal" data-target="#myModal">
+                                Remove
+                            </button>
+                        </div>
+                        `;
+                        }
+                    }
+
                 ],
-                "lengthMenu": [
-                    [10, 25, 50, -1],
-                    [10, 25, 50, "All"]
-                ],
-            });
+                order: [
+            [1, 'desc']
+        ],
+                createdRow: function(row, data, dataIndex) {
+                    $(row).find('td:eq(1)').addClass('text-center');
+                    $(row).find('td:eq(2)').addClass('text-center');
+                    $(row).find('td:eq(3)').addClass('text-center');
+                    $(row).find('td:eq(4)').addClass('text-center');
+                    $(row).find('td:eq(5)').addClass('text-center');
+                    $(row).find('td:eq(6)').addClass('text-center');
+                    $(row).find('td:eq(7)').addClass('text-center');
+                    $(row).find('td:eq(8)').addClass('text-center');
+                    $(row).find('td:eq(9)').addClass('text-center');
+                    $(row).find('td:eq(10)').addClass('text-center');
+                    $(row).find('td:eq(11)').addClass('text-center');
+                    $(row).find('td:eq(12)').addClass('text-center');
+
+                }
+            })
+
+
+            $('#excelBa').on('change', function () {
+                excel_ba = $(this).val();
+        table.ajax.reload(function () {
+            table.draw('page');
+        });
+    })
+
+
+    $('#excel_from_date').on('change', function () {
+                from_date = $(this).val();
+        table.ajax.reload(function () {
+            table.draw('page');
+        });
+    })
+
+        $('#excel_to_date').on('change', function () {
+                to_date = $(this).val();
+        table.ajax.reload(function () {
+            table.draw('page');
+        });
+    });
+
             $('#myModal').on('show.bs.modal', function(event) {
                 var button = $(event.relatedTarget);
                 var id = button.data('id');
