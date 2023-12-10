@@ -7,24 +7,35 @@ use App\Models\FeederPillar;
 use Illuminate\Http\Request;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class FeederPillarExcelController extends Controller
 {
     //
     public function generateFeederPillarExcel(Request $req)
     {
-        $userBa = Auth::user()->ba == '' ? $req->excelBa : Auth::user()->ba;
-        $zone = Auth::user()->zone == '' ? $req->excelZone : Auth::user()->zone;
-        $surveyDate_from = $req->excel_from_date == '' ? FeederPillar::min('visit_date') : $req->excel_from_date;
-        $surveyDate_to = $req->excel_to_date == '' ? FeederPillar::max('visit_date') : $req->excel_to_date;
+        try{
+    
+        $ba = $req->filled('ba') ? $req->excelBa : Auth::user()->ba;
+            $result = FeederPillar::query();
 
-        try {
-            $recored = FeederPillar::where('ba' ,  'LIKE', '%' . $userBa . '%')
-            ->where('zone', 'LIKE', '%' . $zone . '%')
-            ->whereDate('visit_date', '>=', $surveyDate_from)
-            ->whereDate('visit_date', '<=', $surveyDate_to)->get();
-            // return $recored;
-            if (sizeof($recored) > 0) {
+            if ($req->filled('excelBa')) {
+                $result->where('ba', $ba);
+            }
+
+            if ($req->filled('excel_from_date')) {
+                $result->where('visit_date', '>=', $req->excel_from_date);
+            }
+
+            if ($req->filled('surveyDate_to')) {
+                $result->where('visit_date', '<=', $req->surveyDate_to);
+            }
+
+
+            $result = $result->select('*', DB::raw('ST_X(geom) as x'), DB::raw('ST_Y(geom) as y'))->get();
+ 
+             
+            if ($result) {
                 $excelFile = public_path('assets/excel-template/feeder-pillar.xlsx');
 
                 $spreadsheet = IOFactory::load($excelFile);
@@ -32,7 +43,7 @@ class FeederPillarExcelController extends Controller
                 $worksheet = $spreadsheet->getActiveSheet();
 
                 $i = 3;
-                foreach ($recored as $rec) {
+                foreach ($result as $rec) {
                     $worksheet->setCellValue('A' . $i, $i - 3);
 
                     $worksheet->setCellValue('B' . $i, $rec->zone);

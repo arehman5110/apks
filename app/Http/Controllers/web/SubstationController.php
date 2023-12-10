@@ -9,8 +9,6 @@ use App\Models\Team;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
-use PhpParser\Node\Stmt\Return_;
-use Yajra\DataTables\DataTables;
 
 class SubstationController extends Controller
 {
@@ -27,17 +25,18 @@ class SubstationController extends Controller
             $ba = $request->filled('ba') ? $request->ba : Auth::user()->ba;
             $result = Substation::query();
 
-            if ($ba != '') {
+            if ($request->filled('ba')) {
                 $result->where('ba', $ba);
             }
 
-            if ($request->filled('from_date') || $request->filled('to_date')) {
-                $from_date = $request->filled('from_date') ? $request->from_date : Substation::min('visit_date');
-                $to_date = $request->filled('to_date') ? $request->to_date : Substation::max('visit_date');
-
-                $result->where('visit_date', '>=', $from_date)
-                    ->where('visit_date', '<=', $to_date);
+            if ($request->filled('from_date')) {
+                $result->where('visit_date', '>=', $request->from_date);
             }
+
+            if ($request->filled('to_date')) {
+                $result->where('visit_date', '<=', $request->to_date);
+            }
+
 
             $result->when(true, function ($query) {
                 return $query->select(
@@ -349,35 +348,5 @@ class SubstationController extends Controller
         }
     }
 
-    public function paginate(Request $request, $language)
-    {
-        $ba = Auth::user()->ba;
-
-        if ($request->ajax()) {
-            $data = Substation::where('ba', 'LIKE', '%' . $ba . '%')
-
-                ->select(
-                    'id',
-                    'name',
-                    \DB::raw("CASE WHEN (gate_status->>'unlocked')::text='true' THEN 'yes' ELSE '' END as unlocked"),
-                    \DB::raw("CASE WHEN (gate_status->>'demaged')::text='true' THEN 'yes' ELSE '' END as demaged"),
-                    \DB::raw("CASE WHEN (gate_status->>'other')::text='true' THEN 'yes' ELSE '' END as other_gate"),
-
-                    \DB::raw("CASE WHEN (building_status->>'broken_roof')::text='true' THEN 'yes' ELSE '' END as broken_roof"),
-                    \DB::raw("CASE WHEN (building_status->>'broken_gutter')::text='true' THEN 'yes' ELSE '' END as broken_gutter"),
-                    \DB::raw("CASE WHEN (building_status->>'broken_base')::text='true' THEN 'yes' ELSE '' END as broken_base"),
-                    \DB::raw("CASE WHEN (building_status->>'other')::text='true' THEN 'yes' ELSE '' END as building_other"),
-                    'grass_status',
-                    'tree_branches_status',
-                    'advertise_poster_status',
-                    'total_defects',
-                )
-                ->get();
-
-            return datatables()
-                ->of($data)
-                ->make(true);
-        }
-        return view('substation.index');
-    }
+    
 }

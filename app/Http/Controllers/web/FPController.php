@@ -20,19 +20,21 @@ class FPController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
+
+
             $ba = $request->filled('ba') ? $request->ba : Auth::user()->ba;
             $result = FeederPillar::query();
 
-            if ($ba != '') {
+            if ($request->filled('ba')) {
                 $result->where('ba', $ba);
             }
 
-            if ($request->filled('from_date') || $request->filled('to_date')) {
-                $from_date = $request->filled('from_date') ? $request->from_date : FeederPillar::min('visit_date');
-                $to_date = $request->filled('to_date') ? $request->to_date : FeederPillar::max('visit_date');
+            if ($request->filled('from_date')) {
+                $result->where('visit_date', '>=', $request->from_date);
+            }
 
-                $result->where('visit_date', '>=', $from_date)
-                    ->where('visit_date', '<=', $to_date);
+            if ($request->filled('to_date')) {
+                $result->where('visit_date', '<=', $request->to_date);
             }
 
             $result->when(true, function ($query) {
@@ -41,7 +43,6 @@ class FPController extends Controller
                     'ba',
                     'zone',
                     'team',
-
                     'visit_date'
                 );
             });

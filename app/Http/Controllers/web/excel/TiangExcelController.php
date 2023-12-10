@@ -14,13 +14,29 @@ class TiangExcelController extends Controller
 {
     //
 
-    public function generateTiangExcel()
+    public function generateTiangExcel(Request $req)
     {
-        $userBa = Auth::user()->ba;
-            try {
-                $recored = Tiang::where('ba' ,  'LIKE', '%' . $userBa . '%')->get();
-            // return $recored;
-            if (sizeof($recored) > 0) {
+        try{
+        $ba = $req->filled('ba') ? $req->excelBa : Auth::user()->ba;
+            $result = Tiang::query();
+
+            if ($req->filled('excelBa')) {
+                $result->where('ba', $ba);
+            }
+
+            if ($req->filled('excel_from_date')) {
+                $result->where('visit_date', '>=', $req->excel_from_date);
+            }
+
+            if ($req->filled('surveyDate_to')) {
+                $result->where('visit_date', '<=', $req->surveyDate_to);
+            }
+
+
+            $result = $result->get();
+ 
+             
+            if ($result) {
                 $excelFile = public_path('assets/excel-template/QR TIANG.xlsx');
 
                 $spreadsheet = IOFactory::load($excelFile);
@@ -28,7 +44,7 @@ class TiangExcelController extends Controller
                 $worksheet = $spreadsheet->getSheet(0);
 
                 $i = 8;
-                foreach ($recored as $rec) {
+                foreach ($result as $rec) {
                     $worksheet->setCellValue('B' . $i, $i - 7);
                     $worksheet->setCellValue('D' . $i, $rec->fp_name);
                     $worksheet->setCellValue('F' . $i, $rec->fp_road);
@@ -88,7 +104,7 @@ class TiangExcelController extends Controller
 
                 $i = 8;
                 $secondWorksheet = $spreadsheet->getSheet(1);
-                foreach ($recored as $rec) {
+                foreach ($result as $rec) {
                     $secondWorksheet->setCellValue('B' . $i, $i - 7);
                     $secondWorksheet->setCellValue('C' . $i, $rec->fp_name);
                     $secondWorksheet->setCellValue('D' . $i, $rec->fp_road);
@@ -162,7 +178,7 @@ class TiangExcelController extends Controller
 
                 $i = 11;
                 $thirdWorksheet = $spreadsheet->getSheet(2);
-                foreach ($recored as $rec) {
+                foreach ($result as $rec) {
                     $thirdWorksheet->setCellValue('B' . $i, $i - 10);
 
                     if ($rec->tapak_condition != '') {

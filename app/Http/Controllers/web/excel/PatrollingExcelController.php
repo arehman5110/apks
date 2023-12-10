@@ -5,6 +5,8 @@ namespace App\Http\Controllers\web\excel;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Patroling;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class PatrollingExcelController extends Controller
@@ -12,22 +14,27 @@ class PatrollingExcelController extends Controller
 
     public function generateExcel(Request $req)
     {
+        try{
+        $ba = $req->filled('ba') ? $req->excelBa : Auth::user()->ba;
+        $result = Patroling::query();
 
-        // return $req;
-        $userBa = '%';
-        $zone = '%';
-        $surveyDate_from = $req->excel_from_date == "" ? Patroling::min('date') : $req->excel_from_date;
-        $surveyDate_to = $req->excel_to_date == "" ? Patroling::max('date') : $req->excel_to_date;
+        if ($req->filled('excelBa')) {
+            $result->where('ba', $ba);
+        }
 
-        // return $surveyDate_to;
-        try {
-            $recored = Patroling::
-                    whereDate("date" ,">=" , $surveyDate_from)
-                    ->whereDate("date" ,"<=" , $surveyDate_to)->select('wp_name' , 'ba' ,'zone' , 'date' , 'time' , 'km')
-                    ->get();
+        if ($req->filled('excel_from_date')) {
+            $result->where('visit_date', '>=', $req->excel_from_date);
+        }
+
+        if ($req->filled('surveyDate_to')) {
+            $result->where('visit_date', '<=', $req->surveyDate_to);
+        }
 
 
-            if (sizeof($recored) > 0) {
+        $result = $result->select('*', DB::raw('ST_X(geom) as x'), DB::raw('ST_Y(geom) as y'))->get();
+
+         
+        if ($result) {
                 $excelFile = public_path('assets/excel-template/patrolling-template.xlsx');
 
 
@@ -36,7 +43,7 @@ class PatrollingExcelController extends Controller
                 $worksheet = $spreadsheet->getActiveSheet();
 
                 $i = 3;
-                foreach ($recored as $rec) {
+                foreach ($result as $rec) {
                     $worksheet->setCellValue('A' . $i, $i - 2);
                     $worksheet->setCellValue('B' . $i, $rec->wp_name);
                     $worksheet->setCellValue('C' . $i, $rec->zone);

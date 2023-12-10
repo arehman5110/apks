@@ -7,24 +7,34 @@ use App\Models\LinkBox;
 use Illuminate\Http\Request;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\DB;
 
 class LinkBoxExcelController extends Controller
 {
     //
 
     public function generateLinkBoxExcel(Request $req){
-        $userBa = Auth::user()->ba == '' ? $req->excelBa : Auth::user()->ba;
-        $zone = Auth::user()->zone == '' ? $req->excelZone : Auth::user()->zone;
-        $surveyDate_from = $req->excel_from_date == '' ? LinkBox::min('visit_date') : $req->excel_from_date;
-        $surveyDate_to = $req->excel_to_date == '' ? LinkBox::max('visit_date') : $req->excel_to_date;
-        try {
-            $recored = LinkBox::where('ba' ,  'LIKE', '%' . $userBa . '%')
-             ->where('zone', 'LIKE', '%' . $zone . '%')
-            ->whereDate('visit_date', '>=', $surveyDate_from)
-            ->whereDate('visit_date', '<=', $surveyDate_to)->get();
-            // return $recored;
-            if (sizeof($recored) > 0) {
+        try{
+        $ba = $req->filled('ba') ? $req->excelBa : Auth::user()->ba;
+        $result = LinkBox::query();
+
+        if ($req->filled('excelBa')) {
+            $result->where('ba', $ba);
+        }
+
+        if ($req->filled('excel_from_date')) {
+            $result->where('visit_date', '>=', $req->excel_from_date);
+        }
+
+        if ($req->filled('surveyDate_to')) {
+            $result->where('visit_date', '<=', $req->surveyDate_to);
+        }
+
+
+        $result = $result->select('*', DB::raw('ST_X(geom) as x'), DB::raw('ST_Y(geom) as y'))->get();
+
+         
+        if ($result) {
                 $excelFile = public_path('assets/excel-template/link-box.xlsx');
 
                 $spreadsheet = IOFactory::load($excelFile);
@@ -32,7 +42,7 @@ class LinkBoxExcelController extends Controller
                 $worksheet = $spreadsheet->getActiveSheet();
 
                 $i = 4;
-                foreach ($recored as $rec) {
+                foreach ($result as $rec) {
                     $worksheet->setCellValue('A' . $i, $i - 3);
                     $worksheet->setCellValue('B' . $i, $rec->zone);
                     $worksheet->setCellValue('C' . $i, $rec->ba);

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class SubstationExcelController extends Controller
 {
@@ -19,32 +20,28 @@ class SubstationExcelController extends Controller
 
 
         try {
-            $userBa = Auth::user()->ba == '' ? $req->excelBa : Auth::user()->ba;
-            $zone = Auth::user()->zone == '' ? $req->excelZone : Auth::user()->zone;
-            // $recored = Substation::where('ba' ,  'LIKE', '%' . $userBa . '%')->get();
-            if ($req->excel_from_date != '' ||  $req->excel_to_date != '') {
+ 
 
-                $surveyDate_from = $req->excel_from_date == '' ? Substation::min('visit_date') : $req->excel_from_date;
-                $surveyDate_to = $req->excel_to_date == '' ? Substation::max('visit_date') : $req->excel_to_date;
+            $ba = $req->filled('ba') ? $req->excelBa : Auth::user()->ba;
+            $result = Substation::query();
 
-                $recored = Substation::where('ba',$userBa)
-                ->where('zone',$zone)
-                ->whereDate('visit_date', '>=', $surveyDate_from)
-                ->whereDate('visit_date', '<=', $surveyDate_to)
-                ->select('*' , \DB::raw('ST_X(geom) as x'), \DB::raw('ST_Y(geom) as y'),)
-                ->get();
+            if ($req->filled('excelBa')) {
+                $result->where('ba', $ba);
+            }
 
+            if ($req->filled('excel_from_date')) {
+                $result->where('visit_date', '>=', $req->excel_from_date);
+            }
 
-            }else{
-
-               $recored = Substation::where('ba', $userBa)
-                ->where('zone', $zone)
-                ->select('*' , \DB::raw('ST_X(geom) as x'), \DB::raw('ST_Y(geom) as y'),)
-                ->get();
+            if ($req->filled('surveyDate_to')) {
+                $result->where('visit_date', '<=', $req->surveyDate_to);
             }
 
 
-            if (sizeof($recored) > 0) {
+            $result = $result->select('*', DB::raw('ST_X(geom) as x'), DB::raw('ST_Y(geom) as y'))->get();
+ 
+             
+            if ($result) {
                 $excelFile = public_path('assets/excel-template/substation.xlsx');
 
                 $spreadsheet = IOFactory::load($excelFile);
@@ -52,7 +49,7 @@ class SubstationExcelController extends Controller
                 $worksheet = $spreadsheet->getActiveSheet();
 
                 $i = 3;
-                foreach ($recored as $rec) {
+                foreach ($result as $rec) {
 
                     $worksheet->setCellValue('A' . $i, $i - 2);
                     $worksheet->setCellValue('B' . $i, $rec->zone);
@@ -89,6 +86,8 @@ class SubstationExcelController extends Controller
                     }
                     // $worksheet->setCellValue('O' . $i, $rec->building_status);
                     $worksheet->setCellValue('U' . $i, $rec->advertise_poster_status);
+                    $worksheet->setCellValue('V' . $i, $rec->total_defects);
+
 
                     $i++;
 
