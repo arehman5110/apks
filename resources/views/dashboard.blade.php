@@ -187,7 +187,7 @@
                                 <div class="card p-3">
 
                                     <h3 class="text-center"> {{__("messages.total_link_box_defects")}} </h3>
-                                    <p class="text-center mb-0 pb-0"><span>0</span></p>
+                                    <p class="text-center mb-0 pb-0"><span>{{$data->linkbox}}</span></p>
 
                                 </div>
                             </div>

@@ -18,7 +18,7 @@ class Dashboard extends Controller
 
         $ba=Auth::user()->ba;
        if($ba!=''){
-        $query="select dig as total_notice,sup as total_supervision,km as total_km  , feeder_pillar , tiang , link_box , cable_bridge ,  substation,substation_defects,fp_defects from
+        $query="select dig as total_notice,sup as total_supervision,km as total_km  , feeder_pillar , tiang , link_box , cable_bridge ,  substation,substation_defects,fp_defects,lb as linkbox from
         (select
         sum(case
             when notice='yes' Then 1 else 0
@@ -38,11 +38,12 @@ class Dashboard extends Controller
             ) as substation_defects,
         (SELECT sum(gate_locked+gate_damage+gate_other+vandlism+leaning+rust+poster_status)
             FROM public.feeder_pillar_defects_counts where ba='$ba') as fp_defects,
-            (select round(sum(km),2) from patroling where ba='$ba') as km
+            (select round(sum(km),2) from patroling where ba='$ba') as km,
+         (select sum(vandalism_status)+sum(leaning_status)+sum(rust_status)+sum(advertise_poster_status)+sum(bushes_status)+sum(cover_status) from 	tbl_link_box_counts where ba='$ba') as lb   
             ";
 
         }else{
-            $query="select dig as total_notice,sup as total_supervision,km as total_km  , feeder_pillar , tiang , link_box , cable_bridge ,  substation,substation_defects,fp_defects from
+            $query="select dig as total_notice,sup as total_supervision,km as total_km  , feeder_pillar , tiang , link_box , cable_bridge ,  substation,substation_defects,fp_defects,lb as linkbox from
             (select
             sum(case
                 when notice='yes' Then 1 else 0
@@ -61,7 +62,9 @@ class Dashboard extends Controller
             FROM public.substation_defects_counts) as substation_defects,
             (SELECT sum(gate_locked+gate_damage+gate_other+vandlism+leaning+rust+poster_status)
             FROM public.feeder_pillar_defects_counts) as fp_defects,
-            (select round(sum(km),2) from patroling) as km
+            (select round(sum(km),2) from patroling) as km,
+            (select sum(vandalism_status)+sum(leaning_status)+sum(rust_status)+sum(advertise_poster_status)+sum(bushes_status)+sum(cover_status) from 	tbl_link_box_counts ) as lb   
+
             ";
         }   
      //   return $query; 
