@@ -84,7 +84,7 @@ class LinkBoxController extends Controller
             $data->coordinate = $request->coordinate;
             $data->cover_status = $request->cover_status;
             $data->vandalism_status = $request->vandalism_status;
-            $data->leaning_staus = $request->leaning_staus;
+            $data->leaning_status = $request->leaning_status;
             $data->leaning_angle = $request->leaning_angle;
             $data->rust_status = $request->rust_status;
             $data->advertise_poster_status = $request->advertise_poster_status;
@@ -171,7 +171,7 @@ class LinkBoxController extends Controller
             $data->coordinate = $request->coordinate;
             // $data->gate_status = $request->gate_status;
             $data->vandalism_status = $request->vandalism_status;
-            $data->leaning_staus = $request->leaning_staus;
+            $data->leaning_status = $request->leaning_status;
             $data->rust_status = $request->rust_status;
             $data->advertise_poster_status = $request->advertise_poster_status;
             $data->bushes_status = $request->bushes_status;

@@ -143,12 +143,12 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4"><label for="leaning_staus">{{__("messages.leaning")}}</label></div>
+                            <div class="col-md-4"><label for="leaning_status">{{__("messages.leaning")}}</label></div>
                             <div class="col-md-4">
-                                <input readonly value="{{ $data->leaning_staus }}" class="form-control" required>
+                                <input readonly value="{{ $data->leaning_status }}" class="form-control" required>
                             </div>
                         </div>
-                        <div class="row @if ($data->leaning_staus == 'No') d-none @endif " id="leaning-angle">
+                        <div class="row @if ($data->leaning_status == 'No') d-none @endif " id="leaning-angle">
                             <div class="col-md-4"><label for="leaning_angle">{{__('messages.leaning_angle')}}</label></div>
                             <div class="col-md-4">
                                 <input type="text" name="leaning_angle" id="leaning_angle" value="{{ $data->leaning_angle }}" class="form-control" readonly>

@@ -178,9 +178,9 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label for="leaning_staus">{{__("messages.leaning")}} </label></div>
+                                <div class="col-md-4"><label for="leaning_status">{{__("messages.leaning")}} </label></div>
                                 <div class="col-md-4">
-                                    <select name="leaning_staus" id="leaning_staus" class="form-control" required
+                                    <select name="leaning_status" id="leaning_status" class="form-control" required
                                         onchange="leaningStatus(this)">
                                         <option value="" hidden>select status</option>
                                         <option value="Yes">Yes</option>
