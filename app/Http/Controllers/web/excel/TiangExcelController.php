@@ -28,8 +28,8 @@ class TiangExcelController extends Controller
                 $result->where('visit_date', '>=', $req->excel_from_date);
             }
 
-            if ($req->filled('surveyDate_to')) {
-                $result->where('visit_date', '<=', $req->surveyDate_to);
+            if ($req->filled('excel_to_date')) {
+                $result->where('visit_date', '<=', $req->excel_to_date);
             }
 
 
@@ -203,6 +203,8 @@ class TiangExcelController extends Controller
 
                     $i++;
                 }
+                // dump($spreadsheet->getSheetNames());
+                // return;
                 $thirdWorksheet->calculateColumnWidths();
                 $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
 

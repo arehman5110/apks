@@ -98,7 +98,7 @@ Route::group(
                 /// tiang
 
                 Route::resource('tiang-talian-vt-and-vr', TiangContoller::class);
-                Route::get('generate-tiang-talian-vt-and-vr-excel', [TiangExcelController::class, 'generateTiangExcel'])->name('generate-tiang-talian-vt-and-vr-excel');
+                Route::post('generate-tiang-talian-vt-and-vr-excel', [TiangExcelController::class, 'generateTiangExcel'])->name('generate-tiang-talian-vt-and-vr-excel');
                 Route::view('/tiang-talian-vt-and-vr-map', 'Tiang.map')->name('tiang-talian-vt-and-vr-map');
 
                 //// Link Box

@@ -69,8 +69,8 @@ class Dashboard extends Controller
         }else{
          return redirect()->route('third-party-digging.index',app()->getLocale());
         } 
-
-    } catch (Exception $error) {
+ 
+    } catch (\Throwable $th) {
        // return $error->getMessage();
       //  return $th;
        return redirect()->route('third-party-digging.index',app()->getLocale());
