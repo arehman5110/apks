@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CableBridgeExcelController extends Controller
 {
@@ -15,17 +16,26 @@ class CableBridgeExcelController extends Controller
         public function generateCableBridgeExcel(Request $req)
         {
 
-            $userBa = Auth::user()->ba == '' ? $req->excelBa : Auth::user()->ba;
-            $zone = Auth::user()->zone == '' ? $req->excelZone : Auth::user()->zone;
-            $surveyDate_from = $req->excel_from_date == '' ? CableBridge::min('visit_date') : $req->excel_from_date;
-            $surveyDate_to = $req->excel_to_date == '' ? CableBridge::max('visit_date') : $req->excel_to_date;
-            try {
-                $recored = CableBridge::where('ba' ,  'LIKE', '%' . $userBa . '%')
-                ->where('zone', 'LIKE', '%' . $zone . '%')
-                ->whereDate('visit_date', '>=', $surveyDate_from)
-                ->whereDate('visit_date', '<=', $surveyDate_to)->get();
-                // return $recored;
-                if (sizeof($recored) > 0) {
+            try{
+            $ba = $req->filled('ba') ? $req->excelBa : Auth::user()->ba;
+            $result = CableBridge::query();
+
+            if ($req->filled('excelBa')) {
+                $result->where('ba', $ba);
+            }
+
+            if ($req->filled('excel_from_date')) {
+                $result->where('visit_date', '>=', $req->excel_from_date);
+            }
+
+            if ($req->filled('surveyDate_to')) {
+                $result->where('visit_date', '<=', $req->surveyDate_to);
+            }
+
+            $result = $result->get();
+ 
+             
+            if ($result) {
                     $excelFile = public_path('assets/excel-template/cable-bridge.xlsx');
 
                     $spreadsheet = IOFactory::load($excelFile);
@@ -33,7 +43,7 @@ class CableBridgeExcelController extends Controller
                     $worksheet = $spreadsheet->getActiveSheet();
 
                     $i = 4;
-                    foreach ($recored as $rec) {
+                    foreach ($result as $rec) {
                         $worksheet->setCellValue('A' . $i, $i - 3);
                         $worksheet->setCellValue('B' . $i, $rec->zone);
                         $worksheet->setCellValue('C' . $i, $rec->ba);

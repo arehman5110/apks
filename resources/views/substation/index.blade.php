@@ -20,9 +20,9 @@
             visibility: visible;
         }
 
-        .table-responsive::-webkit-scrollbar {
+        /* .table-responsive::-webkit-scrollbar {
             display: none;
-        }
+        } */
 
         .lower-header th,
         td {

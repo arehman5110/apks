@@ -12,7 +12,6 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\DataTables;
 
-
 class ThirdPartyDiggingController extends Controller
 {
     /**
@@ -22,23 +21,34 @@ class ThirdPartyDiggingController extends Controller
      */
     public function index(Request $request)
     {
-        $ba = Auth::user()->ba;
-
-
+ 
 
         if ($request->ajax()) {
-            $query = ThirdPartyDiging::where('ba', 'LIKE', '%' . $ba . '%');
 
-            if ($request->filled('from_date') || $request->filled('to_date')) {
-                $from_date = $request->filled('from_date') ? $request->from_date : ThirdPartyDiging::min('visit_date');
-                $to_date = $request->filled('to_date') ? $request->to_date : ThirdPartyDiging::max('visit_date');
-                $query = $query
-                    ->where('visit_date', '>=', $from_date)
-                    ->where('visit_date', '<=', $to_date);
+        //    $request->from_date;
+
+            $ba = $request->filled('ba') ? $request->ba : Auth::user()->ba;
+            // return $ba;
+            $result = ThirdPartyDiging::query();
+
+            if ($request->filled('ba')) {
+                $result->where('ba', $ba);
             }
-            $data = $query->select('wp_name', 'zone', 'ba', 'survey_date', 'id' , 'patrolling_time' , 'supervision','notice' , 'survey_status','digging')->get();
+
+            if ($request->filled('from_date')) {
+                $result->where('survey_date', '>=', $request->from_date);
+            }
+
+            if ($request->filled('to_date')) {
+                $result->where('survey_date', '<=', $request->to_date);
+            }
+
+            $result->when(true, function ($query) {
+                return $query->select('wp_name', 'zone', 'ba', 'survey_date', 'id', 'patrolling_time', 'supervision', 'notice', 'survey_status', 'digging');
+            });
+
             return datatables()
-                ->of($data)
+                ->of($result->get())
                 ->make(true);
         }
 

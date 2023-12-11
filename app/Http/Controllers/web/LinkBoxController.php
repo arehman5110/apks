@@ -17,13 +17,34 @@ class LinkBoxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $ba = Auth::user()->ba ;
-        $zone = Auth::user()->zone;
-        $data = LinkBox::where('ba', 'LIKE', '%' . $ba . '%')->where('zone', 'LIKE', '%' . $zone . '%')->get();
-        return view('link-box.index', ['datas' => $data]);
+        if ($request->ajax()) {
+            $ba = $request->filled('ba') ? $request->ba : Auth::user()->ba;
+            $result = LinkBox::query();
+
+            if ($request->filled('ba')) {
+                $result->where('ba', $ba);
+            }
+
+            if ($request->filled('from_date')) {
+                $result->where('visit_date', '>=', $request->from_date);
+            }
+
+            if ($request->filled('to_date')) {
+                $result->where('visit_date', '<=', $request->to_date);
+            }
+
+            $result->when(true, function ($query) {
+                return $query->select('id', 'ba', 'zone', 'team', 'visit_date');
+            });
+
+            return datatables()
+                ->of($result->get())
+                ->make(true);
+        }
+        return view('link-box.index');
     }
 
     /**
@@ -56,7 +77,6 @@ class LinkBoxController extends Controller
             $data->team = $request->team;
             $data->visit_date = $request->visit_date;
             $data->patrol_time = $combinedDateTime;
-
 
             $data->start_date = $request->start_date;
             $data->end_date = $request->end_date;
@@ -103,7 +123,7 @@ class LinkBoxController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($language,$id)
+    public function show($language, $id)
     {
         //
         $data = LinkBox::find($id);
@@ -116,7 +136,7 @@ class LinkBoxController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($language,$id)
+    public function edit($language, $id)
     {
         //
         $data = LinkBox::find($id);
@@ -130,7 +150,7 @@ class LinkBoxController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$language, $id)
+    public function update(Request $request, $language, $id)
     {
         //
 
@@ -149,7 +169,7 @@ class LinkBoxController extends Controller
             $data->end_date = $request->end_date;
             $data->type = $request->type;
             $data->coordinate = $request->coordinate;
-           // $data->gate_status = $request->gate_status;
+            // $data->gate_status = $request->gate_status;
             $data->vandalism_status = $request->vandalism_status;
             $data->leaning_staus = $request->leaning_staus;
             $data->rust_status = $request->rust_status;
@@ -187,7 +207,7 @@ class LinkBoxController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($language,$id)
+    public function destroy($language, $id)
     {
         //
         try {

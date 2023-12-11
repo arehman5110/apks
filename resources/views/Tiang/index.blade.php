@@ -60,6 +60,8 @@
 
 
             <div class="row">
+                @include('components.qr-filter', ['url' => 'generate-tiang-talian-vt-and-vr-excel'])
+
                 <div class="col-12">
                     <div class="card">
 
@@ -70,9 +72,12 @@
                             <div class="d-flex ml-auto">
                                 <a href="{{ route('tiang-talian-vt-and-vr.create' ,app()->getLocale()) }}"><button
                                         class="btn text-white btn-success  btn-sm mr-4">Add Tiang</button></a>
-
-                                <a href="{{ route('generate-tiang-talian-vt-and-vr-excel', app()->getLocale() )}}"> <button
-                                        class="btn text-white  btn-sm mr-4" style="background-color: #708090">QR Tiang Talian</button></a>
+                                        <button class="btn text-white  btn-sm mr-4" type="button" data-toggle="collapse"
+                                        style="background-color: #708090" data-target="#collapseQr" aria-expanded="false"
+                                        aria-controls="collapseQr">
+                                        QR Cable Bridge
+                                    </button>
+                                
                             </div>
                         </div>
 
@@ -81,7 +86,7 @@
 
                             </div>
                             <div class="table-responsive">
-                                <table id="myTable" class="table table-bordered table-hover">
+                                <table id="myTable" class="table table-bordered table-hover data-table">
 
 
                                     <thead style="background-color: #E4E3E3 !important">
@@ -96,55 +101,7 @@
                                     </thead>
                                     <tbody>
 
-                                        @foreach ($datas as $data)
-                                            <tr>
-                                                <td>{{$data->tiang_no}}</td>
-                                                <td class="align-middle">{{ $data->ba }}</td>
-                                                {{-- <td class="align-middle">
-                                                    {{ $data->name_contractor }}</td> --}}
-
-
-                                                <td class="align-middle text-center">
-                                                    @php
-                                                        $date = new DateTime($data->review_date);
-                                                        $datePortion = $date->format('Y-m-d');
-
-                                                    @endphp
-                                                    {{ $datePortion }}
-
-                                                <td class="text-center">
-
-                                                    <button type="button" class="btn  " data-toggle="dropdown">
-                                                        <img
-                                                            src="{{ URL::asset('assets/web-images/three-dots-vertical.svg') }}">
-                                                    </button>
-                                                    <div class="dropdown-menu" role="menu">
-
-                                                        <form action="{{ route('tiang-talian-vt-and-vr.show',[app()->getLocale() , $data->id]) }}"
-                                                            method="get">
-                                                            <button type="submit"
-                                                                class="dropdown-item pl-3 w-100 text-left">Detail</button>
-                                                        </form>
-
-                                                        <form action="{{ route('tiang-talian-vt-and-vr.edit', [app()->getLocale() , $data->id]) }}"
-                                                            method="get">
-                                                            <button type="submit"
-                                                                class="dropdown-item pl-3 w-100 text-left">Edit</button>
-                                                        </form>
-
-
-                                                        <button type="button" class="btn btn-primary dropdown-item"
-                                                        data-id="{{ $data->id }}" data-toggle="modal"
-                                                        data-target="#myModal">
-                                                        Remove
-                                                    </button>
-
-
-                                                    </div>
-                                                </td>
-
-                                            </tr>
-                                        @endforeach
+                                        
                                     </tbody>
                                 </table>
                             </div>
@@ -196,26 +153,110 @@
 @section('script')
     <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-
+    <script src="{{ asset('assets/js/generate-qr.js') }}"></script>
 
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.3/datatables.min.js"></script>
 
     <script>
+        var from_date = $('#excel_from_date').val();
+        var to_date = $('#excel_to_date').val();
+        var excel_ba = $('#excelBa').val();
         $(document).ready(function() {
-            $('#myTable').DataTable({
-                aaSorting: [
-                    [3, 'desc']
+            var table = $('.data-table').DataTable({
+                processing: true,
+                serverSide: true,
+
+                ajax: {
+                    url: '{{ route('tiang-talian-vt-and-vr.index', app()->getLocale()) }}',
+                    type: "GET",
+                    data: function(d) {
+
+                        if (from_date) {
+                            d.from_date = from_date;
+                        }
+
+                        if (excel_ba) {
+                            d.ba = excel_ba;
+                        }
+
+                        if (to_date) {
+                            d.to_date = to_date;
+                        }
+                    }
+                },
+                columns: [{
+                        data: 'tiang_no',
+                        name: 'tiang_no'
+                    },
+                    {
+                        data: 'ba',
+                        name: 'ba',
+                        orderable: true
+                    },
+                    {
+                        data: 'review_date',
+                        name: 'review_date'
+                    },
+                    {
+                        render: function(data, type, full) {
+
+                            var id = full.id;
+                            return `<button type="button" class="btn  " data-toggle="dropdown">
+                            <img
+                                src="{{ URL::asset('assets/web-images/three-dots-vertical.svg') }}">
+                        </button>
+                        <div class="dropdown-menu" role="menu">
+                            <form action="/{{ app()->getLocale() }}/feeder-pillar/${id}" method="get">
+
+                                <button type="submit" class="dropdown-item pl-3 w-100 text-left">Detail</button>
+                            </form>
+                            <form action="/{{ app()->getLocale() }}/feeder-pillar/${id}/edit" method="get">
+
+                                <button type="submit" class="dropdown-item pl-3 w-100 text-left">Edit</button>
+                            </form>
+                            <button type="button" class="btn btn-primary dropdown-item" data-id="${id}" data-toggle="modal" data-target="#myModal">
+                                Remove
+                            </button>
+                        </div>
+                        `;
+                        }
+                    }
+
                 ],
-                "lengthMenu": [
-                    [10, 25, 50, -1],
-                    [10, 25, 50, "All"]
-                ],
+                order: [
+                    [2, 'desc']
+                ]
+            })
+
+
+            $('#excelBa').on('change', function() {
+                excel_ba = $(this).val();
+                table.ajax.reload(function() {
+                    table.draw('page');
+                });
+            })
+
+
+            $('#excel_from_date').on('change', function() {
+                from_date = $(this).val();
+                table.ajax.reload(function() {
+                    table.draw('page');
+                });
+            })
+
+            $('#excel_to_date').on('change', function() {
+                to_date = $(this).val();
+                table.ajax.reload(function() {
+                    table.draw('page');
+                });
             });
+
             $('#myModal').on('show.bs.modal', function(event) {
                 var button = $(event.relatedTarget);
                 var id = button.data('id');
+                var langs = '{{ app()->getLocale() }}';
                 var modal = $(this);
-                $('#remove-foam').attr('action', '/en/tiang-talian-vt-and-vr/' + id)
+                $('#remove-foam').attr('action', '/' + langs + '/tiang-talian-vt-and-vr/' + id)
             });
 
         });

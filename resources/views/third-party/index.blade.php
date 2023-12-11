@@ -15,9 +15,9 @@
             visibility: visible;
         }
 
-        .table-responsive::-webkit-scrollbar {
+        /* .table-responsive::-webkit-scrollbar {
             display: none;
-        }
+        } */
     </style>
 @endsection
 
@@ -92,7 +92,7 @@
                                         <th>BA</th>
                                         <th>SURVEY DATE</th>
                                         <th>PATROLLING TIME</th>
-                                        <th>NOTICE</th>
+                                        <th>DIGGING</th>
                                         <th>SUPERVISION</th>
                                         <th>SURVEY STATUS</th>
                                         <th>NOTICE</th>
@@ -160,6 +160,7 @@
     <script>
         var from_date = '';
         var to_date = '';
+        var excel_ba = '';
         $(document).ready(function() {
 
 
@@ -180,6 +181,9 @@
 
                         if (to_date) {
                             d.to_date = to_date;
+                        }
+                        if (excel_ba) {
+                            d.ba = excel_ba;
                         }
                     }
                 },
@@ -267,6 +271,14 @@
                     $(row).find('td:eq(4)').addClass('text-center');
                 }
             })
+            $('#excelBa').on('change', function () {
+                console.log("dsfdsf");
+                excel_ba = $(this).val();
+                console.log(excel_ba);
+        table.ajax.reload(function () {
+            table.draw('page');
+        });
+    })
 
 
             $('#excel_from_date').on('change', function() {

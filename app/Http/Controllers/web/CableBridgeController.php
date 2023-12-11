@@ -17,14 +17,35 @@ class CableBridgeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
 
-        $ba = Auth::user()->ba;
-        $zone = Auth::user()->zone;
-        $data = CableBridge::where('ba', 'LIKE', '%' . $ba . '%')->where('zone', 'LIKE', '%' . $zone . '%')->get();
-        return view('cable-bridge.index', ['datas' => $data]);
+        if ($request->ajax()) {
+            $ba = $request->filled('ba') ? $request->ba : Auth::user()->ba;
+            $result = CableBridge::query();
+
+            if ($request->filled('ba')) {
+                $result->where('ba', $ba);
+            }
+
+            if ($request->filled('from_date')) {
+                $result->where('visit_date', '>=', $request->from_date);
+            }
+
+            if ($request->filled('to_date')) {
+                $result->where('visit_date', '<=', $request->to_date);
+            }
+
+            $result->when(true, function ($query) {
+                return $query->select('id', 'ba', 'zone', 'team', 'visit_date');
+            });
+
+            return datatables()
+                ->of($result->get())
+                ->make(true);
+        }
+        return view('cable-bridge.index');
     }
 
     /**

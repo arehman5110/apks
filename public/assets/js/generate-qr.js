@@ -54,7 +54,7 @@ function getBa (selectedValue) {
 function collapseFilter() {
     $('#collapseQr').collapse('hide');
     setTimeout(function() {
-        $('#excel_from_date').val('');
-        $('#excel_to_date').val('');
+        // $('#excel_from_date').val('');
+        // $('#excel_to_date').val('');
     }, 2000)
 }

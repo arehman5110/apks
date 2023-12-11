@@ -58,6 +58,41 @@
             margin: 0;
         }
 
+        input[type="radio"]#substation_without_defects  {
+
+  background-color: #00F700; 
+  border-color: #00F700;  
+}
+ 
+input[type="radio"]:checked#substation_without_defects {
+  background-color: #00F700; 
+  border-color: #00F700; 
+}
+
+
+input[type="radio"]#select_layer_main  {
+
+background-color: #F7F701; 
+border-color: #F7F701;  
+}
+
+input[type="radio"]:checked#select_layer_main {
+background-color: #F7F701; 
+border-color: #F7F701; 
+}
+
+
+input[type="radio"]#select_layer_unsurveyed  {
+
+background-color: #FF0000; 
+border-color: #FF0000;  
+}
+
+input[type="radio"]:checked#select_layer_unsurveyed {
+background-color: #FF0000; 
+border-color: #FF0000; 
+}
+
         input.typeahead.tt-hint {
             border: 0px !important;
             background: transparent !important;

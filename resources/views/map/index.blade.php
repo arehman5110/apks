@@ -702,18 +702,33 @@
             map.addLayer(rd)
             rd.bringToFront()
 
-            if (substation != '') {
-                map.removeLayer(substation)
+
+            if (pano_layer !== '') {
+                map.removeLayer(pano_layer)
             }
-            substation = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-                layers: 'cite:tbl_substation',
-                format: 'image/png',
-                cql_filter: "ba ILIKE '%" + param + "%'",
-                maxZoom: 21,
-                transparent: true
-            }, {
-                buffer: 10
-            })
+            pano_layer = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+        layers: 'cite:pano_apks',
+        format: 'image/png',
+        cql_filter: "ba ILIKE '%" + param + "%'",
+        maxZoom: 21,
+        transparent: true
+    }, {
+        buffer: 10
+    });
+    map.addLayer(pano_layer);
+    map.addLayer(pano_layer)
+            // if (substation != '') {
+            //     map.removeLayer(substation)
+            // }
+            // substation = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+            //     layers: 'cite:tbl_substation',
+            //     format: 'image/png',
+            //     cql_filter: "ba ILIKE '%" + param + "%'",
+            //     maxZoom: 21,
+            //     transparent: true
+            // }, {
+            //     buffer: 10
+            // })
 
             // map.addLayer(substation)
             // substation.bringToFront()
@@ -1052,7 +1067,7 @@
                     "Work Package": wp,
                     "Roads": rd,
                     "Pano ": pano_layer,
-                    'Subsation': substation,
+                    // 'Subsation': substation,
 
                 }
             };

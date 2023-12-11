@@ -25,14 +25,40 @@ class TiangContoller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $ba = Auth::user()->ba ;
-        $zone = Auth::user()->zone;
-        $datas = Tiang::where('ba', 'LIKE', '%' . $ba . '%')->get();
+        if ($request->ajax()) {
 
-        return view('Tiang.index', ['datas' => $datas]);
+
+            $ba = $request->filled('ba') ? $request->ba : Auth::user()->ba;
+            $result = Tiang::query();
+
+            if ($request->filled('ba')) {
+                $result->where('ba', $ba);
+            }
+
+            if ($request->filled('from_date')) {
+                $result->where('review_date', '>=', $request->from_date);
+            }
+
+            if ($request->filled('to_date')) {
+                $result->where('review_date', '<=', $request->to_date);
+            }
+
+            $result->when(true, function ($query) {
+                return $query->select(
+                    'id',
+                    'ba',
+                    'review_date',
+                    'tiang_no',
+                );
+            });
+
+            return datatables()->of($result->get())->make(true);
+        }
+
+        return view('Tiang.index');
     }
 
     /**

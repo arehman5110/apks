@@ -88,10 +88,10 @@
             <span class="text-danger" id="er-select-layer"></span>
 
             <div class="d-sm-flex">
-                <div class="">
+                {{-- <div class="">
                     <input type="radio" name="select_layer" id="select_layer_substation" value="substation" onchange="selectLayer(this.value)">
                     <label for="select_layer_substation">Substation</label>
-                </div>
+                </div> --}}
 
                 <div class=" mx-4">
                     <input type="radio" name="select_layer" id="select_layer_pano" value="pano" onchange="selectLayer(this.value)">
@@ -240,19 +240,19 @@
             });
 
 
-            if (substation != '') {
-                map.removeLayer(substation)
-            }
+            // if (substation != '') {
+            //     map.removeLayer(substation)
+            // }
 
-            substation = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-                layers: 'cite:tbl_substation',
-                format: 'image/png',
-                cql_filter: "ba ILIKE '%" + param + "%'",
-                maxZoom: 21,
-                transparent: true
-            }, {
-                buffer: 10
-            })
+            // substation = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+            //     layers: 'cite:tbl_substation',
+            //     format: 'image/png',
+            //     cql_filter: "ba ILIKE '%" + param + "%'",
+            //     maxZoom: 21,
+            //     transparent: true
+            // }, {
+            //     buffer: 10
+            // })
 
             // map.addLayer(substation)
             // substation.bringToFront()
@@ -308,7 +308,7 @@
             groupedOverlays = {
                 "POI": {
                     'BA': boundary,
-                    'Substation': substation,
+                    // 'Substation': substation,
                     'Pano': pano_layer,
                     'Cable Bridge': cable_bridge,
                 }
