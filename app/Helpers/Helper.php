@@ -9,7 +9,8 @@ function checkCheckBox($key, $array)
         //code...
 
         if ($array != null) {
-            if (array_key_exists($key, $array)) {
+            if (array_key_exists($key, $array) && $array[$key]==true) {
+
                 return 'checked';
             }
         }
@@ -108,7 +109,7 @@ function getImage2($key, $arr, $arr_name, $img_arr, $lab_name)
     $html = '';
 
     // Check for checked checkbox
-    $key_exist = !empty($arr) && array_key_exists($key, $arr);
+    $key_exist = !empty($arr) && array_key_exists($key, $arr) && $arr[$key] == true;
 
     $id = $arr_name . '_' . $key;
     $name = $arr_name . '[' . $key . ']';
@@ -121,7 +122,7 @@ function getImage2($key, $arr, $arr_name, $img_arr, $lab_name)
     $html .=
         "<td class='$class'>
                 <input type='checkbox' name='$name' id='$id' " .
-        ($key_exist ? 'checked' : '') .
+        ($key_exist? 'checked' : '') .
         " class='form-check'>
                 <label class='text-capitalize' for='$id'> $lab_name</label>";
 
@@ -143,7 +144,7 @@ function getImage2($key, $arr, $arr_name, $img_arr, $lab_name)
               </td>
               <td>";
 
-    if ($img_arr != '') {
+    if ($key_exist && $arr[$key] == true && $img_arr != '') {
         if (array_key_exists($key, $img_arr) && file_exists(public_path($img_arr[$key])) && $img_arr[$key] != '') {
             $html .=
                 "<a href='" .
@@ -178,7 +179,7 @@ function getImageShow($key, $arr, $arr_name, $img_arr, $lab_name)
     $html = '';
 
     // Check for checked checkbox
-    $key_exist = !empty($arr) && array_key_exists($key, $arr);
+    $key_exist = !empty($arr) && array_key_exists($key, $arr) && $arr[$key] == true;
 
     $id = $arr_name . '_' . $key;
     $name = $arr_name . '[' . $key . ']';
@@ -202,7 +203,7 @@ function getImageShow($key, $arr, $arr_name, $img_arr, $lab_name)
     $html .= "</td>
     <td class=''>";
 
-    if ($img_arr != '') {
+    if ($key_exist && $img_arr != '') {
         if (array_key_exists($key, $img_arr) && file_exists(public_path($img_arr[$key])) && $img_arr[$key] != '') {
             $html .=
                 "<a href='" .

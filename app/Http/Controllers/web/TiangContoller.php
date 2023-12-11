@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\web;
 
 use App\Http\Controllers\Controller;
+use App\Models\ThirdPartyDiging;
 use App\Models\Tiang;
 use App\Repositories\TiangRepository;
 use Illuminate\Http\Request;
@@ -12,9 +13,7 @@ use PhpParser\Node\Stmt\TryCatch;
 
 class TiangContoller extends Controller
 {
-
     private $tiangRepository;
-
 
     public function __construct(TiangRepository $tiaRepository)
     {
@@ -29,8 +28,6 @@ class TiangContoller extends Controller
     {
         //
         if ($request->ajax()) {
-
-
             $ba = $request->filled('ba') ? $request->ba : Auth::user()->ba;
             $result = Tiang::query();
 
@@ -47,15 +44,12 @@ class TiangContoller extends Controller
             }
 
             $result->when(true, function ($query) {
-                return $query->select(
-                    'id',
-                    'ba',
-                    'review_date',
-                    'tiang_no',
-                );
+                return $query->select('id', 'ba', 'review_date', 'tiang_no');
             });
 
-            return datatables()->of($result->get())->make(true);
+            return datatables()
+                ->of($result->get())
+                ->make(true);
         }
 
         return view('Tiang.index');
@@ -83,97 +77,116 @@ class TiangContoller extends Controller
         // return $request;
 
         try {
-
             // $this->tiangRepository->store($request->all());
 
             $destinationPath = 'assets/images/tiang/';
 
             $data = new Tiang();
-            foreach ($request->all() as $mainkey => $mainvalue) {
-                if (is_array($mainvalue)) {
-                    $arr = [];
-                    foreach ($mainvalue as $key => $file) {
-                        if (is_a($file, 'Illuminate\Http\UploadedFile') && $file->isValid()) {
-                            $uploadedFile = $file;
-                            $img_ext = $uploadedFile->getClientOriginalExtension();
-                            $filename = $key . '-' . strtotime(now()) . '.' . $img_ext;
-                            $uploadedFile->move($destinationPath, $filename);
-                            $arr[$key] = $destinationPath.$filename;
-                        }
-                    }
-                    $data[$mainkey] = json_encode($arr);
-                }else{
-
-                    if (is_a($mainvalue, 'Illuminate\Http\UploadedFile') && $mainvalue->isValid()) {
-                        $uploadedFile = $mainvalue;
-                        $img_ext = $uploadedFile->getClientOriginalExtension();
-                        $filename = $mainkey . '-' . strtotime(now()) . '.' . $img_ext;
-                        $uploadedFile->move($destinationPath, $filename);
-                        $data[$mainkey] = $destinationPath.$filename ;
-                    }
-
-                }
-            }
-
+            $data->abc_span = $request->has('abc_span') ? json_encode($request->abc_span) : null;
+            $data->pvc_span = $request->has('pvc_span') ? json_encode($request->pvc_span) : null;
+            $data->bare_span = $request->has('bare_span') ? json_encode($request->bare_span) : null;
+            $data->jarak_kelegaan = $request->jarak_kelegaan;
+            $data->arus_pada_tiang = $request->arus_pada_tiang;
             $data->ba = $request->ba;
-            // $data->name_contractor = $request->name_contractor;
-            // $data->start_date = $request->start_date;
-            // $data->end_date = $request->end_date;
             $data->fp_name = $request->fp_name;
-            // $data->review_date = $request->review_date;
+            $data->review_date = $request->review_date;
             $data->fp_road = $request->fp_road;
             $data->section_from = $request->section_from;
             $data->section_to = $request->section_to;
             $data->tiang_no = $request->tiang_no;
 
-            $data->size_tiang = $request->has('size_tiang') ? json_encode($request->size_tiang) : null;
-            $data->jenis_tiang = $request->has('jenis_tiang') ? json_encode($request->jenis_tiang) : null;
-            $data->abc_span = $request->has('abc_span') ? json_encode($request->abc_span) : null;
-            $data->pvc_span = $request->has('pvc_span') ? json_encode($request->pvc_span) : null;
-            $data->bare_span = $request->has('bare_span') ? json_encode($request->bare_span) : null;
+            $data->size_tiang = $request->size_tiang;
+            $data->jenis_tiang = $request->jenis_tiang;
 
-            $data->tiang_defect = $request->has('tiang_defect') ? json_encode($request->tiang_defect) : null;
-            $data->talian_defect = $request->has('talian_defect') ? json_encode($request->talian_defect) : null;
-            $data->umbang_defect = $request->has('umbang_defect') ? json_encode($request->umbang_defect) : null;
-            $data->ipc_defect = $request->has('ipc_defect') ? json_encode($request->ipc_defect) : null;
-            $data->blackbox_defect = $request->has('blackbox_defect') ? json_encode($request->blackbox_defect) : null;
-            $data->jumper = $request->has('jumper') ? json_encode($request->jumper) : null;
-            $data->kilat_defect = $request->has('kilat_defect') ? json_encode($request->kilat_defect) : null;
-            $data->servis_defect = $request->has('servis_defect') ? json_encode($request->servis_defect) : null;
-            $data->pembumian_defect = $request->has('pembumian_defect') ? json_encode($request->pembumian_defect) : null;
-            $data->bekalan_dua_defect = $request->has('bekalan_dua_defect') ? json_encode($request->bekalan_dua_defect) : null;
-            $data->kaki_lima_defect = $request->has('kaki_lima_defect') ? json_encode($request->kaki_lima_defect) : null;
+            $defectsKeys = [];
+            $defectsKeys['tiang_defect'] = ['cracked', 'leaning', 'dim', 'creepers', 'other'];
+            $defectsKeys['talian_defect'] = ['joint', 'need_rentis', 'ground', 'other'];
+            $defectsKeys['umbang_defect'] = ['breaking', 'creepers', 'cracked', 'stay_palte', 'other'];
 
-            $data->total_defects = $request->total_defects;
-            // $data->planed_date = $request->planed_date;
-            // $data->actual_date = $request->actual_date;
-            // $data->remarks = $request->remarks;
+            $defectsKeys['ipc_defect'] = ['burn', 'other'];
+            $defectsKeys['blackbox_defect'] = ['cracked', 'other'];
+            $defectsKeys['jumper'] = ['sleeve', 'burn', 'other'];
 
-            $data->tapak_condition = $request->has('tapak_condition') ? json_encode($request->tapak_condition) : null;
-            $data->kawasan = $request->has('kawasan') ? json_encode($request->kawasan) : null;
+            $defectsKeys['kilat_defect'] = ['broken', 'other'];
+            $defectsKeys['servis_defect'] = ['roof', 'won_piece', 'other'];
 
-            $data->jarak_kelegaan = $request->jarak_kelegaan;
+            $defectsKeys['pembumian_defect'] = ['netural', 'other'];
+            $defectsKeys['bekalan_dua_defect'] = ['damage', 'other'];
+            $defectsKeys['kaki_lima_defect'] = ['date_wire', 'burn', 'other'];
+            $defectsKeys['tapak_condition'] = ['road', 'side_walk', 'vehicle_entry'];
+            $defectsKeys['kawasan'] = ['road', 'bend', 'forest', 'other'];
 
-            $data->talian_spec = $request->has('talian_spec') ? json_encode($request->talian_spec) : null;
+            
+            $defectsImg = ['tapak_road_img', 'tapak_sidewalk_img', 'tapak_no_vehicle_entry_img','kawasan_bend_img', 'kawasan_road_img', 'kawasan_forest_img', 'kawasan_other_img' ,'pole_image_1','pole_image_2'];
+           
+            $total_defects = 0;
+            foreach ($defectsKeys as $key => $defect) {
+                $def = [];
+                $arr = [];
 
-            $data->arus_pada_tiang = $request->arus_pada_tiang;
+                foreach ($defect as $item) {
+                    if ($request->has("$key.$item")) {
+                        $def[$item] = true;
+                        
+                        if ($key != 'tapak_condition' && $key != 'kawasan') {
+                            if ($request->{$key . '_image'} != '') {
+                                foreach ($request->{$key . '_image'} as $keyy => $file) {
+                                    if (is_a($file, 'Illuminate\Http\UploadedFile') && $file->isValid()) {
+                                        $uploadedFile = $file;
+                                        $img_ext = $uploadedFile->getClientOriginalExtension();
+                                        $filename = $keyy . '-' . strtotime(now()) . '.' . $img_ext;
+                                        $uploadedFile->move($destinationPath, $filename);
+                                        $arr[$keyy] = $destinationPath . $filename;
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        $def[$item] = false;
+                    }
+                }
 
-
-
-
-            if ($request->lat != '' && $request->log != '') {
-                $data->geom = DB::raw("ST_GeomFromText('POINT(".$request->log." ".$request->lat.")',4326)");
+                if ($key != 'tapak_condition') {
+                    $def['other_input'] = $request->{"$key.other_input"};
+                }
+                $data->{$key} = json_encode($def);
+                if ($key != 'tapak_condition' && $key != 'kawasan') {
+                    $total_defects ++;
+                    $data->{$key . '_image'} = json_encode($arr);
+                }
+            }
+           
+            foreach ($defectsImg as $file) {
+                 
+                    if (is_a($request->{$file}, 'Illuminate\Http\UploadedFile') && $request->{$file}->isValid()) {
+                        $uploadedFile = $request->{$file};
+                        $img_ext = $request->{$file}->getClientOriginalExtension();
+                        $filename = $file . '-' . strtotime(now()) . '.' . $img_ext;
+                        $uploadedFile->move($destinationPath, $filename);
+                        $data->{$file} = $destinationPath . $filename;
+                    }
+               
             }
 
-            $data->save();
+            // return $data;
+            $data->total_defects = $total_defects;
 
+            $data->talian_spec = $request->talian_spec;
+
+            if ($request->lat != '' && $request->log != '') {
+                $data->geom = DB::raw("ST_GeomFromText('POINT(" . $request->log . ' ' . $request->lat . ")',4326)");
+            }
+            // return "Sds";
+            $data->save();
+            // return 'asdasd';
+        
             return redirect()
-                ->route('tiang-talian-vt-and-vr.index',app()->getLocale())
+                ->route('tiang-talian-vt-and-vr.index', app()->getLocale())
                 ->with('success', 'Form Intserted');
         } catch (\Throwable $th) {
             return $th->getMessage();
             return redirect()
-                ->route('tiang-talian-vt-and-vr.index',app()->getLocale())
+                ->route('tiang-talian-vt-and-vr.index', app()->getLocale())
                 ->with('failed', 'Form Intserted Failed');
         }
     }
@@ -184,18 +197,19 @@ class TiangContoller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($language , $id)
+    public function show($language, $id)
     {
         try {
-            $data =  $this->tiangRepository->getRecoreds($id);
+            $data = $this->tiangRepository->getRecoreds($id);
 
-            return view('Tiang.detail',['data'=>$data]);
+            return view('Tiang.detail', ['data' => $data]);
         } catch (\Throwable $th) {
-            return redirect()->route("tiang-talian-vt-and-vr.index")->with('failed','Request Failed');
+            return redirect()
+                ->route('tiang-talian-vt-and-vr.index')
+                ->with('failed', 'Request Failed');
         }
 
         // dd($id);
-
     }
 
     /**
@@ -204,15 +218,11 @@ class TiangContoller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($language , $id)
+    public function edit($language, $id)
     {
+        $data = $this->tiangRepository->getRecoreds($id);
 
-
-
-        $data =  $this->tiangRepository->getRecoreds($id);
-      
-
-        return $data ?  view('Tiang.edit',['data'=>$data]) : abort(404);
+        return $data ? view('Tiang.edit', ['data' => $data]) : abort(404);
     }
 
     /**
@@ -222,13 +232,13 @@ class TiangContoller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $language,  $id)
+    public function update(Request $request, $language, $id)
     {
         //
         try {
             //code...
             $destinationPath = 'assets/images/tiang/';
-            $data =Tiang::find($id);
+            $data = Tiang::find($id);
             foreach ($request->all() as $mainkey => $mainvalue) {
                 if (is_array($mainvalue)) {
                     $json = json_decode($data[$mainkey], true) ?? []; // Decode existing JSON or create an empty array if not exists
@@ -250,75 +260,86 @@ class TiangContoller extends Controller
                         $img_ext = $uploadedFile->getClientOriginalExtension();
                         $filename = $mainkey . '-' . strtotime(now()) . '.' . $img_ext;
                         $uploadedFile->move($destinationPath, $filename);
-                        $data[$mainkey] = $destinationPath.$filename ;
-
+                        $data[$mainkey] = $destinationPath . $filename;
                     }
                 }
             }
 
             $data->ba = $request->ba;
-            // $data->name_contractor = $request->name_contractor;
-            // $data->start_date = $request->start_date;
-            // $data->end_date = $request->end_date;
+ 
             $data->fp_name = $request->fp_name;
-            // $data->review_date = $request->review_date;
+     
             $data->fp_road = $request->fp_road;
             $data->section_from = $request->section_from;
             $data->section_to = $request->section_to;
             $data->tiang_no = $request->tiang_no;
 
-            $data->size_tiang = $request->has('size_tiang') ? json_encode($request->size_tiang) : null;
-            $data->jenis_tiang = $request->has('jenis_tiang') ? json_encode($request->jenis_tiang) : null;
+            $data->size_tiang = $request->size_tiang;
+            $data->jenis_tiang = $request->jenis_tiang;
             $data->abc_span = $request->has('abc_span') ? json_encode($request->abc_span) : null;
             $data->pvc_span = $request->has('pvc_span') ? json_encode($request->pvc_span) : null;
             $data->bare_span = $request->has('bare_span') ? json_encode($request->bare_span) : null;
 
-            $data->tiang_defect = $request->has('tiang_defect') ? json_encode($request->tiang_defect) : null;
-            $data->talian_defect = $request->has('talian_defect') ? json_encode($request->talian_defect) : null;
-            $data->umbang_defect = $request->has('umbang_defect') ? json_encode($request->umbang_defect) : null;
-            $data->ipc_defect = $request->has('ipc_defect') ? json_encode($request->ipc_defect) : null;
-            $data->blackbox_defect = $request->has('blackbox_defect') ? json_encode($request->blackbox_defect) : null;
-            $data->jumper = $request->has('jumper') ? json_encode($request->jumper) : null;
-            $data->kilat_defect = $request->has('kilat_defect') ? json_encode($request->kilat_defect) : null;
-            $data->servis_defect = $request->has('servis_defect') ? json_encode($request->servis_defect) : null;
-            $data->pembumian_defect = $request->has('pembumian_defect') ? json_encode($request->pembumian_defect) : null;
-            $data->bekalan_dua_defect = $request->has('bekalan_dua_defect') ? json_encode($request->bekalan_dua_defect) : null;
-            $data->kaki_lima_defect = $request->has('kaki_lima_defect') ? json_encode($request->kaki_lima_defect) : null;
+            $defectsKeys = [];
+            $defectsKeys['tiang_defect'] = ['cracked', 'leaning', 'dim', 'creepers', 'other'];
+            $defectsKeys['talian_defect'] = ['joint', 'need_rentis', 'ground', 'other'];
+            $defectsKeys['umbang_defect'] = ['breaking', 'creepers', 'cracked', 'stay_palte', 'other'];
+            $defectsKeys['ipc_defect'] = ['burn', 'other'];
+            $defectsKeys['blackbox_defect'] = ['cracked', 'other'];
+            $defectsKeys['jumper'] = ['sleeve', 'burn', 'other'];
+            $defectsKeys['kilat_defect'] = ['broken', 'other'];
+            $defectsKeys['servis_defect'] = ['roof', 'won_piece', 'other'];
+            $defectsKeys['pembumian_defect'] = ['netural', 'other'];
+            $defectsKeys['bekalan_dua_defect'] = ['damage', 'other'];
+            $defectsKeys['kaki_lima_defect'] = ['date_wire', 'burn', 'other'];
+            $defectsKeys['tapak_condition'] = ['road', 'side_walk', 'vehicle_entry'];
+            $defectsKeys['kawasan'] = ['road', 'bend', 'forest', 'other'];
+
+            $total_defects =0;
+            foreach ($defectsKeys as $key => $defect) {
+                $def = [];
+                $arr = [];
+
+                foreach ($defect as $item) {
+                    if ($request->has("$key.$item")) {
+                        $def[$item] = true;
+                        $total_defects  ++;
+                    } else {
+                        $def[$item] = false;
+                    }
+                }
+
+                if ($key != 'tapak_condition') {
+                    $def['other_input'] = $request->{"$key.other_input"};
+                }
+                $data->{$key} = json_encode($def);
+
+                if ($key != 'tapak_condition' && $key != 'kawasan') {
+                    $total_defects ++; 
+                }
+                
+            }
+
+            
 
             $data->total_defects = $request->total_defects;
-            // $data->planed_date = $request->planed_date;
-            // $data->actual_date = $request->actual_date;
-            // $data->remarks = $request->remarks;
-
-            $data->tapak_condition = $request->has('tapak_condition') ? json_encode($request->tapak_condition) : null;
-            $data->kawasan = $request->has('kawasan') ? json_encode($request->kawasan) : null;
-
+            
             $data->jarak_kelegaan = $request->jarak_kelegaan;
 
-            $data->talian_spec = $request->has('talian_spec') ? json_encode($request->talian_spec) : null;
+            $data->talian_spec = $request->talian_spec;
 
             $data->arus_pada_tiang = $request->arus_pada_tiang;
-            // $destinationPath = 'assets/images/tiang/';
-            // foreach ($request->all() as $key => $file) {
-            //     // Check if the input is a file and it is valid
-            //     if ($request->hasFile($key) && $request->file($key)->isValid()) {
-            //         $uploadedFile = $request->file($key);
-            //         $img_ext = $uploadedFile->getClientOriginalExtension();
-            //         $filename = $key . '-' . strtotime(now()) . '.' . $img_ext;
-            //         $uploadedFile->move($destinationPath, $filename);
-            //         $data->{$key} = $destinationPath . $filename;
-            //     }
-            // }
+            
 
             $data->update();
 
             return redirect()
-                ->route('tiang-talian-vt-and-vr.index',app()->getLocale())
+                ->route('tiang-talian-vt-and-vr.index', app()->getLocale())
                 ->with('success', 'Form Update');
         } catch (\Throwable $th) {
             return $th->getMessage();
             return redirect()
-                ->route('tiang-talian-vt-and-vr.index',app()->getLocale())
+                ->route('tiang-talian-vt-and-vr.index', app()->getLocale())
                 ->with('failed', 'Form Update Failed');
         }
     }
@@ -329,22 +350,20 @@ class TiangContoller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($language ,$id)
+    public function destroy($language, $id)
     {
         //
-        try{
+        try {
             Tiang::find($id)->delete();
 
-         return redirect()
-                ->route('tiang-talian-vt-and-vr.index',app()->getLocale())
+            return redirect()
+                ->route('tiang-talian-vt-and-vr.index', app()->getLocale())
                 ->with('success', 'Record Removed');
         } catch (\Throwable $th) {
             // return $th->getMessage();
             return redirect()
-                ->route('tiang-talian-vt-and-vr.index',app()->getLocale())
+                ->route('tiang-talian-vt-and-vr.index', app()->getLocale())
                 ->with('failed', 'Request Failed');
         }
     }
-
-
 }
