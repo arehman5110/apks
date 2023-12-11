@@ -53,7 +53,7 @@
                                 <div class="card p-3">
 
                                     <h3 class="text-center"> {{__("messages.total_patrollig_done")}}</h3>
-                                    <p class="text-center mb-0 pb-0"><span>{{ $data->total_km }} KM</span></p>
+                                    <p class="text-center mb-0 pb-0"><span>{{ $data->total_km}} KM</span></p>
 
                                 </div>
                             </div>

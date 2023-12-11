@@ -38,7 +38,7 @@ class Dashboard extends Controller
             ) as substation_defects,
         (SELECT sum(gate_locked+gate_damage+gate_other+vandlism+leaning+rust+poster_status)
             FROM public.feeder_pillar_defects_counts where ba='$ba') as fp_defects,
-            (select sum(km) from patroling where ba='$ba') as km
+            (select round(sum(km),2) from patroling where ba='$ba') as km
             ";
 
         }else{
@@ -61,7 +61,7 @@ class Dashboard extends Controller
             FROM public.substation_defects_counts) as substation_defects,
             (SELECT sum(gate_locked+gate_damage+gate_other+vandlism+leaning+rust+poster_status)
             FROM public.feeder_pillar_defects_counts) as fp_defects,
-            (select sum(km) from patroling) as km
+            (select round(sum(km),2) from patroling) as km
             ";
         }   
      //   return $query; 
