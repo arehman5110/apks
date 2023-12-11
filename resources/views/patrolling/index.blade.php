@@ -115,6 +115,10 @@
                             <br>
                             <button class="btn btn-secondary btn-sm mt-2    " type="button" onclick="removePoint()">Clear Points</button>
                         </div>
+                        <div class="col-md-2">
+                            <br>
+                            <button class="btn btn-secondary btn-sm mt-2    " type="button" onclick="removeLines()">Clear Lines</button>
+                        </div>
 
 
                     </div>
@@ -299,7 +303,7 @@
 
 
             patroling = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-                layers: 'cite:patroling',
+                layers: 'cite:patroling_lines',
                 format: 'image/png',
                 cql_filter: "ba ILIKE '%" + param + "%'",
                 maxZoom: 21,
@@ -529,7 +533,7 @@
             });
         });
 
-        var patrol = '';
+        var patrol = [];
 
         function getGeoJson(param) {
             $.ajax({
@@ -545,14 +549,16 @@
                     if (patrol) {
                         map.removeLayer(patrol)
                     }
-
-                    var geom = L.GeoJSON.coordsToLatLngs(data1.features[0].geometry.coordinates);
+                for(var i=0;i<data1.features.length;i++){
+                    var geom = L.GeoJSON.coordsToLatLngs(data1.features[i].geometry.coordinates);
                     var line = L.polyline(geom);
+                    if(i==data1.features.length-1){
                     map.fitBounds(line.getBounds());
+                    }
 
-                    patrol = L.geoJSON(data1.features[0].geometry);
-                    map.addLayer(patrol)
-
+                    patrol[i] = L.geoJSON(data1.features[i].geometry);
+                    map.addLayer(patrol[i])
+                }
 
                 }
             })
@@ -577,6 +583,13 @@
            for(let i = 0 ; i < layer_index ; i++){
             if (marker[i] != '') {
                 map.removeLayer(marker[i])
+            }
+           }
+        }
+        function removeLines(){
+           for(let i = 0 ; i < patrol.length ; i++){
+            if (patrol[i] != '') {
+                map.removeLayer(patrol[i])
             }
            }
         }

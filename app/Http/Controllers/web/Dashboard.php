@@ -18,7 +18,7 @@ class Dashboard extends Controller
 
         $ba=Auth::user()->ba;
        if($ba!=''){
-        $query="select dig as total_notice,sup as total_supervision,dis as total_km  , feeder_pillar , tiang , link_box , cable_bridge ,  substation,substation_defects::integer,fp_defects::integer from
+        $query="select dig as total_notice,sup as total_supervision,km as total_km  , feeder_pillar , tiang , link_box , cable_bridge ,  substation,substation_defects,fp_defects from
         (select
         sum(case
             when notice='yes' Then 1 else 0
@@ -35,12 +35,14 @@ class Dashboard extends Controller
         (select km as dis from patroling where ba='$ba') as b,
         (SELECT sum(grass+treebranches+gate_loc+gate_demage+gate_other+broken_roof+broken_gutter+broken_base+building_other+poster_status)
         FROM public.substation_defects_counts  where ba='$ba'
-            ) as hh) as substation_defects,
+            ) as substation_defects,
         (SELECT sum(gate_locked+gate_damage+gate_other+vandlism+leaning+rust+poster_status)
-            FROM public.feeder_pillar_defects_counts where ba='$ba') as fp_defects";
+            FROM public.feeder_pillar_defects_counts where ba='$ba') as fp_defects,
+            (select sum(km) from patroling where ba='$ba') as km
+            ";
 
         }else{
-            $query="select dig as total_notice,sup as total_supervision,dis as total_km  , feeder_pillar , tiang , link_box , cable_bridge ,  substation,substation_defects,fp_defects from
+            $query="select dig as total_notice,sup as total_supervision,km as total_km  , feeder_pillar , tiang , link_box , cable_bridge ,  substation,substation_defects,fp_defects from
             (select
             sum(case
                 when notice='yes' Then 1 else 0
@@ -58,9 +60,11 @@ class Dashboard extends Controller
             (SELECT sum(grass+treebranches+gate_loc+gate_demage+gate_other+broken_roof+broken_gutter+broken_base+building_other+poster_status)
             FROM public.substation_defects_counts) as substation_defects,
             (SELECT sum(gate_locked+gate_damage+gate_other+vandlism+leaning+rust+poster_status)
-            FROM public.feeder_pillar_defects_counts) as fp_defects";
+            FROM public.feeder_pillar_defects_counts) as fp_defects,
+            (select sum(km) from patroling) as km
+            ";
         }   
-       // return $query; 
+     //   return $query; 
         $data = DB::select($query);
 
          // return $data;

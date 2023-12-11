@@ -143,8 +143,8 @@ class PatrollingController extends Controller
                 ))) AS geojson
             FROM (
                 SELECT id, geom
-                FROM patroling
-                WHERE id = '$id'
+                FROM patroling_lines
+                WHERE patroling_id = '$id'
             ) AS tbl1;
              ");
 
