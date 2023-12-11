@@ -50,7 +50,7 @@ class PatrollingExcelController extends Controller
                     $worksheet->setCellValue('D' . $i, $rec->ba);
                     $worksheet->setCellValue('E' . $i, date('Y-m-d', strtotime($rec->date)));
                     $worksheet->setCellValue('F' . $i, date('H:i:s', strtotime($rec->time)));
-                    $worksheet->setCellValue('G' . $i, $rec->km);
+                    $worksheet->setCellValue('G' . $i, number_format( $rec->km , 2));
 
                     $i++;
                 }
