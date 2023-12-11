@@ -96,7 +96,7 @@
                 <div class=" card col-md-12 p-3 ">
                     <div class=" ">
                         <h3 class="text-center p-2">{{ __('messages.qr_savr') }}</h3>
-                        @include('Tiang.partials.editForm',['data'=>$data , 'url' => "route('tiang-talian-vt-and-vr.update', [app()->getLocale(), $data->id])"])
+                        @include('Tiang.partials.editForm',['data'=>$data , 'url' => "tiang-talian-vt-and-vr"])
 
                     </div>
                 </div>

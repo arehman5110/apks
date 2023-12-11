@@ -1,5 +1,5 @@
 <form id="framework-wizard-form"
-                            action="{{$url }}"
+                            action="/{{app()->getLocale()}}/{{$url }}/{{$data->id}}"
                             enctype="multipart/form-data" style="display: none" method="POST">
                             @method('PATCH')
                             @csrf
