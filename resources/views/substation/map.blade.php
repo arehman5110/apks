@@ -473,8 +473,8 @@ border-color: #FF0000;
                 buffer: 10
             })
 
-            map.addLayer(unservey)
-            unservey.bringToFront()
+            // map.addLayer(unservey)
+            // unservey.bringToFront()
 
 
             if (substation_without_defects != '') {
@@ -505,8 +505,8 @@ border-color: #FF0000;
             }, {
                 buffer: 10
             });
-            map.addLayer(pano_layer);
-            map.addLayer(pano_layer)
+            // map.addLayer(pano_layer);
+            // map.addLayer(pano_layer)
 
             addGroupOverLays()
 
