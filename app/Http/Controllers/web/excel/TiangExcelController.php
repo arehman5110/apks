@@ -25,11 +25,11 @@ class TiangExcelController extends Controller
             }
 
             if ($req->filled('excel_from_date')) {
-                $result->where('visit_date', '>=', $req->excel_from_date);
+                $result->where('review_date', '>=', $req->excel_from_date);
             }
 
             if ($req->filled('excel_to_date')) {
-                $result->where('visit_date', '<=', $req->excel_to_date);
+                $result->where('review_date', '<=', $req->excel_to_date);
             }
 
 
@@ -53,9 +53,9 @@ class TiangExcelController extends Controller
 
                     if ($rec->size_tiang != '') {
                        
-                        $worksheet->setCellValue('L' . $i, $rec->size_tiang == 'st7' ? '1' : '0');
-                        $worksheet->setCellValue('M' . $i, $rec->size_tiang == 'st9' ? '1' : '0');
-                        $worksheet->setCellValue('N' . $i, $rec->size_tiang == 'st10' ? '1' : '0');
+                        $worksheet->setCellValue('L' . $i, $rec->size_tiang == '7' ? '1' : '0');
+                        $worksheet->setCellValue('M' . $i, $rec->size_tiang == '9' ? '1' : '0');
+                        $worksheet->setCellValue('N' . $i, $rec->size_tiang == '10' ? '1' : '0');
                     }
 
                     if ($rec->jenis_tiang != '') {
@@ -195,8 +195,8 @@ class TiangExcelController extends Controller
                     $thirdWorksheet->setCellValue('K' . $i, $rec->jarak_kelegaan);
 
                     if ($rec->talian_spec != '') {
-                        $thirdWorksheet->setCellValue('M' . $i, excelCheckBOc('comply', $rec->talian_spec));
-                        $thirdWorksheet->setCellValue('N' . $i, excelCheckBOc('disobedient', $rec->talian_spec));
+                        $thirdWorksheet->setCellValue('M' . $i, $rec->talian_spec == "comply" ? '1' : '');
+                        $thirdWorksheet->setCellValue('N' . $i, $rec->talian_spec == "disobedient" ? '1' : '');
                     }
 
                     $i++;
