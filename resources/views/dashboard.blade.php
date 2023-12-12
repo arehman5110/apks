@@ -158,7 +158,7 @@
                                 <div class="card p-3">
 
                                     <h3 class="text-center"> {{__("messages.total_tiang_defects")}}</h3>
-                                    <p class="text-center mb-0 pb-0"><span>0</span></p>
+                                    <p class="text-center mb-0 pb-0"><span>{{$data->savr}}</span></p>
 
                                 </div>
                             </div>
@@ -214,7 +214,7 @@
                                 <div class="card p-3">
 
                                     <h3 class="text-center"> {{__("messages.total_cable_bridge_defects")}} </h3>
-                                    <p class="text-center mb-0 pb-0"><span>0</span></p>
+                                    <p class="text-center mb-0 pb-0"><span>{{$data->cablebridge}}</span></p>
 
                                 </div>
                             </div>

@@ -18,7 +18,8 @@ class Dashboard extends Controller
 
         $ba=Auth::user()->ba;
        if($ba!=''){
-        $query="select dig as total_notice,sup as total_supervision,km as total_km  , feeder_pillar , tiang , link_box , cable_bridge ,  substation,substation_defects,fp_defects,lb as linkbox from
+        $query="select dig as total_notice,sup as total_supervision,km as total_km  , feeder_pillar , tiang , link_box , cable_bridge ,  
+        substation,substation_defects,fp_defects,lb as linkbox,cb as cablebridge,savr from
         (select
         sum(case
             when notice='yes' Then 1 else 0
@@ -39,11 +40,21 @@ class Dashboard extends Controller
         (SELECT sum(gate_locked+gate_damage+gate_other+vandlism+leaning+rust+poster_status)
             FROM public.feeder_pillar_defects_counts where ba='$ba') as fp_defects,
             (select round(sum(km),2) from patroling where ba='$ba') as km,
-         (select sum(vandalism_status)+sum(leaning_status)+sum(rust_status)+sum(advertise_poster_status)+sum(bushes_status)+sum(cover_status) from 	tbl_link_box_counts where ba='$ba') as lb   
+         (select sum(vandalism_status)+sum(leaning_status)+sum(rust_status)+sum(advertise_poster_status)+sum(bushes_status)+sum(cover_status) from 	tbl_link_box_counts where ba='$ba') as lb,
+         (SELECT sum(vandalism_status+pipe_status+collapsed_status+rust_status+bushes_status) FROM public.cable_bridge_counts where ba='$ba') as cb,
+         (SELECT sum(tinag_dimm+tiang_cracked+tiang_leaning+tiang_creepers+tiang_other+ 
+         talian_joint+talian_ground+talian_need_rentis+talian_other+umbang_breaking+ 
+         umbang_creepers+umbang_cracked+umbang_stay_palte+umbang_other+ipc_burn+ 
+         ipc_other+blackbox_cracked+blackbox_other+jumper_sleeve+jumper_burn+ 
+         jumper_other+kilat_broken+kilat_other+servis_roof+servis_won_piece+
+         servis_other+pembumian_netural+pembumian_other+bekalan_dua_damage+ 
+         bekalan_dua_other+kaki_lima_date_wire+kaki_lima_burn+kaki_lima_other)
+         FROM public.savr_counts where ba='$ba') as savr   
             ";
 
         }else{
-            $query="select dig as total_notice,sup as total_supervision,km as total_km  , feeder_pillar , tiang , link_box , cable_bridge ,  substation,substation_defects,fp_defects,lb as linkbox from
+            $query="select dig as total_notice,sup as total_supervision,km as total_km  , feeder_pillar , tiang , link_box , cable_bridge , 
+             substation,substation_defects,fp_defects,lb as linkbox,cb as cablebridge, savr  from
             (select
             sum(case
                 when notice='yes' Then 1 else 0
@@ -63,7 +74,16 @@ class Dashboard extends Controller
             (SELECT sum(gate_locked+gate_damage+gate_other+vandlism+leaning+rust+poster_status)
             FROM public.feeder_pillar_defects_counts) as fp_defects,
             (select round(sum(km),2) from patroling) as km,
-            (select sum(vandalism_status)+sum(leaning_status)+sum(rust_status)+sum(advertise_poster_status)+sum(bushes_status)+sum(cover_status) from 	tbl_link_box_counts ) as lb   
+            (select sum(vandalism_status)+sum(leaning_status)+sum(rust_status)+sum(advertise_poster_status)+sum(bushes_status)+sum(cover_status) from 	tbl_link_box_counts ) as lb,
+            (SELECT sum(vandalism_status+pipe_status+collapsed_status+rust_status+bushes_status) FROM public.cable_bridge_counts) as cb,
+            SELECT sum(tinag_dimm+tiang_cracked+tiang_leaning+tiang_creepers+tiang_other+ 
+            talian_joint+talian_ground+talian_need_rentis+talian_other+umbang_breaking+ 
+            umbang_creepers+umbang_cracked+umbang_stay_palte+umbang_other+ipc_burn+ 
+            ipc_other+blackbox_cracked+blackbox_other+jumper_sleeve+jumper_burn+ 
+            jumper_other+kilat_broken+kilat_other+servis_roof+servis_won_piece+
+            servis_other+pembumian_netural+pembumian_other+bekalan_dua_damage+ 
+            bekalan_dua_other+kaki_lima_date_wire+kaki_lima_burn+kaki_lima_other) as savr
+            FROM public.savr_counts  
 
             ";
         }   
