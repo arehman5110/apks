@@ -165,7 +165,22 @@ border-color: #FF0000;
                                 {{ Auth::user()->ba != '' ? Auth::user()->ba : 'Select BA' }}</option>
                         </select>
                     </div>
+                    @if (Auth::user()->ba == '')          
+                        <div class="col-md-3">
+                            <label for="search_ba">Date</label>
+                        <input type="date" class="form-control" onchange="addRemoveBundary('', 2.75101756479656, 101.304931640625,this.value)" />
+                        </div>
+                    @else
+                        <div class="col-md-3">
+                            <label for="search_ba">Date</label>
+                        <input type="date" class="form-control" onchange="addRemoveBundary('{{ Auth::user()->ba }}','','',this.value)" />
+                        </div>    
+                    @endif
 
+                    <div class="col-md-3">
+                        <br />
+                        <input type="button"  class="btn btn-secondary mt-2" value="Reset" onclick="addRemoveBundary('{{ Auth::user()->ba }}','','','')" />
+                        </div>  
 
 
 
@@ -391,10 +406,21 @@ border-color: #FF0000;
 
     <script>
         // for add and remove layers
-        function addRemoveBundary(param, paramY, paramX) {
+        function addRemoveBundary(param, paramY, paramX,date1) {
 
             if (boundary !== '') {
                 map.removeLayer(boundary)
+            }
+            if(date1==''){
+                date='>1970-01-01'
+            }else{
+                date='='+date1;
+            }
+
+            if(paramY==''){
+               var coord= xyObj[param].split(',');
+                paramY=coord[0];
+                paramX=coord[1];
             }
 
 
@@ -423,7 +449,7 @@ border-color: #FF0000;
             substation_with_defects = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
                 layers: 'cite:surved_with_defects',
                 format: 'image/png',
-                cql_filter: "ba ILIKE '%" + param + "%'",
+                cql_filter: "ba ILIKE '%" + param + "%' and visit_date "+date,
                 maxZoom: 21,
                 transparent: true
             }, {
@@ -457,7 +483,7 @@ border-color: #FF0000;
             substation_without_defects = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
                 layers: 'cite:substation_without_defects',
                 format: 'image/png',
-                cql_filter: "ba ILIKE '%" + param + "%'",
+                cql_filter: "ba ILIKE '%" + param + "%' and visit_date "+date,
                 maxZoom: 21,
                 transparent: true
             }, {

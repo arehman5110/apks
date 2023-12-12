@@ -359,6 +359,19 @@
         ['B4', 'PUTRAJAYA & CYBERJAYA', 2.92875032271019, 101.675338316575]
     ];
 
+  var xyObj={
+    'KUALA LUMPUR PUSAT':'3.14925905877391, 101.754098819705',
+    'PETALING JAYA':'3.1128074178475, 101.605270457169',
+    'RAWANG':'3.47839445121726, 101.622905486475',
+    'KUALA SELANGOR': '3.40703209426401, 101.317426926947',
+    'KLANG': '3.08428642705789, 101.436185279023',
+    'PELABUHAN KLANG': '2.98188527916042, 101.324234779569',
+    'CHERAS': '3.14197346621987, 101.849883983416',
+    'BANTING': '2.82111390453244, 101.505890775541',
+    'BANGI':'2.965810949933260, 101.81881303103104',
+    'PUTRAJAYA & CYBERJAYA': '2.92875032271019, 101.675338316575'
+  }  
+
     var ba = "{{ Auth::user()->ba }}";
 
 
@@ -367,7 +380,7 @@
 
         // check ba is empty or not
         if (ba == '') {
-            addRemoveBundary('', 2.75101756479656, 101.304931640625)
+            addRemoveBundary('', 2.75101756479656, 101.304931640625,'')
         } else {
             callLayers(ba);
         }
@@ -385,7 +398,7 @@
             }
         }
         zoom = 11;
-        addRemoveBundary(userBa[1], userBa[2], userBa[3])
+        addRemoveBundary(userBa[1], userBa[2], userBa[3],'')
     }
 
 
