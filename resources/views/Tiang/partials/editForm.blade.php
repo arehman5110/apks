@@ -91,6 +91,13 @@
                                 </div>
 
                                 <div class="row">
+                                    <div class="col-md-4"><label for="review_date">Review Date</label>
+                                    </div>
+                                    <div class="col-md-4"><input type="date" name="review_date" id="review_date"
+                                            class="form-control" required  value="{{ $data->review_date }}"></div>
+                                </div>
+
+                                <div class="row">
                                     <div class="col-md-4"><label for="pole_image-1">{{ __('messages.pole') }} Image 1
                                         </label>
                                     </div>

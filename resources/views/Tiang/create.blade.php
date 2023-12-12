@@ -218,6 +218,14 @@
                                             class="form-control" required></div>
                                 </div>
 
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="review_date">Review Date</label>
+                                    </div>
+                                    <div class="col-md-4"><input type="date" name="review_date" id="review_date"
+                                            class="form-control" required></div>
+                                </div>
+
                                 <div class="row">
                                     <div class="col-md-4"><label for="pole_image-1">{{ __('messages.pole') }} Image 1
                                         </label>
@@ -1173,7 +1181,7 @@
                                                 </td>
                                                 <td>
                                                     <input type="file" name="tapak_no_vehicle_entry_img"
-                                                        id="vehicle_entry-img" class="form-control d-none" required>
+                                                        id="vehicle_entry-img" class="form-control d-none" >
                                                 </td>
                                             </tr>
 
