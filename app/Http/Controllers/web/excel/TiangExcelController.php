@@ -52,21 +52,19 @@ class TiangExcelController extends Controller
                     $worksheet->setCellValue('J' . $i, $rec->section_to);
 
                     if ($rec->size_tiang != '') {
-                        $size_tiang = json_decode($rec->size_tiang);
-
-
-                        $worksheet->setCellValue('L' . $i, $size_tiang == 'st7' ? '1' : '0');
-                        $worksheet->setCellValue('M' . $i, $size_tiang == 'st9' ? '1' : '0');
-                        $worksheet->setCellValue('N' . $i, $size_tiang == 'st10' ? '1' : '0');
+                       
+                        $worksheet->setCellValue('L' . $i, $rec->size_tiang == 'st7' ? '1' : '0');
+                        $worksheet->setCellValue('M' . $i, $rec->size_tiang == 'st9' ? '1' : '0');
+                        $worksheet->setCellValue('N' . $i, $rec->size_tiang == 'st10' ? '1' : '0');
                     }
 
                     if ($rec->jenis_tiang != '') {
-                        $jenis_tiang = json_decode($rec->jenis_tiang);
+                        
 
-                        $worksheet->setCellValue('O' . $i, $jenis_tiang == 'spun' ? '1' : '0');
-                        $worksheet->setCellValue('P' . $i, $jenis_tiang == 'concrete' ? '1' : '0');
-                        $worksheet->setCellValue('Q' . $i, $jenis_tiang == 'iron' ? '1' : '0');
-                        $worksheet->setCellValue('R' . $i, $jenis_tiang == 'wood' ? '1' : '0');
+                        $worksheet->setCellValue('O' . $i, $rec->jenis_tiang == 'spun' ? '1' : '0');
+                        $worksheet->setCellValue('P' . $i, $rec->jenis_tiang == 'concrete' ? '1' : '0');
+                        $worksheet->setCellValue('Q' . $i, $rec->jenis_tiang == 'iron' ? '1' : '0');
+                        $worksheet->setCellValue('R' . $i, $rec->jenis_tiang == 'wood' ? '1' : '0');
                     }
 
                     if ($rec->abc_span != '') {
