@@ -380,7 +380,7 @@
 
         // check ba is empty or not
         if (ba == '') {
-            addRemoveBundary('', 2.75101756479656, 101.304931640625,'')
+            addRemoveBundary('', 2.75101756479656, 101.304931640625)
         } else {
             callLayers(ba);
         }
@@ -398,7 +398,7 @@
             }
         }
         zoom = 11;
-        addRemoveBundary(userBa[1], userBa[2], userBa[3],'')
+        addRemoveBundary(userBa[1], userBa[2], userBa[3])
     }
 
 

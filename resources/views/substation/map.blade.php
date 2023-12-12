@@ -58,40 +58,40 @@
             margin: 0;
         }
 
-        input[type="radio"]#substation_without_defects  {
+        input[type="radio"]#substation_without_defects {
 
-  background-color: #00F700; 
-  border-color: #00F700;  
-}
- 
-input[type="radio"]:checked#substation_without_defects {
-  background-color: #00F700; 
-  border-color: #00F700; 
-}
+            background-color: #00F700;
+            border-color: #00F700;
+        }
 
-
-input[type="radio"]#select_layer_main  {
-
-background-color: #F7F701; 
-border-color: #F7F701;  
-}
-
-input[type="radio"]:checked#select_layer_main {
-background-color: #F7F701; 
-border-color: #F7F701; 
-}
+        input[type="radio"]:checked#substation_without_defects {
+            background-color: #00F700;
+            border-color: #00F700;
+        }
 
 
-input[type="radio"]#select_layer_unsurveyed  {
+        input[type="radio"]#select_layer_main {
 
-background-color: #FF0000; 
-border-color: #FF0000;  
-}
+            background-color: #F7F701;
+            border-color: #F7F701;
+        }
 
-input[type="radio"]:checked#select_layer_unsurveyed {
-background-color: #FF0000; 
-border-color: #FF0000; 
-}
+        input[type="radio"]:checked#select_layer_main {
+            background-color: #F7F701;
+            border-color: #F7F701;
+        }
+
+
+        input[type="radio"]#select_layer_unsurveyed {
+
+            background-color: #FF0000;
+            border-color: #FF0000;
+        }
+
+        input[type="radio"]:checked#select_layer_unsurveyed {
+            background-color: #FF0000;
+            border-color: #FF0000;
+        }
 
         input.typeahead.tt-hint {
             border: 0px !important;
@@ -139,9 +139,9 @@ border-color: #FF0000;
 
         <div class=" p-1 col-12 m-2">
             <div class="card p-0 mb-3">
-                <div class="card-body row">
+                <div class="card-body row form-input">
 
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <label for="search_zone">Zone</label>
                         <select name="search_zone" id="search_zone" class="form-control"
                             onchange="onChangeZone(this.value)">
@@ -157,7 +157,7 @@ border-color: #FF0000;
                             @endif
                         </select>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <label for="search_ba">BA</label>
                         <select name="search_ba" id="search_ba" class="form-control" onchange="callLayers(this.value)">
 
@@ -165,22 +165,23 @@ border-color: #FF0000;
                                 {{ Auth::user()->ba != '' ? Auth::user()->ba : 'Select BA' }}</option>
                         </select>
                     </div>
-                    @if (Auth::user()->ba == '')          
-                        <div class="col-md-3">
-                            <label for="search_ba">Date</label>
-                        <input type="date" class="form-control" onchange="addRemoveBundary('', 2.75101756479656, 101.304931640625,this.value)" />
-                        </div>
-                    @else
-                        <div class="col-md-3">
-                            <label for="search_ba">Date</label>
-                        <input type="date" class="form-control" onchange="addRemoveBundary('{{ Auth::user()->ba }}','','',this.value)" />
-                        </div>    
-                    @endif
 
-                    <div class="col-md-3">
+                    <div class="col-md-2">
+                        <label for="from_date">Fom</label>
+                        <input type="date" class="form-control" id="from_date" onchange="filterByDate(this)" />
+                    </div>
+
+                    <div class="col-md-2">
+                        <label for="to_date">To</label>
+                        <input type="date" class="form-control" id="to_date" onchange="filterByDate(this)" />
+                    </div>
+
+
+                    <div class="col-md-2">
                         <br />
-                        <input type="button"  class="btn btn-secondary mt-2" value="Reset" onclick="addRemoveBundary('{{ Auth::user()->ba }}','','','')" />
-                        </div>  
+                        <input type="button" class="btn btn-secondary mt-2" id="reset" value="Reset"
+                            onclick="resetMapFilters()" />
+                    </div>
 
 
 
@@ -339,6 +340,8 @@ border-color: #FF0000;
 
     @include('partials.map-js')
     <script>
+        var from_date = ''
+        var to_date = ''
         var substringMatcher = function(strs) {
 
             return function findMatches(q, cb) {
@@ -406,23 +409,19 @@ border-color: #FF0000;
 
     <script>
         // for add and remove layers
-        function addRemoveBundary(param, paramY, paramX,date1) {
+        function addRemoveBundary(param, paramY, paramX) {
+
+            var q_cql = "ba ILIKE '%" + param + "%' "
+            if (from_date != '') {
+                q_cql = q_cql + "AND visit_date >=" + from_date;
+            }
+            if (to_date != '') {
+                q_cql = q_cql + "AND visit_date <=" + to_date;
+            }
 
             if (boundary !== '') {
                 map.removeLayer(boundary)
             }
-            if(date1==''){
-                date='>1970-01-01'
-            }else{
-                date='='+date1;
-            }
-
-            if(paramY==''){
-               var coord= xyObj[param].split(',');
-                paramY=coord[0];
-                paramX=coord[1];
-            }
-
 
             boundary = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
                 layers: 'cite:ba',
@@ -449,7 +448,7 @@ border-color: #FF0000;
             substation_with_defects = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
                 layers: 'cite:surved_with_defects',
                 format: 'image/png',
-                cql_filter: "ba ILIKE '%" + param + "%' and visit_date "+date,
+                cql_filter: q_cql,
                 maxZoom: 21,
                 transparent: true
             }, {
@@ -473,8 +472,8 @@ border-color: #FF0000;
                 buffer: 10
             })
 
-            map.addLayer(unservey)
-            unservey.bringToFront()
+            // map.addLayer(unservey)
+            // unservey.bringToFront()
 
 
             if (substation_without_defects != '') {
@@ -483,7 +482,7 @@ border-color: #FF0000;
             substation_without_defects = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
                 layers: 'cite:substation_without_defects',
                 format: 'image/png',
-                cql_filter: "ba ILIKE '%" + param + "%' and visit_date "+date,
+                cql_filter: q_cql,
                 maxZoom: 21,
                 transparent: true
             }, {
@@ -505,8 +504,8 @@ border-color: #FF0000;
             }, {
                 buffer: 10
             });
-            map.addLayer(pano_layer);
-            map.addLayer(pano_layer)
+            // map.addLayer(pano_layer);
+            // map.addLayer(pano_layer)
 
             addGroupOverLays()
 
@@ -574,6 +573,36 @@ border-color: #FF0000;
             )
 
 
+        }
+
+
+        function filterByDate(param) {
+            var inBa = $('#search_ba').val()
+            if (param.id == 'from_date') {
+                from_date = param.value;
+            } else if (param.id == 'to_date') {
+                to_date = param.value;
+            }  
+            callLayers(inBa)
+
+        }
+
+
+        function  resetMapFilters() {
+            
+                from_date = '';
+                to_date = '';
+                $('#from_date , #to_date , .tt-input').val('')
+
+                if (ba == '') {
+                    addRemoveBundary('', 2.75101756479656, 101.304931640625)
+                    $('#search_ba').empty().append(`<option value="" hidden>Select ba</option>`);
+                } else {
+                    callLayers(ba);
+                }
+                if (marker != '') {
+                map.removeLayer(marker)
+            }
         }
     </script>
 @endsection
