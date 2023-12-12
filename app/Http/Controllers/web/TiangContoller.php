@@ -236,6 +236,7 @@ class TiangContoller extends Controller
     {
         //
         try {
+            //  return $request->abc_span;
             //code...
             $destinationPath = 'assets/images/tiang/';
             $data = Tiang::find($id);

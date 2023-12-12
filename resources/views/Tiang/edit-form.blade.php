@@ -245,6 +245,20 @@
                 console.log('unchecked');
             }
 
+            $('.select-radio-value').on('change',function(){
+                var val = this.value;
+                var id = `${this.name}_input`;
+                var input = $(`#${id}`)
+                if (val === 'other') {
+                    input.val('');
+                    input.removeClass('d-none');
+                }else{
+                    input.val(val);
+                    if (!input.hasClass('d-none')) {
+                        input.addClass('d-none')
+                    }
+                }
+            });
             $('#total_defects').val(total_defects)
 
         }

@@ -71,8 +71,12 @@ class CableBridgeController extends Controller
     public function store(Request $request)
     {
         try {
+            $defects = [];
+            $defects = ['pipe_staus', 'vandalism_status', 'collapsed_status', 'rust_status', 'bushes_status'];
+
             $currentDate = Carbon::now()->toDateString();
             $combinedDateTime = $currentDate . ' ' . $request->patrol_time;
+            $total_defects = 0;
 
             $data = new CableBridge();
             $data->zone = $request->zone;
@@ -87,12 +91,13 @@ class CableBridgeController extends Controller
 
             $data->voltage = $request->voltage;
             $data->coordinate = $request->coordinate;
-            $data->pipe_staus = $request->pipe_staus;
-            $data->collapsed_status = $request->collapsed_status;
-            $data->vandalism_status = $request->vandalism_status;
 
-            $data->rust_status = $request->rust_status;
-            $data->bushes_status = $request->bushes_status;
+            foreach ($defects as $value) {
+                $data->{$value} = $request->{$value};
+                $request->has($value) && $request->{$value} == 'Yes' ? $total_defects++ : '';
+            }
+            $data->total_defects = $total_defects;
+
             $destinationPath = 'assets/images/cable-bridge/';
 
             foreach ($request->all() as $key => $file) {
@@ -159,30 +164,27 @@ class CableBridgeController extends Controller
         //
 
         try {
+            $defects = [];
+            $defects = ['pipe_staus', 'vandalism_status', 'collapsed_status', 'rust_status', 'bushes_status'];
+            $total_defects = 0;
             $currentDate = Carbon::now()->toDateString();
             $combinedDateTime = $currentDate . ' ' . $request->patrol_time;
 
             $data = CableBridge::find($id);
             $data->zone = $request->zone;
             $data->ba = $request->ba;
-            // $data->team = $request->team;
             $data->visit_date = $request->visit_date;
             $data->patrol_time = $combinedDateTime;
             $data->feeder_involved = $request->feeder_involved;
-
             $data->start_date = $request->start_date;
             $data->end_date = $request->end_date;
-
             $data->voltage = $request->voltage;
-            // $data->coordinate = $request->coordinate;
-            $data->pipe_staus = $request->pipe_staus;
-            $data->collapsed_status = $request->collapsed_status;
-            $data->vandalism_status = $request->vandalism_status;
-
-            $data->rust_status = $request->rust_status;
-            $data->bushes_status = $request->bushes_status;
+            foreach ($defects as $value) {
+                $data->{$value} = $request->{$value};
+                $request->has($value) && $request->{$value} == 'Yes' ? $total_defects++ : '';
+            }
+            $data->total_defects = $total_defects;
             $destinationPath = 'assets/images/cable-bridge/';
-
             foreach ($request->all() as $key => $file) {
                 // Check if the input is a file and it is valid
                 if ($request->hasFile($key) && $request->file($key)->isValid()) {
@@ -196,11 +198,9 @@ class CableBridgeController extends Controller
 
             $data->save();
 
-
-                return redirect()
-                    ->route('cable-bridge.index', app()->getLocale())
-                    ->with('success', 'Form Update');
-
+            return redirect()
+                ->route('cable-bridge.index', app()->getLocale())
+                ->with('success', 'Form Update');
         } catch (\Throwable $th) {
             return $th->getMessage();
             return redirect()

@@ -160,27 +160,27 @@
                                                 <div class="col-md-12 row">
 
                                                     <div class="d-flex col-md-4">
-                                                        <input type="radio" name="size_tiang" value="st7"
+                                                        <input type="radio" name="size_tiang" value="7.5"
                                                             id="st7"
-                                                            {{ $data->size_tiang == 'st7' ? 'checked' : '' }}
+                                                            {{ $data->size_tiang == '7.5' ? 'checked' : '' }}
                                                             class="  ">
                                                         <label for="st7" class="fw-400"> 7.5</label>
 
                                                     </div>
 
                                                     <div class="d-flex col-md-4">
-                                                        <input type="radio" name="size_tiang" value="st9"
+                                                        <input type="radio" name="size_tiang" value="9"
                                                             id="st9"
-                                                            {{ $data->size_tiang == 'st9' ? 'checked' : '' }}
+                                                            {{ $data->size_tiang == '9' ? 'checked' : '' }}
                                                             class=" ">
                                                         <label for="st9" class="fw-400"> 9</label>
 
                                                     </div>
 
                                                     <div class="d-flex col-md-4">
-                                                        <input type="radio" name="size_tiang" value="st10"
+                                                        <input type="radio" name="size_tiang" value="10"
                                                             id="st10"
-                                                            {{ $data->size_tiang == 'st10' ? 'checked' : '' }}
+                                                            {{ $data->size_tiang == '10' ? 'checked' : '' }}
                                                             class=" ">
                                                         <label for="st10" class="fw-400"> 10</label>
 

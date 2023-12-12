@@ -268,7 +268,7 @@ function tiangSpanRadio($value , $key , $subkey , $status)
                     </div>
               </div>
               <div class='col-md-6'><input type='number' name='".$key."[".$subkey."]' placeholder='enter other value'
-                                                        id='".$name."_input' value='".($other_key ? $value->$subkey : '' )."' class='form-control   ".($other_key  ? '' : 'd-none' )." '$disable></div>
+                                                        id='".$name."_input' value='".(isset($value->$subkey) ?  $value->{$subkey} : '' )."' class='form-control   ".($other_key  ? '' : 'd-none' )." '$disable></div>
     ";
     return $html;
 

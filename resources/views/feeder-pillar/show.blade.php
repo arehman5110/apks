@@ -132,12 +132,7 @@
                         <div class="row">
                             <div class="col-md-4"><label for="end_date">{{ __('messages.gate') }}</label></div>
                             <div class="col-md-4">
-                                <div class="  d-flex">
-                                    <input type="checkbox" name="gate_status[locked]"
-                                        {{ substaionCheckBox('locked', $data->gate_status) }} id="gate_status_locked"
-                                        disabled>
-                                    <label for="gate_status_locked">{{ __('messages.locked') }}</label>
-                                </div>
+                               
                                 <div class=" d-flex">
                                     <input type="checkbox" name="gate_status[unlocked]"
                                         {{ substaionCheckBox('unlocked', $data->gate_status) }} id="gate_status_unlocked"

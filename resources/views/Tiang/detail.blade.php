@@ -215,7 +215,7 @@
 
                                                 <div class="d-flex col-md-4">
                                                     <input type="radio" name="size_tiang" value="st7" id="st7"
-                                                        {{ $data->size_tiang == 'st7' ? 'checked' : '' }} disabled
+                                                        {{ $data->size_tiang == '7.5' ? 'checked' : '' }} disabled
                                                         class="  ">
                                                     <label for="st7" class="fw-400"> 7.5</label>
 
@@ -223,7 +223,7 @@
 
                                                 <div class="d-flex col-md-4">
                                                     <input type="radio" name="size_tiang" value="st9"
-                                                        id="st9" {{ $data->size_tiang == 'st9' ? 'checked' : '' }}
+                                                        id="st9" {{ $data->size_tiang == '9' ? 'checked' : '' }}
                                                         disabled class=" ">
                                                     <label for="st9" class="fw-400"> 9</label>
 
@@ -231,7 +231,7 @@
 
                                                 <div class="d-flex col-md-4">
                                                     <input type="radio" name="size_tiang" value="st10"
-                                                        id="st10" {{ $data->size_tiang == 'st10' ? 'checked' : '' }}
+                                                        id="st10" {{ $data->size_tiang == '10' ? 'checked' : '' }}
                                                         disabled class=" ">
                                                     <label for="st10" class="fw-400"> 10</label>
 

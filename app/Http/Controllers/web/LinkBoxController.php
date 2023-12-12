@@ -71,24 +71,29 @@ class LinkBoxController extends Controller
         $combinedDateTime = $currentDate . ' ' . $request->patrol_time;
 
         try {
+            $defects = [];
+            $defects =['leaning_status','vandalism_status','advertise_poster_status','rust_status','bushes_status' ,'cover_status'];
+            $total_defects = 0;
+
             $data = new LinkBox();
             $data->zone = $request->zone;
             $data->ba = $request->ba;
             $data->team = $request->team;
             $data->visit_date = $request->visit_date;
             $data->patrol_time = $combinedDateTime;
+            $data->leaning_angle = $request->leaning_angle;
 
             $data->start_date = $request->start_date;
             $data->end_date = $request->end_date;
             $data->type = $request->type;
             $data->coordinate = $request->coordinate;
-            $data->cover_status = $request->cover_status;
-            $data->vandalism_status = $request->vandalism_status;
-            $data->leaning_status = $request->leaning_status;
-            $data->leaning_angle = $request->leaning_angle;
-            $data->rust_status = $request->rust_status;
-            $data->advertise_poster_status = $request->advertise_poster_status;
-            $data->bushes_status = $request->bushes_status;
+            
+            foreach ($defects as  $value) {
+                $data->{$value} = $request->{$value};
+               $request->has($value)&& $request->{$value} == 'Yes' ? $total_defects++ : '';
+            }
+           $data->total_defects = $total_defects;
+
             $destinationPath = 'assets/images/link-box/';
 
             foreach ($request->all() as $key => $file) {
@@ -157,6 +162,10 @@ class LinkBoxController extends Controller
         $currentDate = Carbon::now()->toDateString();
         $combinedDateTime = $currentDate . ' ' . $request->patrol_time;
         try {
+
+            $defects = [];
+            $defects =['leaning_status','vandalism_status','advertise_poster_status','rust_status','bushes_status' ,'cover_status'];
+            $total_defects = 0;
             $data = LinkBox::find($id);
             $data->zone = $request->zone;
             $data->ba = $request->ba;
@@ -169,12 +178,12 @@ class LinkBoxController extends Controller
             $data->end_date = $request->end_date;
             $data->type = $request->type;
             $data->coordinate = $request->coordinate;
-            // $data->gate_status = $request->gate_status;
-            $data->vandalism_status = $request->vandalism_status;
-            $data->leaning_status = $request->leaning_status;
-            $data->rust_status = $request->rust_status;
-            $data->advertise_poster_status = $request->advertise_poster_status;
-            $data->bushes_status = $request->bushes_status;
+            foreach ($defects as  $value) {
+                $data->{$value} = $request->{$value};
+               $request->has($value)&& $request->{$value} == 'Yes' ? $total_defects++ : '';
+            }
+           $data->total_defects = $total_defects;
+           $data->leaning_angle = $request->leaning_angle;
             $destinationPath = 'assets/images/link-box/';
 
             foreach ($request->all() as $key => $file) {

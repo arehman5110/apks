@@ -98,56 +98,23 @@
                     <label for="select_layer_pano">Pano</label>
                 </div>
 
-
                 <div class=" mx-4">
                     <input type="radio" name="select_layer" id="cable_bridge" value="cable_bridge" onchange="selectLayer(this.value)">
-                    <label for="cable_bridge">Cable Bridge</label>
+                    <label for="cable_bridge">Cable Bridge with out defects</label>
+                </div>
+
+                <div class=" mx-4">
+                    <input type="radio" name="select_layer" id="cable_bridge_with_defects" value="cable_bridge_with_defects" onchange="selectLayer(this.value)">
+                    <label for="cable_bridge_with_defects">Cable Bridge with defects</label>
                 </div>
             </div>
-            {{-- <select name="select_layer" id="select_layer" onchange="selectLayer(this.value)" class="form-control">
-                <option value="" hidden>select </option>
-                <option value="substation">Substation</option>
-                <option value="pano">Pano</option>
-                <option value="cable_bridge">Cable Bridge</option>
-            </select> --}}
+           
         </div>
         <!--  START MAP CARD DIV -->
         <div class="row m-2">
 
 
-            <!-- START MAP SIDEBAR DIV -->
-            {{-- <div class="col-2 p-0">
-                    <div class="card p-0 m-0"
-                        style="border: 1px solid rgb(177, 175, 175) !important; border-radius: 0px !important">
-                        <div class="card-header"><strong> NAVIGATION</strong></div>
-                        <div class="card-body">
-                            <!-- MAP SIDEBAR LAYERS SELECTOR -->
-                            <div class="side-bar" style="height: 569px !important; overflow-y: scroll;">
-
-
-                                <details class="mb-3" open>
-                                    <summary><strong>Cable Bridge</strong> </summary>
-                                    <table class="table table-bordered">
-                                        <tr>
-                                            <td>Pemeriksaan visual</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Pembersihan semak samun / creepers/sampah/ rumput </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Report</td>
-                                        </tr>
-                                    </table>
-
-                                </details>
-
-
-                                <!-- END MAP SIDEBAR DETAILS -->
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
-            <!-- END MAP SIDEBAR DIV -->
+          
 
             <!-- START MAP  DIV -->
             <div class="col-md-8 p-0 ">
@@ -288,8 +255,8 @@
             }, {
                 buffer: 10
             });
-            map.addLayer(pano_layer);
-            map.addLayer(pano_layer)
+            // map.addLayer(pano_layer);
+            // map.addLayer(pano_layer)
 
 
 
@@ -340,39 +307,39 @@
 
 
             $('#exampleModalLabel').html("Cable Bridge Info")
-            str = `
-                <tr>
-                    <th>Zone</th>
-                    <td>${data.zone}</td>
-                </tr>
-                <tr>
-                    <th>Ba</th>
-                    <td>${data.ba}</td>
-                </tr>
-                <tr>
-                    <th>Area</th>
-                    <td>${data.area}</td>
-                </tr>
-                <tr>
-                    <th>Visit Date</th>
-                    <td>${vDS}</td>
-                </tr>
-                <tr>
-                    <th>Patrol TIme</th>
-                    <td>${vTM}</td>
-                </tr>
-                <tr>
-                    <th>Coordinate</th>
-                    <td>${data.coordinate}</td>
-                </tr>
-                <tr>
-                    <th>Created At</th>
-                    <td>${data.created_at}</td>
-                </tr>
-                <tr>
-                    <th>Detail</th>
-                    <td class="text-center">  <a href="/{{ app()->getLocale() }}/cable-bridge/${idSp[1]}" target="_blank" class="btn btn-sm btn-secondary">Detail</a></td>
-                </tr>`;
+            // str = `
+                // <tr>
+                //     <th>Zone</th>
+                //     <td>${data.zone}</td>
+                // </tr>
+                // <tr>
+                //     <th>Ba</th>
+                //     <td>${data.ba}</td>
+                // </tr>
+                // <tr>
+                //     <th>Area</th>
+                //     <td>${data.area}</td>
+                // </tr>
+                // <tr>
+                //     <th>Visit Date</th>
+                //     <td>${vDS}</td>
+                // </tr>
+                // <tr>
+                //     <th>Patrol TIme</th>
+                //     <td>${vTM}</td>
+                // </tr>
+                // <tr>
+                //     <th>Coordinate</th>
+                //     <td>${data.coordinate}</td>
+                // </tr>
+                // <tr>
+                //     <th>Created At</th>
+                //     <td>${data.created_at}</td>
+                // </tr>
+                // <tr>
+                //     <th>Detail</th>
+                //     <td class="text-center">  <a href="/{{ app()->getLocale() }}/cable-bridge/${idSp[1]}" target="_blank" class="btn btn-sm btn-secondary">Detail</a></td>
+                // </tr>`;
 
             // $("#my_data").html(str);
             // $('#myModal').modal('show');
@@ -383,10 +350,7 @@
         function openDetails(id) {
             // $('#myModal').modal('hide');
             $('#set-iframe').html('');
-
             $('#set-iframe').html(`<iframe src="/{{app()->getLocale()}}/get-cable-bridge-edit/${id}" frameborder="0" style="height:700px; width:100%" ></iframe>`)
-
-
         }
     </script>
 @endsection

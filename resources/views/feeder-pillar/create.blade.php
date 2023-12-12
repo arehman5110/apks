@@ -159,12 +159,9 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="gate_status">{{__('messages.gate')}} </label></div>
                                 <div class="col-md-4">
-                                    <div class="  d-flex">
-                                        <input type="radio" name="gate_status[locked]" id="gate_status_locked" value="locked">
-                                        <label for="gate_status_locked">{{__('messages.locked')}}</label>
-                                    </div>
+                                     
                                     <div class=" d-flex">
-                                        <input type="radio" name="gate_status[locked]" id="gate_status_unlocked" value="unlocked">
+                                        <input type="checkbox" name="gate_status[unlocked]" id="gate_status_unlocked" value="unlocked">
                                         <label for="gate_status_unlocked">{{__('messages.unlocked')}}</label>
                                     </div>
                                     <div class=" d-flex">

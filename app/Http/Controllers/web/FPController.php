@@ -77,6 +77,11 @@ class FPController extends Controller
 
         try {
 
+            $defects = [];
+            $defects =['leaning_staus','vandalism_status','advertise_poster_status','rust_status'];
+          
+            $total_defects =0;
+
             $data = new FeederPillar();
             $data->zone = $request->zone;
             $data->ba = $request->ba;
@@ -86,32 +91,33 @@ class FPController extends Controller
 
             $data->size = $request->size;
             $data->coordinate = $request->coordinate;
+  
+            $data->leaning_angle = $request->leaning_angle; 
 
-            $data->vandalism_status = $request->vandalism_status;
-            $data->leaning_staus = $request->leaning_staus;
-            $data->leaning_angle = $request->leaning_angle;
-            $data->rust_status = $request->rust_status;
-            $data->advertise_poster_status = $request->advertise_poster_status;
-
-            $gate = ['locked' => 'false', 'unlocked' => 'false', 'demaged' => 'false', 'other'=>'false', 'other_value' => ''];
+            $gate = [ 'unlocked' => 'false', 'demaged' => 'false', 'other'=>'false'];
 
             if ($request->has('gate_status')) {
                 $gateStatus = $request->gate_status;
 
                 foreach ($gate as $key => $value) {
-                        if ($key == 'other_value') {
-                            $gate['other_value'] = $request->gate_status['other_value'];
-                        } else {
-                            if ($key == 'locked' || $key == 'unlocked') {
-                                $gate[$key] = array_key_exists('locked', $gateStatus) && $gateStatus['locked'] == $key ? "true" : "false";
-                            }else{
-                            $gate[$key] = array_key_exists($key, $gateStatus) ? 'true' : "false";
-                            }
-                        }
-                }
 
+                    if (array_key_exists($key, $gateStatus)) {
+                        $gate[$key] = true;
+                        $total_defects++;
+                    }else{
+                        $gate[$key] = false;
+                    }
+                        
+                }
+                $gate['other_value'] = $request->gate_status['other_value'];
             }
             $data->gate_status = json_encode($gate) ;
+            foreach ($defects as  $value) {
+                $data->{$value} = $request->{$value};
+               $request->has($value)&& $request->{$value} == 'Yes' ? $total_defects++ : '';
+            }
+            $data->total_defects = $total_defects;
+
 
             $destinationPath = 'assets/images/cable-bridge/';
 
@@ -191,6 +197,11 @@ class FPController extends Controller
     public function update(Request $request,$language,$id)
     {
         try {
+
+            $defects = [];
+            $defects =['leaning_staus','vandalism_status','advertise_poster_status','rust_status'];
+          
+            $total_defects =0;
             $currentDate = Carbon::now()->toDateString();
             $combinedDateTime = $currentDate . ' ' . $request->patrol_time;
 
@@ -204,29 +215,31 @@ class FPController extends Controller
             $data->size = $request->size;
             $data->coordinate = $request->coordinate;
             $data->leaning_angle = $request->leaning_angle;
-            $data->vandalism_status = $request->vandalism_status;
-            $data->leaning_staus = $request->leaning_staus;
-            $data->rust_status = $request->rust_status;
-            $data->advertise_poster_status = $request->advertise_poster_status;
-            $gate = ['locked' => 'false', 'unlocked' => 'false', 'demaged' => 'false', 'other'=>'false', 'other_value' => ''];
+            
+            $gate = [ 'unlocked' => 'false', 'demaged' => 'false', 'other'=>'false'];
 
             if ($request->has('gate_status')) {
                 $gateStatus = $request->gate_status;
 
                 foreach ($gate as $key => $value) {
-                        if ($key == 'other_value') {
-                            $gate['other_value'] = $request->gate_status['other_value'];
-                        } else {
-                            if ($key == 'locked' || $key == 'unlocked') {
-                                $gate[$key] = array_key_exists('locked', $gateStatus) && $gateStatus['locked'] == $key ? "true" : "false";
-                            }else{
-                            $gate[$key] = array_key_exists($key, $gateStatus) ? 'true' : "false";
-                            }
-                        }
-                }
 
+                    if (array_key_exists($key, $gateStatus)) {
+                        $gate[$key] = true;
+                        $total_defects++;
+                    }else{
+                        $gate[$key] = false;
+                    }
+                        
+                }
+                $gate['other_value'] = $request->gate_status['other_value'];
             }
             $data->gate_status = json_encode($gate) ;
+
+            foreach ($defects as  $value) {
+                $data->{$value} = $request->{$value};
+               $request->has($value)&& $request->{$value} == 'Yes' ? $total_defects++ : '';
+            }
+            $data->total_defects = $total_defects;
             $destinationPath = 'assets/images/cable-bridge/';
 
             foreach ($request->all() as $key => $file) {

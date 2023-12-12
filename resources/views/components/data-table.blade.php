@@ -156,11 +156,11 @@
                                 src="{{ URL::asset('assets/web-images/three-dots-vertical.svg') }}">
                         </button>
                         <div class="dropdown-menu" role="menu">
-                            <form action="/{{ app()->getLocale() }}/cable-bridge/${id}" method="get">
+                            <form action="/{{ app()->getLocale() }}/link-box-pelbagai-voltan/${id}" method="get">
 
                                 <button type="submit" class="dropdown-item pl-3 w-100 text-left">Detail</button>
                             </form>
-                            <form action="/{{ app()->getLocale() }}/cable-bridge/${id}/edit" method="get">
+                            <form action="/{{ app()->getLocale() }}/link-box-pelbagai-voltan/${id}/edit" method="get">
 
                                 <button type="submit" class="dropdown-item pl-3 w-100 text-left">Edit</button>
                             </form>
