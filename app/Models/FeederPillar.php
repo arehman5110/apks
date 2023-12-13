@@ -16,6 +16,6 @@ class FeederPillar extends Model
         'feeder_involved', 'area', 'size', 'coordinate', 'gate_status',
         'vandalism_status', 'leaning_staus', 'rust_status', 'advertise_poster_status',
         'created_at', 'updated_at', 'geom', 'image_gate', 'image_vandalism', 'image_leaning', 
-        'image_rust', 'images_advertise_poster','other_image'
+        'image_rust', 'images_advertise_poster','other_image','total_defects'
     ];
 }
