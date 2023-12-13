@@ -88,9 +88,9 @@ class TiangExcelController extends Controller
                     if ($rec->bare_span != '') {
                         $bare_span = json_decode($rec->bare_span);
 
-                        $worksheet->setCellValue('AA' . $i, $bare_span->s7_173);
-                        $worksheet->setCellValue('AB' . $i, $bare_span->s7_122);
-                        $worksheet->setCellValue('AC' . $i, $bare_span->s3_132);
+                        $worksheet->setCellValue('AA' . $i, isset($bare_span->s7_173) ? $bare_span->s7_173 : '');
+                        $worksheet->setCellValue('AB' . $i, isset($bare_span->s7_122) ? $bare_span->s7_122 : '' );
+                        $worksheet->setCellValue('AC' . $i, isset($bare_span->s3_132) ? $bare_span->s3_132 : '' );
                     }
 
                     $worksheet->setCellValue('AK' . $i, $rec->remarks);

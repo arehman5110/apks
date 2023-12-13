@@ -37,7 +37,7 @@ class LinkBoxController extends Controller
             }
 
             $result->when(true, function ($query) {
-                return $query->select('id', 'ba', 'zone', 'team', 'visit_date');
+                return $query->select('id', 'ba', 'zone', 'team', 'visit_date','total_defects');
             });
 
             return datatables()

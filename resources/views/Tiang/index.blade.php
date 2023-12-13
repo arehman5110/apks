@@ -98,6 +98,7 @@
                                             <th>BA</th>
                                             {{-- <th>CONTRACTOR</th> --}}
                                             <th>REVIEW DATE</th>
+                                            <th>TOTAL DEFECTS</th>
                                             <th>ACTION</th>
 
                                         </tr>
@@ -199,6 +200,10 @@
                     {
                         data: 'review_date',
                         name: 'review_date'
+                    },
+                    {
+                        data:'total_defects',
+                        name:'total_defects'
                     },
                     {
                         render: function(data, type, full) {

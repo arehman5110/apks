@@ -44,7 +44,7 @@ class TiangContoller extends Controller
             }
 
             $result->when(true, function ($query) {
-                return $query->select('id', 'ba', 'review_date', 'tiang_no');
+                return $query->select('id', 'ba', 'review_date', 'tiang_no','total_defects');
             });
 
             return datatables()

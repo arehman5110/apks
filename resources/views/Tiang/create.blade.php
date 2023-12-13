@@ -369,7 +369,46 @@
                                         </div>
                                     </div>
 
+                                    
+                                        {{-- ABC (Span) 3 X 185 --}}
+                                        <div class="col-md-6">
+                                            <div class="card p-4">
+                                                
+                                                <label for="section_to">{{ __('messages.ABC_Span') }} 3 X 185</label>
+                                                    {!! tiangSpanRadio( '', 'abc_span', 's3_185',  true) !!}
+
+                                                <label for="s3_95">{{ __('messages.ABC_Span') }}3 X 95</label>
+                                                    {!! tiangSpanRadio(  '', 'abc_span', 's3_95',  true) !!}
+                                                    
+                                                <label for="s3_16">{{ __('messages.ABC_Span') }}3 X 16</label>
+                                                    {!! tiangSpanRadio('', 'abc_span', 's3_16',  true) !!}
+
+                                                 <label for="s1_16">{{ __('messages.ABC_Span') }}1 X 16</label>
+                                                    {!! tiangSpanRadio('', 'abc_span', 's1_16',  true) !!}
+     
+                                            </div>
+                                        </div>
+
+                                        {{-- BARE (Span) 7/173 --}}
+                                     
                                     <div class="col-md-6 ">
+                                        <div class="card p-4">
+
+                                            <label for="s7_173"  >{{ __('messages.BARE_Span') }} 7/173</label>
+                                                {!! tiangSpanRadio(  '', 'bare_span', 's7_173',  true) !!}
+
+                                            <label for="s7_122">{{ __('messages.BARE_Span') }} 7/122</label>
+                                                {!! tiangSpanRadio( '', 'bare_span', 's7_122',  true) !!}
+
+                                            <label for="s3_132">{{ __('messages.BARE_Span') }} 3/132</label>
+                                                {!! tiangSpanRadio( '', 'bare_span', 's3_132',  true) !!}
+ 
+                                        </div>
+                                    </div>
+
+
+                                       {{-- PVC (Span) 19/064 --}}
+                                       <div class="col-md-6 ">
                                         <div class="card p-4">
                                                     <label for="s19_064">{{ __('messages.PVC_Span') }}
                                                         19/064</label>
@@ -380,105 +419,19 @@
                                              <label for="s7_083"  >{{ __('messages.PVC_Span') }}
                                                         7/083</label>
                                                         {!! tiangSpanRadio('', 'pvc_span', 's7_083',  true) !!}
-                                                    {{--
-                                                <div class="col-md-6"><input type="number" name="pvc_span[s7_083]"
-                                                        id="s7_083" class="form-control"></div>
-                                            </div> --}}
+                                                    
 
-                                            {{-- <div class="row">
-                                                <div class="col-md-6"> --}}
+                                          
                                                     <label for="s7_044"  >{{ __('messages.PVC_Span') }}
                                                         7/044</label>
-                                                    {{-- </div>
-                                                <div class="col-md-6"><input type="number" name="pvc_span[s7_044]"
-                                                        id="s7_044" class="form-control"></div> --}}
+                                                   
 
                                                         {!! tiangSpanRadio(  '', 'pvc_span', 's7_044',  true) !!}
-
-                                            {{-- </div> --}}
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 ">
-                                        <div class="card p-4">
-
-                                            {{-- <div class="row">
-                                                <div class="col-md-6"> --}}
-                                                    <label
-                                                        for="s7_173"  >{{ __('messages.BARE_Span') }} 7/173</label>
-
-                                                        {!! tiangSpanRadio(  '', 'bare_span', 's7_173',  true) !!}
-
-                                                {{-- </div>
-                                                <div class="col-md-6"><input type="number" name="bare_span[s7_173]"
-                                                        id="s7_173" class="form-control"></div>
-                                            </div> --}}
-
-                                            {{-- <div class="row">
-                                                <div class="col-md-6"> --}}
-                                                    <label
-                                                        for="s7_122">{{ __('messages.BARE_Span') }} 7/122</label>
-                                                        {!! tiangSpanRadio( '', 'bare_span', 's7_122',  true) !!}
-
-                                                {{-- </div>
-                                                <div class="col-md-6"><input type="number" name="bare_span[s7_122]"
-                                                        id="s7_122" class="form-control"></div>
-                                            </div> --}}
-                                            {{-- <div class="row">
-                                                <div class="col-md-6"> --}}
-                                                    <label
-                                                        for="s3_132">{{ __('messages.BARE_Span') }} 3/132</label>
-                                                        {!! tiangSpanRadio( '', 'bare_span', 's3_132',  true) !!}
-
-                                                {{-- </div>
-                                                <div class="col-md-6"><input type="number" name="bare_span[s3_132]"
-                                                        id="s3_132" class="form-control"></div>
-                                            </div> --}}
+ 
                                         </div>
                                     </div>
 
 
-                                    <div class="col-md-6">
-                                        <div class="card p-4">
-                                            <div class="row">
-                                                <div class="col-md-6"><label
-                                                        for="section_to">{{ __('messages.ABC_Span') }} 3 X 185</label>
-                                                </div>
-
-                                                {!! tiangSpanRadio( '', 'abc_span', 's3_185',  true) !!}
-
-                                                {{-- <div class="col-md-6"><input type="number" name="abc_span[s3_185]"
-                                                        id="section_to" class="form-control"></div> --}}
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6"><label for="s3_95">{{ __('messages.ABC_Span') }}
-                                                        3 X 95</label>
-                                                </div>
-                                                {{-- <div class="col-md-6"><input type="number" name="abc_span[s3_95]"
-                                                        id="s3_95" class="form-control"></div> --}}
-                                                {!! tiangSpanRadio(  '', 'abc_span', 's3_95',  true) !!}
-
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6"><label for="s3_16">{{ __('messages.ABC_Span') }}
-                                                        3 X 16</label>
-                                                </div>
-                                                {!! tiangSpanRadio('', 'abc_span', 's3_16',  true) !!}
-
-                                                {{-- <div class="col-md-6"><input type="number" name="abc_span[s3_16]"
-                                                        id="s3_16" class="form-control"></div> --}}
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6"><label for="s1_16">{{ __('messages.ABC_Span') }}
-                                                        1 X 16</label>
-                                                </div>
-                                                {{-- <div class="col-md-6"><input type="number" name="abc_span[s1_16]"
-                                                        id="s1_16" class="form-control"></div> --}}
-                                                        {!! tiangSpanRadio('', 'abc_span', 's1_16',  true) !!}
-
-                                            </div>
-                                        </div>
-                                    </div>
 
 
 

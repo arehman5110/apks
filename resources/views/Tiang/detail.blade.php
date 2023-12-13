@@ -113,55 +113,59 @@
 
 
                                 <div class="row">
-                                    <div class="col-md-4"><label for="fp_name">{{ __('messages.name_of_substation') }} /
-                                            {{ __('messages.Name_of_Feeder_Pillar') }}</label></div>
-                                    <div class="col-md-4"><input disabled value="{{ $data->fp_name }}" id="fp_name"
-                                            class="form-control"></div>
+                                    <div class="col-md-4">
+                                        <label for="fp_name">{{ __('messages.name_of_substation') }} / {{ __('messages.Name_of_Feeder_Pillar') }}</label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input disabled value="{{ $data->fp_name }}" id="fp_name" class="form-control">
+                                    </div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-4"><label for="fp_road">{{ __('messages.Feeder_Name') }} /
-                                            {{ __('messages.Street_Name') }}</label></div>
-                                    <div class="col-md-4"><input value="{{ $data->fp_road }}" disabled
-                                            class="form-control">
+                                    <div class="col-md-4">
+                                        <label for="fp_road">{{ __('messages.Feeder_Name') }} / {{ __('messages.Street_Name') }}</label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input value="{{ $data->fp_road }}" disabled class="form-control">
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="">{{ __('messages.Section') }} </label></div>
-
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-4"><label for="section_from">{{ __('messages.from') }} </label>
+                                    <div class="col-md-4">
+                                        <label for="section_from">{{ __('messages.from') }} </label>
                                     </div>
-                                    <div class="col-md-4"><input disabled value="{{ $data->section_from }}"
-                                            class="form-control"></div>
+                                    <div class="col-md-4">
+                                        <input disabled value="{{ $data->section_from }}" class="form-control"></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="section_to">{{ __('messages.to') }}</label></div>
-                                    <div class="col-md-4"><input disabled value="{{ $data->section_to }}"
-                                            class="form-control"></div>
+                                    <div class="col-md-4">
+                                        <input disabled value="{{ $data->section_to }}"class="form-control">
+                                    </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="tiang_no">{{ __('messages.Tiang_No') }}</label></div>
-                                    <div class="col-md-4"><input disabled value="{{ $data->tiang_no }}"
-                                            class="form-control">
+                                    <div class="col-md-4">
+                                        <input disabled value="{{ $data->tiang_no }}" class="form-control">
                                     </div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-4"><label for="review_date">Review Date</label>
+                                    <div class="col-md-4"><label for="review_date">Review Date</label></div>
+                                    <div class="col-md-4">
+                                        <input type="date"disabled value="{{ $data->review_date }}"   class="form-control" required>
                                     </div>
-                                    <div class="col-md-4"><input type="date"disabled
-                                        value="{{ $data->review_date }}"   class="form-control" required></div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-4"><label for="pole_image-1">{{ __('messages.pole') }} Image 1
-                                        </label>
+                                    <div class="col-md-4">
+                                        <label for="pole_image-1">{{ __('messages.pole') }} Image 1</label>
                                     </div>
 
 
@@ -212,173 +216,103 @@
                                             <label for="st7"> {{ __('messages.Pole_Size_Bill') }} </label>
                                             <div class="row">
 
-
                                                 <div class="d-flex col-md-4">
-                                                    <input type="radio" name="size_tiang" value="st7" id="st7"
-                                                        {{ $data->size_tiang == '7.5' ? 'checked' : '' }} disabled
-                                                        class="  ">
+                                                    <input type="radio" name="size_tiang" value="st7" id="st7" {{ $data->size_tiang == '7.5' ? 'checked' : '' }} disabled>
                                                     <label for="st7" class="fw-400"> 7.5</label>
-
                                                 </div>
 
                                                 <div class="d-flex col-md-4">
-                                                    <input type="radio" name="size_tiang" value="st9"
-                                                        id="st9" {{ $data->size_tiang == '9' ? 'checked' : '' }}
-                                                        disabled class=" ">
+                                                    <input type="radio" name="size_tiang" value="st9" id="st9" {{ $data->size_tiang == '9' ? 'checked' : '' }} disabled >
                                                     <label for="st9" class="fw-400"> 9</label>
-
                                                 </div>
 
                                                 <div class="d-flex col-md-4">
-                                                    <input type="radio" name="size_tiang" value="st10"
-                                                        id="st10" {{ $data->size_tiang == '10' ? 'checked' : '' }}
-                                                        disabled class=" ">
+                                                    <input type="radio" name="size_tiang" value="st10" id="st10" {{ $data->size_tiang == '10' ? 'checked' : '' }}disabled>
                                                     <label for="st10" class="fw-400"> 10</label>
-
-
                                                 </div>
+
                                             </div>
-
-
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="card p-4">
-
                                             <label for="">{{ __('messages.Pole_type_No') }} </label>
                                             <div class="row">
-
-
-
                                                 <div class="d-flex col-md-4">
-
-                                                    <input type="radio" name="jenis_tiang" value="spun"
-                                                        id="spun" class=" "
-                                                        {{ $data->jenis_tiang == 'spun' ? 'checked' : '' }} disabled>
-                                                    <label for="spun"
-                                                        class="fw-400">{{ __('messages.Spun') }}</label>
-
+                                                    <input type="radio" name="jenis_tiang" value="spun id="spun" {{ $data->jenis_tiang == 'spun' ? 'checked' : '' }} disabled>
+                                                    <label for="spun" class="fw-400">{{ __('messages.Spun') }}</label>
                                                 </div>
 
                                                 <div class="d-flex col-md-4">
-
-                                                    <input type="radio" name="jenis_tiang" value="concrete"
-                                                        id="concrete" class=" "
-                                                        {{ $data->jenis_tiang == 'concrete' ? 'checked' : '' }} disabled>
-                                                    <label for="concrete"
-                                                        class="fw-400">{{ __('messages.Concrete') }}</label>
-
-                                                </div>
-
-
-                                                <div class="d-flex col-md-4">
-
-                                                    <input type="radio" name="jenis_tiang" value="iron"
-                                                        id="iron" class=" "
-                                                        {{ $data->jenis_tiang == 'iron' ? 'checked' : '' }} disabled>
-                                                    <label for="iron"
-                                                        class="fw-400">{{ __('messages.Iron') }}</label>
-
+                                                    <input type="radio" name="jenis_tiang" value="concrete" id="concrete" {{ $data->jenis_tiang == 'concrete' ? 'checked' : '' }} disabled>
+                                                    <label for="concrete"class="fw-400">{{ __('messages.Concrete') }}</label>
                                                 </div>
 
                                                 <div class="d-flex col-md-4">
+                                                    <input type="radio" name="jenis_tiang" value="iron" id="iron" {{ $data->jenis_tiang == 'iron' ? 'checked' : '' }} disabled>
+                                                    <label for="iron" class="fw-400">{{ __('messages.Iron') }}</label>
+                                                </div>
 
-                                                    <input type="radio" name="jenis_tiang" value="wood"
-                                                        id="wood" class=" "
-                                                        {{ $data->jenis_tiang == 'wood' ? 'checked' : '' }} disabled>
-                                                    <label for="wood"
-                                                        class="fw-400">{{ __('messages.Wood') }}</label>
-
+                                                <div class="d-flex col-md-4">
+                                                    <input type="radio" name="jenis_tiang" value="wood" id="wood" {{ $data->jenis_tiang == 'wood' ? 'checked' : '' }} disabled>
+                                                    <label for="wood" class="fw-400">{{ __('messages.Wood') }}</label>
                                                 </div>
                                             </div>
+                                        </div>
+                                    </div>
 
 
+                                    <div class="col-md-6">
+                                        <div class="card p-4">
+
+                                            <label for="section_to">{{ __('messages.ABC_Span') }} 3 X 185</label>
+                                                {!! tiangSpanRadio(  $data->abc_span, 'abc_span', 's3_185',  false) !!}
+
+                                            <label for="s3_95">{{ __('messages.ABC_Span') }} 3 X 95</label>
+                                                {!! tiangSpanRadio(  $data->abc_span, 'abc_span', 's3_95',  false) !!}
+
+                                            <label for="s3_16">{{ __('messages.ABC_Span') }} 3 X 16</label>
+                                                {!! tiangSpanRadio(  $data->abc_span, 'abc_span', 's3_16',  false) !!}
 
 
+                                            <label for="s1_16">{{ __('messages.ABC_Span') }}1 X 16</label>
+                                                {!! tiangSpanRadio(  $data->abc_span, 'abc_span', 's1_16',  false) !!}
 
                                         </div>
                                     </div>
 
+
+                                    <div class="col-md-6">
+                                        <div class="card p-4">
+
+                                            <label for="s7_173">{{ __('messages.BARE_Span') }} 7/173</label>
+                                                {!! tiangSpanRadio(  $data->bare_span, 'bare_span', 's7_173',  false) !!}
+
+                                            <label for="s7_122">{{ __('messages.BARE_Span') }} 7/122</label>
+                                                {!! tiangSpanRadio(  $data->bare_span, 'bare_span', 's7_122',  false) !!}
+                                            
+                                            <label for="s3_132">{{ __('messages.BARE_Span') }} 3/132</label>
+                                                {!! tiangSpanRadio(  $data->bare_span, 'bare_span', 's3_132',  false) !!}
+
+                                        </div>
+                                    </div>
 
 
                                     <div class="col-md-6 ">
                                         <div class="card p-4">
-                                                    <label for="s19_064">{{ __('messages.PVC_Span') }}
-                                                        19/064</label>
 
-                                                        {!! tiangSpanRadio(    $data->pvc_span, 'pvc_span', 's19_064',  false) !!}
+                                            <label for="s19_064">{{ __('messages.PVC_Span') }} 19/064</label>
+                                                {!! tiangSpanRadio(    $data->pvc_span, 'pvc_span', 's19_064',  false) !!}
 
+                                            <label for="s7_083"  >{{ __('messages.PVC_Span') }}7/083</label>
+                                                {!! tiangSpanRadio($data->pvc_span, 'pvc_span', 's7_083',  false) !!}
 
-                                             <label for="s7_083"  >{{ __('messages.PVC_Span') }}
-                                                        7/083</label>
-                                                        {!! tiangSpanRadio($data->pvc_span, 'pvc_span', 's7_083',  false) !!}
-
-                                                    <label for="s7_044"  >{{ __('messages.PVC_Span') }}
-                                                        7/044</label>
-
-
-                                                        {!! tiangSpanRadio(  $data->pvc_span, 'pvc_span', 's7_044',  false) !!}
-
+                                            <label for="s7_044"  >{{ __('messages.PVC_Span') }}7/044</label>
+                                                {!! tiangSpanRadio(  $data->pvc_span, 'pvc_span', 's7_044',  false) !!}
 
                                         </div>
                                     </div>
-
-
-
-
-
-                                    <div class="col-md-6">
-                                        <div class="card p-4">
-                                            <label
-                                                        for="s7_173">{{ __('messages.BARE_Span') }} 7/173</label>
-                                                        {!! tiangSpanRadio(  $data->bare_span, 'bare_span', 's7_173',  false) !!}
-
-
-
-                                             <label
-                                                        for="s7_122">{{ __('messages.BARE_Span') }} 7/122</label>
-                                                        {!! tiangSpanRadio(  $data->bare_span, 'bare_span', 's7_122',  false) !!}
- <label
-                                                        for="s3_132">{{ __('messages.BARE_Span') }} 3/132</label>
-                                                        {!! tiangSpanRadio(  $data->bare_span, 'bare_span', 's3_132',  false) !!}
-
-
-                                        </div>
-                                    </div>
-
-
-
-                                    <div class="col-md-6">
-                                        <div class="card p-4">
-
-                                            <label
-                                                        for="section_to">{{ __('messages.ABC_Span') }} 3 X 185</label>
-
-                                                {!! tiangSpanRadio(  $data->abc_span, 'abc_span', 's3_185',  false) !!}
-
-
-                                           <label for="s3_95">{{ __('messages.ABC_Span') }}
-                                                        3 X 95</label>
-                                                {!! tiangSpanRadio(  $data->abc_span, 'abc_span', 's3_95',  false) !!}
-
-                                             <label for="s3_16">{{ __('messages.ABC_Span') }}
-                                                        3 X 16</label>
-                                                {!! tiangSpanRadio(  $data->abc_span, 'abc_span', 's3_16',  false) !!}
-
-
-                                             <label for="s1_16">{{ __('messages.ABC_Span') }}
-                                                        1 X 16</label>
-                                                {!! tiangSpanRadio(  $data->abc_span, 'abc_span', 's1_16',  false) !!}
-
-
-
-
-
-                                        </div>
-                                    </div>
-
-
 
                                 </div>
 
@@ -957,6 +891,7 @@
                 headerTag: "h3",
                 bodyTag: "fieldset",
                 transitionEffect: "slideLeft",
+                showFinishButtonAlways: false,  
 
                 onStepChanging: function(event, currentIndex, newIndex) {
                     // Allways allow previous action even if the current form is not valid!
