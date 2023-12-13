@@ -44,7 +44,7 @@ class FeederPillarExcelController extends Controller
 
                 $i = 3;
                 foreach ($result as $rec) {
-                    $worksheet->setCellValue('A' . $i, $i - 3);
+                    $worksheet->setCellValue('A' . $i, $rec->id);
 
                     $worksheet->setCellValue('B' . $i, $rec->zone);
                     $worksheet->setCellValue('C' . $i, $rec->ba);
