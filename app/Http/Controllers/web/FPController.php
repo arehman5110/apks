@@ -43,7 +43,8 @@ class FPController extends Controller
                     'ba',
                     'zone',
                     'team',
-                    'visit_date'
+                    'visit_date',
+                    'total_defects'
                 );
             });
 
