@@ -132,7 +132,7 @@
                                 <div class="col-md-4"><label for="area">{{ __('messages.voltage') }}</label></div>
                                 <div class="col-md-4">
                                     <select name="voltage" id="voltage" class="form-control">
-                                        <option value="{{$data->voltage}}" hidden>{{$data->voltage == '' ? 'select' : $data->voltage}}select</option>
+                                        <option value="{{$data->voltage}}" hidden>{{$data->voltage == '' ? 'select' : $data->voltage}}</option>
                                         <option value="11kw">11kv</option>
                                         <option value="13kw">13kv</option>
                                     </select>
