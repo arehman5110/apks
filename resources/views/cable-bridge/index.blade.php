@@ -76,6 +76,7 @@
                                             <th>BA</th>
                                             <th>TEAM</th>
                                             <th>VISIT DATE</th>
+                                            <th>TOTAL DEFECTS</th>
                                             <th>ACTION</th>
 
                                         </tr>
@@ -180,6 +181,10 @@
                     {
                         data: 'visit_date',
                         name: 'visit_date'
+                    },
+                    {
+                        data:'total_defects',
+                        name:'total_defects',
                     },
                     {
                         render: function(data, type, full) {
