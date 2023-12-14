@@ -28,12 +28,13 @@
 
     input {
         min-width: 16px !important;
-     }
+    }
 
 
 
-    .side-bar::-webkit-scrollbar ,
-    .lb-outerContainer ,.lb-closeContainer {
+    .side-bar::-webkit-scrollbar,
+    .lb-outerContainer,
+    .lb-closeContainer {
         display: none;
     }
 
@@ -49,7 +50,107 @@
     .form-input {
         border: 0
     }
-    input[type="radio"]{
+
+    input[type="radio"] {
         border-radius: 50% !important;
+    }
+
+
+    input[type="radio"].without_defects {
+
+        background-color: #00F700;
+        border-color: #00F700;
+    }
+
+    input[type="radio"]:checked.without_defects {
+        background-color: #00F700;
+        border-color: #00F700;
+    }
+
+
+    input[type="radio"].with_defects {
+
+        background-color: #F7F701;
+        border-color: #F7F701;
+    }
+
+    input[type="radio"]:checked.with_defects {
+        background-color: #F7F701;
+        border-color: #F7F701;
+    }
+
+
+    input[type="radio"].unsurveyed {
+
+        background-color: #FF0000;
+        border-color: #FF0000;
+    }
+
+    input[type="radio"]:checked.unsurveyed {
+        background-color: #FF0000;
+        border-color: #FF0000;
+    }
+
+    .tt-menu {
+    z-index: 9999999999999 !important;
+}
+
+    .tt-query,
+    /* UPDATE: newer versions use tt-input instead of tt-query */
+    .tt-hint {
+        width: 200px;
+        height: 30px;
+        padding: 8px 12px;
+        font-size: 24px;
+        line-height: 30px;
+        border: 2px solid #ccc;
+        border-radius: 8px;
+        outline: none;
+    }
+
+    .tt-query {
+        /* UPDATE: newer versions use tt-input instead of tt-query */
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    }
+
+    .tt-hint {
+        color: #999;
+    }
+
+    .tt-menu {
+        /* UPDATE: newer versions use tt-menu instead of tt-dropdown-menu */
+        width: 422px;
+        margin-top: 12px;
+        padding: 8px 0;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+    }
+
+    .tt-suggestion {
+        padding: 3px 20px;
+        font-size: 18px;
+        line-height: 24px;
+        cursor: pointer;
+    }
+
+    .tt-suggestion:hover {
+        color: #f0f0f0;
+        background-color: #0097cf;
+    }
+
+    .tt-suggestion p {
+        margin: 0;
+    }
+
+
+    input.typeahead.tt-hint {
+        border: 0px !important;
+        background: transparent !important;
+        padding: 20px 14px;
+        font-size: 15px !important;
+
     }
 </style>

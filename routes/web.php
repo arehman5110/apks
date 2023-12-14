@@ -100,6 +100,12 @@ Route::group(
                 Route::resource('tiang-talian-vt-and-vr', TiangContoller::class);
                 Route::post('generate-tiang-talian-vt-and-vr-excel', [TiangExcelController::class, 'generateTiangExcel'])->name('generate-tiang-talian-vt-and-vr-excel');
                 Route::view('/tiang-talian-vt-and-vr-map', 'Tiang.map')->name('tiang-talian-vt-and-vr-map');
+                Route::get('/search/find-tiang/{q}', [TiangMapController::class, 'seacrh'])->name('tiang-search');
+                Route::get('/search/find-tiang-cordinated/{q}', [TiangMapController::class, 'seacrhCoordinated'])->name('tiang-coordinated');
+                Route::get('/get-tiang-edit/{id}', [TiangMapController::class, 'editMap'])->name('get-tiang-edit');
+                Route::post('/tiang-talian-vt-and-vr-map-edit/{id}', [TiangMapController::class, 'editMapStore'])->name('tiang-talian-vt-and-vr-map-edit');
+        
+
 
                 //// Link Box
                 Route::resource('link-box-pelbagai-voltan', LinkBoxController::class);
@@ -107,6 +113,8 @@ Route::group(
                 Route::view('/link-box-pelbagai-voltan-map', 'link-box.map')->name('link-box-pelbagai-voltan-map');
                 Route::get('/get-link-box-edit/{id}', [LinkBoxMapController::class, 'editMap'])->name('get-link-box-edit');
                 Route::post('/update-link-box-map-edit/{id}', [LinkBoxMapController::class, 'update'])->name('update-link-box-map-edit');
+                Route::get('/search/find-link-box/{q}', [LinkBoxMapController::class, 'seacrh'])->name('link-box-search');
+                Route::get('/search/find-link-box-cordinated/{q}', [LinkBoxMapController::class, 'seacrhCoordinated'])->name('link-box-coordinated');
 
                 //// Cable Bridge
 
@@ -115,6 +123,8 @@ Route::group(
                 Route::view('/cable-bridge-map', 'cable-bridge.map')->name('cable-bridge-map');
                 Route::get('/get-cable-bridge-edit/{id}', [CableBridgeMapController::class, 'editMap'])->name('get-cable-bridge-edit');
                 Route::post('/update-cable-bridge-map-edit/{id}', [CableBridgeMapController::class, 'update'])->name('update-cable-bridge-map-edit');
+                Route::get('/search/find-cable-bridge/{q}', [CableBridgeMapController::class, 'seacrh'])->name('cable-bridge-search');
+                Route::get('/search/find-cable-bridge-cordinated/{q}', [CableBridgeMapController::class, 'seacrhCoordinated'])->name('cable-bridge-coordinated');
 
                 ////third party digging routes
                 Route::resource('third-party-digging', ThirdPartyDiggingController::class);
@@ -136,6 +146,10 @@ Route::group(
                 Route::post('generate-feeder-pillar-excel', [FeederPillarExcelController::class, 'generateFeederPillarExcel'])->name('generate-feeder-pillar-excel');
                 Route::get('/get-feeder-pillar-edit/{id}', [FeederPillarMapController::class, 'editMap'])->name('get-feeder-pillar-edit');
                 Route::post('/update-feeder-pillar-map-edit/{id}', [FeederPillarMapController::class, 'update'])->name('update-feeder-pillar-map-edit');
+                Route::get('/search/find-feeder-pillar/{q}', [FeederPillarMapController::class, 'seacrh'])->name('feeder-pillar-search');
+
+                Route::get('/search/find-feeder-pillar-cordinated/{q}', [FeederPillarMapController::class, 'seacrhCoordinated'])->name('feeder-pillar-coordinated');
+
 
                 //generate notice pdf
                 Route::get('/generate-notice/{id}', [GenerateNoticeController::class, 'generateNotice']);
@@ -169,9 +183,7 @@ Route::group(
 
                 Route::get('/test-pagination/{id}/{status}', [MapController::class, 'teswtpagination']);
                 Route::get('/preNext/{id}/{status}', [MapController::class, 'preNext']);
-                Route::get('/get-tiang-edit/{id}', [TiangMapController::class, 'editMap'])->name('get-tiang-edit');
-                Route::post('/tiang-talian-vt-and-vr-map-edit/{id}', [TiangMapController::class, 'editMapStore'])->name('tiang-talian-vt-and-vr-map-edit');
-            });
+                });
 
             Route::middleware('isAdmin:' . true)->group(function () {
                 //// Admin side

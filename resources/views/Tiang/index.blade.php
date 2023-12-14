@@ -94,6 +94,7 @@
 
                                     <thead style="background-color: #E4E3E3 !important">
                                         <tr>
+                                            <th>ID</th>
                                             <th>TIANG NO</th>
                                             <th>BA</th>
                                             {{-- <th>CONTRACTOR</th> --}}
@@ -166,75 +167,73 @@
         var to_date = $('#excel_to_date').val();
         var excel_ba = $('#excelBa').val();
         $(document).ready(function() {
-            var table = $('.data-table').DataTable({
-                processing: true,
-                serverSide: true,
+    var table = $('.data-table').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: {
+            url: '{{ route('tiang-talian-vt-and-vr.index', app()->getLocale()) }}',
+            type: "GET",
+            data: function(d) {
+                if (from_date) {
+                    d.from_date = from_date;
+                }
 
-                ajax: {
-                    url: '{{ route('tiang-talian-vt-and-vr.index', app()->getLocale()) }}',
-                    type: "GET",
-                    data: function(d) {
+                if (excel_ba) {
+                    d.ba = excel_ba;
+                }
 
-                        if (from_date) {
-                            d.from_date = from_date;
-                        }
-
-                        if (excel_ba) {
-                            d.ba = excel_ba;
-                        }
-
-                        if (to_date) {
-                            d.to_date = to_date;
-                        }
-                    }
-                },
-                columns: [{
-                        data: 'tiang_no',
-                        name: 'tiang_no'
-                    },
-                    {
-                        data: 'ba',
-                        name: 'ba',
-                        orderable: true
-                    },
-                    {
-                        data: 'review_date',
-                        name: 'review_date'
-                    },
-                    {
-                        data:'total_defects',
-                        name:'total_defects'
-                    },
-                    {
-                        render: function(data, type, full) {
-
-                            var id = full.id;
-                            return `<button type="button" class="btn  " data-toggle="dropdown">
-                            <img
-                                src="{{ URL::asset('assets/web-images/three-dots-vertical.svg') }}">
+                if (to_date) {
+                    d.to_date = to_date;
+                }
+            }
+        },
+        columns: [
+            {
+                data: 'id',
+                name: 'index'
+            },
+            {
+                data: 'tiang_no',
+                name: 'tiang_no'
+            },
+            {
+                data: 'ba',
+                name: 'ba',
+                orderable: true
+            },
+            {
+                data: 'review_date',
+                name: 'review_date'
+            },
+            {
+                data: 'total_defects',
+                name: 'total_defects'
+            },
+            {
+                render: function(data, type, full) {
+                    var id = full.id;
+                    return `<button type="button" class="btn  " data-toggle="dropdown">
+                        <img src="{{ URL::asset('assets/web-images/three-dots-vertical.svg') }}">
+                    </button>
+                    <div class="dropdown-menu" role="menu">
+                        <form action="/{{ app()->getLocale() }}/tiang-talian-vt-and-vr/${id}" method="get">
+                            <button type="submit" class="dropdown-item pl-3 w-100 text-left">Detail</button>
+                        </form>
+                        <form action="/{{ app()->getLocale() }}/tiang-talian-vt-and-vr/${id}/edit" method="get">
+                            <button type="submit" class="dropdown-item pl-3 w-100 text-left">Edit</button>
+                        </form>
+                        <button type="button" class="btn btn-primary dropdown-item" data-id="${id}" data-toggle="modal" data-target="#myModal">
+                            Remove
                         </button>
-                        <div class="dropdown-menu" role="menu">
-                            <form action="/{{ app()->getLocale() }}/tiang-talian-vt-and-vr/${id}" method="get">
-
-                                <button type="submit" class="dropdown-item pl-3 w-100 text-left">Detail</button>
-                            </form>
-                            <form action="/{{ app()->getLocale() }}/tiang-talian-vt-and-vr/${id}/edit" method="get">
-
-                                <button type="submit" class="dropdown-item pl-3 w-100 text-left">Edit</button>
-                            </form>
-                            <button type="button" class="btn btn-primary dropdown-item" data-id="${id}" data-toggle="modal" data-target="#myModal">
-                                Remove
-                            </button>
-                        </div>
-                        `;
-                        }
-                    }
-
-                ],
-                order: [
-                    [2, 'desc']
-                ]
-            })
+                    </div>`;
+                }
+            }
+        ],
+        order: [
+            [2, 'desc']
+        ]
+    });
+ 
 
 
             $('#excelBa').on('change', function() {

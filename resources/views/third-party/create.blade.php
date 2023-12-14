@@ -27,6 +27,7 @@
             margin-bottom: 0px !important;
             margin-top: 1rem;
         }
+
         input[type='radio'] {
             border-radius: 50% !important;
         }
@@ -43,9 +44,11 @@
             height: 400px;
             padding: 20px;
         }
+
         input {
-        min-width: 16px !important;
-     }
+            min-width: 16px !important;
+        }
+
         /* CSS for the Select2 dropdown to match form-control style */
         .select2-container {
             margin-top: 10px;
@@ -67,7 +70,10 @@
             outline: 0;
             box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
         }
-        .form-input{border: 0}
+
+        .form-input {
+            border: 0
+        }
     </style>
 @endsection
 
@@ -77,12 +83,14 @@
         <div class="container-  ">
             <div class="row  " style="flex-wrap:nowrap">
                 <div class="col-sm-6">
-                    <h3>{{__('messages.notice_form')}}</h3>
+                    <h3>{{ __('messages.notice_form') }}</h3>
                 </div>
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
-                        <li class="breadcrumb-item text-lowercase"><a href="{{ route('third-party-digging.index', app()->getLocale()) }}">{{__('messages.index')}}</a></li>
-                        <li class="breadcrumb-item active text-lowercase">{{__('messages.create')}}</li>
+                        <li class="breadcrumb-item text-lowercase"><a
+                                href="{{ route('third-party-digging.index', app()->getLocale()) }}">{{ __('messages.index') }}</a>
+                        </li>
+                        <li class="breadcrumb-item active text-lowercase">{{ __('messages.create') }}</li>
                     </ol>
                 </div>
             </div>
@@ -99,12 +107,12 @@
                     <div class="form-input ">
                         <h3 class="text-center p-2"></h3>
 
-                        <form action="{{ route('third-party-digging.store', app()->getLocale()) }} " id="myForm" method="POST"
-                            enctype="multipart/form-data" onsubmit="return submitFoam()">
+                        <form action="{{ route('third-party-digging.store', app()->getLocale()) }} " id="myForm"
+                            method="POST" enctype="multipart/form-data" onsubmit="return submitFoam()">
                             @csrf
 
                             <div class="row">
-                                <div class="col-md-4"><label for="zone">{{__('messages.zone')}}</label></div>
+                                <div class="col-md-4"><label for="zone">{{ __('messages.zone') }}</label></div>
                                 <div class="col-md-4">
                                     <select name="zone" id="search_zone" class="form-control" required>
                                         @if (Auth::user()->zone == '')
@@ -114,7 +122,8 @@
                                             <option value="B2">B2</option>
                                             <option value="B4">B4</option>
                                         @else
-                                            <option value="{{ Auth::user()->zone }}" hidden>{{ Auth::user()->zone }}</option>
+                                            <option value="{{ Auth::user()->zone }}" hidden>{{ Auth::user()->zone }}
+                                            </option>
                                         @endif
 
                                     </select>
@@ -122,7 +131,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="ba">{{__('messages.ba')}}</label></div>
+                                <div class="col-md-4"><label for="ba">{{ __('messages.ba') }}</label></div>
                                 <div class="col-md-4"><select name="ba_s" id="ba_s" class="form-control" required
                                         onchange="getWorkPackage(this)">
                                         <option value="" hidden>select ba</option>
@@ -133,27 +142,27 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="digging">{{__("messages.digging")}}</label></div>
+                                <div class="col-md-4"><label for="digging">{{ __('messages.digging') }}</label></div>
                                 <div class="col-md-2">
-                                    <input type="radio" name="digging"   id="digging_yes" class="mt-0" value="yes">
-                                    <label for="digging_yes" >Yes</label>
+                                    <input type="radio" name="digging" id="digging_yes" class="mt-0" value="yes">
+                                    <label for="digging_yes">Yes</label>
 
                                 </div>
                                 <div class="col-md-2">
-                                    <input type="radio" name="digging"   id="digging_no" class="mt-0" value="no">
-                                    <label for="digging_no" >No</label>
+                                    <input type="radio" name="digging" id="digging_no" class="mt-0" value="no">
+                                    <label for="digging_no">No</label>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label for="notice">{{__('messages.notice')}}</label></div>
+                                <div class="col-md-4"><label for="notice">{{ __('messages.notice') }}</label></div>
                                 <div class="col-md-2">
-                                    <input type="radio" name="notice"   id="notice_yes" class="mt-0" value="yes">
-                                    <label for="notice_yes" >Yes</label>
+                                    <input type="radio" name="notice" id="notice_yes" class="mt-0" value="yes">
+                                    <label for="notice_yes">Yes</label>
 
                                 </div>
                                 <div class="col-md-2">
-                                    <input type="radio" name="notice"   id="notice_no" class="mt-0" value="no">
-                                    <label for="notice_no" >No</label>
+                                    <input type="radio" name="notice" id="notice_no" class="mt-0" value="no">
+                                    <label for="notice_no">No</label>
                                 </div>
 
                                 {{-- <div class="col-md-4 text-center pt-3 ">
@@ -161,49 +170,56 @@
                                 </div> --}}
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label for="supervision">{{__('messages.supervision')}}</label></div>
+                                <div class="col-md-4"><label for="supervision">{{ __('messages.supervision') }}</label>
+                                </div>
                                 <div class="col-md-2">
-                                    <input type="radio" name="supervision"   id="supervision_yes" class="mt-0" value="yes">
-                                    <label for="supervision_yes" >Yes</label>
+                                    <input type="radio" name="supervision" id="supervision_yes" class="mt-0"
+                                        value="yes">
+                                    <label for="supervision_yes">Yes</label>
 
                                 </div>
                                 <div class="col-md-2">
-                                    <input type="radio" name="supervision"   id="supervision_no" class="mt-0" value="no">
-                                    <label for="supervision_no" >No</label>
+                                    <input type="radio" name="supervision" id="supervision_no" class="mt-0"
+                                        value="no">
+                                    <label for="supervision_no">No</label>
                                 </div>
 
                             </div>
 
 
                             <div class="row">
-                                <div class="col-md-4"><label for="search_wp">{{__('messages.wp_name')}}</label></div>
+                                <div class="col-md-4"><label for="search_wp">{{ __('messages.wp_name') }}</label></div>
                                 <div class="col-md-4">
                                     <select name="search_wp" id="search_wp" class="form-control" required>
                                         <option value="" hidden>select workpackage</option>
 
                                     </select>
-                                    <input type="hidden" name="workpackage_id" id="workpackage_id" class="form-control">
+                                    <input type="hidden" name="workpackage_id" id="workpackage_id"
+                                        class="form-control">
                                     <input type="hidden" name="wp_name" id="wp_name">
                                 </div>
                             </div>
 
 
 
-                                    <input type="hidden" class="form-control" name="team_name"
-                                        value="{{ $team }}" readonly id="team_name">
+                            <input type="hidden" class="form-control" name="team_name" value="{{ $team }}"
+                                readonly id="team_name">
 
 
 
                             <div class="row">
-                                <div class="col-md-4"><label for="survey_date">{{__('messages.survey_date')}}</label></div>
+                                <div class="col-md-4"><label for="survey_date">{{ __('messages.survey_date') }}</label>
+                                </div>
                                 <div class="col-md-4"><input type="date" name="survey_date" id="survey_date"
                                         value="{{ date('Y-m-d') }}" class="form-control" required></div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="patrolling_time">{{__('messages.patrolling_time')}}</label></div>
+                                <div class="col-md-4"><label
+                                        for="patrolling_time">{{ __('messages.patrolling_time') }}</label></div>
                                 <div class="col-md-4"><input type="time" name="patrolling_time" id="patrolling_time"
-                                        value="{{ Carbon\Carbon::now()->format('H:i:s') }}" class="form-control" required>
+                                        value="{{ Carbon\Carbon::now()->format('H:i:s') }}" class="form-control"
+                                        required>
                                 </div>
                             </div>
                             {{-- <div class="row">
@@ -218,7 +234,7 @@
                                         class="form-control" required></div>
                             </div> --}}
 
-{{--
+                            {{--
                             <div class="row">
                                 <div class="col-md-4"><label for="km_actual">{{__('messages.km_actual')}}</label></div>
                                 <div class="col-md-4"><input type="number" name="km_actual" id="km_actual"
@@ -229,28 +245,33 @@
 
 
                             <div class="row">
-                                <div class="col-md-4"><label for="company_name">{{__('messages.company_name')}}</label></div>
+                                <div class="col-md-4"><label for="company_name">{{ __('messages.company_name') }}</label>
+                                </div>
                                 <div class="col-md-4"><input type="text" name="company_name" id="company_name"
                                         class="form-control" required></div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label for="office_phone_no">{{__('messages.office_phone_no')}}</label></div>
+                                <div class="col-md-4"><label
+                                        for="office_phone_no">{{ __('messages.office_phone_no') }}</label></div>
                                 <div class="col-md-4"><input type="number" name="office_phone_no" id="office_phone_no"
                                         class="form-control" required minlength="9" maxlength="11"></div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label for="main_contractor">{{__('messages.main_contractor')}}</label></div>
+                                <div class="col-md-4"><label
+                                        for="main_contractor">{{ __('messages.main_contractor') }}</label></div>
                                 <div class="col-md-4"><input type="text" name="main_contractor" id="main_contractor"
                                         class="form-control" required></div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label for="developer_phone_no">{{__('messages.developer_phone_no')}}</label></div>
+                                <div class="col-md-4"><label
+                                        for="developer_phone_no">{{ __('messages.developer_phone_no') }}</label></div>
                                 <div class="col-md-4"><input type="number" name="developer_phone_no"
                                         id="developer_phone_no" class="form-control" required minlength="9"
                                         maxlength="11"></div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label for="contractor_company_name">{{__('messages.contractort_company_name')}}</label>
+                                <div class="col-md-4"><label
+                                        for="contractor_company_name">{{ __('messages.contractort_company_name') }}</label>
                                 </div>
                                 <div class="col-md-4"><input type="text" name="contractor_company_name"
                                         id="contractor_company_name" class="form-control" required></div>
@@ -258,7 +279,7 @@
 
                             <div class="row">
                                 <div class="col-md-4">
-                                    <label for="site_supervisor_name">{{__('messages.site_supervisor_name')}}</label>
+                                    <label for="site_supervisor_name">{{ __('messages.site_supervisor_name') }}</label>
                                 </div>
                                 <div class="col-md-4">
                                     <input type="text" name="site_supervisor_name" id="site_supervisor_name"
@@ -267,14 +288,17 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="site_supervisor_phone_no">{{__('messages.site_supervisor_phone_no')}}</label></div>
+                                <div class="col-md-4"><label
+                                        for="site_supervisor_phone_no">{{ __('messages.site_supervisor_phone_no') }}</label>
+                                </div>
                                 <div class="col-md-4"><input type="number" name="site_supervisor_phone_no"
                                         id="site_supervisor_phone_no" class="form-control" required minlength="9"
                                         maxlength="11">
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label for="excavator_operator_name">{{__('messages.excavator_operator_name')}}</label>
+                                <div class="col-md-4"><label
+                                        for="excavator_operator_name">{{ __('messages.excavator_operator_name') }}</label>
                                 </div>
                                 <div class="col-md-4"><input type="text" name="excavator_operator_name"
                                         id="excavator_operator_name" class="form-control" required></div>
@@ -283,19 +307,23 @@
 
 
                             <div class="row">
-                                <div class="col-md-4"><label for="excavator_machinery_reg_no">{{__('messages.excavator_machinery_reg_no')}}</label></div>
+                                <div class="col-md-4"><label
+                                        for="excavator_machinery_reg_no">{{ __('messages.excavator_machinery_reg_no') }}</label>
+                                </div>
                                 <div class="col-md-4"><input type="text" name="excavator_machinery_reg_no"
                                         id="excavator_machinery_reg_no" class="form-control" required></div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="department_diging">{{__('messages.dpt_diging')}}</label></div>
+                                <div class="col-md-4"><label
+                                        for="department_diging">{{ __('messages.dpt_diging') }}</label></div>
                                 <div class="col-md-4"><input type="text" name="department_diging"
                                         id="department_diging" class="form-control" required></div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="survey_status">{{__('messages.survey_status')}}</label></div>
+                                <div class="col-md-4"><label
+                                        for="survey_status">{{ __('messages.survey_status') }}</label></div>
                                 <div class="col-md-4">
                                     <select name="survey_status" id="survey_status" class="form-control" required>
                                         <option value="" hidden>select status</option>
@@ -325,85 +353,94 @@
                             </div> --}}
 
                             <div class="row">
-                                <div class="col-md-4"><label for="before_image1">{{__('messages.before_image_1')}}</label></div>
-                                <div class="col-md-4"><input type="file" name="before_image1" id="before_image1" accept="image/*"
-                                        class="form-control"  ></div>
-                                        <div class="col-md-4  " id="before_image1-div">
+                                <div class="col-md-4"><label
+                                        for="before_image1">{{ __('messages.before_image_1') }}</label></div>
+                                <div class="col-md-4"><input type="file" name="before_image1" id="before_image1"
+                                        accept="image/*" class="form-control"></div>
+                                <div class="col-md-4  " id="before_image1-div">
 
-                                        </div>
+                                </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label for="before_image2">{{__('messages.before_image_2')}}</label></div>
-                                <div class="col-md-4"><input type="file" name="before_image2" id="before_image2" accept="image/*"
-                                        class="form-control"  ></div>
-                                        <div class="col-md-4  " id="before_image2-div">
+                                <div class="col-md-4"><label
+                                        for="before_image2">{{ __('messages.before_image_2') }}</label></div>
+                                <div class="col-md-4"><input type="file" name="before_image2" id="before_image2"
+                                        accept="image/*" class="form-control"></div>
+                                <div class="col-md-4  " id="before_image2-div">
 
-                                        </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-4"><label for="before_image3">{{__('messages.before_image_3')}}</label></div>
-                                <div class="col-md-4"><input type="file" name="before_image3" id="before_image3" accept="image/*"
-                                        class="form-control"  ></div>
-                                        <div class="col-md-4  " id="before_image3-div">
-
-                                        </div>
+                                </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="during_image1">{{__('messages.during_image_1')}}</label></div>
-                                <div class="col-md-4"><input type="file" name="during_image1" id="during_image1" accept="image/*"
-                                        class="form-control"></div>
-                                        <div class="col-md-4  " id="during_image1-div">
+                                <div class="col-md-4"><label
+                                        for="before_image3">{{ __('messages.before_image_3') }}</label></div>
+                                <div class="col-md-4"><input type="file" name="before_image3" id="before_image3"
+                                        accept="image/*" class="form-control"></div>
+                                <div class="col-md-4  " id="before_image3-div">
 
-                                        </div>
+                                </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="during_image1">{{__('messages.during_image_2')}}</label></div>
-                                <div class="col-md-4"><input type="file" name="during_image2" id="during_image2" accept="image/*"
-                                        class="form-control"></div>
-                                        <div class="col-md-4  " id="during_image2-div">
+                                <div class="col-md-4"><label
+                                        for="during_image1">{{ __('messages.during_image_1') }}</label></div>
+                                <div class="col-md-4"><input type="file" name="during_image1" id="during_image1"
+                                        accept="image/*" class="form-control"></div>
+                                <div class="col-md-4  " id="during_image1-div">
 
-                                        </div>
+                                </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="during_image1">{{__('messages.during_image_3')}}</label></div>
-                                <div class="col-md-4"><input type="file" name="during_image3" id="during_image3" accept="image/*"
-                                        class="form-control"></div>
-                                        <div class="col-md-4  " id="during_image3-div">
+                                <div class="col-md-4"><label
+                                        for="during_image1">{{ __('messages.during_image_2') }}</label></div>
+                                <div class="col-md-4"><input type="file" name="during_image2" id="during_image2"
+                                        accept="image/*" class="form-control"></div>
+                                <div class="col-md-4  " id="during_image2-div">
 
-                                        </div>
+                                </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="after_image1">{{__('messages.after_image_1')}}</label></div>
-                                <div class="col-md-4"><input type="file" name="after_image1" id="after_image1" accept="image/*"
-                                        class="form-control"></div>
-                                        <div class="col-md-4  " id="after_image1-div">
+                                <div class="col-md-4"><label
+                                        for="during_image1">{{ __('messages.during_image_3') }}</label></div>
+                                <div class="col-md-4"><input type="file" name="during_image3" id="during_image3"
+                                        accept="image/*" class="form-control"></div>
+                                <div class="col-md-4  " id="during_image3-div">
 
-                                        </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4"><label
+                                        for="after_image1">{{ __('messages.after_image_1') }}</label></div>
+                                <div class="col-md-4"><input type="file" name="after_image1" id="after_image1"
+                                        accept="image/*" class="form-control"></div>
+                                <div class="col-md-4  " id="after_image1-div">
+
+                                </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label for="after_image2">{{__('messages.after_image_2')}}</label></div>
-                                <div class="col-md-4"><input type="file" name="after_image2" id="after_image2" accept="image/*"
-                                        class="form-control"></div>
-                                        <div class="col-md-4  " id="after_image2-div">
+                                <div class="col-md-4"><label
+                                        for="after_image2">{{ __('messages.after_image_2') }}</label></div>
+                                <div class="col-md-4"><input type="file" name="after_image2" id="after_image2"
+                                        accept="image/*" class="form-control"></div>
+                                <div class="col-md-4  " id="after_image2-div">
 
-                                        </div>
+                                </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label for="after_image3">{{__('messages.after_image_3')}}</label></div>
-                                <div class="col-md-4"><input type="file" name="after_image3" id="after_image3" accept="image/*"
-                                        class="form-control"></div>
-                                        <div class="col-md-4 " id="after_image3-div">
+                                <div class="col-md-4"><label
+                                        for="after_image3">{{ __('messages.after_image_3') }}</label></div>
+                                <div class="col-md-4"><input type="file" name="after_image3" id="after_image3"
+                                        accept="image/*" class="form-control"></div>
+                                <div class="col-md-4 " id="after_image3-div">
 
-                                        </div>
+                                </div>
                             </div>
 
                             <div class="row   road-d">
-                                <div class="col-md-4"><label for="road_name">{{__('messages.rd_name')}}</label></div>
+                                <div class="col-md-4"><label for="road_name">{{ __('messages.rd_name') }}</label></div>
                                 <div class="col-md-4">
                                     <span id="road_name_check" class="text-danger"></span>
                                     <input type="text" name="road_name" id="road_name" class="form-control" required>
@@ -427,7 +464,8 @@
 
                             </div>
 
-                            <div class="text-center p-4"><button class="btn btn-sm btn-success">{{__('messages.submit')}}</button></div>
+                            <div class="text-center p-4"><button
+                                    class="btn btn-sm btn-success">{{ __('messages.submit') }}</button></div>
 
 
                         </form>
@@ -445,20 +483,22 @@
 
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">{{__("messages.generate_notice")}}</h4>
+                    <h4 class="modal-title">{{ __('messages.generate_notice') }}</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <form action="/{{app()->getLocale()}}/generate-notice" id="remove-foam" method="POST" target="_blank" >
+                <form action="/{{ app()->getLocale() }}/generate-notice" id="remove-foam" method="POST"
+                    target="_blank">
 
                     @csrf
 
                     <div class="modal-body">
-                       comming soon ...
+                        comming soon ...
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
 
-                        <button type="submit" class="btn btn-sm btn-success"  >{{__("messages.generate_notice")}}</button>
+                        <button type="submit"
+                            class="btn btn-sm btn-success">{{ __('messages.generate_notice') }}</button>
                     </div>
                 </form>
 
@@ -475,60 +515,60 @@
 
     @include('partials.form-map-js')
     <script>
+        // ba their names and their points
+        const b1Options = [
+            ['W1', 'KUALA LUMPUR PUSAT', 3.14925905877391, 101.754098819705],
+            ['B1', 'PETALING JAYA', 3.1128074178475, 101.605270457169],
+            ['B1', 'RAWANG', 3.47839445121726, 101.622905486475],
+            ['B1', 'KUALA SELANGOR', 3.40703209426401, 101.317426926947],
+            ['B2', 'KLANG', 3.08428642705789, 101.436185279023],
+            ['B2', 'PELABUHAN KLANG', 2.98188527916042, 101.324234779569],
+            ['B4', 'CHERAS', 3.14197346621987, 101.849883983416],
+            ['B4', 'BANTING', 2.82111390453244, 101.505890775541],
+            ['B4', 'BANGI', 2.965810949933260, 101.81881303103104],
+            ['B4', 'PUTRAJAYA & CYBERJAYA', 2.92875032271019, 101.675338316575]
+        ];
 
-                // ba their names and their points
-                const b1Options = [
-                    ['W1', 'KUALA LUMPUR PUSAT', 3.14925905877391, 101.754098819705],
-                    ['B1', 'PETALING JAYA', 3.1128074178475, 101.605270457169],
-                    ['B1', 'RAWANG', 3.47839445121726, 101.622905486475],
-                    ['B1', 'KUALA SELANGOR', 3.40703209426401, 101.317426926947],
-                    ['B2', 'KLANG', 3.08428642705789, 101.436185279023],
-                    ['B2', 'PELABUHAN KLANG', 2.98188527916042, 101.324234779569],
-                    ['B4', 'CHERAS', 3.14197346621987, 101.849883983416],
-                    ['B4', 'BANTING', 2.82111390453244, 101.505890775541],
-                    ['B4', 'BANGI',2.965810949933260,101.81881303103104 ],
-                    ['B4', 'PUTRAJAYA & CYBERJAYA', 2.92875032271019,101.675338316575]
-                ];
-
-        const userBa = "{{Auth::user()->ba}}";
+        const userBa = "{{ Auth::user()->ba }}";
 
         var wp = '';
         var rd = '';
 
-     $(document).ready(function() {
+        $(document).ready(function() {
 
-        $('#search_wp').select2();
-        console.log(userBa);
+            $('#search_wp').select2();
+            console.log(userBa);
 
-        if (userBa !== '') {
-            getBaPoints(userBa)
-        }
+            if (userBa !== '') {
+                getBaPoints(userBa)
+            }
 
-        $('#remove-foam').on('submit', function () {
+            $('#remove-foam').on('submit', function() {
 
-            $('#myModal').modal('hide');
+                $('#myModal').modal('hide');
+            });
+
+            $('input[type="file"]').on('change', function() {
+                showUploadedImage(this)
+            })
+
+
+
+
         });
 
-        $('input[type="file"]').on('change',function(){
-            showUploadedImage(this)
-        })
 
 
-
-
-     });
-
-
-
-     function showUploadedImage(param) {
+        function showUploadedImage(param) {
             const file = param.files[0];
             const id = $(`#${param.id}-div`);
 
             if (file) {
                 id.empty()
                 const reader = new FileReader();
-                reader.onload = function (e) {
-                    var img = `<a class="text-right"  href="${e.target.result}" data-lightbox="roadtrip"><span class="close-button" onclick="removeImage('${param.id}')">X</span><img src="${e.target.result}" style="height:50px;"/></a>`;
+                reader.onload = function(e) {
+                    var img =
+                        `<a class="text-right"  href="${e.target.result}" data-lightbox="roadtrip"><span class="close-button" onclick="removeImage('${param.id}')">X</span><img src="${e.target.result}" style="height:50px;"/></a>`;
                     id.append(img)
                 };
 
@@ -543,17 +583,17 @@
         }
 
 
-        function getBaPoints(param){
+        function getBaPoints(param) {
             var baSelect = $('#ba_s')
-                baSelect.empty();
+            baSelect.empty();
 
-                b1Options.map((data)=>{
-                    if (data[1] == param) {
-                        baSelect.append(`<option value="${data}">${data[1]}</option>`)
-                    }
-                });
-                let baVal = document.getElementById('ba_s');
-                getWorkPackage(baVal)
+            b1Options.map((data) => {
+                if (data[1] == param) {
+                    baSelect.append(`<option value="${data}">${data[1]}</option>`)
+                }
+            });
+            let baVal = document.getElementById('ba_s');
+            getWorkPackage(baVal)
         }
 
         function getWorkPackage(param) {
@@ -581,7 +621,7 @@
 
             var zone = $('#search_zone').val();
             $.ajax({
-                url: `/{{app()->getLocale()}}/get-work-package/${splitVal[1]}/${zone}`,
+                url: `/{{ app()->getLocale() }}/get-work-package/${splitVal[1]}/${zone}`,
                 dataType: 'JSON',
                 method: 'GET',
                 async: false,
@@ -646,10 +686,10 @@
 
         })
 
-        function generateNotice(param){
+        function generateNotice(param) {
             if (param.value == "yes") {
                 $('#generate-notice').removeClass('d-none')
-            }else{
+            } else {
                 if (!$('#generate-notice').hasClass('d-none')) {
                     $('#generate-notice').addClass('d-none')
                 }

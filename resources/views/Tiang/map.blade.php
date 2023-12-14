@@ -47,77 +47,90 @@
     <div class="container-fluid bg-white pt-2">
 
 
-        <div class=" p-1  m-2">
-            <div class="card p-0 mb-3">
-                <div class="card-body row">
+        <div class="card p-0 mb-3">
+            <div class="card-body row form-input">
 
-                    <div class="col-md-3">
-                        <label for="search_zone">Zone</label>
-                        <select name="search_zone" id="search_zone" class="form-control"
-                            onchange="onChangeZone(this.value)">
+                <div class="col-md-2">
+                    <label for="search_zone">Zone</label>
+                    <select name="search_zone" id="search_zone" class="form-control"
+                        onchange="onChangeZone(this.value)">
 
-                            @if (Auth::user()->zone == '')
-                                <option value="" hidden>select zone</option>
-                                <option value="W1">W1</option>
-                                <option value="B1">B1</option>
-                                <option value="B2">B2</option>
-                                <option value="B4">B4</option>
-                            @else
-                                <option value="{{ Auth::user()->zone }}" hidden>{{ Auth::user()->zone }}</option>
-                            @endif
-                        </select>
-                    </div>
-                    <div class="col-md-3">
-                        <label for="search_ba">BA</label>
-                        <select name="search_ba" id="search_ba" class="form-control" onchange="callLayers(this.value)">
-
-                            <option value="{{ Auth::user()->ba }}" hidden>
-                                {{ Auth::user()->ba != '' ? Auth::user()->ba : 'Select BA' }}</option>
-                        </select>
-                    </div>
-
-
-
-
-
+                        @if (Auth::user()->zone == '')
+                            <option value="" hidden>select zone</option>
+                            <option value="W1">W1</option>
+                            <option value="B1">B1</option>
+                            <option value="B2">B2</option>
+                            <option value="B4">B4</option>
+                        @else
+                            <option value="{{ Auth::user()->zone }}" hidden>{{ Auth::user()->zone }}</option>
+                        @endif
+                    </select>
                 </div>
+                <div class="col-md-2">
+                    <label for="search_ba">BA</label>
+                    <select name="search_ba" id="search_ba" class="form-control" onchange="callLayers(this.value)">
+
+                        <option value="{{ Auth::user()->ba }}" hidden>
+                            {{ Auth::user()->ba != '' ? Auth::user()->ba : 'Select BA' }}</option>
+                    </select>
+                </div>
+
+                <div class="col-md-2">
+                    <label for="from_date">Fom</label>
+                    <input type="date" class="form-control" id="from_date" onchange="filterByDate(this)" />
+                </div>
+
+                <div class="col-md-2">
+                    <label for="to_date">To</label>
+                    <input type="date" class="form-control" id="to_date" onchange="filterByDate(this)" />
+                </div>
+
+
+                <div class="col-md-2">
+                    <br />
+                    <input type="button" class="btn btn-secondary mt-2" id="reset" value="Reset"
+                        onclick="resetMapFilters()" />
+                </div>
+
+                
+
             </div>
         </div>
 
-
-
-        <div class="p-3 form-input    ">
+        <div class="p-3 form-input  ">
             <label for="select_layer">Select Layer : </label>
             <span class="text-danger" id="er-select-layer"></span>
+
             <div class="d-sm-flex">
-                {{-- <div class="">
-                    <input type="radio" name="select_layer" id="select_layer_substation" value="substation" onchange="selectLayer(this.value)">
-                    <label for="select_layer_substation">Substation</label>
-                </div> --}}
+                <div class="">
+                    <input type="radio" name="select_layer" id="ts_unsurveyed" class="unsurveyed" value="ts_unsurveyed" onchange="selectLayer(this.value)">
+                    <label for="ts_unsurveyed">Unsurveyed</label>
+                </div>
+
+                <div class="">
+                    <input type="radio" name="select_layer" id="ts_with_defects" class="with_defects" value="ts_with_defects" onchange="selectLayer(this.value)">
+                    <label for="ts_with_defects">Surveyed with defects</label>
+                </div>
+
+                <div class="">
+                    <input type="radio" name="select_layer" id="ts_without_defects" class="without_defects" value="ts_without_defects" onchange="selectLayer(this.value)">
+                    <label for="ts_without_defects">Surveyed without defects</label>
+                </div>
+
 
                 <div class=" mx-4">
                     <input type="radio" name="select_layer" id="select_layer_pano" value="pano" onchange="selectLayer(this.value)">
                     <label for="select_layer_pano">Pano</label>
                 </div>
+           
 
-                <div class=" mx-4">
-                    <input type="radio" name="select_layer" id="tbl_savr" value="tbl_savr" onchange="selectLayer(this.value)">
-                    <label for="tbl_savr">Tiang</label>
-                </div>
-
-                <div class=" mx-4">
-                    <input type="radio" name="select_layer" id="road" value="road" onchange="selectLayer(this.value)">
-                    <label for="road">Roads</label>
+            <div class="mx-4">
+                <div id="the-basics">
+                    <input class="typeahead" type="text" placeholder="search id" class="form-control">
                 </div>
             </div>
-            {{-- <select name="select_layer" id="select_layer" onchange="selectLayer(this.value)" class="form-control">
-                <option value="" hidden>select layer</option>
-                <option value="substation">Substation</option>
-                <option value="pano">Pano</option>
-                <option value="tbl_savr">Tiang</option>
-                <option value="road">Roads</option>
-
-            </select> --}}
+ </div>
+ 
         </div>
 
         <!--  START MAP CARD DIV -->
@@ -230,9 +243,88 @@
     @include('partials.map-js')
 
 
+
+    <script>
+      
+        var substringMatcher = function(strs) {
+
+            return function findMatches(q, cb) {
+
+                var matches;
+
+                matches = [];
+                $.ajax({
+                    url: '/{{ app()->getLocale() }}/search/find-tiang/' + q,
+                    dataType: 'JSON',
+                    //data: data,
+                    method: 'GET',
+                    async: false,
+                    success: function callback(data) {
+                        $.each(data, function(i, str) {
+
+                            matches.push(str.id);
+
+                        });
+                    }
+                })
+
+                cb(matches);
+            };
+        };
+
+
+        var marker = '';
+        $('#the-basics .typeahead').typeahead({
+            hint: true,
+            highlight: true,
+            minLength: 1
+        }, {
+            name: 'states',
+            source: substringMatcher()
+        });
+
+        $('.typeahead').on('typeahead:select', function(event, suggestion) {
+            var name = encodeURIComponent(suggestion);
+
+            if (marker != '') {
+                map.removeLayer(marker)
+            }
+            $.ajax({
+                url: '/{{ app()->getLocale() }}/search/find-tiang-cordinated/' + encodeURIComponent(
+                    name),
+                dataType: 'JSON',
+                //data: data,
+                method: 'GET',
+                async: false,
+                success: function callback(data) {
+                    console.log(data);
+                    map.flyTo([parseFloat(data.y), parseFloat(data.x)], 16, {
+                        duration: 1.5, // Animation duration in seconds
+                        easeLinearity: 0.25,
+                    });
+
+                    marker = new L.Marker([data.y, data.x]);
+                    map.addLayer(marker);
+                }
+            })
+
+        });
+    </script>
+
+
+
     <script>
         // for add and remove layers
         function addRemoveBundary(param, paramY, paramX) {
+
+
+            var q_cql = "ba ILIKE '%" + param + "%' "
+            if (from_date != '') {
+                q_cql = q_cql + "AND review_date >=" + from_date;
+            }
+            if (to_date != '') {
+                q_cql = q_cql + "AND review_date <=" + to_date;
+            }
 
             if (boundary !== '') {
                 map.removeLayer(boundary)
@@ -286,12 +378,13 @@
             // road.bringToFront()
 
 
-            if (tbl_savr != '') {
-                map.removeLayer(tbl_savr)
+            
+            if (ts_unsurveyed != '') {
+                map.removeLayer(ts_unsurveyed)
             }
 
-            tbl_savr = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-                layers: 'cite:tbl_savr',
+            ts_unsurveyed = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:ts_unsurveyed',
                 format: 'image/png',
                 cql_filter: "ba ILIKE '%" + param + "%'",
                 maxZoom: 21,
@@ -300,8 +393,43 @@
                 buffer: 10
             })
 
-            map.addLayer(tbl_savr)
-            tbl_savr.bringToFront()
+            map.addLayer(ts_unsurveyed)
+            ts_unsurveyed.bringToFront()
+
+
+            if (ts_with_defects != '') {
+                map.removeLayer(ts_with_defects)
+            }
+
+            ts_with_defects = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:ts_with_defects',
+                format: 'image/png',
+                cql_filter: q_cql,
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+
+            map.addLayer(ts_with_defects)
+            ts_with_defects.bringToFront()
+
+            if (ts_without_defects != '') {
+                map.removeLayer(ts_without_defects)
+            }
+
+            ts_without_defects = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:ts_without_defects',
+                format: 'image/png',
+                cql_filter: q_cql,
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+
+            map.addLayer(ts_without_defects)
+            ts_without_defects.bringToFront()
 
 
             if (pano_layer !== '') {
@@ -316,8 +444,8 @@
             }, {
                 buffer: 10
             });
-            map.addLayer(pano_layer);
-            map.addLayer(pano_layer)
+            // map.addLayer(pano_layer);
+            // map.addLayer(pano_layer)
 
 
             addGroupOverLays()
@@ -337,7 +465,9 @@
                     'BA': boundary,
                     // 'Substation': substation,
                     'Pano': pano_layer,
-                    'Tiang': tbl_savr,
+                    'Unsurveyed' : ts_unsurveyed,
+                    'Surveyed with defects' : ts_with_defects,
+                    'Surveyed Without defects' : ts_without_defects,
                     'Roads': road,
                 }
             };

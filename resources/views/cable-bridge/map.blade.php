@@ -43,41 +43,54 @@
 
 
 
-        <div class=" p-1 col-12 m-2">
-            <div class="card p-0 mb-3">
-                <div class="card-body row">
+        <div class="card p-0 mb-3">
+            <div class="card-body row form-input">
 
-                    <div class="col-md-3">
-                        <label for="search_zone">Zone</label>
-                        <select name="search_zone" id="search_zone" class="form-control"
-                            onchange="onChangeZone(this.value)">
+                <div class="col-md-2">
+                    <label for="search_zone">Zone</label>
+                    <select name="search_zone" id="search_zone" class="form-control"
+                        onchange="onChangeZone(this.value)">
 
-                            @if (Auth::user()->zone == '')
-                                <option value="" hidden>select zone</option>
-                                <option value="W1">W1</option>
-                                <option value="B1">B1</option>
-                                <option value="B2">B2</option>
-                                <option value="B4">B4</option>
-                            @else
-                                <option value="{{ Auth::user()->zone }}" hidden>{{ Auth::user()->zone }}</option>
-                            @endif
-                        </select>
-                    </div>
-                    <div class="col-md-3">
-                        <label for="search_ba">BA</label>
-                        <select name="search_ba" id="search_ba" class="form-control" onchange="callLayers(this.value)">
-
-                            <option value="{{ Auth::user()->ba }}" hidden>
-                                {{ Auth::user()->ba != '' ? Auth::user()->ba : 'Select BA' }}</option>
-                        </select>
-                    </div>
-
-
-
-
-
-
+                        @if (Auth::user()->zone == '')
+                            <option value="" hidden>select zone</option>
+                            <option value="W1">W1</option>
+                            <option value="B1">B1</option>
+                            <option value="B2">B2</option>
+                            <option value="B4">B4</option>
+                        @else
+                            <option value="{{ Auth::user()->zone }}" hidden>{{ Auth::user()->zone }}</option>
+                        @endif
+                    </select>
                 </div>
+                <div class="col-md-2">
+                    <label for="search_ba">BA</label>
+                    <select name="search_ba" id="search_ba" class="form-control" onchange="callLayers(this.value)">
+
+                        <option value="{{ Auth::user()->ba }}" hidden>
+                            {{ Auth::user()->ba != '' ? Auth::user()->ba : 'Select BA' }}</option>
+                    </select>
+                </div>
+
+                <div class="col-md-2">
+                    <label for="from_date">Fom</label>
+                    <input type="date" class="form-control" id="from_date" onchange="filterByDate(this)" />
+                </div>
+
+                <div class="col-md-2">
+                    <label for="to_date">To</label>
+                    <input type="date" class="form-control" id="to_date" onchange="filterByDate(this)" />
+                </div>
+
+
+                <div class="col-md-2">
+                    <br />
+                    <input type="button" class="btn btn-secondary mt-2" id="reset" value="Reset"
+                        onclick="resetMapFilters()" />
+                </div>
+
+
+
+
             </div>
         </div>
 
@@ -94,19 +107,33 @@
                 </div> --}}
 
                 <div class=" mx-4">
+                    <input type="radio" name="select_layer" id="cb_unsurveyed" value="cb_unsurveyed" class="unsurveyed" onchange="selectLayer(this.value)">
+                    <label for="cb_unsurveyed">Unsurveyed</label>
+                </div>
+
+               
+
+                <div class=" mx-4">
+                    <input type="radio" name="cb_with_defects" id="cable_bridge" value="cb_with_defects" class="with_defects" onchange="selectLayer(this.value)">
+                    <label for="cb_with_defects">Surveyed with defects</label>
+                </div>
+
+                <div class=" mx-4">
+                    <input type="radio" name="select_layer" id="cb_without_defects" value="cb_without_defects" class="without_defects" onchange="selectLayer(this.value)">
+                    <label for="cb_without_defects">Surveyed witout defects</label>
+                </div>
+
+                <div class=" mx-4">
                     <input type="radio" name="select_layer" id="select_layer_pano" value="pano" onchange="selectLayer(this.value)">
                     <label for="select_layer_pano">Pano</label>
                 </div>
 
-                <div class=" mx-4">
-                    <input type="radio" name="select_layer" id="cable_bridge" value="cable_bridge" onchange="selectLayer(this.value)">
-                    <label for="cable_bridge">Cable Bridge with out defects</label>
+                <div class="mx-4">
+                    <div id="the-basics">
+                        <input class="typeahead" type="text" placeholder="search id" class="form-control">
+                    </div>
                 </div>
-
-                <div class=" mx-4">
-                    <input type="radio" name="select_layer" id="cable_bridge_with_defects" value="cable_bridge_with_defects" onchange="selectLayer(this.value)">
-                    <label for="cable_bridge_with_defects">Cable Bridge with defects</label>
-                </div>
+                
             </div>
            
         </div>
@@ -181,8 +208,85 @@
     @include('partials.map-js')
 
     <script>
+      
+        var substringMatcher = function(strs) {
+
+            return function findMatches(q, cb) {
+
+                var matches;
+
+                matches = [];
+                $.ajax({
+                    url: '/{{ app()->getLocale() }}/search/find-cable-bridge/' + q,
+                    dataType: 'JSON',
+                    //data: data,
+                    method: 'GET',
+                    async: false,
+                    success: function callback(data) {
+                        $.each(data, function(i, str) {
+
+                            matches.push(str.id);
+
+                        });
+                    }
+                })
+
+                cb(matches);
+            };
+        };
+
+
+        var marker = '';
+        $('#the-basics .typeahead').typeahead({
+            hint: true,
+            highlight: true,
+            minLength: 1
+        }, {
+            name: 'states',
+            source: substringMatcher()
+        });
+
+        $('.typeahead').on('typeahead:select', function(event, suggestion) {
+            var name = encodeURIComponent(suggestion);
+
+            if (marker != '') {
+                map.removeLayer(marker)
+            }
+            $.ajax({
+                url: '/{{ app()->getLocale() }}/search/find-cable-bridge-cordinated/' + encodeURIComponent(
+                    name),
+                dataType: 'JSON',
+                //data: data,
+                method: 'GET',
+                async: false,
+                success: function callback(data) {
+                    console.log(data);
+                    map.flyTo([parseFloat(data.y), parseFloat(data.x)], 16, {
+                        duration: 1.5, // Animation duration in seconds
+                        easeLinearity: 0.25,
+                    });
+
+                    marker = new L.Marker([data.y, data.x]);
+                    map.addLayer(marker);
+                }
+            })
+
+        });
+    </script>
+
+    <script>
         // for add and remove layers
         function addRemoveBundary(param, paramY, paramX) {
+
+
+            var q_cql = "ba ILIKE '%" + param + "%' "
+            if (from_date != '') {
+                q_cql = q_cql + "AND visit_date >=" + from_date;
+            }
+            if (to_date != '') {
+                q_cql = q_cql + "AND visit_date <=" + to_date;
+            }
+
 
             if (boundary !== '') {
                 map.removeLayer(boundary)
@@ -226,12 +330,12 @@
 
 
 
-            if (cable_bridge != '') {
-                map.removeLayer(cable_bridge)
+            if (cb_unsurveyed != '') {
+                map.removeLayer(cb_unsurveyed)
             }
 
-            cable_bridge = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-                layers: 'cite:tbl_cable_bridge',
+            cb_unsurveyed = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:cb_unsurveyed',
                 format: 'image/png',
                 cql_filter: "ba ILIKE '%" + param + "%'",
                 maxZoom: 21,
@@ -240,8 +344,46 @@
                 buffer: 10
             })
 
-            map.addLayer(cable_bridge)
-            cable_bridge.bringToFront()
+            map.addLayer(cb_unsurveyed)
+            cb_unsurveyed.bringToFront()
+
+
+
+            if (cb_without_defects != '') {
+                map.removeLayer(cb_without_defects)
+            }
+
+            cb_without_defects = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:cb_without_defects',
+                format: 'image/png',
+                cql_filter: q_cql,
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+
+            map.addLayer(cb_without_defects)
+            cb_without_defects.bringToFront()
+
+
+            if (cb_with_defects != '') {
+                map.removeLayer(cb_with_defects)
+            }
+
+            cb_with_defects = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:cb_with_defects',
+                format: 'image/png',
+                cql_filter: q_cql,
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+
+            map.addLayer(cb_with_defects)
+            cb_with_defects.bringToFront()
+
 
             if (pano_layer !== '') {
                 map.removeLayer(pano_layer)
@@ -277,7 +419,10 @@
                     'BA': boundary,
                     // 'Substation': substation,
                     'Pano': pano_layer,
-                    'Cable Bridge': cable_bridge,
+                    'Unsurveyed': cb_unsurveyed,
+                    'Surveyed with defects': cb_with_defects,
+                    'Surveyed without defects': cb_without_defects,
+
                 }
             };
 
@@ -290,20 +435,20 @@
         }
 
         function showModalData(data, id) {
-            var str = '';
-            var idSp = id.split('.');
-            var vDS = '';
-            if (data.visit_date != '' && data.visit_date != null) {
-                var sDate = data.visit_date.split('T');
-                console.log(sDate[0]);
-                vDS = sDate[0]
-            }
-            var vTM = '';
-            if (data.patrol_time != '' && data.patrol_time != null) {
-                var VTime = data.patrol_time.split('T');
+            // var str = '';
+            // var idSp = id.split('.');
+            // var vDS = '';
+            // if (data.visit_date != '' && data.visit_date != null) {
+            //     var sDate = data.visit_date.split('T');
+            //     console.log(sDate[0]);
+            //     vDS = sDate[0]
+            // }
+            // var vTM = '';
+            // if (data.patrol_time != '' && data.patrol_time != null) {
+            //     var VTime = data.patrol_time.split('T');
 
-                vTM = VTime[1]
-            }
+            //     vTM = VTime[1]
+            // }
 
 
             $('#exampleModalLabel').html("Cable Bridge Info")
@@ -343,7 +488,7 @@
 
             // $("#my_data").html(str);
             // $('#myModal').modal('show');
-            openDetails(idSp[1]);
+            openDetails(id);
 
         }
 
