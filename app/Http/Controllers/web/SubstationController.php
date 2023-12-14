@@ -95,6 +95,7 @@ class SubstationController extends Controller
             $data->team = $request->team;
             $data->visit_date = $request->visit_date;
             $data->patrol_time = $combinedDateTime;
+            $data->fl = $request->fl;
 
             $data->voltage = $request->voltage;
             $data->name = $request->name;
@@ -195,7 +196,7 @@ class SubstationController extends Controller
             $data->gate_status = json_decode($data->gate_status);
             $data->building_status = json_decode($data->building_status);
 
-            return view('substation.show', ['data' => $data]);
+            return view('substation.show',  ['data' => $data,'disabled'=>true]);
         }
         return abort('404');
     }
@@ -214,7 +215,7 @@ class SubstationController extends Controller
             $data->building_status = json_decode($data->building_status);
             // return $data->gate_status->locked;
 
-            return view('substation.edit', ['data' => $data]);
+            return view('substation.edit', ['data' => $data,'disabled'=>false]);
         }
         return abort('404');
     }
@@ -238,7 +239,8 @@ class SubstationController extends Controller
             // $data->team = $request->team;
             $data->visit_date = $request->visit_date;
             $data->patrol_time = $combinedDateTime;
-
+            $data->fl = $request->fl;
+            // return $request->fl;
             $data->voltage = $request->voltage;
             $data->name = $request->name;
             $data->type = $request->type;
@@ -348,5 +350,5 @@ class SubstationController extends Controller
         }
     }
 
-    
+
 }

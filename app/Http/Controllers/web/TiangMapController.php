@@ -114,7 +114,7 @@ class TiangMapController extends Controller
 
         $ba = \Illuminate\Support\Facades\Auth::user()->ba;
 
-        $data = Tiang::where('ba', 'LIKE', '%' . $ba . '%')->where('id' , 'LIKE' , '%' . $q . '%')->select('id')->limit(10)->get();
+        $data = Tiang::where('ba', 'LIKE', '%' . $ba . '%')->where('tiang_no' , 'LIKE' , '%' . $q . '%')->select('tiang_no')->limit(10)->get();
 
         return response()->json($data, 200);
     }
@@ -122,7 +122,7 @@ class TiangMapController extends Controller
     public function seacrhCoordinated($lang , $name)
     {
         $name = urldecode($name);
-        $data = Tiang::where('id' ,$name )->select('id', \DB::raw('ST_X(geom) as x'),\DB::raw('ST_Y(geom) as y'),)->first();
+        $data = Tiang::where('tiang_no' ,$name )->select('tiang_no', \DB::raw('ST_X(geom) as x'),\DB::raw('ST_Y(geom) as y'),)->first();
 
         return response()->json($data, 200);
     }

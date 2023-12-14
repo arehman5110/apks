@@ -369,42 +369,26 @@
                                         </div>
                                     </div>
 
-                                    
+
                                         {{-- ABC (Span) 3 X 185 --}}
                                         <div class="col-md-6">
                                             <div class="card p-4">
-                                                
+
                                                 <label for="section_to">{{ __('messages.ABC_Span') }} 3 X 185</label>
                                                     {!! tiangSpanRadio( '', 'abc_span', 's3_185',  true) !!}
 
                                                 <label for="s3_95">{{ __('messages.ABC_Span') }}3 X 95</label>
                                                     {!! tiangSpanRadio(  '', 'abc_span', 's3_95',  true) !!}
-                                                    
+
                                                 <label for="s3_16">{{ __('messages.ABC_Span') }}3 X 16</label>
                                                     {!! tiangSpanRadio('', 'abc_span', 's3_16',  true) !!}
 
                                                  <label for="s1_16">{{ __('messages.ABC_Span') }}1 X 16</label>
                                                     {!! tiangSpanRadio('', 'abc_span', 's1_16',  true) !!}
-     
+
                                             </div>
                                         </div>
 
-                                        {{-- BARE (Span) 7/173 --}}
-                                     
-                                    <div class="col-md-6 ">
-                                        <div class="card p-4">
-
-                                            <label for="s7_173"  >{{ __('messages.BARE_Span') }} 7/173</label>
-                                                {!! tiangSpanRadio(  '', 'bare_span', 's7_173',  true) !!}
-
-                                            <label for="s7_122">{{ __('messages.BARE_Span') }} 7/122</label>
-                                                {!! tiangSpanRadio( '', 'bare_span', 's7_122',  true) !!}
-
-                                            <label for="s3_132">{{ __('messages.BARE_Span') }} 3/132</label>
-                                                {!! tiangSpanRadio( '', 'bare_span', 's3_132',  true) !!}
- 
-                                        </div>
-                                    </div>
 
 
                                        {{-- PVC (Span) 19/064 --}}
@@ -419,17 +403,36 @@
                                              <label for="s7_083"  >{{ __('messages.PVC_Span') }}
                                                         7/083</label>
                                                         {!! tiangSpanRadio('', 'pvc_span', 's7_083',  true) !!}
-                                                    
 
-                                          
+
+
                                                     <label for="s7_044"  >{{ __('messages.PVC_Span') }}
                                                         7/044</label>
-                                                   
+
 
                                                         {!! tiangSpanRadio(  '', 'pvc_span', 's7_044',  true) !!}
- 
+
                                         </div>
                                     </div>
+
+                                        {{-- BARE (Span) 7/173 --}}
+
+                                    <div class="col-md-6 ">
+                                        <div class="card p-4">
+
+                                            <label for="s7_173"  >{{ __('messages.BARE_Span') }} 7/173</label>
+                                                {!! tiangSpanRadio(  '', 'bare_span', 's7_173',  true) !!}
+
+                                            <label for="s7_122">{{ __('messages.BARE_Span') }} 7/122</label>
+                                                {!! tiangSpanRadio( '', 'bare_span', 's7_122',  true) !!}
+
+                                            <label for="s3_132">{{ __('messages.BARE_Span') }} 3/132</label>
+                                                {!! tiangSpanRadio( '', 'bare_span', 's3_132',  true) !!}
+
+                                        </div>
+                                    </div>
+
+
 
 
 
@@ -1299,34 +1302,14 @@
                 transitionEffect: "slideLeft",
 
                 onStepChanging: function(event, currentIndex, newIndex) {
-                    // Allways allow previous action even if the current form is not valid!
                     if (currentIndex > newIndex) {
                         return true;
                     }
 
-                    // Needed in some cases if the user went back (clean up)
-                    if (currentIndex < newIndex) {
-                        // To remove error styles
-                        form.find(".body:eq(" + newIndex + ") label.error").remove();
-                        form
-                            .find(".body:eq(" + newIndex + ") .error")
-                            .removeClass("error");
-                    }
                     form.validate().settings.ignore = ":disabled,:hidden";
                     return form.valid();
                 },
 
-                onStepChanged: function(event, currentIndex, priorIndex) {
-                    // Used to skip the "Warning" step if the user is old enough.
-                    if (currentIndex === 2 && Number($("#age").val()) >= 18) {
-                        form.steps("next");
-                    }
-                    // Used to skip the "Warning" step if the user is old enough and wants to the previous step.
-                    if (currentIndex === 2 && priorIndex === 3) {
-                        form.steps("previous");
-                    }
-
-                },
 
 
 

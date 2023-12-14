@@ -80,7 +80,7 @@
                                         aria-controls="collapseQr">
                                         QR Tiang
                                     </button>
-                                
+
                             </div>
                         </div>
 
@@ -94,7 +94,7 @@
 
                                     <thead style="background-color: #E4E3E3 !important">
                                         <tr>
-                                            <th>ID</th>
+                                          
                                             <th>TIANG NO</th>
                                             <th>BA</th>
                                             {{-- <th>CONTRACTOR</th> --}}
@@ -106,7 +106,7 @@
                                     </thead>
                                     <tbody>
 
-                                        
+
                                     </tbody>
                                 </table>
                             </div>
@@ -188,10 +188,7 @@
             }
         },
         columns: [
-            {
-                data: 'id',
-                name: 'index'
-            },
+
             {
                 data: 'tiang_no',
                 name: 'tiang_no'
@@ -233,7 +230,7 @@
             [2, 'desc']
         ]
     });
- 
+
 
 
             $('#excelBa').on('change', function() {

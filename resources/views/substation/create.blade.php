@@ -118,9 +118,52 @@
                             <input type="hidden" name="team" id="team" value="{{ $team }}"
                                 class="form-control" readonly>
 
+                                <div class="row">
+                                    <div class="col-md-4"><label for="fl">{{ __('messages.fl_substation') }}</label></div>
+                                    <div class="col-md-4">
+                                        <input type="text" name="fl" id="fl"
+                                            value="" class="form-control"
+                                            required>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="name">{{ __('messages.substation_feeder_pillar_name') }}</label></div>
+                                    <div class="col-md-4">
+                                        <input type="text" name="name" id="name" class="form-control" required>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="type">{{ __('messages.type') }}</label></div>
+                                    <div class="col-md-4">
+                                        <select name="type" id="type" class="form-control">
+                                            <option value="" hidden>select</option>
+                                            <option value="Indoor">Indoor</option>
+                                            <option value="Attach Building">Attach Building</option>
+                                            <option value="Outdoor">Outdoor</option>
+                                            <option value="Padat">Padat</option>
+                                            <option value="Pencawang Atas Tiang (PAT)">Pencawang Atas Tiang (PAT)</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="voltage">{{ __('messages.voltage') }}</label></div>
+                                    <div class="col-md-4">
+                                        <select name="voltage" id="voltage" class="form-control">
+                                            <option value="" hidden>select</option>
+                                            <option value="11kw">11kv</option>
+                                            <option value="13kw">13kv</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+
 
                             <div class="row">
-                                <div class="col-md-4"><label for="visit_date">{{ __('messages.visit_date') }}</label></div>
+                                <div class="col-md-4"><label for="visit_date">{{ __('messages.survey_date') }}</label></div>
                                 <div class="col-md-4">
                                     <input type="date" name="visit_date" id="visit_date"
                                         value="{{ now('Asia/Kuala_Lumpur')->format('Y-m-d') }}" class="form-control"
@@ -143,38 +186,10 @@
 
 
 
-                            <div class="row">
-                                <div class="col-md-4"><label for="voltage">{{ __('messages.voltage') }}</label></div>
-                                <div class="col-md-4">
-                                    <select name="voltage" id="voltage" class="form-control">
-                                        <option value="" hidden>select</option>
-                                        <option value="11kw">11kv</option>
-                                        <option value="13kw">13kv</option>
-                                    </select>
-                                </div>
 
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4"><label for="name">{{ __('messages.name') }}</label></div>
-                                <div class="col-md-4">
-                                    <input type="text" name="name" id="name" class="form-control" required>
-                                </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="col-md-4"><label for="type">{{ __('messages.type') }}</label></div>
-                                <div class="col-md-4">
-                                    <select name="type" id="type" class="form-control">
-                                        <option value="" hidden>select</option>
-                                        <option value="Indoor">Indoor</option>
-                                        <option value="Attach Building">Attach Building</option>
-                                        <option value="Outdoor">Outdoor</option>
-                                        <option value="Padat">Padat</option>
-                                        <option value="Pencawang Atas Tiang (PAT)">Pencawang Atas Tiang (PAT)</option>
-                                    </select>
-                                </div>
 
-                            </div>
+
 
 
 
@@ -356,16 +371,27 @@
                                         class="form-control">
                                 </div>
                             </div>
-                            {{--
+
                             <div class="row">
                                 <div class="col-md-4"><label for="img_advertise_poster">{{__('messages.image_advertise_poster')}}</label></div>
                                 <div class="col-md-4">
-                                    <input type="file" name="img_advertise_poster" id="img_advertise_poster" accept="image/*"
+                                    <input type="file" name="image_advertisement_before_1" id="image_advertisement_before_1" accept="image/*"
                                         class="form-control" >
-                                        <input type="file" name="img_advertise_poster_2" id="img_advertise_poster_2" accept="image/*"
+                                        <input type="file" name="image_advertisement_before_2" id="image_advertisement_before_2" accept="image/*"
                                         class="form-control" >
                                     </div>
-                            </div> --}}
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-4"><label for="img_advertise_poster">{{__('messages.image_advertise_poster_removal')}}</label></div>
+                                <div class="col-md-4">
+                                    <input type="file" name="image_advertisement_after_1" id="image_advertisement_after_1" accept="image/*"
+                                        class="form-control" >
+                                        <input type="file" name="image_advertisement_after_2" id="image_advertisement_after_2" accept="image/*"
+                                        class="form-control" >
+                                    </div>
+                            </div>
 
                             <div class="row ">
                                 <div class="col-md-4"><label for="other_image">{{ __('messages.other_image') }}</label>

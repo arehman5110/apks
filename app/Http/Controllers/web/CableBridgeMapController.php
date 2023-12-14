@@ -15,14 +15,14 @@ class CableBridgeMapController extends Controller
     {
 
         $data = CableBridge::find($id);
-        return $data ?  view('cable-bridge.edit-form', ['data' => $data]) : abort(404);
+        return $data ?  view('cable-bridge.edit-form', ['data' => $data, 'disabled'=>true]) : abort(404);
 
     }
 
     public function update(Request $request, $language, $id)
     {
         //
-        
+
 
         try {
             $currentDate = Carbon::now()->toDateString();

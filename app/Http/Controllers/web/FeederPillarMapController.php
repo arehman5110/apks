@@ -14,7 +14,7 @@ class FeederPillarMapController extends Controller
     {
 
     $data = FeederPillar::find($id);
-    return $data ?  view('feeder-pillar.edit-form', ['data' => $data]) : abort(404);
+    return $data ?  view('feeder-pillar.edit-form', ['data' => $data ,'disabled'=>true]) : abort(404);
 
 }
 

@@ -41,6 +41,9 @@ return [
     'tiang_talian_vt_&_vr'=>'Tiang + Talian VT & VR',
     'link_box_pelbagai_voltan'=> 'Link Box Pelbagai Voltan',
     'cable_bridge'=>'Cable Bridge',
+    'fl_substation' =>'FL Substation',
+    'substation_feeder_pillar_name'=>'Substation / Feeder Pillar name',
+    'survey_date'=>'Survey Date',
 
 
 
@@ -113,12 +116,13 @@ return [
     'broken_gutter' => 'Broken Gutter',
     'broken_base' => 'Broken Base',
     'cleaning_illegal_ads_banners' => 'Cleaning Illegal Ads/Banners',
-    'image_gate' => 'Image Gate',
-    'image_grass' => 'Image Grass',
-    'image_tree_branches' => 'Image Tree Branches',
+    'image_gate' => 'Gate Image ',
+    'image_grass' => 'Grass Image',
+    'image_tree_branches' => 'Tree Image ',
     'images_gate_after_lock' => 'Images Gate After Lock',
-    'image_building' => 'Image Building',
-    'image_advertise_poster' => 'Image Advertise Poster',
+    'image_building' => 'Building Image',
+    'image_advertise_poster' => 'Banner Advertisement Image',
+    'image_advertise_poster_removal' =>'Advertisement Removal Image',
     'other_image' => 'Other Image',
     'coordinate' => 'Coordinate',
 
@@ -134,9 +138,9 @@ return [
     'leaning' => 'Leaning',
     'leaning_angle' => 'Leaning Angle',
     'rusty' =>'Rusty',
-    'image_vandalism' => 'Image Vandalism',
-    'image_leaning' => 'Image Leaning',
-    'image_rust' => 'Image Rust',
+    'image_vandalism' => 'Vandalism Image',
+    'image_leaning' => 'Leaning Image',
+    'image_rust' => 'Rust Image' ,
 
 
 

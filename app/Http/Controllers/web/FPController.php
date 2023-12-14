@@ -80,7 +80,7 @@ class FPController extends Controller
 
             $defects = [];
             $defects =['leaning_staus','vandalism_status','advertise_poster_status','rust_status'];
-          
+
             $total_defects =0;
 
             $data = new FeederPillar();
@@ -92,8 +92,8 @@ class FPController extends Controller
 
             $data->size = $request->size;
             $data->coordinate = $request->coordinate;
-  
-            $data->leaning_angle = $request->leaning_angle; 
+
+            $data->leaning_angle = $request->leaning_angle;
 
             $gate = [ 'unlocked' => 'false', 'demaged' => 'false', 'other'=>'false'];
 
@@ -108,7 +108,7 @@ class FPController extends Controller
                     }else{
                         $gate[$key] = false;
                     }
-                        
+
                 }
                 $gate['other_value'] = $request->gate_status['other_value'];
             }
@@ -161,7 +161,7 @@ class FPController extends Controller
             $data->gate_status = json_decode($data->gate_status);
 
 
-            return view('feeder-pillar.show', ['data' => $data]);
+            return view('feeder-pillar.show', ['data' => $data ,'disabled'=>true]);
         }
         return abort('404');
 
@@ -181,7 +181,7 @@ class FPController extends Controller
             $data->gate_status = json_decode($data->gate_status);
 
 
-            return view('feeder-pillar.edit', ['data' => $data]);
+            return view('feeder-pillar.edit', ['data' => $data , 'disabled'=>false]);
         }
         return abort('404');
 
@@ -201,7 +201,7 @@ class FPController extends Controller
 
             $defects = [];
             $defects =['leaning_staus','vandalism_status','advertise_poster_status','rust_status'];
-          
+
             $total_defects =0;
             $currentDate = Carbon::now()->toDateString();
             $combinedDateTime = $currentDate . ' ' . $request->patrol_time;
@@ -216,7 +216,7 @@ class FPController extends Controller
             $data->size = $request->size;
             $data->coordinate = $request->coordinate;
             $data->leaning_angle = $request->leaning_angle;
-            
+
             $gate = [ 'unlocked' => 'false', 'demaged' => 'false', 'other'=>'false'];
 
             if ($request->has('gate_status')) {
@@ -230,7 +230,7 @@ class FPController extends Controller
                     }else{
                         $gate[$key] = false;
                     }
-                        
+
                 }
                 $gate['other_value'] = $request->gate_status['other_value'];
             }

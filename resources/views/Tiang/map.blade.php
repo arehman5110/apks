@@ -92,7 +92,7 @@
                         onclick="resetMapFilters()" />
                 </div>
 
-                
+
 
             </div>
         </div>
@@ -102,35 +102,38 @@
             <span class="text-danger" id="er-select-layer"></span>
 
             <div class="d-sm-flex">
-                <div class="">
+                <div class="px-4">
                     <input type="radio" name="select_layer" id="ts_unsurveyed" class="unsurveyed" value="ts_unsurveyed" onchange="selectLayer(this.value)">
                     <label for="ts_unsurveyed">Unsurveyed</label>
                 </div>
 
-                <div class="">
+                <div class="px-4">
+
                     <input type="radio" name="select_layer" id="ts_with_defects" class="with_defects" value="ts_with_defects" onchange="selectLayer(this.value)">
                     <label for="ts_with_defects">Surveyed with defects</label>
                 </div>
 
-                <div class="">
+                <div class="px-4">
+
                     <input type="radio" name="select_layer" id="ts_without_defects" class="without_defects" value="ts_without_defects" onchange="selectLayer(this.value)">
                     <label for="ts_without_defects">Surveyed without defects</label>
                 </div>
 
 
-                <div class=" mx-4">
+                <div class="px-4">
+
                     <input type="radio" name="select_layer" id="select_layer_pano" value="pano" onchange="selectLayer(this.value)">
                     <label for="select_layer_pano">Pano</label>
                 </div>
-           
+
 
             <div class="mx-4">
                 <div id="the-basics">
-                    <input class="typeahead" type="text" placeholder="search id" class="form-control">
+                    <input class="typeahead" type="text" placeholder="search by tiang no" class="form-control">
                 </div>
             </div>
  </div>
- 
+
         </div>
 
         <!--  START MAP CARD DIV -->
@@ -245,7 +248,7 @@
 
 
     <script>
-      
+
         var substringMatcher = function(strs) {
 
             return function findMatches(q, cb) {
@@ -262,7 +265,7 @@
                     success: function callback(data) {
                         $.each(data, function(i, str) {
 
-                            matches.push(str.id);
+                            matches.push(str.tiang_no);
 
                         });
                     }
@@ -378,7 +381,7 @@
             // road.bringToFront()
 
 
-            
+
             if (ts_unsurveyed != '') {
                 map.removeLayer(ts_unsurveyed)
             }

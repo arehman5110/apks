@@ -136,7 +136,7 @@ class CableBridgeController extends Controller
     {
         //
         $data = CableBridge::find($id);
-        return $data ? view('cable-bridge.show', ['data' => $data]) : abort(404);
+        return $data ? view('cable-bridge.show', ['data' => $data, 'disabled'=>true]) : abort(404);
     }
 
     /**
@@ -149,7 +149,7 @@ class CableBridgeController extends Controller
     {
         //
         $data = CableBridge::find($id);
-        return $data ? view('cable-bridge.edit', ['data' => $data]) : abort(404);
+        return $data ? view('cable-bridge.edit', ['data' => $data, 'disabled'=>true]) : abort(404);
     }
 
     /**

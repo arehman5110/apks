@@ -281,3 +281,36 @@ function tiangSpanRadio($value , $key , $subkey , $status)
 
 
 }
+
+
+
+
+
+//  for show and update images start
+
+    function viewAndUpdateImage($image , $name , $disabled ){
+
+            $html = '';
+
+
+                        if (!$disabled) {
+                         $html.="<div class='col-md-6'>
+                                    <input type='file' accept='image/*' name='$name' id='$name' class='form-control'>
+                                </div>";
+                        }
+
+                  $html.="
+                    <div class='col-md-6 text-center  py-2'>";
+
+                    if ( $image != '' && file_exists(public_path($image))){
+                        $html.="<a href='".URL::asset($image) ."' data-lightbox='roadtrip'>
+                        <img src='".URL::asset($image) ."' alt=''
+                            height='70' class='adjust-height ml-5'></a>";
+                    }else{
+                        $html.="<strong>".__('messages.no_image_found') ."</strong>";
+                    }
+                    $html.="</div>";
+            return $html;
+    }
+
+//  for show and update images end

@@ -134,7 +134,7 @@
                                 class="form-control" readonly>
 
                             <div class="row">
-                                <div class="col-md-4"><label for="visit_date">{{ __('messages.visit_date') }}</label></div>
+                                <div class="col-md-4"><label for="visit_date">{{ __('messages.survey_date') }}</label></div>
                                 <div class="col-md-4">
                                     <input type="date" name="visit_date" id="visit_date" value="{{ date('Y-m-d') }}"
                                         class="form-control" required>
@@ -200,17 +200,13 @@
                             <div class="row">
                                 <div class="col-md-4"><label for="vandalism_status">{{ __('messages.vandalism') }}
                                     </label></div>
-                                <div class="col-md-4 row">
-                                    <div class="col-md-6 d-flex">
-                                        <input type="radio" name="vandalism_status" id="vandalism_status_yes"
-                                            value="no">
-                                        <label for="vandalism_status_yes"> Yes</label>
-                                    </div>
-                                    <div class="col-md-6 d-flex">
-                                        <input type="radio" name="vandalism_status" id="vandalism_status_no"
-                                            value="no">
-                                        <label for="vandalism_status_no"> No</label>
-                                    </div>
+                                <div class="col-md-4 ">
+                                    <select name="vandalism_status" id="vandalism_status" class="form-control" required
+                                        >
+                                        <option value="" hidden>select status</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
 
                                 </div>
                             </div>
@@ -342,6 +338,18 @@
                                         accept="image/*" class="form-control">
                                 </div>
                             </div>
+
+
+                            <div class="row">
+                                <div class="col-md-4"><label for="img_advertise_poster">{{__('messages.image_advertise_poster_removal')}}</label></div>
+                                <div class="col-md-4">
+                                    <input type="file" name="image_advertisement_after_1" id="image_advertisement_after_1" accept="image/*"
+                                        class="form-control" >
+                                        <input type="file" name="image_advertisement_after_2" id="image_advertisement_after_2" accept="image/*"
+                                        class="form-control" >
+                                    </div>
+                            </div>
+
 
                             <div class="row">
                                 <div class="col-md-4">
