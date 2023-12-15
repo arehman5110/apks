@@ -15,12 +15,29 @@ class Dashboard extends Controller
 
     function patrol_graph(){
         $ba=Auth::user()->ba;
+        $data = [];
         if($ba!=''){
-        $query="select ba, vist_date::date,km from patroling where  vist_date is not null and km is not null and km<>0 and ba='$ba'";
+            $patrolling="select ba, vist_date::date as visit_date,km as bar from patroling where  vist_date is not null and km is not null and km<>0 and ba='$ba'";
+            $substation = "select ba, visit_date::date,sum(total_defects) as bar from tbl_substation where  visit_date is not null and ba='$ba' and   total_defects<>0 group by ba,visit_date ";
+            $feeder_pillar = "select ba, visit_date::date,sum(total_defects) as bar from tbl_substation where  visit_date is not null and ba='$ba' and   total_defects<>0 group by ba,visit_date ";
+            $link_box = "select ba, visit_date::date,sum(total_defects) as bar from tbl_link_box where  visit_date is not null and ba='$ba' and   total_defects<>0 group by ba,visit_date ";
+            $cable_bridge = "select ba, visit_date::date,sum(total_defects) as bar from tbl_cable_bridge where  visit_date is not null and ba='$ba' and   total_defects<>0 group by ba,visit_date ";
+            $tiang = "select ba, review_date::date as visit_date,sum(total_defects) as bar from tbl_cable_bridge where  visit_date is not null and ba='$ba' and   total_defects<>0 group by ba,visit_date ";
         }else{
-            $query="select ba, vist_date::date,km from patroling where  vist_date is not null and km is not null and km<>0 "; 
+            $patrolling="select ba, vist_date::date as visit_date ,km as bar from patroling where  vist_date is not null and km is not null and km<>0 "; 
+            $substation = "select ba, visit_date::date,sum(total_defects) as bar from tbl_substation where  visit_date is not null and   total_defects<>0 group by ba,visit_date ";
+            $feeder_pillar = "select ba, visit_date::date,sum(total_defects) as bar from tbl_substation where  visit_date is not null and   total_defects<>0 group by ba,visit_date ";
+            $link_box = "select ba, visit_date::date,sum(total_defects) as bar from tbl_link_box where  visit_date is not null and   total_defects<>0 group by ba,visit_date ";
+            $cable_bridge = "select ba, visit_date::date,sum(total_defects) as bar from tbl_cable_bridge where  visit_date is not null and   total_defects<>0 group by ba,visit_date ";
+            $tiang = "select ba, review_date::date as visit_date,sum(total_defects) as bar from tbl_cable_bridge where  visit_date is not null and   total_defects<>0 group by ba,visit_date ";
         }
-        $data = DB::select($query); 
+        $data['patrolling'] = DB::select($patrolling);
+        $data['substation'] = DB::select($substation); 
+        $data['feeder_pillar'] = DB::select($feeder_pillar); 
+        $data['link_box'] = DB::select($link_box); 
+        $data['cable_bridge'] = DB::select($cable_bridge);
+        $data['tiang'] =  DB::select($tiang);
+        
         return response()->json($data);
     }
 

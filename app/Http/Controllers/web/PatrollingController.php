@@ -100,14 +100,19 @@ class PatrollingController extends Controller
 
     public function paginate(Request $request, $language)
     {
-        $ba = Auth::user()->ba;
 
+        $result = Patroling::query();
+        
+
+        if ($request->filled('ba')) {
+            $ba = Auth::user()->ba ?? $request->ba;
+            $result->where('ba', $ba);
+        }
         if ($request->ajax()) {
 
-            $query = Patroling::where('ba', $ba)
-    ->whereNotNull('km')->where('km','!=','0')
-        // Check for non-null values
-     
+  
+    $result->whereNotNull('km')->where('km','!=','0')
+  
     ->select(
         '*',
         \DB::raw("st_x(geom_start) as start_x"),
@@ -115,14 +120,13 @@ class PatrollingController extends Controller
         \DB::raw("st_x(geom_end) as end_x"),
         \DB::raw("st_y(geom_end) as end_y")
     )
-    ->orderByDesc('date')
-    ->get()
-    ->makeHidden(['geom']);
+    ->orderByDesc('date');
+    
 
 
 
 
-            return Datatables::of($query)->make(true);
+            return Datatables::of($result->get()->makeHidden(['geom']))->make(true);
         }
 
         return view('patrolling.index');
