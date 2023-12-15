@@ -72,6 +72,7 @@
 
                                     <thead style="background-color: #E4E3E3 !important">
                                         <tr>
+                                            <th>ID</th>
                                             <th>ZONE</th>
                                             <th>BA</th>
                                             <th>TEAM</th>
@@ -166,6 +167,10 @@
                     }
                 },
                 columns: [{
+                    data:"cable_bridge_id",
+                    name:"cable_bridge_id"
+
+                },{
                         data: 'zone',
                         name: 'zone'
                     },
@@ -213,7 +218,7 @@
 
                 ],
                 order: [
-                    [3, 'desc']
+                    [0, 'desc']
                 ]
             })
 

@@ -10,6 +10,7 @@
         div#roads_length {
             display: none;
         }
+        
 
         span.relative.inline-flex.items-center.px-4.py-2.-ml-px.text-sm.font-medium.text-gray-500.bg-white.border.border-gray-300.cursor-default.leading-5 {
             background: #007BFF !important;
@@ -24,24 +25,40 @@
             display: none;
         } */
 
-        .lower-header th,
+        table.dataTable>thead>tr>th:not(.sorting_disabled), table.dataTable>thead>tr>td:not(.sorting_disabled) {
+    padding-right: 14px;
+}
+        .lower-header ,
         td {
             font-size: 14px !important;
             padding: 5px !important;
         }
 
         th {
-            font-size: 15px !important
+            font-size: 15px !important;
+            
         }
+         th{
+            /* border-color: #6969699c  !important; */
+            
+        }
+        thead{
+            /* background-color: #7080907d !important;
+             */
+             background-color: #E4E3E3 !important;
+        }
+        .nowrap,th {
+      white-space: nowrap;
+    }
     </style>
 @endsection
 
 
 
 @section('content')
-    <section class="content-header">
+    <section class="content-header pb-0">
         <div class="container-  ">
-            <div class="row mb-2" style="flex-wrap:nowrap">
+            <div class="row  mb-0 pb-0" style="flex-wrap:nowrap">
                 <div class="col-sm-6">
                     <h3>{{ __('messages.substation') }}</h3>
                 </div>
@@ -57,7 +74,7 @@
     </section>
 
 
-    <section class="content">
+    <section class="content-">
         <div class="container-fluid">
 
 
@@ -68,7 +85,7 @@
             <div class="row">
                 @include('components.qr-filter', ['url' => 'generate-substation-excel'])
 
-                <div class="col-12">
+                <div class="col-12-">
                     <div class="card">
 
                         <div class="card-header d-flex justify-content-between ">
@@ -83,9 +100,7 @@
                                     aria-controls="collapseQr">
                                     QR Substation
                                 </button>
-                                {{--               <a href="{{ route('generate-substation-excel', app()->getLocale()) }}"> <button
-                                        class="btn text-white  btn-sm mr-4" style="background-color: #708090">QR
-                                        Substation</button></a> --}}
+ 
                             </div>
                         </div>
 
@@ -103,15 +118,15 @@
                                 <table id="" class="table table-bordered  table-hover data-table">
 
 
-                                    <thead style="background-color: #E4E3E3 !important">
+                                    <thead  >
                                         <tr>
                                             <th rowspan="2">{{ __('messages.name') }}</th>
                                             <th rowspan="2">{{__('messages.visit_date')}} </th>
-                                            <th colspan="3" class="text-center">{{ __('messages.gate') }}</th>
-                                            <th colspan="2" class="text-center">{{ __('messages.tree') }}</th>
-                                            <th colspan="4" class="text-center">{{ __('messages.building_defects') }}
+                                            <th colspan="3" class="text-center" style="border-bottom: 0px">{{ __('messages.gate') }}</th>
+                                            <th colspan="2" class="text-center" style="border-bottom: 0px">{{ __('messages.tree') }}</th>
+                                            <th colspan="4" class="text-center" style="border-bottom: 0px">{{ __('messages.building_defects') }}
                                             </th>
-                                            <th>{{ __('messages.add_clean_up') }}</th>
+                                            <th class="nowrap" style="border-bottom: 0px">{{ __('messages.add_clean_up') }}</th>
                                             <th rowspan="2">{{ __('messages.total_defects') }} </th>
                                             {{-- <th rowspan="2">QA Status</th> --}}
 
@@ -122,9 +137,9 @@
                                             <th>{{ __('messages.unlocked') }}</th>
                                             <th>{{ __('messages.demaged') }}</th>
                                             <th>{{ __('messages.others') }} </th>
-                                            <th>{{ __('messages.long_grass') }} </th>
-                                            <th>{{ __('messages.tree_branches_in_PE') }} </th>
-                                            <th>{{ __('messages.broken_roof') }} </th>
+                                            <th class="nowrap">{{ __('messages.long_grass') }} </th>
+                                            <th class="nowrap">{{ __('messages.tree_branches_in_PE') }} </th>
+                                            <th class="nowrap">{{ __('messages.broken_roof') }} </th>
                                             <th>{{ __('messages.broken_gutter') }} </th>
                                             <th>{{ __('messages.broken_base') }} </th>
                                             <th>{{ __('messages.others') }} </th>
@@ -201,8 +216,6 @@
                             <div class="col-md-8">
                                 <input type="text" name="" id="modal-name" disabled readonly >
                             </div>
-
-
                         </div>
 
                         <div class="row">
@@ -212,9 +225,8 @@
                             <div class="col-md-8">
                                 <input type="text" name="" id="modal-defects" disabled readonly >
                             </div>
-
-
                         </div>
+
                         <input type="hidden" name="id" id="status-modal-id">
                     </div>
                     <div class="modal-footer">
@@ -242,8 +254,8 @@
 
     <script>
         var from_date = $('#excel_from_date').val();
-        var to_date = $('#excel_to_date').val();
-        var excel_ba = $('#excelBa').val();
+        var to_date   = $('#excel_to_date').val();
+        var excel_ba  = $('#excelBa').val();
 
         $(document).ready(function() {
 
@@ -271,8 +283,10 @@
                 }}
                 },
                 columns: [{
-                        data: 'name',
-                        name: 'name'
+                        render: function(data, type, full) {
+                            return `<a href="/{{app()->getLocale()}}/substation/${full.id}/edit" class="text-decoration-none text-dark">${full.name}</a>`;
+                        },
+                        name:'name'
                     },
                     {
                         data:'visit_date',
@@ -370,7 +384,9 @@
             [1, 'desc']
         ],
                 createdRow: function(row, data, dataIndex) {
-                    $(row).find('td:eq(1)').addClass('text-center');
+                    $(row).find('td:eq(0)').css('width','150px !important');
+
+                    $(row).find('td:eq(1)').addClass('nowrap');
                     $(row).find('td:eq(2)').addClass('text-center');
                     $(row).find('td:eq(3)').addClass('text-center');
                     $(row).find('td:eq(4)').addClass('text-center');

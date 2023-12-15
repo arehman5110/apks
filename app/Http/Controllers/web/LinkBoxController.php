@@ -41,7 +41,10 @@ class LinkBoxController extends Controller
             });
 
             return datatables()
-                ->of($result->get())
+                ->of($result->get())->addColumn('link_box_id', function ($row) {
+                    
+                    return "LB-" .$row->id;
+                })
                 ->make(true);
         }
         return view('link-box.index');
