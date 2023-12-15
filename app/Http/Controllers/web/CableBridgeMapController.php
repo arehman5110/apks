@@ -15,14 +15,14 @@ class CableBridgeMapController extends Controller
     {
 
         $data = CableBridge::find($id);
-        return $data ?  view('cable-bridge.edit-form', ['data' => $data]) : abort(404);
+        return $data ?  view('cable-bridge.edit-form', ['data' => $data, 'disabled'=>true]) : abort(404);
 
     }
 
     public function update(Request $request, $language, $id)
     {
         //
-        
+
 
         try {
             $currentDate = Carbon::now()->toDateString();
@@ -72,6 +72,25 @@ class CableBridgeMapController extends Controller
 
             ->with('failed', 'Form Update Failed');
     }
+    }
+
+
+    public function seacrh($lang ,  $q)
+    {
+
+        $ba = \Illuminate\Support\Facades\Auth::user()->ba;
+
+        $data = CableBridge::where('ba', 'LIKE', '%' . $ba . '%')->where('id' , 'LIKE' , '%' . $q . '%')->select('id')->limit(10)->get();
+
+        return response()->json($data, 200);
+    }
+
+    public function seacrhCoordinated($lang , $name)
+    {
+        $name = urldecode($name);
+        $data = CableBridge::where('id' ,$name )->select('id', \DB::raw('ST_X(geom) as x'),\DB::raw('ST_Y(geom) as y'),)->first();
+
+        return response()->json($data, 200);
     }
 
 }

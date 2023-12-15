@@ -111,7 +111,7 @@
                             </select>
                         </div>
 
-                        <div class="col-md-2">
+                        <div class="col-md-1">
                             <br>
                             <button class="btn btn-secondary btn-sm mt-2    " type="button" onclick="removePoint()">Clear Points</button>
                         </div>
@@ -119,7 +119,6 @@
                             <br>
                             <button class="btn btn-secondary btn-sm mt-2    " type="button" onclick="removeLines()">Clear Lines</button>
                         </div>
-
 
                     </div>
                 </div>
@@ -423,16 +422,30 @@
                         name: 'reading_end'
                     },
                     {
-                        data: 'km',
-                        name: 'km'
-                    },
+            data: 'km',
+            name: 'km',
+            render: function (data, type, row) {
+                if (data === null || data === '') {
+                    return '';
+                }
+
+                return parseFloat(data).toFixed(2);
+            }
+        },
                     {
                         data: 'date',
                         name: 'date'
                     },
                     {
                         data: 'time',
-                        name: 'time'
+                        name: 'time',
+                        render: function (data, type, row) {
+                if (data === null || data === '') {
+                    return '';
+                }
+                let time = data.split(" ");
+                return time[0];
+            }
                     },
                     {
                         data: 'status',

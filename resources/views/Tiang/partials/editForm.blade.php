@@ -267,21 +267,6 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6">
-                                        <div class="card p-4">
-                                            
-                                            <label for="s7_173">{{ __('messages.BARE_Span') }} 7/173</label>
-                                                {!! tiangSpanRadio(  $data->bare_span, 'bare_span', 's7_173',  true) !!}
-
-                                            <label for="s7_122">{{ __('messages.BARE_Span') }} 7/122</label>
-                                                {!! tiangSpanRadio(  $data->bare_span, 'bare_span', 's7_122',  true) !!}
-
-                                            <label for="s3_132">{{ __('messages.BARE_Span') }} 3/132</label>
-                                                {!! tiangSpanRadio(  $data->bare_span, 'bare_span', 's3_132',  true) !!}
-
-                                        </div>
-                                    </div>
-
                                     <div class="col-md-6 ">
                                         <div class="card p-4">
 
@@ -296,6 +281,24 @@
 
                                         </div>
                                     </div>
+
+                                    
+                                    <div class="col-md-6">
+                                        <div class="card p-4">
+
+                                            <label for="s7_173">{{ __('messages.BARE_Span') }} 7/173</label>
+                                                {!! tiangSpanRadio(  $data->bare_span, 'bare_span', 's7_173',  true) !!}
+
+                                            <label for="s7_122">{{ __('messages.BARE_Span') }} 7/122</label>
+                                                {!! tiangSpanRadio(  $data->bare_span, 'bare_span', 's7_122',  true) !!}
+
+                                            <label for="s3_132">{{ __('messages.BARE_Span') }} 3/132</label>
+                                                {!! tiangSpanRadio(  $data->bare_span, 'bare_span', 's3_132',  true) !!}
+
+                                        </div>
+                                    </div>
+
+
 
                                 </div>
                             </fieldset>

@@ -11,6 +11,9 @@
             min-width: 16px !important;
             margin-right: 12px;
         }
+        a[href='#finish'] {
+            display: none !important;
+        }
 
         input[type='radio'] {
             border-radius: 50% !important;
@@ -283,22 +286,6 @@
                                     </div>
 
 
-                                    <div class="col-md-6">
-                                        <div class="card p-4">
-
-                                            <label for="s7_173">{{ __('messages.BARE_Span') }} 7/173</label>
-                                                {!! tiangSpanRadio(  $data->bare_span, 'bare_span', 's7_173',  false) !!}
-
-                                            <label for="s7_122">{{ __('messages.BARE_Span') }} 7/122</label>
-                                                {!! tiangSpanRadio(  $data->bare_span, 'bare_span', 's7_122',  false) !!}
-                                            
-                                            <label for="s3_132">{{ __('messages.BARE_Span') }} 3/132</label>
-                                                {!! tiangSpanRadio(  $data->bare_span, 'bare_span', 's3_132',  false) !!}
-
-                                        </div>
-                                    </div>
-
-
                                     <div class="col-md-6 ">
                                         <div class="card p-4">
 
@@ -312,7 +299,24 @@
                                                 {!! tiangSpanRadio(  $data->pvc_span, 'pvc_span', 's7_044',  false) !!}
 
                                         </div>
+                                    </div>  
+                                    <div class="col-md-6">
+                                        <div class="card p-4">
+
+                                            <label for="s7_173">{{ __('messages.BARE_Span') }} 7/173</label>
+                                                {!! tiangSpanRadio(  $data->bare_span, 'bare_span', 's7_173',  false) !!}
+
+                                            <label for="s7_122">{{ __('messages.BARE_Span') }} 7/122</label>
+                                                {!! tiangSpanRadio(  $data->bare_span, 'bare_span', 's7_122',  false) !!}
+
+                                            <label for="s3_132">{{ __('messages.BARE_Span') }} 3/132</label>
+                                                {!! tiangSpanRadio(  $data->bare_span, 'bare_span', 's3_132',  false) !!}
+
+                                        </div>
                                     </div>
+
+
+
 
                                 </div>
 
@@ -891,43 +895,6 @@
                 headerTag: "h3",
                 bodyTag: "fieldset",
                 transitionEffect: "slideLeft",
-                showFinishButtonAlways: false,  
-
-                onStepChanging: function(event, currentIndex, newIndex) {
-                    // Allways allow previous action even if the current form is not valid!
-                    if (currentIndex > newIndex) {
-                        return true;
-                    }
-
-                    // Needed in some cases if the user went back (clean up)
-                    if (currentIndex < newIndex) {
-                        // To remove error styles
-                        form.find(".body:eq(" + newIndex + ") label.error").remove();
-                        form
-                            .find(".body:eq(" + newIndex + ") .error")
-                            .removeClass("error");
-                    }
-                    form.validate().settings.ignore = ":disabled,:hidden";
-                    return form.valid();
-                },
-
-                onStepChanged: function(event, currentIndex, priorIndex) {
-                    // Used to skip the "Warning" step if the user is old enough.
-                    if (currentIndex === 2 && Number($("#age").val()) >= 18) {
-                        form.steps("next");
-                    }
-                    // Used to skip the "Warning" step if the user is old enough and wants to the previous step.
-                    if (currentIndex === 2 && priorIndex === 3) {
-                        form.steps("previous");
-                    }
-
-                },
-
-
-
-                onFinished: function(event, currentIndex) {
-
-                },
 
             })
     </script>

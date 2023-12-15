@@ -14,7 +14,7 @@ class SubstationMapController extends Controller
     public function editMap($lang, $id)
     {
         $data = Substation::find($id);
-        return $data ? view('substation.edit-form', ['data' => $data]) : abort(404);
+        return $data ? view('substation.edit-form', ['data' => $data , 'disabled'=>false]) : abort(404);
     }
     public function update(Request $request, $language, $id)
     {

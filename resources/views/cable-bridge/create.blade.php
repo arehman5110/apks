@@ -105,10 +105,35 @@
                                     <input type="hidden" name="ba" id="ba">
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-4"><label for="end_date">{{__("messages.to")}}</label></div>
+                                <div class="col-md-4">
+                                    <input type="text" name="end_date" id="end_date" class="form-control" >
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4"><label for="start_date">{{__("messages.from")}}</label></div>
+                                <div class="col-md-4">
+                                    <input type="text" name="start_date" id="start_date" class="form-control" >
+                                </div>
+                            </div>
 
 
                             <div class="row">
-                                <div class="col-md-4"><label for="visit_date">{{__("messages.visit_date")}}</label></div>
+                                <div class="col-md-4"><label for="voltage">{{ __('messages.voltage') }}</label></div>
+                                <div class="col-md-4">
+                                    <select name="voltage" id="voltage" class="form-control">
+                                        <option value="" hidden>select</option>
+                                        <option value="11kw">11kv</option>
+                                        <option value="13kw">13kv</option>
+                                    </select>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4"><label for="visit_date">{{__("messages.survey_date")}}</label></div>
                                 <div class="col-md-4">
                                     <input type="date" name="visit_date" id="visit_date" class="form-control" required value="{{date('Y-m-d')}}">
                                 </div>
@@ -131,27 +156,21 @@
                                         class="form-control" readonly>
 
 
-                            <div class="row">
-                                <div class="col-md-4"><label for="start_date">{{__("messages.from")}}</label></div>
-                                <div class="col-md-4">
-                                    <input type="text" name="start_date" id="start_date" class="form-control" >
-                                </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="col-md-4"><label for="end_date">{{__("messages.to")}}</label></div>
-                                <div class="col-md-4">
-                                    <input type="text" name="end_date" id="end_date" class="form-control" >
-                                </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="col-md-4"><label for="voltage">{{__("messages.voltage")}}</label></div>
-                                <div class="col-md-4">
-                                    <input type="text" name="voltage" id="voltage" class="form-control" required>
-                                </div>
-                            </div>
 
+                                        <div class="row">
+                                            <div class="col-md-4"><label for="vandalism_status">{{__("messages.vandalism")}} </label></div>
+                                            <div class="col-md-4">
+                                                <select name="vandalism_status" id="vandalism_status" class="form-control" required>
+                                                    <option value="" hidden>select option</option>
+                                                    <option value="Yes">Yes</option>
+                                                    <option value="No">No</option>
+
+                                                </select>
+
+                                            </div>
+                                        </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="pipe_staus">{{__("messages.pipe_broken")}}</label></div>
                                 <div class="col-md-4">
@@ -164,18 +183,7 @@
 
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-4"><label for="vandalism_status">{{__("messages.vandalism")}} </label></div>
-                                <div class="col-md-4">
-                                    <select name="vandalism_status" id="vandalism_status" class="form-control" required>
-                                        <option value="" hidden>select option</option>
-                                        <option value="Yes">Yes</option>
-                                        <option value="No">No</option>
 
-                                    </select>
-
-                                </div>
-                            </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="collapsed_status">{{__("messages.collapsed")}} </label></div>
                                 <div class="col-md-4">
@@ -223,15 +231,6 @@
 
                                 </div>
                             </div>
-
-                            <div class="row">
-                                <div class="col-md-4"><label for="image_pipe">{{__("messages.image_pipe")}}</label></div>
-                                <div class="col-md-4">
-                                    <input type="file" name="image_pipe" id="image_pipe" class="form-control" accept="image/*">
-                                    <input type="file" name="image_pipe_2" id="image_pipe_2" class="form-control" accept="image/*">
-
-                                </div>
-                            </div>
                             <div class="row">
                                 <div class="col-md-4"><label for="image_vandalism">{{__("messages.image_vandalism")}}</label></div>
                                 <div class="col-md-4">
@@ -240,6 +239,15 @@
 
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-4"><label for="image_pipe">{{__("messages.image_pipe")}}</label></div>
+                                <div class="col-md-4">
+                                    <input type="file" name="image_pipe" id="image_pipe" class="form-control" accept="image/*">
+                                    <input type="file" name="image_pipe_2" id="image_pipe_2" class="form-control" accept="image/*">
+
+                                </div>
+                            </div>
+
                             <div class="row">
                                 <div class="col-md-4"><label for="image_collapsed">{{__("messages.image_collapsed")}}</label></div>
                                 <div class="col-md-4">

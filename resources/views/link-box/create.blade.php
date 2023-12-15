@@ -107,6 +107,36 @@
                             </div>
 
                             <div class="row">
+                                <div class="col-md-4"><label for="end_date">{{__('messages.to')}}</label></div>
+                                <div class="col-md-4">
+                                    <input type="text" name="end_date" id="end_date" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"><label for="start_date">{{__('messages.from')}}</label></div>
+                                <div class="col-md-4">
+                                    <input type="text" name="start_date" id="start_date" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4"><label for="type">{{ __('messages.type') }}</label></div>
+                                <div class="col-md-4">
+                                    <select name="type" id="type" class="form-control">
+                                        <option value="" hidden>select</option>
+                                        <option value="Indoor">Indoor</option>
+                                        <option value="Attach Building">Attach Building</option>
+                                        <option value="Outdoor">Outdoor</option>
+                                        <option value="Padat">Padat</option>
+                                        <option value="Pencawang Atas Tiang (PAT)">Pencawang Atas Tiang (PAT)</option>
+                                    </select>
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="row">
                                 <div class="col-md-4"><label for="visit_date">{{__('messages.visit_date')}}</label></div>
                                 <div class="col-md-4">
                                     <input type="date" name="visit_date" id="visit_date" class="form-control" required
@@ -134,26 +164,7 @@
 
 
 
-                            <div class="row">
-                                <div class="col-md-4"><label for="start_date">{{__('messages.from')}}</label></div>
-                                <div class="col-md-4">
-                                    <input type="text" name="start_date" id="start_date" class="form-control">
-                                </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="col-md-4"><label for="end_date">{{__('messages.to')}}</label></div>
-                                <div class="col-md-4">
-                                    <input type="text" name="end_date" id="end_date" class="form-control">
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-4"><label for="type">{{__('messages.type')}}</label></div>
-                                <div class="col-md-4">
-                                    <input type="text" name="type" id="type" class="form-control" required>
-                                </div>
-                            </div>
 
                             <div class="row">
                                 <div class="col-md-4"><label for="cover_status">{{__("messages.cover_is_not_closed")}}</label></div>
@@ -281,6 +292,17 @@
                                     <input type="file" name="images_advertise_poster_2" id="images_advertise_poster_2" class="form-control" accept="image/*">
                                 </div>
                             </div>
+
+                            <div class="row">
+                                <div class="col-md-4"><label for="img_advertise_poster">{{__('messages.image_advertise_poster_removal')}}</label></div>
+                                <div class="col-md-4">
+                                    <input type="file" name="image_advertisement_after_1" id="image_advertisement_after_1" accept="image/*"
+                                        class="form-control" >
+                                        <input type="file" name="image_advertisement_after_2" id="image_advertisement_after_2" accept="image/*"
+                                        class="form-control" >
+                                    </div>
+                            </div>
+
 
                             <div class="row">
                                 <div class="col-md-4"><label for="images_bushes">{{__("messages.image_bushes")}}</label></div>

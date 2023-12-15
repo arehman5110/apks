@@ -87,7 +87,7 @@ class LinkBoxController extends Controller
             $data->end_date = $request->end_date;
             $data->type = $request->type;
             $data->coordinate = $request->coordinate;
-            
+
             foreach ($defects as  $value) {
                 $data->{$value} = $request->{$value};
                $request->has($value)&& $request->{$value} == 'Yes' ? $total_defects++ : '';
@@ -132,7 +132,7 @@ class LinkBoxController extends Controller
     {
         //
         $data = LinkBox::find($id);
-        return view('link-box.show', ['data' => $data]);
+        return view('link-box.show', ['data' => $data, 'disabled'=>true]);
     }
 
     /**
@@ -145,7 +145,7 @@ class LinkBoxController extends Controller
     {
         //
         $data = LinkBox::find($id);
-        return view('link-box.edit', ['data' => $data]);
+        return view('link-box.edit', ['data' => $data, 'disabled'=>true]);
     }
 
     /**

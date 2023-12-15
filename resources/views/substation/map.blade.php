@@ -8,98 +8,7 @@
             z-index: 1;
         }
 
-        .tt-query,
-        /* UPDATE: newer versions use tt-input instead of tt-query */
-        .tt-hint {
-            width: 396px;
-            height: 30px;
-            padding: 8px 12px;
-            font-size: 24px;
-            line-height: 30px;
-            border: 2px solid #ccc;
-            border-radius: 8px;
-            outline: none;
-        }
-
-        .tt-query {
-            /* UPDATE: newer versions use tt-input instead of tt-query */
-            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-        }
-
-        .tt-hint {
-            color: #999;
-        }
-
-        .tt-menu {
-            /* UPDATE: newer versions use tt-menu instead of tt-dropdown-menu */
-            width: 422px;
-            margin-top: 12px;
-            padding: 8px 0;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border: 1px solid rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
-            box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
-        }
-
-        .tt-suggestion {
-            padding: 3px 20px;
-            font-size: 18px;
-            line-height: 24px;
-            cursor: pointer;
-        }
-
-        .tt-suggestion:hover {
-            color: #f0f0f0;
-            background-color: #0097cf;
-        }
-
-        .tt-suggestion p {
-            margin: 0;
-        }
-
-        input[type="radio"]#substation_without_defects {
-
-            background-color: #00F700;
-            border-color: #00F700;
-        }
-
-        input[type="radio"]:checked#substation_without_defects {
-            background-color: #00F700;
-            border-color: #00F700;
-        }
-
-
-        input[type="radio"]#select_layer_main {
-
-            background-color: #F7F701;
-            border-color: #F7F701;
-        }
-
-        input[type="radio"]:checked#select_layer_main {
-            background-color: #F7F701;
-            border-color: #F7F701;
-        }
-
-
-        input[type="radio"]#select_layer_unsurveyed {
-
-            background-color: #FF0000;
-            border-color: #FF0000;
-        }
-
-        input[type="radio"]:checked#select_layer_unsurveyed {
-            background-color: #FF0000;
-            border-color: #FF0000;
-        }
-
-        input.typeahead.tt-hint {
-            border: 0px !important;
-            background: transparent !important;
-            padding: 20px 14px;
-            font-size: 15px !important;
-
-        }
+       
     </style>
 @endsection
 
@@ -196,20 +105,20 @@
             <span class="text-danger" id="er-select-layer"></span>
             <div class="d-sm-flex">
                 <div class="">
-                    <input type="radio" name="select_layer" id="select_layer_main" value="substation_with_defects"
+                    <input type="radio" name="select_layer" id="select_layer_main" class="with_defects" value="substation_with_defects"
                         onchange="selectLayer(this.value)">
-                    <label for="select_layer_main">Substation with defects</label>
+                    <label for="select_layer_main">Surveyed with defects</label>
                 </div>
 
                 <div class="mx-4">
                     <input type="radio" name="select_layer" id="substation_without_defects"
-                        value="substation_without_defects" onchange="selectLayer(this.value)">
-                    <label for="substation_without_defects">Substation without defects</label>
+                        value="substation_without_defects" class="without_defects" onchange="selectLayer(this.value)">
+                    <label for="substation_without_defects">Surveyed without defects</label>
                 </div>
                 <div class=" mx-4">
                     <input type="radio" name="select_layer" id="select_layer_unsurveyed" value="unsurveyed"
-                        onchange="selectLayer(this.value)">
-                    <label for="select_layer_unsurveyed">Substation Unsurveyed </label>
+                        onchange="selectLayer(this.value)" class="unsurveyed">
+                    <label for="select_layer_unsurveyed">Unsurveyed </label>
                 </div>
 
 
@@ -335,13 +244,11 @@
     </div>
 @endsection
 
-@section('script')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
+@section('script') 
 
     @include('partials.map-js')
     <script>
-        var from_date = ''
-        var to_date = ''
+      
         var substringMatcher = function(strs) {
 
             return function findMatches(q, cb) {
@@ -576,33 +483,5 @@
         }
 
 
-        function filterByDate(param) {
-            var inBa = $('#search_ba').val()
-            if (param.id == 'from_date') {
-                from_date = param.value;
-            } else if (param.id == 'to_date') {
-                to_date = param.value;
-            }  
-            callLayers(inBa)
-
-        }
-
-
-        function  resetMapFilters() {
-            
-                from_date = '';
-                to_date = '';
-                $('#from_date , #to_date , .tt-input').val('')
-
-                if (ba == '') {
-                    addRemoveBundary('', 2.75101756479656, 101.304931640625)
-                    $('#search_ba').empty().append(`<option value="" hidden>Select ba</option>`);
-                } else {
-                    callLayers(ba);
-                }
-                if (marker != '') {
-                map.removeLayer(marker)
-            }
-        }
     </script>
 @endsection

@@ -40,12 +40,11 @@
     <div class="container-fluid bg-white pt-2">
 
 
-
-        <div class=" p-1 col-12 m-2">
+ 
             <div class="card p-0 mb-3">
-                <div class="card-body row">
+                <div class="card-body row form-input">
 
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <label for="search_zone">Zone</label>
                         <select name="search_zone" id="search_zone" class="form-control"
                             onchange="onChangeZone(this.value)">
@@ -61,7 +60,7 @@
                             @endif
                         </select>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <label for="search_ba">BA</label>
                         <select name="search_ba" id="search_ba" class="form-control" onchange="callLayers(this.value)">
 
@@ -70,10 +69,30 @@
                         </select>
                     </div>
 
+                    <div class="col-md-2">
+                        <label for="from_date">Fom</label>
+                        <input type="date" class="form-control" id="from_date" onchange="filterByDate(this)" />
+                    </div>
+
+                    <div class="col-md-2">
+                        <label for="to_date">To</label>
+                        <input type="date" class="form-control" id="to_date" onchange="filterByDate(this)" />
+                    </div>
+
+
+                    <div class="col-md-2">
+                        <br />
+                        <input type="button" class="btn btn-secondary mt-2" id="reset" value="Reset"
+                            onclick="resetMapFilters()" />
+                    </div>
+
+
+
 
                 </div>
             </div>
-        </div>
+     
+
 
 
 <div class="p-3 form-input w-">
@@ -85,23 +104,37 @@
                         <label for="select_layer_substation">Substation</label>
                     </div> --}}
 
-                    <div class=" mx-4">
+                   
+
+                    <div class=" mx-4 d-flex">
+                        <input type="radio" name="select_layer" id="fp_unsurveyed" value="fp_unsurveyed" class="unsurveyed" onchange="selectLayer(this.value)">
+                        <label for="fp_unsurveyed">Unsurveyed</label>
+                    </div>
+
+
+                    <div class=" mx-4 d-flex">
+                        <input type="radio" name="select_layer" id="fp_surveyed" value="fp_surveyed" class="without_defects" onchange="selectLayer(this.value)">
+                        <label for="fp_surveyed">Surveyed without defects</label>
+                    </div>
+
+                    <div class=" mx-4 d-flex">
+                        <input type="radio" name="select_layer" id="fp_with_defects" value="fp_with_defects" class="with_defects" onchange="selectLayer(this.value)">
+                        <label for="fp_with_defects">Surveyed with defects</label>
+                    </div>
+
+                    <div class=" mx-4 d-flex">
                         <input type="radio" name="select_layer" id="select_layer_pano" value="pano" onchange="selectLayer(this.value)">
                         <label for="select_layer_pano">Pano</label>
                     </div>
 
-                    <div class=" mx-4">
-                        <input type="radio" name="select_layer" id="feeder_pillar" value="feeder_pillar" onchange="selectLayer(this.value)">
-                        <label for="feeder_pillar">Feeder Pillar</label>
+                    <div class="mx-4">
+                        <div id="the-basics">
+                            <input class="typeahead" type="text" placeholder="search id" class="form-control">
+                        </div>
                     </div>
 
                 </div>
-                {{-- <select name="select_layer" id="select_layer" onchange="selectLayer(this.value)" class="form-control">
-                    <option value="" hidden>select layer</option>
-                    <option value="substation">Substation</option>
-                    <option value="pano">Pano</option>
-                    <option value="feeder_pillar">Feeder Pillar</option>
-                </select> --}}
+ 
             </div>
 
         <!--  START MAP CARD DIV -->
@@ -109,47 +142,6 @@
 
 
 
-
-            <!-- START MAP SIDEBAR DIV -->
-            {{-- <div class="col-2 p-0">
-                    <div class="card p-0 m-0"
-                        style="border: 1px solid rgb(177, 175, 175) !important; border-radius: 0px !important">
-                        <div class="card-header"><strong> NAVIGATION</strong></div>
-                        <div class="card-body">
-                            <!-- MAP SIDEBAR LAYERS SELECTOR -->
-                            <div class="side-bar" style="height: 569px !important; overflow-y: scroll;">
-
-
-                                <!-- START MAP SIDEBAR DETAILS -->
-
-
-
-
-                                <details class="mb-3" open>
-                                    <summary><strong>Feeder Pillar</strong> </summary>
-                                    <table class="table table-bordered">
-                                        <tr>
-                                            <td>Pemeriksaan visual</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Pembersihan iklan haram/banner</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Report</td>
-                                        </tr>
-                                    </table>
-
-                                </details>
-
-
-
-
-                                <!-- END MAP SIDEBAR DETAILS -->
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
-            <!-- END MAP SIDEBAR DIV -->
 
             <!-- START MAP  DIV -->
             <div class="col-md-8 p-0 ">
@@ -214,6 +206,72 @@
 
 @section('script')
     @include('partials.map-js')
+    <script>
+      
+        var substringMatcher = function(strs) {
+
+            return function findMatches(q, cb) {
+
+                var matches;
+
+                matches = [];
+                $.ajax({
+                    url: '/{{ app()->getLocale() }}/search/find-feeder-pillar/' + q,
+                    dataType: 'JSON',
+                    //data: data,
+                    method: 'GET',
+                    async: false,
+                    success: function callback(data) {
+                        $.each(data, function(i, str) {
+
+                            matches.push(str.id);
+
+                        });
+                    }
+                })
+
+                cb(matches);
+            };
+        };
+
+
+        var marker = '';
+        $('#the-basics .typeahead').typeahead({
+            hint: true,
+            highlight: true,
+            minLength: 1
+        }, {
+            name: 'states',
+            source: substringMatcher()
+        });
+
+        $('.typeahead').on('typeahead:select', function(event, suggestion) {
+            var name = encodeURIComponent(suggestion);
+
+            if (marker != '') {
+                map.removeLayer(marker)
+            }
+            $.ajax({
+                url: '/{{ app()->getLocale() }}/search/find-feeder-pillar-cordinated/' + encodeURIComponent(
+                    name),
+                dataType: 'JSON',
+                //data: data,
+                method: 'GET',
+                async: false,
+                success: function callback(data) {
+                    console.log(data);
+                    map.flyTo([parseFloat(data.y), parseFloat(data.x)], 16, {
+                        duration: 1.5, // Animation duration in seconds
+                        easeLinearity: 0.25,
+                    });
+
+                    marker = new L.Marker([data.y, data.x]);
+                    map.addLayer(marker);
+                }
+            })
+
+        });
+    </script>
 
 
     <script>
@@ -221,6 +279,15 @@
 
         // for add and remove layers
         function addRemoveBundary(param, paramY, paramX) {
+
+            var q_cql = "ba ILIKE '%" + param + "%' "
+            if (from_date != '') {
+                q_cql = q_cql + "AND visit_date >=" + from_date;
+            }
+            if (to_date != '') {
+                q_cql = q_cql + "AND visit_date <=" + to_date;
+            }
+
 
             if (boundary !== '') {
                 map.removeLayer(boundary)
@@ -258,16 +325,16 @@
     }, {
         buffer: 10
     });
-    map.addLayer(pano_layer);
-    map.addLayer(pano_layer)
+    // map.addLayer(pano_layer);
+    // map.addLayer(pano_layer);
 
 
-            if (feeder_pillar != '') {
-                map.removeLayer(feeder_pillar)
+            if (fp_unsurveyed != '') {
+                map.removeLayer(fp_unsurveyed)
             }
 
-            feeder_pillar = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-                layers: 'cite:tbl_feeder_pillar',
+            fp_unsurveyed = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:fp_unsurveyed',
                 format: 'image/png',
                 cql_filter: "ba ILIKE '%" + param + "%'",
                 maxZoom: 21,
@@ -276,8 +343,44 @@
                 buffer: 10
             })
 
-            map.addLayer(feeder_pillar)
-            feeder_pillar.bringToFront()
+            map.addLayer(fp_unsurveyed)
+            fp_unsurveyed.bringToFront()
+
+
+            if (fp_surveyed != '') {
+                map.removeLayer(fp_surveyed)
+            }
+
+            fp_surveyed = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:fp_surveyed',
+                format: 'image/png',
+                cql_filter: q_cql,
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+
+            map.addLayer(fp_surveyed)
+            fp_surveyed.bringToFront()
+
+
+            if (fp_with_defects != '') {
+                map.removeLayer(fp_with_defects)
+            }
+
+            fp_with_defects = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:fp_with_defects',
+                format: 'image/png',
+                cql_filter: q_cql,
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+
+            map.addLayer(fp_with_defects)
+            fp_with_defects.bringToFront()
 
 
             addGroupOverLays()
@@ -296,7 +399,9 @@
                 "POI": {
                     'BA': boundary,
                     'Pano': pano_layer,
-                    'Feeder Pillar' : feeder_pillar,
+                    'Unsurveyed' : fp_unsurveyed,
+                    'Surveyed with defects' : fp_with_defects,
+                    'Surveyed Without defects' : fp_surveyed,
                 }
             };
             //add layer control on top right corner of map
@@ -313,23 +418,23 @@
         function showModalData(data, id) {
             var str = '';
             // console.log(id);
-            var idSp = id.split('.');
+            // var idSp = id.split('.');
 
-            $('#exampleModalLabel').html("FeederPillar Info")
-            str = ` <tr><th>Zone</th><td>${data.zone}</td> </tr>
-        <tr><th>Ba</th><td>${data.ba}</td> </tr>
-        <tr><th>Area</th><td>${data.area}</td> </tr>
-        <tr><th>Feeder Involved</th><td>${data.feeder_involved}</td> </tr>
-        <tr><th>Coordinate</th><td>${data.coordinate}</td> </tr>
-        <tr><th>Created At</th><td>${data.created_at}</td> </tr>
-        <tr><th>Detail</th><td class="text-center">    <a href="/{{ app()->getLocale() }}/feeder-pillar/${idSp[1]}" target="_blank" class="btn btn-sm btn-secondary">Detail</a>
-            </td> </tr>
+        //     $('#exampleModalLabel').html("FeederPillar Info")
+        //     str = ` <tr><th>Zone</th><td>${data.zone}</td> </tr>
+        // <tr><th>Ba</th><td>${data.ba}</td> </tr>
+        // <tr><th>Area</th><td>${data.area}</td> </tr>
+        // <tr><th>Feeder Involved</th><td>${data.feeder_involved}</td> </tr>
+        // <tr><th>Coordinate</th><td>${data.coordinate}</td> </tr>
+        // <tr><th>Created At</th><td>${data.created_at}</td> </tr>
+        // <tr><th>Detail</th><td class="text-center">    <a href="/{{ app()->getLocale() }}/feeder-pillar/${idSp[1]}" target="_blank" class="btn btn-sm btn-secondary">Detail</a>
+        //     </td> </tr>
 
-        `
+        // `
 
             // $("#my_data").html(str);
             // $('#myModal').modal('show');
-            openDetails(idSp[1]);
+            openDetails(id);
 
 }
 
@@ -341,5 +446,9 @@ function openDetails(id) {
 
 
 }
+
+
+
+
     </script>
 @endsection

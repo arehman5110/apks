@@ -16,8 +16,8 @@
         }
 
         /* .table-responsive::-webkit-scrollbar {
-            display: none;
-        } */
+                display: none;
+            } */
     </style>
 @endsection
 
@@ -271,14 +271,14 @@
                     $(row).find('td:eq(4)').addClass('text-center');
                 }
             })
-            $('#excelBa').on('change', function () {
+            $('#excelBa').on('change', function() {
                 console.log("dsfdsf");
                 excel_ba = $(this).val();
                 console.log(excel_ba);
-        table.ajax.reload(function () {
-            table.draw('page');
-        });
-    })
+                table.ajax.reload(function() {
+                    table.draw('page');
+                });
+            })
 
 
             $('#excel_from_date').on('change', function() {

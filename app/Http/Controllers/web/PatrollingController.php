@@ -104,7 +104,10 @@ class PatrollingController extends Controller
 
         if ($request->ajax()) {
 
-    $query = Patroling::where('ba',  $ba)-> select(
+            $query = Patroling::where('ba', $ba)
+    ->whereNotNull('km')  // Check for non-null values
+     
+    ->select(
         '*',
         \DB::raw("st_x(geom_start) as start_x"),
         \DB::raw("st_y(geom_start) as start_y"),
@@ -114,6 +117,9 @@ class PatrollingController extends Controller
     ->orderByDesc('date')
     ->get()
     ->makeHidden(['geom']);
+
+
+
 
             return Datatables::of($query)->make(true);
         }

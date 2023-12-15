@@ -1,3 +1,5 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
+
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
 <link rel="stylesheet" href="{{ URL::asset('map/draw/leaflet.draw.css') }}" />
 
@@ -15,18 +17,34 @@
     var layerControl = '';
     var boundary = '';
     var zoom = 8;
-
+    var from_date = ''
+    var to_date = ''
     // for layers
     var substation = '';
-    var feeder_pillar = '';
-    var tbl_savr = '';
-    var link_box = '';
-    var cable_bridge = '';
+    var  substation_with_defects = '';
+    var substation_without_defects ='';
+
+    var fp_unsurveyed = '';
+    var fp_surveyed ='';
+    var fp_with_defects ='';
+
+    var ts_without_defects = '';
+    var ts_unsurveyed ='';
+    var ts_with_defects ='';  
+
+    var cb_without_defects = '';
+    var cb_unsurveyed ='';
+    var cb_with_defects ='';
+
+    var lb_without_defects = '';
+    var lb_unsurveyed ='';
+    var lb_with_defects ='';
+
     var road = '';
     var unservey = '';
     var pano_layer = '';
-    var  substation_with_defects = '';
-    var substation_without_defects ='';
+    
+
 
     var popup = L.popup();
 
@@ -67,10 +85,21 @@
                 sel_lyr = substation_without_defects;
 
             }
-            else if (param == 'feeder_pillar') {
-                sel_lyr = feeder_pillar;
+            else if (param == 'fp_unsurveyed') {
+                sel_lyr = fp_unsurveyed;
 
-            } else if (param == 'main_substation') {
+            }
+            else if (param == 'fp_surveyed') {
+                sel_lyr = fp_surveyed;
+
+            }
+
+            else if (param == 'fp_with_defects') {
+                sel_lyr = fp_with_defects;
+
+            }
+            
+            else if (param == 'main_substation') {
                 sel_lyr = substation;
 
             } else if (param == 'tbl_savr') {
@@ -79,8 +108,29 @@
             } else if (param == 'link_box') {
                 sel_lyr = link_box;
 
-            } else if (param == 'cable_bridge') {
-                sel_lyr = cable_bridge;
+            } else if (param == 'cb_unsurveyed') {
+                sel_lyr = cb_unsurveyed;
+
+            }
+            else if (param == 'cb_with_defects') {
+                sel_lyr = cb_with_defects;
+
+            }
+            else if (param == 'cb_without_defects') {
+                sel_lyr = cb_without_defects;
+
+            }
+
+            else if (param == 'ts_unsurveyed') {
+                sel_lyr = ts_unsurveyed;
+
+            }
+            else if (param == 'ts_with_defects') {
+                sel_lyr = ts_with_defects;
+
+            }
+            else if (param == 'ts_without_defects') {
+                sel_lyr = ts_without_defects;
 
             }
             else if (param == 'road') {
@@ -422,4 +472,34 @@
         });
 
     }
+
+
+    function filterByDate(param) {
+            var inBa = $('#search_ba').val()
+            if (param.id == 'from_date') {
+                from_date = param.value;
+            } else if (param.id == 'to_date') {
+                to_date = param.value;
+            }  
+            callLayers(inBa)
+
+        }
+
+
+        function  resetMapFilters() {
+            
+                from_date = '';
+                to_date = '';
+                $('#from_date , #to_date , .tt-input').val('')
+
+                if (ba == '') {
+                    addRemoveBundary('', 2.75101756479656, 101.304931640625)
+                    $('#search_ba').empty().append(`<option value="" hidden>Select ba</option>`);
+                } else {
+                    callLayers(ba);
+                }
+                if (marker != '') {
+                map.removeLayer(marker)
+            }
+        }
 </script>

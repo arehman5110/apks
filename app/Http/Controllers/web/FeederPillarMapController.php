@@ -14,7 +14,7 @@ class FeederPillarMapController extends Controller
     {
 
     $data = FeederPillar::find($id);
-    return $data ?  view('feeder-pillar.edit-form', ['data' => $data]) : abort(404);
+    return $data ?  view('feeder-pillar.edit-form', ['data' => $data ,'disabled'=>true]) : abort(404);
 
 }
 
@@ -87,4 +87,23 @@ public function update(Request $request, $language, $id)
         ->with('failed', 'Form Update Failed');
 }
 }
+
+
+public function seacrh($lang ,  $q)
+{
+
+    $ba = \Illuminate\Support\Facades\Auth::user()->ba;
+
+    $data = FeederPillar::where('ba', 'LIKE', '%' . $ba . '%')->where('id' , 'LIKE' , '%' . $q . '%')->select('id')->limit(10)->get();
+
+    return response()->json($data, 200);
+}
+
+public function seacrhCoordinated($lang , $name)
+    {
+        $name = urldecode($name);
+        $data = FeederPillar::where('id' , $name )->select('id', \DB::raw('ST_X(geom) as x'),\DB::raw('ST_Y(geom) as y'),)->first();
+
+        return response()->json($data, 200);
+    }
 }

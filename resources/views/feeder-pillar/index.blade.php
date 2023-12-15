@@ -170,7 +170,7 @@
                     {
                         data:'id',
                         name:'id'
-                    },    
+                    },
                     {
                         data: 'zone',
                         name: 'zone'
@@ -253,6 +253,8 @@
                 var modal = $(this);
                 $('#remove-foam').attr('action', '/' + langs + '/feeder-pillar/' + id)
             });
+
+          
 
         });
     </script>
