@@ -42,7 +42,10 @@ class CableBridgeController extends Controller
             });
 
             return datatables()
-                ->of($result->get())
+                ->of($result->get())->addColumn('cable_bridge_id', function ($row) {
+                    
+                    return "CB-" .$row->id;
+                })
                 ->make(true);
         }
         return view('cable-bridge.index');

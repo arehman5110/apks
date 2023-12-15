@@ -105,10 +105,7 @@
             } else if (param == 'tbl_savr') {
                 sel_lyr = tbl_savr;
 
-            } else if (param == 'link_box') {
-                sel_lyr = link_box;
-
-            } else if (param == 'cb_unsurveyed') {
+            }  else if (param == 'cb_unsurveyed') {
                 sel_lyr = cb_unsurveyed;
 
             }
@@ -131,6 +128,19 @@
             }
             else if (param == 'ts_without_defects') {
                 sel_lyr = ts_without_defects;
+
+            }
+
+            else if (param == 'lb_unsurveyed') {
+                sel_lyr = lb_unsurveyed;
+
+            }
+            else if (param == 'lb_with_defects') {
+                sel_lyr = lb_with_defects;
+
+            }
+            else if (param == 'lb_without_defects') {
+                sel_lyr = lb_without_defects;
 
             }
             else if (param == 'road') {
@@ -439,6 +449,8 @@
         } else {
             callLayers(ba);
         }
+
+        $('body').addClass('sidebar-collapse');
 
     });
 

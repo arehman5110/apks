@@ -46,9 +46,12 @@ class FPController extends Controller
                     'visit_date',
                     'total_defects'
                 );
-            });
+            }); 
 
-            return datatables()->of($result->get())->make(true);
+            return datatables()->of($result->get())->addColumn('feeder_pillar_id', function ($row) {
+                    
+                return "FP-" .$row->id;
+            })->make(true);
         }
         return view('feeder-pillar.index');
     }

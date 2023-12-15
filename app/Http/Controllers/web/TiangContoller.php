@@ -44,7 +44,7 @@ class TiangContoller extends Controller
             }
 
             $result->when(true, function ($query) {
-                return $query->select('id', 'ba', 'review_date', 'tiang_no','total_defects');
+                return $query->select('id', 'ba', 'review_date', 'tiang_no', 'total_defects');
             });
 
             return datatables()
@@ -86,7 +86,7 @@ class TiangContoller extends Controller
             $data->pvc_span = $request->has('pvc_span') ? json_encode($request->pvc_span) : null;
             $data->bare_span = $request->has('bare_span') ? json_encode($request->bare_span) : null;
             $data->jarak_kelegaan = $request->jarak_kelegaan;
-            $data->arus_pada_tiang = $request->arus_pada_tiang;
+
             $data->ba = $request->ba;
             $data->fp_name = $request->fp_name;
             $data->review_date = $request->review_date;
@@ -116,9 +116,8 @@ class TiangContoller extends Controller
             $defectsKeys['tapak_condition'] = ['road', 'side_walk', 'vehicle_entry'];
             $defectsKeys['kawasan'] = ['road', 'bend', 'forest', 'other'];
 
-            
-            $defectsImg = ['tapak_road_img', 'tapak_sidewalk_img', 'tapak_no_vehicle_entry_img','kawasan_bend_img', 'kawasan_road_img', 'kawasan_forest_img', 'kawasan_other_img' ,'pole_image_1','pole_image_2'];
-           
+            $defectsImg = ['tapak_road_img', 'tapak_sidewalk_img', 'tapak_no_vehicle_entry_img', 'kawasan_bend_img', 'kawasan_road_img', 'kawasan_forest_img', 'kawasan_other_img', 'pole_image_1', 'pole_image_2'];
+
             $total_defects = 0;
             foreach ($defectsKeys as $key => $defect) {
                 $def = [];
@@ -127,7 +126,7 @@ class TiangContoller extends Controller
                 foreach ($defect as $item) {
                     if ($request->has("$key.$item")) {
                         $def[$item] = true;
-                        
+
                         if ($key != 'tapak_condition' && $key != 'kawasan') {
                             if ($request->{$key . '_image'} != '') {
                                 foreach ($request->{$key . '_image'} as $keyy => $file) {
@@ -150,24 +149,24 @@ class TiangContoller extends Controller
                     $def['other_input'] = $request->{"$key.other_input"};
                 }
                 $data->{$key} = json_encode($def);
+
+                $total_defects++;
                 if ($key != 'tapak_condition' && $key != 'kawasan') {
-                    $total_defects ++;
                     $data->{$key . '_image'} = json_encode($arr);
                 }
             }
-           
-            foreach ($defectsImg as $file) {
-                 
-                    if (is_a($request->{$file}, 'Illuminate\Http\UploadedFile') && $request->{$file}->isValid()) {
-                        $uploadedFile = $request->{$file};
-                        $img_ext = $request->{$file}->getClientOriginalExtension();
-                        $filename = $file . '-' . strtotime(now()) . '.' . $img_ext;
-                        $uploadedFile->move($destinationPath, $filename);
-                        $data->{$file} = $destinationPath . $filename;
-                    }
-               
-            }
 
+            foreach ($defectsImg as $file) {
+                if (is_a($request->{$file}, 'Illuminate\Http\UploadedFile') && $request->{$file}->isValid()) {
+                    $uploadedFile = $request->{$file};
+                    $img_ext = $request->{$file}->getClientOriginalExtension();
+                    $filename = $file . '-' . strtotime(now()) . '.' . $img_ext;
+                    $uploadedFile->move($destinationPath, $filename);
+                    $data->{$file} = $destinationPath . $filename;
+                }
+            }
+            $request->arus_pada_tiang == 'Yes' ? $total_defects++ : '';
+            $data->arus_pada_tiang = $request->arus_pada_tiang;
             // return $data;
             $data->total_defects = $total_defects;
 
@@ -179,12 +178,12 @@ class TiangContoller extends Controller
             // return "Sds";
             $data->save();
             // return 'asdasd';
-        
+
             return redirect()
                 ->route('tiang-talian-vt-and-vr.index', app()->getLocale())
                 ->with('success', 'Form Intserted');
         } catch (\Throwable $th) {
-            return $th->getMessage();
+            // return $th->getMessage();
             return redirect()
                 ->route('tiang-talian-vt-and-vr.index', app()->getLocale())
                 ->with('failed', 'Form Intserted Failed');
@@ -222,6 +221,7 @@ class TiangContoller extends Controller
     {
         $data = $this->tiangRepository->getRecoreds($id);
 
+        // return $data->tapak_condition;
         return $data ? view('Tiang.edit', ['data' => $data]) : abort(404);
     }
 
@@ -267,9 +267,9 @@ class TiangContoller extends Controller
             }
 
             $data->ba = $request->ba;
- 
+
             $data->fp_name = $request->fp_name;
-     
+
             $data->fp_road = $request->fp_road;
             $data->section_from = $request->section_from;
             $data->section_to = $request->section_to;
@@ -296,7 +296,7 @@ class TiangContoller extends Controller
             $defectsKeys['tapak_condition'] = ['road', 'side_walk', 'vehicle_entry'];
             $defectsKeys['kawasan'] = ['road', 'bend', 'forest', 'other'];
 
-            $total_defects =0;
+            $total_defects = 0;
             foreach ($defectsKeys as $key => $defect) {
                 $def = [];
                 $arr = [];
@@ -304,7 +304,7 @@ class TiangContoller extends Controller
                 foreach ($defect as $item) {
                     if ($request->has("$key.$item")) {
                         $def[$item] = true;
-                        $total_defects  ++;
+                        $total_defects++;
                     } else {
                         $def[$item] = false;
                     }
@@ -315,22 +315,16 @@ class TiangContoller extends Controller
                 }
                 $data->{$key} = json_encode($def);
 
-                if ($key != 'tapak_condition' && $key != 'kawasan') {
-                    $total_defects ++; 
-                }
-                
+                $total_defects++;
             }
 
-            
-
             $data->total_defects = $request->total_defects;
-            
+
             $data->jarak_kelegaan = $request->jarak_kelegaan;
 
             $data->talian_spec = $request->talian_spec;
 
             $data->arus_pada_tiang = $request->arus_pada_tiang;
-            
 
             $data->update();
 
@@ -338,7 +332,7 @@ class TiangContoller extends Controller
                 ->route('tiang-talian-vt-and-vr.index', app()->getLocale())
                 ->with('success', 'Form Update');
         } catch (\Throwable $th) {
-            return $th->getMessage();
+            // return $th->getMessage();
             return redirect()
                 ->route('tiang-talian-vt-and-vr.index', app()->getLocale())
                 ->with('failed', 'Form Update Failed');

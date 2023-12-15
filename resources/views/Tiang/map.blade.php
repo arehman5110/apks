@@ -102,27 +102,27 @@
             <span class="text-danger" id="er-select-layer"></span>
 
             <div class="d-sm-flex">
-                <div class="px-4">
-                    <input type="radio" name="select_layer" id="ts_unsurveyed" class="unsurveyed" value="ts_unsurveyed" onchange="selectLayer(this.value)">
+                <div class="px-3 d-flex">
+                    <input type="radio" name="select_layer" id="ts_unsurveyed" class="unsurveyed m-1" value="ts_unsurveyed" onchange="selectLayer(this.value)">
                     <label for="ts_unsurveyed">Unsurveyed</label>
                 </div>
 
-                <div class="px-4">
+                <div class="px-3 d-flex">
 
-                    <input type="radio" name="select_layer" id="ts_with_defects" class="with_defects" value="ts_with_defects" onchange="selectLayer(this.value)">
+                    <input type="radio" name="select_layer" id="ts_with_defects" class="with_defects m-1" value="ts_with_defects" onchange="selectLayer(this.value)">
                     <label for="ts_with_defects">Surveyed with defects</label>
                 </div>
 
-                <div class="px-4">
+                <div class="px-3 d-flex">
 
-                    <input type="radio" name="select_layer" id="ts_without_defects" class="without_defects" value="ts_without_defects" onchange="selectLayer(this.value)">
+                    <input type="radio" name="select_layer" id="ts_without_defects" class="without_defects m-1" value="ts_without_defects" onchange="selectLayer(this.value)">
                     <label for="ts_without_defects">Surveyed without defects</label>
                 </div>
 
 
-                <div class="px-4">
+                <div class="px-3 d-flex">
 
-                    <input type="radio" name="select_layer" id="select_layer_pano" value="pano" onchange="selectLayer(this.value)">
+                    <input type="radio" name="select_layer" id="select_layer_pano" class="m-1 pano" value="pano" onchange="selectLayer(this.value)">
                     <label for="select_layer_pano">Pano</label>
                 </div>
 
@@ -505,27 +505,27 @@
         }
 
         function showModalData(data, id) {
-            var str = '';
-            gid = id.split('.')
-            console.log(gid);
-            $('#exampleModalLabel').html("Tiang Info")
-            str = ` <tr>
-        <tr><th>Ba</th><td>${data.ba}</td> </tr>
-        <tr><th>Section From</th><td>${data.section_from}</td> </tr>
-        <tr><th>Section To</th><td>${data.section_to}</td> </tr>
-        <th>Actual Date</th><td>${data.actual_date}</td> </tr>
-        <th>Planed Date</th><td>${data.planed_date}</td> </tr>
+//             var str = '';
+//             gid = id.split('.')
+//             console.log(gid);
+//             $('#exampleModalLabel').html("Tiang Info")
+//             str = ` <tr>
+//         <tr><th>Ba</th><td>${data.ba}</td> </tr>
+//         <tr><th>Section From</th><td>${data.section_from}</td> </tr>
+//         <tr><th>Section To</th><td>${data.section_to}</td> </tr>
+//         <th>Actual Date</th><td>${data.actual_date}</td> </tr>
+//         <th>Planed Date</th><td>${data.planed_date}</td> </tr>
 
-        <tr><th>Coordinate</th><td>${data.coordinate}</td> </tr>
-        <tr><th>Created At</th><td>${data.created_at}</td> </tr>
-        <tr><th>Detail</th><td class="text-center">    <button type="button" onclick="openDetails(${gid[1]})" class="btn btn-sm btn-secondary">Edit</button>
-</td></tr>
-        <tr><th>Detail</th><td class="text-center">    <a href="/{{ app()->getLocale() }}/tiang-talian-vt-and-vr/${gid[1]}" target="_blank" class="btn btn-sm btn-secondary">Detail</a>
-            </td> </tr>
-        `
+//         <tr><th>Coordinate</th><td>${data.coordinate}</td> </tr>
+//         <tr><th>Created At</th><td>${data.created_at}</td> </tr>
+//         <tr><th>Detail</th><td class="text-center">    <button type="button" onclick="openDetails(${gid[1]})" class="btn btn-sm btn-secondary">Edit</button>
+// </td></tr>
+//         <tr><th>Detail</th><td class="text-center">    <a href="/{{ app()->getLocale() }}/tiang-talian-vt-and-vr/${gid[1]}" target="_blank" class="btn btn-sm btn-secondary">Detail</a>
+//             </td> </tr>
+//         `
             // $("#my_data").html(str);
             // $('#myModal').modal('show');
-            openDetails(gid[1])
+            openDetails(data.id)
 
         }
 

@@ -1156,12 +1156,12 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <input type="checkbox" name="kawasan[raod]" id="area_raod"
+                                                    <input type="checkbox" name="kawasan[road]" id="area_road"
                                                         class="form-check">
-                                                    <label for="area_raod"> {{ __('messages.Road') }}</label>
+                                                    <label for="area_road"> {{ __('messages.Road') }}</label>
                                                 </td>
                                                 <td>
-                                                    <input type="file" name="kawasan_road_img" id="area_raod-img"
+                                                    <input type="file" name="kawasan_road_img" id="area_road-img"
                                                         class="form-control d-none" accept="image/*">
                                                 </td>
                                             </tr>
@@ -1249,14 +1249,14 @@
                                         <div class="row">
                                             <div class="col-md-4 d-flex">
                                                 <input type="radio" name="arus_pada_tiang" id="arus_pada_tiang_no"
-                                                    class="form-check" value="no"><label for="arus_pada_tiang_no">
+                                                    class="form-check" value="No"><label for="arus_pada_tiang_no">
 
                                                     {{ __('messages.no') }}</label>
                                             </div>
 
                                             <div class="col-md-4 d-flex">
                                                 <input type="radio" name="arus_pada_tiang" id="arus_pada_tiang_yes"
-                                                    class="form-check" value="yes"><label
+                                                    class="form-check" value="Yes"><label
                                                     for="arus_pada_tiang_yes">
                                                     {{ __('messages.yes') }}</label>
                                             </div>
