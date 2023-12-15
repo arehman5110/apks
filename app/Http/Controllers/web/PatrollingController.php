@@ -105,7 +105,8 @@ class PatrollingController extends Controller
         if ($request->ajax()) {
 
             $query = Patroling::where('ba', $ba)
-    ->whereNotNull('km')  // Check for non-null values
+    ->whereNotNull('km')->where('km','!=','0')
+        // Check for non-null values
      
     ->select(
         '*',

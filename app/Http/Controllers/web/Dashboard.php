@@ -12,6 +12,18 @@ class Dashboard extends Controller
 {
     //
 
+
+    function patrol_graph(){
+        $ba=Auth::user()->ba;
+        if($ba!=''){
+        $query="select ba, vist_date::date,km from patroling where  vist_date is not null and km is not null and km<>0 and ba='$ba'";
+        }else{
+            $query="select ba, vist_date::date,km from patroling where  vist_date is not null and km is not null and km<>0 "; 
+        }
+        $data = DB::select($query); 
+        return response()->json($data);
+    }
+
     public function index()
     {
         try {
@@ -76,21 +88,21 @@ class Dashboard extends Controller
             (select round(sum(km),2) from patroling) as km,
             (select sum(vandalism_status)+sum(leaning_status)+sum(rust_status)+sum(advertise_poster_status)+sum(bushes_status)+sum(cover_status) from 	tbl_link_box_counts ) as lb,
             (SELECT sum(vandalism_status+pipe_status+collapsed_status+rust_status+bushes_status) FROM public.cable_bridge_counts) as cb,
-            SELECT sum(tinag_dimm+tiang_cracked+tiang_leaning+tiang_creepers+tiang_other+ 
+            (SELECT sum(tinag_dimm+tiang_cracked+tiang_leaning+tiang_creepers+tiang_other+ 
             talian_joint+talian_ground+talian_need_rentis+talian_other+umbang_breaking+ 
             umbang_creepers+umbang_cracked+umbang_stay_palte+umbang_other+ipc_burn+ 
             ipc_other+blackbox_cracked+blackbox_other+jumper_sleeve+jumper_burn+ 
             jumper_other+kilat_broken+kilat_other+servis_roof+servis_won_piece+
             servis_other+pembumian_netural+pembumian_other+bekalan_dua_damage+ 
-            bekalan_dua_other+kaki_lima_date_wire+kaki_lima_burn+kaki_lima_other) as savr
-            FROM public.savr_counts  
+            bekalan_dua_other+kaki_lima_date_wire+kaki_lima_burn+kaki_lima_other) 
+            FROM public.savr_counts ) as savr
 
             ";
         }   
      //   return $query; 
         $data = DB::select($query);
 
-         // return $data;
+        //  return $data;
         if($data){
         return view('dashboard',['data'=>$data[0]]);
         }else{
@@ -98,7 +110,7 @@ class Dashboard extends Controller
         } 
  
     } catch (\Throwable $th) {
-       // return $error->getMessage();
+      //  return $error->getMessage();
       //  return $th;
        return redirect()->route('third-party-digging.index',app()->getLocale());
     }

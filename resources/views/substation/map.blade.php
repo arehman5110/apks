@@ -452,7 +452,7 @@
 
         function showModalData(data, id) {
             var str = '';
-            var idSp = id.split('.');
+            var idSp = id;//.split('.');
 
             $('#exampleModalLabel').html("Substation Info")
             str = ` <tr><th>Zone</th><td>${data.zone}</td> </tr>

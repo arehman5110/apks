@@ -176,13 +176,13 @@
                     // console.log(data.features[0].id);
                     if (data.features.length != 0) {
                         if (param == 'substation') {
-                            substationModal(data.features[0].properties, data.features[0].id);
+                            substationModal(data.features[0].properties, data.features[0].properties.id);
 
                         }else if(param == 'road') {
-                            roadModal(data.features[0].properties, data.features[0].id)
+                            roadModal(data.features[0].properties, data.features[0].properties.id)
 
                         }else {
-                            showModalData(data.features[0].properties, data.features[0].id);
+                            showModalData(data.features[0].properties, data.features[0].properties.id);
                         }
                     }
 

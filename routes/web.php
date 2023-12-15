@@ -178,6 +178,8 @@ Route::group(
                 Route::get('/patrolling-detail/{id}', [PatrollingController::class, 'getRoad'])->name('patrolling-detail');
 
                 Route::get('/dashboard', [Dashboard::class, 'index'])->name('dashboard');
+                Route::get('/patrol_graph', [Dashboard::class, 'patrol_graph'])->name('patrol_graph');
+
 
                 Route::view('/map-2', 'map')->name('map-2');
 
