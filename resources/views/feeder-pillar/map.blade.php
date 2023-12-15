@@ -434,7 +434,7 @@
 
             // $("#my_data").html(str);
             // $('#myModal').modal('show');
-            openDetails(id);
+            openDetails(data.id);
 
 }
 

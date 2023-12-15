@@ -133,7 +133,7 @@
                         <input class="typeahead" type="text" placeholder="search id" class="form-control">
                     </div>
                 </div>
-                
+
             </div>
            
         </div>
@@ -488,7 +488,7 @@
 
             // $("#my_data").html(str);
             // $('#myModal').modal('show');
-            openDetails(id);
+            openDetails(data.id);
 
         }
 

@@ -168,8 +168,8 @@
                 },
                 columns: [
                     {
-                        data:'id',
-                        name:'id'
+                        data:'feeder_pillar_id',
+                        name:'feeder_pillar_id'
                     },
                     {
                         data: 'zone',
@@ -219,7 +219,7 @@
 
                 ],
                 order: [
-                    [4, 'desc']
+                    [0, 'desc']
                 ]
             })
 

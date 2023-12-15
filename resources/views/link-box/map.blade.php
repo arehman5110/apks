@@ -96,17 +96,17 @@
             <span class="text-danger" id="er-select-layer"></span>
 
             <div class="d-sm-flex">
-                <div class="">
+                <div class="mx-4">
                     <input type="radio" name="select_layer" id="lb_unsurveyed" class="unsurveyed" value="lb_unsurveyed" onchange="selectLayer(this.value)">
                     <label for="lb_unsurveyed">Unsurveyed</label>
                 </div>
 
-                <div class="">
+                <div class="mx-4">
                     <input type="radio" name="select_layer" id="lb_with_defects" class="with_defects" value="lb_with_defects" onchange="selectLayer(this.value)">
                     <label for="lb_with_defects">Surveyed with defects</label>
                 </div>
 
-                <div class="">
+                <div class="mx-4">
                     <input type="radio" name="select_layer" id="lb_without_defects" class="without_defects" value="lb_without_defects" onchange="selectLayer(this.value)">
                     <label for="lb_without_defects">Surveyed without defects</label>
                 </div>
@@ -124,12 +124,7 @@
                 </div>
             </div>
  </div>
-            {{-- <select name="select_layer" id="select_layer" onchange="selectLayer(this.value)" class="form-control">
-                <option value="" hidden>select layer</option>
-                <option value="substation">Substation</option>
-                <option value="pano">Pano</option>
-                <option value="link_box">Link Box</option>
-            </select> --}}
+            
         </div>
 
         <!--  START MAP CARD DIV -->
@@ -500,7 +495,7 @@
             // $("#my_data").html(str);
             // $('#myModal').modal('show');
 
-            openDetails(id);
+            openDetails(data.id);
 
         }
 

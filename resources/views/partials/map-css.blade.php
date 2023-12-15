@@ -91,6 +91,17 @@
         border-color: #FF0000;
     }
 
+    input[type="radio"].pano {
+
+background-color: blue;
+border-color: blue;
+}
+
+input[type="radio"]:checked.pano {
+background-color: blue;
+border-color: blue;
+}
+
     .tt-menu {
     z-index: 9999999999999 !important;
 }

@@ -703,13 +703,14 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <input type="checkbox" name="kawasan[raod]" id="area_raod"
-                                                        class="form-check" {{ checkCheckBox('raod', $data->kawasan) }}>
-                                                    <label for="area_raod"> {{ __('messages.Road') }}</label>
+                                                    
+                                                    <input type="checkbox" name="kawasan[road]" id="area_road"
+                                                        class="form-check" {{ checkCheckBox('road', $data->kawasan) }}>
+                                                    <label for="area_road"> {{ __('messages.Road') }}</label>
                                                 </td>
                                                 <td>
-                                                    <input type="file" name="kawasan_road_img" id="area_raod-img"
-                                                        class="form-control @if (checkCheckBox('raod', $data->kawasan) != 'checked') d-none @endif">
+                                                    <input type="file" name="kawasan_road_img" id="area_road-img"
+                                                        class="form-control @if (checkCheckBox('road', $data->kawasan) != 'checked') d-none @endif">
                                                 </td>
                                                 <td>
                                                     @if ($data->kawasan_road_img != '' && file_exists(public_path($data->kawasan_road_img)))
@@ -840,19 +841,19 @@
                                         <div class="row">
                                             <div class="col-md-4 d-flex">
                                                 <input type="radio" name="arus_pada_tiang" id="arus_pada_tiang_no"
-                                                    class="form-check" value="no"
-                                                    {{ $data->arus_pada_tiang === 'no' ? 'checked' : '' }}>
+                                                    class="form-check" value="No"
+                                                    {{ $data->arus_pada_tiang === 'No' ? 'checked' : '' }}>
                                                 <label for="arus_pada_tiang_no">{{ __('messages.no') }}</label>
                                             </div>
 
                                             <div class="col-md-4 d-flex">
                                                 <input type="radio" name="arus_pada_tiang" id="arus_pada_tiang_yes"
-                                                    class="form-check" value="yes"
-                                                    {{ $data->arus_pada_tiang === 'yes' ? 'checked' : '' }}>
+                                                    class="form-check" value="Yes"
+                                                    {{ $data->arus_pada_tiang === 'Yes' ? 'checked' : '' }}>
                                                 <label for="arus_pada_tiang_yes">{{ __('messages.yes') }}</label>
                                             </div>
 
-                                            <div class="col-md-4 @if ($data->arus_pada_tiang == 'no' || $data->arus_pada_tiang == '') d-none @endif"
+                                            <div class="col-md-4 @if ($data->arus_pada_tiang == 'No' || $data->arus_pada_tiang == '') d-none @endif"
                                                 id="arus_pada_tiang_amp_div">
                                                 <label for="arus_pada_tiang_amp">{{ __('messages.Amp') }}</label>
                                                 <input type="text" name="arus_pada_tiang_amp" id="arus_pada_tiang_amp"
