@@ -28,7 +28,7 @@ class Dashboard extends Controller
             $substation = "select ba, visit_date::date,sum(total_defects) as bar from tbl_substation where  visit_date is not null and   total_defects<>0 group by ba,visit_date ";
             $feeder_pillar = "select ba, visit_date::date,sum(total_defects) as bar from tbl_substation where  visit_date is not null and   total_defects<>0 group by ba,visit_date ";
             $link_box = "select ba, visit_date::date,sum(total_defects) as bar from tbl_link_box where  visit_date is not null and   total_defects<>0 group by ba,visit_date ";
-            $link_box = "select ba, visit_date::date,sum(total_defects) as bar from tbl_cable_bridge where  visit_date is not null and   total_defects<>0 group by ba,visit_date ";
+            $cable_bridge = "select ba, visit_date::date,sum(total_defects) as bar from tbl_cable_bridge where  visit_date is not null and   total_defects<>0 group by ba,visit_date ";
             $tiang = "select ba, review_date::date as visit_date,sum(total_defects) as bar from tbl_cable_bridge where  visit_date is not null and   total_defects<>0 group by ba,visit_date ";
         }
         $data['patrolling'] = DB::select($patrolling);
