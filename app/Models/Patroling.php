@@ -10,6 +10,6 @@ class Patroling extends Model
     use HasFactory;
 
     public $table = 'patroling';
-    protected $fillable = ['cycle', 'date', 'time', 'geom', 'km', 'wp_name', 'geom_start' ,'reading_start', 'reading_end' ,'image_reading_start' ,'image_reading_end' ,'created_by' , 'status' , 'geom_end'  ];
+    protected $fillable = ['cycle', 'date', 'time', 'geom', 'km', 'wp_name','ba', 'geom_start' ,'reading_start', 'reading_end' ,'image_reading_start' ,'image_reading_end' ,'created_by' , 'status' , 'geom_end'  ];
 
 }

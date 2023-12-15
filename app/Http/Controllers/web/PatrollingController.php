@@ -103,11 +103,13 @@ class PatrollingController extends Controller
 
         $result = Patroling::query();
         
-
-        if ($request->filled('ba')) {
-            $ba = Auth::user()->ba ?? $request->ba;
+        //return $request->filled('ba');
+        //if ($request->filled('ba')) {
+            $ba = Auth::user()->ba ;
+            if($ba!=''){
             $result->where('ba', $ba);
-        }
+            }
+       // }
         if ($request->ajax()) {
 
   
