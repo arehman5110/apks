@@ -112,7 +112,7 @@
 
                             <div class="col-md-12">
                                 <div class="card p-3">
-                                <div id="container3" style="width:100%; height: 400px; margin: 0 auto"></div>
+                                <div id="substation-container" style="width:100%; height: 400px; margin: 0 auto"></div>
                                 </div>
                             </div>
 
@@ -143,7 +143,11 @@
 
                                 </div>
                             </div>
-
+                            <div class="col-md-12">
+                                <div class="card p-3">
+                                <div id="feeder_pillar-container" style="width:100%; height: 400px; margin: 0 auto"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -172,6 +176,11 @@
                                     <h3 class="text-center"> {{__("messages.total_tiang_defects")}}</h3>
                                     <p class="text-center mb-0 pb-0"><span>{{$data->savr}}</span></p>
 
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="card p-3">
+                                <div id="tinag-container" style="width:100%; height: 400px; margin: 0 auto"></div>
                                 </div>
                             </div>
 
@@ -203,6 +212,11 @@
 
                                 </div>
                             </div>
+                            <div class="col-md-12">
+                                <div class="card p-3">
+                                <div id="link_box-container" style="width:100%; height: 400px; margin: 0 auto"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -230,6 +244,12 @@
 
                                 </div>
                             </div>
+
+                            <div class="col-md-12">
+                                <div class="card p-3">
+                                <div id="cable_bridge-container" style="width:100%; height: 400px; margin: 0 auto"></div>
+                                </div>
+                            </div>
                         </div>
 
                     </div>
@@ -249,8 +269,14 @@
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
 
 <script>
-    function mainBarChart(cat,series ,id){
-    Highcharts.chart('id', {
+    function mainBarChart(cat,series ,id  ){
+        var barName = 'Defects';
+        var titleName = 'Defects';
+        if (id == "patrolling-container") {
+            barName = 'KM'
+            titleName = 'KM Patrol'
+        }
+    Highcharts.chart(id, {
         chart: {
             type: 'column'
         },
@@ -275,13 +301,13 @@
         yAxis: {
             min: 0,
             title: {
-                text: 'KM Patrol'
+                text: titleName
             }
         },
         tooltip: {
             headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                '<td style="padding:0"><b>{point.y:f}</b>km</td></tr>',
+            pointFormat: `<tr><td style="color:{series.color};padding:0">{series.name}: ${barName}</td>` +
+                `<td style="padding:0"><b>{point.y:f}</b></td></tr>`,
             footerFormat: '</table>',
             shared: true,
             useHTML: true
@@ -305,10 +331,30 @@ $.ajax({
     method: 'GET',
     async: false,
     success: function callback(data) {
-        console.log(data['patrolling']);
+        // console.log(data['patrolling']);
 
-        if (data && $data['patrolling'] != '') {
-            makeArray($data['patrolling'] , 'patrolling-container')
+        if (data && data['patrolling'] != '') {
+            makeArray(data['patrolling'] , 'patrolling-container'  )
+        }
+
+        if (data && data['substation'] != '') {
+            makeArray(data['substation'] , 'substation-container' )
+        }
+
+        if (data && data['feeder_pillar'] != '') {
+            makeArray(data['feeder_pillar'] , 'feeder_pillar-container' )
+        }
+
+        if (data && data['link_box'] != '') {
+            makeArray(data['link_box'] , 'link_box-container' )
+        }
+
+        if (data && data['cable_bridge'] != '') {
+            makeArray(data['cable_bridge'] , 'cable_bridge-container' )
+        }
+
+        if (data && data['tiang'] != '') {
+            makeArray(data['tiang'] , 'tiang-container' )
         }
         
        
@@ -321,12 +367,13 @@ $.ajax({
 
 function makeArray(data ,id) {
      
+    
     var series=[];
         var temp=[];
         var cat=[];
         for(var k=0;k<data.length;k++){
-            if(cat.includes(data[k].vist_date)==false){
-                cat.push(data[k].vist_date)
+            if(cat.includes(data[k].visit_date)==false){
+                cat.push(data[k].visit_date)
             }
         }
         for(var i=0;i<data.length;i++){
@@ -348,7 +395,7 @@ function makeArray(data ,id) {
                          len=arr.length;
                      }
                     //if(data[j].updated_at==cat[len]){
-                    var index = cat.indexOf(data[j].vist_date);
+                    var index = cat.indexOf(data[j].visit_date);
                     if(index>len){
                     for(g=len;g<index;g++){    
                     arr.push(0)
