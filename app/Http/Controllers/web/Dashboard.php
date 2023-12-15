@@ -15,12 +15,18 @@ class Dashboard extends Controller
 
     function patrol_graph(){
         $ba=Auth::user()->ba;
+        $data = [];
         if($ba!=''){
-        $query="select ba, vist_date::date,km from patroling where  vist_date is not null and km is not null and km<>0 and ba='$ba'";
+            $patrolling="select ba, vist_date::date,km as bar from patroling where  vist_date is not null and km is not null and km<>0 and ba='$ba'";
+            $substation = "select ba, visit_date::date,sum(total_defects) as bar from tbl_substation where  visit_date is not null and ba='$ba' and   total_defects<>0 group by ba,visit_date ";
         }else{
-            $query="select ba, vist_date::date,km from patroling where  vist_date is not null and km is not null and km<>0 "; 
+            $patrolling="select ba, vist_date::date,km as bar from patroling where  vist_date is not null and km is not null and km<>0 "; 
+            $substation = "select ba, visit_date::date,sum(total_defects) as bar from tbl_substation where  visit_date is not null and   total_defects<>0 group by ba,visit_date ";
+
         }
-        $data = DB::select($query); 
+        $data['patrolling'] = DB::select($patrolling);
+        $data['substation'] = DB::select($substation); 
+
         return response()->json($data);
     }
 

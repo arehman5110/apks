@@ -158,7 +158,7 @@
 
     function callSelfLayer(param) {
         // console.log("asdasdasdasdas");
-        console.log(sel_lyr);
+        // console.log(sel_lyr);
         map.off('click');
         map.on('click', function(e) {
             popup

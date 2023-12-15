@@ -29,131 +29,7 @@
             color: slategrey;
         }
     </style>
-<script src="https://code.highcharts.com/stock/highstock.js"></script>
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/modules/exporting.js"></script>
-    <script src="https://code.highcharts.com/modules/export-data.js"></script>
-
-<script>
-    function mainBarChart(cat,series){
-    Highcharts.chart('container2', {
-        chart: {
-            type: 'column'
-        },
-        credits:false,
-       
-        title: {
-            text: 'Total Data'
-        },
-        subtitle: {
-            text: 'Source:Aerosynergy'
-        },
-        xAxis: {
-            categories:cat,
-            min: 0,
-            max:3,
-            scrollbar:{
-                enabled:true
-              },
-             
-            crosshair: true
-        },
-        yAxis: {
-            min: 0,
-            title: {
-                text: 'KM Patrol'
-            }
-        },
-        tooltip: {
-            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                '<td style="padding:0"><b>{point.y:f}</b>km</td></tr>',
-            footerFormat: '</table>',
-            shared: true,
-            useHTML: true
-        },
-        plotOptions: {
-            column: {
-                pointPadding: 0.2,
-                borderWidth: 0
-            }
-        },
-        series: series
-    });
-}
-
-
-function getDateCounts(){
-
-$.ajax({
-    url: 'http://121.121.232.53:8090/en/patrol_graph',
-    dataType: 'JSON',
-    method: 'GET',
-    async: false,
-    success: function callback(data) {
-        console.log(data)
-        var series=[];
-        var temp=[];
-        var cat=[];
-        for(var k=0;k<data.length;k++){
-            if(cat.includes(data[k].vist_date)==false){
-                cat.push(data[k].vist_date)
-            }
-        }
-        for(var i=0;i<data.length;i++){
-            // if(cat.includes(data[i].updated_at)==false){
-            //     cat.push(data[i].updated_at)
-            // }
-            var username=data[i].ba;
-        if(temp.includes(username)==true){
-            continue;
-        }else{   
-            temp.push(username); 
-            var obj={};
-            obj.name=username;
-            var arr=[]
-            for(var j=0;j<data.length;j++){
-                if(data[j].ba==username){
-                     var len=0;
-                     if(arr.length>0){
-                         len=arr.length;
-                     }
-                    //if(data[j].updated_at==cat[len]){
-                    var index = cat.indexOf(data[j].vist_date);
-                    if(index>len){
-                    for(g=len;g<index;g++){    
-                    arr.push(0)
-                    }
-                    arr.push(parseInt(data[j].km));
-                    }else{
-                        arr.push(parseInt(data[j].km));
-                    }
-                    // }else{
-                    //     arr.push(0)
-                    // }
-                }
-                
-            }
-            obj.data=arr;
-            series.push(obj)
-        }
-        }
-        mainBarChart(cat,series)
-       
-       
-    }
-});
-
-
-
-}
-
-
-setTimeout(() => {
-    getDateCounts();
-}, 1000);
-</script>    
-
+@endsection
 @section('content')
     <div class=" p-4 ">
 
@@ -201,16 +77,9 @@ setTimeout(() => {
 
                             <div class="col-md-12">
                                 <div class="card p-3">
-
-                                <div id="container2" style="width:100%; height: 400px; margin: 0 auto"></div>
-
+                                <div id="patrolling-container" style="width:100%; height: 400px; margin: 0 auto"></div>
                                 </div>
                             </div>
-
-
-
-
-
                         </div>
                     </div>
                 </div>
@@ -237,6 +106,13 @@ setTimeout(() => {
                                     <h3 class="text-center"> {{__("messages.total_substation_defects")}}</h3>
                                     <p class="text-center mb-0 pb-0"><span>{{$data->substation_defects}}</span></p>
 
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-12">
+                                <div class="card p-3">
+                                <div id="container3" style="width:100%; height: 400px; margin: 0 auto"></div>
                                 </div>
                             </div>
 
@@ -361,237 +237,145 @@ setTimeout(() => {
             </div>
         </div>
 
-        {{-- <div class="accordion row" id="accordionExample">
-
-            <div class="col-md-4">
-                <div class="card ">
-                    <div class="card-header  p-2" id="thirdPartyDigingHeading">
-                        <h2 class="mb-0">
-                            <button class="btn   btn-block text-left" type="button" data-toggle="collapse"
-                                data-target="#thirdPartyDiging" aria-expanded="true" aria-controls="collapseOne">
-                                <h3> <i class="fas fa-tools"></i>{{__("messages.3rd_party_digging")}}</h3>
-                            </button>
-                        </h2>
-                    </div>
-
-                    <div id="thirdPartyDiging" class="collapse  " aria-labelledby="thirdPartyDigingHeading"
-                        data-parent="#accordionExample">
-                        <div class="card-body">
-                            <ul>
-                                <li>
-                                    <a class=" dropdown-item"
-                                        href="{{ route('third-party-digging.create', app()->getLocale()) }}">{{__("messages.create")}}</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item"
-                                        href="{{ route('third-party-digging.index', app()->getLocale()) }}">{{__("messages.index")}}</a>
-                                </li>
-
-                                <li>
-                                    <a href="/create-patrolling" class="dropdown-item">{{__("messages.patrolling")}}</a>
-                                </li>
-                                <li>
-                                    <a href="/map-1" class="dropdown-item">{{__("messages.map")}}</a>
-                                </li>
-
-                                <li>
-                                    <a href="/get-all-work-packages" class="dropdown-item">{{__("messages.sbum_approval_and_detail")}}</a>
-                                </li>
-
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card ">
-                    <div class="card-header  p-2" id="substationHeading">
-                        <h2 class="mb-0">
-                            <button class="btn   btn-block text-left" type="button" data-toggle="collapse"
-                                data-target="#substation" aria-expanded="true" aria-controls="collapseOne">
-                                <h3><i class="fas fa-building"></i> {{__("messages.substation")}}</h3>
-                            </button>
-                        </h2>
-                    </div>
-
-                    <div id="substation" class="collapse  " aria-labelledby="substationHeading"
-                        data-parent="#accordionExample">
-                        <div class="card-body">
-                            <ul>
-                                <li>
-                                    <a class=" dropdown-item"
-                                        href="{{ route('substation.create', app()->getLocale()) }}">{{__("messages.create")}}</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item"
-                                        href="{{ route('substation.index', app()->getLocale()) }}">{{__("messages.index")}}</a>
-                                </li>
-                                <li>
-                                    <a href="/substation-map" class="dropdown-item">{{__("messages.map")}}</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card ">
-                    <div class="card-header  p-2" id="feederPillarHeading">
-                        <h2 class="mb-0">
-                            <button class="btn   btn-block text-left" type="button" data-toggle="collapse"
-                                data-target="#feederPillar" aria-expanded="false" aria-controls="collapseOne">
-                                <h3><i class="fas fa-cube"></i> {{__("messages.feeder_pillar")}}</h3>
-                            </button>
-                        </h2>
-                    </div>
-
-                    <div id="feederPillar" class="collapse  " aria-labelledby="feederPillarHeading"
-                        data-parent="#accordionExample">
-                        <div class="card-body">
-                            <ul>
-                                <li>
-                                    <a class=" dropdown-item"
-                                        href="{{ route('feeder-pillar.create', app()->getLocale()) }}">{{__("messages.create")}}</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item"
-                                        href="{{ route('feeder-pillar.index', app()->getLocale()) }}">{{__("messages.index")}}</a>
-                                </li>
-                                <li>
-                                    <a href="/feeder-pillar-map" class="dropdown-item">{{__("messages.map")}}</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card ">
-                    <div class="card-header p-2" id="tiangHeading">
-                        <h2 class="mb-0">
-                            <button class="btn   btn-block text-left" type="button" data-toggle="collapse"
-                                data-target="#tiang" aria-expanded="false" aria-controls="collapseOne">
-                                <h3> <i class="fas fa-bolt"></i> {{__("messages.tiang_talian_vt_&_vr")}}</h3>
-                            </button>
-                        </h2>
-                    </div>
-
-                    <div id="tiang" class="collapse  " aria-labelledby="tiangHeading"
-                        data-parent="#accordionExample">
-                        <div class="card-body">
-                            <ul>
-                                <li>
-                                    <a class=" dropdown-item"
-                                        href="{{ route('tiang-talian-vt-and-vr.create', app()->getLocale()) }}">{{__("messages.create")}}</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item"
-                                        href="{{ route('tiang-talian-vt-and-vr.index', app()->getLocale()) }}">{{__("messages.index")}}</a>
-                                </li>
-                                <li>
-                                    <a href="/tiang-talian-vt-and-vr-map" class="dropdown-item">{{__("messages.map")}}</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="col-md-4">
-                <div class="card ">
-                    <div class="card-header  p-2" id="linkBoxHeading">
-                        <h2 class="mb-0">
-                            <button class="btn   btn-block text-left" type="button" data-toggle="collapse"
-                                data-target="#linkBox" aria-expanded="false" aria-controls="collapseOne">
-                                <h3><i class="fas fa-link"></i>{{__('messages.link_box_pelbagai_voltan')}}</h3>
-                            </button>
-                        </h2>
-                    </div>
-
-                    <div id="linkBox" class="collapse  " aria-labelledby="linkBoxHeading"
-                        data-parent="#accordionExample">
-                        <div class="card-body">
-                            <ul>
-                                <li>
-                                    <a class=" dropdown-item"
-                                        href="{{ route('link-box-pelbagai-voltan.create', app()->getLocale()) }}">{{__('messages.create')}}</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item"
-                                        href="{{ route('link-box-pelbagai-voltan.index', app()->getLocale()) }}">{{__('messages.index')}}</a>
-                                </li>
-                                <li>
-                                    <a href="/link-box-pelbagai-voltan-map" class="dropdown-item">{{__('messages.map')}}</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="col-md-4">
-                <div class="card ">
-                    <div class="card-header  p-2" id="cableBridgeHeading">
-                        <h2 class="mb-0">
-                            <button class="btn   btn-block text-left" type="button" data-toggle="collapse"
-                                data-target="#cableBridge" aria-expanded="false" aria-controls="collapseOne">
-                                <h3><i class="fas fa-road"></i> {{__('messages.cable_bridge')}}</h3>
-                            </button>
-                        </h2>
-                    </div>
-
-                    <div id="cableBridge" class="collapse  " aria-labelledby="cableBridgeHeading"
-                        data-parent="#accordionExample">
-                        <div class="card-body">
-                            <ul>
-                                <li>
-                                    <a class=" dropdown-item"
-                                        href="{{ route('cable-bridge.create', app()->getLocale()) }}">{{__('messages.create')}}</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item"
-                                        href="{{ route('cable-bridge.index', app()->getLocale()) }}">{{__('messages.index')}}</a>
-                                </li>
-                                <li>
-                                    <a href="/cable-bridge-map" class="dropdown-item">{{__('messages.map')}}</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div> --}}
-        {{-- <div class="row ">
-        <div class="col-md-4">
-            <a href="{{route('third-party-digging.index')}}">
-            <div class="card p-3 bg-light"> <h3 ><i class="fas fa-tools"></i>  3rd Party Digging</h3></div></a>
-        </div>
-        <div class="col-md-4">
-            <a href="{{route('substation.index')}}">
-            <div class="card p-3 bg-light"><h3><i class="fas fa-building"></i>  Substation</h3></div></a>
-        </div>
-        <div class="col-md-4">
-            <a href="{{route('feeder-pillar.index')}}">
-            <div class="card p-3 bg-light"><h3><i class="fas fa-cube"></i> Feeder Pillar</h3></div></a>
-        </div>
-        <div class="col-md-4">
-            <a href="{{route('tiang-talian-vt-and-vr.index')}}">
-            <div class="card p-3 bg-light"><h3>  <i class="fas fa-bolt"></i> Tiang + Talian VT & VR</h3></div></a>
-        </div>
-        <div class="col-md-4">
-            <a href="{{route('link-box-pelbagai-voltan.index')}}">
-            <div class="card p-3 bg-light"><h3><i class="fas fa-link"></i> Link Box Pelbagai Voltan</h3></div></a>
-        </div>
-        <div class="col-md-4">
-            <a href="{{route('cable-bridge.create')}}">
-            <div class="card p-3 bg-light"><h3><i class="fas fa-road"></i> Cable Bridge</h3> </div></a>
-        </div>
-    </div> --}}
     </div>
+@endsection
+
+
+@section('script')
+
+<script src="https://code.highcharts.com/stock/highstock.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+
+<script>
+    function mainBarChart(cat,series ,id){
+    Highcharts.chart('id', {
+        chart: {
+            type: 'column'
+        },
+        credits:false,
+       
+        title: {
+            text: 'Total Data'
+        },
+        subtitle: {
+            text: 'Source:Aerosynergy'
+        },
+        xAxis: {
+            categories:cat,
+            min: 0,
+            max:3,
+            scrollbar:{
+                enabled:true
+              },
+             
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'KM Patrol'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y:f}</b>km</td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: series
+    });
+}
+
+
+function getDateCounts(){
+
+$.ajax({
+    url: '/{{app()->getLocale()}}/patrol_graph',
+    dataType: 'JSON',
+    method: 'GET',
+    async: false,
+    success: function callback(data) {
+        console.log(data['patrolling']);
+
+        if (data && $data['patrolling'] != '') {
+            makeArray($data['patrolling'] , 'patrolling-container')
+        }
+        
+       
+    }
+});
+
+
+
+}
+
+function makeArray(data ,id) {
+     
+    var series=[];
+        var temp=[];
+        var cat=[];
+        for(var k=0;k<data.length;k++){
+            if(cat.includes(data[k].vist_date)==false){
+                cat.push(data[k].vist_date)
+            }
+        }
+        for(var i=0;i<data.length;i++){
+            // if(cat.includes(data[i].updated_at)==false){
+            //     cat.push(data[i].updated_at)
+            // }
+            var username=data[i].ba;
+        if(temp.includes(username)==true){
+            continue;
+        }else{   
+            temp.push(username); 
+            var obj={};
+            obj.name=username;
+            var arr=[]
+            for(var j=0;j<data.length;j++){
+                if(data[j].ba==username){
+                     var len=0;
+                     if(arr.length>0){
+                         len=arr.length;
+                     }
+                    //if(data[j].updated_at==cat[len]){
+                    var index = cat.indexOf(data[j].vist_date);
+                    if(index>len){
+                    for(g=len;g<index;g++){    
+                    arr.push(0)
+                    }
+                    arr.push(parseInt(data[j].bar));
+                    }else{
+                        arr.push(parseInt(data[j].bar));
+                    }
+                    // }else{
+                    //     arr.push(0)
+                    // }
+                }
+                
+            }
+            obj.data=arr;
+            series.push(obj)
+        }
+        }
+        mainBarChart(cat,series ,id)
+       
+       
+}
+
+
+setTimeout(() => {
+    getDateCounts();
+}, 1000);
+</script>    
+
 @endsection
