@@ -246,11 +246,12 @@
         
         var patroling = '';
          
-
+        var patrol = [];
  
 
 
         function addRemoveBundary(param, paramY, paramX) {
+
 
             if (boundary !== '') {
                 map.removeLayer(boundary)
@@ -309,6 +310,14 @@
 
             addpanolayer();
             addGroupOverLays()
+
+            if (patrol) {
+                        for (let i = 0; i < patrol.length; i++) {
+                            if (patrol[i] != '') {
+                                map.removeLayer(patrol[i])
+                            }
+                        }
+                    }
 
         }
 
@@ -470,7 +479,7 @@
             });
         });
 
-        var patrol = [];
+        
 
         function getGeoJson(param) {
             $.ajax({
