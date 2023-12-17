@@ -48,11 +48,17 @@ class Dashboard extends Controller
         return response()->json($data);
     }
 
-    public function index()
+    public function index(Request $request)
     {
         try {
 
         $ba=Auth::user()->ba;
+        if($ba==''){
+            if($request->ba_name!='null'){
+                $ba=$request->ba_name;
+            }
+           }
+            
        if($ba!=''){
         $query="select dig as total_notice,sup as total_supervision,km as total_km  , feeder_pillar , tiang , link_box , cable_bridge ,  
         substation,substation_defects,fp_defects,lb as linkbox,cb as cablebridge,savr from
@@ -128,7 +134,11 @@ class Dashboard extends Controller
 
         //  return $data;
         if($data){
+        if($request->ajax()){
+         return $data[0];   
+        }else{    
         return view('dashboard',['data'=>$data[0]]);
+        }
         }else{
          return redirect()->route('third-party-digging.index',app()->getLocale());
         } 
