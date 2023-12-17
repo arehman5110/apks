@@ -6,7 +6,7 @@
 <div class="col-12">
     <div class="collapse" id="collapseQr">
         <div class="card card-body">
-            <form action="{{ route("$url", app()->getLocale()) }}"
+            <form action="{{ isset($url) ? route($url, app()->getLocale()) : '#' }}"
                 onsubmit="collapseFilter()" method="post">
                 @csrf
                 <div class="row form-input ">
@@ -42,12 +42,14 @@
                         <label for="excel_to_date">To Date : </label>
                         <input type="date" name="excel_to_date" id="excel_to_date" onchange="setMaxDate(this.value)" class="form-control">
                     </div>
-
+                    @isset($url)
                     <div class="col-md-2 pt-2 ">
 
                         <button type="submit" class="btn text-white btn-sm mt-4 " class="form-control"
                             style="background-color: #708090">Download QR </button>
                     </div>
+                    @endisset
+                   
 
             </form>
         </div>

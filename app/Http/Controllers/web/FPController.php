@@ -40,10 +40,15 @@ class FPController extends Controller
             $result->when(true, function ($query) {
                 return $query->select(
                     'id',
-                    'ba',
-                    'zone',
-                    'team',
+                    'ba', 
                     'visit_date',
+                    DB::raw("CASE WHEN (gate_status->>'unlocked')::text='true' THEN 'Yes' ELSE 'No' END as unlocked"),
+                    DB::raw("CASE WHEN (gate_status->>'demaged')::text='true' THEN 'Yes' ELSE 'No' END as demaged"),
+                    DB::raw("CASE WHEN (gate_status->>'other')::text='true' THEN 'Yes' ELSE 'No' END as other_gate"),
+                    'vandalism_status',
+                    'leaning_staus',
+                    'rust_status',
+                    'advertise_poster_status',
                     'total_defects'
                 );
             }); 

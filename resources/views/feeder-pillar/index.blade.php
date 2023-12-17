@@ -78,10 +78,15 @@
                                     <thead style="background-color: #E4E3E3 !important">
                                         <tr>
                                             <th>ID</th>
-                                            <th>ZONE</th>
                                             <th>BA</th>
-                                            <th>TEAM</th>
                                             <th>VISIT DATE</th>
+                                            <th>UNLOCKED</th>
+                                            <th>DEMAGED</th>
+                                            <th>OTHER</th>
+                                            <th>VANDALISM</th>
+                                            <th>LEANING</th>
+                                            <th>RUST</th>
+                                            <th>ADVERTISE POSTER</th>
                                             <th>TOTAL DEFECTS</th>
                                             <th>ACTION</th>
 
@@ -172,21 +177,39 @@
                         name:'feeder_pillar_id'
                     },
                     {
-                        data: 'zone',
-                        name: 'zone'
-                    },
-                    {
                         data: 'ba',
                         name: 'ba',
                         orderable: true
                     },
                     {
-                        data: 'team',
-                        name: 'team'
-                    },
-                    {
                         data: 'visit_date',
                         name: 'visit_date'
+                    },
+                    {
+                        data:'unlocked',
+                        name:'unlocked',
+                    },{
+                        data:'demaged',
+                        name:'demaged',
+                    },
+                    {
+                        data:'other_gate',
+                        name:'other_gate'
+                    },
+                    {
+                        data:'vandalism_status',
+                        name:'vandalism_status'
+                    },{
+                        data:'leaning_staus',
+                        name:'leaning_staus'
+                    },
+                    {
+                        data:'rust_status',
+                        name:'rust_status'
+                    },
+                    {
+                        data:'advertise_poster_status',
+                        name:'advertise_poster_status'
                     },
                     {
                         data:'total_defects',

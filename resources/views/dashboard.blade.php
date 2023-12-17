@@ -28,32 +28,59 @@
             font-weight: 600;
             color: slategrey;
         }
+        .form-input{
+            padding: 0  10px 0 0 ;
+
+    border: 0px;
+        }
     </style>
 @endsection
 @section('content')
 
-@if(Auth::user()->name=='aerosynergy')
-    <div class=" p-1  col-12 m-2 ">
+@if(Auth::user()->ba=='')
+ 
+
+    <div class=" px-4  mt-2  from-input  ">
             <div class="card p-0 mb-3">
                 <div class="card-body row">
 
-                    <div class="col-md-3">
-                        <label for="search_zone">Zone</label>
-                        <select name="search_zone" id="search_zone" class="form-control" onchange="onChangeZone(this.value)">
-
-                               <option value="" hidden>select zone</option>
+                    <div class=" col-md-3">
+                        <label for="excelZone">Zone :</label>
+                        <select name="excelZone" id="excelZone" class="form-control" onchange="getBa(this.value)">
+                            <option value="" hidden>
+                                Select Zone 
+                            </option>
+                           
                                 <option value="W1">W1</option>
                                 <option value="B1">B1</option>
                                 <option value="B2">B2</option>
                                 <option value="B4">B4</option>
-                        </select>
-                    </div>
-                    <div class="col-md-3">
-                        <label for="search_ba">BA</label>
-                        <select name="search_ba" id="search_ba" class="form-control" onchange="onChangeBA()">
                             
                         </select>
                     </div>
+                    <div class=" col-md-3">
+                        <label for="excelBa">BA :</label>
+                        <select name="excelBa" id="excelBa" class="form-control" onchange="onChangeBA()">
+                           
+
+                        </select>
+                    </div>
+                    <div class=" col-md-2 form-input">
+                        <label for="excel_from_date">From Date : </label>
+                        <input type="date" name="excel_from_date" id="excel_from_date"
+                            class="form-control" onchange="setMinDate(this.value)">
+                    </div>
+                    <div class=" col-md-2 form-input">
+                        <label for="excel_to_date">To Date : </label>
+                        <input type="date" name="excel_to_date" id="excel_to_date" onchange="setMaxDate(this.value)" class="form-control">
+                    </div>
+                    <div class="col-md-2 pt-2">
+                        <br>
+                        <button class="btn btn-secondary  " type="button" onclick="resetDashboard()">Reset</button>
+                    </div>
+
+
+
                 </div>
             </div>
         </div>
@@ -61,8 +88,8 @@
 
 
 
-    <div class=" p-4 ">
 @endif
+    <div class=" px-4 mt-2">
         <div class="row dashboard-counts">
             {{-- <div class="col-md-2">
         <div class="card p-3">
@@ -91,7 +118,7 @@
                                 <div class="card p-3">
 
                                     <h3 class="text-center">{{__("messages.total_notice_generated")}} </h3>
-                                    <p class="text-center mb-0 pb-0"><span id="total_notice">{{$data->total_notice}}</span></p>
+                                    <p class="text-center mb-0 pb-0"><span id="total_notice">{{$data->total_notice ?? '0'}}</span></p>
 
                                 </div>
                             </div>
@@ -100,7 +127,7 @@
                                 <div class="card p-3">
 
                                     <h3 class="text-center"> {{__("messages.total_supervision")}} </h3>
-                                    <p class="text-center mb-0 pb-0"><span id="total_supervision">{{$data->total_supervision}}</span></p>
+                                    <p class="text-center mb-0 pb-0"><span id="total_supervision">{{$data->total_supervision ?? 0}}</span></p>
 
                                 </div>
                             </div>
@@ -297,40 +324,11 @@
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="{{ asset('assets/js/generate-qr.js') }}"></script>
+
 
 <script>
-
-const b1Options = [
-         ['W1', 'KUALA LUMPUR PUSAT', 3.14925905877391, 101.754098819705],
-        ['B1', 'PETALING JAYA', 3.1128074178475, 101.605270457169],
-        ['B1', 'RAWANG', 3.47839445121726, 101.622905486475],
-        ['B1', 'KUALA SELANGOR', 3.40703209426401, 101.317426926947],
-        ['B2', 'KLANG', 3.08428642705789, 101.436185279023],
-        ['B2', 'PELABUHAN KLANG', 2.98188527916042, 101.324234779569],
-        ['B4', 'CHERAS', 3.14197346621987, 101.849883983416],
-        ['B4', 'BANTING', 2.82111390453244, 101.505890775541],
-        ['B4', 'BANGI', 2.965810949933260, 101.81881303103104],
-        ['B4', 'PUTRAJAYA & CYBERJAYA', 2.92875032271019, 101.675338316575],
-        ['B4', 'SEPANG', 2.734218580014375, 101.69394518452967],
-        ['B4', 'PUCHONG', 2.971632230751114, 101.62918173453126]
-    ];   
-
-function onChangeZone(param) {
-        const areaSelect = $('#search_ba');
-
-        // Clear previous options
-        areaSelect.empty();
-        areaSelect.append(`<option value="all">Select BA</option>`)
-
-
-        b1Options.map((data) => {
-            if (data[0] == param) {
-                areaSelect.append(`<option value="${data[1]}">${data[1]}</option>`)
-            }
-        });
-        
-    }
-
+ 
     function onChangeBA(){
          // console.log(data['patrolling']);
          $("#patrolling-container").html('')
@@ -401,11 +399,14 @@ function onChangeZone(param) {
 
 
 function getDateCounts(){
-    var cu_ba=$('#search_ba').val();
+    var cu_ba=$('#excelBa').val();
+    var from_date = $('#excel_from_date').val();
+    var to_date = $('#excel_to_date').val();
 
    
     $.ajax({
-        url: '/{{app()->getLocale()}}/patrol_graph?ba_name='+cu_ba,
+        url: `/{{app()->getLocale()}}/patrol_graph?ba_name=${cu_ba}&from_date=${from_date}&to_date=${to_date}`,
+
         dataType: 'JSON',
         method: 'GET',
         async: false,
@@ -510,6 +511,18 @@ function makeArray(data ,id) {
         mainBarChart(cat,series ,id)
        
        
+}
+
+$(function(){
+    $('#excel_from_date , #excel_to_date').on('change',function(){
+        onChangeBA();
+    })
+})
+
+function resetDashboard(){
+    $('#excelBa').empty();
+    $('#excel_from_date, #excel_to_date ').val('');
+    onChangeBA();
 }
 
 

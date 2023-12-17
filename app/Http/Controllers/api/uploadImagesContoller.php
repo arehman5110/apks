@@ -91,7 +91,8 @@ class uploadImagesContoller extends Controller
                            
                             $uploadedFile->move($destinationPath, $filename);
                             $arr[$key] = $destinationPath.$filename;
-                            // return $arr;
+                        
+                            
                         }
                     }
                     $data[$mainkey] = json_encode($arr);
