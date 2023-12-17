@@ -1,7 +1,7 @@
 @extends('layouts.app', ['page_title' => 'Index'])
 
 @section('css')
-@include('partials.map-css')
+<!-- @include('partials.map-css') -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
  
@@ -212,13 +212,13 @@
 
                 </div>
   <!-- END MAP  DIV -->
-  <div id="wg" class="windowGroup">
+  <!-- <div id="wg" class="windowGroup">
 
   </div>
 
   <div id="wg1" class="windowGroup">
 
-  </div>
+  </div> -->
 
 
             </div>

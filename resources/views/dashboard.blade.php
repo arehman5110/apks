@@ -31,8 +31,41 @@
     </style>
 @endsection
 @section('content')
-    <div class=" p-4 ">
 
+@if(Auth::user()->name=='aerosynergy')
+    <div class=" p-1  col-12 m-2 ">
+            <div class="card p-0 mb-3">
+                <div class="card-body row">
+
+                    <div class="col-md-3">
+                        <label for="search_zone">Zone</label>
+                        <select name="search_zone" id="search_zone" class="form-control" onchange="onChangeZone(this.value)">
+
+                               <option value="" hidden>select zone</option>
+                                <option value="W1">W1</option>
+                                <option value="B1">B1</option>
+                                <option value="B2">B2</option>
+                                <option value="B4">B4</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="search_ba">BA</label>
+                        <select name="search_ba" id="search_ba" class="form-control" onchange="onChangeBA()">
+                            
+                        </select>
+                    </div>
+
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+
+    <div class=" p-4 ">
+@endif
         <div class="row dashboard-counts">
             {{-- <div class="col-md-2">
         <div class="card p-3">
@@ -269,6 +302,51 @@
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
 
 <script>
+
+const b1Options = [
+         ['W1', 'KUALA LUMPUR PUSAT', 3.14925905877391, 101.754098819705],
+        ['B1', 'PETALING JAYA', 3.1128074178475, 101.605270457169],
+        ['B1', 'RAWANG', 3.47839445121726, 101.622905486475],
+        ['B1', 'KUALA SELANGOR', 3.40703209426401, 101.317426926947],
+        ['B2', 'KLANG', 3.08428642705789, 101.436185279023],
+        ['B2', 'PELABUHAN KLANG', 2.98188527916042, 101.324234779569],
+        ['B4', 'CHERAS', 3.14197346621987, 101.849883983416],
+        ['B4', 'BANTING', 2.82111390453244, 101.505890775541],
+        ['B4', 'BANGI', 2.965810949933260, 101.81881303103104],
+        ['B4', 'PUTRAJAYA & CYBERJAYA', 2.92875032271019, 101.675338316575],
+        ['B4', 'SEPANG', 2.734218580014375, 101.69394518452967],
+        ['B4', 'PUCHONG', 2.971632230751114, 101.62918173453126]
+    ];   
+
+function onChangeZone(param) {
+        const areaSelect = $('#search_ba');
+
+        // Clear previous options
+        areaSelect.empty();
+        areaSelect.append(`<option value="all">Select BA</option>`)
+
+
+        b1Options.map((data) => {
+            if (data[0] == param) {
+                areaSelect.append(`<option value="${data[1]}">${data[1]}</option>`)
+            }
+        });
+        
+    }
+
+    function onChangeBA(){
+         // console.log(data['patrolling']);
+         $("#patrolling-container").html('')
+            $("#substation-container").html('')
+            $("#feeder_pillar-container").html('')
+            $("#link_box-container").html('')
+            $("#link_box-container").html('')
+            $("#cable_bridge-container").html('')
+            $("#tiang-container").html('')
+        getDateCounts();
+    }
+
+
     function mainBarChart(cat,series ,id  ){
         var barName = 'Defects';
         var titleName = 'Defects';
@@ -324,46 +402,44 @@
 
 
 function getDateCounts(){
+    var cu_ba=$('#search_ba').val();
+   
+    $.ajax({
+        url: '/{{app()->getLocale()}}/patrol_graph?ba_name='+cu_ba,
+        dataType: 'JSON',
+        method: 'GET',
+        async: false,
+        success: function callback(data) {
+           
 
-$.ajax({
-    url: '/{{app()->getLocale()}}/patrol_graph',
-    dataType: 'JSON',
-    method: 'GET',
-    async: false,
-    success: function callback(data) {
-        // console.log(data['patrolling']);
+            if (data && data['patrolling'] != '') {
+                makeArray(data['patrolling'] , 'patrolling-container'  )
+            }
 
-        if (data && data['patrolling'] != '') {
-            makeArray(data['patrolling'] , 'patrolling-container'  )
+            if (data && data['substation'] != '') {
+                makeArray(data['substation'] , 'substation-container' )
+            }
+
+            if (data && data['feeder_pillar'] != '') {
+                makeArray(data['feeder_pillar'] , 'feeder_pillar-container' )
+            }
+
+            if (data && data['link_box'] != '') {
+                makeArray(data['link_box'] , 'link_box-container' )
+            }
+
+            if (data && data['cable_bridge'] != '') {
+                makeArray(data['cable_bridge'] , 'cable_bridge-container' )
+            }
+
+            if (data && data['tiang'] != '') {
+                makeArray(data['tiang'] , 'tiang-container' )
+            }    
         }
-
-        if (data && data['substation'] != '') {
-            makeArray(data['substation'] , 'substation-container' )
-        }
-
-        if (data && data['feeder_pillar'] != '') {
-            makeArray(data['feeder_pillar'] , 'feeder_pillar-container' )
-        }
-
-        if (data && data['link_box'] != '') {
-            makeArray(data['link_box'] , 'link_box-container' )
-        }
-
-        if (data && data['cable_bridge'] != '') {
-            makeArray(data['cable_bridge'] , 'cable_bridge-container' )
-        }
-
-        if (data && data['tiang'] != '') {
-            makeArray(data['tiang'] , 'tiang-container' )
-        }
-        
-       
-    }
-});
-
-
-
+    });
 }
+
+
 
 function makeArray(data ,id) {
      

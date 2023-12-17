@@ -13,8 +13,15 @@ class Dashboard extends Controller
     //
 
 
-    function patrol_graph(){
+    function patrol_graph(Request $request){
         $ba=Auth::user()->ba;
+        if($ba==''){
+        if($request->ba_name!='null'){
+            $ba=$request->ba_name;
+        }
+       }
+        
+       // return $request->ba_name;
         $data = [];
         if($ba!=''){
             $patrolling="select ba, vist_date::date as visit_date,km as bar from patroling where  vist_date is not null and km is not null and km<>0 and ba='$ba'";
