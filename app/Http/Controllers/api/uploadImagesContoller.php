@@ -75,14 +75,23 @@ class uploadImagesContoller extends Controller
 
             foreach ($request->all() as $mainkey => $mainvalue) {
                 if (is_array($mainvalue)) {
+                  
+                    $before = json_decode( $data->{$mainkey}); 
                     $arr = [];
+                  
+                    foreach($before as $bKey => $bname){
+                        $arr[$bKey]=$bname;
+                    }
+   
                     foreach ($mainvalue as $key => $file) {
                         if (is_a($file, 'Illuminate\Http\UploadedFile') && $file->isValid()) {
                             $uploadedFile = $file;
                             $img_ext = $uploadedFile->getClientOriginalExtension();
                             $filename = $key . '-' . strtotime(now()) . '.' . $img_ext;
+                           
                             $uploadedFile->move($destinationPath, $filename);
                             $arr[$key] = $destinationPath.$filename;
+                            // return $arr;
                         }
                     }
                     $data[$mainkey] = json_encode($arr);
