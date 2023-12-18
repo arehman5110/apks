@@ -53,13 +53,13 @@ class Dashboard extends Controller
         //     $tiang = 'select ba, review_date::date as visit_date,sum(total_defects) as bar from tbl_savr where  review_date is not null and   total_defects<>0 group by ba,review_date ';
         // }
         // $data['patrolling'] = $patrolling;
-        // // return $data;
+        // 
         // $data['substation'] =$substation;
         // $data['feeder_pillar'] =$feeder_pillar;
         // $data['link_box'] =$link_box;
         // $data['cable_bridge'] =$cable_bridge;
-        // $data['tiang'] =$cable_bridge;
-
+        // $data['tiang'] =$tiang;
+// return $data;
         
     }
 

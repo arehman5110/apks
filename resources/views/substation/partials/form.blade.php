@@ -242,7 +242,7 @@
     <div class="col-md-8 row">
         {!!  viewAndUpdateImage($data->substation_image_1 , 'substation_image_1' , $disabled )  !!}
 
-        {!!  viewAndUpdateImage($data->substation_image_1 , 'substation_image_1' , $disabled )  !!}
+        {!!  viewAndUpdateImage($data->substation_image_2 , 'substation_image_2' , $disabled )  !!}
 
         </div>
 
