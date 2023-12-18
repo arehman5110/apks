@@ -49,12 +49,13 @@ function getInputValue($key, $array)
 
 function excelCheckBOc($key, $array)
 {
-    if ($array != null) {
-        if (property_exists($key, $array)) {
-            return '1';
-        }
+  
+    // return $array;
+    if ($array != null && isset($array->{$key})) {
+       return $array->{$key} ? '1':'0';       
     }
-    return '';
+    return "";
+
 }
 
 function getZone()
