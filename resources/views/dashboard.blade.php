@@ -399,9 +399,9 @@
 
 
 function getDateCounts(){
-    var cu_ba=$('#excelBa').val();
-    var from_date = $('#excel_from_date').val();
-    var to_date = $('#excel_to_date').val();
+    var cu_ba=$('#excelBa').val() ?? 'null';
+    var from_date = $('#excel_from_date').val() ?? '';
+    var to_date = $('#excel_to_date').val() ?? '';
 
    
     $.ajax({
