@@ -207,30 +207,53 @@ class TiangExcelController extends Controller
                 // return;
                 //$i = 11
 
+                
+
                 $i = 11;
                 $thirdWorksheet = $spreadsheet->getSheet(2);
+
+//                 $commonStyle = $thirdWorksheet->getDefaultStyle()->getAlignment();
+// $commonStyle->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+// $commonStyle->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
+
+// // Set font size for all cells
+// $commonStyle->setFont(['size' => 12]);
+
+
+$thirdWorksheet->getStyle('A:O')->getAlignment()->setHorizontal('center');
+
+                $thirdWorksheet->setCellValue('K4' , date('Y-m-d'));
                 foreach ($res as $rec) {
-                    $thirdWorksheet->setCellValue('B' . $i, $i - 10);
+                    $thirdWorksheet->setCellValue('A' . $i, $i - 10);
+                    $thirdWorksheet->setCellValue('B' . $i, $rec->review_date);
+                    // $thirdWorksheet->getStyle('B'.$i)
+
+                   
 
                     if ($rec->tapak_condition != '') {
-                        $thirdWorksheet->setCellValue('E' . $i, excelCheckBOc('road', $rec->tapak_condition));
-                        $thirdWorksheet->setCellValue('F' . $i, excelCheckBOc('side_walk', $rec->tapak_condition));
-                        $thirdWorksheet->setCellValue('G' . $i, excelCheckBOc('vehicle_entry', $rec->tapak_condition));
+                        $tapak_condition = json_decode($rec->tapak_condition);
+                        $thirdWorksheet->setCellValue('E' . $i, excelCheckBOc('road', $tapak_condition));
+                        $thirdWorksheet->setCellValue('F' . $i, excelCheckBOc('side_walk', $tapak_condition));
+                        $thirdWorksheet->setCellValue('G' . $i, excelCheckBOc('vehicle_entry', $tapak_condition));
                     }
 
                     if ($rec->kawasan != '') {
-                        $thirdWorksheet->setCellValue('H' . $i, excelCheckBOc('bend', $rec->kawasan));
-                        $thirdWorksheet->setCellValue('I' . $i, excelCheckBOc('raod', $rec->kawasan));
-                        $thirdWorksheet->setCellValue('J' . $i, excelCheckBOc('forest', $rec->kawasan));
-                        $thirdWorksheet->setCellValue('K' . $i, excelCheckBOc('other', $rec->kawasan));
+                        $kawasan = json_decode($rec->kawasan);
+                        $thirdWorksheet->setCellValue('H' . $i, excelCheckBOc('bend', $kawasan));
+                        $thirdWorksheet->setCellValue('I' . $i, excelCheckBOc('raod', $kawasan));
+                        $thirdWorksheet->setCellValue('J' . $i, excelCheckBOc('forest', $kawasan));
+                        $thirdWorksheet->setCellValue('K' . $i, excelCheckBOc('other', $kawasan));
                     }
 
-                    $thirdWorksheet->setCellValue('K' . $i, $rec->jarak_kelegaan);
+                    $thirdWorksheet->setCellValue('L' . $i, $rec->jarak_kelegaan);
 
                     if ($rec->talian_spec != '') {
                         $thirdWorksheet->setCellValue('M' . $i, $rec->talian_spec == "comply" ? '1' : '');
-                        $thirdWorksheet->setCellValue('N' . $i, $rec->talian_spec == "disobedient" ? '1' : '');
+                        $thirdWorksheet->setCellValue('N' . $i, $rec->talian_spec == "uncomply" ? '1' : '');
                     }
+
+                    $thirdWorksheet->setCellValue('O' . $i, $rec->arus_pada_tiang == "Yes" ? '1' : '');
+
 
                     $i++;
                 }
