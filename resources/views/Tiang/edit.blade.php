@@ -166,7 +166,7 @@
             })
 
             $('input[name="arus_pada_tiang"]').on('change', function() {
-                if (this.value == 'yes') {
+                if (this.value == 'Yes') {
                     if ($('#arus_pada_tiang_amp_div').hasClass('d-none')) {
                         $('#arus_pada_tiang_amp_div').removeClass('d-none');
                     }
