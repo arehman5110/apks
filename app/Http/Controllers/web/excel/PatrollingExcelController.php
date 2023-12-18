@@ -26,12 +26,12 @@ class PatrollingExcelController extends Controller
             $result->where('visit_date', '>=', $req->excel_from_date);
         }
 
-        if ($req->filled('surveyDate_to')) {
-            $result->where('visit_date', '<=', $req->surveyDate_to);
+        if ($req->filled('excel_from_date')) {
+            $result->where('visit_date', '<=', $req->excel_from_date);
         }
 
 
-        $result = $result->select('*', DB::raw('ST_X(geom) as x'), DB::raw('ST_Y(geom) as y'))->get();
+        $result = $result->whereNotNull('visit_date')->select('*', DB::raw('ST_X(geom) as x'), DB::raw('ST_Y(geom) as y'))->get();
 
          
         if ($result) {

@@ -23,7 +23,7 @@ class Dashboard extends Controller
       $data['feeder_pillar']    = $this->getGraphCount('tbl_feeder_pillar' , 'visit_date' , 'total_defects' , $ba, $request);
       $data['link_box']         = $this->getGraphCount('tbl_link_box' , 'visit_date' , 'total_defects', $ba , $request);
       $data['cable_bridge']     = $this->getGraphCount('tbl_cable_bridge' , 'visit_date' , 'total_defects', $ba , $request);
-      $data['tiang']     = $this->getGraphCount('tbl_savr' , 'review_date' , 'total_defects', $ba , $request);
+      $data['tiang']            = $this->getGraphCount('tbl_savr' , 'review_date' , 'total_defects', $ba , $request);
 
       return response()->json($data);
     //   $feeder_pillar    = $this->getGraphCount('tbl_feeder_pillar' , 'visit_date' , 'total_defects' , $request);
