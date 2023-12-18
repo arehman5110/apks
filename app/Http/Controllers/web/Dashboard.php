@@ -266,7 +266,7 @@ class Dashboard extends Controller
                             return $query->where($date, '<=' , $to_date);
                         });
                         if ($bar != 'km') {
-                            $query->groupBy('ba', DB::raw('visit_date::date'));
+                            $query->groupBy('ba', DB::raw("$date::date"));
                         }
 
                         $query->orderBy($date , 'desc');
