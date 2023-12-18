@@ -169,6 +169,7 @@ class TiangContoller extends Controller
             $data->arus_pada_tiang = $request->arus_pada_tiang;
             // return $data;
             $data->total_defects = $total_defects;
+            
 
             $data->talian_spec = $request->talian_spec;
 
@@ -309,17 +310,19 @@ class TiangContoller extends Controller
                         $def[$item] = false;
                     }
                 }
+        
 
                 if ($key != 'tapak_condition') {
                     $def['other_input'] = $request->{"$key.other_input"};
                 }
                 $data->{$key} = json_encode($def);
 
-                $total_defects++;
             }
 
-            $data->total_defects = $request->total_defects;
-
+            $request->arus_pada_tiang == 'Yes' ? $total_defects++ : '';
+        
+            $data->total_defects = $total_defects;
+            // return $data;
             $data->jarak_kelegaan = $request->jarak_kelegaan;
 
             $data->talian_spec = $request->talian_spec;
