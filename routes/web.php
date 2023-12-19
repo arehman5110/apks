@@ -179,6 +179,8 @@ Route::group(
 
                 Route::get('/dashboard', [Dashboard::class, 'index'])->name('dashboard');
                 Route::get('/patrol_graph', [Dashboard::class, 'patrol_graph'])->name('patrol_graph');
+                Route::get('/statsTable', [Dashboard::class, 'statsTable'])->name('statsTable');
+
 
 
                 Route::view('/map-2', 'map')->name('map-2');

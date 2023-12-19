@@ -86,7 +86,30 @@
         </div>
 
 
+        <div class=" px-4  mt-2  from-input  ">
+            <div class="card p-0 mb-3">
+                <div class="card-body row">
 
+            <table class="table">
+            <thead>
+                <tr>
+                
+                <th scope="col">BA</th>
+                <th scope="col">Patroling</th>
+                <th scope="col">Substation</th>
+                <th scope="col">Feeder Pillar</th>
+                <th scope="col">Tiang</th>
+                <th scope="col">Link Box</th>
+                <th scope="col">Cable Bridge</th>
+                </tr>
+            </thead>
+            <tbody id='stats_table'>
+
+    </tbody>
+    </table>
+                </div>
+            </div>
+        </div>
 
 @endif
     <div class=" px-4 mt-2">
@@ -399,9 +422,22 @@
 
 
 function getDateCounts(){
+ let  todaydate='{{date("Y-m-d")}}';
+
+
+
     var cu_ba=$('#excelBa').val() ?? 'null';
-    var from_date = $('#excel_from_date').val() ?? '';
-    var to_date = $('#excel_to_date').val() ?? '';
+    if($('#excel_from_date').val()==''){
+        var from_date='1970-01-01'
+    }else{
+        var from_date = $('#excel_from_date').val();
+    }if($('#excel_from_date').val()==''){
+        var to_date=todaydate
+    }else{
+        var to_date = $('#excel_to_date').val() ;
+    }
+    
+   
 
    
     $.ajax({
@@ -514,10 +550,48 @@ function makeArray(data ,id) {
 }
 
 $(function(){
+    getAllStats()
     $('#excel_from_date , #excel_to_date').on('change',function(){
         onChangeBA();
+        getAllStats();
+
+       
+
     })
 })
+
+
+function getAllStats(){
+    let  todaydate='{{date("Y-m-d")}}';
+
+
+
+var cu_ba=$('#excelBa').val() ?? 'null';
+if($('#excel_from_date').val()==''){
+    var from_date='1970-01-01'
+}else{
+    var from_date = $('#excel_from_date').val();
+}if($('#excel_from_date').val()==''){
+    var to_date=todaydate
+}else{
+    var to_date = $('#excel_to_date').val() ;
+}
+
+    $.ajax({
+        url: `/{{app()->getLocale()}}/statsTable?from_date=${from_date}&to_date=${to_date}`,
+        dataType: 'JSON',
+        method: 'GET',
+        async: false,
+        success: function callback(data) {
+            var str='';  
+            for (var i=0; i<data.length;i++){
+              str+='<tr><td>'+data[i].ba+'</td><td>'+data[i].patroling+'</td>'+'<td>'+data[i].substation+'</td><td>'+data[i].feeder_pillar+'</td><td>'+data[i].tiang+'</td><td>'+data[i].link_box+'</td><td>'+data[i].cable_bridge+'</td></tr>'
+            }
+            $('#stats_table').html(str);
+        }
+    });
+}
+
 
 function resetDashboard(){
     $('#excelBa').empty();

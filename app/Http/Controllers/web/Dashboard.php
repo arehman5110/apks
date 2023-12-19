@@ -10,6 +10,55 @@ use Illuminate\Support\Facades\Auth;
 class Dashboard extends Controller
 {
     //
+function statsTable(Request $request){
+    $from_date  = $request->from_date;
+    $to_date    = $request->to_date;
+    $query="select   ba, km as patroling  ,substation, feeder_pillar , tiang , link_box , cable_bridge   from
+    (
+        select 'PETALING JAYA' as ba,
+                (select count(*) from tbl_substation where total_defects is not null
+                 and substation_image_1 is not null and substation_image_2 is not null  and ba='PETALING JAYA' and visit_date >= '$from_date'
+                 AND visit_date <=  ' $to_date') as substation,
+                (select count(*) from tbl_feeder_pillar where feeder_pillar_image_1 is not null and 
+                 feeder_pillar_image_1 is not null  and ba='PETALING JAYA') as feeder_pillar,
+                (select count(*) from tbl_savr  where ba='PETALING JAYA') as tiang,
+                (select count(*) from tbl_link_box  where ba='PETALING JAYA') as link_box,
+                (select count(*) from tbl_cable_bridge   where ba='PETALING JAYA') as cable_bridge,
+                (select round(sum(km),2) from patroling  where ba='PETALING JAYA') as km
+    union		   
+        select 'RAWANG' as ba,
+                (select count(*) from tbl_substation where total_defects is not null
+                 and substation_image_1 is not null and substation_image_2 is not null  and ba='RAWANG' and visit_date >= '$from_date'
+                 AND visit_date <=  ' $to_date') as substation,
+                (select count(*) from tbl_feeder_pillar where feeder_pillar_image_1 is not null and 
+                 feeder_pillar_image_1 is not null  and ba='RAWANG') as feeder_pillar,
+                (select count(*) from tbl_savr  where ba='RAWANG') as tiang,
+                (select count(*) from tbl_link_box  where ba='RAWANG') as link_box,
+                (select count(*) from tbl_cable_bridge   where ba='RAWANG') as cable_bridge,
+                (select round(sum(km),2) from patroling  where ba='RAWANG') as km
+    union		   
+        select 'KUALA LUMPUR PUSAT' as ba,
+                (select count(*) from tbl_substation where total_defects is not null
+                 and substation_image_1 is not null and substation_image_2 is not null  and ba='KUALA LUMPUR PUSAT' and visit_date >= '$from_date'
+                 AND visit_date <= ' $to_date') as substation,
+                (select count(*) from tbl_feeder_pillar where feeder_pillar_image_1 is not null and 
+                 feeder_pillar_image_1 is not null  and ba='KUALA LUMPUR PUSAT') as feeder_pillar,
+                (select count(*) from tbl_savr  where ba='KUALA LUMPUR PUSAT') as tiang,
+                (select count(*) from tbl_link_box  where ba='KUALA LUMPUR PUSAT') as link_box,
+                (select count(*) from tbl_cable_bridge   where ba='KUALA LUMPUR PUSAT') as cable_bridge,
+                (select round(sum(km),2) from patroling  where ba='KUALA LUMPUR PUSAT') as km
+       
+               )as stats";
+               $data = DB::select($query);
+ 
+               if ($data) {
+            return $data;   
+            }
+               
+}
+
+
+
 
     function patrol_graph(Request $request)
     {
