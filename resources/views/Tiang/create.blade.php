@@ -184,14 +184,15 @@
                                             class="form-control" required></div>
                                 </div>
 
-
-
                                 <div class="row">
-                                    <div class="col-md-4"><label for="fp_road"> {{ __('messages.Feeder_Name') }} /
-                                            {{ __('messages.Street_Name') }}</label></div>
-                                    <div class="col-md-4"><input type="text" name="fp_road" id="fp_road"
+                                    <div class="col-md-4"></div>
+                                    <div class="col-md-4"><input type="text" name="fp_name" id="fp_name"
                                             class="form-control" required></div>
                                 </div>
+
+
+
+                               
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="">{{ __('messages.Section') }} </label></div>
@@ -220,11 +221,46 @@
 
 
                                 <div class="row">
-                                    <div class="col-md-4"><label for="review_date">Review Date</label>
+                                    <div class="col-md-4">
+                                        <label for="review_date">Review Date</label>
                                     </div>
                                     <div class="col-md-4"><input type="date" name="review_date" id="review_date"
                                             class="form-control" required></div>
                                 </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="main_line">{{__('messages.main_line_service_line')}}</label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <select name="talian_utama" id="main_line" class="form-control" required onchange="getMainLine(this.value)">
+                                            <option value="" hidden>select</option>
+                                            <option value="main_line">Main Line</option>
+                                            <option value="service_line">Service Line</option>
+                                        </select>
+                                </div>
+                                </div>
+                                <div class="row d-none" id="main_line_connection">
+                                    <div class="col-md-4">
+                                        <label for="">
+                                            Number of Services Involves 1 user only
+
+                                        </label>
+                                    </div>
+                                    <div class="col-md-2 d-flex mt-2">
+                                        <input type="radio" name="talian_utama_connection" id="main_line_connection_one" value="one"
+                                              required>
+                                            <label for="main_line_connection_one">One</label>
+                                        </div>
+
+                                        <div class="col-md-2 d-flex mt-2">
+                                            <input type="radio" name="talian_utama_connection" id="main_line_connection_many" value="many"
+                                                 required>
+                                            <label for="main_line_connection_many">Many</label>
+
+                                            </div>
+                                </div>
+
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="pole_image-1">{{ __('messages.pole') }} Image 1
@@ -1604,6 +1640,18 @@
             });
             let baVal = document.getElementById('ba_s');
             getWp(baVal)
+        }
+
+
+        function getMainLine(val){
+            if (val == 'service_line') {
+                $('#main_line_connection').removeClass('d-none')
+            }else{
+                if (!$('#main_line_connection').hasClass('d-none')) {
+                $('#main_line_connection').addClass('d-none')
+                $('#main_line_connection_one , #main_line_connection_many').prop('checked', false);
+                }
+            }
         }
     </script>
 @endsection

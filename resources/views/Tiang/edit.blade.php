@@ -293,5 +293,17 @@
 
             }
         }
+
+        function getMainLine(val){
+            if (val == 'service_line') {
+                $('#main_line_connection').removeClass('d-none')
+            }else{
+                if (!$('#main_line_connection').hasClass('d-none')) {
+                $('#main_line_connection').addClass('d-none')
+                $('#main_line_connection_one , #main_line_connection_many').prop('checked', false);
+
+                }
+            }
+        }
     </script>
 @endsection

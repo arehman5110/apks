@@ -10,6 +10,8 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use PhpOffice\PhpSpreadsheet\Style\Border;
+use PhpOffice\PhpSpreadsheet\Style\Color;
 
 class TiangExcelController extends Controller
 {
@@ -63,13 +65,33 @@ class TiangExcelController extends Controller
             ->selectRaw("SUM(CASE WHEN (bare_span->'s7_173')::text <> '' AND (bare_span->'s7_173')::text <> 'null'THEN 0 ELSE 1 END) as bare_s7173")
             ->selectRaw("SUM(CASE WHEN (bare_span->'s7_122')::text <> '' AND (bare_span->'s7_122')::text <> 'null'THEN 0 ELSE 1 END) as bare_s7122")
             ->selectRaw("SUM(CASE WHEN (bare_span->'s3_132')::text <> '' AND (bare_span->'s3_132')::text <> 'null'THEN 0 ELSE 1 END) as bare_s7132")
+            ->selectRaw("SUM(CASE WHEN (umbang_defect->'breaking')::text <> '' AND (bare_span->'breaking')::text <> 'null'THEN 0 ELSE 1 END) as bare_s7132")
+            ->selectRaw("SUM(CASE WHEN (blackbox_defect->'cracked')::text = 'true' THEN 1 ELSE 0 END + CASE WHEN (blackbox_defect->'other')::text = 'true' THEN 1 ELSE 0 END) as blackbox")
+            ->selectRaw("SUM(CASE WHEN (ipc_defect->'burn')::text = 'true' THEN 1 ELSE 0 END + CASE WHEN (ipc_defect->'other')::text = 'true' THEN 1 ELSE 0 END) as ipc")
+
+
+            ->selectRaw("SUM(CASE WHEN (umbang_defect->'breaking')::text = 'true' THEN 1 ELSE 0 END + CASE WHEN (umbang_defect->'creepers')::text = 'true' THEN 1 ELSE 0 END
+            + CASE WHEN (umbang_defect->'cracked')::text = 'true' THEN 1 ELSE 0 END + CASE WHEN (umbang_defect->'stay_palte')::text = 'true' THEN 1 ELSE 0 END + CASE WHEN (umbang_defect->'other')::text = 'true' THEN 1 ELSE 0 END
+            ) as umbagan")
+
+            ->selectRaw("SUM(CASE WHEN (talian_utama_connection)::text ='one' THEN 1 ELSE 0 END ) as service")
+
+
             ->whereNotNull('review_date')
             ->whereNotNull('fp_road');
                 if ($ba != '') {
                     $query->where('ba',$ba);
                 }
+
+                if ($req->filled('excel_from_date')) {
+                    $query->where('review_date', '>=', $req->excel_from_date);
+                }
+    
+                if ($req->filled('excel_to_date')) {
+                    $query->where('review_date', '<=', $req->excel_to_date);
+                }
           
-             $roadStatistics = $query->groupBy('fp_road' )->get();
+           $roadStatistics = $query->groupBy('fp_road' )->get();
 
            
              
@@ -79,14 +101,18 @@ class TiangExcelController extends Controller
                 $spreadsheet = IOFactory::load($excelFile);
 
                 $worksheet = $spreadsheet->getSheet(0);
+                $worksheet->getStyle('B:AK')->getAlignment()->setHorizontal('center');
+$worksheet->getStyle('B:AL')->getFont()->setSize(9);
+
+
                 $worksheet->setCellValue('D4', $ba);
                 $i = 8;
                 foreach ($roadStatistics as $rec) {
                     $worksheet->setCellValue('B' . $i, $i - 7);
-                    $worksheet->setCellValue('D' . $i, $rec->road);
-                    $worksheet->setCellValue('F' . $i, $rec->fp_name);
-                    $worksheet->setCellValue('I' . $i, $rec->section_from );
-                    $worksheet->setCellValue('J' . $i, $rec->section_to);
+                    $worksheet->setCellValue('F' . $i, $rec->road);
+                    // $worksheet->setCellValue('F' . $i, $rec->fp_name);
+                    // $worksheet->setCellValue('I' . $i, $rec->section_from );
+                    // $worksheet->setCellValue('J' . $i, $rec->section_to);
 
                     $worksheet->setCellValue('L' . $i, $rec->size_tiang_75 );
                     $worksheet->setCellValue('M' . $i, $rec->size_tiang_9  );
@@ -109,6 +135,32 @@ class TiangExcelController extends Controller
                     $worksheet->setCellValue('AA' . $i, $rec->bare_s7173 );
                     $worksheet->setCellValue('AB' . $i, $rec->bare_s7122 );
                     $worksheet->setCellValue('AC' . $i, $rec->bare_s7132 );
+
+                    unset($rec->road); 
+                    $array = json_decode($rec, true);
+
+                    // Sum the values
+                  $totalSum = array_sum($array);
+ 
+
+                    $worksheet->setCellValue('AD' . $i, $totalSum );
+
+                    $worksheet->setCellValue('AE' . $i, $rec->talian_utama  );
+                    $worksheet->setCellValue('AF' . $i, $rec->umbagan  );
+
+
+
+                    $worksheet->setCellValue('AG' . $i, $rec->blackbox  );
+                    $worksheet->setCellValue('AH' . $i, $rec->ipc  );
+
+                    $worksheet->setCellValue('AJ' . $i, $rec->service  );
+
+
+
+
+                     
+
+                    
                 
 
                
@@ -123,6 +175,10 @@ class TiangExcelController extends Controller
 
                 $i = 8;
                 $secondWorksheet = $spreadsheet->getSheet(1);
+$secondWorksheet->getStyle('B:AL')->getAlignment()->setHorizontal('center');
+$secondWorksheet->getStyle('B:AL')->getFont()->setSize(9);
+
+
                 $secondWorksheet->setCellValue('C1', $ba);
                 $secondWorksheet->setCellValue('B3', 'Tarikh Pemeriksaan : ' .date('Y-m-d'));
 
@@ -221,8 +277,37 @@ class TiangExcelController extends Controller
 
 
 $thirdWorksheet->getStyle('A:O')->getAlignment()->setHorizontal('center');
+$secondWorksheet->getStyle('B:AL')->getFont()->setSize(9);
 
-                $thirdWorksheet->setCellValue('K4' , date('Y-m-d'));
+
+// $borderStyle = [
+//     'borders' => [
+//         'outline' => [
+//             'borderStyle' => Border::BORDER_THICK,
+//             'color' => ['argb' => 'FFFF0000'], // You can adjust the color code as needed
+//         ],
+//     ],
+// ];
+
+// $thirdWorksheet->getStyle('A:O')->applyFromArray($borderStyle);
+// $thirdWorksheet->getStyle('A:O')->getBorders()
+// ->getOutline()
+// ->setBorderStyle(Border::BORDER_THICK)
+// ->setColor(new Color('FFFF0000'));
+
+// $thirdWorksheet->getStyle('A:O')->applyFromArray([
+//     'alignment' => [
+//         'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+//         'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+//     ],
+//     'borders' => [
+//         'allBorders' => [
+//             'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+//         ],
+//     ],
+// ]);
+                // $thirdWorksheet->setCellValue('K4' , date('Y-m-d'));
+
                 foreach ($res as $rec) {
                     $thirdWorksheet->setCellValue('A' . $i, $i - 10);
                     $thirdWorksheet->setCellValue('B' . $i, $rec->review_date);
@@ -257,6 +342,13 @@ $thirdWorksheet->getStyle('A:O')->getAlignment()->setHorizontal('center');
 
                     $i++;
                 }
+
+                // foreach (range('A','AZ') as $col) {
+                //     $thirdWorksheet->getColumnDimension($col)->setAutoSize(true);
+                //     $secondWorksheet ->getColumnDimension($col)->setAutoSize(true);
+                //     $worksheet ->getColumnDimension($col)->setAutoSize(true);
+
+                //  }
                 // dump($spreadsheet->getSheetNames());
                 // return;
                 $thirdWorksheet->calculateColumnWidths();
