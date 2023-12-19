@@ -47,6 +47,17 @@ function statsTable(Request $request){
                 (select count(*) from tbl_link_box  where ba='KUALA LUMPUR PUSAT') as link_box,
                 (select count(*) from tbl_cable_bridge   where ba='KUALA LUMPUR PUSAT') as cable_bridge,
                 (select round(sum(km),2) from patroling  where ba='KUALA LUMPUR PUSAT') as km
+    union		   
+                select 'KLANG' as ba,
+                        (select count(*) from tbl_substation where total_defects is not null
+                         and substation_image_1 is not null and substation_image_2 is not null  and ba='KLANG' and visit_date >= '$from_date'
+                         AND visit_date <= ' $to_date') as substation,
+                        (select count(*) from tbl_feeder_pillar where feeder_pillar_image_1 is not null and 
+                         feeder_pillar_image_1 is not null  and ba='KLANG') as feeder_pillar,
+                        (select count(*) from tbl_savr  where ba='KLANG') as tiang,
+                        (select count(*) from tbl_link_box  where ba='KLANG') as link_box,
+                        (select count(*) from tbl_cable_bridge   where ba='KLANG') as cable_bridge,
+                        (select round(sum(km),2) from patroling  where ba='KLANG') as km            
        
                )as stats";
                $data = DB::select($query);
