@@ -451,6 +451,23 @@
             // map.addLayer(pano_layer)
 
 
+            if(work_package){
+        map.removeLayer(work_package);
+        }
+
+        work_package = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:tbl_workpackage',
+                format: 'image/png',
+                cql_filter: "ba ILIKE '%" + param + "%'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+            map.addLayer(work_package)
+            work_package.bringToFront()
+
+
             addGroupOverLays()
 
         }
@@ -472,6 +489,8 @@
                     'Surveyed with defects' : ts_with_defects,
                     'Surveyed Without defects' : ts_without_defects,
                     'Roads': road,
+                    'Work Package':work_package
+
                 }
             };
             //add layer control on top right corner of map

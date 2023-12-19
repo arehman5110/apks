@@ -11,61 +11,56 @@ class Dashboard extends Controller
 {
     //
 function statsTable(Request $request){
+    $bas = [
+        'rawang' => 'RAWANG',
+        'kuala_lampur'=>'KUALA LUMPUR PUSAT',
+        'kalang'=>'KLANG',
+        'kuala_selangor'=>'KUALA SELANGOR',
+        'pelabuhan_klang'=>'PELABUHAN KLANG',
+        'bangi'=>'BANGI',
+        'cheras'=> 'CHERAS',
+        'banting'=>'BANTING',
+        'putrajaya'=> 'PUTRAJAYA & CYBERJAYA',
+        'petaling_jaya'=> 'PETALING JAYA',
+        'SEPANG' =>'SEPANG',
+        'PUCHONG'=> 'PUCHONG'
+    ];
     $from_date  = $request->from_date;
     $to_date    = $request->to_date;
-    $query="select   ba, km as patroling  ,substation, feeder_pillar , tiang , link_box , cable_bridge   from
+    $data = [];
+
+    foreach($bas as $key => $ba){
+
+
+        $query="select   ba, km as patroling  ,substation, feeder_pillar , tiang , link_box , cable_bridge   from
     (
-        select 'PETALING JAYA' as ba,
+        select '$ba' as ba,
                 (select count(*) from tbl_substation where total_defects is not null
-                 and substation_image_1 is not null and substation_image_2 is not null  and ba='PETALING JAYA' and visit_date >= '$from_date'
+                 and substation_image_1 is not null and substation_image_2 is not null  and ba='$ba' and visit_date >= '$from_date'
                  AND visit_date <=  ' $to_date') as substation,
-                (select count(*) from tbl_feeder_pillar where feeder_pillar_image_1 is not null and 
-                 feeder_pillar_image_1 is not null  and ba='PETALING JAYA') as feeder_pillar,
-                (select count(*) from tbl_savr  where ba='PETALING JAYA') as tiang,
-                (select count(*) from tbl_link_box  where ba='PETALING JAYA') as link_box,
-                (select count(*) from tbl_cable_bridge   where ba='PETALING JAYA') as cable_bridge,
-                (select round(sum(km),2) from patroling  where ba='PETALING JAYA') as km
-    union		   
-        select 'RAWANG' as ba,
-                (select count(*) from tbl_substation where total_defects is not null
-                 and substation_image_1 is not null and substation_image_2 is not null  and ba='RAWANG' and visit_date >= '$from_date'
-                 AND visit_date <=  ' $to_date') as substation,
-                (select count(*) from tbl_feeder_pillar where feeder_pillar_image_1 is not null and 
-                 feeder_pillar_image_1 is not null  and ba='RAWANG') as feeder_pillar,
-                (select count(*) from tbl_savr  where ba='RAWANG') as tiang,
-                (select count(*) from tbl_link_box  where ba='RAWANG') as link_box,
-                (select count(*) from tbl_cable_bridge   where ba='RAWANG') as cable_bridge,
-                (select round(sum(km),2) from patroling  where ba='RAWANG') as km
-    union		   
-        select 'KUALA LUMPUR PUSAT' as ba,
-                (select count(*) from tbl_substation where total_defects is not null
-                 and substation_image_1 is not null and substation_image_2 is not null  and ba='KUALA LUMPUR PUSAT' and visit_date >= '$from_date'
-                 AND visit_date <= ' $to_date') as substation,
-                (select count(*) from tbl_feeder_pillar where feeder_pillar_image_1 is not null and 
-                 feeder_pillar_image_1 is not null  and ba='KUALA LUMPUR PUSAT') as feeder_pillar,
-                (select count(*) from tbl_savr  where ba='KUALA LUMPUR PUSAT') as tiang,
-                (select count(*) from tbl_link_box  where ba='KUALA LUMPUR PUSAT') as link_box,
-                (select count(*) from tbl_cable_bridge   where ba='KUALA LUMPUR PUSAT') as cable_bridge,
-                (select round(sum(km),2) from patroling  where ba='KUALA LUMPUR PUSAT') as km
-    union		   
-                select 'KLANG' as ba,
-                        (select count(*) from tbl_substation where total_defects is not null
-                         and substation_image_1 is not null and substation_image_2 is not null  and ba='KLANG' and visit_date >= '$from_date'
-                         AND visit_date <= ' $to_date') as substation,
-                        (select count(*) from tbl_feeder_pillar where feeder_pillar_image_1 is not null and 
-                         feeder_pillar_image_1 is not null  and ba='KLANG') as feeder_pillar,
-                        (select count(*) from tbl_savr  where ba='KLANG') as tiang,
-                        (select count(*) from tbl_link_box  where ba='KLANG') as link_box,
-                        (select count(*) from tbl_cable_bridge   where ba='KLANG') as cable_bridge,
-                        (select round(sum(km),2) from patroling  where ba='KLANG') as km            
-       
-               )as stats";
-               $data = DB::select($query);
- 
+                (select count(*) from tbl_feeder_pillar where feeder_pillar_image_1 is not null and
+                 feeder_pillar_image_2 is not null  and ba='$ba' and visit_date >= '$from_date'
+                 AND visit_date <=  ' $to_date' ) as feeder_pillar,
+                (select count(*) from tbl_savr  where ba='$ba' and pole_image_1 is not null and review_date is not null  and review_date >= '$from_date'
+                AND review_date <=  ' $to_date') as tiang,
+                (select count(*) from tbl_link_box  where ba='$ba' and link_box_image_1 is not null and visit_date is not null  and visit_date >= '$from_date'
+                AND visit_date <=  ' $to_date') as link_box,
+                (select count(*) from tbl_cable_bridge   where ba='$ba' and cable_bridge_image_1 is not null and visit_date is not null  and visit_date >= '$from_date'
+                AND visit_date <=  ' $to_date') as cable_bridge,
+                (select round(sum(km),2) from patroling  where ba='$ba' and vist_date is not null  and vist_date >= '$from_date'
+                AND vist_date <=  ' $to_date') as km) as stats";
+            $res = DB::select($query);
+
+               $data[] =$res[0];
+
+    }
+
+               return $data;
+
                if ($data) {
-            return $data;   
+            return $data;
             }
-               
+
 }
 
 
@@ -86,41 +81,8 @@ function statsTable(Request $request){
       $data['tiang']            = $this->getGraphCount('tbl_savr' , 'review_date' , 'total_defects', $ba , $request);
 
       return response()->json($data);
-    //   $feeder_pillar    = $this->getGraphCount('tbl_feeder_pillar' , 'visit_date' , 'total_defects' , $request);
 
-            // $tiang = DB::table('tbl_savr')
-            // ->select('ba', DB::raw('review_date::date as visit_date'), DB::raw('SUM(total_defects) as bar'))
-            
-            // ->whereNotNull('review_date')
-            // ->whereNotNull('total_defects')
-            // ->where('total_defects', '<>', 0)
-            // ->groupBy('ba', 'visit_date')
-            // // ->where('ba', $ba)
-            // ->get();
-        // if ($ba != '') {
-        //     // $patrolling = "select ba, vist_date::date as visit_date,km as bar from patroling where  vist_date is not null and km is not null and km<>0 and ba='$ba'";
-        //     // $substation = "select ba, visit_date::date,sum(total_defects) as bar from tbl_substation where  visit_date is not null and ba='$ba' and   total_defects<>0 group by ba,visit_date ";
-        //     $feeder_pillar = "select ba, visit_date::date,sum(total_defects) as bar from tbl_feeder_pillar where  visit_date is not null and ba='$ba' and   total_defects<>0 group by ba,visit_date ";
-        //     // $link_box = "select ba, visit_date::date,sum(total_defects) as bar from tbl_link_box where  visit_date is not null and ba='$ba' and   total_defects<>0 group by ba,visit_date ";
-        //     // $cable_bridge = "select ba, visit_date::date,sum(total_defects) as bar from tbl_cable_bridge where  visit_date is not null and ba='$ba' and   total_defects<>0 group by ba,visit_date ";
-        //     // $tiang = "select ba, review_date::date as visit_date,sum(total_defects) as bar from tbl_savr where  review_date is not null and ba='$ba' and   total_defects<>0 group by ba,review_date ";
-        // } else {
-        //     $patrolling = 'select ba, vist_date::date as visit_date ,km as bar from patroling where  vist_date is not null and km is not null and km<>0 ';
-        //     $substation = 'select ba, visit_date::date,sum(total_defects) as bar from tbl_substation where  visit_date is not null and   total_defects<>0 group by ba,visit_date ';
-        //     $feeder_pillar = 'select ba, visit_date::date,sum(total_defects) as bar from tbl_feeder_pillar where  visit_date is not null and   total_defects<>0 group by ba,visit_date ';
-        //     $link_box = 'select ba, visit_date::date,sum(total_defects) as bar from tbl_link_box where  visit_date is not null and   total_defects<>0 group by ba,visit_date ';
-        //     $cable_bridge = 'select ba, visit_date::date,sum(total_defects) as bar from tbl_cable_bridge where  visit_date is not null and   total_defects<>0 group by ba,visit_date ';
-        //     $tiang = 'select ba, review_date::date as visit_date,sum(total_defects) as bar from tbl_savr where  review_date is not null and   total_defects<>0 group by ba,review_date ';
-        // }
-        // $data['patrolling'] = $patrolling;
-        // 
-        // $data['substation'] =$substation;
-        // $data['feeder_pillar'] =$feeder_pillar;
-        // $data['link_box'] =$link_box;
-        // $data['cable_bridge'] =$cable_bridge;
-        // $data['tiang'] =$tiang;
-// return $data;
-        
+
     }
 
     public function index(Request $request)
@@ -135,9 +97,9 @@ function statsTable(Request $request){
 
 
         //  return  $count =
-     
+
      // Now $count contains the count of records that satisfy the conditions
-     
+
             // ->when($ba , function ($query) use ($ba) {
             //     return $query->where('ba', $ba);
             // })
@@ -147,7 +109,7 @@ function statsTable(Request $request){
             // ->when($to_date, function ($query) use ($to_date , $date) {
             //     return $query->where($date, '<=' , $to_date);
             // });
-    
+
     // return $query->get();
         // $data = [];
         //     $substation = $this->getDashboardCount('tbl_substation','visit_date', 'substation_image_1',$ba,$request);
@@ -238,9 +200,9 @@ function statsTable(Request $request){
             FROM public.savr_counts ) as savr
 
             ";
-            } 
+            }
             $data = DB::select($query);
- 
+
             if ($data) {
                 if ($request->ajax()) {
                     return $data[0];
@@ -257,8 +219,8 @@ function statsTable(Request $request){
     }
 
     private function getDashboardCount($table , $dateColumn , $imageColumnName, $ba  , $request){
-   
-        
+
+
          $from_date  = $request->from_date;
          $to_date    = $request->to_date;
          $count =  [];
@@ -300,15 +262,15 @@ function statsTable(Request $request){
 
         // $table = table name
         // $date = date column name
-        // $bar = third column name 
+        // $bar = third column name
         // $request = conatins from_date , to_date
 
-        if ($bar != 'km') {    
+        if ($bar != 'km') {
            $sbar = DB::raw('sum(total_defects) as bar' );
         }else{
             $sbar = "km as bar";
         }
-  
+
         $from_date  = $request->from_date;
         $to_date    = $request->to_date;
         $query      = DB::table($table)
@@ -330,7 +292,8 @@ function statsTable(Request $request){
                         }
 
                         $query->orderBy($date , 'desc');
-            
+
             return $query->get();
     }
+
 }

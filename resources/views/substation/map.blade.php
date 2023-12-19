@@ -8,7 +8,7 @@
             z-index: 1;
         }
 
-       
+
     </style>
 @endsection
 
@@ -244,11 +244,11 @@
     </div>
 @endsection
 
-@section('script') 
+@section('script')
 
     @include('partials.map-js')
     <script>
-      
+
         var substringMatcher = function(strs) {
 
             return function findMatches(q, cb) {
@@ -414,6 +414,27 @@
             // map.addLayer(pano_layer);
             // map.addLayer(pano_layer)
 
+
+
+            if(work_package){
+        map.removeLayer(work_package);
+        }
+
+        work_package = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:tbl_workpackage',
+                format: 'image/png',
+                cql_filter: "ba ILIKE '%" + param + "%'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+            map.addLayer(work_package)
+            work_package.bringToFront()
+
+
+
+
             addGroupOverLays()
 
         }
@@ -433,6 +454,7 @@
                     'Without defects': substation_without_defects,
                     'Unsurveyed': unservey,
                     'Pano': pano_layer,
+                    'Work Package':work_package
                 }
             };
             //add layer control on top right corner of map

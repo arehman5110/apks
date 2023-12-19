@@ -111,7 +111,7 @@
                     <label for="cb_unsurveyed">Unsurveyed</label>
                 </div>
 
-               
+
 
                 <div class=" mx-4">
                     <input type="radio" name="cb_with_defects" id="cable_bridge" value="cb_with_defects" class="with_defects" onchange="selectLayer(this.value)">
@@ -135,13 +135,13 @@
                 </div>
 
             </div>
-           
+
         </div>
         <!--  START MAP CARD DIV -->
         <div class="row m-2">
 
 
-          
+
 
             <!-- START MAP  DIV -->
             <div class="col-md-8 p-0 ">
@@ -208,7 +208,7 @@
     @include('partials.map-js')
 
     <script>
-      
+
         var substringMatcher = function(strs) {
 
             return function findMatches(q, cb) {
@@ -401,6 +401,22 @@
             // map.addLayer(pano_layer)
 
 
+            if(work_package){
+        map.removeLayer(work_package);
+        }
+
+        work_package = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:tbl_workpackage',
+                format: 'image/png',
+                cql_filter: "ba ILIKE '%" + param + "%'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+            map.addLayer(work_package)
+            work_package.bringToFront()
+
 
             addGroupOverLays()
 
@@ -422,6 +438,8 @@
                     'Unsurveyed': cb_unsurveyed,
                     'Surveyed with defects': cb_with_defects,
                     'Surveyed without defects': cb_without_defects,
+                    'Work Package':work_package
+
 
                 }
             };

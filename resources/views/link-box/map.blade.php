@@ -86,7 +86,7 @@
                         onclick="resetMapFilters()" />
                 </div>
 
-                
+
 
             </div>
         </div>
@@ -116,7 +116,7 @@
                     <input type="radio" name="select_layer" id="select_layer_pano" value="pano" onchange="selectLayer(this.value)">
                     <label for="select_layer_pano">Pano</label>
                 </div>
-           
+
 
             <div class="mx-4">
                 <div id="the-basics">
@@ -124,7 +124,7 @@
                 </div>
             </div>
  </div>
-            
+
         </div>
 
         <!--  START MAP CARD DIV -->
@@ -239,7 +239,7 @@
 
 
     <script>
-      
+
         var substringMatcher = function(strs) {
 
             return function findMatches(q, cb) {
@@ -428,7 +428,23 @@
             // map.addLayer(pano_layer);
             // map.addLayer(pano_layer)
 
-            
+            if(work_package){
+        map.removeLayer(work_package);
+        }
+
+        work_package = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:tbl_workpackage',
+                format: 'image/png',
+                cql_filter: "ba ILIKE '%" + param + "%'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+            map.addLayer(work_package)
+            work_package.bringToFront()
+
+
             addGroupOverLays()
 
         }
@@ -448,7 +464,9 @@
                     'Pano': pano_layer,
                     'Unsurveyed': lb_unsurveyed,
                     'Surveyed with defects' : lb_with_defects,
-                    'Surveyed  without defects':lb_without_defects
+                    'Surveyed  without defects':lb_without_defects,
+                    'Work Package':work_package
+
                 }
             };
             //add layer control on top right corner of map

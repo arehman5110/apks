@@ -40,7 +40,7 @@
     <div class="container-fluid bg-white pt-2">
 
 
- 
+
             <div class="card p-0 mb-3">
                 <div class="card-body row form-input">
 
@@ -91,7 +91,7 @@
 
                 </div>
             </div>
-     
+
 
 
 
@@ -104,7 +104,7 @@
                         <label for="select_layer_substation">Substation</label>
                     </div> --}}
 
-                   
+
 
                     <div class=" mx-4 d-flex">
                         <input type="radio" name="select_layer" id="fp_unsurveyed" value="fp_unsurveyed" class="unsurveyed" onchange="selectLayer(this.value)">
@@ -134,7 +134,7 @@
                     </div>
 
                 </div>
- 
+
             </div>
 
         <!--  START MAP CARD DIV -->
@@ -207,7 +207,7 @@
 @section('script')
     @include('partials.map-js')
     <script>
-      
+
         var substringMatcher = function(strs) {
 
             return function findMatches(q, cb) {
@@ -383,6 +383,24 @@
             fp_with_defects.bringToFront()
 
 
+            if(work_package){
+        map.removeLayer(work_package);
+        }
+
+        work_package = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:tbl_workpackage',
+                format: 'image/png',
+                cql_filter: "ba ILIKE '%" + param + "%'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+            map.addLayer(work_package)
+            work_package.bringToFront()
+
+
+
             addGroupOverLays()
 
         }
@@ -402,6 +420,8 @@
                     'Unsurveyed' : fp_unsurveyed,
                     'Surveyed with defects' : fp_with_defects,
                     'Surveyed Without defects' : fp_surveyed,
+                    'Work Package':work_package
+
                 }
             };
             //add layer control on top right corner of map

@@ -30,7 +30,7 @@
 
     var ts_without_defects = '';
     var ts_unsurveyed ='';
-    var ts_with_defects ='';  
+    var ts_with_defects ='';
 
     var cb_without_defects = '';
     var cb_unsurveyed ='';
@@ -43,7 +43,9 @@
     var road = '';
     var unservey = '';
     var pano_layer = '';
-    
+
+    var work_package = '';
+
 
 
     var popup = L.popup();
@@ -98,7 +100,7 @@
                 sel_lyr = fp_with_defects;
 
             }
-            
+
             else if (param == 'main_substation') {
                 sel_lyr = substation;
 
@@ -419,7 +421,7 @@
         ['B4', 'PUTRAJAYA & CYBERJAYA', 2.92875032271019, 101.675338316575],
         ['B4', 'SEPANG', 2.734218580014375, 101.69394518452967],
         ['B4', 'PUCHONG', 2.971632230751114, 101.62918173453126]
-  
+
     ];
 
   var xyObj={
@@ -435,8 +437,8 @@
     'PUTRAJAYA & CYBERJAYA': '2.92875032271019, 101.675338316575',
     'SEPANG': '2.734218580014375, 101.69394518452967',
     'PUCHONG':'2.971632230751114, 101.62918173453126'
-  }  
-  
+  }
+
     var ba = "{{ Auth::user()->ba }}";
 
 
@@ -492,14 +494,14 @@
                 from_date = param.value;
             } else if (param.id == 'to_date') {
                 to_date = param.value;
-            }  
+            }
             callLayers(inBa)
 
         }
 
 
         function  resetMapFilters() {
-            
+
                 from_date = '';
                 to_date = '';
                 $('#from_date , #to_date , .tt-input').val('')

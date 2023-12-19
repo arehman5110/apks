@@ -38,7 +38,7 @@
 @section('content')
 
 @if(Auth::user()->ba=='')
- 
+
 
     <div class=" px-4  mt-2  from-input  ">
             <div class="card p-0 mb-3">
@@ -48,20 +48,20 @@
                         <label for="excelZone">Zone :</label>
                         <select name="excelZone" id="excelZone" class="form-control" onchange="getBa(this.value)">
                             <option value="" hidden>
-                                Select Zone 
+                                Select Zone
                             </option>
-                           
+
                                 <option value="W1">W1</option>
                                 <option value="B1">B1</option>
                                 <option value="B2">B2</option>
                                 <option value="B4">B4</option>
-                            
+
                         </select>
                     </div>
                     <div class=" col-md-3">
                         <label for="excelBa">BA :</label>
                         <select name="excelBa" id="excelBa" class="form-control" onchange="onChangeBA()">
-                           
+
 
                         </select>
                     </div>
@@ -93,7 +93,7 @@
             <table class="table">
             <thead>
                 <tr>
-                
+
                 <th scope="col">BA</th>
                 <th scope="col">Patroling</th>
                 <th scope="col">Substation</th>
@@ -351,7 +351,7 @@
 
 
 <script>
- 
+
     function onChangeBA(){
          // console.log(data['patrolling']);
          $("#patrolling-container").html('')
@@ -377,7 +377,7 @@
             type: 'column'
         },
         credits:false,
-       
+
         title: {
             text: 'Total Data'
         },
@@ -391,7 +391,7 @@
             scrollbar:{
                 enabled:true
               },
-             
+
             crosshair: true
         },
         yAxis: {
@@ -436,10 +436,10 @@ function getDateCounts(){
     }else{
         var to_date = $('#excel_to_date').val() ;
     }
-    
-   
 
-   
+
+
+
     $.ajax({
         url: `/{{app()->getLocale()}}/patrol_graph?ba_name=${cu_ba}&from_date=${from_date}&to_date=${to_date}`,
 
@@ -447,7 +447,7 @@ function getDateCounts(){
         method: 'GET',
         async: false,
         success: function callback(data) {
-           
+
 
             if (data && data['patrolling'] != '') {
                 makeArray(data['patrolling'] , 'patrolling-container'  )
@@ -471,7 +471,7 @@ function getDateCounts(){
 
             if (data && data['tiang'] != '') {
                 makeArray(data['tiang'] , 'tiang-container' )
-            }    
+            }
         }
     });
 
@@ -483,7 +483,7 @@ function getDateCounts(){
         method: 'GET',
         async: false,
         success: function callback(data) {
-        
+
             for (var key in data){
               $("#"+key).html(data[key]);
             }
@@ -496,8 +496,8 @@ function getDateCounts(){
 
 
 function makeArray(data ,id) {
-     
-    
+
+
     var series=[];
         var temp=[];
         var cat=[];
@@ -513,8 +513,8 @@ function makeArray(data ,id) {
             var username=data[i].ba;
         if(temp.includes(username)==true){
             continue;
-        }else{   
-            temp.push(username); 
+        }else{
+            temp.push(username);
             var obj={};
             obj.name=username;
             var arr=[]
@@ -527,7 +527,7 @@ function makeArray(data ,id) {
                     //if(data[j].updated_at==cat[len]){
                     var index = cat.indexOf(data[j].visit_date);
                     if(index>len){
-                    for(g=len;g<index;g++){    
+                    for(g=len;g<index;g++){
                     arr.push(0)
                     }
                     arr.push(parseInt(data[j].bar));
@@ -538,24 +538,27 @@ function makeArray(data ,id) {
                     //     arr.push(0)
                     // }
                 }
-                
+
             }
             obj.data=arr;
             series.push(obj)
         }
         }
         mainBarChart(cat,series ,id)
-       
-       
+
+
 }
 
 $(function(){
-    getAllStats()
+    if ('{{Auth::user()->ba}}' == '') {
+        getAllStats()
+    }
+
     $('#excel_from_date , #excel_to_date').on('change',function(){
         onChangeBA();
         getAllStats();
 
-       
+
 
     })
 })
@@ -583,7 +586,7 @@ if($('#excel_from_date').val()==''){
         method: 'GET',
         async: false,
         success: function callback(data) {
-            var str='';  
+            var str='';
             for (var i=0; i<data.length;i++){
               str+='<tr><td>'+data[i].ba+'</td><td>'+data[i].patroling+'</td>'+'<td>'+data[i].substation+'</td><td>'+data[i].feeder_pillar+'</td><td>'+data[i].tiang+'</td><td>'+data[i].link_box+'</td><td>'+data[i].cable_bridge+'</td></tr>'
             }
@@ -603,6 +606,6 @@ function resetDashboard(){
 setTimeout(() => {
     getDateCounts();
 }, 1000);
-</script>    
+</script>
 
 @endsection
