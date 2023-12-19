@@ -135,6 +135,32 @@ $worksheet->getStyle('B:AL')->getFont()->setSize(9);
                     $worksheet->setCellValue('AA' . $i, $rec->bare_s7173 );
                     $worksheet->setCellValue('AB' . $i, $rec->bare_s7122 );
                     $worksheet->setCellValue('AC' . $i, $rec->bare_s7132 );
+                   $one_line = Tiang::where('fp_road', $rec->road)
+                    ->whereNotNull('talian_utama_connection')
+                    ->where('talian_utama_connection' ,'one')
+                    ->where('talian_utama', 'main_line')
+                    ->count();
+
+                    $many_line = Tiang::where('fp_road', $rec->road)
+                    ->whereNotNull('talian_utama_connection')
+                    ->where('talian_utama_connection' ,'many')
+                    ->where('talian_utama', 'main_line')
+                    ->count();
+                    $line = '';
+                    if ($one_line > 0)  {
+
+                            $line = 'M';
+                    }elseif($many_line > 0){
+                        $line = 'S';
+                    }
+
+                    
+                
+
+                    $service_line = Tiang::where('fp_road' ,$rec->road)
+                    ->whereNotNull('talian_utama')
+                    ->where('talian_utama','');
+                    
 
                     unset($rec->road); 
                     $array = json_decode($rec, true);
@@ -145,7 +171,7 @@ $worksheet->getStyle('B:AL')->getFont()->setSize(9);
 
                     $worksheet->setCellValue('AD' . $i, $totalSum );
 
-                    $worksheet->setCellValue('AE' . $i, $rec->talian_utama  );
+                    $worksheet->setCellValue('AE' . $i, $line  );
                     $worksheet->setCellValue('AF' . $i, $rec->umbagan  );
 
 
