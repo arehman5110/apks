@@ -97,6 +97,8 @@ class TiangContoller extends Controller
 
             $data->size_tiang = $request->size_tiang;
             $data->jenis_tiang = $request->jenis_tiang;
+            $data->talian_utama = $request->talian_utama;
+            $data->talian_utama_connection = $request->talian_utama_connection;
 
             $defectsKeys = [];
             $defectsKeys['tiang_defect'] = ['cracked', 'leaning', 'dim', 'creepers', 'other'];
@@ -275,7 +277,8 @@ class TiangContoller extends Controller
             $data->section_from = $request->section_from;
             $data->section_to = $request->section_to;
             $data->tiang_no = $request->tiang_no;
-
+            $data->talian_utama = $request->talian_utama;
+            $data->talian_utama_connection = $request->talian_utama_connection;
             $data->size_tiang = $request->size_tiang;
             $data->jenis_tiang = $request->jenis_tiang;
             $data->abc_span = $request->has('abc_span') ? json_encode($request->abc_span) : null;

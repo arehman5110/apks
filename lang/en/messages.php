@@ -306,7 +306,8 @@ return [
 
     'qr'=>'QR',
     'tree'=>'Tree',
-    'add_clean_up'=>'Add clean up'
+    'add_clean_up'=>'Add clean up',
+    'main_line_service_line'=>'Main Line (M) / Servis (S)'
 
 
 
