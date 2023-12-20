@@ -155,7 +155,15 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-12">
+                           
+
+                            <div class="col-md-6">
+                                <div class="card p-3">
+                                <div id="suryed_patrolling-container" style="width:100%; height: 400px; margin: 0 auto"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
                                 <div class="card p-3">
                                 <div id="patrolling-container" style="width:100%; height: 400px; margin: 0 auto"></div>
                                 </div>
@@ -190,12 +198,19 @@
                             </div>
 
 
-                            <div class="col-md-12">
+                            <div class="col-md-6">
+                                <div class="card p-3">
+                                <div id="suryed_substation-container" style="width:100%; height: 400px; margin: 0 auto"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
                                 <div class="card p-3">
                                 <div id="substation-container" style="width:100%; height: 400px; margin: 0 auto"></div>
                                 </div>
                             </div>
 
+
+                            
                         </div>
                     </div>
                 </div>
@@ -223,11 +238,20 @@
 
                                 </div>
                             </div>
-                            <div class="col-md-12">
+
+                            <div class="col-md-6">
+                                <div class="card p-3">
+                                <div id="suryed_feeder_pillar-container" style="width:100%; height: 400px; margin: 0 auto"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
                                 <div class="card p-3">
                                 <div id="feeder_pillar-container" style="width:100%; height: 400px; margin: 0 auto"></div>
                                 </div>
                             </div>
+
+
+                           
                         </div>
                     </div>
                 </div>
@@ -258,11 +282,18 @@
 
                                 </div>
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-6">
+                                <div class="card p-3">
+                                <div id="suryed_tiang-container" style="width:100%; height: 400px; margin: 0 auto"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
                                 <div class="card p-3">
                                 <div id="tiang-container" style="width:100%; height: 400px; margin: 0 auto"></div>
                                 </div>
                             </div>
+
+                            
 
                         </div>
                     </div>
@@ -292,11 +323,18 @@
 
                                 </div>
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-6">
+                                <div class="card p-3">
+                                <div id="suryed_link_box-container" style="width:100%; height: 400px; margin: 0 auto"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
                                 <div class="card p-3">
                                 <div id="link_box-container" style="width:100%; height: 400px; margin: 0 auto"></div>
                                 </div>
                             </div>
+
+                           
                         </div>
                     </div>
                 </div>
@@ -325,11 +363,19 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-12">
+                            <div class="col-md-6">
+                                <div class="card p-3">
+                                <div id="suryed_cable_bridge-container" style="width:100%; height: 400px; margin: 0 auto"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
                                 <div class="card p-3">
                                 <div id="cable_bridge-container" style="width:100%; height: 400px; margin: 0 auto"></div>
                                 </div>
                             </div>
+
+
+                            
                         </div>
 
                     </div>
@@ -361,13 +407,22 @@
             $("#link_box-container").html('')
             $("#cable_bridge-container").html('')
             $("#tiang-container").html('')
+
+            $("#suryed_patrolling-container").html('')
+            $("#suryed_substation-container").html('')
+            $("#suryed_feeder_pillar-container").html('')
+            $("#suryed_link_box-container").html('')
+            $("#suryed_link_box-container").html('')
+            $("#suryed_cable_bridge-container").html('')
+            $("#suryed_tiang-container").html('')
+
         getDateCounts();
     }
 
 
-    function mainBarChart(cat,series ,id  ){
-        var barName = 'Defects';
-        var titleName = 'Defects';
+    function mainBarChart(cat,series ,id ,tName ){
+        var barName =  tName;
+        var titleName = 'Total ' +tName;
         if (id == "patrolling-container") {
             barName = 'KM'
             titleName = 'KM Patrol'
@@ -422,20 +477,14 @@
 
 
 function getDateCounts(){
- let  todaydate='{{date("Y-m-d")}}';
 
 
 
     var cu_ba=$('#excelBa').val() ?? 'null';
-    if($('#excel_from_date').val()==''){
-        var from_date='1970-01-01'
-    }else{
-        var from_date = $('#excel_from_date').val();
-    }if($('#excel_from_date').val()==''){
-        var to_date=todaydate
-    }else{
-        var to_date = $('#excel_to_date').val() ;
-    }
+    var from_date=$('#excel_from_date').val() ?? '';
+    var to_date=$('#excel_to_date').val() ?? '';
+
+    
 
 
 
@@ -454,7 +503,7 @@ function getDateCounts(){
             }
 
             if (data && data['substation'] != '') {
-                makeArray(data['substation'] , 'substation-container' )
+                makeArray(data['substation'] , 'substation-container')
             }
 
             if (data && data['feeder_pillar'] != '') {
@@ -462,7 +511,7 @@ function getDateCounts(){
             }
 
             if (data && data['link_box'] != '') {
-                makeArray(data['link_box'] , 'link_box-container' )
+                makeArray(data['link_box'] , 'link_box-container')
             }
 
             if (data && data['cable_bridge'] != '') {
@@ -470,7 +519,31 @@ function getDateCounts(){
             }
 
             if (data && data['tiang'] != '') {
-                makeArray(data['tiang'] , 'tiang-container' )
+                makeArray(data['tiang'] , 'tiang-container'  )
+            }
+
+            if (data && data['suryed_patrolling'] != '') {
+                makeTotalArray(data['suryed_patrolling'] , 'suryed_patrolling-container'  )
+            }
+
+            if (data && data['suryed_substation'] != '') {
+                makeTotalArray(data['suryed_substation'] , 'suryed_substation-container' )
+            }
+
+            if (data && data['suryed_feeder_pillar'] != '') {
+                makeTotalArray(data['suryed_feeder_pillar'] , 'suryed_feeder_pillar-container' )
+            }
+
+            if (data && data['suryed_link_box'] != '') {
+                makeTotalArray(data['suryed_link_box'] , 'suryed_link_box-container' )
+            }
+
+            if (data && data['suryed_cable_bridge'] != '') {
+                makeTotalArray(data['suryed_cable_bridge'] , 'suryed_cable_bridge-container' )
+            }
+
+            if (data && data['suryed_tiang'] != '') {
+                makeTotalArray(data['suryed_tiang'] , 'suryed_tiang-container' )
             }
         }
     });
@@ -493,6 +566,22 @@ function getDateCounts(){
 
 }
 
+function makeTotalArray(arr ,id) {
+
+    console.log(arr);
+    var cate = arr.map(item => item.ba);
+var seriesD = arr.map(item => item.count);
+
+var series = [{
+  name: 'Count',
+  data: seriesD
+}];
+
+console.log(series);
+mainBarChart(cate, series, id ,'Counts');
+
+
+}
 
 
 function makeArray(data ,id) {
@@ -543,8 +632,10 @@ function makeArray(data ,id) {
             obj.data=arr;
             series.push(obj)
         }
+
         }
-        mainBarChart(cat,series ,id)
+        // console.log(series);
+        mainBarChart(cat,series ,id , 'Defects')
 
 
 }
@@ -574,7 +665,7 @@ if($('#excel_from_date').val()==''){
     var from_date='1970-01-01'
 }else{
     var from_date = $('#excel_from_date').val();
-}if($('#excel_from_date').val()==''){
+}if($('#excel_to_date').val()==''){
     var to_date=todaydate
 }else{
     var to_date = $('#excel_to_date').val() ;
