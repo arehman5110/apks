@@ -96,6 +96,7 @@
 
                 <th scope="col">BA</th>
                 <th scope="col">Patroling</th>
+                <th scope="col">Notice</th>
                 <th scope="col">Substation</th>
                 <th scope="col">Feeder Pillar</th>
                 <th scope="col">Tiang</th>
@@ -157,13 +158,13 @@
 
                            
 
-                            <div class="col-md-6">
+                            <!-- <div class="col-md-6">
                                 <div class="card p-3">
                                 <div id="suryed_patrolling-container" style="width:100%; height: 400px; margin: 0 auto"></div>
                                 </div>
-                            </div>
+                            </div> -->
 
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="card p-3">
                                 <div id="patrolling-container" style="width:100%; height: 400px; margin: 0 auto"></div>
                                 </div>
@@ -408,7 +409,7 @@
             $("#cable_bridge-container").html('')
             $("#tiang-container").html('')
 
-            $("#suryed_patrolling-container").html('')
+            //$("#suryed_patrolling-container").html('')
             $("#suryed_substation-container").html('')
             $("#suryed_feeder_pillar-container").html('')
             $("#suryed_link_box-container").html('')
@@ -479,12 +480,26 @@
 function getDateCounts(){
 
 
+//  if('{{Auth::user()->name}}'=='aerosynergy'){
+     var cu_ba=$('#excelBa').val() ?? 'null';
+//     if($('#excel_from_date').val()==''){
+//         var from_date='1970-01-01'
+//     }else{
+//         var from_date = $('#excel_from_date').val();
+//     }if($('#excel_from_date').val()==''){
+//         var to_date=todaydate
+//     }else{
+//         var to_date = $('#excel_to_date').val() ;
+//     }
+// }else{
+//     var from_date='1970-01-01';
+//     var to_date=todaydate
+// }
 
-    var cu_ba=$('#excelBa').val() ?? 'null';
     var from_date=$('#excel_from_date').val() ?? '';
     var to_date=$('#excel_to_date').val() ?? '';
 
-    
+
 
 
 
@@ -523,9 +538,9 @@ function getDateCounts(){
                 makeArray(data['tiang'] , 'tiang-container'  )
             }
 
-            if (data && data['suryed_patrolling'] != '') {
-                makeTotalArray(data['suryed_patrolling'] , 'suryed_patrolling-container'  )
-            }
+            // if (data && data['suryed_patrolling'] != '') {
+            //     makeTotalArray(data['suryed_patrolling'] , 'suryed_patrolling-container'  )
+            // }
 
             if (data && data['suryed_substation'] != '') {
                 makeTotalArray(data['suryed_substation'] , 'suryed_substation-container' )
@@ -659,8 +674,6 @@ $(function(){
 function getAllStats(){
     let  todaydate='{{date("Y-m-d")}}';
 
-
-
 var cu_ba=$('#excelBa').val() ?? 'null';
 if($('#excel_from_date').val()==''){
     var from_date='1970-01-01'
@@ -672,6 +685,7 @@ if($('#excel_from_date').val()==''){
     var to_date = $('#excel_to_date').val() ;
 }
 
+
     $.ajax({
         url: `/{{app()->getLocale()}}/statsTable?from_date=${from_date}&to_date=${to_date}`,
         dataType: 'JSON',
@@ -680,7 +694,7 @@ if($('#excel_from_date').val()==''){
         success: function callback(data) {
             var str='';
             for (var i=0; i<data.length;i++){
-              str+='<tr><td>'+data[i].ba+'</td><td>'+data[i].patroling+'</td>'+'<td>'+data[i].substation+'</td><td>'+data[i].feeder_pillar+'</td><td>'+data[i].tiang+'</td><td>'+data[i].link_box+'</td><td>'+data[i].cable_bridge+'</td></tr>'
+              str+='<tr><td>'+data[i].ba+'</td><td>'+data[i].patroling+'</td><td>'+data[i].notice+'</td><td>'+data[i].substation+'</td><td>'+data[i].feeder_pillar+'</td><td>'+data[i].tiang+'</td><td>'+data[i].link_box+'</td><td>'+data[i].cable_bridge+'</td></tr>'
             }
             $('#stats_table').html(str);
         }
