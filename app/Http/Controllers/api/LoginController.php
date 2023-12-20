@@ -34,8 +34,8 @@ class LoginController extends Controller
 
         if (  auth()->attempt(['name' => $input['username'], 'password' => $input['password']])) {
             $user = Auth::user();
-            $team = Team::find($user->id);
-            $user['team_name'] = $team;
+             $team = Team::find($user->id_team);
+            $user['team_name'] = $team->team_name;
 
 
             return response()
