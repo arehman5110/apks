@@ -158,13 +158,13 @@
 
                            
 
-                            <div class="col-md-6">
+                            <!-- <div class="col-md-6">
                                 <div class="card p-3">
                                 <div id="suryed_patrolling-container" style="width:100%; height: 400px; margin: 0 auto"></div>
                                 </div>
-                            </div>
+                            </div> -->
 
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="card p-3">
                                 <div id="patrolling-container" style="width:100%; height: 400px; margin: 0 auto"></div>
                                 </div>
@@ -409,7 +409,7 @@
             $("#cable_bridge-container").html('')
             $("#tiang-container").html('')
 
-            $("#suryed_patrolling-container").html('')
+            //$("#suryed_patrolling-container").html('')
             $("#suryed_substation-container").html('')
             $("#suryed_feeder_pillar-container").html('')
             $("#suryed_link_box-container").html('')
@@ -480,21 +480,25 @@
 function getDateCounts(){
 
 
- if('{{Auth::user()->name}}'=='aerosynergy'){
-    var cu_ba=$('#excelBa').val() ?? 'null';
-    if($('#excel_from_date').val()==''){
-        var from_date='1970-01-01'
-    }else{
-        var from_date = $('#excel_from_date').val();
-    }if($('#excel_from_date').val()==''){
-        var to_date=todaydate
-    }else{
-        var to_date = $('#excel_to_date').val() ;
-    }
-}else{
-    var from_date='1970-01-01';
-    var to_date=todaydate
-}
+//  if('{{Auth::user()->name}}'=='aerosynergy'){
+     var cu_ba=$('#excelBa').val() ?? 'null';
+//     if($('#excel_from_date').val()==''){
+//         var from_date='1970-01-01'
+//     }else{
+//         var from_date = $('#excel_from_date').val();
+//     }if($('#excel_from_date').val()==''){
+//         var to_date=todaydate
+//     }else{
+//         var to_date = $('#excel_to_date').val() ;
+//     }
+// }else{
+//     var from_date='1970-01-01';
+//     var to_date=todaydate
+// }
+
+    var from_date=$('#excel_from_date').val() ?? '';
+    var to_date=$('#excel_to_date').val() ?? '';
+
 
 
 
@@ -533,9 +537,9 @@ function getDateCounts(){
                 makeArray(data['tiang'] , 'tiang-container'  )
             }
 
-            if (data && data['suryed_patrolling'] != '') {
-                makeTotalArray(data['suryed_patrolling'] , 'suryed_patrolling-container'  )
-            }
+            // if (data && data['suryed_patrolling'] != '') {
+            //     makeTotalArray(data['suryed_patrolling'] , 'suryed_patrolling-container'  )
+            // }
 
             if (data && data['suryed_substation'] != '') {
                 makeTotalArray(data['suryed_substation'] , 'suryed_substation-container' )
