@@ -33,15 +33,17 @@ class LoginController extends Controller
 
 
         if (  auth()->attempt(['name' => $input['username'], 'password' => $input['password']])) {
-            $id = Auth::user()->id_team;
-            $team = Team::find($id);
+            $user = Auth::user();
+            $team = Team::find($user->id);
+            $user['team_name'] = $team;
+
 
             return response()
                     ->json([
                         'statusCode' => 200,
                         'success'=>true,
-                        'data'=>['team'=>$team ? $team->team_name : ''],
                         'message' => 'login success',
+                        'data'=>$user,
 
                     ],200);
         } else {
