@@ -497,9 +497,10 @@ function getDateCounts(){
         async: false,
         success: function callback(data) {
 
+            console.log(data['patrolling'].defects);
 
-            if (data && data['patrolling'] != '') {
-                makeArray(data['patrolling'] , 'patrolling-container'  )
+            if (data && data['patrolling'].defects != '') {
+                makeArray(data['patrolling'].defects , 'patrolling-container'  )
             }
 
             if (data && data['substation'] != '') {
