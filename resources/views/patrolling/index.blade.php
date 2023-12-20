@@ -173,6 +173,7 @@
                                     <thead style="background-color: #E4E3E3 !important">
                                         <tr>
                                             <th class="text-center">WP NAME</th>
+                                            <th class="text-center">BA</th>
                                             <th class="text-center">CYCLE</th>
                                             <th class="text-center">READING START</th>
                                             <th class="text-center">READING END</th>
@@ -358,6 +359,10 @@
                 columns: [{
                         data: 'wp_name',
                         name: 'wp_name'
+                    },
+                    {
+                        data: 'ba',
+                        name: 'ba'
                     },
                     {
                         data: 'cycle',

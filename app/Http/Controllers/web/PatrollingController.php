@@ -82,7 +82,7 @@ class PatrollingController extends Controller
     public function getRoadsByID($language, $id)
     {
         $road = Road::where('id', $id)
-            ->select('id', 'road_name', 'km', 'date_patrol', 'time_patrol', 'name_project', 'actual_km', 'fidar', 'total_digging', 'total_notice', 'total_supervision')
+            ->select('id', 'road_name', 'ba', 'km', 'date_patrol', 'time_patrol', 'name_project', 'actual_km', 'fidar', 'total_digging', 'total_notice', 'total_supervision')
             ->first();
         $road->time_petrol = date('H:i:s', strtotime($road->time_petrol));
         return $road;

@@ -32,13 +32,9 @@ function statsTable(Request $request){
     foreach($bas as $key => $ba){
 
 
-        $query="select   ba, km as patroling ,notice ,substation, feeder_pillar , tiang , link_box , cable_bridge   from
+        $query="select   ba, km as patroling  ,substation, feeder_pillar , tiang , link_box , cable_bridge   from
     (
         select '$ba' as ba,
-                   (select    sum(case
-                    when notice='yes' Then 1 else 0
-                end )  from tbl_third_party_diging_patroling where ba='$ba' and survey_date >= '$from_date'
-                AND survey_date <=  ' $to_date') as notice,
                 (select count(*) from tbl_substation where total_defects is not null
                  and substation_image_1 is not null and substation_image_2 is not null  and ba='$ba' and visit_date >= '$from_date'
                  AND visit_date <=  ' $to_date') as substation,
@@ -78,7 +74,6 @@ function statsTable(Request $request){
         }
 
       $data['patrolling']       = $this->getGraphCount('patroling' , 'vist_date' , 'km' , $ba , $request );
-      return $data;
       $data['substation']       = $this->getGraphCount('tbl_substation' , 'visit_date' , 'total_defects' , $ba, $request);
       $data['feeder_pillar']    = $this->getGraphCount('tbl_feeder_pillar' , 'visit_date' , 'total_defects' , $ba, $request );
       $data['link_box']         = $this->getGraphCount('tbl_link_box' , 'visit_date' , 'total_defects', $ba , $request );
@@ -86,11 +81,11 @@ function statsTable(Request $request){
       $data['tiang']            = $this->getGraphCount('tbl_savr' , 'review_date' , 'total_defects', $ba , $request);
 
     //   $data['suryed_patrolling']       = $this->totalGraphCount('patroling'  , $ba ,'vist_date' , $request);
-    //   $data['suryed_substation']       = $this->totalGraphCount('tbl_substation' , $ba ,'visit_date' , $request);
-    //   $data['suryed_feeder_pillar']    = $this->totalGraphCount('tbl_feeder_pillar' , $ba ,'visit_date' , $request );
-    //   $data['suryed_link_box']         = $this->totalGraphCount('tbl_link_box', $ba ,'visit_date' , $request );
-    //   $data['suryed_cable_bridge']     = $this->totalGraphCount('tbl_cable_bridge' , $ba ,'visit_date' , $request);
-    //   $data['suryed_tiang']            = $this->totalGraphCount('tbl_savr' , $ba ,'review_date' , $request);
+      $data['suryed_substation']       = $this->totalGraphCount('tbl_substation' , $ba ,'visit_date' , $request);
+      $data['suryed_feeder_pillar']    = $this->totalGraphCount('tbl_feeder_pillar' , $ba ,'visit_date' , $request );
+      $data['suryed_link_box']         = $this->totalGraphCount('tbl_link_box', $ba ,'visit_date' , $request );
+      $data['suryed_cable_bridge']     = $this->totalGraphCount('tbl_cable_bridge' , $ba ,'visit_date' , $request);
+      $data['suryed_tiang']            = $this->totalGraphCount('tbl_savr' , $ba ,'review_date' , $request);
 
 
       return response()->json($data);
@@ -269,75 +264,74 @@ function statsTable(Request $request){
 
 
     }
-    private function getGraphCount($table, $date, $bar, $ba, $request)
-    {
+
+    private function getGraphCount($table , $date , $bar , $ba , $request ){
+
+
         if ($bar != 'km') {
-            $sbar = DB::raw('sum(total_defects) as bar');
-        } else {
+           $sbar = DB::raw('sum(total_defects) as bar' );
+        }else{
             $sbar = "km as bar";
         }
-        $sum = [];
-    
-        $from_date = $request->from_date;
-        $to_date = $request->to_date;
-    
-        $query = DB::table($table)
-            ->select('ba', DB::raw("$date::date as visit_date"), $sbar)
-            ->whereNotNull($bar);
-    
-        if ($ba) {
-            $query->where('ba', $ba);
-        }
-    
-        if ($from_date) {
-            $query->where($date, '>=', $from_date);
-        }
-    
-        if ($to_date) {
-            $query->where($date, '<=', $to_date);
-        }
-    
-        if ($bar != 'km') {
-            $query->groupBy('ba', DB::raw("$date::date"));
 
-            $total = clone $query; 
-    
-            $sum['total'] = $total->orderBy($date, 'desc')->get();
-        }
-    
-       
-        $sum['defects'] = $query->whereNotNull($date)
-            
-            ->where($bar, '<>', 0)
-            ->orderBy($date, 'desc')
-            ->get();
-    
-        return $sum;
+        $from_date  = $request->from_date;
+        $to_date    = $request->to_date;
+        $query      = DB::table($table)
+                        ->select('ba', DB::raw("$date::date as visit_date"), $sbar)
+                        ->whereNotNull($date)
+                        ->whereNotNull($bar)
+                        ->where($bar, '<>', 0);
+ 
+                        if ($ba) {
+                            $query->where('ba', $ba);
+                        }
+        
+                        if ($from_date) {
+                            $query->where($date, '>=', $from_date);
+                        }
+                                
+                        if ($to_date) {
+                            $query->where($date, '<=' , $to_date);
+                        } 
+
+                        if ($bar != 'km') {
+                            $query->groupBy('ba', DB::raw("$date::date"));
+                        }
+
+                        $query->orderBy($date , 'desc');
+
+            return $query->get();
     }
+
+    private function totalGraphCount($table , $ba , $date, $request){
+       
+ 
+         $from_date  = $request->from_date;
+         $to_date    = $request->to_date;
+         $query      = DB::table($table)
+                         ->select('ba', DB::raw("$date::date as visit_date"), DB::raw('count(*) as bar' ))
+                         ->whereNotNull($date)
+                         ->whereNotNull('total_defects');
+  
+                         if ($ba) {
+                             $query->where('ba', $ba);
+                         }
+         
+                         if ($from_date) {
+                             $query->where($date, '>=', $from_date);
+                         }
+                                 
+                         if ($to_date) {
+                             $query->where($date, '<=' , $to_date);
+                         } 
+ 
+                        
+                             $query->groupBy('ba', DB::raw("$date::date"))
+                             ->orderBy($date , 'desc');
+ 
+             return $query->get();
     
 
-    // private function totalGraphCount($table , $ba , $date, $request){
-    //     $from_date  = $request->from_date;
-    //     $to_date    = $request->to_date;
-
-    //     $query = DB::table($table)
-    //     ->select('ba', DB::raw('count(*) as count'));
-    //     if ($ba != '') {
-    //         $query->where('ba', $ba);
-    //     }
-
-    //     if ($from_date) {
-    //         $query->where($date, '>=', $from_date);
-    //     }
-                
-    //     if ($to_date) {
-    //         $query->where($date, '<=' , $to_date);
-    //     } 
-
-    //  return   $query->groupBy('ba')
-    //     ->get();
-    
-
-    // }
+    }
 
 }

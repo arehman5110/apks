@@ -96,7 +96,6 @@
 
                 <th scope="col">BA</th>
                 <th scope="col">Patroling</th>
-                <th scope="col">Notice</th>
                 <th scope="col">Substation</th>
                 <th scope="col">Feeder Pillar</th>
                 <th scope="col">Tiang</th>
@@ -158,13 +157,13 @@
 
                            
 
-                            <!-- <div class="col-md-6">
+                            <div class="col-md-6">
                                 <div class="card p-3">
                                 <div id="suryed_patrolling-container" style="width:100%; height: 400px; margin: 0 auto"></div>
                                 </div>
-                            </div> -->
+                            </div>
 
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="card p-3">
                                 <div id="patrolling-container" style="width:100%; height: 400px; margin: 0 auto"></div>
                                 </div>
@@ -409,7 +408,7 @@
             $("#cable_bridge-container").html('')
             $("#tiang-container").html('')
 
-            //$("#suryed_patrolling-container").html('')
+            // $("#suryed_patrolling-container").html('')
             $("#suryed_substation-container").html('')
             $("#suryed_feeder_pillar-container").html('')
             $("#suryed_link_box-container").html('')
@@ -422,7 +421,7 @@
 
 
     function mainBarChart(cat,series ,id ,tName ){
-        var barName =  tName;
+        var barName =  '';
         var titleName = 'Total ' +tName;
         if (id == "patrolling-container") {
             barName = 'KM'
@@ -435,7 +434,7 @@
         credits:false,
 
         title: {
-            text: 'Total Data'
+            text: 'Total ' + tName
         },
         subtitle: {
             text: 'Source:Aerosynergy'
@@ -480,26 +479,12 @@
 function getDateCounts(){
 
 
-//  if('{{Auth::user()->name}}'=='aerosynergy'){
-     var cu_ba=$('#excelBa').val() ?? 'null';
-//     if($('#excel_from_date').val()==''){
-//         var from_date='1970-01-01'
-//     }else{
-//         var from_date = $('#excel_from_date').val();
-//     }if($('#excel_from_date').val()==''){
-//         var to_date=todaydate
-//     }else{
-//         var to_date = $('#excel_to_date').val() ;
-//     }
-// }else{
-//     var from_date='1970-01-01';
-//     var to_date=todaydate
-// }
 
+    var cu_ba=$('#excelBa').val() ?? 'null';
     var from_date=$('#excel_from_date').val() ?? '';
     var to_date=$('#excel_to_date').val() ?? '';
 
-
+    
 
 
 
@@ -512,30 +497,29 @@ function getDateCounts(){
         async: false,
         success: function callback(data) {
 
-            console.log(data['patrolling'].defects);
 
-            if (data && data['patrolling'].defects != '') {
-                makeArray(data['patrolling'].defects , 'patrolling-container'  )
+            if (data && data['patrolling'] != '') {
+                makeArray(data['patrolling'] , 'patrolling-container' ,'Defcets' )
             }
 
             if (data && data['substation'] != '') {
-                makeArray(data['substation'] , 'substation-container')
+                makeArray(data['substation'] , 'substation-container' ,'Defcets')
             }
 
             if (data && data['feeder_pillar'] != '') {
-                makeArray(data['feeder_pillar'] , 'feeder_pillar-container' )
+                makeArray(data['feeder_pillar'] , 'feeder_pillar-container' ,'Defcets' )
             }
 
             if (data && data['link_box'] != '') {
-                makeArray(data['link_box'] , 'link_box-container')
+                makeArray(data['link_box'] , 'link_box-container' ,'Defcets')
             }
 
             if (data && data['cable_bridge'] != '') {
-                makeArray(data['cable_bridge'] , 'cable_bridge-container' )
+                makeArray(data['cable_bridge'] , 'cable_bridge-container' ,'Defcets' )
             }
 
             if (data && data['tiang'] != '') {
-                makeArray(data['tiang'] , 'tiang-container'  )
+                makeArray(data['tiang'] , 'tiang-container'  ,'Defcets' )
             }
 
             // if (data && data['suryed_patrolling'] != '') {
@@ -543,23 +527,23 @@ function getDateCounts(){
             // }
 
             if (data && data['suryed_substation'] != '') {
-                makeTotalArray(data['suryed_substation'] , 'suryed_substation-container' )
+                makeArray(data['suryed_substation'] , 'suryed_substation-container' ,'Visited' )
             }
 
             if (data && data['suryed_feeder_pillar'] != '') {
-                makeTotalArray(data['suryed_feeder_pillar'] , 'suryed_feeder_pillar-container' )
+                makeArray(data['suryed_feeder_pillar'] , 'suryed_feeder_pillar-container' ,'Visited' )
             }
 
             if (data && data['suryed_link_box'] != '') {
-                makeTotalArray(data['suryed_link_box'] , 'suryed_link_box-container' )
+                makeArray(data['suryed_link_box'] , 'suryed_link_box-container' ,'Visited' )
             }
 
             if (data && data['suryed_cable_bridge'] != '') {
-                makeTotalArray(data['suryed_cable_bridge'] , 'suryed_cable_bridge-container' )
+                makeArray(data['suryed_cable_bridge'] , 'suryed_cable_bridge-container' ,'Visited' )
             }
 
             if (data && data['suryed_tiang'] != '') {
-                makeTotalArray(data['suryed_tiang'] , 'suryed_tiang-container' )
+                makeArray(data['suryed_tiang'] , 'suryed_tiang-container' ,'Visited' )
             }
         }
     });
@@ -600,7 +584,7 @@ mainBarChart(cate, series, id ,'Counts');
 }
 
 
-function makeArray(data ,id) {
+function makeArray(data ,id , tName) {
 
 
     var series=[];
@@ -651,7 +635,7 @@ function makeArray(data ,id) {
 
         }
         // console.log(series);
-        mainBarChart(cat,series ,id , 'Defects')
+        mainBarChart(cat,series ,id , tName)
 
 
 }
@@ -674,6 +658,8 @@ $(function(){
 function getAllStats(){
     let  todaydate='{{date("Y-m-d")}}';
 
+
+
 var cu_ba=$('#excelBa').val() ?? 'null';
 if($('#excel_from_date').val()==''){
     var from_date='1970-01-01'
@@ -685,7 +671,6 @@ if($('#excel_from_date').val()==''){
     var to_date = $('#excel_to_date').val() ;
 }
 
-
     $.ajax({
         url: `/{{app()->getLocale()}}/statsTable?from_date=${from_date}&to_date=${to_date}`,
         dataType: 'JSON',
@@ -694,7 +679,7 @@ if($('#excel_from_date').val()==''){
         success: function callback(data) {
             var str='';
             for (var i=0; i<data.length;i++){
-              str+='<tr><td>'+data[i].ba+'</td><td>'+data[i].patroling+'</td><td>'+data[i].notice+'</td><td>'+data[i].substation+'</td><td>'+data[i].feeder_pillar+'</td><td>'+data[i].tiang+'</td><td>'+data[i].link_box+'</td><td>'+data[i].cable_bridge+'</td></tr>'
+              str+='<tr><td>'+data[i].ba+'</td><td>'+data[i].patroling+'</td>'+'<td>'+data[i].substation+'</td><td>'+data[i].feeder_pillar+'</td><td>'+data[i].tiang+'</td><td>'+data[i].link_box+'</td><td>'+data[i].cable_bridge+'</td></tr>'
             }
             $('#stats_table').html(str);
         }
