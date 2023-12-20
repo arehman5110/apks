@@ -32,9 +32,13 @@ function statsTable(Request $request){
     foreach($bas as $key => $ba){
 
 
-        $query="select   ba, km as patroling  ,substation, feeder_pillar , tiang , link_box , cable_bridge   from
+        $query="select   ba, km as patroling ,notice ,substation, feeder_pillar , tiang , link_box , cable_bridge   from
     (
         select '$ba' as ba,
+                   (select    sum(case
+                    when notice='yes' Then 1 else 0
+                end )  from tbl_third_party_diging_patroling where ba='$ba' and survey_date >= '$from_date'
+                AND survey_date <=  ' $to_date') as notice,
                 (select count(*) from tbl_substation where total_defects is not null
                  and substation_image_1 is not null and substation_image_2 is not null  and ba='$ba' and visit_date >= '$from_date'
                  AND visit_date <=  ' $to_date') as substation,
