@@ -440,6 +440,7 @@
   }
 
     var ba = "{{ Auth::user()->ba }}";
+    var f_ba = '';
 
 
     // on page load
@@ -459,15 +460,22 @@
 
     // if ba is not empty
     function callLayers(param) {
-        var userBa = '';
+     
+            var userBa = '';
         for (const data of b1Options) {
             if (data[1] == param) {
                 userBa = data;
                 break;
             }
+
         }
+        if (userBa == '') {
+            addRemoveBundary('', 2.75101756479656, 101.304931640625)
+        }else{
         zoom = 11;
         addRemoveBundary(userBa[1], userBa[2], userBa[3])
+        }
+        
     }
 
 
@@ -489,7 +497,7 @@
 
 
     function filterByDate(param) {
-            var inBa = $('#search_ba').val()
+            var inBa = $('#search_ba').val() ??'';
             if (param.id == 'from_date') {
                 from_date = param.value;
             } else if (param.id == 'to_date') {

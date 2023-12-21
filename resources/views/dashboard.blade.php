@@ -1152,10 +1152,13 @@ zoom = 9;
             }
 
             $('#excel_from_date , #excel_to_date').on('change', function() {
-                from_date = $('#excel_from_date') ?? null;
-                to_date = $('#excel_from_date') ?? null;
+                var ff_ba = $('#excelBa').val() ??'';
+                from_date = $('#excel_from_date').val() ?? null;
+                to_date = $('#excel_to_date').val() ?? null;
+                
                 onChangeBA();
                 getAllStats();
+                callLayers(ff_ba)
 
             })
 
