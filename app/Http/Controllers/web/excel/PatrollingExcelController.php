@@ -29,13 +29,13 @@ class PatrollingExcelController extends Controller
             $result->whereDate('vist_date', '>=', $req->excel_from_date);
         }
 
-        if ($req->filled('excel_from_date')) {
-            $result->whereDate('vist_date', '<=', $req->excel_from_date);
+        if ($req->filled('excel_to_date')) {
+            $result->whereDate('vist_date', '<=', $req->excel_to_date);
         }
        
 
         $result = $result->where('km' ,'!=' , '0')-> whereNotNull('vist_date')->select('*', DB::raw('ST_X(geom) as x'), DB::raw('ST_Y(geom) as y'))->get();
- return $result;
+// return $result;
          
         if ($result) {
                 $excelFile = public_path('assets/excel-template/patrolling-template.xlsx');
