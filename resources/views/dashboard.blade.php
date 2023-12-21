@@ -886,6 +886,27 @@ zoom = 9;
                 // groupCheckboxes: true
             }).addTo(map);
         }
+
+
+        $(function() {
+            // $('#stats_table').DataTable()
+            if ('{{ Auth::user()->ba }}' == '') {
+                getAllStats()
+            }
+
+            $('#excel_from_date , #excel_to_date').on('change', function() {
+                var ff_ba = $('#excelBa').val() ??'';
+                from_date = $('#excel_from_date').val() ?? null;
+                to_date = $('#excel_to_date').val() ?? null;
+                
+                onChangeBA();
+                getAllStats();
+                callLayers(ff_ba)
+
+            })
+
+
+        })
     </script>
 
     {{-- MAP END --}}
@@ -1145,25 +1166,7 @@ zoom = 9;
     {{-- COUNTS START --}}
 
     <script>
-        $(function() {
-            // $('#stats_table').DataTable()
-            if ('{{ Auth::user()->ba }}' == '') {
-                getAllStats()
-            }
-
-            $('#excel_from_date , #excel_to_date').on('change', function() {
-                var ff_ba = $('#excelBa').val() ??'';
-                from_date = $('#excel_from_date').val() ?? null;
-                to_date = $('#excel_to_date').val() ?? null;
-                
-                onChangeBA();
-                getAllStats();
-                callLayers(ff_ba)
-
-            })
-
-
-        })
+      
 
 
         function getAllStats() {
