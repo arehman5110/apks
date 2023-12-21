@@ -233,7 +233,7 @@
                                         <label for="main_line">{{__('messages.main_line_service_line')}}</label>
                                     </div>
                                     <div class="col-md-4">
-                                        <select name="talian_utama" id="main_line" class="form-control" required onchange="getMainLine(this.value)">
+                                        <select name="talian_utama" id="main_line" class="form-control"  onchange="getMainLine(this.value)">
                                             <option value="" hidden>select</option>
                                             <option value="main_line">Main Line</option>
                                             <option value="service_line">Service Line</option>
