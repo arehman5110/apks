@@ -286,10 +286,10 @@
 
             var q_cql = "ba ILIKE '%" + param + "%' "
             if (from_date != '') {
-                q_cql = q_cql + "AND vist_date>=" + from_date;
+                q_cql = q_cql + "AND visit_date>=" + from_date;
             }
             if (to_date != '') {
-                q_cql = q_cql + "AND vist_date<=" + to_date;
+                q_cql = q_cql + "AND visit_date<=" + to_date;
             }
             if (boundary !== '') {
                 map.removeLayer(boundary)

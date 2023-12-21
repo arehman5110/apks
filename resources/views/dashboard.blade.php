@@ -98,7 +98,7 @@
                             
 
                                 <th scope="col">BA</th>
-                                <th scope="col">Patroling</th>
+                                <th scope="col">Patroling(KM)</th>
                                 <th scope="col">Substation</th>
                                 <th scope="col">Feeder Pillar</th>
                                 <th scope="col">Tiang</th>
