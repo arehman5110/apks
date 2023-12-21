@@ -16,7 +16,7 @@ class FeederPillarExcelController extends Controller
     {
         try{
     
-        $ba = $req->filled('ba') ? $req->excelBa : Auth::user()->ba;
+        $ba = $req->filled('excelBa') ? $req->excelBa : Auth::user()->ba;
             $result = FeederPillar::query();
 
             if ($req->filled('excelBa')) {

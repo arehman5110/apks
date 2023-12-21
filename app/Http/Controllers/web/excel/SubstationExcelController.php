@@ -22,7 +22,7 @@ class SubstationExcelController extends Controller
         try {
  
 
-            $ba = $req->filled('ba') ? $req->excelBa : Auth::user()->ba;
+            $ba = $req->filled('excelBa') ? $req->excelBa : Auth::user()->ba;
             $result = Substation::query();
 
             if ($req->filled('excelBa')) {
@@ -40,7 +40,7 @@ class SubstationExcelController extends Controller
 
             $result = $result->whereNotNull('visit_date')->select('*', DB::raw('ST_X(geom) as x'), DB::raw('ST_Y(geom) as y'))->get();
  
-             
+                // return $result; 
             if ($result) {
                 $excelFile = public_path('assets/excel-template/substation.xlsx');
 

@@ -15,7 +15,7 @@ class LinkBoxExcelController extends Controller
 
     public function generateLinkBoxExcel(Request $req){
         try{
-        $ba = $req->filled('ba') ? $req->excelBa : Auth::user()->ba;
+        $ba = $req->filled('excelBa') ? $req->excelBa : Auth::user()->ba;
         $result = LinkBox::query();
 
         if ($req->filled('excelBa')) {
