@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('css')
+@include('partials.map-css')
 <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
 <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
 <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
@@ -89,10 +90,12 @@
         </div>
 
 
+
         <div class=" px-4  mt-2  from-input  ">
             <div class="card p-0 mb-3">
                 <div class="card-body row">
-                    <div class="table-responsive">
+
+                    <div  class="table-responsive col-md-6">
                     <table class="table" id="stats_table_1">
                         <thead>
                             
@@ -114,6 +117,13 @@
                         </tfoot> 
                     </table>
                     </div>
+
+                <div id='map' style="width:100%;height:800px;"  class="col-md-6">
+
+                </div>    
+
+
+
                 </div>
             </div>
         </div>
@@ -422,7 +432,7 @@
  
 <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
- 
+@include('partials.map-js')
 
 
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.3/datatables.min.js"></script>
