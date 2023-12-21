@@ -17,7 +17,7 @@ class CableBridgeExcelController extends Controller
         {
 
             try{
-            $ba = $req->filled('ba') ? $req->excelBa : Auth::user()->ba;
+            $ba = $req->filled('excelBa') ? $req->excelBa : Auth::user()->ba;
             $result = CableBridge::query();
 
             if ($req->filled('excelBa')) {

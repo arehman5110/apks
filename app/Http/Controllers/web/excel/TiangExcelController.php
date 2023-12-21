@@ -22,7 +22,7 @@ class TiangExcelController extends Controller
         try{
 // return date('Y-m-d');
             
-        $ba = $req->filled('ba') ? $req->excelBa : Auth::user()->ba;
+        $ba = $req->filled('excelBa') ? $req->excelBa : Auth::user()->ba;
 
         $result = Tiang::query();
 
