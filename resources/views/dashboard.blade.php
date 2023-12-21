@@ -1,7 +1,11 @@
 @extends('layouts.app')
 @section('css')
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+<link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+<link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+     <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+   
     <style>
         h3 {
             font-weight: 600
@@ -88,10 +92,10 @@
         <div class=" px-4  mt-2  from-input  ">
             <div class="card p-0 mb-3">
                 <div class="card-body row">
-
-                    <table class="table">
+                    <div class="table-responsive">
+                    <table class="table" id="stats_table_1">
                         <thead>
-                            <tr>
+                            
 
                                 <th scope="col">BA</th>
                                 <th scope="col">Patroling</th>
@@ -100,12 +104,16 @@
                                 <th scope="col">Tiang</th>
                                 <th scope="col">Link Box</th>
                                 <th scope="col">Cable Bridge</th>
-                            </tr>
+                           
                         </thead>
                         <tbody id='stats_table'>
 
                         </tbody>
+                        <tfoot id='stats_table_footer'>
+
+                        </tfoot> 
                     </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -159,10 +167,10 @@
 
 
                             <!-- <div class="col-md-6">
-                                    <div class="card p-3">
-                                    <div id="suryed_patrolling-container" style="width:100%; height: 400px; margin: 0 auto"></div>
-                                    </div>
-                                </div> -->
+                                                <div class="card p-3">
+                                                <div id="suryed_patrolling-container" style="width:100%; height: 400px; margin: 0 auto"></div>
+                                                </div>
+                                            </div> -->
 
                             <div class="col-md-12">
                                 <div class="card p-3">
@@ -404,12 +412,24 @@
 
 
 @section('script')
+
+
     <script src="https://code.highcharts.com/stock/highstock.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
-    <script src="{{ asset('assets/js/generate-qr.js') }}"></script>
 
+ 
+<script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+ 
+
+
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.3/datatables.min.js"></script>
+    <script src="{{ asset('assets/js/generate-qr.js') }}"></script> 
+
+
+    
 
     <script>
         function onChangeBA() {
@@ -656,6 +676,7 @@
         }
 
         $(function() {
+            // $('#stats_table').DataTable()
             if ('{{ Auth::user()->ba }}' == '') {
                 getAllStats()
             }
@@ -664,9 +685,9 @@
                 onChangeBA();
                 getAllStats();
 
-
-
             })
+
+          
         })
 
 
@@ -693,15 +714,58 @@
                 method: 'GET',
                 async: false,
                 success: function callback(data) {
+                    if ($.fn.DataTable.isDataTable('#stats_table_1')) {
+    $('#stats_table_1').DataTable().destroy();
+}
+
                     var str = '';
+                    var totals = {
+                        patroling: 0,
+                        substation: 0,
+                        feeder_pillar: 0,
+                        tiang: 0,
+                        link_box: 0,
+                        cable_bridge: 0
+                    };
+
                     for (var i = 0; i < data.length; i++) {
-                        str += '<tr><td>' + data[i].ba + '</td><td>' + data[i].patroling + '</td>' + '<td>' +
+                        str += '<tr><td>' + data[i].ba + '</td><td>' + data[i].patroling + '</td><td>' +
                             data[i].substation + '</td><td>' + data[i].feeder_pillar + '</td><td>' + data[i]
-                            .tiang + '</td><td>' + data[i].link_box + '</td><td>' + data[i].cable_bridge +
-                            '</td></tr>'
+                            .tiang + '</td><td>' +
+                            data[i].link_box + '</td><td>' + data[i].cable_bridge + '</td></tr>';
+
+                        totals.patroling += parseInt(data[i].patroling) || 0;
+                        totals.substation += parseInt(data[i].substation) || 0;
+                        totals.feeder_pillar += parseInt(data[i].feeder_pillar) || 0;
+                        totals.tiang += parseInt(data[i].tiang) || 0;
+                        totals.link_box += parseInt(data[i].link_box) || 0;
+                        totals.cable_bridge += parseInt(data[i].cable_bridge) || 0;
                     }
+
                     $('#stats_table').html(str);
+
+                    
+
+                    var str2 = '<tr><th>Total</th>';
+
+                    for (var key in totals) {
+                        str2 += '<th>' + totals[key] + '</th>';
+                    }
+
+                    str2 += '</tr>';
+
+                    $('#stats_table_footer').html(str2);
+                  // Destroy existing DataTable instance (if any)
+
+// Reinitialize DataTable with new options
+$('#stats_table_1').DataTable({
+    searching: false,  // Disable search bar
+    paging: false       // Disable pagination
+});
+
+
                 }
+
             });
         }
 
@@ -710,7 +774,7 @@
             $('#excelBa').empty();
             $('#excel_from_date, #excel_to_date ').val('');
             onChangeBA();
-        
+
             // $("#excelBa").val($("#excelBa option:first").val());
         }
 

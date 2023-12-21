@@ -14,14 +14,16 @@ class PatrollingExcelController extends Controller
 
     public function generateExcel(Request $req)
     {
+        // return $req;
         try{
             
-        $ba = $req->filled('ba') ? $req->excelBa : Auth::user()->ba;
+        $ba = $req->filled('excelBa') ? $req->excelBa : Auth::user()->ba;
         $result = Patroling::query();
 
         if ($req->filled('excelBa')) {
             $result->where('ba', $ba);
         }
+        // return $result->get();
 
         if ($req->filled('excel_from_date')) {
             $result->where('vist_date', '>=', $req->excel_from_date);
@@ -30,10 +32,10 @@ class PatrollingExcelController extends Controller
         if ($req->filled('excel_from_date')) {
             $result->where('vist_date', '<=', $req->excel_from_date);
         }
-
+       
 
         $result = $result->whereNotNull('vist_date')->select('*', DB::raw('ST_X(geom) as x'), DB::raw('ST_Y(geom) as y'))->get();
-
+//  return $result;
          
         if ($result) {
                 $excelFile = public_path('assets/excel-template/patrolling-template.xlsx');
