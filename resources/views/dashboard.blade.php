@@ -1,12 +1,12 @@
 @extends('layouts.app')
 @section('css')
-@include('partials.map-css')
-<link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
-<link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
-<link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
-     <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
-   
+    @include('partials.map-css')
+    <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <style>
         h3 {
             font-weight: 600
@@ -63,7 +63,7 @@
                     </div>
                     <div class=" col-md-3">
                         <label for="excelBa">BA :</label>
-                        <select name="excelBa" id="excelBa" class="form-control" onchange="onChangeBA()">
+                        <select name="excelBa" id="excelBa" class="form-control" onchange="onChangeBA(this.value)">
 
 
                         </select>
@@ -95,10 +95,10 @@
             <div class="card p-0 mb-3">
                 <div class="card-body row">
 
-                    <div  class="table-responsive col-md-6">
-                    <table class="table" id="stats_table_1">
-                        <thead>
-                            
+                    <div class="table-responsive col-md-6">
+                        <table class="table" id="stats_table_1">
+                            <thead>
+
 
                                 <th scope="col">BA</th>
                                 <th scope="col">Patroling(KM)</th>
@@ -107,20 +107,20 @@
                                 <th scope="col">Tiang</th>
                                 <th scope="col">Link Box</th>
                                 <th scope="col">Cable Bridge</th>
-                           
-                        </thead>
-                        <tbody id='stats_table'>
 
-                        </tbody>
-                        <tfoot id='stats_table_footer'>
+                            </thead>
+                            <tbody id='stats_table'>
 
-                        </tfoot> 
-                    </table>
+                            </tbody>
+                            <tfoot id='stats_table_footer'>
+
+                            </tfoot>
+                        </table>
                     </div>
 
-                <div id='map' style="width:100%;height:800px;"  class="col-md-6">
+                    <div id='map' style="width:100%;height:800px;" class="col-md-6">
 
-                </div>    
+                    </div>
 
 
 
@@ -177,10 +177,10 @@
 
 
                             <!-- <div class="col-md-6">
-                                                <div class="card p-3">
-                                                <div id="suryed_patrolling-container" style="width:100%; height: 400px; margin: 0 auto"></div>
-                                                </div>
-                                            </div> -->
+                                                        <div class="card p-3">
+                                                        <div id="suryed_patrolling-container" style="width:100%; height: 400px; margin: 0 auto"></div>
+                                                        </div>
+                                                    </div> -->
 
                             <div class="col-md-12">
                                 <div class="card p-3">
@@ -422,27 +422,484 @@
 
 
 @section('script')
-
-
     <script src="https://code.highcharts.com/stock/highstock.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
 
- 
-<script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-@include('partials.map-js')
+
+    <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+    @include('partials.map-js')
 
 
-<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.3/datatables.min.js"></script>
-    <script src="{{ asset('assets/js/generate-qr.js') }}"></script> 
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.3/datatables.min.js"></script>
+    <script src="{{ asset('assets/js/generate-qr.js') }}"></script>
 
 
-    
+    {{-- MAP START   --}}
 
     <script>
-        function onChangeBA() {
+        var patroling = '';
+
+        var patrol = [];
+
+        var from_date = $('#excel_from_date').val();
+        var to_date = $('#excel_to_date').val();
+        var excel_ba = $('#search_ba').val();
+
+zoom = 9;
+
+        function addRemoveBundary(param, paramY, paramX) {
+
+            var q_cql = "ba ILIKE '%" + param + "%' "
+            var t_cql = q_cql;
+            var p_cql = q_cql;
+            if (from_date != '') {
+                q_cql = q_cql + "AND visit_date>=" + from_date;
+                t_cql = t_cql + "AND review_date>=" + from_date;
+                p_cql = p_cql + "AND vist_date>=" + from_date;
+
+            }
+            if (to_date != '') {
+                q_cql = q_cql + "AND visit_date<=" + to_date;
+                t_cql = t_cql + "AND review_date<=" + to_date;
+                p_cql = p_cql + "AND vist_date<=" + to_date;
+
+
+            }
+            if (boundary !== '') {
+                map.removeLayer(boundary)
+            }
+
+
+
+
+            boundary = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:ba',
+                format: 'image/png',
+                cql_filter: "station ILIKE '%" + param + "%'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+            map.addLayer(boundary)
+            boundary.bringToFront()
+
+            map.flyTo([parseFloat(paramY), parseFloat(paramX)], zoom, {
+                duration: 1.5, // Animation duration in seconds
+                easeLinearity: 0.25,
+            });
+
+
+            if (patroling !== '') {
+                map.removeLayer(patroling)
+            }
+
+
+            patroling = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:patroling_lines',
+                format: 'image/png',
+                cql_filter: p_cql,
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+            map.addLayer(patroling)
+            patroling.bringToFront()
+
+            if (pano_layer !== '') {
+                map.removeLayer(pano_layer)
+            }
+            pano_layer = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:pano_apks',
+                format: 'image/png',
+                cql_filter: "ba ILIKE '%" + param + "%'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            });
+            // map.addLayer(pano_layer); 
+
+            if (substation_with_defects != '') {
+                map.removeLayer(substation_with_defects)
+            }
+
+            substation_with_defects = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:surved_with_defects',
+                format: 'image/png',
+                cql_filter: q_cql,
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+
+
+            map.addLayer(substation_with_defects)
+            substation_with_defects.bringToFront()
+
+            if (unservey != '') {
+                map.removeLayer(unservey)
+            }
+            unservey = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:substation_unsurveyed',
+                format: 'image/png',
+                cql_filter: "ba ILIKE '%" + param + "%'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+
+            map.addLayer(unservey)
+            unservey.bringToFront()
+
+
+            if (substation_without_defects != '') {
+                map.removeLayer(substation_without_defects)
+            }
+            substation_without_defects = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:substation_without_defects',
+                format: 'image/png',
+                cql_filter: q_cql,
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+
+            map.addLayer(substation_without_defects)
+            substation_without_defects.bringToFront()
+
+
+
+
+            if (work_package) {
+                map.removeLayer(work_package);
+            }
+
+            work_package = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:tbl_workpackage',
+                format: 'image/png',
+                cql_filter: "ba ILIKE '%" + param + "%'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+            map.addLayer(work_package)
+            work_package.bringToFront()
+
+
+
+            if (fp_unsurveyed != '') {
+                map.removeLayer(fp_unsurveyed)
+            }
+
+            fp_unsurveyed = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:fp_unsurveyed',
+                format: 'image/png',
+                cql_filter: "ba ILIKE '%" + param + "%'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+
+            map.addLayer(fp_unsurveyed)
+            fp_unsurveyed.bringToFront()
+
+
+            if (fp_surveyed != '') {
+                map.removeLayer(fp_surveyed)
+            }
+
+            fp_surveyed = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:fp_surveyed',
+                format: 'image/png',
+                cql_filter: q_cql,
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+
+            map.addLayer(fp_surveyed)
+            fp_surveyed.bringToFront()
+
+
+            if (fp_with_defects != '') {
+                map.removeLayer(fp_with_defects)
+            }
+
+            fp_with_defects = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:fp_with_defects',
+                format: 'image/png',
+                cql_filter: q_cql,
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+
+            map.addLayer(fp_with_defects)
+            fp_with_defects.bringToFront()
+
+            if (road != '') {
+                map.removeLayer(road)
+            }
+
+            road = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:tbl_roads',
+                format: 'image/png',
+                cql_filter: "ba ILIKE '%" + param + "%'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+            map.addLayer(road)
+            road.bringToFront()
+
+
+
+            if (ts_unsurveyed != '') {
+                map.removeLayer(ts_unsurveyed)
+            }
+
+            ts_unsurveyed = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:ts_unsurveyed',
+                format: 'image/png',
+                cql_filter: "ba ILIKE '%" + param + "%'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+
+            map.addLayer(ts_unsurveyed)
+            ts_unsurveyed.bringToFront()
+
+
+            if (ts_with_defects != '') {
+                map.removeLayer(ts_with_defects)
+            }
+
+            ts_with_defects = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:ts_with_defects',
+                format: 'image/png',
+                cql_filter: t_cql,
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+
+            map.addLayer(ts_with_defects)
+            ts_with_defects.bringToFront()
+
+            if (ts_without_defects != '') {
+                map.removeLayer(ts_without_defects)
+            }
+
+            ts_without_defects = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:ts_without_defects',
+                format: 'image/png',
+                cql_filter: t_cql,
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+
+            map.addLayer(ts_without_defects)
+            ts_without_defects.bringToFront()
+
+
+            if (lb_unsurveyed != '') {
+                map.removeLayer(lb_unsurveyed)
+            }
+
+            lb_unsurveyed = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:lb_unsurveyed',
+                format: 'image/png',
+                cql_filter: "ba ILIKE '%" + param + "%'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+
+            map.addLayer(lb_unsurveyed)
+            lb_unsurveyed.bringToFront()
+
+
+            if (lb_with_defects != '') {
+                map.removeLayer(lb_with_defects)
+            }
+
+            lb_with_defects = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:lb_with_defects',
+                format: 'image/png',
+                cql_filter: q_cql,
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+
+            map.addLayer(lb_with_defects)
+            lb_with_defects.bringToFront()
+
+            if (lb_without_defects != '') {
+                map.removeLayer(lb_without_defects)
+            }
+
+            lb_without_defects = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:lb_without_defects',
+                format: 'image/png',
+                cql_filter: q_cql,
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+
+            map.addLayer(lb_without_defects)
+            lb_without_defects.bringToFront()
+
+
+
+            if (cb_unsurveyed != '') {
+                map.removeLayer(cb_unsurveyed)
+            }
+
+            cb_unsurveyed = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:cb_unsurveyed',
+                format: 'image/png',
+                cql_filter: "ba ILIKE '%" + param + "%'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+
+            map.addLayer(cb_unsurveyed)
+            cb_unsurveyed.bringToFront()
+
+
+
+            if (cb_without_defects != '') {
+                map.removeLayer(cb_without_defects)
+            }
+
+            cb_without_defects = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:cb_without_defects',
+                format: 'image/png',
+                cql_filter: q_cql,
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+
+            map.addLayer(cb_without_defects)
+            cb_without_defects.bringToFront()
+
+
+            if (cb_with_defects != '') {
+                map.removeLayer(cb_with_defects)
+            }
+
+            cb_with_defects = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:cb_with_defects',
+                format: 'image/png',
+                cql_filter: q_cql,
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+
+            map.addLayer(cb_with_defects)
+            cb_with_defects.bringToFront()
+
+
+
+
+
+
+            addpanolayer();
+            addGroupOverLays()
+
+            if (patrol) {
+                for (let i = 0; i < patrol.length; i++) {
+                    if (patrol[i] != '') {
+                        map.removeLayer(patrol[i])
+                    }
+                }
+            }
+
+        }
+
+
+
+        function addGroupOverLays() {
+            if (layerControl != '') {
+                // console.log("inmsdanssdkjnasjnd");
+                map.removeControl(layerControl);
+            }
+            // console.log("sdfsdf");
+            groupedOverlays = {
+                "POI": {
+                    'Boundary': boundary,
+                    'Patrolling': patroling,
+                    'Pano': pano_layer,
+                    'Substation With defects': substation_with_defects,
+                    'Substation Without defects': substation_without_defects,
+                    'Substation Unsurveyed': unservey,
+                    'Pano': pano_layer,
+                    'Work Package': work_package,
+                    'Feeder Pillar Unsurveyed': fp_unsurveyed,
+                    'Feeder Pillar Surveyed with defects': fp_with_defects,
+                    'Feeder Pillar Surveyed Without defects': fp_surveyed,
+                    'Tiang Unsurveyed': ts_unsurveyed,
+                    'Tiang Surveyed with defects': ts_with_defects,
+                    'Tiang Surveyed Without defects': ts_without_defects,
+                    'Roads': road,
+                    'Link Box Unsurveyed': lb_unsurveyed,
+                    'Link Box Surveyed with defects': lb_with_defects,
+                    'Link BoxSurveyed  without defects': lb_without_defects,
+                    'Cable Bridge Unsurveyed': cb_unsurveyed,
+                    'Cable Bridge Surveyed with defects': cb_with_defects,
+                    'Cable Bridge Surveyed without defects': cb_without_defects,
+                }
+            };
+            //add layer control on top right corner of map
+            layerControl = L.control.groupedLayers(baseLayers, groupedOverlays, {
+                collapsed: true,
+                position: 'topright'
+                // groupCheckboxes: true
+            }).addTo(map);
+        }
+    </script>
+
+    {{-- MAP END --}}
+
+
+
+
+
+
+
+    {{-- Charts Start --}}
+
+    <script>
+        function onChangeBA(param) {
             // console.log(data['patrolling']);
             $("#patrolling-container").html('')
             $("#substation-container").html('')
@@ -462,6 +919,7 @@
 
             getDateCounts();
             getAllStats();
+            callLayers(param);
         }
 
 
@@ -523,19 +981,14 @@
 
         function getDateCounts() {
 
-
-
             var cu_ba = $('#excelBa').val() ?? 'null';
-            var from_date = $('#excel_from_date').val() ?? '';
-            var to_date = $('#excel_to_date').val() ?? '';
-
-
-
+            var from_datee = $('#excel_from_date').val() ?? '';
+            var to_datee = $('#excel_to_date').val() ?? '';
 
 
 
             $.ajax({
-                url: `/{{ app()->getLocale() }}/patrol_graph?ba_name=${cu_ba}&from_date=${from_date}&to_date=${to_date}`,
+                url: `/{{ app()->getLocale() }}/patrol_graph?ba_name=${cu_ba}&from_date=${from_datee}&to_date=${to_datee}`,
 
                 dataType: 'JSON',
                 method: 'GET',
@@ -684,7 +1137,14 @@
 
 
         }
+    </script>
 
+    {{-- CHARTS END --}}
+
+
+    {{-- COUNTS START --}}
+
+    <script>
         $(function() {
             // $('#stats_table').DataTable()
             if ('{{ Auth::user()->ba }}' == '') {
@@ -692,12 +1152,14 @@
             }
 
             $('#excel_from_date , #excel_to_date').on('change', function() {
+                from_date = $('#excel_from_date') ?? null;
+                to_date = $('#excel_from_date') ?? null;
                 onChangeBA();
                 getAllStats();
 
             })
 
-          
+
         })
 
 
@@ -708,25 +1170,25 @@
 
             var cu_ba = $('#excelBa').val() ?? 'null';
             if ($('#excel_from_date').val() == '') {
-                var from_date = '1970-01-01'
+                var from_datee = '1970-01-01'
             } else {
-                var from_date = $('#excel_from_date').val();
+                var from_datee = $('#excel_from_date').val();
             }
             if ($('#excel_to_date').val() == '') {
-                var to_date = todaydate
+                var to_datee = todaydate
             } else {
-                var to_date = $('#excel_to_date').val();
+                var to_datee = $('#excel_to_date').val();
             }
 
             $.ajax({
-                url: `/{{ app()->getLocale() }}/statsTable?ba_name=${cu_ba}&from_date=${from_date}&to_date=${to_date}`,
+                url: `/{{ app()->getLocale() }}/statsTable?ba_name=${cu_ba}&from_date=${from_datee}&to_date=${to_datee}`,
                 dataType: 'JSON',
                 method: 'GET',
                 async: false,
                 success: function callback(data) {
                     if ($.fn.DataTable.isDataTable('#stats_table_1')) {
-    $('#stats_table_1').DataTable().destroy();
-}
+                        $('#stats_table_1').DataTable().destroy();
+                    }
 
                     var str = '';
                     var totals = {
@@ -754,7 +1216,7 @@
 
                     $('#stats_table').html(str);
 
-                    
+
 
                     var str2 = '<tr><th>Total</th>';
 
@@ -765,13 +1227,13 @@
                     str2 += '</tr>';
 
                     $('#stats_table_footer').html(str2);
-                  // Destroy existing DataTable instance (if any)
+                    // Destroy existing DataTable instance (if any)
 
-// Reinitialize DataTable with new options
-$('#stats_table_1').DataTable({
-    searching: false,  // Disable search bar
-    paging: false       // Disable pagination
-});
+                    // Reinitialize DataTable with new options
+                    $('#stats_table_1').DataTable({
+                        searching: false, // Disable search bar
+                        paging: false // Disable pagination
+                    });
 
 
                 }
@@ -784,7 +1246,14 @@ $('#stats_table_1').DataTable({
             $('#excelBa').empty();
             $('#excel_from_date, #excel_to_date ').val('');
             onChangeBA();
+            from_date = '';
+            to_date = '';
 
+if (ba == '') {
+            addRemoveBundary('', 2.75101756479656, 101.304931640625)
+        } else {
+            callLayers(ba);
+        }
             // $("#excelBa").val($("#excelBa option:first").val());
         }
 
@@ -793,4 +1262,6 @@ $('#stats_table_1').DataTable({
             getDateCounts();
         }, 1000);
     </script>
+
+    {{-- COUNTS END --}}
 @endsection
