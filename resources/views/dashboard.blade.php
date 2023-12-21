@@ -157,13 +157,13 @@
 
                            
 
-                            <div class="col-md-6">
+                            <!-- <div class="col-md-6">
                                 <div class="card p-3">
                                 <div id="suryed_patrolling-container" style="width:100%; height: 400px; margin: 0 auto"></div>
                                 </div>
-                            </div>
+                            </div> -->
 
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="card p-3">
                                 <div id="patrolling-container" style="width:100%; height: 400px; margin: 0 auto"></div>
                                 </div>
