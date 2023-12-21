@@ -15,6 +15,7 @@ class PatrollingExcelController extends Controller
     public function generateExcel(Request $req)
     {
         try{
+            
         $ba = $req->filled('ba') ? $req->excelBa : Auth::user()->ba;
         $result = Patroling::query();
 
@@ -23,15 +24,15 @@ class PatrollingExcelController extends Controller
         }
 
         if ($req->filled('excel_from_date')) {
-            $result->where('visit_date', '>=', $req->excel_from_date);
+            $result->where('vist_date', '>=', $req->excel_from_date);
         }
 
         if ($req->filled('excel_from_date')) {
-            $result->where('visit_date', '<=', $req->excel_from_date);
+            $result->where('vist_date', '<=', $req->excel_from_date);
         }
 
 
-        $result = $result->whereNotNull('visit_date')->select('*', DB::raw('ST_X(geom) as x'), DB::raw('ST_Y(geom) as y'))->get();
+        $result = $result->whereNotNull('vist_date')->select('*', DB::raw('ST_X(geom) as x'), DB::raw('ST_Y(geom) as y'))->get();
 
          
         if ($result) {
@@ -66,7 +67,7 @@ class PatrollingExcelController extends Controller
                     ->with('failed', 'No records found ');
             }
         } catch (\Throwable $th) {
-           // return $th->getMessage();
+        //    return $th->getMessage();
             return redirect()
                 ->back()
                 ->with('failed', 'Request Failed');

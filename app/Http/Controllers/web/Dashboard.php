@@ -12,19 +12,25 @@ class Dashboard extends Controller
     //
 function statsTable(Request $request){
     $bas = [
-        'rawang' => 'RAWANG',
-        'kuala_lampur'=>'KUALA LUMPUR PUSAT',
-        'kalang'=>'KLANG',
-        'kuala_selangor'=>'KUALA SELANGOR',
-        'pelabuhan_klang'=>'PELABUHAN KLANG',
-        'bangi'=>'BANGI',
-        'cheras'=> 'CHERAS',
-        'banting'=>'BANTING',
-        'putrajaya'=> 'PUTRAJAYA & CYBERJAYA',
-        'petaling_jaya'=> 'PETALING JAYA',
-        'SEPANG' =>'SEPANG',
-        'PUCHONG'=> 'PUCHONG'
+        'RAWANG',
+        'KUALA LUMPUR PUSAT',
+        'KLANG',
+        'KUALA SELANGOR',
+        'PELABUHAN KLANG',
+        'BANGI',
+        'CHERAS',
+        'BANTING',
+        'PUTRAJAYA & CYBERJAYA',
+        'PETALING JAYA',
+        'SEPANG',
+        'PUCHONG'
     ];
+
+  
+    if ( $request->ba_name != 'null') {
+        $bas = [];
+            $bas = [$request->ba_name];
+    }
     $from_date  = $request->from_date;
     $to_date    = $request->to_date;
     $data = [];
