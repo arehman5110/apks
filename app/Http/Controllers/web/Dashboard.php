@@ -38,7 +38,7 @@ function statsTable(Request $request){
     foreach($bas as $key => $ba){
 
 
-        $query="select   ba, km as patroling  ,substation, feeder_pillar , tiang , link_box , cable_bridge   from
+        $query="select   ba, COALESCE(km,0) as patroling  ,substation, feeder_pillar , tiang , link_box , cable_bridge   from
     (
         select '$ba' as ba,
                 (select count(*) from tbl_substation where total_defects is not null
