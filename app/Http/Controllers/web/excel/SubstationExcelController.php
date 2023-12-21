@@ -33,8 +33,8 @@ class SubstationExcelController extends Controller
                 $result->where('visit_date', '>=', $req->excel_from_date);
             }
 
-            if ($req->filled('excel_from_date')) {
-                $result->where('visit_date', '<=', $req->excel_from_date);
+            if ($req->filled('excel_to_date')) {
+                $result->where('visit_date', '<=', $req->excel_to_date);
             }
 
 
