@@ -710,6 +710,8 @@
             $('#excelBa').empty();
             $('#excel_from_date, #excel_to_date ').val('');
             onChangeBA();
+        
+            // $("#excelBa").val($("#excelBa option:first").val());
         }
 
 
