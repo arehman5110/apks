@@ -103,37 +103,27 @@
                                         <label for="main_line">{{__('messages.main_line_service_line')}}</label>
                                     </div>
                                     <div class="col-md-4">
-                                        <select name="talian_utama" id="main_line" class="form-control"  onchange="getMainLine(this.value)">
+                                        <select name="talian_utama" id="main_line" class="form-control"  >
                                             <option value="{{$data->talian_utama ?? ''}}" hidden>{{$data->talian_utama ?? 'select'}}</option>
                                             <option value="main_line">Main Line</option>
                                             <option value="service_line">Service Line</option>
                                         </select>
                                 </div>
                                 </div>
-                                <div class="row {{$data->talian_utama == 'service_line' ? '' : 'd-none'}}" id="main_line_connection">
+                                <div class="row " id="main_line_connection">
                                     <div class="col-md-4">
                                         <label for="">
                                             Number of Services Involves 1 user only
 
                                         </label>
                                     </div>
-                                    <div class="col-md-2 d-flex mt-2">
-                                        <input type="radio" name="talian_utama_connection" id="main_line_connection_one" value="one" 
-                                        {{$data->talian_utama_connection == 'one' ? 'checked' : ''}}
-                                              required>
+                                    <div class="col-md-4">
+                                        <input type="number" name="talian_utama_connection" value="{{$data->talian_utama_connection}}" class="form-control" id="main_line_connection_one"  >
                                             <label for="main_line_connection_one">One</label>
                                         </div>
 
-                                        <div class="col-md-2 d-flex mt-2">
-                                            <input type="radio" name="talian_utama_connection" id="main_line_connection_many" value="many"
-                                        {{$data->talian_utama_connection == 'many' ? 'checked' : ''}}
-
-                                                 required>
-                                            <label for="main_line_connection_many">Many</label>
-
-                                            </div>
+                                      
                                 </div>
-
                                 <div class="row">
                                     <div class="col-md-4"><label for="pole_image-1">{{ __('messages.pole') }} Image 1
                                         </label>

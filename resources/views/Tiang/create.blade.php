@@ -240,7 +240,7 @@
                                         </select>
                                 </div>
                                 </div>
-                                <div class="row d-none" id="main_line_connection">
+                                <div class="row d-none" >
                                     <div class="col-md-4">
                                         <label for="">
                                             Number of Services Involves 1 user only
@@ -248,15 +248,16 @@
                                         </label>
                                     </div>
                                     <div class="col-md-2 d-flex mt-2">
-                                        <input type="radio" name="talian_utama_connection" id="main_line_connection_one" value="one"
-                                              required>
-                                            <label for="main_line_connection_one">One</label>
-                                        </div>
+                                        <input type="number" name="talian_utama_connection" class="form-control"  id="main_line_connection_one"
+                                              >
+                                          
+                                              
 
-                                        <div class="col-md-2 d-flex mt-2">
-                                            <input type="radio" name="talian_utama_connection" id="main_line_connection_many" value="many"
-                                                 required>
-                                            <label for="main_line_connection_many">Many</label>
+
+
+
+
+                                       
 
                                             </div>
                                 </div>
@@ -1644,14 +1645,14 @@
 
 
         function getMainLine(val){
-            if (val == 'service_line') {
-                $('#main_line_connection').removeClass('d-none')
-            }else{
-                if (!$('#main_line_connection').hasClass('d-none')) {
-                $('#main_line_connection').addClass('d-none')
-                $('#main_line_connection_one , #main_line_connection_many').prop('checked', false);
-                }
-            }
+            // if (val == 'service_line') {
+            //     $('#main_line_connection').removeClass('d-none')
+            // }else{
+            //     if (!$('#main_line_connection').hasClass('d-none')) {
+            //     $('#main_line_connection').addClass('d-none')
+            //     $('#main_line_connection_one , #main_line_connection_many').prop('checked', false);
+            //     }
+            // }
         }
     </script>
 @endsection
