@@ -128,7 +128,7 @@
                                             </th>
                                             <th class="nowrap" style="border-bottom: 0px">{{ __('messages.add_clean_up') }}</th>
                                             <th rowspan="2">{{ __('messages.total_defects') }} </th>
-                                            {{-- <th rowspan="2">QA Status</th> --}}
+                                            <th rowspan="2">QA Status</th>
 
                                             <th rowspan="2">ACTION</th>
 
@@ -339,21 +339,26 @@
                         data: 'total_defects',
                         name: 'total_defects'
                     },
-                    // {
-                    //     render:function(data , type , full){
-                    //         if (full.visit_date != '' && full.substation_image_1 != '' && full.substation_image_2 != '') {
-                    //             if (full.qa_status == '' ) {
-                    //                 return ` <button type="button" class="btn btn-primary "
-                    //                                         data-id="${full.id}" data-name="${full.name}" data-total_defects="${full.total_defects}" data-toggle="modal"
-                    //                                         data-target="#qaStatusModal">
-                    //                                         QA Status
-                    //                                     </button>`;
-                    //             }
-                    //         }else{
-                    //             return `<td></td>`;
-                    //         }
-                    //     }
-                    // },
+                   
+                    {
+                        render:function(data , type , full){
+                            if (full.qa_status != '' && full.qa_status != 'null') {
+                           
+                                    return `<button type="button" class="btn btn-primary "
+                                                          onlcick="qaqcStatus('accept',`+full.id+`)"
+                                                            >
+                                                            Accept
+                                                        </button>/<button type="button" class="btn btn-primary "
+                                                          onlcick="qaqcStatus('reject',`+full.id+`)"
+                                                            >
+                                                            Reject
+                                                        </button>`;
+                                
+                            }else{
+                                return full.qa_status;
+                            }
+                        }
+                    },
                     {
                         render: function(data, type, full) {
 
@@ -446,6 +451,24 @@
 
 
         });
+
+
+        function qaqcStatus(status,id){
+            
+            $.ajax({
+                url: `/{{ app()->getLocale() }}/updateQAStatus?status=`+status+`&&id=`+id,
+                dataType: 'JSON',
+                method: 'GET',
+                async: false,
+                success: function callback(data) {
+                  
+
+                    alert(data);
+
+                }
+
+            });
+        }
 
 
     </script>

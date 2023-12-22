@@ -139,6 +139,7 @@ Route::group(
                 Route::post('/update-substation-map-edit/{id}', [SubstationMapController::class, 'update'])->name('update-substation-map-edit');
                 Route::get('/search/find-substation/{q}', [SubstationMapController::class, 'seacrh'])->name('subsation-search');
                 Route::get('/search/find-substation-cordinated/{q}', [SubstationMapController::class, 'seacrhCoordinated'])->name('subsation-coordinated');
+                Route::get('/qaqcStatus', [SubstationMapController::class, 'qaqcStatus'])->name('qaqcStatus');
 
                 ////feeder-piller routes
                 Route::resource('feeder-pillar', FPController::class);

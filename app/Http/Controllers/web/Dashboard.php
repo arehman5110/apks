@@ -162,7 +162,7 @@ function statsTable(Request $request){
             when supervision='yes' Then 1 else 0
         end) as sup
         from tbl_third_party_diging_patroling where ba='$ba') as a,
-        (select km as dis from patroling where ba='$ba') as b,
+        
         (SELECT sum(grass+treebranches+gate_loc+gate_demage+gate_other+broken_roof+broken_gutter+broken_base+building_other+poster_status)
         FROM public.substation_defects_counts  where ba='$ba'
             ) as substation_defects,
@@ -196,7 +196,7 @@ function statsTable(Request $request){
                 when supervision='yes' Then 1 else 0
             end) as sup
             from tbl_third_party_diging_patroling ) as a,
-            (select km as dis from patroling ) as b,
+            
             (SELECT sum(grass+treebranches+gate_loc+gate_demage+gate_other+broken_roof+broken_gutter+broken_base+building_other+poster_status)
             FROM public.substation_defects_counts) as substation_defects,
             (SELECT sum(gate_locked+gate_damage+gate_other+vandlism+leaning+rust+poster_status)
@@ -215,8 +215,10 @@ function statsTable(Request $request){
 
             ";
             }
+           // (select km as dis from patroling ) as b,
+           //(select km as dis from patroling where ba='$ba') as b,
             $data = DB::select($query);
-
+          
             if ($data) {
                 if ($request->ajax()) {
                     return $data[0];

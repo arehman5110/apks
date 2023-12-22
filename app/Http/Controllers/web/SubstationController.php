@@ -357,4 +357,19 @@ class SubstationController extends Controller
     }
 
 
+    public function updateQAStatus(Request $req){
+        $qa_data=Substation::find($req->id);
+
+        $qa_data->qa_status=$req->status;
+
+        $up_status=$qa_data->update();
+        if($up_status){
+            return 'QA status updated ';
+        }else{
+            return 'QA status failed to update ';
+        }
+
+    }
+
+
 }
