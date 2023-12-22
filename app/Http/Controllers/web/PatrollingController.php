@@ -7,7 +7,7 @@ use App\Models\Road;
 use App\Models\Team;
 use App\Models\WorkPackage;
 use App\Models\Patroling;
-
+use App\Traits\Filter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -17,6 +17,7 @@ use Yajra\DataTables\DataTables;
 class PatrollingController extends Controller
 {
     //
+    use Filter;
 
     public function index()
     {
@@ -105,30 +106,19 @@ class PatrollingController extends Controller
  
         if ($request->ajax()) {
 
-            $ba = $request->filled('ba') ? $request->ba : Auth::user()->ba;
+           
             $result = Patroling::query();
 
-            if ($request->filled('ba')) {
-                $result->where('ba', $ba);
-            }
+        $request =  $this->filter($result , 'vist_date' , $request);
 
-            if ($request->filled('from_date')) {
-                $result->where('vist_date', '>=', $request->from_date);
-            }
-
-            if ($request->filled('to_date')) {
-                $result->where('vist_date', '<=', $request->to_date);
-            }
-
-  
     $result->whereNotNull('km')->where('km','!=','0')
   
     ->select(
         '*',
-        \DB::raw("st_x(geom_start) as start_x"),
-        \DB::raw("st_y(geom_start) as start_y"),
-        \DB::raw("st_x(geom_end) as end_x"),
-        \DB::raw("st_y(geom_end) as end_y")
+        DB::raw("st_x(geom_start) as start_x"),
+        DB::raw("st_y(geom_start) as start_y"),
+        DB::raw("st_x(geom_end) as end_x"),
+        DB::raw("st_y(geom_end) as end_y")
     )
     ->orderByDesc('date');
 
@@ -168,5 +158,20 @@ class PatrollingController extends Controller
 
              return response()->json($query, 200);
 
+    }
+
+
+
+    public function updateQAStatus(Request $req)
+    {
+        try {
+            $qa_data = Patroling::find($req->id);
+            $qa_data->qa_status = $req->status;
+            $qa_data->update();
+
+            return response()->json(['status' => $req->status]);
+        } catch (\Throwable $th) {
+            return response()->json(['status' => 'Request failed']);
+        }
     }
 }

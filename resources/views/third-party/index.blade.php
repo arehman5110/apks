@@ -96,6 +96,7 @@
                                         <th>SUPERVISION</th>
                                         <th>SURVEY STATUS</th>
                                         <th>NOTICE</th>
+                                        <th>QA STATUS</th>
                                         <th>ACTION</th>
 
                                     </tr>
@@ -120,33 +121,9 @@
         </div>
         </div>
     </section>
-    <div class="modal fade" id="myModal">
-        <div class="modal-dialog">
-            <div class="modal-content ">
-
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title">Remove Recored</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <form action="" id="remove-foam" method="POST">
-                    @method('DELETE')
-                    @csrf
-
-                    <div class="modal-body">
-                        Are You Sure ?
-                        <input type="hidden" name="id" id="modal-id">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
-                        <button type="submit" class="btn btn-danger">Remove</button>
-                    </div>
-                </form>
-
-            </div>
-        </div>
-    </div>
+    <x-remove-confirm />
+    
+    
 @endsection
 
 
@@ -158,14 +135,14 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.3/datatables.min.js"></script>
 
     <script>
-        var from_date = '';
-        var to_date = '';
-        var excel_ba = '';
+       var lang = "{{app()->getLocale()}}";
+ var url = "third-party-digging"
+ var auth_ba = "{{Auth::user()->ba}}"
         $(document).ready(function() {
 
 
 
-            var table = $('.data-table').DataTable({
+             table = $('.data-table').DataTable({
 
                 processing: true,
                 serverSide: true,
@@ -234,30 +211,12 @@
                         name: 'notice'
                     },
 
-
                     {
-                        render: function(data, type, full) {
-
-                            var id = full.id;
-                            return `<button type="button" class="btn  " data-toggle="dropdown">
-                            <img
-                                src="{{ URL::asset('assets/web-images/three-dots-vertical.svg') }}">
-                        </button>
-                        <div class="dropdown-menu" role="menu">
-                            <form action="/{{ app()->getLocale() }}/third-party-digging/${id}" method="get">
-
-                                <button type="submit" class="dropdown-item pl-3 w-100 text-left">Detail</button>
-                            </form>
-                            <form action="/{{ app()->getLocale() }}/third-party-digging/${id}/edit" method="get">
-
-                                <button type="submit" class="dropdown-item pl-3 w-100 text-left">Edit</button>
-                            </form>
-                            <button type="button" class="btn btn-primary dropdown-item" data-id="${id}" data-toggle="modal" data-target="#myModal">
-                                Remove
-                            </button>
-                        </div>
-                        `;
-                        }
+                        data: null, render: renderQaStatus
+                    },
+                    {
+                        data: null, render: renderDropDownActions
+                    
                     }
 
                 ],
@@ -271,37 +230,7 @@
                     $(row).find('td:eq(4)').addClass('text-center');
                 }
             })
-            $('#excelBa').on('change', function() {
-                console.log("dsfdsf");
-                excel_ba = $(this).val();
-                console.log(excel_ba);
-                table.ajax.reload(function() {
-                    table.draw('page');
-                });
-            })
-
-
-            $('#excel_from_date').on('change', function() {
-                from_date = $(this).val();
-                table.ajax.reload(function() {
-                    table.draw('page');
-                });
-            })
-
-            $('#excel_to_date').on('change', function() {
-                to_date = $(this).val();
-                table.ajax.reload(function() {
-                    table.draw('page');
-                });
-            });
-            $('#myModal').on('show.bs.modal', function(event) {
-                var button = $(event.relatedTarget);
-                var langs = '{{ app()->getLocale() }}'
-                var id = button.data('id');
-                var modal = $(this);
-                $('#remove-foam').attr('action', '/' + langs + '/third-party-digging/' + id)
-            });
-
+           
         });
     </script>
 @endsection

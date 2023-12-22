@@ -10,7 +10,7 @@
         div#roads_length {
             display: none;
         }
-        
+
 
         span.relative.inline-flex.items-center.px-4.py-2.-ml-px.text-sm.font-medium.text-gray-500.bg-white.border.border-gray-300.cursor-default.leading-5 {
             background: #007BFF !important;
@@ -22,13 +22,15 @@
         }
 
         /* .table-responsive::-webkit-scrollbar {
-            display: none;
-        } */
+                display: none;
+            } */
 
-        table.dataTable>thead>tr>th:not(.sorting_disabled), table.dataTable>thead>tr>td:not(.sorting_disabled) {
-    padding-right: 14px;
-}
-        .lower-header ,
+        table.dataTable>thead>tr>th:not(.sorting_disabled),
+        table.dataTable>thead>tr>td:not(.sorting_disabled) {
+            padding-right: 14px;
+        }
+
+        .lower-header,
         td {
             font-size: 14px !important;
             padding: 5px !important;
@@ -36,20 +38,17 @@
 
         th {
             font-size: 15px !important;
-            
+
         }
-         th{
-            /* border-color: #6969699c  !important; */
-            
+ 
+        thead { 
+            background-color: #E4E3E3 !important;
         }
-        thead{
-            /* background-color: #7080907d !important;
-             */
-             background-color: #E4E3E3 !important;
+
+        .nowrap,
+        th {
+            white-space: nowrap;
         }
-        .nowrap,th {
-      white-space: nowrap;
-    }
     </style>
 @endsection
 
@@ -100,7 +99,7 @@
                                     aria-controls="collapseQr">
                                     QR Substation
                                 </button>
- 
+
                             </div>
                         </div>
 
@@ -118,15 +117,19 @@
                                 <table id="" class="table table-bordered  table-hover data-table">
 
 
-                                    <thead  >
+                                    <thead>
                                         <tr>
                                             <th rowspan="2">{{ __('messages.name') }}</th>
-                                            <th rowspan="2">{{__('messages.visit_date')}} </th>
-                                            <th colspan="3" class="text-center" style="border-bottom: 0px">{{ __('messages.gate') }}</th>
-                                            <th colspan="2" class="text-center" style="border-bottom: 0px">{{ __('messages.tree') }}</th>
-                                            <th colspan="4" class="text-center" style="border-bottom: 0px">{{ __('messages.building_defects') }}
+                                            <th rowspan="2">{{ __('messages.visit_date') }} </th>
+                                            <th colspan="3" class="text-center" style="border-bottom: 0px">
+                                                {{ __('messages.gate') }}</th>
+                                            <th colspan="2" class="text-center" style="border-bottom: 0px">
+                                                {{ __('messages.tree') }}</th>
+                                            <th colspan="4" class="text-center" style="border-bottom: 0px">
+                                                {{ __('messages.building_defects') }}
                                             </th>
-                                            <th class="nowrap" style="border-bottom: 0px">{{ __('messages.add_clean_up') }}</th>
+                                            <th class="nowrap" style="border-bottom: 0px">{{ __('messages.add_clean_up') }}
+                                            </th>
                                             <th rowspan="2">{{ __('messages.total_defects') }} </th>
                                             <th rowspan="2">QA Status</th>
 
@@ -167,34 +170,10 @@
             </div>
         </div>
     </section>
-    <div class="modal fade" id="myModal">
-        <div class="modal-dialog">
-            <div class="modal-content ">
 
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title">Remove Recored</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <form action="" id="remove-foam" method="POST">
-                    @method('DELETE')
-                    @csrf
 
-                    <div class="modal-body">
-                        Are You Sure ?
-                        <input type="hidden" name="id" id="modal-id">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
-                        <button type="submit" class="btn btn-danger">Remove</button>
-                    </div>
-                </form>
-
-            </div>
-        </div>
-    </div>
-
+    <x-remove-confirm  />
+   
     <div class="modal fade" id="qaStatusModal">
         <div class="modal-dialog">
             <div class="modal-content ">
@@ -214,7 +193,7 @@
                                 <label for="name">Name</label>
                             </div>
                             <div class="col-md-8">
-                                <input type="text" name="" id="modal-name" disabled readonly >
+                                <input type="text" name="" id="modal-name" disabled readonly>
                             </div>
                         </div>
 
@@ -223,7 +202,7 @@
                                 <label for="name">Total defects</label>
                             </div>
                             <div class="col-md-8">
-                                <input type="text" name="" id="modal-defects" disabled readonly >
+                                <input type="text" name="" id="modal-defects" disabled readonly>
                             </div>
                         </div>
 
@@ -242,8 +221,7 @@
 @endsection
 
 
-@section('script')
-    <script src="https://cdn.datatables.net/select/1.3.3/js/dataTables.select.min.js"></script>
+@section('script') 
     <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('assets/js/generate-qr.js') }}"></script>
@@ -253,44 +231,53 @@
 
 
     <script>
-        var from_date = $('#excel_from_date').val();
-        var to_date   = $('#excel_to_date').val();
-        var excel_ba  = $('#excelBa').val();
+ var lang = "{{app()->getLocale()}}";
+ var url = "substation"
+ var auth_ba = "{{Auth::user()->ba}}"
+
 
         $(document).ready(function() {
 
 
 
-            var table = $('.data-table').DataTable({
+             table = $('.data-table').DataTable({
                 processing: true,
                 serverSide: true,
 
                 ajax: {
                     url: '{{ route('substation.index', app()->getLocale()) }}',
                     type: "GET",
-                    data:function (d) {
+                    data: function(d) {
 
-                if (from_date) {
-                    d.from_date = from_date;
-                }
+                        if (from_date) {
+                            d.from_date = from_date;
+                        }
 
-                if (excel_ba) {
-                    d.ba = excel_ba;
-                }
+                        if (excel_ba) {
+                            d.ba = excel_ba;
+                        }
 
-                if (to_date) {
-                    d.to_date = to_date;
-                }}
+                        if (to_date) {
+                            d.to_date = to_date;
+                        }
+                        if (f_status) {
+                            d.status = f_status;
+                            d.image = 'substation_image_1';
+                        }
+                        if (qa_status) {
+                            d.qa_status = qa_status;
+                        }
+                    }
                 },
                 columns: [{
                         render: function(data, type, full) {
-                            return `<a href="/{{app()->getLocale()}}/substation/${full.id}/edit" class="text-decoration-none text-dark">${full.name}</a>`;
+                            return `<a href="/{{ app()->getLocale() }}/substation/${full.id}/edit" class="text-decoration-none text-dark">${full.name}</a>`;
                         },
-                        name:'name'
+                        name: 'name'
                     },
                     {
-                        data:'visit_date',
-                        name:'visit_date',
+                        data: 'visit_date',
+                        name: 'visit_date',
                         orderable: true
                     },
                     {
@@ -339,137 +326,32 @@
                         data: 'total_defects',
                         name: 'total_defects'
                     },
-                   
+
                     {
-                        render:function(data , type , full){
-                            if (full.qa_status != '' && full.qa_status != 'null') {
-                           
-                                    return `<button type="button" class="btn btn-primary "
-                                                          onlcick="qaqcStatus('accept',`+full.id+`)"
-                                                            >
-                                                            Accept
-                                                        </button>/<button type="button" class="btn btn-primary "
-                                                          onlcick="qaqcStatus('reject',`+full.id+`)"
-                                                            >
-                                                            Reject
-                                                        </button>`;
-                                
-                            }else{
-                                return full.qa_status;
-                            }
-                        }
+                        data: null, render: renderQaStatus
                     },
                     {
-                        render: function(data, type, full) {
-
-                            var id = full.id;
-                            return `<button type="button" class="btn  " data-toggle="dropdown">
-                            <img
-                                src="{{ URL::asset('assets/web-images/three-dots-vertical.svg') }}">
-                        </button>
-                        <div class="dropdown-menu" role="menu">
-                            <form action="/{{ app()->getLocale() }}/substation/${id}" method="get">
-
-                                <button type="submit" class="dropdown-item pl-3 w-100 text-left">Detail</button>
-                            </form>
-                            <form action="/{{ app()->getLocale() }}/substation/${id}/edit" method="get">
-
-                                <button type="submit" class="dropdown-item pl-3 w-100 text-left">Edit</button>
-                            </form>
-                            <button type="button" class="btn btn-primary dropdown-item" data-id="${id}" data-toggle="modal" data-target="#myModal">
-                                Remove
-                            </button>
-                        </div>
-                        `;
-                        }
+                        data: null, render: renderDropDownActions
+                    
                     }
 
                 ],
                 order: [
-            [1, 'desc']
-        ],
+                    [1, 'desc']
+                ],
                 createdRow: function(row, data, dataIndex) {
-                    $(row).find('td:eq(0)').css('width','150px !important');
-
-                    $(row).find('td:eq(1)').addClass('nowrap');
-                    $(row).find('td:eq(2)').addClass('text-center');
-                    $(row).find('td:eq(3)').addClass('text-center');
-                    $(row).find('td:eq(4)').addClass('text-center');
-                    $(row).find('td:eq(5)').addClass('text-center');
-                    $(row).find('td:eq(6)').addClass('text-center');
-                    $(row).find('td:eq(7)').addClass('text-center');
-                    $(row).find('td:eq(8)').addClass('text-center');
-                    $(row).find('td:eq(9)').addClass('text-center');
-                    $(row).find('td:eq(10)').addClass('text-center');
-                    $(row).find('td:eq(11)').addClass('text-center');
-                    $(row).find('td:eq(12)').addClass('text-center');
-
+                    $(row).find('td:not(:first-child)').addClass('text-center');
                 }
             })
 
-
-            $('#excelBa').on('change', function () {
-                excel_ba = $(this).val();
-        table.ajax.reload(function () {
-            table.draw('page');
-        });
-    })
-
-
-    $('#excel_from_date').on('change', function () {
-                from_date = $(this).val();
-        table.ajax.reload(function () {
-            table.draw('page');
-        });
-    })
-
-        $('#excel_to_date').on('change', function () {
-                to_date = $(this).val();
-        table.ajax.reload(function () {
-            table.draw('page');
-        });
-    });
-
-
-            $('#myModal').on('show.bs.modal', function(event) {
-                var button = $(event.relatedTarget);
-                var id = button.data('id');
-                var modal = $(this);
-                $('#remove-foam').attr('action', '/en/substation/' + id)
-            });
-
-            $('#qaStatusModal').on('show.bs.modal', function(event) {
-                var button = $(event.relatedTarget);
-                var id = button.data('id');
-
-                $('#modal-name').val(button.data('name'));
-                $('#modal-defects').val(button.data('total_defects'));
-                $('#status-modal-id').val(id)
-                var modal = $(this);
-                $('#remove-foam').attr('action', '/en/substation/' + id)
-            });
+           
 
 
         });
 
-
-        function qaqcStatus(status,id){
-            
-            $.ajax({
-                url: `/{{ app()->getLocale() }}/updateQAStatus?status=`+status+`&&id=`+id,
-                dataType: 'JSON',
-                method: 'GET',
-                async: false,
-                success: function callback(data) {
-                  
-
-                    alert(data);
-
-                }
-
-            });
-        }
+       
 
 
+        
     </script>
 @endsection

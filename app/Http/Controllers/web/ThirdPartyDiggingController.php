@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\ThirdPartyDiging;
 use App\Models\Team;
 use App\Models\WorkPackage;
+use App\Traits\Filter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
@@ -14,6 +15,7 @@ use Yajra\DataTables\DataTables;
 
 class ThirdPartyDiggingController extends Controller
 {
+    use Filter;
     /**
      * Display a listing of the resource.
      *
@@ -25,26 +27,13 @@ class ThirdPartyDiggingController extends Controller
 
         if ($request->ajax()) {
 
-        //    $request->from_date;
-
-            $ba = $request->filled('ba') ? $request->ba : Auth::user()->ba;
-            // return $ba;
+  
             $result = ThirdPartyDiging::query();
 
-            if ($request->filled('ba')) {
-                $result->where('ba', $ba);
-            }
-
-            if ($request->filled('from_date')) {
-                $result->where('survey_date', '>=', $request->from_date);
-            }
-
-            if ($request->filled('to_date')) {
-                $result->where('survey_date', '<=', $request->to_date);
-            }
+            $this->filter($result , 'survey_date' , $request);
 
             $result->when(true, function ($query) {
-                return $query->select('wp_name', 'zone', 'ba', 'survey_date', 'id', 'patrolling_time', 'supervision', 'notice', 'survey_status', 'digging');
+                return $query->select('wp_name', 'zone', 'ba', 'survey_date', 'id', 'patrolling_time', 'supervision', 'notice', 'survey_status', 'digging' ,'qa_status');
             });
 
             return datatables()
@@ -262,6 +251,20 @@ class ThirdPartyDiggingController extends Controller
             return redirect()
                 ->route('third-party-digging.index', app()->getLocale())
                 ->with('failed', 'Request Failed');
+        }
+    }
+
+
+    public function updateQAStatus(Request $req)
+    {
+        try {
+            $qa_data = ThirdPartyDiging::find($req->id);
+            $qa_data->qa_status = $req->status;
+            $qa_data->update();
+
+            return response()->json(['status' => $req->status]);
+        } catch (\Throwable $th) {
+            return response()->json(['status' => 'Request failed']);
         }
     }
 }

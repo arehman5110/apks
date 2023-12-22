@@ -515,8 +515,9 @@
                 $('#from_date , #to_date , .tt-input').val('')
 
                 if (ba == '') {
+                    zoom = 8
                     addRemoveBundary('', 2.75101756479656, 101.304931640625)
-                    $('#search_ba').empty().append(`<option value="" hidden>Select ba</option>`);
+                    $('#search_ba').val('');
                 } else {
                     callLayers(ba);
                 }

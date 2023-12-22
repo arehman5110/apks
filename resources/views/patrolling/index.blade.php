@@ -213,6 +213,8 @@
 
                                             <th class="tex-center">IMAGE READING START</th>
                                             <th class="tex-center">IMAGE READING END</th>
+                                            <th>QA STATUS</th>
+
                                             {{-- <th class="text-center">PATROLLING PATH START</th>
                                         <th class="text-center">PATROLLING PATH END</th> --}}
 
@@ -244,11 +246,11 @@
                 <!-- END MAP  DIV -->
                 <!-- <div id="wg" class="windowGroup">
 
-      </div>
+          </div>
 
-      <div id="wg1" class="windowGroup">
+          <div id="wg1" class="windowGroup">
 
-      </div> -->
+          </div> -->
 
 
             </div>
@@ -265,23 +267,19 @@
     <script src="https://cdn.datatables.net/select/1.3.3/js/dataTables.select.min.js"></script>
     <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('assets/js/generate-qr.js') }}"></script>
+    <script src="{{ asset('assets/js/patrolling.js') }}"></script>
 
     @include('partials.map-js')
 
 
 
-
+{{-- some javascript code is in public/assets/js/patrolling.js --}}
 
     <script type="text/javascript">
-        var patroling = '';
+        var lang = "{{ app()->getLocale() }}";
+        var url = "patrolling";
 
-        var patrol = [];
-        var from_date = $('#excel_from_date').val();
-        var to_date = $('#excel_to_date').val();
-        var excel_ba = $('#search_ba').val();
-
-
+            //this function just add and remove boundary 
         function addRemoveBundary(param, paramY, paramX) {
 
             var q_cql = "ba ILIKE '%" + param + "%' "
@@ -361,12 +359,12 @@
 
 
 
+            // add group over layes
         function addGroupOverLays() {
             if (layerControl != '') {
-                // console.log("inmsdanssdkjnasjnd");
                 map.removeControl(layerControl);
             }
-            // console.log("sdfsdf");
+            
             groupedOverlays = {
                 "POI": {
                     'Boundary': boundary,
@@ -382,8 +380,15 @@
             }).addTo(map);
         }
     </script>
+
+
+
+
+{{-- DATA TABLE --}}
     <script>
-       
+
+
+
         var table = '';
 
 
@@ -482,31 +487,14 @@
                     },
 
                     {
-                        render: function(data, type, full) {
+                        data: null,
+                        render: renderQaStatus
+                    },
+                    {
+                        data: null,
+                        render: renderDropDownActions
 
-                            var id = full.id;
-                            return `<button type="button" class="btn  " data-toggle="dropdown">
-                                <i class="fa fa-eye" aria-hidden="true"></i>
-                        </button>
-                        <div class="dropdown-menu" role="menu">
-
-
-                                <button type="button" onclick="getGeoJson(${full.id})" class="dropdown-item pl-3 w-100 text-left">Full Path</button>
-
-
-                                <button type="button" class="btn btn-primary dropdown-item" onclick="showPoint(${full.start_x} , ${full.start_y})"  >
-                                Starting Point
-                            </button>
-                                <button type="button" onclick="showPoint(${full.end_x} , ${full.end_y})" class="dropdown-item pl-3 w-100 text-left">End Point</button>
-
-
-                        </div>
-
-
-            `;
-                        }
                     }
-
 
 
                 ],
@@ -524,149 +512,9 @@
                 }
             });
 
-
-
-
-            $('#search_ba').on('change', function() {
-                excel_ba = $(this).val();
-
-                table.ajax.reload(function() {
-                    table.draw('page');
-                });
-            })
-
-
-            $('#excel_from_date').on('change', function() {
-                from_date = $(this).val();
-                table.ajax.reload(function() {
-                    table.draw('page');
-                });
-                filterByPatrollingDate(this)
-            })
-
-            $('#excel_to_date').on('change', function() {
-                to_date = $(this).val();
-                table.ajax.reload(function() {
-                    table.draw('page');
-                });
-                filterByPatrollingDate(this)
-            });
         });
-
-
-
-        function getGeoJson(param) {
-            $.ajax({
-                url: '/{{ app()->getLocale() }}/get-patrolling-json/' + param,
-                dataType: 'JSON',
-                //data: data,
-                method: 'GET',
-                async: false,
-                success: function callback(data) {
-                    var data1 = JSON.parse(data[0].geojson)
-
-
-                    if (patrol) {
-                        for (let i = 0; i < patrol.length; i++) {
-                            if (patrol[i] != '') {
-                                map.removeLayer(patrol[i])
-                            }
-                        }
-                    }
-                    for (var i = 0; i < data1.features.length; i++) {
-                        var geom = L.GeoJSON.coordsToLatLngs(data1.features[i].geometry.coordinates);
-                        var line = L.polyline(geom);
-                        if (i == data1.features.length - 1) {
-                            map.fitBounds(line.getBounds());
-                        }
-
-                        patrol[i] = L.geoJSON(data1.features[i].geometry);
-                        map.addLayer(patrol[i])
-                    }
-
-                }
-            })
-        }
-
-        var marker = [];
-        var layer_index = 0;
-
-        function showPoint(param_x, param_y) {
-
-            marker[layer_index] = new L.Marker([param_y, param_x]);
-            map.addLayer(marker[layer_index]);
-            layer_index++;
-            map.flyTo([parseFloat(param_y), parseFloat(param_x)], 18, {
-                duration: 1.5, // Animation duration in seconds
-                easeLinearity: 0.25,
-            });
-
-        }
-
-        function removePoint() {
-            for (let i = 0; i < layer_index; i++) {
-                if (marker[i] != '') {
-                    map.removeLayer(marker[i])
-                }
-            }
-        }
-
-        function removeLines() {
-            for (let i = 0; i < patrol.length; i++) {
-                if (patrol[i] != '') {
-                    map.removeLayer(patrol[i])
-                }
-            }
-        }
-
-        function callPatrlloingLayer(param) {
-            var userBa = '';
-            for (const data of b1Options) {
-                if (data[1] == param) {
-                    userBa = data;
-                    break;
-                }
-            }
-            zoom = 11;
-            excel_ba = param;
-
-            table.ajax.reload(function() {
-                table.draw('page');
-            });
-            addRemoveBundary(userBa[1], userBa[2], userBa[3])
-        }
-
-
-        function resetPatrlloingMapFilters() {
-
-            from_date = '';
-            to_date = '';
-            excel_ba = '';
-            $('#excel_from_date , #excel_to_date ').val('')
-
-            if (ba == '') {
-                zoom= 8;
-                addRemoveBundary('', 2.75101756479656, 101.304931640625)
-                $('#search_ba').empty().append(`<option value="" hidden>Select ba</option>`);
-            } else {
-                callPatrlloingLayer(ba);
-            }
-
-            table.ajax.reload(function() {
-                table.draw('page');
-            });
-
-        }
-
-        function filterByPatrollingDate(param) {
-            var inBa = $('#search_ba').val()
-            if (param.id == 'excel_from_date') {
-                from_date = param.value;
-            } else if (param.id == 'excel_to_date') {
-                to_date = param.value;
-            }
-            callPatrlloingLayer(inBa)
-
-        }
     </script>
+
+
+{{-- END DATA TABLE --}}
 @endsection

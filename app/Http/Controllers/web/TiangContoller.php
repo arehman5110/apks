@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\ThirdPartyDiging;
 use App\Models\Tiang;
 use App\Repositories\TiangRepository;
+use App\Traits\Filter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -13,6 +14,7 @@ use PhpParser\Node\Stmt\TryCatch;
 
 class TiangContoller extends Controller
 {
+    use Filter;
     private $tiangRepository;
 
     public function __construct(TiangRepository $tiaRepository)
@@ -31,20 +33,10 @@ class TiangContoller extends Controller
             $ba = $request->filled('ba') ? $request->ba : Auth::user()->ba;
             $result = Tiang::query();
 
-            if ($request->filled('ba')) {
-                $result->where('ba', $ba);
-            }
-
-            if ($request->filled('from_date')) {
-                $result->where('review_date', '>=', $request->from_date);
-            }
-
-            if ($request->filled('to_date')) {
-                $result->where('review_date', '<=', $request->to_date);
-            }
+           $result = $this->filter($result , 'review_date' , $request);
 
             $result->when(true, function ($query) {
-                return $query->select('id', 'ba', 'review_date', 'tiang_no', 'total_defects');
+                return $query->select('id', 'ba', 'review_date', 'tiang_no', 'total_defects' , 'qa_status');
             });
 
             return datatables()
@@ -370,6 +362,20 @@ class TiangContoller extends Controller
             return redirect()
                 ->route('tiang-talian-vt-and-vr.index', app()->getLocale())
                 ->with('failed', 'Request Failed');
+        }
+    }
+
+
+    public function updateQAStatus(Request $req)
+    {
+        try {
+            $qa_data = Tiang::find($req->id);
+            $qa_data->qa_status = $req->status;
+            $qa_data->update();
+
+            return response()->json(['status' => $req->status]);
+        } catch (\Throwable $th) {
+            return response()->json(['status' => 'Request failed']);
         }
     }
 }

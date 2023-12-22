@@ -85,6 +85,7 @@
                                             <th>TEAM</th>
                                             <th>VISIT DATE</th>
                                             <th>TOTAL DEFECTS</th>
+                                            <th>QA STATUS</th>
                                             <th>ACTION</th>
 
                                         </tr>
@@ -123,11 +124,12 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.3/datatables.min.js"></script>
 
     <script>
-        var from_date = $('#excel_from_date').val();
-        var to_date = $('#excel_to_date').val();
-        var excel_ba = $('#excelBa').val();
+        var lang = "{{app()->getLocale()}}";
+ var url = "link-box-pelbagai-voltan"
+ var auth_ba = "{{Auth::user()->ba}}"
+
         $(document).ready(function() {
-            var table = $('.data-table').DataTable({
+           table = $('.data-table').DataTable({
                 processing: true,
                 serverSide: true,
 
@@ -146,6 +148,13 @@
 
                         if (to_date) {
                             d.to_date = to_date;
+                        }
+                        if (f_status) {
+                            d.status = f_status;
+                            d.image = 'link_box_image_1';
+                        }
+                        if (qa_status) {
+                            d.qa_status = qa_status;
                         }
                     }
                 },
@@ -176,28 +185,11 @@
                         name:'total_defects'
                     },
                     {
-                        render: function(data, type, full) {
-
-                            var id = full.id;
-                            return `<button type="button" class="btn  " data-toggle="dropdown">
-                            <img
-                                src="{{ URL::asset('assets/web-images/three-dots-vertical.svg') }}">
-                        </button>
-                        <div class="dropdown-menu" role="menu">
-                            <form action="/{{ app()->getLocale() }}/link-box-pelbagai-voltan/${id}" method="get">
-
-                                <button type="submit" class="dropdown-item pl-3 w-100 text-left">Detail</button>
-                            </form>
-                            <form action="/{{ app()->getLocale() }}/link-box-pelbagai-voltan/${id}/edit" method="get">
-
-                                <button type="submit" class="dropdown-item pl-3 w-100 text-left">Edit</button>
-                            </form>
-                            <button type="button" class="btn btn-primary dropdown-item" data-id="${id}" data-toggle="modal" data-target="#myModal">
-                                Remove
-                            </button>
-                        </div>
-                        `;
-                        }
+                        data: null, render: renderQaStatus
+                    },
+                    {
+                        data: null, render: renderDropDownActions
+                    
                     }
 
                 ],
@@ -207,36 +199,7 @@
             })
 
 
-            $('#excelBa').on('change', function() {
-                excel_ba = $(this).val();
-                table.ajax.reload(function() {
-                    table.draw('page');
-                });
-            })
-
-
-            $('#excel_from_date').on('change', function() {
-                from_date = $(this).val();
-                table.ajax.reload(function() {
-                    table.draw('page');
-                });
-            })
-
-            $('#excel_to_date').on('change', function() {
-                to_date = $(this).val();
-                table.ajax.reload(function() {
-                    table.draw('page');
-                });
-            });
-
-            $('#myModal').on('show.bs.modal', function(event) {
-                var button = $(event.relatedTarget);
-                var id = button.data('id');
-                var langs = '{{ app()->getLocale() }}';
-                var modal = $(this);
-                $('#remove-foam').attr('action', '/' + langs + '/link-box-pelbagai-voltan/' + id)
-            });
-
+         
         });
     </script>
     

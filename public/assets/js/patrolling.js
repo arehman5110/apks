@@ -1,5 +1,4 @@
 
-
 const b10ptions = [
     ['W1', 'KUALA LUMPUR PUSAT', 3.14925905877391, 101.754098819705],
     ['B1', 'PETALING JAYA', 3.1128074178475, 101.605270457169],
@@ -16,64 +15,49 @@ const b10ptions = [
 ];
 
 
-var from_date = $('#excel_from_date').val()  ?? "" ;
-var to_date = $('#excel_to_date').val() ??"";
-var excel_ba = $('#excelBa').val() ??'';
-var qa_status = $('#qa_status').val() ?? '';
-var f_status = $('#status').val() ?? '';
-
-
+var from_date = $('#excel_from_date').val();
+var to_date = $('#excel_to_date').val();
+var excel_ba = $('#excelBa').val();
 
 var table = '';
+var patroling = '';
 
+var patrol = [];
+var from_date = $('#excel_from_date').val();
+var to_date = $('#excel_to_date').val();
+var excel_ba = $('#search_ba').val();
 
 $(function(){
-    $('#excelBa').on('change', function() {
+
+
+    $('#search_ba').on('change', function() {
         excel_ba = $(this).val();
+    
         table.ajax.reload(function() {
             table.draw('page');
         });
     })
-
-
+    
+    
     $('#excel_from_date').on('change', function() {
         from_date = $(this).val();
         table.ajax.reload(function() {
             table.draw('page');
         });
+        filterByPatrollingDate(this)
     })
-
+    
     $('#excel_to_date').on('change', function() {
         to_date = $(this).val();
         table.ajax.reload(function() {
             table.draw('page');
         });
+        filterByPatrollingDate(this)
     });
-
-    $('#status').on('change', function() {
-        f_status = $(this).val();
-        table.ajax.reload(function() {
-            table.draw('page');
-        });
     });
-
-    $('#qa_status').on('change', function() {
-        qa_status = $(this).val();
-        table.ajax.reload(function() {
-            table.draw('page');
-        });
-    });
-
-
-    $('#myModal').on('show.bs.modal', function(event) {
-        var button = $(event.relatedTarget);
-        var id = button.data('id');
-        $('#remove-foam').attr('action', `/${lang}/${url}/${id}`)
-        });
-});
-
-
-
+    
+    
+    
     function setMinDate(minDate){
         $('#excel_to_date').attr('min',minDate);
     }
@@ -97,18 +81,14 @@ $(function(){
                 areaSelect.append(`<option value="${data[1]}">${data[1]}</option>`);
             }
         });
-
-        $('#search_wp').empty();
-        $('#search_wp').append(`<option value="" hidden>Select Work Package</option>`);
+ 
 
     }
 
 
 
 
-    function collapseFilter() {
-    $('#collapseQr').collapse('hide');
-    }
+    
 
 
     function updateQaStatus(status, id ) {
@@ -133,25 +113,27 @@ $(function(){
 
 
 function renderDropDownActions(data, type, full) {
-
     var id = full.id;
     return `<button type="button" class="btn  " data-toggle="dropdown">
-        <i class="fas fa-ellipsis-v"></i>
+        <i class="fa fa-eye" aria-hidden="true"></i>
+</button>
+<div class="dropdown-menu" role="menu">
+
+
+        <button type="button" onclick="getGeoJson(${full.id})" class="dropdown-item pl-3 w-100 text-left">Full Path</button>
+
+
+        <button type="button" class="btn btn-primary dropdown-item" onclick="showPoint(${full.start_x} , ${full.start_y})"  >
+        Starting Point
     </button>
-    <div class="dropdown-menu" role="menu">
-        <form action="/${lang}/${url}/${id}" method="get">
+        <button type="button" onclick="showPoint(${full.end_x} , ${full.end_y})" class="dropdown-item pl-3 w-100 text-left">End Point</button>
 
-            <button type="submit" class="dropdown-item pl-3 w-100 text-left">Detail</button>
-        </form>
-        <form action="/${lang}/${url}/${id}/edit" method="get">
 
-            <button type="submit" class="dropdown-item pl-3 w-100 text-left">Edit</button>
-        </form>
-        <button type="button" class="btn btn-primary dropdown-item" data-id="${id}" data-toggle="modal"
-            data-target="#myModal">
-            Remove
-        </button>
-    </div>`
+</div>
+
+
+`;
+
 
 }
 
@@ -179,26 +161,116 @@ function renderQaStatus(data, type, full) {
     }
 }
 
+function getGeoJson(param) {
+$.ajax({
+    url: `/${lang}/get-patrolling-json/` + param,
+    dataType: 'JSON',
+    //data: data,
+    method: 'GET',
+    async: false,
+    success: function callback(data) {
+        var data1 = JSON.parse(data[0].geojson)
 
-function resetIndex(){
-    from_date = '';
-    to_date = '';
 
-    qa_status = '' ;
-    f_status = '' ;
-    
-    if (auth_ba == '') {
-        excel_ba = '';
-        $('#excelBa').val('');
-        
+        if (patrol) {
+            for (let i = 0; i < patrol.length; i++) {
+                if (patrol[i] != '') {
+                    map.removeLayer(patrol[i])
+                }
+            }
+        }
+        for (var i = 0; i < data1.features.length; i++) {
+            var geom = L.GeoJSON.coordsToLatLngs(data1.features[i].geometry.coordinates);
+            var line = L.polyline(geom);
+            if (i == data1.features.length - 1) {
+                map.fitBounds(line.getBounds());
+            }
+
+            patrol[i] = L.geoJSON(data1.features[i].geometry);
+            map.addLayer(patrol[i])
+        }
+
     }
-    $('#excel_from_date').val('');
-    $('#excel_to_date').val('');
-    $('#qa_status').val('');
-    $('#status').val('');
+})
+}
 
-    table.ajax.reload(function() {
-        table.draw('page');
-    });
+var marker = [];
+var layer_index = 0;
+
+function showPoint(param_x, param_y) {
+
+marker[layer_index] = new L.Marker([param_y, param_x]);
+map.addLayer(marker[layer_index]);
+layer_index++;
+map.flyTo([parseFloat(param_y), parseFloat(param_x)], 18, {
+    duration: 1.5, // Animation duration in seconds
+    easeLinearity: 0.25,
+});
+
+}
+
+function removePoint() {
+for (let i = 0; i < layer_index; i++) {
+    if (marker[i] != '') {
+        map.removeLayer(marker[i])
+    }
+}
+}
+
+function removeLines() {
+for (let i = 0; i < patrol.length; i++) {
+    if (patrol[i] != '') {
+        map.removeLayer(patrol[i])
+    }
+}
+}
+
+function callPatrlloingLayer(param) {
+var userBa = '';
+for (const data of b1Options) {
+    if (data[1] == param) {
+        userBa = data;
+        break;
+    }
+}
+zoom = 11;
+excel_ba = param;
+
+table.ajax.reload(function() {
+    table.draw('page');
+});
+addRemoveBundary(userBa[1], userBa[2], userBa[3])
+}
+
+
+function resetPatrlloingMapFilters() {
+
+from_date = '';
+to_date = '';
+excel_ba = '';
+$('#excel_from_date , #excel_to_date ').val('')
+
+if (ba == '') {
+    zoom= 8;
+    addRemoveBundary('', 2.75101756479656, 101.304931640625)
+    $('#search_ba').empty().append(`<option value="" hidden>Select ba</option>`);
+} else {
+    callPatrlloingLayer(ba);
+}
+
+table.ajax.reload(function() {
+    table.draw('page');
+});
+
+}
+
+function filterByPatrollingDate(param) {
+var inBa = $('#search_ba').val()
+if (param.id == 'excel_from_date') {
+    from_date = param.value;
+} else if (param.id == 'excel_to_date') {
+    to_date = param.value;
+}
+callPatrlloingLayer(inBa)
 
 }

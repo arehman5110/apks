@@ -33,6 +33,31 @@
                         </select>
                     </div>
 
+                     @if (Auth::user()->ba != '' && $url !='generate-third-party-digging-excel')
+                    <div class=" col-md-2">
+                        <label for="status">Status</label>
+                        <select name="status" id="status" class="form-control">
+                            <option value="" >All</option>
+                            <option value="unsurveyed">Unurveyed</option>
+                            <option value="surveyed_with_defects">Surveyed with defects</option>
+                            <option value="surveyed_without_defects">Surveyed without defects</option>
+
+                        </select>
+                    </div>
+
+
+                    <div class=" col-md-2">
+                        <label for="qa_status">QA Status</label>
+                        <select name="qa_status" id="qa_status" class="form-control">
+                            <option value="" >All</option>
+                            <option value="Accept">Accept</option>
+                            <option value="Reject">Reject</option>
+                           
+                        </select>
+                    </div>
+                    @endif 
+
+
                     <div class=" col-md-2">
                         <label for="excel_from_date">From Date : </label>
                         <input type="date" name="excel_from_date" id="excel_from_date"
@@ -49,6 +74,12 @@
                             style="background-color: #708090">Download QR </button>
                     </div>
                     @endisset
+                    <div class="col-md-2 pt-2 ">
+
+                        <button type="button" class="btn text-white btn-sm mt-4 " class="form-control"
+                            style="background-color: #708090" onclick="resetIndex()">Reset</button>
+                    </div>
+
                    
 
             </form>

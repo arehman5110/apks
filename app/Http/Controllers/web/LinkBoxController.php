@@ -5,6 +5,7 @@ namespace App\Http\Controllers\web;
 use App\Http\Controllers\Controller;
 use App\Models\LinkBox;
 use App\Models\Team;
+use App\Traits\Filter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 
 class LinkBoxController extends Controller
 {
+    use Filter;
     /**
      * Display a listing of the resource.
      *
@@ -24,20 +26,10 @@ class LinkBoxController extends Controller
             $ba = $request->filled('ba') ? $request->ba : Auth::user()->ba;
             $result = LinkBox::query();
 
-            if ($request->filled('ba')) {
-                $result->where('ba', $ba);
-            }
-
-            if ($request->filled('from_date')) {
-                $result->where('visit_date', '>=', $request->from_date);
-            }
-
-            if ($request->filled('to_date')) {
-                $result->where('visit_date', '<=', $request->to_date);
-            }
+           $result = $this->filter($result , 'visit_date' , $request);
 
             $result->when(true, function ($query) {
-                return $query->select('id', 'ba', 'zone', 'team', 'visit_date','total_defects');
+                return $query->select('id', 'ba', 'zone', 'team', 'visit_date','total_defects' , 'qa_status');
             });
 
             return datatables()
@@ -239,6 +231,19 @@ class LinkBoxController extends Controller
             return redirect()
                 ->route('link-box-pelbagai-voltan.index', app()->getLocale())
                 ->with('failed', 'Request Failed');
+        }
+    }
+
+    public function updateQAStatus(Request $req)
+    {
+        try {
+            $qa_data = LinkBox::find($req->id);
+            $qa_data->qa_status = $req->status;
+            $qa_data->update();
+
+            return response()->json(['status' => $req->status]);
+        } catch (\Throwable $th) {
+            return response()->json(['status' => 'Request failed']);
         }
     }
 }

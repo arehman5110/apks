@@ -5,6 +5,7 @@ namespace App\Http\Controllers\web;
 use App\Http\Controllers\Controller;
 use App\Models\CableBridge;
 use App\Models\Team;
+use App\Traits\Filter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 
 class CableBridgeController extends Controller
 {
+    use Filter;
     /**
      * Display a listing of the resource.
      *
@@ -25,27 +27,35 @@ class CableBridgeController extends Controller
             $ba = $request->filled('ba') ? $request->ba : Auth::user()->ba;
             $result = CableBridge::query();
 
-            if ($request->filled('ba')) {
-                $result->where('ba', $ba);
-            }
-
-            if ($request->filled('from_date')) {
-                $result->where('visit_date', '>=', $request->from_date);
-            }
-
-            if ($request->filled('to_date')) {
-                $result->where('visit_date', '<=', $request->to_date);
-            }
+           $result = $this->filter($result , 'visit_date',$request);
 
             $result->when(true, function ($query) {
-                return $query->select('id', 'ba', 'zone', 'team', 'visit_date' ,'total_defects');
+                return $query->select('id', 'ba', 'zone', 'team', 'visit_date', 'total_defects', 'qa_status');
             });
 
             return datatables()
-                ->of($result->get())->addColumn('cable_bridge_id', function ($row) {
-                    
-                    return "CB-" .$row->id;
+                ->of($result->get())
+                ->addColumn('cable_bridge_id', function ($row) {
+                    return 'CB-' . $row->id;
                 })
+                // ->addColumn('qa_status_action', function ($row) {
+                    
+                //     if ($row->visit_date != '' && $row->cable_bridge_image_1 != '') {
+                //         return "SDfsdfsd";
+                //         if ($row->qa_status === 'Accept' || $row->qa_status === 'Reject') {
+                //             if ($row->qa_status == 'Accept') {
+                //                 return "<span class='badge bg-success'>Accept</span>";
+                //             }
+                //             return "<span class='badge bg-danger'>Reject</span>";
+                //         } else {
+                //             return "<div class='d-flex text-center' id='status-$row->id'>
+                //                         <a type='button' class='btn btn-sm btn-success' onclick='updateQaStatus('Accept',$row->id)'>Accept</a>/
+                //                         <a type='button' class='btn btn-sm btn-danger ' onclick='updateQaStatus('Reject',$row->id)'> Reject </a>
+                //                     </div>";
+                //         }
+                //     }
+                //     return '';
+                // })
                 ->make(true);
         }
         return view('cable-bridge.index');
@@ -142,7 +152,7 @@ class CableBridgeController extends Controller
     {
         //
         $data = CableBridge::find($id);
-        return $data ? view('cable-bridge.show', ['data' => $data, 'disabled'=>true]) : abort(404);
+        return $data ? view('cable-bridge.show', ['data' => $data, 'disabled' => true]) : abort(404);
     }
 
     /**
@@ -155,7 +165,7 @@ class CableBridgeController extends Controller
     {
         //
         $data = CableBridge::find($id);
-        return $data ? view('cable-bridge.edit', ['data' => $data, 'disabled'=>true]) : abort(404);
+        return $data ? view('cable-bridge.edit', ['data' => $data, 'disabled' => true]) : abort(404);
     }
 
     /**
@@ -237,6 +247,19 @@ class CableBridgeController extends Controller
             return redirect()
                 ->route('cable-bridge.index', app()->getLocale())
                 ->with('failed', 'Request Failed');
+        }
+    }
+
+    public function updateQAStatus(Request $req)
+    {
+        try {
+            $qa_data = CableBridge::find($req->id);
+            $qa_data->qa_status = $req->status;
+            $qa_data->update();
+
+            return response()->json(['status' => $req->status]);
+        } catch (\Throwable $th) {
+            return response()->json(['status' => 'Request failed']);
         }
     }
 }
