@@ -101,7 +101,10 @@
                                             {{-- <th>CONTRACTOR</th> --}}
                                             <th>REVIEW DATE</th>
                                             <th>TOTAL DEFECTS</th>
-                                            <th>QA STATUS</th>
+                                            @if (Auth::user()->ba !== '')
+                                                <th>QA Status</th>
+                                            @endif
+
                                             <th>ACTION</th>
 
                                         </tr>
@@ -128,7 +131,6 @@
         </div>
     </section>
     <x-remove-confirm />
-
 @endsection
 
 
@@ -140,12 +142,45 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.3/datatables.min.js"></script>
 
     <script>
-        var lang = "{{app()->getLocale()}}";
- var url = "tiang-talian-vt-and-vr"
- var auth_ba = "{{Auth::user()->ba}}"
+        var lang = "{{ app()->getLocale() }}";
+        var url = "tiang-talian-vt-and-vr"
+        var auth_ba = "{{ Auth::user()->ba }}"
 
         $(document).ready(function() {
-             table = $('.data-table').DataTable({
+
+
+            var columns = [
+
+                {
+                    data: 'tiang_no',
+                    name: 'tiang_no'
+                },
+                {
+                    data: 'ba',
+                    name: 'ba',
+                    orderable: true
+                },
+                {
+                    data: 'review_date',
+                    name: 'review_date'
+                },
+                {
+                    data: 'total_defects',
+                    name: 'total_defects'
+                }
+            ];
+            if (auth_ba !== '') {
+                columns.push({
+                    data: null,
+                    render: renderQaStatus
+                });
+            }
+
+            columns.push({
+                data: null,
+                render: renderDropDownActions
+            });
+            table = $('.data-table').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: {
@@ -172,35 +207,7 @@
                         }
                     }
                 },
-                columns: [
-
-                    {
-                        data: 'tiang_no',
-                        name: 'tiang_no'
-                    },
-                    {
-                        data: 'ba',
-                        name: 'ba',
-                        orderable: true
-                    },
-                    {
-                        data: 'review_date',
-                        name: 'review_date'
-                    },
-                    {
-                        data: 'total_defects',
-                        name: 'total_defects'
-                    },
-                    {
-                        data: null,
-                        render: renderQaStatus
-                    },
-                    {
-                        data: null,
-                        render: renderDropDownActions
-
-                    }
-                ],
+                columns: columns,
                 order: [
                     [2, 'desc']
                 ]

@@ -10,6 +10,7 @@
         div#roads_length {
             display: none;
         }
+
         .collapse {
             visibility: visible;
         }
@@ -23,13 +24,14 @@
         <div class="container-  ">
             <div class="row mb-2" style="flex-wrap:nowrap">
                 <div class="col-sm-6">
-                    <h3>{{__('messages.link_box_pelbagai_voltan')}}</h3>
+                    <h3>{{ __('messages.link_box_pelbagai_voltan') }}</h3>
 
                 </div>
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
-                        <li class="breadcrumb-item"><a href="/{{app()->getLocale()}}/dashboard">{{__("messages.dashboard")}}</a></li>
-                        <li class="breadcrumb-item active">{{__("messages.index")}}</li>
+                        <li class="breadcrumb-item"><a
+                                href="/{{ app()->getLocale() }}/dashboard">{{ __('messages.dashboard') }}</a></li>
+                        <li class="breadcrumb-item active">{{ __('messages.index') }}</li>
                     </ol>
                 </div>
             </div>
@@ -46,25 +48,26 @@
 
 
             <div class="row">
-                @include('components.qr-filter',['url'=>"generate-link-box-excel"])
+                @include('components.qr-filter', ['url' => 'generate-link-box-excel'])
                 <div class="col-12">
                     <div class="card">
 
-                            <div class="card-header d-flex justify-content-between ">
-                                <div class="card-title">
-                                    {{-- Link Box --}}
-                                </div>
-                                <div class="d-flex ml-auto">
-                                <a href="{{route('link-box-pelbagai-voltan.create',app()->getLocale())}}"><button class="btn text-white btn-success  btn-sm mr-4"  >Add Link Box</button></a>
+                        <div class="card-header d-flex justify-content-between ">
+                            <div class="card-title">
+                                {{-- Link Box --}}
+                            </div>
+                            <div class="d-flex ml-auto">
+                                <a href="{{ route('link-box-pelbagai-voltan.create', app()->getLocale()) }}"><button
+                                        class="btn text-white btn-success  btn-sm mr-4">Add Link Box</button></a>
 
                                 <button class="btn text-white  btn-sm mr-4" type="button" data-toggle="collapse"
-                                style="background-color: #708090" data-target="#collapseQr" aria-expanded="false"
-                                aria-controls="collapseQr">
-                                QR Link Box
-                            </button>
-                               {{-- <a href="{{route('generate-link-box-excel', app()->getLocale())}}"> <button class="btn text-white  btn-sm mr-4" style="background-color: #708090">QR Link Box</button></a> --}}
+                                    style="background-color: #708090" data-target="#collapseQr" aria-expanded="false"
+                                    aria-controls="collapseQr">
+                                    QR Link Box
+                                </button>
+                                {{-- <a href="{{route('generate-link-box-excel', app()->getLocale())}}"> <button class="btn text-white  btn-sm mr-4" style="background-color: #708090">QR Link Box</button></a> --}}
                             </div>
-                            </div>
+                        </div>
 
 
 
@@ -81,18 +84,20 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>ZONE</th>
-                                            <th>BA</th> 
+                                            <th>BA</th>
                                             <th>TEAM</th>
                                             <th>VISIT DATE</th>
                                             <th>TOTAL DEFECTS</th>
-                                            <th>QA STATUS</th>
+                                            @if (Auth::user()->ba !== '')
+                                                <th>QA Status</th>
+                                            @endif
                                             <th>ACTION</th>
 
                                         </tr>
                                     </thead>
                                     <tbody>
 
-                                        
+
                                     </tbody>
                                 </table>
                             </div>
@@ -111,25 +116,62 @@
             </div>
         </div>
     </section>
-   <x-remove-confirm />
+    <x-remove-confirm />
 @endsection
 
 
 @section('script')
-
     <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{asset('assets/js/generate-qr.js')}}"></script>
+    <script src="{{ asset('assets/js/generate-qr.js') }}"></script>
 
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.3/datatables.min.js"></script>
 
     <script>
-        var lang = "{{app()->getLocale()}}";
- var url = "link-box-pelbagai-voltan"
- var auth_ba = "{{Auth::user()->ba}}"
+        var lang = "{{ app()->getLocale() }}";
+        var url = "link-box-pelbagai-voltan"
+        var auth_ba = "{{ Auth::user()->ba }}"
 
         $(document).ready(function() {
-           table = $('.data-table').DataTable({
+
+            var columns = [{
+                    data: "link_box_id",
+                    name: "link_box_id"
+                },
+                {
+                    data: 'zone',
+                    name: 'zone'
+                },
+                {
+                    data: 'ba',
+                    name: 'ba',
+                    orderable: true
+                },
+                {
+                    data: 'team',
+                    name: 'team'
+                },
+                {
+                    data: 'visit_date',
+                    name: 'visit_date'
+                },
+                {
+                    data: 'total_defects',
+                    name: 'total_defects'
+                },
+            ]
+            if (auth_ba !== '') {
+                columns.push({
+                    data: null,
+                    render: renderQaStatus
+                });
+            }
+
+            columns.push({
+                data: null,
+                render: renderDropDownActions
+            });
+            table = $('.data-table').DataTable({
                 processing: true,
                 serverSide: true,
 
@@ -158,49 +200,14 @@
                         }
                     }
                 },
-                columns: [
-                {
-                    data:"link_box_id",
-                    name:"link_box_id"
-                },    
-                {
-                        data: 'zone',
-                        name: 'zone'
-                    },
-                    {
-                        data: 'ba',
-                        name: 'ba',
-                        orderable: true
-                    },
-                    {
-                        data: 'team',
-                        name: 'team'
-                    },
-                    {
-                        data: 'visit_date',
-                        name: 'visit_date'
-                    },
-                    {
-                        data:'total_defects',
-                        name:'total_defects'
-                    },
-                    {
-                        data: null, render: renderQaStatus
-                    },
-                    {
-                        data: null, render: renderDropDownActions
-                    
-                    }
-
-                ],
+                columns: columns,
                 order: [
                     [0, 'desc']
                 ]
             })
 
 
-         
+
         });
     </script>
-    
 @endsection

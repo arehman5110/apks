@@ -213,7 +213,9 @@
 
                                             <th class="tex-center">IMAGE READING START</th>
                                             <th class="tex-center">IMAGE READING END</th>
-                                            <th>QA STATUS</th>
+                                            @if (Auth::user()->ba !== '')
+                                            <th >QA Status</th>
+                                            @endif
 
                                             {{-- <th class="text-center">PATROLLING PATH START</th>
                                         <th class="text-center">PATROLLING PATH END</th> --}}
@@ -278,6 +280,7 @@
     <script type="text/javascript">
         var lang = "{{ app()->getLocale() }}";
         var url = "patrolling";
+        var auth_ba = "{{Auth::user()->ba}}";
 
             //this function just add and remove boundary 
         function addRemoveBundary(param, paramY, paramX) {
@@ -395,27 +398,7 @@
 
         $(function() {
 
-            table = $('.data-table').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: {
-                    url: '{{ route('patrolling-paginate', app()->getLocale()) }}',
-                    type: "GET",
-                    data: function(d) {
-                        if (from_date) {
-                            d.from_date = from_date;
-                        }
-
-                        if (excel_ba) {
-                            d.ba = excel_ba;
-                        }
-
-                        if (to_date) {
-                            d.to_date = to_date;
-                        }
-                    }
-                },
-                columns: [{
+            var columns =  [{
                         data: 'wp_name',
                         name: 'wp_name'
                     },
@@ -484,20 +467,36 @@
                             return `<td></td>`;
                         },
                         name: 'image_reading_end'
-                    },
-
-                    {
-                        data: null,
-                        render: renderQaStatus
-                    },
-                    {
-                        data: null,
-                        render: renderDropDownActions
-
                     }
+                ];
 
+                if (auth_ba !== '') {
+        columns.push({ data: null, render: renderQaStatus });
+    }
 
-                ],
+    columns.push({ data: null, render: renderDropDownActions });
+
+            table = $('.data-table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: '{{ route('patrolling-paginate', app()->getLocale()) }}',
+                    type: "GET",
+                    data: function(d) {
+                        if (from_date) {
+                            d.from_date = from_date;
+                        }
+
+                        if (excel_ba) {
+                            d.ba = excel_ba;
+                        }
+
+                        if (to_date) {
+                            d.to_date = to_date;
+                        }
+                    }
+                },
+                columns: columns,
                 createdRow: function(row, data, dataIndex) {
                     $(row).find('td:eq(1)').addClass('text-center');
                     $(row).find('td:eq(2)').addClass('text-center');

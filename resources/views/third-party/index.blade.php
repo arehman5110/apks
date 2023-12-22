@@ -96,7 +96,9 @@
                                         <th>SUPERVISION</th>
                                         <th>SURVEY STATUS</th>
                                         <th>NOTICE</th>
-                                        <th>QA STATUS</th>
+                                        @if (Auth::user()->ba !== '')
+                                            <th >QA Status</th>
+                                            @endif
                                         <th>ACTION</th>
 
                                     </tr>
@@ -142,29 +144,7 @@
 
 
 
-             table = $('.data-table').DataTable({
-
-                processing: true,
-                serverSide: true,
-
-                ajax: {
-                    url: "{{ route('third-party-digging.index', app()->getLocale()) }}",
-                    type: "GET",
-                    data: function(d) {
-
-                        if (from_date) {
-                            d.from_date = from_date;
-                        }
-
-                        if (to_date) {
-                            d.to_date = to_date;
-                        }
-                        if (excel_ba) {
-                            d.ba = excel_ba;
-                        }
-                    }
-                },
-                columns: [{
+            var columns = [{
                         data: 'wp_name',
                         name: 'wop_name '
                     },
@@ -211,15 +191,37 @@
                         name: 'notice'
                     },
 
-                    {
-                        data: null, render: renderQaStatus
-                    },
-                    {
-                        data: null, render: renderDropDownActions
-                    
-                    }
+                ];
 
-                ],
+                if (auth_ba !== '') {
+        columns.push({ data: null, render: renderQaStatus });
+    }
+
+    columns.push({ data: null, render: renderDropDownActions });
+
+             table = $('.data-table').DataTable({
+
+                processing: true,
+                serverSide: true,
+
+                ajax: {
+                    url: "{{ route('third-party-digging.index', app()->getLocale()) }}",
+                    type: "GET",
+                    data: function(d) {
+
+                        if (from_date) {
+                            d.from_date = from_date;
+                        }
+
+                        if (to_date) {
+                            d.to_date = to_date;
+                        }
+                        if (excel_ba) {
+                            d.ba = excel_ba;
+                        }
+                    }
+                },
+                columns: columns,
                 order: [
                     [3, 'desc']
                 ],

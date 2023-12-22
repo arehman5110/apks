@@ -78,7 +78,9 @@
                                             <th>TEAM</th>
                                             <th>VISIT DATE</th>
                                             <th>TOTAL DEFECTS</th>
-                                            <th>QA STATUS</th>
+                                            @if (Auth::user()->ba !== '')
+                                            <th >QA Status</th>
+                                            @endif
                                             <th>ACTION</th>
 
                                         </tr>
@@ -122,6 +124,41 @@
 
 
         $(document).ready(function() {
+
+
+            var columns = [{
+                    data:"cable_bridge_id",
+                    name:"cable_bridge_id"
+
+                },{
+                        data: 'zone',
+                        name: 'zone'
+                    },
+                    {
+                        data: 'ba',
+                        name: 'ba',
+                        orderable: true
+                    },
+                    {
+                        data: 'team',
+                        name: 'team'
+                    },
+                    {
+                        data: 'visit_date',
+                        name: 'visit_date'
+                    },
+                    {
+                        data:'total_defects',
+                        name:'total_defects',
+                    },
+                
+                ];
+
+                if (auth_ba !== '') {
+        columns.push({ data: null, render: renderQaStatus });
+    }
+
+    columns.push({ data: null, render: renderDropDownActions });
             table = $('.data-table').DataTable({
                 processing: true,
                 serverSide: true,
@@ -151,39 +188,7 @@
                         }
                     }
                 },
-                columns: [{
-                    data:"cable_bridge_id",
-                    name:"cable_bridge_id"
-
-                },{
-                        data: 'zone',
-                        name: 'zone'
-                    },
-                    {
-                        data: 'ba',
-                        name: 'ba',
-                        orderable: true
-                    },
-                    {
-                        data: 'team',
-                        name: 'team'
-                    },
-                    {
-                        data: 'visit_date',
-                        name: 'visit_date'
-                    },
-                    {
-                        data:'total_defects',
-                        name:'total_defects',
-                    },
-                    {
-                        data: null, render: renderQaStatus
-                    },
-                    {
-                        data: null, render: renderDropDownActions
-                    
-                    }
-                ],
+                columns: columns ,
                 order: [
                     [0, 'desc']
                 ]

@@ -88,7 +88,9 @@
                                             <th>RUST</th>
                                             <th>ADVERTISE POSTER</th>
                                             <th>TOTAL DEFECTS</th>
-                                            <th>QA STATUS</th>
+                                            @if (Auth::user()->ba !== '')
+                                            <th >QA Status</th>
+                                            @endif
                                             <th>ACTION</th>
 
                                         </tr>
@@ -128,36 +130,9 @@
 
 
         $(document).ready(function() {
-            table = $('.data-table').DataTable({
-                processing: true,
-                serverSide: true,
 
-                ajax: {
-                    url: '{{ route('feeder-pillar.index', app()->getLocale()) }}',
-                    type: "GET",
-                    data: function(d) {
 
-                        if (from_date) {
-                            d.from_date = from_date;
-                        }
-
-                        if (excel_ba) {
-                            d.ba = excel_ba;
-                        }
-
-                        if (to_date) {
-                            d.to_date = to_date;
-                        }
-                        if (f_status) {
-                            d.status = f_status;
-                            d.image = 'feeder_pillar_image_1';
-                        }
-                        if (qa_status) {
-                            d.qa_status = qa_status;
-                        }
-                    }
-                },
-                columns: [{
+            var columns = [{
                         data: 'feeder_pillar_id',
                         name: 'feeder_pillar_id'
                     },
@@ -200,16 +175,44 @@
                         data: 'total_defects',
                         name: 'total_defects'
                     },
-                    {
-                        data: null,
-                        render: renderQaStatus
-                    },
-                    {
-                        data: null,
-                        render: renderDropDownActions
-                    }
+                   
+                ];
+                if (auth_ba !== '') {
+        columns.push({ data: null, render: renderQaStatus });
+    }
 
-                ],
+    columns.push({ data: null, render: renderDropDownActions });
+                
+            table = $('.data-table').DataTable({
+                processing: true,
+                serverSide: true,
+
+                ajax: {
+                    url: '{{ route('feeder-pillar.index', app()->getLocale()) }}',
+                    type: "GET",
+                    data: function(d) {
+
+                        if (from_date) {
+                            d.from_date = from_date;
+                        }
+
+                        if (excel_ba) {
+                            d.ba = excel_ba;
+                        }
+
+                        if (to_date) {
+                            d.to_date = to_date;
+                        }
+                        if (f_status) {
+                            d.status = f_status;
+                            d.image = 'feeder_pillar_image_1';
+                        }
+                        if (qa_status) {
+                            d.qa_status = qa_status;
+                        }
+                    }
+                },
+                columns : columns,
                 order: [
                     [0, 'desc']
                 ],

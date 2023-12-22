@@ -131,7 +131,10 @@
                                             <th class="nowrap" style="border-bottom: 0px">{{ __('messages.add_clean_up') }}
                                             </th>
                                             <th rowspan="2">{{ __('messages.total_defects') }} </th>
+                                            @if (Auth::user()->ba !== '')
                                             <th rowspan="2">QA Status</th>
+                                            @endif
+                                            
 
                                             <th rowspan="2">ACTION</th>
 
@@ -238,38 +241,7 @@
 
         $(document).ready(function() {
 
-
-
-             table = $('.data-table').DataTable({
-                processing: true,
-                serverSide: true,
-
-                ajax: {
-                    url: '{{ route('substation.index', app()->getLocale()) }}',
-                    type: "GET",
-                    data: function(d) {
-
-                        if (from_date) {
-                            d.from_date = from_date;
-                        }
-
-                        if (excel_ba) {
-                            d.ba = excel_ba;
-                        }
-
-                        if (to_date) {
-                            d.to_date = to_date;
-                        }
-                        if (f_status) {
-                            d.status = f_status;
-                            d.image = 'substation_image_1';
-                        }
-                        if (qa_status) {
-                            d.qa_status = qa_status;
-                        }
-                    }
-                },
-                columns: [{
+          var  columns = [{
                         render: function(data, type, full) {
                             return `<a href="/{{ app()->getLocale() }}/substation/${full.id}/edit" class="text-decoration-none text-dark">${full.name}</a>`;
                         },
@@ -325,20 +297,49 @@
                     {
                         data: 'total_defects',
                         name: 'total_defects'
-                    },
-
-                    {
-                        data: null, render: renderQaStatus
-                    },
-                    {
-                        data: null, render: renderDropDownActions
-                    
                     }
+                ];
+                    if (auth_ba !== '') {
+        columns.push({ data: null, render: renderQaStatus });
+    }
 
-                ],
-                order: [
-                    [1, 'desc']
-                ],
+    columns.push({ data: null, render: renderDropDownActions });
+
+
+
+
+
+             table = $('.data-table').DataTable({
+                processing: true,
+                serverSide: true,
+
+                ajax: {
+                    url: '{{ route('substation.index', app()->getLocale()) }}',
+                    type: "GET",
+                    data: function(d) {
+
+                        if (from_date) {
+                            d.from_date = from_date;
+                        }
+
+                        if (excel_ba) {
+                            d.ba = excel_ba;
+                        }
+
+                        if (to_date) {
+                            d.to_date = to_date;
+                        }
+                        if (f_status) {
+                            d.status = f_status;
+                            d.image = 'substation_image_1';
+                        }
+                        if (qa_status) {
+                            d.qa_status = qa_status;
+                        }
+                    }
+                },
+                columns: columns,
+        order: [[1, 'desc']],
                 createdRow: function(row, data, dataIndex) {
                     $(row).find('td:not(:first-child)').addClass('text-center');
                 }
