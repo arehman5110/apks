@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Tiang;
 use Illuminate\Http\Request;
 use App\Repositories\TiangRepository;
+use Illuminate\Support\Facades\Auth;
 
 class TiangMapController extends Controller
 {
@@ -61,9 +62,10 @@ class TiangMapController extends Controller
             }
 
             $data->ba = $request->ba;
-
             $data->fp_name = $request->fp_name;
+            $user = Auth::user()->id;
 
+            $data->updated_by = $user;
             $data->fp_road = $request->fp_road;
             $data->section_from = $request->section_from;
             $data->section_to = $request->section_to;

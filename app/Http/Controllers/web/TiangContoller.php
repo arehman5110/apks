@@ -87,6 +87,9 @@ class TiangContoller extends Controller
             $data->bare_span = $request->has('bare_span') ? json_encode($request->bare_span) : null;
             $data->jarak_kelegaan = $request->jarak_kelegaan;
 
+            $user = Auth::user()->id;
+
+            $data->created_by = $user;
             $data->ba = $request->ba;
             $data->fp_name = $request->fp_name;
             $data->review_date = $request->review_date;
@@ -270,7 +273,9 @@ class TiangContoller extends Controller
             }
 
             $data->ba = $request->ba;
+            $user = Auth::user()->id;
 
+            $data->updated_by = $user;
             $data->fp_name = $request->fp_name;
 
             $data->fp_road = $request->fp_road;

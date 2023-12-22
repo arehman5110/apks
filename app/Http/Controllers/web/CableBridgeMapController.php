@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\CableBridge;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class CableBridgeMapController extends Controller
 {
@@ -24,6 +25,7 @@ class CableBridgeMapController extends Controller
         //
 
 
+
         try {
             $currentDate = Carbon::now()->toDateString();
             $combinedDateTime = $currentDate . ' ' . $request->patrol_time;
@@ -31,6 +33,9 @@ class CableBridgeMapController extends Controller
             $data = CableBridge::find($id);
             $data->zone = $request->zone;
             $data->ba = $request->ba;
+            $user = Auth::user()->id;
+
+            $data->updated_by = $user;
             // $data->team = $request->team;
             $data->visit_date = $request->visit_date;
             $data->patrol_time = $combinedDateTime;

@@ -89,6 +89,9 @@ class LinkBoxController extends Controller
             $data->start_date = $request->start_date;
             $data->end_date = $request->end_date;
             $data->type = $request->type;
+            $user = Auth::user()->id;
+
+            $data->created_by = $user;
             $data->coordinate = $request->coordinate;
 
             foreach ($defects as  $value) {
@@ -176,6 +179,9 @@ class LinkBoxController extends Controller
             $data->visit_date = $request->visit_date;
             $data->patrol_time = $combinedDateTime;
             $data->feeder_involved = $request->feeder_involved;
+            $user = Auth::user()->id;
+
+            $data->updated_by = $user;
 
             $data->start_date = $request->start_date;
             $data->end_date = $request->end_date;

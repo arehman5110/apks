@@ -100,7 +100,9 @@ class FPController extends Controller
 
             $data->size = $request->size;
             $data->coordinate = $request->coordinate;
+            $user = Auth::user()->id;
 
+            $data->created_by = $user;
             $data->leaning_angle = $request->leaning_angle;
 
             $gate = [ 'unlocked' => 'false', 'demaged' => 'false', 'other'=>'false'];
@@ -220,6 +222,9 @@ class FPController extends Controller
             // $data->team = $request->team;
             $data->visit_date = $request->visit_date;
             $data->patrol_time = $combinedDateTime;
+            $user = Auth::user()->id;
+
+            $data->updated_by = $user;
 
             $data->size = $request->size;
             $data->coordinate = $request->coordinate;

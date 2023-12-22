@@ -7,6 +7,8 @@ use App\Models\FeederPillar;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
+
 class FeederPillarMapController extends Controller
 {
     //
@@ -33,7 +35,9 @@ public function update(Request $request, $language, $id)
         // $data->team = $request->team;
         $data->visit_date = $request->visit_date;
         $data->patrol_time = $combinedDateTime;
+        $user = Auth::user()->id;
 
+        $data->updated_by = $user;
         $data->size = $request->size;
         $data->coordinate = $request->coordinate;
         $data->leaning_angle = $request->leaning_angle;

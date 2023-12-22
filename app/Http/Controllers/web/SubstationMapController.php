@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Substation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class SubstationMapController extends Controller
 {
@@ -28,7 +29,10 @@ class SubstationMapController extends Controller
             // $data->team = $request->team;
             $data->visit_date = $request->visit_date;
             $data->patrol_time = $combinedDateTime;
+        
+            $user = Auth::user()->id;
 
+            $data->updated_by = $user;
             $data->voltage = $request->voltage;
             $data->name = $request->name;
             $data->type = $request->type;

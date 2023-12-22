@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\LinkBox;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class LinkBoxMapController extends Controller
 {
@@ -31,7 +32,9 @@ class LinkBoxMapController extends Controller
             $data->visit_date = $request->visit_date;
             $data->patrol_time = $combinedDateTime;
             $data->feeder_involved = $request->feeder_involved;
+            $user = Auth::user()->id;
 
+            $data->updated_by = $user;
             $data->start_date = $request->start_date;
             $data->end_date = $request->end_date;
             $data->type = $request->type;

@@ -100,6 +100,9 @@ class SubstationController extends Controller
             $data->name = $request->name;
             $data->type = $request->type;
             $data->coordinate = $request->coordinate;
+            $user = Auth::user()->id;
+
+            $data->created_by = $user;
             $total_defects = 0;
             $request->grass_status == 'Yes' ? $total_defects++ : '';
             $request->tree_branches_status == 'Yes' ? $total_defects++ : '';
@@ -243,7 +246,11 @@ class SubstationController extends Controller
             $data->voltage = $request->voltage;
             $data->name = $request->name;
             $data->type = $request->type;
+            $user = Auth::user()->id;
+
+            $data->updated_by = $user;
             $total_defects = 0;
+
             $request->grass_status == 'Yes' ? $total_defects++ : '';
             $request->tree_branches_status == 'Yes' ? $total_defects++ : '';
             $request->advertise_poster_status == 'Yes' ? $total_defects++ : '';

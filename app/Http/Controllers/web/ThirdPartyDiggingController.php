@@ -95,7 +95,9 @@ class ThirdPartyDiggingController extends Controller
             $data->road_name = $request->road_name;
 
             // $data->km_actual = $request->km_actual;
+        $user = Auth::user()->id;
 
+            $data->created_by = $user;
             $data->digging = $request->digging;
             $data->notice = $request->notice;
             $data->supervision = $request->supervision;
@@ -194,6 +196,9 @@ class ThirdPartyDiggingController extends Controller
 
             // $data->km_actual = $request->km_actual;
             $data->road_name = $request->road_name;
+            $user = Auth::user()->id;
+
+            $data->updated_by = $user;
 
             $data->digging = $request->digging;
             $data->notice = $request->notice;
