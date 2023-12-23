@@ -113,13 +113,18 @@ $(function(){
 
     function updateQaStatus(status, id ) {
 
+        var confirmation = confirm(`Are you sure you want to ${status}?`);
+    
+    if (confirmation) {
+         
+   
         $.ajax({
             url: `/${lang}/${url}-update-QA-Status?status=${status}&&id=${id}`,
             dataType: 'JSON',
             method: 'GET',
             async: false,
             success: function callback(data) {
-                 alert('Request Success');
+                //  alert('Request Success');
                 if (data.status == 'Accept') {
                     $('#status-' + id).html(`<span class="badge bg-success">Accept</span>`);
 
@@ -129,6 +134,7 @@ $(function(){
                 }
             }
         });
+    }
     }
 
 
