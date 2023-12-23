@@ -4,6 +4,7 @@ namespace App\Http\Controllers\web\excel;
 
 use App\Http\Controllers\Controller;
 use App\Models\Substation;
+use App\Traits\Filter;
 use Illuminate\Http\Request;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
@@ -13,6 +14,8 @@ use Illuminate\Support\Facades\DB;
 class SubstationExcelController extends Controller
 {
     //
+    use Filter;
+
 
     public function generateSubstationExcel(Request $req)
     {
@@ -21,21 +24,11 @@ class SubstationExcelController extends Controller
 
         try {
  
-
-            $ba = $req->filled('excelBa') ? $req->excelBa : Auth::user()->ba;
+ 
             $result = Substation::query();
 
-            if ($req->filled('excelBa')) {
-                $result->where('ba', $ba);
-            }
+            $result = $this->filter($result , 'visit_date',$req);
 
-            if ($req->filled('excel_from_date')) {
-                $result->where('visit_date', '>=', $req->excel_from_date);
-            }
-
-            if ($req->filled('excel_to_date')) {
-                $result->where('visit_date', '<=', $req->excel_to_date);
-            }
 
 
             $result = $result->whereNotNull('visit_date')->select('*', DB::raw('ST_X(geom) as x'), DB::raw('ST_Y(geom) as y'))->get();

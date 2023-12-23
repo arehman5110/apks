@@ -5,34 +5,24 @@ namespace App\Http\Controllers\web\excel;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Patroling;
+use App\Traits\Filter;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class PatrollingExcelController extends Controller
 {
+    use Filter;
 
     public function generateExcel(Request $req)
     {
         // return $req;
         try{
-            
-        $ba = $req->filled('excelBa') ? $req->excelBa : Auth::user()->ba;
+             
         $result = Patroling::query();
 
-        if ($req->filled('excelBa')) {
-            $result->where('ba', $ba);
-        }
-        // return $result->get();
+        $result = $this->filter($result , 'vist_date',$req);
 
-        if ($req->filled('excel_from_date')) {
-            $result->whereDate('vist_date', '>=', $req->excel_from_date);
-        }
-
-        if ($req->filled('excel_to_date')) {
-            $result->whereDate('vist_date', '<=', $req->excel_to_date);
-        }
-       
 
         $result = $result->where('km' ,'!=' , '0')-> whereNotNull('vist_date')->select('*', DB::raw('ST_X(geom) as x'), DB::raw('ST_Y(geom) as y'))->get();
 

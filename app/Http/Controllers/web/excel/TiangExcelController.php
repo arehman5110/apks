@@ -4,6 +4,7 @@ namespace App\Http\Controllers\web\excel;
 
 use App\Http\Controllers\Controller;
 use App\Models\Tiang;
+use App\Traits\Filter;
 use Illuminate\Http\Request;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
@@ -16,6 +17,7 @@ use PhpOffice\PhpSpreadsheet\Style\Color;
 class TiangExcelController extends Controller
 {
     //
+    use Filter;
 
     public function generateTiangExcel(Request $req)
     {
@@ -26,17 +28,7 @@ class TiangExcelController extends Controller
 
         $result = Tiang::query();
 
-            if ($req->filled('excelBa')) {
-                $result->where('ba', $ba);
-            }
-
-            if ($req->filled('excel_from_date')) {
-                $result->where('review_date', '>=', $req->excel_from_date);
-            }
-
-            if ($req->filled('excel_to_date')) {
-                $result->where('review_date', '<=', $req->excel_to_date);
-            }
+        $result = $this->filter($result , 'review_date',$req);
 
 
             $res = $result->whereNotNull('review_date')

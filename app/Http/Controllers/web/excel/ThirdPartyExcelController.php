@@ -4,30 +4,22 @@ namespace App\Http\Controllers\web\excel;
 
 use App\Http\Controllers\Controller;
 use App\Models\ThirdPartyDiging;
+use App\Traits\Filter;
 use Illuminate\Http\Request;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use Illuminate\Support\Facades\Auth;
 
 class ThirdPartyExcelController extends Controller
 {
+    use Filter;
     public function generateThirdPartExcel(Request $req)
     {
 
-        try{
-        $ba = $req->filled('ba') ? $req->excelBa : Auth::user()->ba;
+        try{ 
             $result = ThirdPartyDiging::query();
 
-            if ($req->filled('excelBa')) {
-                $result->where('ba', $ba);
-            }
+            $result = $this->filter($result , 'survey_date',$req);
 
-            if ($req->filled('excel_from_date')) {
-                $result->where('survey_date', '>=', $req->excel_from_date);
-            }
-
-            if ($req->filled('surveyDate_to')) {
-                $result->where('survey_date', '<=', $req->surveyDate_to);
-            }
 
 
             $result = $result->get();
