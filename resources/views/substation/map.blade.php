@@ -121,6 +121,20 @@
                     <label for="select_layer_unsurveyed">Unsurveyed </label>
                 </div>
 
+                <div class=" mx-4">
+                    <input type="radio" name="select_layer" id="select_layer_pending" value="sub_pending"
+                        onchange="selectLayer(this.value)" class="pending">
+                    <label for="select_layer_pending">Pending </label>
+                </div>
+
+
+                <div class=" mx-4">
+                    <input type="radio" name="select_layer" id="select_layer_reject" value="sub_reject"
+                        onchange="selectLayer(this.value)" class="reject">
+                    <label for="select_layer_reject">Reject </label>
+                </div>
+
+
 
                 <div class=" mx-4">
                     <input type="radio" name="select_layer" id="select_layer_pano" value="pano"
@@ -315,6 +329,7 @@
     </script>
 
     <script>
+       
         // for add and remove layers
         function addRemoveBundary(param, paramY, paramX) {
 
@@ -326,9 +341,30 @@
                 q_cql = q_cql + "AND visit_date <=" + to_date;
             }
 
+
+            if(work_package){
+        map.removeLayer(work_package);
+        }
+
+        work_package = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:tbl_workpackage',
+                format: 'image/png',
+                cql_filter: "ba ILIKE '%" + param + "%'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+            map.addLayer(work_package)
+            // work_package.bringToFront()
+
+
+
             if (boundary !== '') {
                 map.removeLayer(boundary)
             }
+
+            
 
             boundary = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
                 layers: 'cite:ba',
@@ -366,11 +402,48 @@
             map.addLayer(substation_with_defects)
             substation_with_defects.bringToFront()
 
+            if (sub_reject != '') {
+                map.removeLayer(sub_reject)
+            }
+
+            sub_reject = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:sub_reject',
+                format: 'image/png',
+                cql_filter: q_cql,
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+
+
+            map.addLayer(sub_reject)
+            sub_reject.bringToFront()
+
+
+            if (sub_pending != '') {
+                map.removeLayer(sub_pending)
+            }
+
+            sub_pending = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:sub_pending',
+                format: 'image/png',
+                cql_filter: q_cql,
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+
+
+            map.addLayer(sub_pending)
+            sub_pending.bringToFront()
+
             if (unservey != '') {
                 map.removeLayer(unservey)
             }
             unservey = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-                layers: 'cite:substation_unsurveyed',
+                layers: 'cite:sub_unserveyed',
                 format: 'image/png',
                 cql_filter: "ba ILIKE '%" + param + "%'",
                 maxZoom: 21,
@@ -379,8 +452,8 @@
                 buffer: 10
             })
 
-            // map.addLayer(unservey)
-            // unservey.bringToFront()
+            map.addLayer(unservey)
+            unservey.bringToFront()
 
 
             if (substation_without_defects != '') {
@@ -416,21 +489,7 @@
 
 
 
-            if(work_package){
-        map.removeLayer(work_package);
-        }
-
-        work_package = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-                layers: 'cite:tbl_workpackage',
-                format: 'image/png',
-                cql_filter: "ba ILIKE '%" + param + "%'",
-                maxZoom: 21,
-                transparent: true
-            }, {
-                buffer: 10
-            })
-            map.addLayer(work_package)
-            work_package.bringToFront()
+          
 
 
 

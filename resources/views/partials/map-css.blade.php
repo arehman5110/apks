@@ -80,17 +80,27 @@
     }
 
 
+    input[type="radio"].reject {
+
+        background-color: #FF0000;
+        border-color: #FF0000;
+    }
+
+    input[type="radio"]:checked.reject {
+        background-color: #FF0000;
+        border-color: #FF0000;
+    }
+
     input[type="radio"].unsurveyed {
 
-        background-color: #FF0000;
-        border-color: #FF0000;
-    }
+background-color: #FF7F00;
+border-color: #FF7F00;
+}
 
-    input[type="radio"]:checked.unsurveyed {
-        background-color: #FF0000;
-        border-color: #FF0000;
-    }
-
+input[type="radio"]:checked.unsurveyed {
+background-color: #FF7F00;
+border-color: #FF7F00;
+}
     input[type="radio"].pano {
 
 background-color: blue;
@@ -102,6 +112,17 @@ background-color: blue;
 border-color: blue;
 }
 
+
+input[type="radio"].pending {
+
+background-color: #BF2BFF;
+border-color: #BF2BFF;
+}
+
+input[type="radio"]:checked.pending {
+background-color: #BF2BFF;
+border-color: #BF2BFF;
+}
     .tt-menu {
     z-index: 9999999999999 !important;
 }

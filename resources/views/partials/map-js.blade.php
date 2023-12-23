@@ -23,6 +23,8 @@
     var substation = '';
     var  substation_with_defects = '';
     var substation_without_defects ='';
+    var sub_pending = '';
+    var sub_reject = '';
 
     var fp_unsurveyed = '';
     var fp_surveyed ='';
@@ -79,8 +81,17 @@
             addpanolayer();
         } else {
 
-            if (param == 'substation_with_defects') {
-                sel_lyr = substation_with_defects;
+            if (param == 'sub_reject') {
+                sel_lyr = sub_reject;
+
+            }
+            else if (param == 'substation_without_defects') {
+                sel_lyr = substation_without_defects;
+
+            }
+
+            if (param == 'sub_pending') {
+                sel_lyr = sub_pending;
 
             }
             else if (param == 'substation_without_defects') {
