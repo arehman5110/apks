@@ -513,7 +513,9 @@
                     'Without defects': substation_without_defects,
                     'Unsurveyed': unservey,
                     'Pano': pano_layer,
-                    'Work Package':work_package
+                    'Work Package':work_package,
+                    'Pending':sub_pending,
+                    'Reject' : sub_reject
                 }
             };
             //add layer control on top right corner of map
