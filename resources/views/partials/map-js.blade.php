@@ -148,6 +148,12 @@
             }else if(param == 'unsurveyed'){
                 sel_lyr =  unservey;
             }
+            else if(param == 'ts_pending'){
+                sel_lyr =  ts_pending;
+            }
+            else if(param == 'ts_reject'){
+                sel_lyr =  ts_reject;
+            }
             callSelfLayer(param);
         }
     }
