@@ -16,9 +16,14 @@ class FeederPillarMapController extends Controller
     public function editMap($lang, $id)
     {
         $data = FeederPillar::find($id);
-        $data->gate_status = json_decode($data->gate_status);
+         
+        if ($data) {
+            $data->gate_status = json_decode($data->gate_status);
+        
 
-        return $data ? view('feeder-pillar.edit-form', ['data' => $data, 'disabled' => true]) : abort(404);
+        return view('feeder-pillar.edit-form', ['data' => $data, 'disabled' => true]) ;
+        }
+        abort(404);
     }
 
     public function update(Request $request, $language, $id, FeederPillarRepo $feederPillar)

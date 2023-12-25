@@ -9,6 +9,10 @@
 
 <script src="{{ URL::asset('map/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js') }}"></script>
 
+<script src="{{ URL::asset('assets/js/geoserver-layers.js') }}"></script>
+
+
+
 
 <script type="text/javascript">
     var baseLayers = '';
@@ -19,36 +23,9 @@
     var zoom = 8;
     var from_date = ''
     var to_date = ''
-    // for layers
-    var substation = '';
-    var  substation_with_defects = '';
-    var substation_without_defects ='';
-    var sub_pending = '';
-    var sub_reject = '';
-
-    var fp_unsurveyed = '';
-    var fp_surveyed ='';
-    var fp_with_defects ='';
-
-    var ts_without_defects = '';
-    var ts_unsurveyed ='';
-    var ts_with_defects ='';
-
-    var cb_without_defects = '';
-    var cb_unsurveyed ='';
-    var cb_with_defects ='';
-
-    var lb_without_defects = '';
-    var lb_unsurveyed ='';
-    var lb_with_defects ='';
-
-    var road = '';
-    var unservey = '';
-    var pano_layer = '';
-
-    var work_package = '';
 
 
+   
 
     var popup = L.popup();
 
@@ -90,7 +67,7 @@
 
             }
 
-            if (param == 'sub_pending') {
+            else if (param == 'sub_pending') {
                 sel_lyr = sub_pending;
 
             }
@@ -102,13 +79,22 @@
                 sel_lyr = fp_unsurveyed;
 
             }
-            else if (param == 'fp_surveyed') {
-                sel_lyr = fp_surveyed;
+            else if (param == 'fp_without_defects') {
+                sel_lyr = fp_without_defects;
 
             }
 
             else if (param == 'fp_with_defects') {
                 sel_lyr = fp_with_defects;
+
+            }
+
+            else if (param == 'fp_pending') {
+                sel_lyr = fp_pending;
+
+            }
+            else if (param == 'fp_reject') {
+                sel_lyr = fp_reject;
 
             }
 
@@ -185,7 +171,7 @@
                     'info_format': 'application/json',
                     'propertyName': 'NAME,AREA_CODE,DESCRIPTIO'
                 }
-            );
+            ); 
             var secondUrl = encodeURIComponent(url)
             $.ajax({
                 url: '/{{ app()->getLocale() }}/proxy/' + encodeURIComponent(secondUrl),
@@ -195,7 +181,9 @@
                 async: false,
                 success: function callback(data1) {
 
+
                     data = JSON.parse(data1)
+                    console.log(data.features[0].properties.id);
                     // console.log(data.features[0].id);
                     if (data.features.length != 0) {
                         if (param == 'substation') {

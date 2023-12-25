@@ -41,101 +41,122 @@
 
 
 
-            <div class="card p-0 mb-3">
-                <div class="card-body row form-input">
+        <div class="card p-0 mb-3">
+            <div class="card-body row form-input">
 
-                    <div class="col-md-2">
-                        <label for="search_zone">Zone</label>
-                        <select name="search_zone" id="search_zone" class="form-control"
-                            onchange="onChangeZone(this.value)">
+                <div class="col-md-2">
+                    <label for="search_zone">Zone</label>
+                    <select name="search_zone" id="search_zone" class="form-control" onchange="onChangeZone(this.value)">
 
-                            @if (Auth::user()->zone == '')
-                                <option value="" hidden>select zone</option>
-                                <option value="W1">W1</option>
-                                <option value="B1">B1</option>
-                                <option value="B2">B2</option>
-                                <option value="B4">B4</option>
-                            @else
-                                <option value="{{ Auth::user()->zone }}" hidden>{{ Auth::user()->zone }}</option>
-                            @endif
-                        </select>
-                    </div>
-                    <div class="col-md-2">
-                        <label for="search_ba">BA</label>
-                        <select name="search_ba" id="search_ba" class="form-control" onchange="callLayers(this.value)">
-
-                            <option value="{{ Auth::user()->ba }}" hidden>
-                                {{ Auth::user()->ba != '' ? Auth::user()->ba : 'Select BA' }}</option>
-                        </select>
-                    </div>
-
-                    <div class="col-md-2">
-                        <label for="from_date">Fom</label>
-                        <input type="date" class="form-control" id="from_date" onchange="filterByDate(this)" />
-                    </div>
-
-                    <div class="col-md-2">
-                        <label for="to_date">To</label>
-                        <input type="date" class="form-control" id="to_date" onchange="filterByDate(this)" />
-                    </div>
-
-
-                    <div class="col-md-2">
-                        <br />
-                        <input type="button" class="btn btn-secondary mt-2" id="reset" value="Reset"
-                            onclick="resetMapFilters()" />
-                    </div>
-
-
-
-
+                        @if (Auth::user()->zone == '')
+                            <option value="" hidden>select zone</option>
+                            <option value="W1">W1</option>
+                            <option value="B1">B1</option>
+                            <option value="B2">B2</option>
+                            <option value="B4">B4</option>
+                        @else
+                            <option value="{{ Auth::user()->zone }}" hidden>{{ Auth::user()->zone }}</option>
+                        @endif
+                    </select>
                 </div>
+                <div class="col-md-2">
+                    <label for="search_ba">BA</label>
+                    <select name="search_ba" id="search_ba" class="form-control" onchange="callLayers(this.value)">
+
+                        <option value="{{ Auth::user()->ba }}" hidden>
+                            {{ Auth::user()->ba != '' ? Auth::user()->ba : 'Select BA' }}</option>
+                    </select>
+                </div>
+
+                <div class="col-md-2">
+                    <label for="from_date">Fom</label>
+                    <input type="date" class="form-control" id="from_date" onchange="filterByDate(this)" />
+                </div>
+
+                <div class="col-md-2">
+                    <label for="to_date">To</label>
+                    <input type="date" class="form-control" id="to_date" onchange="filterByDate(this)" />
+                </div>
+
+
+                <div class="col-md-2">
+                    <br />
+                    <input type="button" class="btn btn-secondary mt-2" id="reset" value="Reset"
+                        onclick="resetMapFilters()" />
+                </div>
+
+
+
+
             </div>
+        </div>
 
 
 
 
-<div class="p-3 form-input w-">
-                <label for="select_layer">Select Layer : </label>
-                <span class="text-danger" id="er-select-layer"></span>
-                <div class="d-sm-flex">
-                    {{-- <div class="">
+        <div class="p-3 form-input w-">
+            <label for="select_layer">Select Layer : </label>
+            <span class="text-danger" id="er-select-layer"></span>
+            <div class="d-sm-flex">
+                {{-- <div class="">
                         <input type="radio" name="select_layer" id="select_layer_substation" value="substation" onchange="selectLayer(this.value)">
                         <label for="select_layer_substation">Substation</label>
                     </div> --}}
 
 
 
-                    <div class=" mx-4 d-flex">
-                        <input type="radio" name="select_layer" id="fp_unsurveyed" value="fp_unsurveyed" class="unsurveyed" onchange="selectLayer(this.value)">
-                        <label for="fp_unsurveyed">Unsurveyed</label>
+
+
+                <div class=" mx-4 d-flex">
+                    <input type="radio" name="select_layer" id="fp_surveyed" value="fp_without_defects" class="without_defects"
+                        onchange="selectLayer(this.value)">
+                    <label for="fp_surveyed">Surveyed without defects</label>
+                </div>
+
+
+                <div class=" mx-4 d-flex">
+                    <input type="radio" name="select_layer" id="fp_with_defects" value="fp_with_defects"
+                        class="with_defects" onchange="selectLayer(this.value)">
+                    <label for="fp_with_defects">Surveyed with defects</label>
+                </div>
+                @if (Auth::user()->ba != '')
+                    
+                
+                
+                <div class=" mx-4 d-flex">
+                    <input type="radio" name="select_layer" id="fp_unsurveyed" value="fp_unsurveyed" class="unsurveyed"
+                        onchange="selectLayer(this.value)">
+                    <label for="fp_unsurveyed">Unsurveyed</label>
+                </div>
+
+                <div class=" mx-4">
+                    <input type="radio" name="select_layer" id="select_layer_pending" value="fp_pending"
+                        onchange="selectLayer(this.value)" class="pending">
+                    <label for="select_layer_pending">Pending </label>
+                </div>
+
+
+                <div class=" mx-4">
+                    <input type="radio" name="select_layer" id="select_layer_reject" value="fp_reject"
+                        onchange="selectLayer(this.value)" class="reject">
+                    <label for="select_layer_reject">Reject </label>
+                </div>
+                @endif
+                <div class=" mx-4 d-flex">
+                    <input type="radio" name="select_layer" id="select_layer_pano" value="pano"
+                        onchange="selectLayer(this.value)">
+                    <label for="select_layer_pano">Pano</label>
+                </div>
+
+                <div class="mx-4">
+                    <div id="the-basics">
+                        <input class="typeahead" type="text" placeholder="search id" class="form-control">
                     </div>
-
-
-                    <div class=" mx-4 d-flex">
-                        <input type="radio" name="select_layer" id="fp_surveyed" value="fp_surveyed" class="without_defects" onchange="selectLayer(this.value)">
-                        <label for="fp_surveyed">Surveyed without defects</label>
-                    </div>
-
-                    <div class=" mx-4 d-flex">
-                        <input type="radio" name="select_layer" id="fp_with_defects" value="fp_with_defects" class="with_defects" onchange="selectLayer(this.value)">
-                        <label for="fp_with_defects">Surveyed with defects</label>
-                    </div>
-
-                    <div class=" mx-4 d-flex">
-                        <input type="radio" name="select_layer" id="select_layer_pano" value="pano" onchange="selectLayer(this.value)">
-                        <label for="select_layer_pano">Pano</label>
-                    </div>
-
-                    <div class="mx-4">
-                        <div id="the-basics">
-                            <input class="typeahead" type="text" placeholder="search id" class="form-control">
-                        </div>
-                    </div>
-
                 </div>
 
             </div>
+
+        </div>
 
         <!--  START MAP CARD DIV -->
         <div class="row m-2">
@@ -207,7 +228,6 @@
 @section('script')
     @include('partials.map-js')
     <script>
-
         var substringMatcher = function(strs) {
 
             return function findMatches(q, cb) {
@@ -275,23 +295,33 @@
 
 
     <script>
-
-
-        // for add and remove layers
         function addRemoveBundary(param, paramY, paramX) {
 
-            var q_cql = "ba ILIKE '%" + param + "%' "
-            if (from_date != '') {
-                q_cql = q_cql + "AND visit_date >=" + from_date;
+
+
+
+            if (work_package) {
+                map.removeLayer(work_package);
             }
-            if (to_date != '') {
-                q_cql = q_cql + "AND visit_date <=" + to_date;
-            }
+
+            work_package = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:tbl_workpackage',
+                format: 'image/png',
+                cql_filter: "ba ILIKE '%" + param + "%'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+            map.addLayer(work_package)
+            // work_package.bringToFront()
+
 
 
             if (boundary !== '') {
                 map.removeLayer(boundary)
             }
+
 
 
             boundary = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
@@ -306,53 +336,51 @@
             map.addLayer(boundary)
             boundary.bringToFront()
 
-            map.flyTo([parseFloat(paramY), parseFloat(paramX)], zoom, {
-                duration: 1.5, // Animation duration in seconds
-                easeLinearity: 0.25,
-            });
-
-
 
             if (pano_layer !== '') {
                 map.removeLayer(pano_layer)
             }
             pano_layer = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-        layers: 'cite:pano_apks',
-        format: 'image/png',
-        cql_filter: "ba ILIKE '%" + param + "%'",
-        maxZoom: 21,
-        transparent: true
-    }, {
-        buffer: 10
-    });
-    // map.addLayer(pano_layer);
-    // map.addLayer(pano_layer);
-
-
-            if (fp_unsurveyed != '') {
-                map.removeLayer(fp_unsurveyed)
-            }
-
-            fp_unsurveyed = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-                layers: 'cite:fp_unsurveyed',
+                layers: 'cite:pano_apks',
                 format: 'image/png',
                 cql_filter: "ba ILIKE '%" + param + "%'",
                 maxZoom: 21,
                 transparent: true
             }, {
                 buffer: 10
-            })
+            });
+            // map.addLayer(pano_layer);
+            // map.addLayer(pano_layer)
 
-            map.addLayer(fp_unsurveyed)
-            fp_unsurveyed.bringToFront()
 
 
-            if (fp_surveyed != '') {
-                map.removeLayer(fp_surveyed)
+
+            map.flyTo([parseFloat(paramY), parseFloat(paramX)], zoom, {
+                duration: 1.5, // Animation duration in seconds
+                easeLinearity: 0.25,
+            });
+
+            updateLayers(param);
+
+        }
+
+
+        function updateLayers(param) {
+
+            var q_cql = "ba ILIKE '%" + param + "%' "
+            if (from_date != '') {
+                q_cql = q_cql + "AND visit_date >=" + from_date;
+            }
+            if (to_date != '') {
+                q_cql = q_cql + "AND visit_date <=" + to_date;
             }
 
-            fp_surveyed = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-                layers: 'cite:fp_surveyed',
+           
+            if (fp_without_defects != '') {
+                map.removeLayer(fp_without_defects)
+            }
+            fp_without_defects = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:fp_without_defects',
                 format: 'image/png',
                 cql_filter: q_cql,
                 maxZoom: 21,
@@ -361,8 +389,9 @@
                 buffer: 10
             })
 
-            map.addLayer(fp_surveyed)
-            fp_surveyed.bringToFront()
+            map.addLayer(fp_without_defects)
+            fp_without_defects.bringToFront()
+
 
 
             if (fp_with_defects != '') {
@@ -379,16 +408,55 @@
                 buffer: 10
             })
 
+
             map.addLayer(fp_with_defects)
             fp_with_defects.bringToFront()
 
+            if (ba !== '') {
+                
+           
+            if (fp_reject != '') {
+                map.removeLayer(fp_reject)
+            }
 
-            if(work_package){
-        map.removeLayer(work_package);
-        }
+            fp_reject = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:fp_reject',
+                format: 'image/png',
+                cql_filter: q_cql,
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
 
-        work_package = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-                layers: 'cite:tbl_workpackage',
+
+            map.addLayer(fp_reject)
+            fp_reject.bringToFront()
+
+
+            if (fp_pending != '') {
+                map.removeLayer(fp_pending)
+            }
+
+            fp_pending = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:fp_pending',
+                format: 'image/png',
+                cql_filter: q_cql,
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+
+
+            map.addLayer(fp_pending)
+            fp_pending.bringToFront()
+
+            if (fp_unsurveyed != '') {
+                map.removeLayer(fp_unsurveyed)
+            }
+            fp_unsurveyed = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:fp_unsurveyed',
                 format: 'image/png',
                 cql_filter: "ba ILIKE '%" + param + "%'",
                 maxZoom: 21,
@@ -396,15 +464,15 @@
             }, {
                 buffer: 10
             })
-            map.addLayer(work_package)
-            work_package.bringToFront()
 
-
-
+            map.addLayer(fp_unsurveyed)
+            fp_unsurveyed.bringToFront()
+        }
             addGroupOverLays()
 
         }
 
+       
 
         // add group overlayes
         function addGroupOverLays() {
@@ -413,17 +481,32 @@
                 map.removeControl(layerControl);
             }
             // console.log("sdfsdf");
+            if (ba !== '') {
             groupedOverlays = {
                 "POI": {
                     'BA': boundary,
                     'Pano': pano_layer,
-                    'Unsurveyed' : fp_unsurveyed,
-                    'Surveyed with defects' : fp_with_defects,
-                    'Surveyed Without defects' : fp_surveyed,
-                    'Work Package':work_package
+                    'Unsurveyed': fp_unsurveyed,
+                    'Surveyed with defects': fp_with_defects,
+                    'Surveyed Without defects': fp_surveyed,
+                    'Work Package': work_package,
+                    'Pending':fp_pending,
+                    'Reject':fp_reject
 
                 }
             };
+        }else{
+            groupedOverlays = {
+                "POI": {
+                    'BA': boundary,
+                    'Pano': pano_layer,
+                    'Surveyed with defects': fp_with_defects,
+                    'Surveyed Without defects': fp_surveyed,
+                    'Work Package': work_package,
+
+                }
+            };
+        }
             //add layer control on top right corner of map
             layerControl = L.control.groupedLayers(baseLayers, groupedOverlays, {
                 collapsed: true,
@@ -436,12 +519,13 @@
 
 
         function showModalData(data, id) {
+            console.log(id);
             var str = '';
             // console.log(id);
             // var idSp = id.split('.');
 
-        //     $('#exampleModalLabel').html("FeederPillar Info")
-        //     str = ` <tr><th>Zone</th><td>${data.zone}</td> </tr>
+            //     $('#exampleModalLabel').html("FeederPillar Info")
+            //     str = ` <tr><th>Zone</th><td>${data.zone}</td> </tr>
         // <tr><th>Ba</th><td>${data.ba}</td> </tr>
         // <tr><th>Area</th><td>${data.area}</td> </tr>
         // <tr><th>Feeder Involved</th><td>${data.feeder_involved}</td> </tr>
@@ -456,19 +540,17 @@
             // $('#myModal').modal('show');
             openDetails(data.id);
 
-}
+        }
 
-function openDetails(id) {
-    // $('#myModal').modal('hide');
-    $('#set-iframe').html('');
+        function openDetails(id) {
+            // $('#myModal').modal('hide');
+            $('#set-iframe').html('');
 
-    $('#set-iframe').html(`<iframe src="/{{app()->getLocale()}}/get-feeder-pillar-edit/${id}" frameborder="0" style="height:700px; width:100%" ></iframe>`)
-
-
-}
-
+            $('#set-iframe').html(
+                `<iframe src="/{{ app()->getLocale() }}/get-feeder-pillar-edit/${id}" frameborder="0" style="height:700px; width:100%" ></iframe>`
+                )
 
 
-
+        }
     </script>
 @endsection

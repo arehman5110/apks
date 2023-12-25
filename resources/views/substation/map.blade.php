@@ -7,8 +7,6 @@
             height: 700px;
             z-index: 1;
         }
-
-
     </style>
 @endsection
 
@@ -105,8 +103,8 @@
             <span class="text-danger" id="er-select-layer"></span>
             <div class="d-sm-flex">
                 <div class="">
-                    <input type="radio" name="select_layer" id="select_layer_main" class="with_defects" value="substation_with_defects"
-                        onchange="selectLayer(this.value)">
+                    <input type="radio" name="select_layer" id="select_layer_main" class="with_defects"
+                        value="substation_with_defects" onchange="selectLayer(this.value)">
                     <label for="select_layer_main">Surveyed with defects</label>
                 </div>
 
@@ -115,26 +113,26 @@
                         value="substation_without_defects" class="without_defects" onchange="selectLayer(this.value)">
                     <label for="substation_without_defects">Surveyed without defects</label>
                 </div>
-                <div class=" mx-4">
-                    <input type="radio" name="select_layer" id="select_layer_unsurveyed" value="unsurveyed"
-                        onchange="selectLayer(this.value)" class="unsurveyed">
-                    <label for="select_layer_unsurveyed">Unsurveyed </label>
-                </div>
+                @if (Auth::user()->ba != '')
+                    <div class=" mx-4">
+                        <input type="radio" name="select_layer" id="select_layer_unsurveyed" value="unsurveyed"
+                            onchange="selectLayer(this.value)" class="unsurveyed">
+                        <label for="select_layer_unsurveyed">Unsurveyed </label>
+                    </div>
 
-                <div class=" mx-4">
-                    <input type="radio" name="select_layer" id="select_layer_pending" value="sub_pending"
-                        onchange="selectLayer(this.value)" class="pending">
-                    <label for="select_layer_pending">Pending </label>
-                </div>
-
-
-                <div class=" mx-4">
-                    <input type="radio" name="select_layer" id="select_layer_reject" value="sub_reject"
-                        onchange="selectLayer(this.value)" class="reject">
-                    <label for="select_layer_reject">Reject </label>
-                </div>
+                    <div class=" mx-4">
+                        <input type="radio" name="select_layer" id="select_layer_pending" value="sub_pending"
+                            onchange="selectLayer(this.value)" class="pending">
+                        <label for="select_layer_pending">Pending </label>
+                    </div>
 
 
+                    <div class=" mx-4">
+                        <input type="radio" name="select_layer" id="select_layer_reject" value="sub_reject"
+                            onchange="selectLayer(this.value)" class="reject">
+                        <label for="select_layer_reject">Reject </label>
+                    </div>
+                @endif
 
                 <div class=" mx-4">
                     <input type="radio" name="select_layer" id="select_layer_pano" value="pano"
@@ -259,10 +257,8 @@
 @endsection
 
 @section('script')
-
     @include('partials.map-js')
     <script>
-
         var substringMatcher = function(strs) {
 
             return function findMatches(q, cb) {
@@ -329,24 +325,20 @@
     </script>
 
     <script>
-       
+        var layers = [];
+        layers = ['']
+
         // for add and remove layers
         function addRemoveBundary(param, paramY, paramX) {
 
-            var q_cql = "ba ILIKE '%" + param + "%' "
-            if (from_date != '') {
-                q_cql = q_cql + "AND visit_date >=" + from_date;
+
+
+
+            if (work_package) {
+                map.removeLayer(work_package);
             }
-            if (to_date != '') {
-                q_cql = q_cql + "AND visit_date <=" + to_date;
-            }
 
-
-            if(work_package){
-        map.removeLayer(work_package);
-        }
-
-        work_package = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+            work_package = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
                 layers: 'cite:tbl_workpackage',
                 format: 'image/png',
                 cql_filter: "ba ILIKE '%" + param + "%'",
@@ -364,7 +356,7 @@
                 map.removeLayer(boundary)
             }
 
-            
+
 
             boundary = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
                 layers: 'cite:ba',
@@ -378,10 +370,62 @@
             map.addLayer(boundary)
             boundary.bringToFront()
 
+
+            if (pano_layer !== '') {
+                map.removeLayer(pano_layer)
+            }
+            pano_layer = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:pano_apks',
+                format: 'image/png',
+                cql_filter: "ba ILIKE '%" + param + "%'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            });
+            // map.addLayer(pano_layer);
+            // map.addLayer(pano_layer)
+
+
+
+
             map.flyTo([parseFloat(paramY), parseFloat(paramX)], zoom, {
                 duration: 1.5, // Animation duration in seconds
                 easeLinearity: 0.25,
             });
+
+            updateLayers(param);
+
+        }
+
+
+        function updateLayers(param) {
+
+            var q_cql = "ba ILIKE '%" + param + "%' "
+            if (from_date != '') {
+                q_cql = q_cql + "AND visit_date >=" + from_date;
+            }
+            if (to_date != '') {
+                q_cql = q_cql + "AND visit_date <=" + to_date;
+            }
+
+
+            if (substation_without_defects != '') {
+                map.removeLayer(substation_without_defects)
+            }
+            substation_without_defects = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:substation_without_defects',
+                format: 'image/png',
+                cql_filter: q_cql,
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+
+            map.addLayer(substation_without_defects)
+            substation_without_defects.bringToFront()
+
 
 
             if (substation_with_defects != '') {
@@ -402,97 +446,64 @@
             map.addLayer(substation_with_defects)
             substation_with_defects.bringToFront()
 
-            if (sub_reject != '') {
-                map.removeLayer(sub_reject)
+            if (ba !== '') {
+
+
+
+                if (sub_reject != '') {
+                    map.removeLayer(sub_reject)
+                }
+
+                sub_reject = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                    layers: 'cite:sub_reject',
+                    format: 'image/png',
+                    cql_filter: q_cql,
+                    maxZoom: 21,
+                    transparent: true
+                }, {
+                    buffer: 10
+                })
+
+
+                map.addLayer(sub_reject)
+                sub_reject.bringToFront()
+
+
+                if (sub_pending != '') {
+                    map.removeLayer(sub_pending)
+                }
+
+                sub_pending = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                    layers: 'cite:sub_pending',
+                    format: 'image/png',
+                    cql_filter: q_cql,
+                    maxZoom: 21,
+                    transparent: true
+                }, {
+                    buffer: 10
+                })
+
+
+                map.addLayer(sub_pending)
+                sub_pending.bringToFront()
+
+                if (unservey != '') {
+                    map.removeLayer(unservey)
+                }
+                unservey = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                    layers: 'cite:sub_unserveyed',
+                    format: 'image/png',
+                    cql_filter: "ba ILIKE '%" + param + "%'",
+                    maxZoom: 21,
+                    transparent: true
+                }, {
+                    buffer: 10
+                })
+
+                map.addLayer(unservey)
+                unservey.bringToFront()
+
             }
-
-            sub_reject = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-                layers: 'cite:sub_reject',
-                format: 'image/png',
-                cql_filter: q_cql,
-                maxZoom: 21,
-                transparent: true
-            }, {
-                buffer: 10
-            })
-
-
-            map.addLayer(sub_reject)
-            sub_reject.bringToFront()
-
-
-            if (sub_pending != '') {
-                map.removeLayer(sub_pending)
-            }
-
-            sub_pending = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-                layers: 'cite:sub_pending',
-                format: 'image/png',
-                cql_filter: q_cql,
-                maxZoom: 21,
-                transparent: true
-            }, {
-                buffer: 10
-            })
-
-
-            map.addLayer(sub_pending)
-            sub_pending.bringToFront()
-
-            if (unservey != '') {
-                map.removeLayer(unservey)
-            }
-            unservey = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-                layers: 'cite:sub_unserveyed',
-                format: 'image/png',
-                cql_filter: "ba ILIKE '%" + param + "%'",
-                maxZoom: 21,
-                transparent: true
-            }, {
-                buffer: 10
-            })
-
-            map.addLayer(unservey)
-            unservey.bringToFront()
-
-
-            if (substation_without_defects != '') {
-                map.removeLayer(substation_without_defects)
-            }
-            substation_without_defects = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-                layers: 'cite:substation_without_defects',
-                format: 'image/png',
-                cql_filter: q_cql,
-                maxZoom: 21,
-                transparent: true
-            }, {
-                buffer: 10
-            })
-
-            map.addLayer(substation_without_defects)
-            substation_without_defects.bringToFront()
-
-            if (pano_layer !== '') {
-                map.removeLayer(pano_layer)
-            }
-            pano_layer = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-                layers: 'cite:pano_apks',
-                format: 'image/png',
-                cql_filter: "ba ILIKE '%" + param + "%'",
-                maxZoom: 21,
-                transparent: true
-            }, {
-                buffer: 10
-            });
-            // map.addLayer(pano_layer);
-            // map.addLayer(pano_layer)
-
-
-
-          
-
-
-
 
             addGroupOverLays()
 
@@ -505,19 +516,36 @@
                 // console.log("inmsdanssdkjnasjnd");
                 map.removeControl(layerControl);
             }
-            // console.log("sdfsdf");
+
+            if (ba !== '') {
+
+
             groupedOverlays = {
                 "POI": {
                     'BA': boundary,
+                    'Pano': pano_layer,
                     'With defects': substation_with_defects,
                     'Without defects': substation_without_defects,
                     'Unsurveyed': unservey,
-                    'Pano': pano_layer,
-                    'Work Package':work_package,
-                    'Pending':sub_pending,
-                    'Reject' : sub_reject
+
+                    'Work Package': work_package,
+                    'Pending': sub_pending,
+                    'Reject': sub_reject
                 }
             };
+        }else{
+
+            groupedOverlays = {
+                "POI": {
+                    'BA': boundary,
+                    'Pano': pano_layer,
+                    'With defects': substation_with_defects,
+                    'Without defects': substation_without_defects,
+                    'Work Package': work_package,
+                }
+            };
+
+        }
             //add layer control on top right corner of map
             layerControl = L.control.groupedLayers(baseLayers, groupedOverlays, {
                 collapsed: true,
@@ -535,7 +563,7 @@
 
         function showModalData(data, id) {
             var str = '';
-            var idSp = id;//.split('.');
+            var idSp = id; //.split('.');
 
             $('#exampleModalLabel').html("Substation Info")
             str = ` <tr><th>Zone</th><td>${data.zone}</td> </tr>
@@ -564,7 +592,5 @@
 
 
         }
-
-
     </script>
 @endsection
