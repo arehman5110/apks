@@ -25,6 +25,56 @@
     var to_date = ''
 
 
+
+    
+/// layers
+
+var substation = '';
+var substation_with_defects = '';
+var substation_without_defects ='';
+var sub_pending = '';
+var sub_reject = '';
+
+var fp_unsurveyed = '';
+var fp_without_defects ='';
+var fp_with_defects ='';
+var fp_reject ='';
+var fp_pending = '';
+
+var ts_without_defects = '';
+var ts_unsurveyed ='';
+var ts_with_defects ='';
+
+var cb_without_defects = '';
+var cb_unsurveyed ='';
+var cb_with_defects ='';
+var cb_pending = '';
+var cb_reject = '';
+
+var lb_without_defects = '';
+var lb_unsurveyed ='';
+var lb_with_defects ='';
+var lb_pending = '';
+var lb_reject = '';
+
+var road = '';
+var unservey = '';
+var pano_layer = '';
+
+var work_package = '';
+
+
+
+var substation = '';
+var substation_with_defects = '';
+var substation_without_defects ='';
+var sub_pending = '';
+var sub_reject = '';
+
+
+
+
+
    
 
     var popup = L.popup();
@@ -117,6 +167,16 @@
 
             }
 
+            else if (param == 'cb_pending') {
+                sel_lyr = cb_pending;
+
+            }
+            else if (param == 'cb_reject') {
+                sel_lyr = cb_reject;
+
+            }
+
+
             else if (param == 'ts_unsurveyed') {
                 sel_lyr = ts_unsurveyed;
 
@@ -140,6 +200,14 @@
             }
             else if (param == 'lb_without_defects') {
                 sel_lyr = lb_without_defects;
+
+            }
+            else if (param == 'lb_pending') {
+                sel_lyr = lb_pending;
+
+            }
+            else if (param == 'lb_reject') {
+                sel_lyr = lb_reject;
 
             }
             else if (param == 'road') {

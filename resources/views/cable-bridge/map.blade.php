@@ -48,8 +48,7 @@
 
                 <div class="col-md-2">
                     <label for="search_zone">Zone</label>
-                    <select name="search_zone" id="search_zone" class="form-control"
-                        onchange="onChangeZone(this.value)">
+                    <select name="search_zone" id="search_zone" class="form-control" onchange="onChangeZone(this.value)">
 
                         @if (Auth::user()->zone == '')
                             <option value="" hidden>select zone</option>
@@ -106,25 +105,52 @@
                     <label for="select_layer_substation">Substation</label>
                 </div> --}}
 
-                <div class=" mx-4">
-                    <input type="radio" name="select_layer" id="cb_unsurveyed" value="cb_unsurveyed" class="unsurveyed" onchange="selectLayer(this.value)">
+                {{-- <div class=" mx-4">
+                    <input type="radio" name="select_layer" id="cb_unsurveyed" value="cb_unsurveyed" class="unsurveyed"
+                        onchange="selectLayer(this.value)">
                     <label for="cb_unsurveyed">Unsurveyed</label>
-                </div>
+                </div> --}}
 
 
 
                 <div class=" mx-4">
-                    <input type="radio" name="cb_with_defects" id="cable_bridge" value="cb_with_defects" class="with_defects" onchange="selectLayer(this.value)">
+                    <input type="radio" name="cb_with_defects" id="cable_bridge" value="cb_with_defects"
+                        class="with_defects" onchange="selectLayer(this.value)">
                     <label for="cb_with_defects">Surveyed with defects</label>
                 </div>
 
                 <div class=" mx-4">
-                    <input type="radio" name="select_layer" id="cb_without_defects" value="cb_without_defects" class="without_defects" onchange="selectLayer(this.value)">
+                    <input type="radio" name="select_layer" id="cb_without_defects" value="cb_without_defects"
+                        class="without_defects" onchange="selectLayer(this.value)">
                     <label for="cb_without_defects">Surveyed witout defects</label>
                 </div>
 
+
+                @if (Auth::user()->ba != '')
+                    <div class=" mx-4">
+                        <input type="radio" name="select_layer" id="select_layer_unsurveyed" value="cb_unsurveyed"
+                            onchange="selectLayer(this.value)" class="unsurveyed">
+                        <label for="select_layer_unsurveyed">Unsurveyed </label>
+                    </div>
+
+                    <div class=" mx-4">
+                        <input type="radio" name="select_layer" id="select_layer_pending" value="cb_pending"
+                            onchange="selectLayer(this.value)" class="pending">
+                        <label for="select_layer_pending">Pending </label>
+                    </div>
+
+
+                    <div class=" mx-4">
+                        <input type="radio" name="select_layer" id="select_layer_reject" value="cb_reject"
+                            onchange="selectLayer(this.value)" class="reject">
+                        <label for="select_layer_reject">Reject </label>
+                    </div>
+                @endif
+
+
                 <div class=" mx-4">
-                    <input type="radio" name="select_layer" id="select_layer_pano" value="pano" onchange="selectLayer(this.value)">
+                    <input type="radio" name="select_layer" id="select_layer_pano" value="pano"
+                        onchange="selectLayer(this.value)">
                     <label for="select_layer_pano">Pano</label>
                 </div>
 
@@ -208,7 +234,6 @@
     @include('partials.map-js')
 
     <script>
-
         var substringMatcher = function(strs) {
 
             return function findMatches(q, cb) {
@@ -276,21 +301,34 @@
 
     <script>
         // for add and remove layers
+        // for add and remove layers
         function addRemoveBundary(param, paramY, paramX) {
 
 
-            var q_cql = "ba ILIKE '%" + param + "%' "
-            if (from_date != '') {
-                q_cql = q_cql + "AND visit_date >=" + from_date;
+
+
+            if (work_package) {
+                map.removeLayer(work_package);
             }
-            if (to_date != '') {
-                q_cql = q_cql + "AND visit_date <=" + to_date;
-            }
+
+            work_package = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:tbl_workpackage',
+                format: 'image/png',
+                cql_filter: "ba ILIKE '%" + param + "%'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+            map.addLayer(work_package)
+            // work_package.bringToFront()
+
 
 
             if (boundary !== '') {
                 map.removeLayer(boundary)
             }
+
 
 
             boundary = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
@@ -304,85 +342,6 @@
             })
             map.addLayer(boundary)
             boundary.bringToFront()
-
-            map.flyTo([parseFloat(paramY), parseFloat(paramX)], zoom, {
-                duration: 1.5, // Animation duration in seconds
-                easeLinearity: 0.25,
-            });
-
-
-            // if (substation != '') {
-            //     map.removeLayer(substation)
-            // }
-
-            // substation = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-            //     layers: 'cite:tbl_substation',
-            //     format: 'image/png',
-            //     cql_filter: "ba ILIKE '%" + param + "%'",
-            //     maxZoom: 21,
-            //     transparent: true
-            // }, {
-            //     buffer: 10
-            // })
-
-            // map.addLayer(substation)
-            // substation.bringToFront()
-
-
-
-            if (cb_unsurveyed != '') {
-                map.removeLayer(cb_unsurveyed)
-            }
-
-            cb_unsurveyed = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-                layers: 'cite:cb_unsurveyed',
-                format: 'image/png',
-                cql_filter: "ba ILIKE '%" + param + "%'",
-                maxZoom: 21,
-                transparent: true
-            }, {
-                buffer: 10
-            })
-
-            map.addLayer(cb_unsurveyed)
-            cb_unsurveyed.bringToFront()
-
-
-
-            if (cb_without_defects != '') {
-                map.removeLayer(cb_without_defects)
-            }
-
-            cb_without_defects = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-                layers: 'cite:cb_without_defects',
-                format: 'image/png',
-                cql_filter: q_cql,
-                maxZoom: 21,
-                transparent: true
-            }, {
-                buffer: 10
-            })
-
-            map.addLayer(cb_without_defects)
-            cb_without_defects.bringToFront()
-
-
-            if (cb_with_defects != '') {
-                map.removeLayer(cb_with_defects)
-            }
-
-            cb_with_defects = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-                layers: 'cite:cb_with_defects',
-                format: 'image/png',
-                cql_filter: q_cql,
-                maxZoom: 21,
-                transparent: true
-            }, {
-                buffer: 10
-            })
-
-            map.addLayer(cb_with_defects)
-            cb_with_defects.bringToFront()
 
 
             if (pano_layer !== '') {
@@ -401,22 +360,130 @@
             // map.addLayer(pano_layer)
 
 
-            if(work_package){
-        map.removeLayer(work_package);
+
+
+            map.flyTo([parseFloat(paramY), parseFloat(paramX)], zoom, {
+                duration: 1.5, // Animation duration in seconds
+                easeLinearity: 0.25,
+            });
+
+            updateLayers(param);
+
         }
 
-        work_package = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-                layers: 'cite:tbl_workpackage',
+
+        function updateLayers(param) {
+
+            var q_cql = "ba ILIKE '%" + param + "%' "
+            if (from_date != '') {
+                q_cql = q_cql + "AND visit_date >=" + from_date;
+            }
+            if (to_date != '') {
+                q_cql = q_cql + "AND visit_date <=" + to_date;
+            }
+
+
+            if (cb_without_defects != '') {
+                map.removeLayer(cb_without_defects)
+            }
+            cb_without_defects = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:cb_without_defects',
                 format: 'image/png',
-                cql_filter: "ba ILIKE '%" + param + "%'",
+                cql_filter: q_cql,
                 maxZoom: 21,
                 transparent: true
             }, {
                 buffer: 10
             })
-            map.addLayer(work_package)
-            work_package.bringToFront()
 
+            map.addLayer(cb_without_defects)
+            cb_without_defects.bringToFront()
+
+
+            // link box with defects ----
+
+            if (cb_with_defects != '') {
+                map.removeLayer(cb_with_defects)
+            }
+
+            cb_with_defects = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:cb_with_defects',
+                format: 'image/png',
+                cql_filter: q_cql,
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+
+
+            map.addLayer(cb_with_defects)
+            cb_with_defects.bringToFront()
+
+
+
+            // if user is not admin
+            if (ba !== '') {
+
+
+
+                if (cb_pending != '') {
+                    map.removeLayer(cb_pending)
+                }
+
+                cb_pending = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                    layers: 'cite:sub_reject',
+                    format: 'image/png',
+                    cql_filter: q_cql,
+                    maxZoom: 21,
+                    transparent: true
+                }, {
+                    buffer: 10
+                })
+
+
+                map.addLayer(cb_pending)
+                cb_pending.bringToFront()
+
+
+                // link box Reject -----
+                if (cb_reject != '') {
+                    map.removeLayer(cb_reject)
+                }
+
+                cb_reject = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                    layers: 'cite:cb_reject',
+                    format: 'image/png',
+                    cql_filter: q_cql,
+                    maxZoom: 21,
+                    transparent: true
+                }, {
+                    buffer: 10
+                })
+
+
+                map.addLayer(cb_reject)
+                cb_reject.bringToFront()
+
+                // link box unsurvey  -----
+
+                if (cb_unsurveyed != '') {
+                    map.removeLayer(cb_unsurveyed)
+                }
+                cb_unsurveyed = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                    layers: 'cite:cb_unsurveyed',
+                    format: 'image/png',
+                    cql_filter: "ba ILIKE '%" + param + "%'",
+                    maxZoom: 21,
+                    transparent: true
+                }, {
+                    buffer: 10
+                })
+
+                map.addLayer(cb_unsurveyed)
+                cb_unsurveyed.bringToFront()
+
+            }
 
             addGroupOverLays()
 
@@ -429,21 +496,36 @@
                 // console.log("inmsdanssdkjnasjnd");
                 map.removeControl(layerControl);
             }
-            // console.log("sdfsdf");
-            groupedOverlays = {
-                "POI": {
-                    'BA': boundary,
-                    // 'Substation': substation,
-                    'Pano': pano_layer,
-                    'Unsurveyed': cb_unsurveyed,
-                    'Surveyed with defects': cb_with_defects,
-                    'Surveyed without defects': cb_without_defects,
-                    'Work Package':work_package
+
+            if (ba !== '') {
 
 
-                }
-            };
+                groupedOverlays = {
+                    "POI": {
+                        'BA': boundary,
+                        'Pano': pano_layer,
+                        'With defects': cb_with_defects,
+                        'Without defects': cb_without_defects,
+                        'Unsurveyed': cb_unsurveyed,
 
+                        'Work Package': work_package,
+                        'Pending': cb_pending,
+                        'Reject': cb_reject
+                    }
+                };
+            } else {
+
+                groupedOverlays = {
+                    "POI": {
+                        'BA': boundary,
+                        'Pano': pano_layer,
+                        'With defects': cb_with_defects,
+                        'Without defects': cb_without_defects,
+                        'Work Package': work_package,
+                    }
+                };
+
+            }
             //add layer control on top right corner of map
             layerControl = L.control.groupedLayers(baseLayers, groupedOverlays, {
                 collapsed: true,
@@ -451,6 +533,7 @@
                 // groupCheckboxes: true
             }).addTo(map);
         }
+
 
         function showModalData(data, id) {
             // var str = '';
@@ -471,38 +554,38 @@
 
             $('#exampleModalLabel').html("Cable Bridge Info")
             // str = `
-                // <tr>
-                //     <th>Zone</th>
-                //     <td>${data.zone}</td>
-                // </tr>
-                // <tr>
-                //     <th>Ba</th>
-                //     <td>${data.ba}</td>
-                // </tr>
-                // <tr>
-                //     <th>Area</th>
-                //     <td>${data.area}</td>
-                // </tr>
-                // <tr>
-                //     <th>Visit Date</th>
-                //     <td>${vDS}</td>
-                // </tr>
-                // <tr>
-                //     <th>Patrol TIme</th>
-                //     <td>${vTM}</td>
-                // </tr>
-                // <tr>
-                //     <th>Coordinate</th>
-                //     <td>${data.coordinate}</td>
-                // </tr>
-                // <tr>
-                //     <th>Created At</th>
-                //     <td>${data.created_at}</td>
-                // </tr>
-                // <tr>
-                //     <th>Detail</th>
-                //     <td class="text-center">  <a href="/{{ app()->getLocale() }}/cable-bridge/${idSp[1]}" target="_blank" class="btn btn-sm btn-secondary">Detail</a></td>
-                // </tr>`;
+        // <tr>
+        //     <th>Zone</th>
+        //     <td>${data.zone}</td>
+        // </tr>
+        // <tr>
+        //     <th>Ba</th>
+        //     <td>${data.ba}</td>
+        // </tr>
+        // <tr>
+        //     <th>Area</th>
+        //     <td>${data.area}</td>
+        // </tr>
+        // <tr>
+        //     <th>Visit Date</th>
+        //     <td>${vDS}</td>
+        // </tr>
+        // <tr>
+        //     <th>Patrol TIme</th>
+        //     <td>${vTM}</td>
+        // </tr>
+        // <tr>
+        //     <th>Coordinate</th>
+        //     <td>${data.coordinate}</td>
+        // </tr>
+        // <tr>
+        //     <th>Created At</th>
+        //     <td>${data.created_at}</td>
+        // </tr>
+        // <tr>
+        //     <th>Detail</th>
+        //     <td class="text-center">  <a href="/{{ app()->getLocale() }}/cable-bridge/${idSp[1]}" target="_blank" class="btn btn-sm btn-secondary">Detail</a></td>
+        // </tr>`;
 
             // $("#my_data").html(str);
             // $('#myModal').modal('show');
@@ -513,7 +596,9 @@
         function openDetails(id) {
             // $('#myModal').modal('hide');
             $('#set-iframe').html('');
-            $('#set-iframe').html(`<iframe src="/{{app()->getLocale()}}/get-cable-bridge-edit/${id}" frameborder="0" style="height:700px; width:100%" ></iframe>`)
+            $('#set-iframe').html(
+                `<iframe src="/{{ app()->getLocale() }}/get-cable-bridge-edit/${id}" frameborder="0" style="height:700px; width:100%" ></iframe>`
+                )
         }
     </script>
 @endsection

@@ -46,8 +46,7 @@
 
                 <div class="col-md-2">
                     <label for="search_zone">Zone</label>
-                    <select name="search_zone" id="search_zone" class="form-control"
-                        onchange="onChangeZone(this.value)">
+                    <select name="search_zone" id="search_zone" class="form-control" onchange="onChangeZone(this.value)">
 
                         @if (Auth::user()->zone == '')
                             <option value="" hidden>select zone</option>
@@ -96,34 +95,56 @@
             <span class="text-danger" id="er-select-layer"></span>
 
             <div class="d-sm-flex">
-                <div class="mx-4">
-                    <input type="radio" name="select_layer" id="lb_unsurveyed" class="unsurveyed" value="lb_unsurveyed" onchange="selectLayer(this.value)">
-                    <label for="lb_unsurveyed">Unsurveyed</label>
-                </div>
+
 
                 <div class="mx-4">
-                    <input type="radio" name="select_layer" id="lb_with_defects" class="with_defects" value="lb_with_defects" onchange="selectLayer(this.value)">
+                    <input type="radio" name="select_layer" id="lb_with_defects" class="with_defects"
+                        value="lb_with_defects" onchange="selectLayer(this.value)">
                     <label for="lb_with_defects">Surveyed with defects</label>
                 </div>
 
                 <div class="mx-4">
-                    <input type="radio" name="select_layer" id="lb_without_defects" class="without_defects" value="lb_without_defects" onchange="selectLayer(this.value)">
+                    <input type="radio" name="select_layer" id="lb_without_defects" class="without_defects"
+                        value="lb_without_defects" onchange="selectLayer(this.value)">
                     <label for="lb_without_defects">Surveyed without defects</label>
                 </div>
 
+                @if (Auth::user()->ba != '')
+                    <div class=" mx-4">
+                        <input type="radio" name="select_layer" id="select_layer_unsurveyed" value="lb_unsurveyed"
+                            onchange="selectLayer(this.value)" class="unsurveyed">
+                        <label for="select_layer_unsurveyed">Unsurveyed </label>
+                    </div>
+
+                    <div class=" mx-4">
+                        <input type="radio" name="select_layer" id="select_layer_pending" value="lb_pending"
+                            onchange="selectLayer(this.value)" class="pending">
+                        <label for="select_layer_pending">Pending </label>
+                    </div>
+
+
+                    <div class=" mx-4">
+                        <input type="radio" name="select_layer" id="lb_reject" value="lb_reject"
+                            onchange="selectLayer(this.value)" class="reject">
+                        <label for="lb_reject">Reject </label>
+                    </div>
+                @endif
+
+
 
                 <div class=" mx-4">
-                    <input type="radio" name="select_layer" id="select_layer_pano" value="pano" onchange="selectLayer(this.value)">
+                    <input type="radio" name="select_layer" id="select_layer_pano" value="pano"
+                        onchange="selectLayer(this.value)">
                     <label for="select_layer_pano">Pano</label>
                 </div>
 
 
-            <div class="mx-4">
-                <div id="the-basics">
-                    <input class="typeahead" type="text" placeholder="search id" class="form-control">
+                <div class="mx-4">
+                    <div id="the-basics">
+                        <input class="typeahead" type="text" placeholder="search id" class="form-control">
+                    </div>
                 </div>
             </div>
- </div>
 
         </div>
 
@@ -239,7 +260,6 @@
 
 
     <script>
-
         var substringMatcher = function(strs) {
 
             return function findMatches(q, cb) {
@@ -310,17 +330,31 @@
         // for add and remove layers
         function addRemoveBundary(param, paramY, paramX) {
 
-            var q_cql = "ba ILIKE '%" + param + "%' "
-            if (from_date != '') {
-                q_cql = q_cql + "AND visit_date >=" + from_date;
+
+
+
+            if (work_package) {
+                map.removeLayer(work_package);
             }
-            if (to_date != '') {
-                q_cql = q_cql + "AND visit_date <=" + to_date;
-            }
+
+            work_package = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:tbl_workpackage',
+                format: 'image/png',
+                cql_filter: "ba ILIKE '%" + param + "%'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+            map.addLayer(work_package)
+            // work_package.bringToFront()
+
+
 
             if (boundary !== '') {
                 map.removeLayer(boundary)
             }
+
 
 
             boundary = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
@@ -334,83 +368,6 @@
             })
             map.addLayer(boundary)
             boundary.bringToFront()
-
-            map.flyTo([parseFloat(paramY), parseFloat(paramX)], zoom, {
-                duration: 1.5, // Animation duration in seconds
-                easeLinearity: 0.25,
-            });
-
-
-            // if (substation != '') {
-            //     map.removeLayer(substation)
-            // }
-
-            // substation = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-            //     layers: 'cite:tbl_substation',
-            //     format: 'image/png',
-            //     cql_filter: "ba ILIKE '%" + param + "%'",
-            //     maxZoom: 21,
-            //     transparent: true
-            // }, {
-            //     buffer: 10
-            // })
-
-            // map.addLayer(substation)
-            // substation.bringToFront()
-
-
-
-            if (lb_unsurveyed != '') {
-                map.removeLayer(lb_unsurveyed)
-            }
-
-            lb_unsurveyed = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-                layers: 'cite:lb_unsurveyed',
-                format: 'image/png',
-                cql_filter: "ba ILIKE '%" + param + "%'",
-                maxZoom: 21,
-                transparent: true
-            }, {
-                buffer: 10
-            })
-
-            map.addLayer(lb_unsurveyed)
-            lb_unsurveyed.bringToFront()
-
-
-            if (lb_with_defects != '') {
-                map.removeLayer(lb_with_defects)
-            }
-
-            lb_with_defects = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-                layers: 'cite:lb_with_defects',
-                format: 'image/png',
-                cql_filter: q_cql,
-                maxZoom: 21,
-                transparent: true
-            }, {
-                buffer: 10
-            })
-
-            map.addLayer(lb_with_defects)
-            lb_with_defects.bringToFront()
-
-            if (lb_without_defects != '') {
-                map.removeLayer(lb_without_defects)
-            }
-
-            lb_without_defects = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-                layers: 'cite:lb_without_defects',
-                format: 'image/png',
-                cql_filter: q_cql,
-                maxZoom: 21,
-                transparent: true
-            }, {
-                buffer: 10
-            })
-
-            map.addLayer(lb_without_defects)
-            lb_without_defects.bringToFront()
 
 
             if (pano_layer !== '') {
@@ -428,22 +385,131 @@
             // map.addLayer(pano_layer);
             // map.addLayer(pano_layer)
 
-            if(work_package){
-        map.removeLayer(work_package);
+
+
+
+            map.flyTo([parseFloat(paramY), parseFloat(paramX)], zoom, {
+                duration: 1.5, // Animation duration in seconds
+                easeLinearity: 0.25,
+            });
+
+            updateLayers(param);
+
         }
 
-        work_package = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-                layers: 'cite:tbl_workpackage',
+
+        function updateLayers(param) {
+
+            var q_cql = "ba ILIKE '%" + param + "%' "
+            if (from_date != '') {
+                q_cql = q_cql + "AND visit_date >=" + from_date;
+            }
+            if (to_date != '') {
+                q_cql = q_cql + "AND visit_date <=" + to_date;
+            }
+
+
+            if (lb_without_defects != '') {
+                map.removeLayer(lb_without_defects)
+            }
+            lb_without_defects = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:lb_without_defects',
                 format: 'image/png',
-                cql_filter: "ba ILIKE '%" + param + "%'",
+                cql_filter: q_cql,
                 maxZoom: 21,
                 transparent: true
             }, {
                 buffer: 10
             })
-            map.addLayer(work_package)
-            work_package.bringToFront()
 
+            map.addLayer(lb_without_defects)
+            lb_without_defects.bringToFront()
+
+
+            // link box with defects ----
+
+            if (lb_with_defects != '') {
+                map.removeLayer(lb_with_defects)
+            }
+
+            lb_with_defects = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:lb_with_defects',
+                format: 'image/png',
+                cql_filter: q_cql,
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+
+
+            map.addLayer(lb_with_defects)
+            lb_with_defects.bringToFront()
+
+
+
+            // if user is not admin
+            if (ba !== '') {
+
+
+
+                if (lb_pending != '') {
+                    map.removeLayer(lb_pending)
+                }
+
+                lb_pending = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                    layers: 'cite:sub_reject',
+                    format: 'image/png',
+                    cql_filter: q_cql,
+                    maxZoom: 21,
+                    transparent: true
+                }, {
+                    buffer: 10
+                })
+
+
+                map.addLayer(lb_pending)
+                lb_pending.bringToFront()
+
+
+                // link box Reject -----
+                if (lb_reject != '') {
+                    map.removeLayer(lb_reject)
+                }
+
+                lb_reject = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                    layers: 'cite:lb_reject',
+                    format: 'image/png',
+                    cql_filter: q_cql,
+                    maxZoom: 21,
+                    transparent: true
+                }, {
+                    buffer: 10
+                })
+
+
+                map.addLayer(lb_reject)
+                lb_reject.bringToFront()
+
+                // link box unsurvey  -----
+
+                if (lb_unsurveyed != '') {
+                    map.removeLayer(lb_unsurveyed)
+                }
+                lb_unsurveyed = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                    layers: 'cite:lb_unsurveyed',
+                    format: 'image/png',
+                    cql_filter: "ba ILIKE '%" + param + "%'",
+                    maxZoom: 21,
+                    transparent: true
+                }, {
+                    buffer: 10
+                })
+
+                map.addLayer(lb_unsurveyed)
+                lb_unsurveyed.bringToFront()
+
+            }
 
             addGroupOverLays()
 
@@ -456,19 +522,36 @@
                 // console.log("inmsdanssdkjnasjnd");
                 map.removeControl(layerControl);
             }
-            // console.log("sdfsdf");
-            groupedOverlays = {
-                "POI": {
-                    'BA': boundary,
-                    // 'Substation': substation,
-                    'Pano': pano_layer,
-                    'Unsurveyed': lb_unsurveyed,
-                    'Surveyed with defects' : lb_with_defects,
-                    'Surveyed  without defects':lb_without_defects,
-                    'Work Package':work_package
 
-                }
-            };
+            if (ba !== '') {
+
+
+                groupedOverlays = {
+                    "POI": {
+                        'BA': boundary,
+                        'Pano': pano_layer,
+                        'With defects': lb_with_defects,
+                        'Without defects': lb_without_defects,
+                        'Unsurveyed': lb_unsurveyed,
+
+                        'Work Package': work_package,
+                        'Pending': lb_pending,
+                        'Reject': lb_reject
+                    }
+                };
+            } else {
+
+                groupedOverlays = {
+                    "POI": {
+                        'BA': boundary,
+                        'Pano': pano_layer,
+                        'With defects': lb_with_defects,
+                        'Without defects': lb_without_defects,
+                        'Work Package': work_package,
+                    }
+                };
+
+            }
             //add layer control on top right corner of map
             layerControl = L.control.groupedLayers(baseLayers, groupedOverlays, {
                 collapsed: true,
@@ -476,6 +559,11 @@
                 // groupCheckboxes: true
             }).addTo(map);
         }
+
+
+
+
+
 
         function showModalData(data, id) {
             // var str = '';
@@ -494,8 +582,8 @@
             // }
 
 
-        //     $('#exampleModalLabel').html("Link Box Info")
-        //     str = ` <tr>
+            //     $('#exampleModalLabel').html("Link Box Info")
+            //     str = ` <tr>
         //         <tr><th>Zone</th><td>${data.zone}</td> </tr>
         // <tr><th>Ba</th><td>${data.ba}</td> </tr>
         // <tr><th>Area</th><td>${data.area}</td> </tr>
@@ -523,7 +611,7 @@
 
             $('#set-iframe').html(
                 `<iframe src="/{{ app()->getLocale() }}/get-link-box-edit/${id}" frameborder="0" style="height:700px; width:100%" ></iframe>`
-                )
+            )
 
 
         }

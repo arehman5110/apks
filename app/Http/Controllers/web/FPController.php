@@ -86,6 +86,7 @@ class FPController extends Controller
             $user = Auth::user()->id;
 
             $data->created_by = $user;
+            $data->qa_status = 'pending';
             $data->geom = DB::raw("ST_GeomFromText('POINT(" . $request->log . ' ' . $request->lat . ")',4326)");
             $feederPillar->store($data,$request);
             $data->save();
@@ -195,6 +196,9 @@ class FPController extends Controller
         try {
             $qa_data = FeederPillar::find($req->id);
             $qa_data->qa_status = $req->status;
+            $user = Auth::user()->id;
+
+            $qa_data->updated_by = $user;
             $qa_data->update();
 
             return response()->json(['status' => $req->status]);

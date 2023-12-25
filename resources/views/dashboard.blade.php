@@ -177,10 +177,10 @@
 
 
                             <!-- <div class="col-md-6">
-                                                        <div class="card p-3">
-                                                        <div id="suryed_patrolling-container" style="width:100%; height: 400px; margin: 0 auto"></div>
-                                                        </div>
-                                                    </div> -->
+                                                            <div class="card p-3">
+                                                            <div id="suryed_patrolling-container" style="width:100%; height: 400px; margin: 0 auto"></div>
+                                                            </div>
+                                                        </div> -->
 
                             <div class="col-md-12">
                                 <div class="card p-3">
@@ -448,7 +448,7 @@
         var to_date = $('#excel_to_date').val();
         var excel_ba = $('#search_ba').val();
 
-zoom = 9;
+        zoom = 9;
 
         function addRemoveBundary(param, paramY, paramX) {
 
@@ -468,12 +468,12 @@ zoom = 9;
 
 
             }
+
+
+            // add boundary
             if (boundary !== '') {
                 map.removeLayer(boundary)
             }
-
-
-
 
             boundary = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
                 layers: 'cite:ba',
@@ -487,11 +487,15 @@ zoom = 9;
             map.addLayer(boundary)
             boundary.bringToFront()
 
+
+            // zoom to map
             map.flyTo([parseFloat(paramY), parseFloat(paramX)], zoom, {
                 duration: 1.5, // Animation duration in seconds
                 easeLinearity: 0.25,
             });
 
+
+            //  add patrolling layer 
 
             if (patroling !== '') {
                 map.removeLayer(patroling)
@@ -510,6 +514,8 @@ zoom = 9;
             map.addLayer(patroling)
             patroling.bringToFront()
 
+            // add pano layer
+
             if (pano_layer !== '') {
                 map.removeLayer(pano_layer)
             }
@@ -522,7 +528,29 @@ zoom = 9;
             }, {
                 buffer: 10
             });
+
+
             // map.addLayer(pano_layer); 
+
+            //  add work package
+
+            if (work_package) {
+                map.removeLayer(work_package);
+            }
+
+            work_package = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:tbl_workpackage',
+                format: 'image/png',
+                cql_filter: "ba ILIKE '%" + param + "%'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+            map.addLayer(work_package)
+            // work_package.bringToFront()
+
+
 
             if (substation_with_defects != '') {
                 map.removeLayer(substation_with_defects)
@@ -542,21 +570,7 @@ zoom = 9;
             map.addLayer(substation_with_defects)
             substation_with_defects.bringToFront()
 
-            if (unservey != '') {
-                map.removeLayer(unservey)
-            }
-            unservey = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-                layers: 'cite:substation_unsurveyed',
-                format: 'image/png',
-                cql_filter: "ba ILIKE '%" + param + "%'",
-                maxZoom: 21,
-                transparent: true
-            }, {
-                buffer: 10
-            })
 
-            map.addLayer(unservey)
-            unservey.bringToFront()
 
 
             if (substation_without_defects != '') {
@@ -578,58 +592,11 @@ zoom = 9;
 
 
 
-            if (work_package) {
-                map.removeLayer(work_package);
-            }
-
-            work_package = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-                layers: 'cite:tbl_workpackage',
-                format: 'image/png',
-                cql_filter: "ba ILIKE '%" + param + "%'",
-                maxZoom: 21,
-                transparent: true
-            }, {
-                buffer: 10
-            })
-            map.addLayer(work_package)
-            work_package.bringToFront()
 
 
 
-            if (fp_unsurveyed != '') {
-                map.removeLayer(fp_unsurveyed)
-            }
-
-            fp_unsurveyed = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-                layers: 'cite:fp_unsurveyed',
-                format: 'image/png',
-                cql_filter: "ba ILIKE '%" + param + "%'",
-                maxZoom: 21,
-                transparent: true
-            }, {
-                buffer: 10
-            })
-
-            map.addLayer(fp_unsurveyed)
-            fp_unsurveyed.bringToFront()
 
 
-            if (fp_surveyed != '') {
-                map.removeLayer(fp_surveyed)
-            }
-
-            fp_surveyed = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-                layers: 'cite:fp_surveyed',
-                format: 'image/png',
-                cql_filter: q_cql,
-                maxZoom: 21,
-                transparent: true
-            }, {
-                buffer: 10
-            })
-
-            map.addLayer(fp_surveyed)
-            fp_surveyed.bringToFront()
 
 
             if (fp_with_defects != '') {
@@ -649,6 +616,24 @@ zoom = 9;
             map.addLayer(fp_with_defects)
             fp_with_defects.bringToFront()
 
+
+            if (fp_without_defects != '') {
+                map.removeLayer(fp_without_defects)
+            }
+
+            fp_without_defects = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:fp_without_defects',
+                format: 'image/png',
+                cql_filter: q_cql,
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+
+            map.addLayer(fp_without_defects)
+            fp_without_defects.bringToFront()
+
             if (road != '') {
                 map.removeLayer(road)
             }
@@ -666,23 +651,6 @@ zoom = 9;
             road.bringToFront()
 
 
-
-            if (ts_unsurveyed != '') {
-                map.removeLayer(ts_unsurveyed)
-            }
-
-            ts_unsurveyed = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-                layers: 'cite:ts_unsurveyed',
-                format: 'image/png',
-                cql_filter: "ba ILIKE '%" + param + "%'",
-                maxZoom: 21,
-                transparent: true
-            }, {
-                buffer: 10
-            })
-
-            map.addLayer(ts_unsurveyed)
-            ts_unsurveyed.bringToFront()
 
 
             if (ts_with_defects != '') {
@@ -720,12 +688,12 @@ zoom = 9;
             ts_without_defects.bringToFront()
 
 
-            if (lb_unsurveyed != '') {
-                map.removeLayer(lb_unsurveyed)
+            if (lb_with_defects != '') {
+                map.removeLayer(lb_with_defects)
             }
 
-            lb_unsurveyed = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-                layers: 'cite:lb_unsurveyed',
+            lb_with_defects = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:lb_with_defects',
                 format: 'image/png',
                 cql_filter: "ba ILIKE '%" + param + "%'",
                 maxZoom: 21,
@@ -734,26 +702,9 @@ zoom = 9;
                 buffer: 10
             })
 
-            map.addLayer(lb_unsurveyed)
-            lb_unsurveyed.bringToFront()
-
-
-            if (lb_with_defects != '') {
-                map.removeLayer(lb_with_defects)
-            }
-
-            lb_with_defects = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-                layers: 'cite:lb_with_defects',
-                format: 'image/png',
-                cql_filter: q_cql,
-                maxZoom: 21,
-                transparent: true
-            }, {
-                buffer: 10
-            })
-
             map.addLayer(lb_with_defects)
             lb_with_defects.bringToFront()
+
 
             if (lb_without_defects != '') {
                 map.removeLayer(lb_without_defects)
@@ -771,26 +722,6 @@ zoom = 9;
 
             map.addLayer(lb_without_defects)
             lb_without_defects.bringToFront()
-
-
-
-            if (cb_unsurveyed != '') {
-                map.removeLayer(cb_unsurveyed)
-            }
-
-            cb_unsurveyed = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-                layers: 'cite:cb_unsurveyed',
-                format: 'image/png',
-                cql_filter: "ba ILIKE '%" + param + "%'",
-                maxZoom: 21,
-                transparent: true
-            }, {
-                buffer: 10
-            })
-
-            map.addLayer(cb_unsurveyed)
-            cb_unsurveyed.bringToFront()
-
 
 
             if (cb_without_defects != '') {
@@ -833,7 +764,7 @@ zoom = 9;
 
 
 
-            addpanolayer();
+            // addpanolayer();
             addGroupOverLays()
 
             if (patrol) {
@@ -859,22 +790,18 @@ zoom = 9;
                     'Boundary': boundary,
                     'Patrolling': patroling,
                     'Pano': pano_layer,
+                    'Roads': road,
+
                     'Substation With defects': substation_with_defects,
                     'Substation Without defects': substation_without_defects,
-                    'Substation Unsurveyed': unservey,
                     'Pano': pano_layer,
                     'Work Package': work_package,
-                    'Feeder Pillar Unsurveyed': fp_unsurveyed,
                     'Feeder Pillar Surveyed with defects': fp_with_defects,
-                    'Feeder Pillar Surveyed Without defects': fp_surveyed,
-                    'Tiang Unsurveyed': ts_unsurveyed,
+                    'Feeder Pillar Surveyed Without defects': fp_without_defects,
                     'Tiang Surveyed with defects': ts_with_defects,
                     'Tiang Surveyed Without defects': ts_without_defects,
-                    'Roads': road,
-                    'Link Box Unsurveyed': lb_unsurveyed,
                     'Link Box Surveyed with defects': lb_with_defects,
                     'Link BoxSurveyed  without defects': lb_without_defects,
-                    'Cable Bridge Unsurveyed': cb_unsurveyed,
                     'Cable Bridge Surveyed with defects': cb_with_defects,
                     'Cable Bridge Surveyed without defects': cb_without_defects,
                 }
@@ -895,10 +822,10 @@ zoom = 9;
             }
 
             $('#excel_from_date , #excel_to_date').on('change', function() {
-                var ff_ba = $('#excelBa').val() ??'';
+                var ff_ba = $('#excelBa').val() ?? '';
                 from_date = $('#excel_from_date').val() ?? null;
                 to_date = $('#excel_to_date').val() ?? null;
-                
+
                 onChangeBA();
                 getAllStats();
                 callLayers(ff_ba)
@@ -1166,9 +1093,6 @@ zoom = 9;
     {{-- COUNTS START --}}
 
     <script>
-      
-
-
         function getAllStats() {
             let todaydate = '{{ date('Y-m-d') }}';
 
@@ -1255,11 +1179,11 @@ zoom = 9;
             from_date = '';
             to_date = '';
 
-if (ba == '') {
-            addRemoveBundary('', 2.75101756479656, 101.304931640625)
-        } else {
-            callLayers(ba);
-        }
+            if (ba == '') {
+                addRemoveBundary('', 2.75101756479656, 101.304931640625)
+            } else {
+                callLayers(ba);
+            }
             // $("#excelBa").val($("#excelBa option:first").val());
         }
 

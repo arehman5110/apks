@@ -101,7 +101,7 @@ class CableBridgeController extends Controller
 
             $data->start_date = $request->start_date;
             $data->end_date = $request->end_date;
-
+            $data->qa_status = 'pending';
             $user = Auth::user()->id;
 
             $data->created_by = $user;
@@ -255,6 +255,9 @@ class CableBridgeController extends Controller
         try {
             $qa_data = CableBridge::find($req->id);
             $qa_data->qa_status = $req->status;
+            $user = Auth::user()->id;
+
+            $qa_data->updated_by = $user;
             $qa_data->update();
 
             return response()->json(['status' => $req->status]);

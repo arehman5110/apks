@@ -78,7 +78,7 @@ class TiangContoller extends Controller
             $data->pvc_span = $request->has('pvc_span') ? json_encode($request->pvc_span) : null;
             $data->bare_span = $request->has('bare_span') ? json_encode($request->bare_span) : null;
             $data->jarak_kelegaan = $request->jarak_kelegaan;
-
+            $data->qa_status = 'pending';
             $user = Auth::user()->id;
 
             $data->created_by = $user;
@@ -371,6 +371,9 @@ class TiangContoller extends Controller
         try {
             $qa_data = Tiang::find($req->id);
             $qa_data->qa_status = $req->status;
+            $user = Auth::user()->id;
+
+            $qa_data->updated_by = $user;
             $qa_data->update();
 
             return response()->json(['status' => $req->status]);
