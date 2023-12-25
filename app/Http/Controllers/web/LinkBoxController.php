@@ -143,7 +143,7 @@ class LinkBoxController extends Controller
     {
         //
         $data = LinkBox::find($id);
-        return view('link-box.edit', ['data' => $data, 'disabled'=>true]);
+        return view('link-box.edit', ['data' => $data, 'disabled'=>false]);
     }
 
     /**
