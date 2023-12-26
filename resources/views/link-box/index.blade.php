@@ -181,6 +181,8 @@
             table = $('.data-table').DataTable({
                 processing: true,
                 serverSide: true,
+                stateSave: true,
+
 
                 ajax: {
                     url: '{{ route('link-box-pelbagai-voltan.index', app()->getLocale()) }}',

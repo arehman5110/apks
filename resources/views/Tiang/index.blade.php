@@ -103,7 +103,7 @@
 
                                             <th>TIANG NO</th>
                                             <th>BA</th>
-                                            {{-- <th>CONTRACTOR</th> --}}
+                                            <th></th>
                                             <th>REVIEW DATE</th>
                                             <th>TOTAL DEFECTS</th>
                                             @if (Auth::user()->ba !== '')
@@ -172,6 +172,11 @@
                     name: 'review_date'
                 },
                 {
+                    data: 'id',
+                    name: 'id',
+                    visible: false,
+                },
+                {
                     data: 'total_defects',
                     name: 'total_defects'
                 }
@@ -190,6 +195,7 @@
             table = $('.data-table').DataTable({
                 processing: true,
                 serverSide: true,
+                stateSave: true,
                 ajax: {
                     url: '{{ route('tiang-talian-vt-and-vr.index', app()->getLocale()) }}',
                     type: "GET",
@@ -216,7 +222,8 @@
                 },
                 columns: columns,
                 order: [
-                    [2, 'desc']
+                    [2, 'desc'],
+                    [3,'desc']
                 ]
             });
 

@@ -190,7 +190,9 @@ class CableBridgeController extends Controller
             $data->zone = $request->zone;
             $data->ba = $request->ba;
             $user = Auth::user()->id;
-
+            if ($data->qa_status == '') {
+                $data->qa_status = 'pending';
+            }
             $data->updated_by = $user;
             $data->visit_date = $request->visit_date;
             $data->patrol_time = $combinedDateTime;
@@ -263,7 +265,7 @@ class CableBridgeController extends Controller
             $qa_data->updated_by = $user;
             $qa_data->update();
 
-            return response()->json(['status' => $req->status]);
+            return redirect()->back();
         } catch (\Throwable $th) {
             return response()->json(['status' => 'Request failed']);
         }

@@ -175,7 +175,9 @@ class LinkBoxController extends Controller
             $user = Auth::user()->id;
 
             $data->updated_by = $user;
-
+            if ($data->qa_status == '') {
+                $data->qa_status = 'pending';
+            }
             $data->start_date = $request->start_date;
             $data->end_date = $request->end_date;
             $data->type = $request->type;
@@ -248,7 +250,7 @@ class LinkBoxController extends Controller
             $qa_data->updated_by = $user;
             $qa_data->update();
 
-            return response()->json(['status' => $req->status]);
+            return redirect()->back();
         } catch (\Throwable $th) {
             return response()->json(['status' => 'Request failed']);
         }

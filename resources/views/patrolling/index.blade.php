@@ -479,6 +479,8 @@
             table = $('.data-table').DataTable({
                 processing: true,
                 serverSide: true,
+                orderable: true,
+
                 ajax: {
                     url: '{{ route('patrolling-paginate', app()->getLocale()) }}',
                     type: "GET",

@@ -80,6 +80,7 @@ class ThirdPartyDiggingController extends Controller
             $data->team_name = $request->team_name;
             $data->survey_date = $request->survey_date;
             $data->patrolling_time = $combinedDateTime;
+            $data->qa_status = 'pending';
             // $data->project_name = $request->project_name;
             $data->road_name = $request->road_name;
 
@@ -188,7 +189,9 @@ class ThirdPartyDiggingController extends Controller
             $user = Auth::user()->id;
 
             $data->updated_by = $user;
-
+            if ($data->qa_status == '') {
+                $data->qa_status = 'pending';
+            }
             $data->digging = $request->digging;
             $data->notice = $request->notice;
             $data->supervision = $request->supervision;
@@ -265,7 +268,7 @@ class ThirdPartyDiggingController extends Controller
             }
             $qa_data->update();
 
-            return response()->json(['status' => $req->status]);
+            return redirect()->back();
         } catch (\Throwable $th) {
             return response()->json(['status' => 'Request failed']);
         }

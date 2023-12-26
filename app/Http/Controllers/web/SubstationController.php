@@ -85,7 +85,7 @@ class SubstationController extends Controller
             $data->created_by = $user;
             $data->geom = DB::raw("ST_GeomFromText('POINT(" . $request->log . ' ' . $request->lat . ")',4326)");
             $data->coordinate = $request->coordinate;
-            $data->qa_status = 'pending';
+            // $data->qa_status = 'pending';
 
             $res = $this->substationRepository->store($data, $request);
 
@@ -198,7 +198,7 @@ class SubstationController extends Controller
             $qa_data->updated_by = $user;
             $qa_data->update();
 
-            return response()->json(['status' => $req->status]);
+            return redirect()->back();
         } catch (\Throwable $th) {
             return $th->getMessage();
             return response()->json(['status' => 'Request failed']);

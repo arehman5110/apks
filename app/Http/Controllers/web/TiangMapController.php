@@ -64,7 +64,9 @@ class TiangMapController extends Controller
             $data->ba = $request->ba;
             $data->fp_name = $request->fp_name;
             $user = Auth::user()->id;
-
+            if ($data->qa_status == '') {
+                $data->qa_status = 'pending';
+            }
             $data->updated_by = $user;
             $data->fp_road = $request->fp_road;
             $data->section_from = $request->section_from;

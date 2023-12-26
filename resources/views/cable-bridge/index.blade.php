@@ -169,6 +169,8 @@
             table = $('.data-table').DataTable({
                 processing: true,
                 serverSide: true,
+                stateSave: true,
+
 
                 ajax: {
                     url: '{{ route('cable-bridge.index', app()->getLocale()) }}',

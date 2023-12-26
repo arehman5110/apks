@@ -20,6 +20,9 @@ class FeederPillarRepo
             $defects = [];
             $defects =['leaning_staus','vandalism_status','advertise_poster_status','rust_status'];
 
+            if ($data->qa_status == '') {
+                $data->qa_status = 'pending';
+            }
             $total_defects =0;
  
             $data->zone = $request->zone;

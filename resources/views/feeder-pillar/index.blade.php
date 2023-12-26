@@ -137,8 +137,7 @@
 
 
         $(document).ready(function() {
-            to_date= localStorage.feeder_to??'';
-           from_date= localStorage.feeder_from??'';
+            
 
             var columns = [{
                         data: 'feeder_pillar_id',
@@ -153,6 +152,7 @@
                         data: 'visit_date',
                         name: 'visit_date'
                     },
+                    
                     {
                         data: 'unlocked',
                         name: 'unlocked',
@@ -194,6 +194,8 @@
             table = $('.data-table').DataTable({
                 processing: true,
                 serverSide: true,
+                stateSave: true,
+
 
                 ajax: {
                     url: '{{ route('feeder-pillar.index', app()->getLocale()) }}',

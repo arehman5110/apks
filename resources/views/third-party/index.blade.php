@@ -209,6 +209,8 @@
 
                 processing: true,
                 serverSide: true,
+                stateSave: true,
+
 
                 ajax: {
                     url: "{{ route('third-party-digging.index', app()->getLocale()) }}",

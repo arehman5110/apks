@@ -31,6 +31,9 @@ class SubstationRepository
         $currentDate = Carbon::now()->toDateString();
         $combinedDateTime = $currentDate . ' ' . $request->patrol_time;
 
+        if ($data->qa_status == '') {
+            $data->qa_status = 'pending';
+        }
         $data->zone = $request->zone;
         $data->ba = $request->ba;
         $data->team = $request->team;

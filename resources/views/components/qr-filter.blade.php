@@ -69,17 +69,19 @@
                         <input type="date" name="excel_to_date" id="excel_to_date" onchange="setMaxDate(this.value,'{{explode('-',$url)[1]}}')" class="form-control">
                     </div>
                     @isset($url)
+                    <div class="col-md-1 pt-2 ">
+
+                        <button type="button" class="btn text-white btn-sm mt-4 " class="form-control"
+                            style="background-color: #708090" onclick="resetIndex()">Reset</button>
+                    </div>
+                    
                     <div class="col-md-2 pt-2 ">
 
                         <button type="submit" class="btn text-white btn-sm mt-4 " class="form-control"
                             style="background-color: #708090">Download QR </button>
                     </div>
                     @endisset
-                    <div class="col-md-2 pt-2 ">
-
-                        <button type="button" class="btn text-white btn-sm mt-4 " class="form-control"
-                            style="background-color: #708090" onclick="resetIndex()">Reset</button>
-                    </div>
+                     
 
 
 

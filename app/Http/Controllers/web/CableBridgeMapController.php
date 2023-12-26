@@ -40,7 +40,9 @@ class CableBridgeMapController extends Controller
             $data->visit_date = $request->visit_date;
             $data->patrol_time = $combinedDateTime;
             $data->feeder_involved = $request->feeder_involved;
-
+            if ($data->qa_status == '') {
+                $data->qa_status = 'pending';
+            }
             $data->start_date = $request->start_date;
             $data->end_date = $request->end_date;
 

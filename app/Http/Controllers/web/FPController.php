@@ -205,7 +205,7 @@ class FPController extends Controller
             $qa_data->updated_by = $user;
             $qa_data->update();
 
-            return response()->json(['status' => $req->status]);
+            return redirect()->back();
         } catch (\Throwable $th) {
             return response()->json(['status' => 'Request failed']);
         }

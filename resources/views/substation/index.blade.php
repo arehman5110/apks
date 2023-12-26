@@ -212,8 +212,8 @@
                     orderable: true
                 },
                 {
-                    data: 'updated_at',
-                    name: 'updated_at',
+                    data: 'id',
+                    name: 'id',
                     visible: false,
                 },
                 {
@@ -283,6 +283,8 @@
              table = $('.data-table').DataTable({
                 processing: true,
                 serverSide: true,
+                stateSave: true,
+
 
                 ajax: {
                     url: '{{ route('substation.index', app()->getLocale()) }}',
@@ -312,7 +314,7 @@
                 columns: columns,
                 order: [
                     [1, 'desc'],
-                    // [0, 'desc']
+                    [0, 'desc']
 
                 ],
                 createdRow: function(row, data, dataIndex) {

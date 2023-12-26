@@ -16,6 +16,8 @@ const b10ptions = [
 ];
 
 
+
+
 var from_date = $('#excel_from_date').val()  ?? "" ;
 var to_date = $('#excel_to_date').val() ??"";
 var excel_ba = $('#excelBa').val() ??'';
@@ -24,10 +26,31 @@ var f_status = $('#status').val() ?? '';
 
 
 
+
+var url_split = '';
+
+
+
 var table = '';
 
 
 $(function(){
+
+
+    url_split = url.split('-');
+
+    to_date= localStorage[url_split[0] + '_to']??'';
+    from_date= localStorage[url_split[0] + '_from']??'';
+    $('#excel_from_date').val(from_date) 
+ $('#excel_to_date').val(to_date)
+
+
+ $('.table').on('page.dt', function() {
+    
+    console.log(table.page.info().page);
+
+});
+
     $('#excelBa').on('change', function() {
         excel_ba = $(this).val();
         table.ajax.reload(function() {
@@ -73,15 +96,15 @@ $(function(){
 
 
           //submit foam using ajax
-          $jq('#reject-foam').ajaxForm({
-            success: function(rs) {
-                $('#rejectReasonModal').modal('hide');
-            $('#reject_remakrs').val('');
-                table.ajax.reload(function() {
-                    table.draw('page');
-                });
-            }
-        });
+        //   $jq('#reject-foam').ajaxForm({
+        //     success: function(rs) {
+        //         $('#rejectReasonModal').modal('hide');
+        //         $('#reject_remakrs').val('');
+        //         table.ajax.reload(); // Reload without changing the page
+        //     }
+        // });
+        
+          
 
 
 
@@ -151,13 +174,14 @@ $(function(){
             async: false,
             success: function callback(data) {
                 //  alert('Request Success');
-                if (data.status == 'Accept') {
-                    $('#status-' + id).html(`<span class="badge bg-success">Accept</span>`);
+                // if (data.status == 'Accept') {
+                //     $('#status-' + id).html(`<span class="badge bg-success">Accept</span>`);
 
-                } else if (data.status == 'Reject') {
-                    $('#status-' + id).html(`<span class="badge bg-danger">Reject</span>`);
+                // } else if (data.status == 'Reject') {
+                //     $('#status-' + id).html(`<span class="badge bg-danger">Reject</span>`);
 
-                }
+                // }
+                location.reload();
             }
         });
     }
@@ -192,26 +216,30 @@ function renderQaStatus(data, type, full) {
 
     if (full.qa_status === 'Accept' || full.qa_status === 'Reject') {
         if (full.qa_status == 'Accept') {
-            return `<span class="badge bg-success">Accept</span>`;
+            return `
+            <span class="badge bg-success">Accept</span>`;
 
         }
         return `<span class="badge bg-danger">${full.reject_remarks}</span>`;
 
     } else {
-
+        if ( full.qa_status == 'pending') {
+            
+        
         return `<div class="d-flex text-center" id="status-${full.id}">
-                    <a type="button" class="btn btn-sm btn-success  " onclick="updateQaStatus('Accept',` + full.id + `)">
+                    <a  class="btn btn-sm btn-success  " href="/${lang}/${url}-update-QA-Status?status=Accept&&id=${full.id}" onclick="return confirm('are you sure?')" >
                                 Accept
                     </a>
                      /
-
                      <a type="button" class="btn btn-danger  btn-sm" data-id="${full.id}" data-toggle="modal"
             data-target="#rejectReasonModal">
             Reject
         </a>
 
                 </div>`;
+                }
     }
+    return '';
 }
 
 
@@ -231,10 +259,9 @@ function resetIndex(){
     $('#excel_to_date').val('');
     $('#qa_status').val('');
     $('#status').val('');
-    localStorage.removeItem("substation_to");
-    localStorage.removeItem("substation_from");
-    localStorage.removeItem("feeder_to");
-    localStorage.removeItem("feeder_from");
+
+    localStorage.removeItem(url_split[0]+"_to");
+    localStorage.removeItem(url_split[0]+"_from");
 
     table.ajax.reload(function() {
         table.draw('page');

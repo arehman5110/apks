@@ -57,7 +57,7 @@
 
                     <x-dropdown-link :href="route('logout', app()->getLocale())"
                         onclick="event.preventDefault();
-                                    this.closest('form').submit();">
+                                    this.closest('form').submit(); localStorage.clear()">
                         {{ __('Log Out') }}
                     </x-dropdown-link>
                 </form>
