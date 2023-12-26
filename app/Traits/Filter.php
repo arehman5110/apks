@@ -44,6 +44,29 @@ trait Filter
         }
         return $model;
     }
+
+
+
+    public function filterWithOutAccpet($model , $column , $request ){
+        $ba = $request->filled('ba') ? $request->ba : Auth::user()->ba;
+        
+
+        if ($request->filled('ba')) {
+            $model->where('ba', $ba);
+        }
+
+        if ($request->filled('from_date')) {
+            $model->where($column, '>=', $request->from_date);
+        }
+
+        if ($request->filled('to_date')) {
+            $model->where($column, '<=', $request->to_date);
+        }
+      
+
+       
+        return $model;
+    }
 }
 
 

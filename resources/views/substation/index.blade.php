@@ -1,6 +1,11 @@
 @extends('layouts.app', ['page_title' => 'Index'])
 
 @section('css')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
+    <script src="https://malsup.github.io/jquery.form.js"></script>
+    <script>
+        var $jq = $.noConflict(true);
+    </script>
     <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
@@ -22,8 +27,8 @@
         }
 
         /* .table-responsive::-webkit-scrollbar {
-                display: none;
-            } */
+                        display: none;
+                    } */
 
         table.dataTable>thead>tr>th:not(.sorting_disabled),
         table.dataTable>thead>tr>td:not(.sorting_disabled) {
@@ -81,6 +86,11 @@
             @include('components.message')
 
 
+
+
+
+
+
             <div class="row">
                 @include('components.qr-filter', ['url' => 'generate-substation-excel'])
 
@@ -121,6 +131,7 @@
                                         <tr>
                                             <th rowspan="2">{{ __('messages.name') }}</th>
                                             <th rowspan="2">{{ __('messages.visit_date') }} </th>
+                                            <th rowspan="2">asdas</th>
                                             <th colspan="3" class="text-center" style="border-bottom: 0px">
                                                 {{ __('messages.gate') }}</th>
                                             <th colspan="2" class="text-center" style="border-bottom: 0px">
@@ -132,7 +143,7 @@
                                             </th>
                                             <th rowspan="2">{{ __('messages.total_defects') }} </th>
                                             @if (Auth::user()->ba !== '')
-                                            <th rowspan="2">QA Status</th>
+                                                <th rowspan="2">QA Status</th>
                                             @endif
 
 
@@ -158,69 +169,17 @@
                                     </tbody>
                                 </table>
                             </div>
-
-
-
-
-
-
                         </div>
                     </div>
-
-
-
                 </div>
             </div>
         </div>
     </section>
 
 
-    <x-remove-confirm  />
+    <x-remove-confirm />
 
-    <div class="modal fade" id="qaStatusModal">
-        <div class="modal-dialog">
-            <div class="modal-content ">
-
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title">Update Status</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <form action="" id="remove-foam" method="POST">
-
-                    @csrf
-
-                    <div class="modal-body form-input">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <label for="name">Name</label>
-                            </div>
-                            <div class="col-md-8">
-                                <input type="text" name="" id="modal-name" disabled readonly>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-4">
-                                <label for="name">Total defects</label>
-                            </div>
-                            <div class="col-md-8">
-                                <input type="text" name="" id="modal-defects" disabled readonly>
-                            </div>
-                        </div>
-
-                        <input type="hidden" name="id" id="status-modal-id">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
-                        <button type="submit" class="btn btn-danger">Remove</button>
-                    </div>
-                </form>
-
-            </div>
-        </div>
-    </div>
+    <x-reject-modal />
 @endsection
 
 
@@ -234,77 +193,87 @@
 
 
     <script>
- var lang = "{{app()->getLocale()}}";
- var url = "substation"
- var auth_ba = "{{Auth::user()->ba}}"
+        var lang = "{{ app()->getLocale() }}";
+        var url = "substation"
+        var auth_ba = "{{ Auth::user()->ba }}"
 
 
         $(document).ready(function() {
-            to_date= localStorage.substation_to??'';
-           from_date= localStorage.substation_from??'';
-          var  columns = [{
-                        render: function(data, type, full) {
-                            return `<a href="/{{ app()->getLocale() }}/substation/${full.id}/edit" class="text-decoration-none text-dark">${full.name}</a>`;
-                        },
-                        name: 'name'
-                    },
-                    {
-                        data: 'visit_date',
-                        name: 'visit_date',
-                        orderable: true
-                    },
-                    {
-                        data: 'unlocked',
-                        name: 'unlocked'
-                    },
-                    {
-                        data: 'demaged',
-                        name: 'demaged'
-                    },
 
-                    {
-                        data: 'other_gate',
-                        name: 'other_gate'
+            var columns = [{
+                    render: function(data, type, full) {
+                        return `<a href="/{{ app()->getLocale() }}/substation/${full.id}/edit" class="text-decoration-none text-dark">${full.name}</a>`;
                     },
-                    {
-                        data: 'grass_status',
-                        name: 'grass_status'
-                    },
-                    {
-                        data: 'tree_branches_status',
-                        name: 'tree_branches_status'
-                    },
-                    {
-                        data: 'broken_roof',
-                        name: 'broken_roof'
-                    },
-                    {
-                        data: 'broken_gutter',
-                        name: 'broken_gutter'
-                    },
-                    {
-                        data: 'broken_base',
-                        name: 'broken_base'
-                    },
-                    {
-                        data: 'building_other',
-                        name: 'building_other'
-                    },
+                    name: 'name'
+                },
+                {
+                    data: 'visit_date',
+                    name: 'visit_date',
+                    orderable: true
+                },
+                {
+                    data: 'updated_at',
+                    name: 'updated_at',
+                    visible: false,
+                },
+                {
+                    data: 'unlocked',
+                    name: 'unlocked'
+                },
+                {
+                    data: 'demaged',
+                    name: 'demaged'
+                },
 
-                    {
-                        data: 'advertise_poster_status',
-                        name: 'advertise_poster_status'
-                    },
-                    {
-                        data: 'total_defects',
-                        name: 'total_defects'
-                    }
-                ];
-                    if (auth_ba !== '') {
-        columns.push({ data: null, render: renderQaStatus });
-    }
+                {
+                    data: 'other_gate',
+                    name: 'other_gate'
+                },
+                {
+                    data: 'grass_status',
+                    name: 'grass_status'
+                },
+                {
+                    data: 'tree_branches_status',
+                    name: 'tree_branches_status'
+                },
+                {
+                    data: 'broken_roof',
+                    name: 'broken_roof'
+                },
+                {
+                    data: 'broken_gutter',
+                    name: 'broken_gutter'
+                },
+                {
+                    data: 'broken_base',
+                    name: 'broken_base'
+                },
+                {
+                    data: 'building_other',
+                    name: 'building_other'
+                },
 
-    columns.push({ data: null, render: renderDropDownActions });
+                {
+                    data: 'advertise_poster_status',
+                    name: 'advertise_poster_status'
+                },
+                {
+                    data: 'total_defects',
+                    name: 'total_defects'
+                }
+            ];
+            if (auth_ba !== '') {
+                columns.push({
+                    data: null,
+                    render: renderQaStatus
+                });
+            }
+
+            columns.push({
+                data: null,
+                render: renderDropDownActions
+            });
 
 
 
@@ -341,7 +310,11 @@
                     }
                 },
                 columns: columns,
-        order: [[1, 'desc']],
+                order: [
+                    [1, 'desc'],
+                    // [0, 'desc']
+
+                ],
                 createdRow: function(row, data, dataIndex) {
                     $(row).find('td:not(:first-child)').addClass('text-center');
                 }

@@ -44,7 +44,8 @@ class FPController extends Controller
                     'rust_status',
                     'advertise_poster_status',
                     'total_defects',
-                    'qa_status'
+                    'qa_status',
+                    'qa_status' , 'reject_remarks',
                 );
             }); 
 
@@ -196,6 +197,9 @@ class FPController extends Controller
         try {
             $qa_data = FeederPillar::find($req->id);
             $qa_data->qa_status = $req->status;
+            if ($req->status == 'Reject') {
+                $qa_data->reject_remarks = $req->reject_remakrs;
+            }
             $user = Auth::user()->id;
 
             $qa_data->updated_by = $user;

@@ -27,7 +27,7 @@
                     </div>
                     <div class=" col-md-2">
                         <label for="excelBa">BA :</label>
-                        <select name="excelBa" id="excelBa" class="form-control">
+                        <select name="ba" id="excelBa" class="form-control">
                             <option value="{{ Auth::user()->ba }}" hidden>
                                 {{ Auth::user()->ba != '' ? Auth::user()->ba : 'Select BA' }} </option>
 

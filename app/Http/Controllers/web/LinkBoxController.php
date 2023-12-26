@@ -29,7 +29,7 @@ class LinkBoxController extends Controller
            $result = $this->filter($result , 'visit_date' , $request);
 
             $result->when(true, function ($query) {
-                return $query->select('id', 'ba', 'zone', 'team', 'visit_date','total_defects' , 'qa_status');
+                return $query->select('id','qa_status' , 'reject_remarks', 'ba', 'zone', 'team', 'visit_date','total_defects' , 'qa_status');
             });
 
             return datatables()
@@ -240,6 +240,9 @@ class LinkBoxController extends Controller
         try {
             $qa_data = LinkBox::find($req->id);
             $qa_data->qa_status = $req->status;
+            if ($req->status == 'Reject') {
+                $qa_data->reject_remarks = $req->reject_remakrs;
+            }
             $user = Auth::user()->id;
 
             $qa_data->updated_by = $user;

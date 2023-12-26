@@ -1,6 +1,11 @@
 @extends('layouts.app', ['page_title' => 'Index'])
 
 @section('css')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
+<script src="https://malsup.github.io/jquery.form.js"></script>
+<script>
+    var $jq = $.noConflict(true);
+</script>
     <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
@@ -106,6 +111,8 @@
         </div>
     </section>
     <x-remove-confirm  />
+    <x-reject-modal />
+
 
 @endsection
 

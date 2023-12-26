@@ -33,7 +33,7 @@ class ThirdPartyDiggingController extends Controller
             $this->filter($result , 'survey_date' , $request);
 
             $result->when(true, function ($query) {
-                return $query->select('wp_name', 'zone', 'ba', 'survey_date', 'id', 'patrolling_time', 'supervision', 'notice', 'survey_status', 'digging' ,'qa_status');
+                return $query->select('wp_name', 'qa_status' , 'reject_remarks', 'zone', 'ba', 'survey_date', 'id', 'patrolling_time', 'supervision', 'notice', 'survey_status', 'digging' ,'qa_status');
             });
 
             return datatables()
@@ -260,6 +260,9 @@ class ThirdPartyDiggingController extends Controller
         try {
             $qa_data = ThirdPartyDiging::find($req->id);
             $qa_data->qa_status = $req->status;
+            if ($req->status == 'Reject') {
+                $qa_data->reject_remarks = $req->reject_remakrs;
+            }
             $qa_data->update();
 
             return response()->json(['status' => $req->status]);
