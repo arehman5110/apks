@@ -36,7 +36,7 @@ class TiangContoller extends Controller
            $result = $this->filter($result , 'review_date' , $request);
 
             $result->when(true, function ($query) {
-                return $query->select('id', 'ba', 'review_date', 'tiang_no', 'total_defects' , 'qa_status');
+                return $query->select('id', 'ba' ,'qa_status' , 'reject_remarks', 'review_date', 'tiang_no', 'total_defects' );
             });
 
             return datatables()
@@ -371,6 +371,9 @@ class TiangContoller extends Controller
         try {
             $qa_data = Tiang::find($req->id);
             $qa_data->qa_status = $req->status;
+            if ($req->status == 'Reject') {
+                $qa_data->reject_remarks = $req->reject_remakrs;
+            }
             $user = Auth::user()->id;
 
             $qa_data->updated_by = $user;

@@ -24,7 +24,7 @@ class SubstationExcelController extends Controller
 
         try {
  
- 
+//  return $req;
             $result = Substation::query();
 
             $result = $this->filter($result , 'visit_date',$req);

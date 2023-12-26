@@ -109,7 +109,7 @@ class PatrollingController extends Controller
            
             $result = Patroling::query();
 
-        $request =  $this->filter($result , 'vist_date' , $request);
+        $request =  $this->filterWithOutAccpet($result , 'vist_date' , $request);
 
     $result->whereNotNull('km')->where('km','!=','0')
   
@@ -167,6 +167,9 @@ class PatrollingController extends Controller
         try {
             $qa_data = Patroling::find($req->id);
             $qa_data->qa_status = $req->status;
+            if ($req->status == 'Reject') {
+                $qa_data->reject_remarks = $req->reject_remakrs;
+            }
             $qa_data->update();
 
             return response()->json(['status' => $req->status]);

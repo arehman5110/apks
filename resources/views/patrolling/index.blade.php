@@ -470,9 +470,9 @@
                     }
                 ];
 
-                if (auth_ba !== '') {
-        columns.push({ data: null, render: renderQaStatus });
-    }
+    //             if (auth_ba !== '') {
+    //     columns.push({ data: null, render: renderQaStatus });
+    // }
 
     columns.push({ data: null, render: renderDropDownActions });
 

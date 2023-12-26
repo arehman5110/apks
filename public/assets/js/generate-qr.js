@@ -70,6 +70,29 @@ $(function(){
         var id = button.data('id');
         $('#remove-foam').attr('action', `/${lang}/${url}/${id}`)
         });
+
+
+          //submit foam using ajax
+          $jq('#reject-foam').ajaxForm({
+            success: function(rs) {
+                $('#rejectReasonModal').modal('hide');
+            $('#reject_remakrs').val('');
+                table.ajax.reload(function() {
+                    table.draw('page');
+                });
+            }
+        });
+
+
+
+
+        $('#rejectReasonModal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget);
+            var id = button.data('id');
+
+            $('#reject-foam').attr('action', `/${lang}/${url}-update-QA-Status`)
+            $('#reject-id').val(id);
+        });
 });
 
 
@@ -169,7 +192,7 @@ function renderQaStatus(data, type, full) {
             return `<span class="badge bg-success">Accept</span>`;
 
         }
-        return `<span class="badge bg-danger">Reject</span>`;
+        return `<span class="badge bg-danger">${full.reject_remarks}</span>`;
 
     } else {
 
@@ -178,9 +201,12 @@ function renderQaStatus(data, type, full) {
                                 Accept
                     </a>
                      / 
-                    <a type="button" class="btn btn-sm btn-danger " onclick="updateQaStatus('Reject',` + full.id + `)">
-                                Reject
-                    </a>
+
+                     <a type="button" class="btn btn-danger  btn-sm" data-id="${full.id}" data-toggle="modal"
+            data-target="#rejectReasonModal">
+            Reject
+        </a>
+                    
                 </div>`;
     }
 }
