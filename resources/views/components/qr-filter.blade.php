@@ -3,6 +3,7 @@
         border: 0px;
     }
 </style>
+
 <div class="col-12">
     <div class="collapse" id="collapseQr">
         <div class="card card-body">
@@ -52,20 +53,20 @@
                             <option value="" >All</option>
                             <option value="Accept">Accept</option>
                             <option value="Reject">Reject</option>
-                           
+
                         </select>
                     </div>
-                    @endif 
+                    @endif
 
 
                     <div class=" col-md-2">
                         <label for="excel_from_date">From Date : </label>
                         <input type="date" name="excel_from_date" id="excel_from_date"
-                            class="form-control" onchange="setMinDate(this.value)">
+                            class="form-control" onchange="setMinDate(this.value,'{{explode('-',$url)[1]}}')">
                     </div>
                     <div class=" col-md-2">
                         <label for="excel_to_date">To Date : </label>
-                        <input type="date" name="excel_to_date" id="excel_to_date" onchange="setMaxDate(this.value)" class="form-control">
+                        <input type="date" name="excel_to_date" id="excel_to_date" onchange="setMaxDate(this.value,'{{explode('-',$url)[1]}}')" class="form-control">
                     </div>
                     @isset($url)
                     <div class="col-md-2 pt-2 ">
@@ -80,7 +81,7 @@
                             style="background-color: #708090" onclick="resetIndex()">Reset</button>
                     </div>
 
-                   
+
 
             </form>
         </div>

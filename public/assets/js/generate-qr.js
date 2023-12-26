@@ -74,11 +74,14 @@ $(function(){
 
 
 
-    function setMinDate(minDate){
+    function setMinDate(minDate,type){
+
+        localStorage.setItem(type+'_from', minDate);
         $('#excel_to_date').attr('min',minDate);
     }
 
-    function setMaxDate(maxDate){
+    function setMaxDate(maxDate,type){
+        localStorage.setItem(type+'_to', maxDate);
         $('#excel_from_date').attr('max',maxDate);
     }
 
@@ -114,10 +117,10 @@ $(function(){
     function updateQaStatus(status, id ) {
 
         var confirmation = confirm(`Are you sure you want to ${status}?`);
-    
+
     if (confirmation) {
-         
-   
+
+
         $.ajax({
             url: `/${lang}/${url}-update-QA-Status?status=${status}&&id=${id}`,
             dataType: 'JSON',
@@ -163,7 +166,7 @@ function renderDropDownActions(data, type, full) {
 
 
 function renderQaStatus(data, type, full) {
-    
+
     if (full.qa_status === 'Accept' || full.qa_status === 'Reject') {
         if (full.qa_status == 'Accept') {
             return `<span class="badge bg-success">Accept</span>`;
@@ -173,11 +176,11 @@ function renderQaStatus(data, type, full) {
 
     } else {
 
-        return `<div class="d-flex text-center" id="status-${full.id}"> 
+        return `<div class="d-flex text-center" id="status-${full.id}">
                     <a type="button" class="btn btn-sm btn-success  " onclick="updateQaStatus('Accept',` + full.id + `)">
                                 Accept
                     </a>
-                     / 
+                     /
                     <a type="button" class="btn btn-sm btn-danger " onclick="updateQaStatus('Reject',` + full.id + `)">
                                 Reject
                     </a>
@@ -192,16 +195,20 @@ function resetIndex(){
 
     qa_status = '' ;
     f_status = '' ;
-    
+
     if (auth_ba == '') {
         excel_ba = '';
         $('#excelBa').val('');
-        
+
     }
     $('#excel_from_date').val('');
     $('#excel_to_date').val('');
     $('#qa_status').val('');
     $('#status').val('');
+    localStorage.removeItem("substation_to");
+    localStorage.removeItem("substation_from");
+    localStorage.removeItem("feeder_to");
+    localStorage.removeItem("feeder_from");
 
     table.ajax.reload(function() {
         table.draw('page');

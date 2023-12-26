@@ -23,12 +23,24 @@ class TiangExcelController extends Controller
     {
         try{
 // return date('Y-m-d');
-            
+
         $ba = $req->filled('excelBa') ? $req->excelBa : Auth::user()->ba;
 
         $result = Tiang::query();
 
-        $result = $this->filter($result , 'review_date',$req);
+      //  $result = $this->filter($result , 'review_date',$req);
+
+        if ($req->filled('excelBa')) {
+         $result->where('ba', $ba);
+        }
+
+        if ($req->filled('excel_from_date')) {
+            $result->where('review_date', '>=', $req->excel_from_date);
+        }
+
+        if ($req->filled('excel_to_date')) {
+            $result->where('review_date', '<=', $req->excel_to_date);
+        }
 
 
             $res = $result->whereNotNull('review_date')
@@ -38,7 +50,7 @@ class TiangExcelController extends Controller
              'kaki_lima_defect_image','tapak_road_img','tapak_sidewalk_img','tapak_sidewalk_img','tapak_no_vehicle_entry_img','kawasan_bend_img',
             'kawasan_road_img' , 'kawasan_forest_img' , 'kawasan_other_img']);
             // return $res;
-            
+
             $query = Tiang::select('fp_road as road')
             ->selectRaw("SUM(CASE WHEN size_tiang = '7.5' THEN 1 ELSE 0 END) as size_tiang_75")
             ->selectRaw("SUM(CASE WHEN size_tiang = '9' THEN 1 ELSE 0 END) as size_tiang_9")
@@ -78,15 +90,17 @@ class TiangExcelController extends Controller
                 if ($req->filled('excel_from_date')) {
                     $query->where('review_date', '>=', $req->excel_from_date);
                 }
-    
+
                 if ($req->filled('excel_to_date')) {
                     $query->where('review_date', '<=', $req->excel_to_date);
                 }
-          
+
            $roadStatistics = $query->groupBy('fp_road' )->get();
 
-           
-             
+         //  return $roadStatistics;
+
+
+
             if ($roadStatistics) {
                 $excelFile = public_path('assets/excel-template/QR TIANG.xlsx');
 
@@ -94,7 +108,7 @@ class TiangExcelController extends Controller
 
                 $worksheet = $spreadsheet->getSheet(0);
                 $worksheet->getStyle('B:AK')->getAlignment()->setHorizontal('center');
-$worksheet->getStyle('B:AL')->getFont()->setSize(9);
+            $worksheet->getStyle('B:AL')->getFont()->setSize(9);
 
 
                 $worksheet->setCellValue('D4', $ba);
@@ -146,20 +160,20 @@ $worksheet->getStyle('B:AL')->getFont()->setSize(9);
                         $line = 'S';
                     }
 
-                    
-                
+
+
 
                     $service_line = Tiang::where('fp_road' ,$rec->road)
                     ->whereNotNull('talian_utama')
                     ->where('talian_utama','');
-                    
 
-                    unset($rec->road); 
+
+                     ($rec->road);
                     $array = json_decode($rec, true);
 
                     // Sum the values
                   $totalSum = array_sum($array);
- 
+
 
                     $worksheet->setCellValue('AD' . $i, $totalSum );
 
@@ -176,12 +190,12 @@ $worksheet->getStyle('B:AL')->getFont()->setSize(9);
 
 
 
-                     
 
-                    
-                
 
-               
+
+
+
+
 
                     $i++;
                 }
@@ -189,20 +203,21 @@ $worksheet->getStyle('B:AL')->getFont()->setSize(9);
                 // SHeet 2
 
                 $worksheet->calculateColumnWidths();
-               
+
 
                 $i = 8;
                 $secondWorksheet = $spreadsheet->getSheet(1);
-$secondWorksheet->getStyle('B:AL')->getAlignment()->setHorizontal('center');
-$secondWorksheet->getStyle('B:AL')->getFont()->setSize(9);
+                $secondWorksheet->getStyle('B:AL')->getAlignment()->setHorizontal('center');
+                $secondWorksheet->getStyle('B:AL')->getFont()->setSize(9);
 
 
                 $secondWorksheet->setCellValue('C1', $ba);
                 $secondWorksheet->setCellValue('B3', 'Tarikh Pemeriksaan : ' .date('Y-m-d'));
 
-
+                //return $res;
                 foreach ($res as $secondRec) {
                     // echo "test <br>";
+
                     $secondWorksheet->setCellValue('B' . $i, $i - 7);
                     $secondWorksheet->setCellValue('C' . $i, $secondRec->fp_name);
                     $secondWorksheet->setCellValue('D' . $i, $secondRec->fp_road);
@@ -234,7 +249,7 @@ $secondWorksheet->getStyle('B:AL')->getFont()->setSize(9);
                     }
 
                     if ($secondRec->ipc_defect != '') {
-                        
+
                         $secondWorksheet->setCellValue('X' . $i, excelCheckBOc('burn', json_decode($secondRec->ipc_defect)));
                     }
 
@@ -281,7 +296,7 @@ $secondWorksheet->getStyle('B:AL')->getFont()->setSize(9);
                 // return;
                 //$i = 11
 
-                
+
 
                 $i = 11;
                 $thirdWorksheet = $spreadsheet->getSheet(2);
@@ -331,7 +346,7 @@ $secondWorksheet->getStyle('B:AL')->getFont()->setSize(9);
                     $thirdWorksheet->setCellValue('B' . $i, $rec->review_date);
                     // $thirdWorksheet->getStyle('B'.$i)
 
-                   
+
 
                     if ($rec->tapak_condition != '') {
                         $tapak_condition = json_decode($rec->tapak_condition);

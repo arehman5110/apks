@@ -40,8 +40,8 @@
             font-size: 15px !important;
 
         }
- 
-        thead { 
+
+        thead {
             background-color: #E4E3E3 !important;
         }
 
@@ -134,7 +134,7 @@
                                             @if (Auth::user()->ba !== '')
                                             <th rowspan="2">QA Status</th>
                                             @endif
-                                            
+
 
                                             <th rowspan="2">ACTION</th>
 
@@ -176,7 +176,7 @@
 
 
     <x-remove-confirm  />
-   
+
     <div class="modal fade" id="qaStatusModal">
         <div class="modal-dialog">
             <div class="modal-content ">
@@ -224,7 +224,7 @@
 @endsection
 
 
-@section('script') 
+@section('script')
     <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('assets/js/generate-qr.js') }}"></script>
@@ -240,7 +240,8 @@
 
 
         $(document).ready(function() {
-
+            to_date= localStorage.substation_to??'';
+           from_date= localStorage.substation_from??'';
           var  columns = [{
                         render: function(data, type, full) {
                             return `<a href="/{{ app()->getLocale() }}/substation/${full.id}/edit" class="text-decoration-none text-dark">${full.name}</a>`;
@@ -309,6 +310,7 @@
 
 
 
+
              table = $('.data-table').DataTable({
                 processing: true,
                 serverSide: true,
@@ -345,14 +347,13 @@
                 }
             })
 
-           
+
 
 
         });
 
-       
 
 
-        
+
     </script>
 @endsection

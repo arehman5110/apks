@@ -130,7 +130,8 @@
 
 
         $(document).ready(function() {
-
+            to_date= localStorage.feeder_to??'';
+           from_date= localStorage.feeder_from??'';
 
             var columns = [{
                         data: 'feeder_pillar_id',
@@ -175,14 +176,14 @@
                         data: 'total_defects',
                         name: 'total_defects'
                     },
-                   
+
                 ];
                 if (auth_ba !== '') {
         columns.push({ data: null, render: renderQaStatus });
     }
 
     columns.push({ data: null, render: renderDropDownActions });
-                
+
             table = $('.data-table').DataTable({
                 processing: true,
                 serverSide: true,
