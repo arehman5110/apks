@@ -160,7 +160,7 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-4"><label for="review_date">Review Date</label></div>
+                                    <div class="col-md-4"><label for="review_date">{{__('messages.visit_date')}}</label></div>
                                     <div class="col-md-4">
                                         <input type="date"disabled value="{{ $data->review_date }}"   class="form-control" required>
                                     </div>

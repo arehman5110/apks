@@ -222,7 +222,7 @@
 
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <label for="review_date">Review Date</label>
+                                        <label for="review_date">{{__('messages.visit_date')}}</label>
                                     </div>
                                     <div class="col-md-4"><input type="date" name="review_date" id="review_date"
                                             class="form-control" required></div>
