@@ -44,17 +44,19 @@ $(function(){
     $('#excel_from_date').val(from_date) 
  $('#excel_to_date').val(to_date)
 
+ qa_status = '';
 
- $('.table').on('page.dt', function() {
+
+//  $('.table').on('page.dt', function() {
     
-    console.log(table.page.info().page);
+//     console.log(table.page.info().page);
 
-});
+// });
 
     $('#excelBa').on('change', function() {
         excel_ba = $(this).val();
         table.ajax.reload(function() {
-            table.draw('page');
+            // table.draw('page');
         });
     })
 
@@ -62,28 +64,28 @@ $(function(){
     $('#excel_from_date').on('change', function() {
         from_date = $(this).val();
         table.ajax.reload(function() {
-            table.draw('page');
+            // table.draw('page');
         });
     })
 
     $('#excel_to_date').on('change', function() {
         to_date = $(this).val();
         table.ajax.reload(function() {
-            table.draw('page');
+            // table.draw('page');
         });
     });
 
     $('#status').on('change', function() {
         f_status = $(this).val();
         table.ajax.reload(function() {
-            table.draw('page');
+            // table.draw('page');
         });
     });
 
     $('#qa_status').on('change', function() {
         qa_status = $(this).val();
         table.ajax.reload(function() {
-            table.draw('page');
+            // table.draw('page');
         });
     });
 
@@ -263,8 +265,6 @@ function resetIndex(){
     localStorage.removeItem(url_split[0]+"_to");
     localStorage.removeItem(url_split[0]+"_from");
 
-    table.ajax.reload(function() {
-        table.draw('page');
-    });
+    table.ajax.reload();
 
 }

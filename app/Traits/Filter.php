@@ -75,9 +75,13 @@ trait Filter
 
     public function filterWithOutAccpet($model, $column, $request)
     {
-        $ba = $request->filled('ba') ? $request->ba : Auth::user()->ba;
+        $ba = Auth::user()->ba;
+        if ($ba == ''  && $request->ba != 'null') {
+                $ba = $request->ba;
+               // return $ba;
+        }
 
-        if ($request->filled('ba')) {
+         if (!empty($ba)) {
             $model->where('ba', $ba);
         }
 
