@@ -15,10 +15,17 @@ trait Filter
 
         // request contains param like from-to date ,ba , status ect...
 
-        $ba = $request->filled('ba') ? $request->ba : Auth::user()->ba;
+        //$ba = $request->filled('ba') ? $request->ba : Auth::user()->ba;
+        $ba = Auth::user()->ba;
+        if ($ba == ''  && $request->ba != 'null') {
+                $ba = $request->ba;
+               // return $ba;
+        }
+
+     //   dd($ba);
 
         //cheeck if request has ba and ba is not empty then  add where ba = request ba
-        if ($request->filled('ba')) {
+        if (!empty($ba)) {
             $model->where('ba', $ba);
         }
 

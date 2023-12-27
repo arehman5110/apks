@@ -30,7 +30,7 @@ function statsTable(Request $request){
         'PUCHONG'
     ];
 
-  
+
     if ( $request->ba_name != 'null') {
         $bas = [];
             $bas = [$request->ba_name];
@@ -79,8 +79,9 @@ function statsTable(Request $request){
     function patrol_graph(Request $request)
     {
         $ba = Auth::user()->ba;
-        if ($ba == ''  && $request->ba_name != 'null') {
-                $ba = $request->ba_name;
+        if ($ba == ''  && $request->ba != 'null') {
+                $ba = $request->ba;
+               // return $ba;
         }
 
       $data['patrolling']       = $this->getGraphCount('patroling' , 'vist_date' , 'km' , $ba , $request );
@@ -131,12 +132,12 @@ function statsTable(Request $request){
     //                 // Sum total_defects
     //                 $data[$key . '_defect'] = $query->where('total_defects', '>', 0)->sum('total_defects');
     //             }
-                
+
 
     //             $data['total_km'] = $this->filterWithOutAccpet(Patroling::select(DB::raw('sum(km)')), 'vist_date', $request)->first()->sum;
     //             $data['total_notice'] = $this->filterWithOutAccpet(ThirdPartyDiging::where('notice', 'yes'), 'survey_date', $request)->count();
     //             $data['total_supervision'] = $this->filterWithOutAccpet(ThirdPartyDiging::where('supervision', 'yes'), 'survey_date', $request)->count();
- 
+
     //             return $data;
     //         }
     //         return view('admin-dashboard');
@@ -175,7 +176,7 @@ function statsTable(Request $request){
             when supervision='yes' Then 1 else 0
         end) as sup
         from tbl_third_party_diging_patroling where ba='$ba') as a,
-        
+
         (SELECT sum(grass+treebranches+gate_loc+gate_demage+gate_other+broken_roof+broken_gutter+broken_base+building_other+poster_status)
         FROM public.substation_defects_counts  where ba='$ba'
             ) as substation_defects,
@@ -209,7 +210,7 @@ function statsTable(Request $request){
                 when supervision='yes' Then 1 else 0
             end) as sup
             from tbl_third_party_diging_patroling ) as a,
-            
+
             (SELECT sum(grass+treebranches+gate_loc+gate_demage+gate_other+broken_roof+broken_gutter+broken_base+building_other+poster_status)
             FROM public.substation_defects_counts) as substation_defects,
             (SELECT sum(gate_locked+gate_damage+gate_other+vandlism+leaning+rust+poster_status)
@@ -229,15 +230,15 @@ function statsTable(Request $request){
             ";
             }
             $data = DB::select($query);
-          
+
             if ($data) {
                 if ($request->ajax()) {
                     return $data[0];
                 } else {
-                    
-                        
+
+
                     return view('dashboard', ['data' => $data[0]]);
-                       
+
                 }
             } else {
                 return redirect()->route('third-party-digging.index', app()->getLocale());
@@ -303,18 +304,18 @@ function statsTable(Request $request){
                         ->whereNotNull($date)
                         ->whereNotNull($bar)
                         ->where($bar, '<>', 0);
- 
+
                         if ($ba) {
                             $query->where('ba', $ba);
                         }
-        
+
                         if ($from_date) {
                             $query->where($date, '>=', $from_date);
                         }
-                                
+
                         if ($to_date) {
                             $query->where($date, '<=' , $to_date);
-                        } 
+                        }
 
                         if (Auth::user()->ba == '' && $bar != 'km') {
                             $query->where('qa_status', 'Accept');
@@ -329,36 +330,36 @@ function statsTable(Request $request){
     }
 
     private function totalGraphCount($table , $ba , $date, $request){
-       
- 
+
+
          $from_date  = $request->from_date;
          $to_date    = $request->to_date;
          $query      = DB::table($table)
                          ->select('ba', DB::raw("$date::date as visit_date"), DB::raw('count(*) as bar' ))
                          ->whereNotNull($date)
                          ->whereNotNull('total_defects');
-  
+
                          if ($ba) {
                              $query->where('ba', $ba);
                          }
-         
+
                          if ($from_date) {
                              $query->where($date, '>=', $from_date);
                          }
-                                 
+
                          if ($to_date) {
                              $query->where($date, '<=' , $to_date);
-                         } 
+                         }
                          if (Auth::user()->ba == '') {
                            $query->where('qa_status','Accept');
                          }
- 
-                        
+
+
                              $query->groupBy('ba', DB::raw("$date::date"))
                              ->orderBy($date , 'desc');
- 
+
              return $query->get();
-    
+
 
     }
 

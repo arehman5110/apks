@@ -24,12 +24,12 @@ class AdminDashboard extends Controller
     public function index(Request $request){
         if (Auth::user()->ba == '') {
         return view('admin-dashboard');
-          
+
         }
         return view('dashboard');
     }
 
-    
+
     public function getAllCounts(Request $request)
     {
         try {
@@ -43,14 +43,17 @@ class AdminDashboard extends Controller
                 'link_box' => 'tbl_link_box',
                 'cable_bridge' => 'tbl_cable_bridge',
             ];
-            if ($request->ajax()) {
+        //    if ($request->ajax()) {
                 $data = [];
 
                 foreach ($tables as $key => $tableName) {
                     $query = DB::table($tableName);
                     $column = $key == 'tiang' ? 'review_date' : 'visit_date';
 
+
                     $query = $this->filter($query, $column, $request);
+
+                   // print_r($query);
 
                     $data[$key] = $query->count(); // Count records
 
@@ -61,10 +64,10 @@ class AdminDashboard extends Controller
                 $data['total_km'] = $this->filterWithOutAccpet(Patroling::select(DB::raw('sum(km)')), 'vist_date', $request)->first()->sum;
                 $data['total_notice'] = $this->filterWithOutAccpet(ThirdPartyDiging::where('notice', 'yes'), 'survey_date', $request)->count();
                 $data['total_supervision'] = $this->filterWithOutAccpet(ThirdPartyDiging::where('supervision', 'yes'), 'survey_date', $request)->count();
- 
+
                 return $data;
-            }
-            return view('admin-dashboard');
+          //  }
+       //     return view('admin-dashboard');
         } catch (\Throwable $th) {
             return $th->getMessage();
             return redirect()->route('third-party-digging.index', app()->getLocale());
@@ -88,8 +91,8 @@ class AdminDashboard extends Controller
             'SEPANG',
             'PUCHONG'
         ];
-    
-      
+
+
         if ( $request->ba_name != 'null') {
             $bas = [];
                 $bas = [$request->ba_name];
@@ -97,10 +100,10 @@ class AdminDashboard extends Controller
         $from_date  = $request->from_date;
         $to_date    = $request->to_date;
         $data = [];
-    
+
         foreach($bas as $key => $ba){
-    
-    
+
+
             $query="select   ba, COALESCE(km,0) as patroling  ,substation, feeder_pillar , tiang , link_box , cable_bridge   from
         (
             select '$ba' as ba,
@@ -119,19 +122,19 @@ class AdminDashboard extends Controller
                     (select round(sum(km),2) from patroling  where ba='$ba' and vist_date is not null  and vist_date >= '$from_date'
                     AND vist_date <=  ' $to_date' ) as km) as stats";
                 $res = DB::select($query);
-    
+
                    $data[] =$res[0];
-    
+
         }
-    
+
                    return $data;
-    
+
                    if ($data) {
                 return $data;
                 }
-    
+
     }
-    
+
 
 
 

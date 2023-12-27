@@ -495,7 +495,7 @@
             });
 
 
-            //  add patrolling layer 
+            //  add patrolling layer
 
             if (patroling !== '') {
                 map.removeLayer(patroling)
@@ -530,7 +530,7 @@
             });
 
 
-            // map.addLayer(pano_layer); 
+            // map.addLayer(pano_layer);
 
             //  add work package
 
@@ -997,7 +997,7 @@
 
 
             $.ajax({
-                url: `/{{ app()->getLocale() }}/admin-get-all-counts?ba_name=${cu_ba}&from_date=${from_datee}&to_date=${to_datee}`,
+                url: `/{{ app()->getLocale() }}/admin-get-all-counts?ba=${cu_ba}&from_date=${from_datee}&to_date=${to_datee}`,
                 dataType: 'JSON',
                 method: 'GET',
                 async: false,

@@ -42,7 +42,7 @@
     </style>
 @endsection
 @section('content')
-   
+
     <div class=" px-4 mt-2">
         <div class="row dashboard-counts">
             {{-- <div class="col-md-2">
@@ -128,7 +128,7 @@
 
                                     <h3 class="text-center"> {{ __('messages.total_substation_defects') }}</h3>
                                     <p class="text-center mb-0 pb-0"><span
-                                            id="substation_defect"> </span></p>
+                                            id="substation_defects"> </span></p>
 
                                 </div>
                             </div>
@@ -343,25 +343,25 @@
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
 
 
-    
+
 
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.3/datatables.min.js"></script>
     <script src="{{ asset('assets/js/dashboard.js') }}"></script>
 
 
- 
+
 
     <script>
-      
+
 
         var from_date = $('#excel_from_date').val();
         var to_date = $('#excel_to_date').val();
         var excel_ba = $('#search_ba').val();
 
-       
-     
 
- 
+
+
+
 
         $(function() {
             // $('#stats_table').DataTable()
@@ -374,7 +374,7 @@
                 from_date = $('#excel_from_date').val() ?? null;
                 to_date = $('#excel_to_date').val() ?? null;
 
-                onChangeBA(); 
+                onChangeBA();
                 callLayers(ff_ba)
 
             })
@@ -383,7 +383,7 @@
         })
     </script>
 
-    
+
 
 
 
