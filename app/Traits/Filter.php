@@ -66,7 +66,7 @@ trait Filter
 
         // for accept and reject
         if ($request->filled('qa_status')) {
-            if ($request->qa_status == 'Accept' || $request->qa_status == 'Reject') {
+            if ($request->qa_status == 'Accept' || $request->qa_status == 'Reject' || $request->qa_status == 'pending') {
                 $model->where('qa_status', $request->qa_status);
             }
         }

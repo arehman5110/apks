@@ -53,6 +53,7 @@
                             <option value="" >All</option>
                             <option value="Accept">Accept</option>
                             <option value="Reject">Reject</option>
+                            <option value="pending">Pending</option>
 
                         </select>
                     </div>
