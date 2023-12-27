@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\web;
 
 use App\Http\Controllers\Controller;
+use App\Models\Patroling;
+use App\Models\ThirdPartyDiging;
+use App\Traits\Filter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -10,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 class Dashboard extends Controller
 {
     //
+    use Filter;
 function statsTable(Request $request){
     $bas = [
         'RAWANG',
@@ -86,8 +90,7 @@ function statsTable(Request $request){
       $data['cable_bridge']     = $this->getGraphCount('tbl_cable_bridge' , 'visit_date' , 'total_defects', $ba , $request );
       $data['tiang']            = $this->getGraphCount('tbl_savr' , 'review_date' , 'total_defects', $ba , $request);
 
-    //   $data['suryed_patrolling']       = $this->totalGraphCount('patroling'  , $ba ,'vist_date' , $request);
-      $data['suryed_substation']       = $this->totalGraphCount('tbl_substation' , $ba ,'visit_date' , $request);
+   $data['suryed_substation']       = $this->totalGraphCount('tbl_substation' , $ba ,'visit_date' , $request);
       $data['suryed_feeder_pillar']    = $this->totalGraphCount('tbl_feeder_pillar' , $ba ,'visit_date' , $request );
       $data['suryed_link_box']         = $this->totalGraphCount('tbl_link_box', $ba ,'visit_date' , $request );
       $data['suryed_cable_bridge']     = $this->totalGraphCount('tbl_cable_bridge' , $ba ,'visit_date' , $request);
@@ -99,7 +102,52 @@ function statsTable(Request $request){
 
     }
 
-    public function index(Request $request)
+
+
+    // public function getAllCounts(Request $request)
+    // {
+    //     try {
+    //         // $this->filter  is trait  this function taking 3 params (1) model query (2)column name (3) $request that contains  visit_date from-to date nad ba
+    //         // traits return filtered orms and after filtered count
+
+    //         $tables = [
+    //             'substation' => 'tbl_substation',
+    //             'feeder_pillar' => 'tbl_feeder_pillar',
+    //             'tiang' => 'tbl_savr',
+    //             'link_box' => 'tbl_link_box',
+    //             'cable_bridge' => 'tbl_cable_bridge',
+    //         ];
+    //         if ($request->ajax()) {
+    //             $data = [];
+
+    //             foreach ($tables as $key => $tableName) {
+    //                 $query = DB::table($tableName);
+    //                 $column = $key == 'tiang' ? 'review_date' : 'visit_date';
+
+    //                 $query = $this->filter($query, $column, $request);
+
+    //                 $data[$key] = $query->count(); // Count records
+
+    //                 // Sum total_defects
+    //                 $data[$key . '_defect'] = $query->where('total_defects', '>', 0)->sum('total_defects');
+    //             }
+                
+
+    //             $data['total_km'] = $this->filterWithOutAccpet(Patroling::select(DB::raw('sum(km)')), 'vist_date', $request)->first()->sum;
+    //             $data['total_notice'] = $this->filterWithOutAccpet(ThirdPartyDiging::where('notice', 'yes'), 'survey_date', $request)->count();
+    //             $data['total_supervision'] = $this->filterWithOutAccpet(ThirdPartyDiging::where('supervision', 'yes'), 'survey_date', $request)->count();
+ 
+    //             return $data;
+    //         }
+    //         return view('admin-dashboard');
+    //     } catch (\Throwable $th) {
+    //         return $th->getMessage();
+    //         return redirect()->route('third-party-digging.index', app()->getLocale());
+    //     }
+    // }
+
+
+    public function getAllCounts(Request $request)
     {
         try {
             $ba = Auth::user()->ba;
@@ -110,45 +158,10 @@ function statsTable(Request $request){
             }
 
 
-        //  return  $count =
-
-     // Now $count contains the count of records that satisfy the conditions
-
-            // ->when($ba , function ($query) use ($ba) {
-            //     return $query->where('ba', $ba);
-            // })
-            // ->when($from_date, function ($query) use ($from_date , $date) {
-            //     return $query->where($date, '>=', $from_date);
-            // })
-            // ->when($to_date, function ($query) use ($to_date , $date) {
-            //     return $query->where($date, '<=' , $to_date);
-            // });
-
-    // return $query->get();
-        // $data = [];
-        //     $substation = $this->getDashboardCount('tbl_substation','visit_date', 'substation_image_1',$ba,$request);
-        //     $data['substation_defects'] = $substation['sum'];
-        //     $data['substation']  = $substation['count'];
-
-        //     $feeder_pillar = $this->getDashboardCount('tbl_feeder_pillar','visit_date', 'feeder_pillar_image_1',$ba,$request);
-        //     $data['fp_defects'] = $feeder_pillar['sum'];
-        //     $data['feeder_pillar']  = $feeder_pillar['count'];
-
-        //     $link_box = $this->getDashboardCount('tbl_link_box','visit_date', 'link_box_image_1',$ba,$request);
-        //     $data['lb_defect'] = $link_box['sum'];
-        //     $data['link_box']  = $link_box['count'];
-
-        //     $cable_bridge = $this->getDashboardCount('tbl_cable_bridge','visit_date', 'cable_bridge_image_1',$ba,$request);
-        //     $data['cb_defect'] = $cable_bridge['sum'];
-        //     $data['cb_defect']  = $cable_bridge['count'];
-
-
-
-        //     return $data;
 
             if ($ba != '') {
                 $query = "select dig as total_notice,sup as total_supervision,km as total_km  , feeder_pillar , tiang , link_box , cable_bridge ,
-        substation,substation_defects,fp_defects,lb as linkbox,cb as cablebridge,savr from
+        substation,substation_defects,fp_defects as feeder_pillar_defect,lb as link_box_defect,cb as cable_bridge_defect,savr as tiang_defect from
         (select
         sum(case
             when notice='yes' Then 1 else 0
@@ -215,15 +228,16 @@ function statsTable(Request $request){
 
             ";
             }
-           // (select km as dis from patroling ) as b,
-           //(select km as dis from patroling where ba='$ba') as b,
             $data = DB::select($query);
           
             if ($data) {
                 if ($request->ajax()) {
                     return $data[0];
                 } else {
+                    
+                        
                     return view('dashboard', ['data' => $data[0]]);
+                       
                 }
             } else {
                 return redirect()->route('third-party-digging.index', app()->getLocale());
@@ -302,6 +316,9 @@ function statsTable(Request $request){
                             $query->where($date, '<=' , $to_date);
                         } 
 
+                        if (Auth::user()->ba == '' && $bar != 'km') {
+                            $query->where('qa_status', 'Accept');
+                        }
                         if ($bar != 'km') {
                             $query->groupBy('ba', DB::raw("$date::date"));
                         }
@@ -332,6 +349,9 @@ function statsTable(Request $request){
                          if ($to_date) {
                              $query->where($date, '<=' , $to_date);
                          } 
+                         if (Auth::user()->ba == '') {
+                           $query->where('qa_status','Accept');
+                         }
  
                         
                              $query->groupBy('ba', DB::raw("$date::date"))

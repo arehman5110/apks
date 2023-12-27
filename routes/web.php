@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminDashboard;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\web\admin\TeamController;
 use App\Http\Controllers\web\admin\TeamUsersController;
@@ -186,9 +187,15 @@ Route::group(
                 Route::get('/edit-patrolling/{id}', [PatrollingController::class, 'editRoad']);
                 Route::get('/patrolling-detail/{id}', [PatrollingController::class, 'getRoad'])->name('patrolling-detail');
 
-                Route::get('/dashboard', [Dashboard::class, 'index'])->name('dashboard');
+                Route::get('/dashboard', [AdminDashboard::class, 'index'])->name('dashboard');
                 Route::get('/patrol_graph', [Dashboard::class, 'patrol_graph'])->name('patrol_graph');
                 Route::get('/statsTable', [Dashboard::class, 'statsTable'])->name('statsTable');
+                Route::get('/admin-statsTable', [AdminDashboard::class, 'statsTable'])->name('admin-statsTable');
+                Route::get('/admin-get-all-counts', [AdminDashboard::class, 'getAllCounts'])->name('admin-get-all-counts');
+                Route::get('/get-all-counts', [Dashboard::class, 'getAllCounts'])->name('get-all-counts');
+
+
+
 
 
 
