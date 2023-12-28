@@ -698,7 +698,7 @@
                     var str2 = '<tr><th>Total</th>';
 
                     for (var key in totals) {
-                        str2 += '<th>' + totals[key] + '</th>';
+                        str2 += '<th>' + parseFloat(totals[key]).toFixed(2) + '</th>';
                     }
 
                     str2 += '</tr>';

@@ -213,7 +213,7 @@
 
                                     <h3 class="text-center"> {{ __('messages.total_substation_defects') }}</h3>
                                     <p class="text-center mb-0 pb-0"><span
-                                            id="substation_defect"></span></p>
+                                            id="substation_defects"></span></p>
 
                                 </div>
                             </div>
@@ -258,7 +258,7 @@
                                 <div class="card p-3">
 
                                     <h3 class="text-center"> {{ __('messages.total_feeder_pillar_defects') }}</h3>
-                                    <p class="text-center mb-0 pb-0"><span id="feeder_pillar_defect"></span>
+                                    <p class="text-center mb-0 pb-0"><span id="fp_defects"></span>
                                     </p>
 
                                 </div>
@@ -305,7 +305,7 @@
                                 <div class="card p-3">
 
                                     <h3 class="text-center"> {{ __('messages.total_tiang_defects') }}</h3>
-                                    <p class="text-center mb-0 pb-0"><span id="tiang_defect"></span></p>
+                                    <p class="text-center mb-0 pb-0"><span id="savr"></span></p>
 
                                 </div>
                             </div>
@@ -348,7 +348,7 @@
                                 <div class="card p-3">
 
                                     <h3 class="text-center"> {{ __('messages.total_link_box_defects') }} </h3>
-                                    <p class="text-center mb-0 pb-0"><span id="link_box_defect"></span></p>
+                                    <p class="text-center mb-0 pb-0"><span id="linkbox"></span></p>
 
                                 </div>
                             </div>
@@ -390,7 +390,7 @@
 
                                     <h3 class="text-center"> {{ __('messages.total_cable_bridge_defects') }} </h3>
                                     <p class="text-center mb-0 pb-0"><span
-                                            id="cable_bridge_defect"></span></p>
+                                            id="cablebridge"></span></p>
 
                                 </div>
                             </div>
@@ -997,7 +997,7 @@
 
 
             $.ajax({
-                url: `/{{ app()->getLocale() }}/admin-get-all-counts?ba=${cu_ba}&from_date=${from_datee}&to_date=${to_datee}`,
+                url: `/{{ app()->getLocale() }}/get-all-counts?ba=${cu_ba}&from_date=${from_datee}&to_date=${to_datee}`,
                 dataType: 'JSON',
                 method: 'GET',
                 async: false,
@@ -1111,7 +1111,7 @@
             }
 
             $.ajax({
-                url: `/{{ app()->getLocale() }}/admin-statsTable?ba_name=${cu_ba}&from_date=${from_datee}&to_date=${to_datee}`,
+                url: `/{{ app()->getLocale() }}/statsTable?ba_name=${cu_ba}&from_date=${from_datee}&to_date=${to_datee}`,
                 dataType: 'JSON',
                 method: 'GET',
                 async: false,
@@ -1151,7 +1151,7 @@
                     var str2 = '<tr><th>Total</th>';
 
                     for (var key in totals) {
-                        str2 += '<th>' + totals[key] + '</th>';
+                        str2 += '<th>' + parseFloat(totals[key]).toFixed(2) + '</th>';
                     }
 
                     str2 += '</tr>';

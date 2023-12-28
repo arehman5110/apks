@@ -317,9 +317,9 @@ function statsTable(Request $request){
                             $query->where($date, '<=' , $to_date);
                         }
 
-                        if (Auth::user()->ba == '' && $bar != 'km') {
-                            $query->where('qa_status', 'Accept');
-                        }
+                        // if (Auth::user()->ba == '' && $bar != 'km') {
+                        //     $query->where('qa_status', 'Accept');
+                        // }
                         if ($bar != 'km') {
                             $query->groupBy('ba', DB::raw("$date::date"));
                         }
@@ -350,9 +350,9 @@ function statsTable(Request $request){
                          if ($to_date) {
                              $query->where($date, '<=' , $to_date);
                          }
-                         if (Auth::user()->ba == '') {
-                           $query->where('qa_status','Accept');
-                         }
+                        //  if (Auth::user()->ba == '') {
+                        //    $query->where('qa_status','Accept');
+                        //  }
 
 
                              $query->groupBy('ba', DB::raw("$date::date"))
