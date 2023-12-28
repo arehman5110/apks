@@ -34,7 +34,7 @@
                         </select>
                     </div>
 
-                     @if (Auth::user()->ba != '' && $url !='generate-third-party-digging-excel')
+                     @if ($url !='generate-third-party-digging-excel')
                     <div class=" col-md-2">
                         <label for="status">Status</label>
                         <select name="status" id="status" class="form-control">

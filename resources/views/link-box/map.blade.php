@@ -109,7 +109,7 @@
                     <label for="lb_without_defects">Surveyed without defects</label>
                 </div>
 
-                @if (Auth::user()->ba != '')
+                {{-- @if (Auth::user()->ba != '') --}}
                     <div class=" mx-4">
                         <input type="radio" name="select_layer" id="select_layer_unsurveyed" value="lb_unsurveyed"
                             onchange="selectLayer(this.value)" class="unsurveyed">
@@ -128,7 +128,7 @@
                             onchange="selectLayer(this.value)" class="reject">
                         <label for="lb_reject">Reject </label>
                     </div>
-                @endif
+                {{-- @endif --}}
 
 
 
@@ -449,7 +449,7 @@
 
 
             // if user is not admin
-            if (ba !== '') {
+            // if (ba !== '') {
 
 
 
@@ -509,7 +509,7 @@
                 map.addLayer(lb_unsurveyed)
                 lb_unsurveyed.bringToFront()
 
-            }
+            // }
 
             addGroupOverLays()
 
@@ -523,7 +523,7 @@
                 map.removeControl(layerControl);
             }
 
-            if (ba !== '') {
+            // if (ba !== '') {
 
 
                 groupedOverlays = {
@@ -539,19 +539,19 @@
                         'Reject': lb_reject
                     }
                 };
-            } else {
+            // } else {
 
-                groupedOverlays = {
-                    "POI": {
-                        'BA': boundary,
-                        'Pano': pano_layer,
-                        'With defects': lb_with_defects,
-                        'Without defects': lb_without_defects,
-                        'Work Package': work_package,
-                    }
-                };
+            //     groupedOverlays = {
+            //         "POI": {
+            //             'BA': boundary,
+            //             'Pano': pano_layer,
+            //             'With defects': lb_with_defects,
+            //             'Without defects': lb_without_defects,
+            //             'Work Package': work_package,
+            //         }
+            //     };
 
-            }
+            // }
             //add layer control on top right corner of map
             layerControl = L.control.groupedLayers(baseLayers, groupedOverlays, {
                 collapsed: true,

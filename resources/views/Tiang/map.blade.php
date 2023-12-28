@@ -123,14 +123,14 @@
                 <div class=" mx-4">
                     <input type="radio" name="select_layer" id="ts_layer_pending" value="ts_pending"
                         onchange="selectLayer(this.value)" class="pending">
-                    <label for="select_layer_pending">Pending </label>
+                    <label for="ts_layer_pending">Pending </label>
                 </div>
 
 
                 <div class=" mx-4">
                     <input type="radio" name="select_layer" id="ts_layer_reject" value="ts_reject"
                         onchange="selectLayer(this.value)" class="reject">
-                    <label for="select_layer_reject">Reject </label>
+                    <label for="ts_layer_reject">Reject </label>
                 </div>
 
 
@@ -411,8 +411,8 @@
                 buffer: 10
             })
 
-            map.addLayer(ts_unsurveyed)
-            ts_unsurveyed.bringToFront()
+            // map.addLayer(ts_unsurveyed)
+            // ts_unsurveyed.bringToFront()
 
 
             if (ts_with_defects != '') {
@@ -449,6 +449,10 @@
             map.addLayer(ts_without_defects)
             ts_without_defects.bringToFront()
 
+            if (ts_pending != '') {
+                map.removeLayer(ts_pending)
+            }
+
             ts_pending= L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
                 layers: 'cite:ts_pending',
                 format: 'image/png',
@@ -461,6 +465,10 @@
 
             map.addLayer(ts_pending)
             ts_pending.bringToFront()
+
+            if (ts_reject != '') {
+                map.removeLayer(ts_reject)
+            }
 
             ts_reject = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
                 layers: 'cite:ts_reject',
@@ -505,8 +513,8 @@
             }, {
                 buffer: 10
             })
-            map.addLayer(work_package)
-            work_package.bringToFront()
+            // map.addLayer(work_package)
+            // work_package.bringToFront()
 
 
             addGroupOverLays()

@@ -119,7 +119,7 @@
                         class="with_defects" onchange="selectLayer(this.value)">
                     <label for="fp_with_defects">Surveyed with defects</label>
                 </div>
-                @if (Auth::user()->ba != '')
+                {{-- @if (Auth::user()->ba != '') --}}
                     
                 
                 
@@ -141,7 +141,7 @@
                         onchange="selectLayer(this.value)" class="reject">
                     <label for="select_layer_reject">Reject </label>
                 </div>
-                @endif
+                {{-- @endif --}}
                 <div class=" mx-4 d-flex">
                     <input type="radio" name="select_layer" id="select_layer_pano" value="pano"
                         onchange="selectLayer(this.value)">
@@ -412,7 +412,7 @@
             map.addLayer(fp_with_defects)
             fp_with_defects.bringToFront()
 
-            if (ba !== '') {
+            // if (ba !== '') {
                 
            
             if (fp_reject != '') {
@@ -467,7 +467,7 @@
 
             map.addLayer(fp_unsurveyed)
             fp_unsurveyed.bringToFront()
-        }
+        // }
             addGroupOverLays()
 
         }
@@ -481,7 +481,7 @@
                 map.removeControl(layerControl);
             }
             // console.log("sdfsdf");
-            if (ba !== '') {
+            // if (ba !== '') {
             groupedOverlays = {
                 "POI": {
                     'BA': boundary,
@@ -495,18 +495,18 @@
 
                 }
             };
-        }else{
-            groupedOverlays = {
-                "POI": {
-                    'BA': boundary,
-                    'Pano': pano_layer,
-                    'Surveyed with defects': fp_with_defects,
-                    'Surveyed Without defects': fp_surveyed,
-                    'Work Package': work_package,
+        // }else{
+        //     groupedOverlays = {
+        //         "POI": {
+        //             'BA': boundary,
+        //             'Pano': pano_layer,
+        //             'Surveyed with defects': fp_with_defects,
+        //             'Surveyed Without defects': fp_surveyed,
+        //             'Work Package': work_package,
 
-                }
-            };
-        }
+        //         }
+        //     };
+        // }
             //add layer control on top right corner of map
             layerControl = L.control.groupedLayers(baseLayers, groupedOverlays, {
                 collapsed: true,
