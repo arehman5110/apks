@@ -38,7 +38,7 @@
                     <a href="/pencawang" class="nav-link ">
                         <i class="fas fa-road"></i>
 
-                        <p>{{__('messages.patrolling')}} 
+                        <p>{{__('messages.patrolling')}}
 
                         <i class="right fas fa-angle-left"></i></p>
                     </a>
@@ -137,6 +137,14 @@
                             <a href="{{ route('substation.index', app()->getLocale()) }}" class="nav-link ">
                                <p> <i class="far fa-circle nav-icon"></i>
                                 {{__('messages.qr')}}</p>
+                            </a>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a href="/{{app()->getLocale()}}/substation-lks" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>LKS</p>
                             </a>
                         </li>
 
@@ -270,9 +278,17 @@
                                 <p>{{__('messages.index')}}</p>
                             </a>
                         </li>
+
+                        <li class="nav-item">
+                            <a href="" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>LKS</p>
+                            </a>
+                        </li>
+
+
                     </ul>
                 </li>
-
 
 
                 {{-- <li class="nav-item ">

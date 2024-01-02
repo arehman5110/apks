@@ -23,7 +23,7 @@ class SubstationExcelController extends Controller
 
 
         try {
- 
+
 //  return $req;
             $result = Substation::query();
 
@@ -32,8 +32,8 @@ class SubstationExcelController extends Controller
 
 
             $result = $result->whereNotNull('visit_date')->select('*', DB::raw('ST_X(geom) as x'), DB::raw('ST_Y(geom) as y'))->get();
- 
-                // return $result; 
+
+                // return $result;
             if ($result) {
                 $excelFile = public_path('assets/excel-template/substation.xlsx');
 

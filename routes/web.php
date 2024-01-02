@@ -25,6 +25,7 @@ use App\Http\Controllers\web\TiangContoller;
 use App\Http\Controllers\web\tnbes\StatusController;
 use App\Http\Controllers\web\ThirdPartyDiggingController;
 use App\Http\Controllers\web\SubstationController;
+use App\Http\Controllers\lks\SubstationLKSController;
 use App\Http\Controllers\web\FPController;
 use App\Http\Controllers\web\GenerateNoticeController;
 use App\Http\Controllers\web\LinkBoxMapController;
@@ -106,7 +107,7 @@ Route::group(
                 Route::get('/get-tiang-edit/{id}', [TiangMapController::class, 'editMap'])->name('get-tiang-edit');
                 Route::post('/tiang-talian-vt-and-vr-map-edit/{id}', [TiangMapController::class, 'editMapStore'])->name('tiang-talian-vt-and-vr-map-edit');
                 Route::get('/tiang-talian-vt-and-vr-update-QA-Status', [TiangContoller::class, 'updateQAStatus'])->name('tiang-talian-vt-and-vr-update-QA-Status');
-        
+
 
 
                 //// Link Box
@@ -146,6 +147,8 @@ Route::group(
                 Route::get('/search/find-substation/{q}', [SubstationMapController::class, 'seacrh'])->name('subsation-search');
                 Route::get('/search/find-substation-cordinated/{q}', [SubstationMapController::class, 'seacrhCoordinated'])->name('subsation-coordinated');
                 Route::get('/substation-update-QA-Status', [SubstationController::class, 'updateQAStatus'])->name('substation-update-QA-Status');
+                Route::get('/substation-lks',[SubstationLKSController::class,'index'])->name('substation-lks');
+                Route::get('/get-substation-lks',[SubstationLKSController::class,'getDataForLKS'])->name('get-substation-lks');
 
                 ////feeder-piller routes
                 Route::resource('feeder-pillar', FPController::class);
