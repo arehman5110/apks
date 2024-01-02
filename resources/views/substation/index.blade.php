@@ -142,9 +142,9 @@
                                             <th class="nowrap" style="border-bottom: 0px">{{ __('messages.add_clean_up') }}
                                             </th>
                                             <th rowspan="2">{{ __('messages.total_defects') }} </th>
-                                            @if (Auth::user()->ba !== '')
+                                            {{-- @if (Auth::user()->ba !== '') --}}
                                                 <th rowspan="2">QA Status</th>
-                                            @endif
+                                            {{-- @endif --}}
 
 
                                             <th rowspan="2">ACTION</th>
@@ -263,12 +263,12 @@
                     name: 'total_defects'
                 }
             ];
-            if (auth_ba !== '') {
+            // if (auth_ba !== '') {
                 columns.push({
                     data: null,
                     render: renderQaStatus
                 });
-            }
+            // }
 
             columns.push({
                 data: null,

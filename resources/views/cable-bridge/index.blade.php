@@ -83,9 +83,9 @@
                                             <th>TEAM</th>
                                             <th>VISIT DATE</th>
                                             <th>TOTAL DEFECTS</th>
-                                            @if (Auth::user()->ba !== '')
+                                            {{-- @if (Auth::user()->ba !== '') --}}
                                             <th >QA Status</th>
-                                            @endif
+                                            {{-- @endif --}}
                                             <th>ACTION</th>
 
                                         </tr>
@@ -161,9 +161,9 @@
                 
                 ];
 
-                if (auth_ba !== '') {
+                // if (auth_ba !== '') {
         columns.push({ data: null, render: renderQaStatus });
-    }
+    // }
 
     columns.push({ data: null, render: renderDropDownActions });
             table = $('.data-table').DataTable({

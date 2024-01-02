@@ -103,12 +103,13 @@
 
                                             <th>TIANG NO</th>
                                             <th>BA</th>
-                                            <th></th>
                                             <th>REVIEW DATE</th>
+                                            <th></th>
+                                            
                                             <th>TOTAL DEFECTS</th>
-                                            @if (Auth::user()->ba !== '')
+                                            {{-- @if (Auth::user()->ba !== '') --}}
                                                 <th>QA Status</th>
-                                            @endif
+                                            {{-- @endif --}}
 
                                             <th>ACTION</th>
 
@@ -181,12 +182,12 @@
                     name: 'total_defects'
                 }
             ];
-            if (auth_ba !== '') {
+            // if (auth_ba !== '') {
                 columns.push({
                     data: null,
                     render: renderQaStatus
                 });
-            }
+            // }
 
             columns.push({
                 data: null,

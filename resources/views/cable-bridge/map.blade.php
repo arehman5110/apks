@@ -126,7 +126,7 @@
                 </div>
 
 
-                @if (Auth::user()->ba != '')
+                {{-- @if (Auth::user()->ba != '') --}}
                     <div class=" mx-4">
                         <input type="radio" name="select_layer" id="select_layer_unsurveyed" value="cb_unsurveyed"
                             onchange="selectLayer(this.value)" class="unsurveyed">
@@ -145,7 +145,7 @@
                             onchange="selectLayer(this.value)" class="reject">
                         <label for="select_layer_reject">Reject </label>
                     </div>
-                @endif
+                {{-- @endif --}}
 
 
                 <div class=" mx-4">
@@ -423,7 +423,7 @@
 
 
             // if user is not admin
-            if (ba !== '') {
+            // if (ba !== '') {
 
 
 
@@ -483,7 +483,7 @@
                 map.addLayer(cb_unsurveyed)
                 cb_unsurveyed.bringToFront()
 
-            }
+            // }
 
             addGroupOverLays()
 
@@ -497,7 +497,7 @@
                 map.removeControl(layerControl);
             }
 
-            if (ba !== '') {
+            // if (ba !== '') {
 
 
                 groupedOverlays = {
@@ -513,19 +513,19 @@
                         'Reject': cb_reject
                     }
                 };
-            } else {
+            // } else {
 
-                groupedOverlays = {
-                    "POI": {
-                        'BA': boundary,
-                        'Pano': pano_layer,
-                        'With defects': cb_with_defects,
-                        'Without defects': cb_without_defects,
-                        'Work Package': work_package,
-                    }
-                };
+            //     groupedOverlays = {
+            //         "POI": {
+            //             'BA': boundary,
+            //             'Pano': pano_layer,
+            //             'With defects': cb_with_defects,
+            //             'Without defects': cb_without_defects,
+            //             'Work Package': work_package,
+            //         }
+            //     };
 
-            }
+            // }
             //add layer control on top right corner of map
             layerControl = L.control.groupedLayers(baseLayers, groupedOverlays, {
                 collapsed: true,
