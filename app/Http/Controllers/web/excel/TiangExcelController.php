@@ -24,22 +24,22 @@ class TiangExcelController extends Controller
         try{
 // return date('Y-m-d');
 
-        $ba = $req->filled('excelBa') ? $req->excelBa : Auth::user()->ba;
+        $ba = $req->filled('ba') ? $req->ba : Auth::user()->ba;
 
         $result = Tiang::query();
 
       //  $result = $this->filter($result , 'review_date',$req);
 
-        if ($req->filled('excelBa')) {
+        if ($req->filled('ba')) {
          $result->where('ba', $ba);
         }
 
-        if ($req->filled('excel_from_date')) {
-            $result->where('review_date', '>=', $req->excel_from_date);
+        if ($req->filled('from_date')) {
+            $result->where('review_date', '>=', $req->from_date);
         }
 
-        if ($req->filled('excel_to_date')) {
-            $result->where('review_date', '<=', $req->excel_to_date);
+        if ($req->filled('to_date')) {
+            $result->where('review_date', '<=', $req->to_date);
         }
 
 
@@ -87,12 +87,12 @@ class TiangExcelController extends Controller
                     $query->where('ba',$ba);
                 }
 
-                if ($req->filled('excel_from_date')) {
-                    $query->where('review_date', '>=', $req->excel_from_date);
+                if ($req->filled('from_date')) {
+                    $query->where('review_date', '>=', $req->from_date);
                 }
 
-                if ($req->filled('excel_to_date')) {
-                    $query->where('review_date', '<=', $req->excel_to_date);
+                if ($req->filled('to_date')) {
+                    $query->where('review_date', '<=', $req->to_date);
                 }
 
            $roadStatistics = $query->groupBy('fp_road' )->get();

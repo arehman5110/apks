@@ -62,12 +62,12 @@
 
                     <div class=" col-md-2">
                         <label for="excel_from_date">From Date : </label>
-                        <input type="date" name="excel_from_date" id="excel_from_date"
+                        <input type="date" name="from_date" id="excel_from_date"
                             class="form-control" onchange="setMinDate(this.value,'{{explode('-',$url)[1]}}')">
                     </div>
                     <div class=" col-md-2">
                         <label for="excel_to_date">To Date : </label>
-                        <input type="date" name="excel_to_date" id="excel_to_date" onchange="setMaxDate(this.value,'{{explode('-',$url)[1]}}')" class="form-control">
+                        <input type="date" name="to_date" id="excel_to_date" onchange="setMaxDate(this.value,'{{explode('-',$url)[1]}}')" class="form-control">
                     </div>
                     @isset($url)
                     <div class="col-md-1 pt-2 ">
@@ -75,14 +75,14 @@
                         <button type="button" class="btn text-white btn-sm mt-4 " class="form-control"
                             style="background-color: #708090" onclick="resetIndex()">Reset</button>
                     </div>
-                    
+
                     <div class="col-md-2 pt-2 ">
 
                         <button type="submit" class="btn text-white btn-sm mt-4 " class="form-control"
                             style="background-color: #708090">Download QR </button>
                     </div>
                     @endisset
-                     
+
 
 
 
