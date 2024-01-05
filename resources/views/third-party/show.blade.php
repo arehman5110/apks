@@ -70,6 +70,63 @@
 
 
                         <div class="row">
+                            <div class="col-md-4">
+                                <label for="zone">QA Status</label>
+                            </div>
+                            <div class="col-md-4">
+
+                            
+
+                                @if ($data->visit_date != '' )
+
+                                
+                                <button type="button" class="btn  text-left form-control {{$data->qa_status == 'Accept' ? 'btn-success' :($data->qa_status == 'Reject' ? 'btn-danger' :'btn-primary') }} " 
+                                    data-toggle="dropdown">
+                                    {{ $data->qa_status }}
+
+                                </button>
+                                <div class="dropdown-menu" role="menu">
+                                    @if ($data->qa_status != 'Accept')
+                                        <a href="/{{ app()->getLocale() }}/third-party-digging-update-QA-Status?status=Accept&&id={{ $data->id }}"
+                                            onclick="return confirm('are you sure?')">
+                                            <button type="submit"
+                                                class="dropdown-item pl-3 w-100 text-left">Accept</button>
+                                        </a>
+                                    @endif
+
+                                    @if ($data->qa_status != 'Reject')
+                                        <button type="button" class="btn btn-primary dropdown-item" data-id="{{$data->id }}"
+                                            data-toggle="modal" data-target="#rejectReasonModal">
+                                            Remove
+                                        </button>
+                                    @endif
+
+
+
+                                </div>
+                                @else
+                                <button type="button" class="btn  text-left form-control" style="background: orange ; color:white"
+                                >
+                                <strong >Unsurveyed</strong>
+
+
+                             </button>
+                                @endif
+                                {{-- <select name="qa_status" id="qa_status" class="form-control" ></select> --}}
+                            </div>
+                        </div>
+
+                        @if ($data->qa_status == 'Reject')
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="zone">Reason</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <textarea name="" id="" cols="10" rows="4" disabled class="form-control">{{$data->qa_status}}</textarea>
+                                </div>
+                            </div>
+                        @endif
+                        <div class="row">
                             <div class="col-md-4"><label for="zone">{{ __('messages.zone') }}</label></div>
                             <div class="col-md-4"><input readonly value="{{ $data->zone }}" class="form-control">
 
@@ -451,4 +508,24 @@
             </div>
         </div>
     </div>
+
+    <x-reject-modal />
+
+@endsection
+
+
+
+@section('script')
+
+<script>
+    $(function(){
+        $('#rejectReasonModal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget);
+            var id = button.data('id');
+
+            $('#reject-foam').attr('action', `/{{app()->getLocale()}}/third-party-digging-update-QA-Status`)
+            $('#reject-id').val(id);
+        });
+    })
+</script>
 @endsection
