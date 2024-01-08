@@ -40,7 +40,7 @@ class TiangContoller extends Controller
             });
 
             return datatables()
-                ->of($result->get())->of($result->get())->addColumn('tiang_id', function ($row) {
+                ->of($result->get())->addColumn('tiang_id', function ($row) {
                     
                     return "SAVR-" .$row->id;
                 })
