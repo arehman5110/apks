@@ -129,6 +129,7 @@
 
                                     <thead>
                                         <tr>
+                                            <th rowspan="2">ID</th>
                                             <th rowspan="2">{{ __('messages.name') }}</th>
                                             <th rowspan="2">{{ __('messages.visit_date') }} </th>
                                             <th rowspan="2">asdas</th>
@@ -199,7 +200,12 @@
 
         $(document).ready(function() {
 
-            var columns = [{
+            var columns = [
+            {
+                name:'substation_id',
+                data:'substation_id',
+            },    
+            {
                     render: function(data, type, full) {
                         return `<a href="/{{ app()->getLocale() }}/substation/${full.id}/edit" class="text-decoration-none text-dark">${full.name}</a>`;
                     },

@@ -100,7 +100,7 @@
 
                                     <thead style="background-color: #E4E3E3 !important">
                                         <tr>
-
+                                            <th>ID</th>
                                             <th>TIANG NO</th>
                                             <th>BA</th>
                                             <th>REVIEW DATE</th>
@@ -158,6 +158,10 @@
 
 
             var columns = [
+                {
+name:"tiang_id",
+data:'tiang_id',
+                },
 
                 {
                     data: 'tiang_no',
