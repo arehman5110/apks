@@ -30,6 +30,7 @@ class SubstationController extends Controller
      */
     public function index(Request $request)
     {
+        // return strtotime(now());
         if ($request->ajax()) {
             $result = Substation::query();
 

@@ -112,7 +112,7 @@ class ThirdPartyDiggingController extends Controller
                 if ($request->hasFile($key) && $request->file($key)->isValid()) {
                     $uploadedFile = $request->file($key);
                     $img_ext = $uploadedFile->getClientOriginalExtension();
-                    $filename = $key . '-' . strtotime(now()) . '.' . $img_ext;
+                    $filename = $key . '-' . strtotime(now()). $user . '.' . $img_ext;
                     $uploadedFile->move($destinationPath, $filename);
                     $data->{$key} = $destinationPath . $filename;
                 }
@@ -216,7 +216,7 @@ class ThirdPartyDiggingController extends Controller
                 if ($request->hasFile($key) && $request->file($key)->isValid()) {
                     $uploadedFile = $request->file($key);
                     $img_ext = $uploadedFile->getClientOriginalExtension();
-                    $filename = $key . '-' . strtotime(now()) . '.' . $img_ext;
+                    $filename = $key . '-' . strtotime(now()). $data->id . '.' . $img_ext;
                     $uploadedFile->move($destinationPath, $filename);
                     $data->{$key} = $destinationPath . $filename;
                 }
