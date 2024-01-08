@@ -300,9 +300,9 @@
     </div>
 
     <div class="col-md-8 row">
-        {!!  viewAndUpdateImage($data->image_building , 'images_gate_after_lock' , $disabled )  !!}
+        {!!  viewAndUpdateImage($data->images_gate_after_lock , 'images_gate_after_lock' , $disabled )  !!}
 
-        {!!  viewAndUpdateImage($data->image_building_2 , 'image_building_2' , $disabled )  !!}
+        {!!  viewAndUpdateImage($data->images_gate_after_lock_2 , 'images_gate_after_lock_2' , $disabled )  !!}
 
     </div>
 
