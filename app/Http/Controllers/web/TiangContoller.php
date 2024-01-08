@@ -130,7 +130,7 @@ class TiangContoller extends Controller
                                     if (is_a($file, 'Illuminate\Http\UploadedFile') && $file->isValid()) {
                                         $uploadedFile = $file;
                                         $img_ext = $uploadedFile->getClientOriginalExtension();
-                                        $filename = $keyy . '-' . strtotime(now()) . '.' . $img_ext;
+                                        $filename = $keyy . '-' . strtotime(now()).rand(10,100)  . '.' . $img_ext;
                                         $uploadedFile->move($destinationPath, $filename);
                                         $arr[$keyy] = $destinationPath . $filename;
                                     }
@@ -157,7 +157,7 @@ class TiangContoller extends Controller
                 if (is_a($request->{$file}, 'Illuminate\Http\UploadedFile') && $request->{$file}->isValid()) {
                     $uploadedFile = $request->{$file};
                     $img_ext = $request->{$file}->getClientOriginalExtension();
-                    $filename = $file . '-' . strtotime(now()) . '.' . $img_ext;
+                    $filename = $file . '-' . strtotime(now()) .rand(10,100) . '.' . $img_ext;
                     $uploadedFile->move($destinationPath, $filename);
                     $data->{$file} = $destinationPath . $filename;
                 }
@@ -246,7 +246,7 @@ class TiangContoller extends Controller
                         if (is_a($file, 'Illuminate\Http\UploadedFile') && $file->isValid()) {
                             $uploadedFile = $file;
                             $img_ext = $uploadedFile->getClientOriginalExtension();
-                            $filename = $key . '-' . strtotime(now()) . '.' . $img_ext;
+                            $filename = $key . '-' . strtotime(now()).rand(10,100)  . '.' . $img_ext;
                             $uploadedFile->move($destinationPath, $filename);
                             $json[$key] = $destinationPath . $filename;
                         }
@@ -257,7 +257,7 @@ class TiangContoller extends Controller
                     if (is_a($mainvalue, 'Illuminate\Http\UploadedFile') && $mainvalue->isValid()) {
                         $uploadedFile = $mainvalue;
                         $img_ext = $uploadedFile->getClientOriginalExtension();
-                        $filename = $mainkey . '-' . strtotime(now()) . '.' . $img_ext;
+                        $filename = $mainkey . '-' . strtotime(now()).rand(10,100)  . '.' . $img_ext;
                         $uploadedFile->move($destinationPath, $filename);
                         $data[$mainkey] = $destinationPath . $filename;
                     }

@@ -68,7 +68,7 @@ var work_package = '';
 
 
 var substation = '';
-var substation_with_defects = '';
+// var substation_with_defects = '';
 var substation_without_defects ='';
 var sub_pending = '';
 var sub_reject = '';
@@ -125,6 +125,10 @@ var sub_reject = '';
             }
             else if (param == 'substation_without_defects') {
                 sel_lyr = substation_without_defects;
+
+            }
+            else if (param == 'substation_with_defects') {
+                sel_lyr = substation_with_defects;
 
             }
             else if (param == 'fp_unsurveyed') {
