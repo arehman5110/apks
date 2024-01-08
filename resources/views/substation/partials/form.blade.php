@@ -47,7 +47,7 @@
     <div class="col-md-4"><label for="type">{{ __('messages.type') }}</label></div>
     <div class="col-md-4">
         <select name="type" id="type" class="form-control" {{$disabled ? 'disabled' : ''}}>
-            <option value="{{$data->type}}" hidden>{{$data->type == '' ? 'select' : $data->type}}select</option>
+            <option value="{{$data->type}}" hidden>{{$data->type == '' ? 'select' : $data->type}}</option>
             <option value="Indoor">Indoor</option>
             <option value="Attach Building">Attach Building</option>
             <option value="Outdoor">Outdoor</option>
@@ -61,7 +61,7 @@
     <div class="col-md-4"><label for="area">{{ __('messages.voltage') }}</label></div>
     <div class="col-md-4">
         <select name="voltage" id="voltage" class="form-control" {{$disabled ? 'disabled' : ''}}>
-            <option value="{{$data->voltage}}" hidden>{{$data->voltage == '' ? 'select' : $data->voltage}}select</option>
+            <option value="{{$data->voltage}}" hidden>{{$data->voltage == '' ? 'select' : $data->voltage}}</option>
             <option value="11kw">11kv</option>
             <option value="13kw">13kv</option>
         </select>
