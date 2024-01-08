@@ -31,7 +31,7 @@ class uploadImagesContoller extends Controller
                     if ($req->hasFile($key) && $req->file($key)->isValid()) {
                         $uploadedFile = $req->file($key);
                         $img_ext = $uploadedFile->getClientOriginalExtension();
-                        $filename = $key . '-' . strtotime(now()) . '.' . $img_ext;
+                        $filename = $key . '-' . strtotime(now()). $data->id . '.' . $img_ext;
                         $uploadedFile->move($destinationPath, $filename);
                         $data->{$key} = $destinationPath . $filename;
                     }
@@ -91,7 +91,7 @@ class uploadImagesContoller extends Controller
                         if (is_a($file, 'Illuminate\Http\UploadedFile') && $file->isValid()) {
                             $uploadedFile = $file;
                             $img_ext = $uploadedFile->getClientOriginalExtension();
-                            $filename = $key . '-' . strtotime(now()) . '.' . $img_ext;
+                            $filename = $key . '-' . strtotime(now()). $data->id . '.' . $img_ext;
                            
                             $uploadedFile->move($destinationPath, $filename);
                             $arr[$key] = $destinationPath.$filename;
@@ -105,7 +105,7 @@ class uploadImagesContoller extends Controller
                     if (is_a($mainvalue, 'Illuminate\Http\UploadedFile') && $mainvalue->isValid()) {
                         $uploadedFile = $mainvalue;
                         $img_ext = $uploadedFile->getClientOriginalExtension();
-                        $filename = $mainkey . '-' . strtotime(now()) . '.' . $img_ext;
+                        $filename = $mainkey . '-' . strtotime(now()). $data->id . '.' . $img_ext;
                         $uploadedFile->move($destinationPath, $filename);
                         $data[$mainkey] = $destinationPath.$filename ;
                     }
