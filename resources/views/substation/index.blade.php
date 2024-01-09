@@ -179,6 +179,7 @@
 
 
     <x-remove-confirm />
+    <x-reject-modal />
 
 @endsection
 
