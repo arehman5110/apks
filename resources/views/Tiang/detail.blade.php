@@ -173,27 +173,21 @@
                                         <label for="main_line">{{__('messages.main_line_service_line')}}</label>
                                     </div>
                                     <div class="col-md-4">
-                                        <select name="talian_utama" id="main_line" class="form-control"   disabled>
-                                            <option value="{{$data->talian_utama ?? ''}}" hidden>{{$data->talian_utama ?? 'select'}}</option>
+                                        <select name="talian_utama_connection" id="main_line" class="form-control"   disabled>
+                                            <option value="{{$data->talian_utama_connection ?? ''}}" hidden>{{$data->talian_utama_connection ?? 'select'}}</option>
                                             <option value="main_line">Main Line</option>
                                             <option value="service_line">Service Line</option>
                                         </select>
+                                    </div>
                                 </div>
-                                </div>
+
                                 <div class="row " >
                                     <div class="col-md-4">
-                                        <label for="">
-                                            Number of Services Involves 1 user only
-
-                                        </label>
+                                        <label for="">  Number of Services Involves 1 user only </label>
                                     </div>
                                     <div class="col-md-2 d-flex mt-2">
-                                        <input type="number" disabled  value="{{$data->talian_utama_connection}}" 
-                                         
-                                      >
-
-                                      
-                                            </div>
+                                        <input type="number" disabled  value="{{$data->talian_utama}}"  >
+                                    </div>
                                 </div>
 
                                 <div class="row">
