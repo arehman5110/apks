@@ -192,105 +192,97 @@
 
 
 
-                               
+
 
                                 <div class="row">
                                     <div class="col-md-4"><label for="">{{ __('messages.Section') }} </label></div>
-
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-4"><label for="section_from">{{ __('messages.from') }} </label>
+                                    <div class="col-md-4">
+                                        <label for="section_from">{{ __('messages.from') }} </label>
                                     </div>
-                                    <div class="col-md-4"><input type="text" name="section_from" id="section_from"
-                                            class="form-control"></div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-4"><label for="section_to">{{ __('messages.to') }}</label></div>
-                                    <div class="col-md-4"><input type="text" name="section_to" id="section_to"
-                                            class="form-control"></div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-4"><label for="tiang_no">{{ __('messages.Tiang_No') }}</label>
+                                    <div class="col-md-4">
+                                        <input type="text" name="section_from" id="section_from" class="form-control">
                                     </div>
-                                    <div class="col-md-4"><input type="text" name="tiang_no" id="tiang_no"
-                                            class="form-control" required></div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="section_to">{{ __('messages.to') }}</label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="text" name="section_to" id="section_to" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="tiang_no">{{ __('messages.Tiang_No') }}</label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="text" name="tiang_no" id="tiang_no" class="form-control" required>
+                                    </div>
                                 </div>
 
 
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <label for="review_date">{{__('messages.visit_date')}}</label>
+                                        <label for="review_date">{{ __('messages.visit_date') }}</label>
                                     </div>
-                                    <div class="col-md-4"><input type="date" name="review_date" id="review_date"
-                                            class="form-control" required></div>
+                                    <div class="col-md-4">
+                                        <input type="date" name="review_date" id="review_date" class="form-control" required>
+                                    </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <label for="main_line">{{__('messages.main_line_service_line')}}</label>
+                                        <label for="main_line">{{ __('messages.main_line_service_line') }}</label>
                                     </div>
                                     <div class="col-md-4">
-                                        <select name="talian_utama" id="main_line" class="form-control"  onchange="getMainLine(this.value)">
+                                        <select name="talian_utama_connection" id="main_line" class="form-control">
                                             <option value="" hidden>select</option>
                                             <option value="main_line">Main Line</option>
                                             <option value="service_line">Service Line</option>
                                         </select>
+                                    </div>
                                 </div>
-                                </div>
-                                <div class="row d-none" >
-                                    <div class="col-md-4">
-                                        <label for="">
-                                            Number of Services Involves 1 user only
 
-                                        </label>
+                                <div class="row  ">
+                                    <div class="col-md-4">
+                                        <label for=""> Number of Services Involves 1 user only </label>
                                     </div>
                                     <div class="col-md-2 d-flex mt-2">
-                                        <input type="number" name="talian_utama_connection" class="form-control"  id="main_line_connection_one"
-                                              >
-                                          
-                                              
-
-
-
-
-
-                                       
-
-                                            </div>
+                                        <input type="number" name="talian_utama" class="form-control" id="main_line_connection_one">
+                                    </div>
                                 </div>
 
 
                                 <div class="row">
-                                    <div class="col-md-4"><label for="pole_image-1">{{ __('messages.pole') }} Image 1
-                                        </label>
+                                    <div class="col-md-4">
+                                        <label for="pole_image-1">{{ __('messages.pole') }} Image 1 </label>
                                     </div>
-                                    <div class="col-md-5 p-2 pr-5"><input type="file" name="pole_image_1"
-                                            id="pole_image_1" required accept="image/*" class="form-control">
+                                    <div class="col-md-5 p-2 pr-5">
+                                        <input type="file" name="pole_image_1" id="pole_image_1" required accept="image/*" class="form-control">
                                     </div>
-
-
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-4"><label for="pole_image-2">{{ __('messages.pole') }} Image
-                                            2</label>
+                                    <div class="col-md-4">
+                                        <label for="pole_image-2">{{ __('messages.pole') }} Image 2</label>
                                     </div>
-                                    <div class="col-md-5 p-2 pr-5"><input type="file" name="pole_image_2"
-                                            id="pole_image_2" required accept="image/*" class="form-control">
+                                    <div class="col-md-5 p-2 pr-5">
+                                        <input type="file" name="pole_image_2" id="pole_image_2" required accept="image/*" class="form-control">
                                     </div>
-
                                 </div>
 
-
-
                                 <div class="row">
-                                    <div class="col-md-4"><label for="cordinates">{{ __('messages.coordinate') }}</label>
+                                    <div class="col-md-4">
+                                        <label for="cordinates">{{ __('messages.coordinate') }}</label>
                                     </div>
-                                    <div class="col-md-4"><input type="text" name="cordinates" id="cordinates"
-                                            class="form-control" required readonly></div>
+                                    <div class="col-md-4">
+                                        <input type="text" name="cordinates" id="cordinates" class="form-control" required readonly>
+                                    </div>
                                 </div>
 
                                 <input type="hidden" name="lat" id="lat" required class="form-control">
@@ -316,15 +308,11 @@
 
                                     <div class="col-md-6">
                                         <div class="card p-4">
-                                            <label for="st7">
-                                                {{ __('messages.Pole_Size_Bill') }} </label>
+                                            <label for="st7"> {{ __('messages.Pole_Size_Bill') }} </label>
+
                                             <div class="row">
 
                                                 <div class=" col-md-12 row">
-
-
-
-
                                                     <div class="d-flex col-md-4">
                                                         <input type="radio" name="size_tiang" value="7.5"
                                                             id="st7" class="  ">
@@ -407,64 +395,64 @@
                                     </div>
 
 
-                                        {{-- ABC (Span) 3 X 185 --}}
-                                        <div class="col-md-6">
-                                            <div class="card p-4">
-
-                                                <label for="section_to">{{ __('messages.ABC_Span') }} 3 X 185</label>
-                                                    {!! tiangSpanRadio( '', 'abc_span', 's3_185',  true) !!}
-
-                                                <label for="s3_95">{{ __('messages.ABC_Span') }}3 X 95</label>
-                                                    {!! tiangSpanRadio(  '', 'abc_span', 's3_95',  true) !!}
-
-                                                <label for="s3_16">{{ __('messages.ABC_Span') }}3 X 16</label>
-                                                    {!! tiangSpanRadio('', 'abc_span', 's3_16',  true) !!}
-
-                                                 <label for="s1_16">{{ __('messages.ABC_Span') }}1 X 16</label>
-                                                    {!! tiangSpanRadio('', 'abc_span', 's1_16',  true) !!}
-
-                                            </div>
-                                        </div>
-
-
-
-                                       {{-- PVC (Span) 19/064 --}}
-                                       <div class="col-md-6 ">
+                                    {{-- ABC (Span) 3 X 185 --}}
+                                    <div class="col-md-6">
                                         <div class="card p-4">
-                                                    <label for="s19_064">{{ __('messages.PVC_Span') }}
-                                                        19/064</label>
 
-                                                        {!! tiangSpanRadio(     '', 'pvc_span', 's19_064',  true) !!}
+                                            <label for="section_to">{{ __('messages.ABC_Span') }} 3 X 185</label>
+                                            {!! tiangSpanRadio('', 'abc_span', 's3_185', true) !!}
 
+                                            <label for="s3_95">{{ __('messages.ABC_Span') }}3 X 95</label>
+                                            {!! tiangSpanRadio('', 'abc_span', 's3_95', true) !!}
 
-                                             <label for="s7_083"  >{{ __('messages.PVC_Span') }}
-                                                        7/083</label>
-                                                        {!! tiangSpanRadio('', 'pvc_span', 's7_083',  true) !!}
+                                            <label for="s3_16">{{ __('messages.ABC_Span') }}3 X 16</label>
+                                            {!! tiangSpanRadio('', 'abc_span', 's3_16', true) !!}
 
-
-
-                                                    <label for="s7_044"  >{{ __('messages.PVC_Span') }}
-                                                        7/044</label>
-
-
-                                                        {!! tiangSpanRadio(  '', 'pvc_span', 's7_044',  true) !!}
+                                            <label for="s1_16">{{ __('messages.ABC_Span') }}1 X 16</label>
+                                            {!! tiangSpanRadio('', 'abc_span', 's1_16', true) !!}
 
                                         </div>
                                     </div>
 
-                                        {{-- BARE (Span) 7/173 --}}
+
+
+                                    {{-- PVC (Span) 19/064 --}}
+                                    <div class="col-md-6 ">
+                                        <div class="card p-4">
+                                            <label for="s19_064">{{ __('messages.PVC_Span') }}
+                                                19/064</label>
+
+                                            {!! tiangSpanRadio('', 'pvc_span', 's19_064', true) !!}
+
+
+                                            <label for="s7_083">{{ __('messages.PVC_Span') }}
+                                                7/083</label>
+                                            {!! tiangSpanRadio('', 'pvc_span', 's7_083', true) !!}
+
+
+
+                                            <label for="s7_044">{{ __('messages.PVC_Span') }}
+                                                7/044</label>
+
+
+                                            {!! tiangSpanRadio('', 'pvc_span', 's7_044', true) !!}
+
+                                        </div>
+                                    </div>
+
+                                    {{-- BARE (Span) 7/173 --}}
 
                                     <div class="col-md-6 ">
                                         <div class="card p-4">
 
-                                            <label for="s7_173"  >{{ __('messages.BARE_Span') }} 7/173</label>
-                                                {!! tiangSpanRadio(  '', 'bare_span', 's7_173',  true) !!}
+                                            <label for="s7_173">{{ __('messages.BARE_Span') }} 7/173</label>
+                                            {!! tiangSpanRadio('', 'bare_span', 's7_173', true) !!}
 
                                             <label for="s7_122">{{ __('messages.BARE_Span') }} 7/122</label>
-                                                {!! tiangSpanRadio( '', 'bare_span', 's7_122',  true) !!}
+                                            {!! tiangSpanRadio('', 'bare_span', 's7_122', true) !!}
 
                                             <label for="s3_132">{{ __('messages.BARE_Span') }} 3/132</label>
-                                                {!! tiangSpanRadio( '', 'bare_span', 's3_132',  true) !!}
+                                            {!! tiangSpanRadio('', 'bare_span', 's3_132', true) !!}
 
                                         </div>
                                     </div>
@@ -1174,7 +1162,7 @@
                                                 </td>
                                                 <td>
                                                     <input type="file" name="tapak_no_vehicle_entry_img"
-                                                        id="vehicle_entry-img" class="form-control d-none" >
+                                                        id="vehicle_entry-img" class="form-control d-none">
                                                 </td>
                                             </tr>
 
@@ -1293,16 +1281,15 @@
 
                                             <div class="col-md-4 d-flex">
                                                 <input type="radio" name="arus_pada_tiang" id="arus_pada_tiang_yes"
-                                                    class="form-check" value="Yes"><label
-                                                    for="arus_pada_tiang_yes">
+                                                    class="form-check" value="Yes"><label for="arus_pada_tiang_yes">
                                                     {{ __('messages.yes') }}</label>
                                             </div>
 
                                             <div class="col-md-4 d-none  " id="arus_pada_tiang_amp_div">
                                                 <label for="arus_pada_tiang_amp">
                                                     {{ __('messages.Amp') }}</label>
-                                                <input type="text" name="arus_pada_tiang_amp"
-                                                    id="arus_pada_tiang_amp" class="form-control" required>
+                                                <input type="text" name="arus_pada_tiang_amp" id="arus_pada_tiang_amp"
+                                                    class="form-control" required>
                                             </div>
 
 
@@ -1527,14 +1514,14 @@
             })
 
 
-            $('.select-radio-value').on('change',function(){
+            $('.select-radio-value').on('change', function() {
                 var val = this.value;
                 var id = `${this.name}_input`;
                 var input = $(`#${id}`)
                 if (val === 'other') {
                     input.val('');
                     input.removeClass('d-none');
-                }else{
+                } else {
                     input.val(val);
                     if (!input.hasClass('d-none')) {
                         input.addClass('d-none')
@@ -1644,7 +1631,7 @@
         }
 
 
-        function getMainLine(val){
+        function getMainLine(val) {
             // if (val == 'service_line') {
             //     $('#main_line_connection').removeClass('d-none')
             // }else{
