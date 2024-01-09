@@ -93,7 +93,7 @@
                                     @if ($data->qa_status != 'Reject')
                                         <button type="button" class="btn btn-primary dropdown-item" data-id="{{$data->id }}"
                                             data-toggle="modal" data-target="#rejectReasonModal">
-                                            Remove
+                                            Reject
                                         </button>
                                     @endif
 
@@ -118,7 +118,7 @@
                                     <label for="zone">Reason</label>
                                 </div>
                                 <div class="col-md-4">
-                                    <textarea name="" id="" cols="10" rows="4" disabled class="form-control">{{$data->qa_status}}</textarea>
+                                    <textarea name="" id="" cols="10" rows="4" disabled class="form-control">{{$data->reject_remarks}}</textarea>
                                 </div>
                             </div>
                         @endif
