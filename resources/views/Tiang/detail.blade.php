@@ -931,7 +931,7 @@
                                     @if ($data->qa_status != 'Reject')
                                         <button type="button" class="btn btn-primary dropdown-item" data-id="{{$data->id }}"
                                             data-toggle="modal" data-target="#rejectReasonModal">
-                                            Remove
+                                            Reject
                                         </button>
                                     @endif
 
