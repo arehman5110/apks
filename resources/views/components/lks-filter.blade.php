@@ -8,7 +8,7 @@
     <div id="collapseQr">
         <div class="card card-body">
             <form action="{{ isset($url) ? route($url, app()->getLocale()) : '#' }}"
-                onsubmit="collapseFilter()" method="post">
+                  method="post">
                 @csrf
                 <div class="row form-input ">
                     <div class=" col-md-2">
@@ -38,11 +38,11 @@
                     <div class=" col-md-2">
                         <label for="excel_from_date">From Date : </label>
                         <input type="date" name="excel_from_date" id="excel_from_date"
-                            class="form-control" onchange="setMinDate(this.value,'{{explode('-',$url)[1]}}')">
+                            class="form-control" onchange="setMinDate(this.value)">
                     </div>
                     <div class=" col-md-2">
                         <label for="excel_to_date">To Date : </label>
-                        <input type="date" name="excel_to_date" id="excel_to_date" onchange="setMaxDate(this.value,'{{explode('-',$url)[1]}}')" class="form-control">
+                        <input type="date" name="excel_to_date" id="excel_to_date" onchange="setMaxDate(this.value)" class="form-control">
                     </div>
                     @isset($url)
                     <div class="col-md-1 pt-2 ">
@@ -53,8 +53,8 @@
 
                     <div class="col-md-1 pt-2 ">
 
-                        <button type="button" class="btn text-white btn-sm mt-4 " class="form-control"
-                            style="background-color: #708090" onclick="generateLKS()">Generate LKS</button>
+                        <button type="submit" class="btn text-white btn-sm mt-4 " class="form-control"
+                            style="background-color: #708090"   >Generate LKS</button>
                     </div>
 
 

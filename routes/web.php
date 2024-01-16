@@ -198,8 +198,17 @@ Route::group(
                 Route::get('/get-all-counts', [Dashboard::class, 'getAllCounts'])->name('get-all-counts');
 
 
+                Route::post('/GENERATE', [SubstationLKSController::class, 'gene'])->name('GENERATE');
 
+                // Route::get('/GENERATE', function (Codedge\Fpdf\Fpdf\Fpdf $fpdf) {
 
+                //     $fpdf->AddPage();
+                //     $fpdf->SetFont('Courier', 'B', 18);
+                //     $fpdf->Cell(50, 25, 'Hello World!');
+                //     $fpdf->Output();
+                //     exit;
+                
+                // });
 
 
                 Route::view('/map-2', 'map')->name('map-2');

@@ -89,7 +89,7 @@
 
 
             <div class="row">
-                @include('components.lks-filter', ['url' => 'generate-substation-excel'])
+                @include('components.lks-filter', ['url' => 'GENERATE'])
 
 
 
