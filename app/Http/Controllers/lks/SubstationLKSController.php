@@ -29,6 +29,7 @@ class SubstationLKSController extends Controller
 
 
 public function gene(Fpdf $fpdf, Request $req){
+    
     $result = Substation::query();
 
         $result = $this->filter($result , 'visit_date',$req)->where('qa_status','Accept');
