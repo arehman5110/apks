@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\AdminDashboard;
+use App\Http\Controllers\lks\CableBridgeLKSController;
+use App\Http\Controllers\lks\FeederPillarLKSController;
+use App\Http\Controllers\lks\LinkBoxLKSController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\web\admin\TeamController;
 use App\Http\Controllers\web\admin\TeamUsersController;
@@ -119,6 +122,8 @@ Route::group(
                 Route::get('/search/find-link-box/{q}', [LinkBoxMapController::class, 'seacrh'])->name('link-box-search');
                 Route::get('/search/find-link-box-cordinated/{q}', [LinkBoxMapController::class, 'seacrhCoordinated'])->name('link-box-coordinated');
                 Route::get('/link-box-pelbagai-voltan-update-QA-Status', [LinkBoxController::class, 'updateQAStatus'])->name('link-box-pelbagai-voltane-update-QA-Status');
+                Route::post('/generate-link-box-lks', [LinkBoxLKSController::class, 'gene'])->name('generate-link-box-lks');
+                Route::get('/link-box-lks',[LinkBoxLKSController::class,'index'])->name('link-box-lks');
 
 
                 //// Cable Bridge
@@ -131,6 +136,8 @@ Route::group(
                 Route::get('/search/find-cable-bridge/{q}', [CableBridgeMapController::class, 'seacrh'])->name('cable-bridge-search');
                 Route::get('/search/find-cable-bridge-cordinated/{q}', [CableBridgeMapController::class, 'seacrhCoordinated'])->name('cable-bridge-coordinated');
                 Route::get('/cable-bridge-update-QA-Status', [CableBridgeController::class, 'updateQAStatus'])->name('cable-bridge-update-QA-Status');
+                Route::post('/generate-cable-bridge-lks', [CableBridgeLKSController::class, 'gene'])->name('generate-cable-bridge-lks');
+                Route::get('/cable-bridge-lks',[CableBridgeLKSController::class,'index'])->name('cable-bridge-lks');
 
                 ////third party digging routes
                 Route::resource('third-party-digging', ThirdPartyDiggingController::class);
@@ -149,6 +156,8 @@ Route::group(
                 Route::get('/substation-update-QA-Status', [SubstationController::class, 'updateQAStatus'])->name('substation-update-QA-Status');
                 Route::get('/substation-lks',[SubstationLKSController::class,'index'])->name('substation-lks');
                 Route::get('/get-substation-lks',[SubstationLKSController::class,'getDataForLKS'])->name('get-substation-lks');
+                Route::post('/generate-substation-lks', [SubstationLKSController::class, 'gene'])->name('generate-substation-lks');
+
 
                 ////feeder-piller routes
                 Route::resource('feeder-pillar', FPController::class);
@@ -160,6 +169,8 @@ Route::group(
 
                 Route::get('/search/find-feeder-pillar-cordinated/{q}', [FeederPillarMapController::class, 'seacrhCoordinated'])->name('feeder-pillar-coordinated');
                 Route::get('/feeder-pillar-update-QA-Status', [FPController::class, 'updateQAStatus'])->name('feeder-pillar-update-QA-Status');
+                Route::post('/generate-feeder-pillar-lks', [FeederPillarLKSController::class, 'gene'])->name('generate-feeder-pillar-lks');
+                Route::get('/feeder-pillar-lks',[FeederPillarLKSController::class,'index'])->name('feeder-pillar-lks');
 
 
                 //generate notice pdf
@@ -198,7 +209,6 @@ Route::group(
                 Route::get('/get-all-counts', [Dashboard::class, 'getAllCounts'])->name('get-all-counts');
 
 
-                Route::post('/GENERATE', [SubstationLKSController::class, 'gene'])->name('GENERATE');
 
                 // Route::get('/GENERATE', function (Codedge\Fpdf\Fpdf\Fpdf $fpdf) {
 

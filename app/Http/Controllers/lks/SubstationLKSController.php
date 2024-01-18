@@ -214,6 +214,6 @@ public function gene(Fpdf $fpdf, Request $req){
         // Move to the next line for the next row
     }
     
-    return $fpdf->output('I');
+    return $fpdf->output('I','substation.pdf');
 }
 }
