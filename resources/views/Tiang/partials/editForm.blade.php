@@ -1,8 +1,4 @@
-<form id="framework-wizard-form"
-                            action="/{{app()->getLocale()}}/{{$url }}/{{$data->id}}"
-                            enctype="multipart/form-data" style="display: none" method="POST">
-                            @method('PATCH')
-                            @csrf
+
                             <h3>{{ __('messages.info') }} </h3>
 
 
@@ -896,7 +892,7 @@
                             {{-- END Kebocoran Arus (5) --}}
 
 
-                        </form>
+                    
 
 
 

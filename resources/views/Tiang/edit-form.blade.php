@@ -82,18 +82,83 @@
 
             <div class=" ">
 
-                <div class=" card row   ">
+                <div class=" card row bg-white   ">
                     <div class=" ">
                         {{-- <h3 class="text-center p-2">{{ __('messages.qr_savr') }}</h3> --}}
+                                
+                        {{-- <div class="row p-4">
+                            <div class="col-md-4">
+                                <label for="zone">QA Status</label>
+                            </div>
+                            <div class="col-md-4">
 
-                        @include('Tiang.partials.editForm', ['data'=>$data , 'url' => "tiang-talian-vt-and-vr"])
+                            
 
+                                @if ($data->review_date != '' && $data->pole_image_1 != '')
+
+                                
+                                <button type="button" class="btn  text-left form-control {{$data->qa_status == 'Accept' ? 'btn-success' :($data->qa_status == 'Reject' ? 'btn-danger' :'btn-primary') }} " 
+                                    data-toggle="dropdown">
+                                    {{ $data->qa_status }}
+
+                                </button>
+                                <div class="dropdown-menu" role="menu">
+                                    @if ($data->qa_status != 'Accept')
+                                        <a href="/{{ app()->getLocale() }}/tiang-talian-vt-and-vr-update-QA-Status?status=Accept&&id={{ $data->id }}"
+                                            onclick="return confirm('are you sure?')">
+                                            <button type="button"
+                                                class="dropdown-item pl-3 w-100 text-left">Accept</button>
+                                        </a>
+                                    @endif
+
+                                    @if ($data->qa_status != 'Reject')
+                                        <button type="button" class="btn btn-primary dropdown-item" data-id="{{$data->id }}"
+                                            data-toggle="modal" data-target="#rejectReasonModal">
+                                            Reject
+                                        </button>
+                                    @endif
+
+
+
+                                </div>
+                                @else
+                                <button type="button" class="btn  text-left form-control" style="background: orange ; color:white"
+                                >
+                                <strong >Unsurveyed</strong>
+
+
+                             </button>
+                                @endif
+                                {{-- <select name="qa_status" id="qa_status" class="form-control" ></select> -
+                            </div>
+                        </div> --}}
+
+                        {{-- @if ($data->qa_status == 'Reject')
+                            <div class="row px-4">
+                                <div class="col-md-4">
+                                    <label for="zone">Reason</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <textarea name="" id="" cols="10" rows="4" disabled class="form-control">{{$data->reject_remarks}}</textarea>
+                                </div>
+                            </div>
+                        @endif
+                            </fieldset> --}}
+                            <form id="framework-wizard-form"
+                            action="/{{app()->getLocale()}}/tiang-talian-vt-and-vr-map-edit/{{$data->id}}"
+                            enctype="multipart/form-data" style="display: none" method="POST"> 
+    
+                                @csrf
+                        @include('Tiang.partials.editForm', ['data'=>$data ])
+                            </form>
                     </div>
                 </div>
             </div>
 
         </div>
     </div>
+    <x-reject-modal />
+
 @endsection
 
 @section('script')
@@ -181,7 +246,15 @@
                 }
             });
 
+            $(function(){
+        $('#rejectReasonModal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget);
+            var id = button.data('id');
 
+            $('#reject-foam').attr('action', `/{{app()->getLocale()}}/tiang-talian-vt-and-vr-update-QA-Status`)
+            $('#reject-id').val(id);
+        });
+    })
 
         });
 

@@ -7,6 +7,7 @@ use App\Models\Tiang;
 use Illuminate\Http\Request;
 use App\Repositories\TiangRepository;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class TiangMapController extends Controller
 {
@@ -27,9 +28,12 @@ class TiangMapController extends Controller
     }
 
 
-    public function editMapStore(Request $request, $language,  $id)
+    public function 
+    
+    editMapStore(Request $request, $language,  $id)
     {
         //
+        // return 'sdfsdf';
         try {
             //  return $request->abc_span;
             //code...
@@ -139,12 +143,18 @@ class TiangMapController extends Controller
         }
     }
 
-    public function seacrh($lang ,  $q)
+    public function seacrh($lang , $type, $q)
     {
 
         $ba = \Illuminate\Support\Facades\Auth::user()->ba;
 
-        $data = Tiang::where('ba', 'LIKE', '%' . $ba . '%')->where('tiang_no' , 'LIKE' , '%' . $q . '%')->select('tiang_no')->limit(10)->get();
+        $data = Tiang::where('ba', 'LIKE', '%' . $ba . '%');
+        if ($type == 'tiang_no') {
+           $data->where('tiang_no' , 'LIKE' , '%' . $q . '%')->select('tiang_no');
+        }else{
+            $data->where('id' , 'LIKE' ,  $q . '%')->select(DB::raw('id as tiang_no'));
+        }
+        $data = $data->limit(10)->get();
 
         return response()->json($data, 200);
     }
@@ -152,7 +162,7 @@ class TiangMapController extends Controller
     public function seacrhCoordinated($lang , $name)
     {
         $name = urldecode($name);
-        $data = Tiang::where('tiang_no' ,$name )->select('tiang_no', \DB::raw('ST_X(geom) as x'),\DB::raw('ST_Y(geom) as y'),)->first();
+        $data = Tiang::where('tiang_no' ,$name )->orwhere('id' ,$name )->select('tiang_no', \DB::raw('ST_X(geom) as x'),\DB::raw('ST_Y(geom) as y'),)->first();
 
         return response()->json($data, 200);
     }

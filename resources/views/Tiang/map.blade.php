@@ -143,7 +143,15 @@
 
             <div class="mx-4">
                 <div id="the-basics">
-                    <input class="typeahead" type="text" placeholder="search by tiang no" class="form-control">
+                    <div class="d-flex">
+                        <div class="col-6">
+                            <input type="radio" name="search-by" value="tiang_no" id="search-by-tiang-no" checked onclick="$('#search-input').attr('placeholder','Search by Tiang No')"> <label for="search-by-tiang-no">Tiang No</label>
+                        </div>
+                        <div class="col-6">
+                            <input type="radio" name="search-by" value="tiang_id" id="search-by-tiang-id" onclick="document.getElementById('search-input').placeholder = 'Search by Tiang ID'"> <label for="search-by-tiang-id">Tiang Id</label>
+                        </div>
+                    </div>
+                    <input class="typeahead" type="text" placeholder="search by tiang no" id="search-input" class="form-control">
                 </div>
             </div>
  </div>
@@ -268,10 +276,11 @@
             return function findMatches(q, cb) {
 
                 var matches;
+                var searchBy= $('input[name="search-by"]:checked').val();
 
                 matches = [];
                 $.ajax({
-                    url: '/{{ app()->getLocale() }}/search/find-tiang/' + q,
+                    url: '/{{ app()->getLocale() }}/search/find-tiang/'+searchBy+'/' + q,
                     dataType: 'JSON',
                     //data: data,
                     method: 'GET',
