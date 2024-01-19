@@ -37,12 +37,12 @@
 
                     <div class=" col-md-2">
                         <label for="excel_from_date">From Date : </label>
-                        <input type="date" name="excel_from_date" id="excel_from_date"
+                        <input type="date" name="from_date" id="excel_from_date"
                             class="form-control" onchange="setMinDate(this.value)">
                     </div>
                     <div class=" col-md-2">
                         <label for="excel_to_date">To Date : </label>
-                        <input type="date" name="excel_to_date" id="excel_to_date" onchange="setMaxDate(this.value)" class="form-control">
+                        <input type="date" name="to_date" id="excel_to_date" onchange="setMaxDate(this.value)" class="form-control">
                     </div>
                     @isset($url)
                     <div class="col-md-1 pt-2 ">
