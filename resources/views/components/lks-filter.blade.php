@@ -7,7 +7,7 @@
 <div class="col-12">
     <div id="collapseQr">
         <div class="card card-body">
-            <form action="{{ isset($url) ? route($url, app()->getLocale()) : '#' }}"
+            <form action="{{ isset($url) ? route($url, app()->getLocale()) : '#' }}" target="_blank"
                   method="post">
                 @csrf
                 <div class="row form-input ">
@@ -51,7 +51,7 @@
                             style="background-color: #708090" onclick="resetIndex()">Reset</button>
                     </div>
 
-                    <div class="col-md-1 pt-2 ">
+                    <div class="col-md-2 pt-2 ">
 
                         <button type="submit" class="btn text-white btn-sm mt-4 " class="form-control"
                             style="background-color: #708090"   >Generate LKS</button>
