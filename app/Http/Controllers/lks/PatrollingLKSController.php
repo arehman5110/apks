@@ -101,14 +101,7 @@ if (file_exists(public_path('assets/html/testing ujsf.html'))) {
     # code...
 }
 return "sad";
-        // return view('example',['data'=>$result]);
-
-        // $data = [
-        //     'title' => 'PDF Title',
-        //     'content' => 'This is the PDF content.',
-        //     'mapImage' => 'https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/pin-s-a+000(-76.9,38.9)/-76.9,38.9,13/600x400?access_token=YOUR_MAPBOX_ACCESS_TOKEN',
-        // ];
-    
+         
 
         $pdf = app(PDF::class);
         $pdf->loadHTML(View::make('example', ['data'=>$data]));
