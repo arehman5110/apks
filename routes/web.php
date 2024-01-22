@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminDashboard;
 use App\Http\Controllers\lks\CableBridgeLKSController;
 use App\Http\Controllers\lks\FeederPillarLKSController;
 use App\Http\Controllers\lks\LinkBoxLKSController;
+use App\Http\Controllers\lks\PatrollingLKSController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\web\admin\TeamController;
 use App\Http\Controllers\web\admin\TeamUsersController;
@@ -193,6 +194,8 @@ Route::group(
                 Route::get('/patrolling-paginate', [PatrollingController::class, 'paginate'])->name('patrolling-paginate');
                 Route::post('/generate-patrolling-excel', [PatrollingExcelController::class, 'generateExcel'])->name('generate-patrolling-excel');
                 Route::get('/patrolling-update-QA-Status', [PatrollingController::class, 'updateQAStatus'])->name('patrolling-update-QA-Status');
+                Route::post('/generate-patrolling-lks', [PatrollingLKSController::class, 'gene'])->name('generate-patrolling-lks');
+                Route::get('/patrolling-lks',[PatrollingLKSController::class,'index'])->name('patrolling-lks');
 
 
                 Route::get('/get-roads-name/{id}', [PatrollingController::class, 'getRoads']);
@@ -209,6 +212,9 @@ Route::group(
                 Route::get('/admin-statsTable', [AdminDashboard::class, 'statsTable'])->name('admin-statsTable');
                 Route::get('/admin-get-all-counts', [AdminDashboard::class, 'getAllCounts'])->name('admin-get-all-counts');
                 Route::get('/get-all-counts', [Dashboard::class, 'getAllCounts'])->name('get-all-counts');
+
+                Route::get('/testing-map', [PatrollingLKSController::class, 'genet'])->name('tetsing-map');
+
 
 
 

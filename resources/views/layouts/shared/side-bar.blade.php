@@ -52,6 +52,14 @@
                             </a>
                         </li>
 
+                        
+                        <li class="nav-item">
+                            <a href="/{{app()->getLocale()}}/patrolling-lks" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>LKS</p>
+                            </a>
+                        </li>
+
                     </ul>
                 </li>
                 <li class="nav-item ">
