@@ -29,6 +29,7 @@ use App\Http\Controllers\web\tnbes\StatusController;
 use App\Http\Controllers\web\ThirdPartyDiggingController;
 use App\Http\Controllers\web\SubstationController;
 use App\Http\Controllers\lks\SubstationLKSController;
+use App\Http\Controllers\lks\TiangLKSController;
 use App\Http\Controllers\web\FPController;
 use App\Http\Controllers\web\GenerateNoticeController;
 use App\Http\Controllers\web\LinkBoxMapController;
@@ -110,7 +111,8 @@ Route::group(
                 Route::get('/get-tiang-edit/{id}', [TiangMapController::class, 'editMap'])->name('get-tiang-edit');
                 Route::post('/tiang-talian-vt-and-vr-map-edit/{id}', [TiangMapController::class, 'editMapStore'])->name('tiang-talian-vt-and-vr-map-edit');
                 Route::get('/tiang-talian-vt-and-vr-update-QA-Status', [TiangContoller::class, 'updateQAStatus'])->name('tiang-talian-vt-and-vr-update-QA-Status');
-
+                Route::post('/generate-tiang-talian-vt-and-vr-lks', [TiangLKSController::class, 'gene'])->name('generate-tiang-talian-vt-and-vr-lks');
+                Route::get('/tiang-talian-vt-and-vr-lks',[TiangLKSController::class,'index'])->name('tiang-talian-vt-and-vr-lks');
 
 
                 //// Link Box

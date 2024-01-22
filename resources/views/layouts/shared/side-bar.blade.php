@@ -218,6 +218,12 @@
                                 <p>{{__('messages.index')}}</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="/{{app()->getLocale()}}/tiang-talian-vt-and-vr-lks" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>LKS</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
 
