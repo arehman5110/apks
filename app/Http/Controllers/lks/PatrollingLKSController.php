@@ -93,9 +93,9 @@ class PatrollingLKSController extends Controller
         </body>
         </html>
 ";        
-File::put(public_path('assets/testing ujsf.html'), $htmlContent);
+File::put(public_path('assets/html/testing ujsf.html'), $htmlContent);
 
-if (file_exists(public_path('assets/testing ujsf.html'))) {
+if (file_exists(public_path('assets/html/testing ujsf.html'))) {
     
     
     # code...
