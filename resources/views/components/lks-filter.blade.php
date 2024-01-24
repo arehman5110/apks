@@ -48,7 +48,7 @@
                     <div class="col-md-1 pt-2 ">
 
                         <button type="button" class="btn text-white btn-sm mt-4 " class="form-control"
-                            style="background-color: #708090" onclick="resetIndex()">Reset</button>
+                            style="background-color: #708090" onclick="$('#excel_to_date ,#excel_from_date').val('')">Reset</button>
                     </div>
 
                     <div class="col-md-2 pt-2 ">
