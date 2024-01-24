@@ -128,11 +128,11 @@ class LinkBoxLKSController extends Controller
             $fpdf->Ln(); 
             $fpdf->Cell(46, 7, $row->cover_status, 1);
 
-            $fpdf->Cell(46, 7, $row->vandalism_status, 1);
-            $fpdf->Cell(46, 7, $row->leaning_status, 1);
-            $fpdf->Cell(46, 7, $row->rust_status, 1);
-            $fpdf->Cell(46, 7, $row->bushes_status, 1);
-            $fpdf->Cell(46, 7, $row->advertise_poster_status, 1);
+            $fpdf->Cell(46, 7, $row->vandalism_status=='Yes' ?'Yes' : '', 1);
+            $fpdf->Cell(46, 7, $row->leaning_status=='Yes' ?'Yes' : '', 1);
+            $fpdf->Cell(46, 7, $row->rust_status=='Yes' ?'Yes' : '', 1);
+            $fpdf->Cell(46, 7, $row->bushes_status=='Yes' ?'Yes' : '', 1);
+            $fpdf->Cell(46, 7, $row->advertise_poster_status=='Yes' ?'Yes' : '', 1);
 
 
     

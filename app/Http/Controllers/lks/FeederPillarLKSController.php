@@ -27,7 +27,7 @@ class FeederPillarLKSController extends Controller
         $getResultByVisitDate= $getResultByVisitDate->select('visit_date',DB::raw("count(*)"))->groupBy('visit_date')->get();  //get total count against visit_date
           
 
-        $data = $result->select('id', 'ba','feeder_pillar_image_1','feeder_pillar_image_2', DB::raw("CASE WHEN (gate_status->>'unlocked')::text='true' THEN 'Yes' ELSE 'No' END as unlocked"), DB::raw("CASE WHEN (gate_status->>'demaged')::text='true' THEN 'Yes' ELSE 'No' END as demaged"), DB::raw("CASE WHEN (gate_status->>'other')::text='true' THEN 'Yes' ELSE 'No' END as other_gate"), 'vandalism_status', 'leaning_staus', 'rust_status', 'advertise_poster_status', 'visit_date', 'size', 'coordinate', 'image_gate', 'image_gate_2', 'total_defects', 'image_vandalism', 'image_vandalism_2', 'image_leaning', 'image_leaning_2', 'image_rust', 'image_rust_2', 'images_advertise_poster', 'images_advertise_poster_2')->get();
+        $data = $result->select('id', 'ba','feeder_pillar_image_1','feeder_pillar_image_2', DB::raw("CASE WHEN (gate_status->>'unlocked')::text='true' THEN 'Yes' ELSE '' END as unlocked"), DB::raw("CASE WHEN (gate_status->>'demaged')::text='true' THEN 'Yes' ELSE '' END as demaged"), DB::raw("CASE WHEN (gate_status->>'other')::text='true' THEN 'Yes' ELSE '' END as other_gate"), 'vandalism_status', 'leaning_staus', 'rust_status', 'advertise_poster_status', 'visit_date', 'size', 'coordinate', 'image_gate', 'image_gate_2', 'total_defects', 'image_vandalism', 'image_vandalism_2', 'image_leaning', 'image_leaning_2', 'image_rust', 'image_rust_2', 'images_advertise_poster', 'images_advertise_poster_2')->get();
 
         $fpdf->AddPage('L', 'A4');
         $fpdf->SetFont('Arial', 'B', 22);
@@ -119,12 +119,12 @@ class FeederPillarLKSController extends Controller
             $fpdf->Cell(20, 7, $row->unlocked, 1);
             $fpdf->Cell(19, 7, $row->demaged, 1);
             $fpdf->Cell(19, 7, $row->other_gate, 1);
-            $fpdf->Cell(54, 7, $row->vandalism_status, 1);
+            $fpdf->Cell(54, 7, $row->vandalism_status=='Yes' ?'Yes' : '', 1);
 
-            $fpdf->Cell(54, 7, $row->leaning_staus, 1);
+            $fpdf->Cell(54, 7, $row->leaning_staus=='Yes' ?'Yes' : '', 1);
 
-            $fpdf->Cell(54, 7, $row->rust_status, 1);
-            $fpdf->Cell(54, 7, $row->advertise_poster_status, 1);
+            $fpdf->Cell(54, 7, $row->rust_status=='Yes' ?'Yes' : '', 1);
+            $fpdf->Cell(54, 7, $row->advertise_poster_status=='Yes' ?'Yes' : '', 1);
 
             $fpdf->Ln();
 

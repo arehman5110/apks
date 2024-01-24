@@ -106,11 +106,11 @@ class CableBridgeLKSController extends Controller
             $fpdf->SetFillColor(255, 255, 255);
             $fpdf->Ln();
 
-            $fpdf->Cell(54, 7, $row->vandalism_status, 1);
-            $fpdf->Cell(54, 7, $row->collapsed_status, 1);
-            $fpdf->Cell(54, 7, $row->rust_status, 1);
-            $fpdf->Cell(54, 7, $row->bushes_status, 1);
-            $fpdf->Cell(54, 7, $row->pipe_staus, 1);
+            $fpdf->Cell(54, 7, $row->vandalism_status=='Yes' ?'Yes' : '', 1);
+            $fpdf->Cell(54, 7, $row->collapsed_status=='Yes' ?'Yes' : '', 1);
+            $fpdf->Cell(54, 7, $row->rust_status=='Yes' ?'Yes' : '', 1);
+            $fpdf->Cell(54, 7, $row->bushes_status=='Yes' ?'Yes' : '', 1);
+            $fpdf->Cell(54, 7, $row->pipe_staus=='Yes' ?'Yes' : '', 1);
 
             $fpdf->Ln();
 
