@@ -24,29 +24,80 @@ class LinkBoxLKSController extends Controller
         $result = LinkBox::query();
     
             $result = $this->filter($result , 'visit_date',$req)->where('qa_status','Accept');
+            $getResultByVisitDate = clone $result;   // clone filtered query
+            $getResultByVisitDate= $getResultByVisitDate->select('visit_date',DB::raw("count(*)"))->groupBy('visit_date')->get();  //get total count against visit_date
+              
     
                     
-          $data = $result->select('id','ba', 'bushes_status','type',
+          $data = $result->select('id','ba', 'bushes_status','type','link_box_image_1', 'link_box_image_2',
            'vandalism_status', 'cover_status','leaning_status','rust_status','advertise_poster_status','start_date','end_date','visit_date','coordinate','image_cover','image_cover_2','total_defects',
            'image_vandalism','image_vandalism_2','image_leaning','image_leaning_2','image_rust','image_rust_2','images_bushes','images_bushes_2','images_advertise_poster','images_advertise_poster_2')->get();
 
         $fpdf->AddPage('L', 'A4');
         $fpdf->SetFont('Arial', 'B', 22);
         
-        $fpdf->Cell(80, 25, $req->ba .' LKS');
+        $fpdf->Cell(180, 25, $req->ba .' LKS ( '. ($req->from_date?? ' All ') . ' - ' . ($req->to_date?? ' All ').' )');
+        $fpdf->Ln();   
+        $fpdf->SetFont('Arial', 'B', 16);
+
+        $fpdf->Cell(100,7,'TOTAL RECORED AGAINST VISIT DATE',0,1);
+
+        $fpdf->SetFillColor(169, 169, 169);
+        $totalRecords = 0;
+
+        foreach ($getResultByVisitDate as $visit_date) 
+        {
+            $fpdf->SetFont('Arial', 'B', 9);
+            $fpdf->Cell(50,7,$visit_date->visit_date,1,0,'C',true);
+            $fpdf->Cell(50,7,$visit_date->count,1,0,'C');
+            $fpdf->Ln();
+            $totalRecords += $visit_date->count;
+
+        }
+        $fpdf->Cell(50,7,'TOTAL RECORD',1,0,'C',true);
+        $fpdf->Cell(50,7,$totalRecords,1,0,'C');
+
         $fpdf->Ln();  
+        $fpdf->Ln();  
+
     
         $imagePath = public_path('assets/web-images/main-logo.png');  
         $fpdf->Image($imagePath, 190, 20, 57, 0);
         $fpdf->SetFont('Arial', 'B', 9);
+
+        $sr_no= 0;
+
         foreach ($data as $row) {  
     
-    
+            $sr_no++;
+            $fpdf->Cell(160, 6, 'SR # : '.$sr_no ,0);
+
+            // add substation image 1 and substation image 2
+            $fpdf->Cell(40, 6, 'LINK BOX IMAGE 1' ,0);
+            $fpdf->Cell(40, 6, 'LINK BOX IMAGE 2' ,0);
+            $fpdf->Ln();
+
     
      
-            $fpdf->Cell(60, 6, 'ID : LB-'.$row->id );
+            $fpdf->Cell(160, 6, 'ID : LB-'.$row->id );
+
+           
+            if ($row->link_box_image_1 != '' && file_exists(public_path($row->link_box_image_1))) 
+            {
+
+                $fpdf->Image(public_path($row->link_box_image_1), $fpdf->GetX(), $fpdf->GetY(), 20, 20);
+            } 
+            $fpdf->Cell(45,6);
+            // $fpdf->Ln();
+
+
+            if ($row->link_box_image_2 != '' && file_exists(public_path($row->link_box_image_2))) 
+            {
+                $fpdf->Image(public_path($row->link_box_image_2), $fpdf->GetX(), $fpdf->GetY(), 20, 20);
+            } 
             $fpdf->Ln();
-            $fpdf->Cell(60, 6, 'VISIT  DATE : '.$row->visit_date);
+           
+            $fpdf->Cell(165, 6, 'VISIT  DATE : '.$row->visit_date); 
             $fpdf->Ln();
             $fpdf->Cell(60, 6, 'TYPE : '.$row->type);
             $fpdf->Ln();
@@ -94,7 +145,7 @@ class LinkBoxLKSController extends Controller
                 $fpdf->Cell(23);
     
             }else{
-                $fpdf->Cell(23, 7, 'no image found', 1); 
+                $fpdf->Cell(23, 7, ''); 
             }
     
             
@@ -106,7 +157,7 @@ class LinkBoxLKSController extends Controller
                 $fpdf->Cell(23);
     
             }else{
-                $fpdf->Cell(23, 7, 'no image found', 1); 
+                $fpdf->Cell(23, 7, ''); 
             }
 
 
@@ -117,7 +168,7 @@ class LinkBoxLKSController extends Controller
                 $fpdf->Cell(23);
     
             }else{
-                $fpdf->Cell(23, 7, 'no image found', 1); 
+                $fpdf->Cell(23, 7, ''); 
             }
     
             
@@ -129,7 +180,7 @@ class LinkBoxLKSController extends Controller
                 $fpdf->Cell(23);
     
             }else{
-                $fpdf->Cell(23, 7, 'no image found', 1); 
+                $fpdf->Cell(23, 7, ''); 
             }
      
            
@@ -139,7 +190,7 @@ class LinkBoxLKSController extends Controller
                 $fpdf->Cell(23);
     
             }else{
-                $fpdf->Cell(23, 7, 'no image found', 1); 
+                $fpdf->Cell(23, 7, ''); 
             }
     
             if ($row->image_leaning_2 !='' && file_exists(public_path($row->image_leaning_2))) {
@@ -148,7 +199,7 @@ class LinkBoxLKSController extends Controller
                 $fpdf->Cell(23);
     
             }else{
-                $fpdf->Cell(23, 7, 'no image found', 1); 
+                $fpdf->Cell(23, 7, ''); 
             }
     
             
@@ -161,7 +212,7 @@ class LinkBoxLKSController extends Controller
                 $fpdf->Cell(23);
     
             }else{
-                $fpdf->Cell(23, 7, 'no image found', 1); 
+                $fpdf->Cell(23, 7, ''); 
             }
     
             if ($row->image_rust_2 != '' && file_exists(public_path($row->image_rust_2))) {
@@ -170,7 +221,7 @@ class LinkBoxLKSController extends Controller
                 $fpdf->Cell(23);
     
             }else{
-                $fpdf->Cell(23, 7, 'no image found', 1); 
+                $fpdf->Cell(23, 7, ''); 
             }
             
             if ($row->images_bushes != '' && file_exists(public_path($row->images_bushes))) {
@@ -179,7 +230,7 @@ class LinkBoxLKSController extends Controller
                 $fpdf->Cell(23);
     
             }else{
-                $fpdf->Cell(23, 7, 'no image found', 1); 
+                $fpdf->Cell(23, 7, ''); 
             }
     
             if ($row->images_bushes_2 != '' && file_exists(public_path($row->images_bushes_2))) {
@@ -189,7 +240,7 @@ class LinkBoxLKSController extends Controller
     
             }else{
                
-                $fpdf->Cell(23, 7, 'no image found', 1); 
+                $fpdf->Cell(23, 7, ''); 
             }
     
 
@@ -199,7 +250,7 @@ class LinkBoxLKSController extends Controller
                 $fpdf->Cell(23);
     
             }else{
-                $fpdf->Cell(23, 7, 'no image found', 1); 
+                $fpdf->Cell(23, 7, ''); 
             }
     
             if ($row->images_advertise_poster_2 != '' && file_exists(public_path($row->images_advertise_poster_2))) {
@@ -209,7 +260,7 @@ class LinkBoxLKSController extends Controller
     
             }else{
                
-                $fpdf->Cell(23, 7, 'no image found', 1); 
+                $fpdf->Cell(23, 7, ''); 
             }
     
     
@@ -222,6 +273,9 @@ class LinkBoxLKSController extends Controller
             // Move to the next line for the next row
         }
         
-        return $fpdf->output('I','link_box.pdf');
+        $pdfFileName = 'LINK BOX ' . $req->ba . ' LKS ( ' . ($req->from_date ?? 'All') . ' - ' . ($req->to_date ?? 'All') . ' ).pdf';
+        header('Content-Type: application/pdf');
+        header('Content-Disposition: attachment; filename="' . $pdfFileName . '"');
+        return  $fpdf->output('D', $pdfFileName );
     }
 }

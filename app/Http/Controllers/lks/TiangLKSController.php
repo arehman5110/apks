@@ -29,54 +29,62 @@ class TiangLKSController extends Controller
         $result = Tiang::query();
     
             $result = $this->filter($result , 'review_date',$req)->where('qa_status','Accept');
+
+            $getResultByVisitDate = clone $result;   // clone filtered query
+            $getResultByVisitDate= $getResultByVisitDate->select('review_date as visit_date',DB::raw("count(*)"))->groupBy('visit_date')->get();  //get total count against visit_date
+              
     
             $img_arr = [
-                ['name'=>'Pole Cracked' , 'key'=>'cracked' , 'arr'=>'tiang_defect_image' , 'defect_arr' => 'tiang_defect_cracked'],
-                ['name'=>'Pole leaning ' , 'key'=>'leaning' , 'arr'=>'tiang_defect_image', 'defect_arr' => 'tiang_defect_leaning'],
-                ['name'=>'Pole dim' , 'key'=>'dim' , 'arr'=>'tiang_defect_image','defect_arr' => 'tiang_defect_dim'],
-                ['name'=>'Pole creepers' , 'key'=>'creepers' , 'arr'=>'tiang_defect_image','defect_arr' => 'tiang_defect_creepers'],
-                ['name'=>'Pole other' , 'key'=>'other' , 'arr'=>'tiang_defect_image','defect_arr' => 'tiang_defect_other'],
-
-
-                ['name'=>'Line Joint' , 'key'=>'joint' , 'arr'=>'talian_defect_image','defect_arr' => 'talian_defect_joint'],
-                ['name'=>'Line Rentis' , 'key'=>'need_rentis' , 'arr'=>'talian_defect_image','defect_arr' => 'talian_defect_need_rentis'],
-                ['name'=>'Line Ground clr' , 'key'=>'ground' , 'arr'=>'talian_defect_image','defect_arr' => 'talian_defect_ground'],
-                ['name'=>'Line other' , 'key'=>'other' , 'arr'=>'talian_defect_image','defect_arr' => 'talian_defect_other'],
-
-                ['name'=>'Umbang breaking' , 'key'=>'breaking' , 'arr'=>'umbang_defect_image','defect_arr' => 'umbang_defect_breaking'],
-                ['name'=>'Umbang creepers' , 'key'=>'creepers' , 'arr'=>'umbang_defect_image','defect_arr' => 'umbang_defect_creepers'],
-                ['name'=>'Umbang cracked' , 'key'=>'cracked' , 'arr'=>'umbang_defect_image','defect_arr' => 'umbang_defect_cracked'],
-                ['name'=>'Umbang stay_palte' , 'key'=>'stay_palte' , 'arr'=>'umbang_defect_image','defect_arr' => 'umbang_defect_stay_palte'],
-                ['name'=>'Umbang other' , 'key'=>'other' , 'arr'=>'umbang_defect_image','defect_arr' => 'umbang_defect_other'],
-
-                ['name'=>'IPC Burn' , 'key'=>'burn' , 'arr'=>'ipc_defect_image','defect_arr' => 'ipc_defect_burn'],
-                ['name'=>'IPC other' , 'key'=>'other' , 'arr'=>'ipc_defect_image','defect_arr' => 'ipc_defect_other'],
-
-                ['name'=>'Blackbox cracked' , 'key'=>'cracked' , 'arr'=>'blackbox_defect_image','defect_arr' => 'blackbox_defect_cracked'],
-                ['name'=>'Blackbox other' , 'key'=>'other' , 'arr'=>'blackbox_defect_image','defect_arr' => 'blackbox_defect_other'],
-
-                ['name'=>'Jumper sleeve' , 'key'=>'sleeve' , 'arr'=>'jumper_image','defect_arr' => 'jumper_sleeve'],
-                ['name'=>'Jumper burn' , 'key'=>'burn' , 'arr'=>'jumper_image','defect_arr' => 'jumper_burn'],
-                ['name'=>'Jumper other' , 'key'=>'other' , 'arr'=>'jumper_image','defect_arr' => 'jumper_other'],
-
-                ['name'=>'Lightning broken' , 'key'=>'broken' , 'arr'=>'kilat_defect_image','defect_arr' => 'kilat_defect_broken'],
-                ['name'=>'Lightning other' , 'key'=>'other' , 'arr'=>'kilat_defect_image','defect_arr' => 'kilat_defect_other'],
-
-                ['name'=>'Service roof' , 'key'=>'roof' , 'arr'=>'servis_defect_image','defect_arr' => 'servis_defect_roof'],
-                ['name'=>'Service won_piece' , 'key'=>'won_piece' , 'arr'=>'servis_defect_image','defect_arr' => 'servis_defect_won_piece'],
-                ['name'=>'Service other' , 'key'=>'other' , 'arr'=>'servis_defect_image','defect_arr' => 'servis_defect_other'],
-
-                ['name'=>'Grounding netural' , 'key'=>'netural' , 'arr'=>'pembumian_defect_image','defect_arr' => 'pembumian_defect_netural'],
-                ['name'=>'Grounding other' , 'key'=>'other' , 'arr'=>'pembumian_defect_image','defect_arr' => 'pembumian_defect_other'],
-
-                ['name'=>'Signage damage' , 'key'=>'damage' , 'arr'=>'bekalan_dua_defect_image','defect_arr' => 'bekalan_dua_defect_damage'],
-                ['name'=>'Signage other' , 'key'=>'other' , 'arr'=>'bekalan_dua_defect_image','defect_arr' => 'bekalan_dua_defect_other'],
-           
-                ['name'=>'Main St. date_wire' , 'key'=>'date_wire' , 'arr'=>'kaki_lima_defect_image','defect_arr' => 'kaki_lima_defect_date_wire'],
-                ['name'=>'Main St. burn' , 'key'=>'burn' , 'arr'=>'kaki_lima_defect_image','defect_arr' => 'kaki_lima_defect_burn'],
-                ['name'=>'Main St. other' , 'key'=>'other' , 'arr'=>'kaki_lima_defect_image','defect_arr' => 'kaki_lima_defect_other'],
-
-
+                [
+                    'defect_name'=>'tiang_defect',
+                    'title'=>'Pole',
+                    'defects'=>['cracked','leaning','dim','creepers','other']
+                ],
+                [
+                    'defect_name'=>'talian_defect',
+                    'title'=>'Line',
+                    'defects'=>['joint','need_rentis','ground','other']
+                ],
+                [
+                    'defect_name'=>'umbang_defect',
+                    'title'=>'Umbang',
+                    'defects'=>['breaking','creepers','cracked','stay_palte', 'other']
+                ],
+                [
+                    'defect_name'=>'ipc_defect',
+                    'title'=>'IPC',
+                    'defects'=>['burn','other']
+                ],
+                [
+                    'defect_name'=>'blackbox_defect',
+                    'title'=>'Blackbox',
+                    'defects'=>['cracked','other']
+                ],
+                [
+                    'defect_name'=>'jumper',
+                    'title'=>'Jumper',
+                    'defects'=>['sleeve','burn','other']
+                ],
+                [
+                    'defect_name'=>'kilat_defect',
+                    'title'=>'Lightning',
+                    'defects'=>['broken','other']
+                ],
+                [
+                    'defect_name'=>'servis_defect',
+                    'title'=>'Service',
+                    'defects'=>['roof','won_piece','other']
+                ],
+                [
+                    'defect_name'=>'bekalan_dua_defect',
+                    'title'=>'Signage',
+                    'defects'=>['damage','other']
+                ],
+                [
+                    'defect_name'=>'kaki_lima_defect',
+                    'title'=>'Main St.',
+                    'defects'=>['date_wire','burn','other']
+                ],
             ];
 
             $imageSingle = [
@@ -148,30 +156,65 @@ class TiangLKSController extends Controller
 
         $fpdf->AddPage('L', 'A4');
         $fpdf->SetFont('Arial', 'B', 22);
-        
-        $fpdf->Cell(80, 25, $req->ba .' LKS');
-        $fpdf->Ln();  
-    
+            //add Heading
+        $fpdf->Cell(180, 25, $req->ba .' LKS ( '. ($req->from_date?? ' All ') . ' - ' . ($req->to_date?? ' All ').' )');
+        $fpdf->Ln();   
+        $fpdf->SetFont('Arial', 'B', 16);
+            // visit date table start
+        $fpdf->Cell(100,7,'TOTAL RECORED AGAINST VISIT DATE',0,1);
+
+        $fpdf->SetFillColor(169, 169, 169);
+        $totalRecords = 0;
+
+        foreach ($getResultByVisitDate as $visit_date) 
+        {
+            $fpdf->SetFont('Arial', 'B', 9);
+            $fpdf->Cell(50,7,$visit_date->visit_date,1,0,'C',true);
+            $fpdf->Cell(50,7,$visit_date->count,1,0,'C');
+            $fpdf->Ln();
+            $totalRecords += $visit_date->count;
+
+        }
+        $fpdf->Cell(50,7,'TOTAL RECORD',1,0,'C',true);
+        $fpdf->Cell(50,7,$totalRecords,1,0,'C');
+        // visit date table end
+        $fpdf->Ln();
+        $fpdf->Ln();
+
+
         $imagePath = public_path('assets/web-images/main-logo.png');  
         $fpdf->Image($imagePath, 190, 20, 57, 0);
         $fpdf->SetFont('Arial', 'B', 9);
 
 
-
+        $sr_no =0;
         foreach ($data as $row) {  
     
-        //     $fpdf->Cell(60, 6, 'ID : SAVR-'.$row->id , 1 ,3 );
-        // // $fpdf->Ln();
-        // $fpdf->Cell(60, 6, 'VISIT  DATE : '.$row->review_date ,1 ,0);
-        // $fpdf->Ln();
-        // $fpdf->Cell(60, 6, 'TIANG NO : '.$row->tiang_no);
-        // $fpdf->Ln();
+            $sr_no++;
+            $fpdf->Cell(160, 6, 'SR # : '.$sr_no ,0);
 
-
-        // return $fpdf->output('I','Tiang-savr.pdf');
+            // add substation image 1 and substation image 2
+            $fpdf->Cell(40, 6, 'TINAG IMAGE 1' ,0);
+            $fpdf->Cell(40, 6, 'TIANG IMAGE 2' ,0);
+            $fpdf->Ln();
+ 
     
      
-            $fpdf->Cell(60, 6, 'ID : SAVR-'.$row->id );
+            $fpdf->Cell(165, 6, 'ID : SAVR-'.$row->id );
+             
+            if ($row->pole_image_1 != '' && file_exists(public_path($row->pole_image_1))) 
+            {
+
+                $fpdf->Image(public_path($row->pole_image_1), $fpdf->GetX(), $fpdf->GetY(), 20, 20);
+            } 
+            $fpdf->Cell(40,6);
+            // $fpdf->Ln();
+
+
+            if ($row->pole_image_2 != '' && file_exists(public_path($row->pole_image_2))) 
+            {
+                $fpdf->Image(public_path($row->pole_image_2), $fpdf->GetX(), $fpdf->GetY(), 20, 20);
+            }
             $fpdf->Ln();
             $fpdf->Cell(60, 6, 'VISIT  DATE : '.$row->review_date);
             $fpdf->Ln();
@@ -523,49 +566,44 @@ class TiangLKSController extends Controller
 
 
             $len = 0 ;
-            foreach ($img_arr as $value) {
- 
-                if ($row->{$value['defect_arr']} == 'Yes' && $row->{$value['arr']} != '') {
-                    $json_dec = json_decode($row->{$value['arr']});
-            
-                    // Check if $json_dec is an object
-                    if (is_object($json_dec)) {
-                        // Access the property using -> (object syntax)
-                        $imagePath = isset($json_dec->{$value['key']}) ? $json_dec->{$value['key']} : '';
-                    } elseif (is_array($json_dec)) {
-                        // Access the property using array syntax
-                        $imagePath = isset($json_dec[$value['key']]) ? $json_dec[$value['key']] : '';
+            foreach ($img_arr as $value) 
+            {
+                foreach ($value['defects'] as $defect) // run loop for defects
+                { 
+                    $defectName = $value['defect_name'].'_'.$defect;   // name that get from DB::raw(made up name)
+                    $defectImage = $value['defect_name'].'_image';     // image name that is in db > image column > json
+
+                    if ($row->{$defectName} == 'Yes' && $row->{$defectImage} != '') // check if defect is 'Yes' and Defect Image column is  not empty 
+                    {
+                         
+                      $json_dec = json_decode($row->{$defectImage});    // image column is json so decode json
+
+                        
+
+                        if (is_object($json_dec)) {
+                            // Access the property using -> (object syntax)
+                            $imagePath = isset($json_dec->{$defect}) ? $json_dec->{$defect} : '';
+                        } elseif (is_array($json_dec)) {
+                            // Access the property using array syntax
+                            $imagePath = isset($json_dec[$defect]) ? $json_dec[$defect] : '';
+                        }
+
+                        if ($imagePath && file_exists(public_path($imagePath))) // check image path is not empty and image exists
+                        { 
+                            $fpdf->Image(public_path($imagePath), $fpdf->GetX()+2, $fpdf->GetY()+8, 19, 18); //add image
+                        }
+
+                        $fpdf->Cell(25, 7, $value['title'].' '.$defect, 1);
+                        $len = $len + 25;
                     }
-            
-                    if ($imagePath && file_exists(public_path($imagePath))) {
-                        // $fpdf->Cell(1);
-                        $fpdf->Image(public_path($imagePath), $fpdf->GetX()+2, $fpdf->GetY()+8, 19, 18);
-
-                    } else {
-                        // $fpdf->Cell(23);
-
-                        // $fpdf->Cell(23, 7, 'no image found', 1);
+               
+                    if ($len == 275) 
+                    {
+                        $len = 0 ;
+                        $fpdf->Ln(); $fpdf->Ln(); $fpdf->Ln(); $fpdf->Ln();
                     }
-                $fpdf->Cell(25, 7, $value['name'], 1);
-                $len = $len + 25;
 
-                } else {
-
-                    // $fpdf->Cell(23);
-
-                    // $fpdf->Cell(23, 7, 'no image found', 1);
                 }
-
-               if ($len == 275) {
-                $len = 0 ;
-                    $fpdf->Ln();
-                    $fpdf->Ln();
-                    $fpdf->Ln();
-                    $fpdf->Ln();
-
-               }
-
-
 
             }
 
@@ -586,12 +624,13 @@ class TiangLKSController extends Controller
                 if ($row->{$sinVal['arr']} == 'Yes' && $row->{$sinVal['key']} != '' ) {
              
             
+                    $imagePath = $row->{$sinVal['key']};
               
                     if (file_exists(public_path($imagePath))) {
                         // $fpdf->Cell(1);
                         $fpdf->Image(public_path($imagePath), $fpdf->GetX()+2, $fpdf->GetY()+8, 19, 18);
 
-                        $fpdf->Cell(25, 7, $value['name'], 1);
+                        $fpdf->Cell(25, 7, $sinVal['name'], 1);
                 $len = $len + 25;
                     } 
                 
@@ -612,6 +651,96 @@ class TiangLKSController extends Controller
          
         }
         
-        return $fpdf->output('I','link_box.pdf');
+        $pdfFileName = 'TIANG - SAVR  ' . $req->ba . ' LKS ( ' . ($req->from_date ?? 'All') . ' - ' . ($req->to_date ?? 'All') . ' ).pdf';
+        header('Content-Type: application/pdf');
+        header('Content-Disposition: attachment; filename="' . $pdfFileName . '"');
+        return  $fpdf->output('D', $pdfFileName );
      }
 }
+
+
+
+
+
+
+                // ['name'=>'Pole Cracked' , 'key'=>'cracked' , 'arr'=>'tiang_defect_image' , 'defect_arr' => 'tiang_defect_cracked'],
+                // ['name'=>'Pole leaning ' , 'key'=>'leaning' , 'arr'=>'tiang_defect_image', 'defect_arr' => 'tiang_defect_leaning'],
+                // ['name'=>'Pole dim' , 'key'=>'dim' , 'arr'=>'tiang_defect_image','defect_arr' => 'tiang_defect_dim'],
+                // ['name'=>'Pole creepers' , 'key'=>'creepers' , 'arr'=>'tiang_defect_image','defect_arr' => 'tiang_defect_creepers'],
+                // ['name'=>'Pole other' , 'key'=>'other' , 'arr'=>'tiang_defect_image','defect_arr' => 'tiang_defect_other'],
+
+
+                // ['name'=>'Line Joint' , 'key'=>'joint' , 'arr'=>'talian_defect_image','defect_arr' => 'talian_defect_joint'],
+                // ['name'=>'Line Rentis' , 'key'=>'need_rentis' , 'arr'=>'talian_defect_image','defect_arr' => 'talian_defect_need_rentis'],
+                // ['name'=>'Line Ground clr' , 'key'=>'ground' , 'arr'=>'talian_defect_image','defect_arr' => 'talian_defect_ground'],
+                // ['name'=>'Line other' , 'key'=>'other' , 'arr'=>'talian_defect_image','defect_arr' => 'talian_defect_other'],
+
+                // ['name'=>'Umbang breaking' , 'key'=>'breaking' , 'arr'=>'umbang_defect_image','defect_arr' => 'umbang_defect_breaking'],
+                // ['name'=>'Umbang creepers' , 'key'=>'creepers' , 'arr'=>'umbang_defect_image','defect_arr' => 'umbang_defect_creepers'],
+                // ['name'=>'Umbang cracked' , 'key'=>'cracked' , 'arr'=>'umbang_defect_image','defect_arr' => 'umbang_defect_cracked'],
+                // ['name'=>'Umbang stay_palte' , 'key'=>'stay_palte' , 'arr'=>'umbang_defect_image','defect_arr' => 'umbang_defect_stay_palte'],
+                // ['name'=>'Umbang other' , 'key'=>'other' , 'arr'=>'umbang_defect_image','defect_arr' => 'umbang_defect_other'],
+
+                // ['name'=>'IPC Burn' , 'key'=>'burn' , 'arr'=>'ipc_defect_image','defect_arr' => 'ipc_defect_burn'],
+                // ['name'=>'IPC other' , 'key'=>'other' , 'arr'=>'ipc_defect_image','defect_arr' => 'ipc_defect_other'],
+
+                // ['name'=>'Blackbox cracked' , 'key'=>'cracked' , 'arr'=>'blackbox_defect_image','defect_arr' => 'blackbox_defect_cracked'],
+                // ['name'=>'Blackbox other' , 'key'=>'other' , 'arr'=>'blackbox_defect_image','defect_arr' => 'blackbox_defect_other'],
+
+                // ['name'=>'Jumper sleeve' , 'key'=>'sleeve' , 'arr'=>'jumper_image','defect_arr' => 'jumper_sleeve'],
+                // ['name'=>'Jumper burn' , 'key'=>'burn' , 'arr'=>'jumper_image','defect_arr' => 'jumper_burn'],
+                // ['name'=>'Jumper other' , 'key'=>'other' , 'arr'=>'jumper_image','defect_arr' => 'jumper_other'],
+
+                // ['name'=>'Lightning broken' , 'key'=>'broken' , 'arr'=>'kilat_defect_image','defect_arr' => 'kilat_defect_broken'],
+                // ['name'=>'Lightning other' , 'key'=>'other' , 'arr'=>'kilat_defect_image','defect_arr' => 'kilat_defect_other'],
+
+
+                // ['name'=>'Service roof' , 'key'=>'roof' , 'arr'=>'servis_defect_image','defect_arr' => 'servis_defect_roof'],
+                // ['name'=>'Service won_piece' , 'key'=>'won_piece' , 'arr'=>'servis_defect_image','defect_arr' => 'servis_defect_won_piece'],
+                // ['name'=>'Service other' , 'key'=>'other' , 'arr'=>'servis_defect_image','defect_arr' => 'servis_defect_other'],
+
+                // ['name'=>'Grounding netural' , 'key'=>'netural' , 'arr'=>'pembumian_defect_image','defect_arr' => 'pembumian_defect_netural'],
+                // ['name'=>'Grounding other' , 'key'=>'other' , 'arr'=>'pembumian_defect_image','defect_arr' => 'pembumian_defect_other'],
+
+                // ['name'=>'Signage damage' , 'key'=>'damage' , 'arr'=>'bekalan_dua_defect_image','defect_arr' => 'bekalan_dua_defect_damage'],
+                // ['name'=>'Signage other' , 'key'=>'other' , 'arr'=>'bekalan_dua_defect_image','defect_arr' => 'bekalan_dua_defect_other'],
+           
+                // ['name'=>'Main St. date_wire' , 'key'=>'date_wire' , 'arr'=>'kaki_lima_defect_image','defect_arr' => 'kaki_lima_defect_date_wire'],
+                // ['name'=>'Main St. burn' , 'key'=>'burn' , 'arr'=>'kaki_lima_defect_image','defect_arr' => 'kaki_lima_defect_burn'],
+                // ['name'=>'Main St. other' , 'key'=>'other' , 'arr'=>'kaki_lima_defect_image','defect_arr' => 'kaki_lima_defect_other'],
+
+
+
+
+
+
+ // if ($row->{$value['defect']} == 'Yes' && $row->{$value['arr']} != '') {
+                //     $json_dec = json_decode($row->{$value['arr']});
+            
+                //     // Check if $json_dec is an object
+                //     if (is_object($json_dec)) {
+                //         // Access the property using -> (object syntax)
+                //         $imagePath = isset($json_dec->{$value['key']}) ? $json_dec->{$value['key']} : '';
+                //     } elseif (is_array($json_dec)) {
+                //         // Access the property using array syntax
+                //         $imagePath = isset($json_dec[$value['key']]) ? $json_dec[$value['key']] : '';
+                //     }
+            
+                //     if ($imagePath && file_exists(public_path($imagePath))) {
+                //         // $fpdf->Cell(1);
+                //         $fpdf->Image(public_path($imagePath), $fpdf->GetX()+2, $fpdf->GetY()+8, 19, 18);
+
+                //     } else {
+                //         // $fpdf->Cell(23);
+
+                //         // $fpdf->Cell(23, 7, 'no image found', 1);
+                //     }
+                // $fpdf->Cell(25, 7, $value['name'], 1);
+                // $len = $len + 25;
+
+                // } else {
+
+                //     // $fpdf->Cell(23);
+
+                //     // $fpdf->Cell(23, 7, 'no image found', 1);
+                // }
