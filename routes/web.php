@@ -159,7 +159,10 @@ Route::group(
                 Route::get('/substation-update-QA-Status', [SubstationController::class, 'updateQAStatus'])->name('substation-update-QA-Status');
                 Route::get('/substation-lks',[SubstationLKSController::class,'index'])->name('substation-lks');
                 Route::get('/get-substation-lks',[SubstationLKSController::class,'getDataForLKS'])->name('get-substation-lks');
-                Route::post('/generate-substation-lks', [SubstationLKSController::class, 'gene'])->name('generate-substation-lks');
+                Route::any('/generate-substation-lks', [SubstationLKSController::class, 'gene'])->name('generate-substation-lks');
+                Route::get('/generate-substation-lks-by-visit-date', [SubstationLKSController::class, 'generateByVisitDate'])->name('generate-substation-lks-by-visit-date');
+                Route::get('/remove-generate-substation-lks-by-visit-date', [SubstationLKSController::class, 'removeFiles'])->name('remove-generate-substation-lks-by-visit-date');
+
 
 
                 ////feeder-piller routes

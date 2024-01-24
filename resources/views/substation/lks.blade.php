@@ -137,11 +137,30 @@
         var auth_ba = "{{ Auth::user()->ba }}"
 
 
-        // $(document).ready(function() {
+    //     $(document).ready(function() {
 
-        // //    generateLKS()
+            
+    //         var options = {
+    //     success: callbackSuccess
+    // };
 
-        // });
+    // // Submit form using ajax
+    // $jq('#generate-lks-form').ajaxForm(options);
+
+    // function callbackSuccess(response) {
+    //     var pdfPath = response.pdfPath;
+    //     console.log(pdfPath);
+    //     const link = document.createElement('a');
+    //         link.setAttribute('href', '/temp/'+pdfPath);
+    //         link.setAttribute('download', pdfPath); // Need to modify filename ...
+    //         link.click();
+
+    //     link.remove();
+         
+    // }
+
+
+    //     });
 
 
 
