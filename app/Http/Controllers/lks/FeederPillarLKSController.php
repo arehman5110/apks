@@ -15,44 +15,29 @@ class FeederPillarLKSController extends Controller
 
     public function index()
     {
-        return view('feeder-pillar.lks');
+        return view('lks.generate-lks',['title'=>'feeder_pillar' , 'url'=>'feeder-pillar']);
+ 
     }
 
-    public function gene(Fpdf $fpdf, Request $req)
+    
+    public function generateByVisitDate(Fpdf $fpdf, Request $req)
     {
-        $result = FeederPillar::query();
 
-        $result = $this->filter($result, 'visit_date', $req)->where('qa_status', 'Accept');
-        $getResultByVisitDate = clone $result;   // clone filtered query
-        $getResultByVisitDate= $getResultByVisitDate->select('visit_date',DB::raw("count(*)"))->groupBy('visit_date')->get();  //get total count against visit_date
-          
+        $result = FeederPillar::where('ba',$req->ba)->where('visit_date', $req->visit_date)->where('qa_status','Accept');
 
-        $data = $result->select('id', 'ba','feeder_pillar_image_1','feeder_pillar_image_2', DB::raw("CASE WHEN (gate_status->>'unlocked')::text='true' THEN 'Yes' ELSE '' END as unlocked"), DB::raw("CASE WHEN (gate_status->>'demaged')::text='true' THEN 'Yes' ELSE '' END as demaged"), DB::raw("CASE WHEN (gate_status->>'other')::text='true' THEN 'Yes' ELSE '' END as other_gate"), 'vandalism_status', 'leaning_staus', 'rust_status', 'advertise_poster_status', 'visit_date', 'size', 'coordinate', 'image_gate', 'image_gate_2', 'total_defects', 'image_vandalism', 'image_vandalism_2', 'image_leaning', 'image_leaning_2', 'image_rust', 'image_rust_2', 'images_advertise_poster', 'images_advertise_poster_2')->get();
+        $data = $result->select('id', 'ba','feeder_pillar_image_1','feeder_pillar_image_2', DB::raw("CASE WHEN (gate_status->>'unlocked')::text='true' THEN 'Ya' ELSE 'Tidak' END as unlocked"), DB::raw("CASE WHEN (gate_status->>'demaged')::text='true' THEN 'Ya' ELSE 'Tidak' END as demaged"), DB::raw("CASE WHEN (gate_status->>'other')::text='true' THEN 'Ya' ELSE 'Tidak' END as other_gate"), 'vandalism_status', 'leaning_staus', 'rust_status', 'advertise_poster_status', 'visit_date', 'size', 'coordinate', 'image_gate', 'image_gate_2', 'total_defects', 'image_vandalism', 'image_vandalism_2', 'image_leaning', 'image_leaning_2', 'image_rust', 'image_rust_2', 'images_advertise_poster', 'images_advertise_poster_2')->get();
 
         $fpdf->AddPage('L', 'A4');
         $fpdf->SetFont('Arial', 'B', 22);
 
+ 
+        $fpdf->Cell(180, 25, $req->ba .' ' .$req->visit_date );
+        $fpdf->Ln();  
 
-        $fpdf->Cell(180, 25, $req->ba .' LKS ( '. ($req->from_date?? ' All ') . ' - ' . ($req->to_date?? ' All ').' )');
-        $fpdf->Ln();   
         $fpdf->SetFont('Arial', 'B', 16);
 
-        $fpdf->Cell(100,7,'TOTAL RECORED AGAINST VISIT DATE',0,1);
-
-        $fpdf->SetFillColor(169, 169, 169);
-        $totalRecords = 0;
-
-        foreach ($getResultByVisitDate as $visit_date) 
-        {
-            $fpdf->SetFont('Arial', 'B', 9);
-            $fpdf->Cell(50,7,$visit_date->visit_date,1,0,'C',true);
-            $fpdf->Cell(50,7,$visit_date->count,1,0,'C');
-            $fpdf->Ln();
-            $totalRecords += $visit_date->count;
-
-        }
-        $fpdf->Cell(50,7,'TOTAL RECORD',1,0,'C',true);
-        $fpdf->Cell(50,7,$totalRecords,1,0,'C');
+        $fpdf->Cell(50,7,'Jumlah Rekod',1);
+        $fpdf->Cell(20,7,sizeof($data),1);
 
         $fpdf->Ln();
         $fpdf->Ln();
@@ -101,30 +86,30 @@ class FeederPillarLKSController extends Controller
 
             $fpdf->SetFillColor(169, 169, 169);
 
-            $fpdf->Cell(58, 7, 'GATE', 1, 0, 'C', true);
-            $fpdf->Cell(216, 7, 'OTHERS STATUS', 1, 0, 'C', true);
+            $fpdf->Cell(58, 7, 'Pintu Pagar', 1, 0, 'C', true);  //GATE
+            $fpdf->Cell(216, 7, 'STATUS LAIN', 1, 0, 'C', true);  // OTHERS STATUS
 
             $fpdf->Ln();
 
-            $fpdf->Cell(20, 7, 'UNLOCKED', 1, 0, 'L', true);
-            $fpdf->Cell(19, 7, 'DAMAGED', 1, 0, 'L', true);
-            $fpdf->Cell(19, 7, 'OTHER', 1, 0, 'L', true);
+            $fpdf->Cell(20, 7, 'DIBUKA', 1,0,'L',true);   //unlocked
+            $fpdf->Cell(19, 7, 'Rosak', 1,0,'L',true);    //damaged
+            $fpdf->Cell(19, 7, 'Lain', 1,0,'L',true);      //other
 
-            $fpdf->Cell(54, 7, 'VANDALISM', 1, 0, 'L', true);
-            $fpdf->Cell(54, 7, 'LEANING', 1, 0, 'L', true);
-            $fpdf->Cell(54, 7, 'RUST', 1, 0, 'L', true);
-            $fpdf->Cell(54, 7, 'ADVERTISE POSTER', 1, 0, 'L', true);
+            $fpdf->Cell(54, 7, 'Vandalism', 1, 0, 'L', true); //Vandalism
+            $fpdf->Cell(54, 7, 'Condong', 1, 0, 'L', true);   //Leaning
+            $fpdf->Cell(54, 7, 'Berkarat', 1, 0, 'L', true);  //Rusty
+            $fpdf->Cell(54, 7, 'Iklan Poster', 1, 0, 'L', true); //ADVERTISE POSTER
             $fpdf->SetFillColor(255, 255, 255);
             $fpdf->Ln();
             $fpdf->Cell(20, 7, $row->unlocked, 1);
             $fpdf->Cell(19, 7, $row->demaged, 1);
             $fpdf->Cell(19, 7, $row->other_gate, 1);
-            $fpdf->Cell(54, 7, $row->vandalism_status=='Yes' ?'Yes' : '', 1);
+            $fpdf->Cell(54, 7, $row->vandalism_status=='Yes' ?'Ya' : 'Tidak', 1);
 
-            $fpdf->Cell(54, 7, $row->leaning_staus=='Yes' ?'Yes' : '', 1);
+            $fpdf->Cell(54, 7, $row->leaning_staus=='Yes' ?'Ya' : 'Tidak', 1);
 
-            $fpdf->Cell(54, 7, $row->rust_status=='Yes' ?'Yes' : '', 1);
-            $fpdf->Cell(54, 7, $row->advertise_poster_status=='Yes' ?'Yes' : '', 1);
+            $fpdf->Cell(54, 7, $row->rust_status=='Yes' ?'Ya' : 'Tidak', 1);
+            $fpdf->Cell(54, 7, $row->advertise_poster_status=='Yes' ?'Ya' : 'Tidak', 1);
 
             $fpdf->Ln();
 
@@ -209,9 +194,79 @@ class FeederPillarLKSController extends Controller
             // Move to the next line for the next row
         }
 
-        $pdfFileName = 'FEEDER PILLAR ' . $req->ba . ' LKS ( ' . ($req->from_date ?? 'All') . ' - ' . ($req->to_date ?? 'All') . ' ).pdf';
+        $pdfFileName = $req->ba.' - Feeder-pillar - '.$req->visit_date.'.pdf'; 
         header('Content-Type: application/pdf');
         header('Content-Disposition: attachment; filename="' . $pdfFileName . '"');
-        return  $fpdf->output('D', $pdfFileName );
+        $pdfFilePath = public_path('temp/' . $pdfFileName);  
+        $fpdf->output('F', $pdfFilePath);
+ 
+        $response = [
+            'pdfPath' => $pdfFileName,
+        ];
+
+        return response()->json($response);
+    }
+
+
+    public function gene(Fpdf $fpdf, Request $req)
+    {
+        if ($req->ajax()) 
+        { 
+
+            $result = FeederPillar::query();
+        
+            $result = $this->filter($result , 'visit_date',$req)->where('qa_status','Accept')->whereNotNull('visit_date');
+            $getResultByVisitDate= $result->select('visit_date',DB::raw("count(*)"))->groupBy('visit_date')->get();  //get total count against visit_date
+             
+            
+            $fpdf->AddPage('L', 'A4');
+            $fpdf->SetFont('Arial', 'B', 22);
+                //add Heading
+            $fpdf->Cell(180, 25, $req->ba .' LKS ( '. ($req->from_date?? ' All ') . ' - ' . ($req->to_date?? ' All ').' )');
+            $fpdf->Ln();   
+            $fpdf->SetFont('Arial', 'B', 16);
+                // visit date table start
+            $fpdf->Cell(100,7,'JUMLAH YANG DICATAT BERHADAPAN TARIKH LAWATAN',0,1);
+    
+            $fpdf->SetFillColor(169, 169, 169);
+            $totalRecords = 0;
+    
+            $visitDates = [];
+            foreach ($getResultByVisitDate as $visit_date) 
+            {
+                $fpdf->SetFont('Arial', 'B', 9);
+                $fpdf->Cell(50,7,$visit_date->visit_date,1,0,'C',true);
+                $fpdf->Cell(50,7,$visit_date->count,1,0,'C');
+                $fpdf->Ln();
+                $totalRecords += $visit_date->count;
+                $visitDates[]=$visit_date->visit_date;
+                
+    
+            }
+            $fpdf->Cell(50,7,'JUMLAH REKOD',1,0,'C',true);
+            $fpdf->Cell(50,7,$totalRecords,1,0,'C');
+            // visit date table end
+            $fpdf->Ln();
+            $fpdf->Ln();
+    
+            $pdfFileName = $req->ba.' - Feeder-pillar - Table - Of - Contents - '.$req->from_date.' - '.$req->from_date.'.pdf'; 
+
+            header('Content-Type: application/pdf');
+            header('Content-Disposition: attachment; filename="' . $pdfFileName . '"');
+            $pdfFilePath = public_path('temp/' . $pdfFileName);  
+            $fpdf->output('F', $pdfFilePath);
+            
+    
+     
+            $response = [
+                'pdfPath' => $pdfFileName,
+                'visit_dates'=>$visitDates,
+            ];
+    
+            return response()->json($response);
+        }
+        
+        return view('lks.download-lks',['ba'=>$req->ba,'from_date'=>$req->from_date,'to_date'=>$req->to_date,'url'=>'feeder-pillar']); 
+        
     }
 }

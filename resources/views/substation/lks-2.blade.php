@@ -10,7 +10,8 @@
 
 <body>
 
-    <p id="counts"></p>
+    <p  >Total Number of downloads is <span class="counts"></span></p>
+    <p  >Total download complete <span id="download-complete"></span> / <span class="counts"></span></p>
     <p id='handle-request'></p>
 
      
@@ -22,23 +23,52 @@
         var from_date = "{{$from_date}}";
         var to_date = "{{$to_date}}"
 
-        $.ajax({
+        
+
+    
+            $.ajax({
+            url: `/{{app()->getLocale()}}/generate-substation-lks-table-of-content?ba=${ba}&from_date=${from_date}&to_date=${to_date}`,
+            method: 'GET',
+            success: function(response) {
+                // Handle the success response
+                var pdfPath = response.pdfPath;
+                   
+                   const link = document.createElement('a');
+                   link.setAttribute('href', '/temp/' + pdfPath);
+                   link.setAttribute('download', pdfPath); 
+                   link.click();
+
+                   link.remove();
+
+                   removeFiles(pdfPath);
+                
+            },
+            error: function(error) {
+                console.error('Error:', error);
+            }
+        });
+     
+        function getDates(){
+            $.ajax({
             url: `/{{app()->getLocale()}}/generate-substation-lks?ba=${ba}&from_date=${from_date}&to_date=${to_date}`,
             method: 'GET',
             success: function(response) {
                 // Handle the success response
-                $('#counts').html(`Total Number of downloads is ${response.length}`)
+                $('.counts').html(response.length +1)
+                
                 generateFiles(response, 0);
             },
             error: function(error) {
                 console.error('Error:', error);
             }
         });
+        }
 
  
         function generateFiles(dates, index) {
 
             $('#handle-request').html('Please wait sending request ...');
+            $('#download-complete').html(index + 1)
             if (index < dates.length) {
 
                 $.ajax({
@@ -46,7 +76,7 @@
                     method: 'GET',
                     success: function(response) {
                         // Handle the success response
-                        $('#handle-request').val('downloading ...' + index + ' / ' + dates.length);
+                        $('#handle-request').val('downloading ...' + index+1 + ' / ' + dates.length);
 
                         var pdfPath = response.pdfPath;
                    
@@ -74,11 +104,16 @@
 
         function removeFiles(pdfPath ,dates ,index){
             $.ajax({
-                    url: '/{{app()->getLocale()}}/remove-generate-substation-lks-by-visit-date?fileName='+pdfPath,
+                    url: '/{{app()->getLocale()}}/remove-generate-lks-by-visit-date?fileName='+pdfPath,
                     method: 'GET',
                     success: function(response) {
+                        if (dates) {
+                            generateFiles(dates, index + 1);
+                        }else{
+                            getDates();
+                        }
                  
-                        generateFiles(dates, index + 1);
+                        
 
                      
                     },
