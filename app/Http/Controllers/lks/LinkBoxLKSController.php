@@ -57,8 +57,8 @@ class LinkBoxLKSController extends Controller
             $fpdf->Cell(160, 6, 'SR # : '.$sr_no ,0);
 
             // add substation image 1 and substation image 2
-            $fpdf->Cell(40, 6, 'LINK BOX IMAGE 1' ,0);
-            $fpdf->Cell(40, 6, 'LINK BOX IMAGE 2' ,0);
+            $fpdf->Cell(40, 6, 'LINK BOX Gambar 1' ,0);
+            $fpdf->Cell(40, 6, 'LINK BOX Gambar 2' ,0);
             $fpdf->Ln();
 
      
@@ -78,15 +78,15 @@ class LinkBoxLKSController extends Controller
             } 
             $fpdf->Ln();
            
-            $fpdf->Cell(165, 6, 'VISIT  DATE : '.$row->visit_date); 
+            $fpdf->Cell(165, 6, 'Tarikh Lawatan : '.$row->visit_date);     //VISIT  DATE
             $fpdf->Ln();
-            $fpdf->Cell(60, 6, 'TYPE : '.$row->type);
+            $fpdf->Cell(60, 6, 'Jenis : '.$row->type);                      //Type
             $fpdf->Ln();
             $fpdf->Cell(60, 6, 'TO - FROM : '.$row->end_date .' - ' .  $row->start_date);
             $fpdf->Ln();
-            $fpdf->Cell(60, 6, 'COORDINATE : '.$row->coordinate);
+            $fpdf->Cell(60, 6, 'Koordinat : '.$row->coordinate);        //COORDINATE
             $fpdf->Ln();
-            $fpdf->Cell(60, 6, 'TOTAL DEFECTS : ' .$row->total_defects);
+            $fpdf->Cell(60, 6, 'Bil Janggal : ' .$row->total_defects);  //TOTAL DEFECTS
             $fpdf->Ln();
     
            

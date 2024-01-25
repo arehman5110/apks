@@ -52,8 +52,8 @@ class FeederPillarLKSController extends Controller
             $fpdf->Cell(160, 6, 'SR # : '.$sr_no ,0);
 
             // add feeder pilar images  Header 
-            $fpdf->Cell(45, 6, 'FEEDER PILLAR IMAGE 1' ,0);
-            $fpdf->Cell(40, 6, 'FEEDER PILLAR IMAGE 2' ,0);
+            $fpdf->Cell(45, 6, 'FEEDER PILLAR Gambar 1' ,0);
+            $fpdf->Cell(40, 6, 'FEEDER PILLAR Gambar 2' ,0);
             $fpdf->Ln();
 
             $fpdf->Cell(165, 6, 'ID : FP-' . $row->id);
@@ -73,13 +73,13 @@ class FeederPillarLKSController extends Controller
                 $fpdf->Image(public_path($row->feeder_pillar_image_2), $fpdf->GetX(), $fpdf->GetY(), 20, 20);
             }
             $fpdf->Ln(); 
-            $fpdf->Cell(60, 6, 'VISIT  DATE : ' . $row->visit_date);
+            $fpdf->Cell(60, 6, 'Tarikh Lawatan : ' . $row->visit_date);     //VISIT  DATE
             $fpdf->Ln();
-            $fpdf->Cell(60, 6, 'SIZE : ' . $row->size);
+            $fpdf->Cell(60, 6, 'Saiz : ' . $row->size);                     //SIZE
             $fpdf->Ln();
-            $fpdf->Cell(60, 6, 'COORDINATE : ' . $row->coordinate);
+            $fpdf->Cell(60, 6, 'Koordinat : ' . $row->coordinate);          //COORDINATE
             $fpdf->Ln();
-            $fpdf->Cell(60, 6, 'TOTAL DEFECTS : ' . $row->total_defects);
+            $fpdf->Cell(60, 6, 'Bil Janggal : ' . $row->total_defects);     //TOTAL DEFECTS
             $fpdf->Ln();
 
             $fpdf->SetFont('Arial', 'B', 8);

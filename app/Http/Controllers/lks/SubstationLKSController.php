@@ -78,8 +78,8 @@ class SubstationLKSController extends Controller
                 $fpdf->Image(public_path($row->substation_image_2), $fpdf->GetX(), $fpdf->GetY(), 20, 20);
             }
             $fpdf->Ln();
-            $fpdf->Cell(60, 6, 'VISIT  DATE : '.$row->visit_date,0,1);
-            $fpdf->Cell(60, 6, 'TOTAL DEFECTS : ' .$row->total_defects,0,1);
+            $fpdf->Cell(60, 6, 'Tarikh Lawatan : '.$row->visit_date,0,1);          //VISIT  DATE
+            $fpdf->Cell(60, 6, 'Bil Janggal : ' .$row->total_defects,0,1);         //
 
 
        

@@ -16,28 +16,27 @@ class TiangLKSController extends Controller
 
     use Filter;
 
-    public function index(){
-
-        return view('Tiang.lks');
+    public function index()
+    {
+        return view('lks.generate-lks',['title'=>'tiang' , 'url'=>'tiang-talian-vt-and-vr']);
     }
 
 
-    public function gene(Fpdf $fpdf, Request $req){
+    public function generateByVisitDate(Fpdf $fpdf, Request $req){
     
 
         // return Tiang::first();
-        $result = Tiang::query();
+       
     
-            $result = $this->filter($result , 'review_date',$req)->where('qa_status','Accept');
+        $result = Tiang::where('ba',$req->ba)->where('review_date', $req->visit_date)->where('qa_status','Accept');
 
-            $getResultByVisitDate = clone $result;   // clone filtered query
-            $getResultByVisitDate= $getResultByVisitDate->select('review_date as visit_date',DB::raw("count(*)"))->groupBy('visit_date')->get();  //get total count against visit_date
-              
+
+           
     
             $img_arr = [
                 [
                     'defect_name'=>'tiang_defect',
-                    'title'=>'Pole',
+                    'title'=>'Tiang',
                     'defects'=>['cracked','leaning','dim','creepers','other']
                 ],
                 [
@@ -67,22 +66,27 @@ class TiangLKSController extends Controller
                 ],
                 [
                     'defect_name'=>'kilat_defect',
-                    'title'=>'Lightning',
+                    'title'=>'Kilat',
                     'defects'=>['broken','other']
                 ],
                 [
                     'defect_name'=>'servis_defect',
-                    'title'=>'Service',
+                    'title'=>'Sesvis',
                     'defects'=>['roof','won_piece','other']
                 ],
                 [
+                    'defect_name'=>'pembumian_defect',
+                    'title'=>'Pembumian',
+                    'defects'=>['netural','other']
+                ],
+                [
                     'defect_name'=>'bekalan_dua_defect',
-                    'title'=>'Signage',
+                    'title'=>'Papan tanda',
                     'defects'=>['damage','other']
                 ],
                 [
                     'defect_name'=>'kaki_lima_defect',
-                    'title'=>'Main St.',
+                    'title'=>'Sesalur Kaki Lima',
                     'defects'=>['date_wire','burn','other']
                 ],
             ];
@@ -110,81 +114,67 @@ class TiangLKSController extends Controller
            'tapak_no_vehicle_entry_img','kawasan_bend_img','kawasan_road_img','kawasan_forest_img','kawasan_other_img',
             DB::raw("ST_Y(geom) as Y"),
             DB::raw("ST_X(geom) as X"),
-            DB::raw("CASE WHEN (tiang_defect->>'cracked')::text='true' THEN 'Yes' ELSE '' END as tiang_defect_cracked"),
-            DB::raw("CASE WHEN (tiang_defect->>'leaning')::text='true' THEN 'Yes' ELSE '' END as tiang_defect_leaning"),
-            DB::raw("CASE WHEN (tiang_defect->>'dim')::text='true' THEN 'Yes' ELSE '' END as tiang_defect_dim"),
-            DB::raw("CASE WHEN (tiang_defect->>'creepers')::text='true' THEN 'Yes' ELSE '' END as tiang_defect_creepers"),
-            DB::raw("CASE WHEN (tiang_defect->>'other')::text='true' THEN 'Yes' ELSE '' END as tiang_defect_other"),
-            DB::raw("CASE WHEN (talian_defect->>'joint')::text='true' THEN 'Yes' ELSE '' END as talian_defect_joint"),
-            DB::raw("CASE WHEN (talian_defect->>'need_rentis')::text='true' THEN 'Yes' ELSE '' END as talian_defect_need_rentis"),
-            DB::raw("CASE WHEN (talian_defect->>'ground')::text='true' THEN 'Yes' ELSE '' END as talian_defect_ground"),
-            DB::raw("CASE WHEN (talian_defect->>'other')::text='true' THEN 'Yes' ELSE '' END as talian_defect_other"),
-            DB::raw("CASE WHEN (umbang_defect->>'breaking')::text='true' THEN 'Yes' ELSE '' END as umbang_defect_breaking"),
-            DB::raw("CASE WHEN (umbang_defect->>'creepers')::text='true' THEN 'Yes' ELSE '' END as umbang_defect_creepers"),
-            DB::raw("CASE WHEN (umbang_defect->>'cracked')::text='true' THEN 'Yes' ELSE '' END as umbang_defect_cracked"),
-            DB::raw("CASE WHEN (umbang_defect->>'stay_palte')::text='true' THEN 'Yes' ELSE '' END as umbang_defect_stay_palte"),
-            DB::raw("CASE WHEN (umbang_defect->>'other')::text='true' THEN 'Yes' ELSE '' END as umbang_defect_other"),
-            DB::raw("CASE WHEN (ipc_defect->>'burn')::text='true' THEN 'Yes' ELSE '' END as ipc_defect_burn"),
-            DB::raw("CASE WHEN (ipc_defect->>'other')::text='true' THEN 'Yes' ELSE '' END as ipc_defect_other"),
-            DB::raw("CASE WHEN (blackbox_defect->>'cracked')::text='true' THEN 'Yes' ELSE '' END as blackbox_defect_cracked"),
-            DB::raw("CASE WHEN (blackbox_defect->>'other')::text='true' THEN 'Yes' ELSE '' END as blackbox_defect_other"),
-            DB::raw("CASE WHEN (jumper->>'sleeve')::text='true' THEN 'Yes' ELSE '' END as jumper_sleeve"),
-            DB::raw("CASE WHEN (jumper->>'burn')::text='true' THEN 'Yes' ELSE '' END as jumper_burn"),
-            DB::raw("CASE WHEN (jumper->>'other')::text='true' THEN 'Yes' ELSE '' END as jumper_other"),
-            DB::raw("CASE WHEN (kilat_defect->>'broken')::text='true' THEN 'Yes' ELSE '' END as kilat_defect_broken"),
-            DB::raw("CASE WHEN (kilat_defect->>'other')::text='true' THEN 'Yes' ELSE '' END as kilat_defect_other"),
-            DB::raw("CASE WHEN (servis_defect->>'roof')::text='true' THEN 'Yes' ELSE '' END as servis_defect_roof"),
-            DB::raw("CASE WHEN (servis_defect->>'won_piece')::text='true' THEN 'Yes' ELSE '' END as servis_defect_won_piece"),
-            DB::raw("CASE WHEN (servis_defect->>'other')::text='true' THEN 'Yes' ELSE '' END as servis_defect_other"),
-            DB::raw("CASE WHEN (pembumian_defect->>'netural')::text='true' THEN 'Yes' ELSE '' END as pembumian_defect_netural"),
-            DB::raw("CASE WHEN (pembumian_defect->>'other')::text='true' THEN 'Yes' ELSE '' END as pembumian_defect_other"),
-            DB::raw("CASE WHEN (bekalan_dua_defect->>'damage')::text='true' THEN 'Yes' ELSE '' END as bekalan_dua_defect_damage"),
-            DB::raw("CASE WHEN (bekalan_dua_defect->>'other')::text='true' THEN 'Yes' ELSE '' END as bekalan_dua_defect_other"),
-            DB::raw("CASE WHEN (kaki_lima_defect->>'date_wire')::text='true' THEN 'Yes' ELSE '' END as kaki_lima_defect_date_wire"),
-            DB::raw("CASE WHEN (kaki_lima_defect->>'burn')::text='true' THEN 'Yes' ELSE '' END as kaki_lima_defect_burn"),
-            DB::raw("CASE WHEN (kaki_lima_defect->>'other')::text='true' THEN 'Yes' ELSE '' END as kaki_lima_defect_other"),
-            DB::raw("CASE WHEN (tapak_condition::json->>'road')::text='true' THEN 'Yes' ELSE '' END as tapak_condition_road"),
-            DB::raw("CASE WHEN (tapak_condition::json->>'side_walk')::text='true' THEN 'Yes' ELSE '' END as tapak_condition_side_walk"),
-            DB::raw("CASE WHEN (tapak_condition::json->>'vehicle_entry')::text='true' THEN 'Yes' ELSE '' END as tapak_condition_vehicle_entry"),
-            DB::raw("CASE WHEN (kawasan::json->>'bend')::text='true' THEN 'Yes' ELSE '' END as kawasan_bend"),
-            DB::raw("CASE WHEN (kawasan::json->>'road')::text='true' THEN 'Yes' ELSE '' END as kawasan_road"),
-            DB::raw("CASE WHEN (kawasan::json->>'forest')::text='true' THEN 'Yes' ELSE '' END as kawasan_forest"),
-            DB::raw("CASE WHEN (kawasan::json->>'other')::text='true' THEN 'Yes' ELSE '' END as kawasan_other")
+            DB::raw("CASE WHEN (tiang_defect->>'cracked')::text='true' THEN 'Ya' ELSE 'Tidak' END as tiang_defect_cracked"),
+            DB::raw("CASE WHEN (tiang_defect->>'leaning')::text='true' THEN 'Ya' ELSE 'Tidak' END as tiang_defect_leaning"),
+            DB::raw("CASE WHEN (tiang_defect->>'dim')::text='true' THEN 'Ya' ELSE 'Tidak' END as tiang_defect_dim"),
+            DB::raw("CASE WHEN (tiang_defect->>'creepers')::text='true' THEN 'Ya' ELSE 'Tidak' END as tiang_defect_creepers"),
+            DB::raw("CASE WHEN (tiang_defect->>'other')::text='true' THEN 'Ya' ELSE 'Tidak' END as tiang_defect_other"),
+            DB::raw("CASE WHEN (talian_defect->>'joint')::text='true' THEN 'Ya' ELSE 'Tidak' END as talian_defect_joint"),
+            DB::raw("CASE WHEN (talian_defect->>'need_rentis')::text='true' THEN 'Ya' ELSE 'Tidak' END as talian_defect_need_rentis"),
+            DB::raw("CASE WHEN (talian_defect->>'ground')::text='true' THEN 'Ya' ELSE 'Tidak' END as talian_defect_ground"),
+            DB::raw("CASE WHEN (talian_defect->>'other')::text='true' THEN 'Ya' ELSE 'Tidak' END as talian_defect_other"),
+            DB::raw("CASE WHEN (umbang_defect->>'breaking')::text='true' THEN 'Ya' ELSE 'Tidak' END as umbang_defect_breaking"),
+            DB::raw("CASE WHEN (umbang_defect->>'creepers')::text='true' THEN 'Ya' ELSE 'Tidak' END as umbang_defect_creepers"),
+            DB::raw("CASE WHEN (umbang_defect->>'cracked')::text='true' THEN 'Ya' ELSE 'Tidak' END as umbang_defect_cracked"),
+            DB::raw("CASE WHEN (umbang_defect->>'stay_palte')::text='true' THEN 'Ya' ELSE 'Tidak' END as umbang_defect_stay_palte"),
+            DB::raw("CASE WHEN (umbang_defect->>'other')::text='true' THEN 'Ya' ELSE 'Tidak' END as umbang_defect_other"),
+            DB::raw("CASE WHEN (ipc_defect->>'burn')::text='true' THEN 'Ya' ELSE 'Tidak' END as ipc_defect_burn"),
+            DB::raw("CASE WHEN (ipc_defect->>'other')::text='true' THEN 'Ya' ELSE 'Tidak' END as ipc_defect_other"),
+            DB::raw("CASE WHEN (blackbox_defect->>'cracked')::text='true' THEN 'Ya' ELSE 'Tidak' END as blackbox_defect_cracked"),
+            DB::raw("CASE WHEN (blackbox_defect->>'other')::text='true' THEN 'Ya' ELSE 'Tidak' END as blackbox_defect_other"),
+            DB::raw("CASE WHEN (jumper->>'sleeve')::text='true' THEN 'Ya' ELSE 'Tidak' END as jumper_sleeve"),
+            DB::raw("CASE WHEN (jumper->>'burn')::text='true' THEN 'Ya' ELSE 'Tidak' END as jumper_burn"),
+            DB::raw("CASE WHEN (jumper->>'other')::text='true' THEN 'Ya' ELSE 'Tidak' END as jumper_other"),
+            DB::raw("CASE WHEN (kilat_defect->>'broken')::text='true' THEN 'Ya' ELSE 'Tidak' END as kilat_defect_broken"),
+            DB::raw("CASE WHEN (kilat_defect->>'other')::text='true' THEN 'Ya' ELSE 'Tidak' END as kilat_defect_other"),
+            DB::raw("CASE WHEN (servis_defect->>'roof')::text='true' THEN 'Ya' ELSE 'Tidak' END as servis_defect_roof"),
+            DB::raw("CASE WHEN (servis_defect->>'won_piece')::text='true' THEN 'Ya' ELSE 'Tidak' END as servis_defect_won_piece"),
+            DB::raw("CASE WHEN (servis_defect->>'other')::text='true' THEN 'Ya' ELSE 'Tidak' END as servis_defect_other"),
+            DB::raw("CASE WHEN (pembumian_defect->>'netural')::text='true' THEN 'Ya' ELSE 'Tidak' END as pembumian_defect_netural"),
+            DB::raw("CASE WHEN (pembumian_defect->>'other')::text='true' THEN 'Ya' ELSE 'Tidak' END as pembumian_defect_other"),
+            DB::raw("CASE WHEN (bekalan_dua_defect->>'damage')::text='true' THEN 'Ya' ELSE 'Tidak' END as bekalan_dua_defect_damage"),
+            DB::raw("CASE WHEN (bekalan_dua_defect->>'other')::text='true' THEN 'Ya' ELSE 'Tidak' END as bekalan_dua_defect_other"),
+            DB::raw("CASE WHEN (kaki_lima_defect->>'date_wire')::text='true' THEN 'Ya' ELSE 'Tidak' END as kaki_lima_defect_date_wire"),
+            DB::raw("CASE WHEN (kaki_lima_defect->>'burn')::text='true' THEN 'Ya' ELSE 'Tidak' END as kaki_lima_defect_burn"),
+            DB::raw("CASE WHEN (kaki_lima_defect->>'other')::text='true' THEN 'Ya' ELSE 'Tidak' END as kaki_lima_defect_other"),
+            DB::raw("CASE WHEN (tapak_condition::json->>'road')::text='true' THEN 'Ya' ELSE 'Tidak' END as tapak_condition_road"),
+            DB::raw("CASE WHEN (tapak_condition::json->>'side_walk')::text='true' THEN 'Ya' ELSE 'Tidak' END as tapak_condition_side_walk"),
+            DB::raw("CASE WHEN (tapak_condition::json->>'vehicle_entry')::text='true' THEN 'Ya' ELSE 'Tidak' END as tapak_condition_vehicle_entry"),
+            DB::raw("CASE WHEN (kawasan::json->>'bend')::text='true' THEN 'Ya' ELSE 'Tidak' END as kawasan_bend"),
+            DB::raw("CASE WHEN (kawasan::json->>'road')::text='true' THEN 'Ya' ELSE 'Tidak' END as kawasan_road"),
+            DB::raw("CASE WHEN (kawasan::json->>'forest')::text='true' THEN 'Ya' ELSE 'Tidak' END as kawasan_forest"),
+            DB::raw("CASE WHEN (kawasan::json->>'other')::text='true' THEN 'Ya' ELSE 'Tidak' END as kawasan_other")
            )
             ->get();
  
 
-        $fpdf->AddPage('L', 'A4');
-        $fpdf->SetFont('Arial', 'B', 22);
-            //add Heading
-        $fpdf->Cell(180, 25, $req->ba .' LKS ( '. ($req->from_date?? ' All ') . ' - ' . ($req->to_date?? ' All ').' )');
-        $fpdf->Ln();   
-        $fpdf->SetFont('Arial', 'B', 16);
-            // visit date table start
-        $fpdf->Cell(100,7,'TOTAL RECORED AGAINST VISIT DATE',0,1);
-
-        $fpdf->SetFillColor(169, 169, 169);
-        $totalRecords = 0;
-
-        foreach ($getResultByVisitDate as $visit_date) 
-        {
-            $fpdf->SetFont('Arial', 'B', 9);
-            $fpdf->Cell(50,7,$visit_date->visit_date,1,0,'C',true);
-            $fpdf->Cell(50,7,$visit_date->count,1,0,'C');
+            $fpdf->AddPage('L', 'A4');
+            $fpdf->SetFont('Arial', 'B', 22); 
+    
+            $fpdf->Cell(180, 25, $req->ba .' ' .$req->visit_date );
+            $fpdf->Ln();   
+            $fpdf->SetFont('Arial', 'B', 16);
+    
+            $fpdf->Cell(50,7,'Jumlah Rekod',1);
+            $fpdf->Cell(20,7,sizeof($data),1);
+          
+    
             $fpdf->Ln();
-            $totalRecords += $visit_date->count;
+            $fpdf->Ln();
 
-        }
-        $fpdf->Cell(50,7,'TOTAL RECORD',1,0,'C',true);
-        $fpdf->Cell(50,7,$totalRecords,1,0,'C');
-        // visit date table end
-        $fpdf->Ln();
-        $fpdf->Ln();
-
-
-        $imagePath = public_path('assets/web-images/main-logo.png');  
-        $fpdf->Image($imagePath, 190, 20, 57, 0);
-        $fpdf->SetFont('Arial', 'B', 9);
+            $imagePath = public_path('assets/web-images/main-logo.png');  
+            $fpdf->Image($imagePath, 190, 20, 57, 0);
+            $fpdf->SetFont('Arial', 'B', 9);
 
 
         $sr_no =0;
@@ -194,8 +184,8 @@ class TiangLKSController extends Controller
             $fpdf->Cell(160, 6, 'SR # : '.$sr_no ,0);
 
             // add substation image 1 and substation image 2
-            $fpdf->Cell(40, 6, 'TINAG IMAGE 1' ,0);
-            $fpdf->Cell(40, 6, 'TIANG IMAGE 2' ,0);
+            $fpdf->Cell(40, 6, 'TINAG Gambar 1' ,0);
+            $fpdf->Cell(40, 6, 'TIANG Gambar 2' ,0);
             $fpdf->Ln();
  
     
@@ -216,15 +206,15 @@ class TiangLKSController extends Controller
                 $fpdf->Image(public_path($row->pole_image_2), $fpdf->GetX(), $fpdf->GetY(), 20, 20);
             }
             $fpdf->Ln();
-            $fpdf->Cell(60, 6, 'VISIT  DATE : '.$row->review_date);
+            $fpdf->Cell(60, 6, 'Tarikh Lawatan : '.$row->review_date);          //VISIT  DATE
             $fpdf->Ln();
             $fpdf->Cell(60, 6, 'TIANG NO : '.$row->tiang_no);
             $fpdf->Ln();
             $fpdf->Cell(60, 6, 'TO - FROM : '.$row->section_from .' - ' .  $row->section_to);
             $fpdf->Ln();
-            $fpdf->Cell(60, 6, 'COORDINATE : '.$row->X .' , '. $row->Y);
+            $fpdf->Cell(60, 6, 'Koordinat : '.$row->X .' , '. $row->Y);         //COORDINATE
             $fpdf->Ln();
-            $fpdf->Cell(60, 6, 'TOTAL DEFECTS : ' .$row->total_defects);
+            $fpdf->Cell(60, 6, 'Bil Janggal : ' .$row->total_defects);          //TOTAL DEFECTS
             $fpdf->Ln();
     
            $newArr = $row;
@@ -236,11 +226,11 @@ class TiangLKSController extends Controller
  
             // table 0 header # 1/2 bare span table header # 1 start
  
-            $fpdf->Cell(40, 6, 'Main Line (M) / Servis (S)' ,1,0,'C',true );
-            $fpdf->Cell(45, 6, 'Number of Services Involves' ,1,0,'C',true );
-            $fpdf->Cell(30, 6, 'Clearance Distance' ,1,0,'C',true );
-            $fpdf->Cell(65, 6, 'Line clearance specifications' ,1,0,'C',true );
-            $fpdf->Cell(90, 6, 'Inspection of current leakage on the pole' ,1,0,'C',true );
+            $fpdf->Cell(40, 6, 'Talian Utama (M) / Servis (S)' ,1,0,'C',true );         //Main Line (M) / Servis (S)
+            $fpdf->Cell(45, 6, 'Bilangan Perkhidmatan Terlibat' ,1,0,'C',true );        //Number of Services Involves
+            $fpdf->Cell(30, 6, 'Jarak Kelegaan (meter)' ,1,0,'C',true );                //Clearance Distance
+            $fpdf->Cell(65, 6, 'Spesifikasi Kelegaan Talian' ,1,0,'C',true );           //Line clearance specifications
+            $fpdf->Cell(90, 6, 'Pemeriksaan Kebocoran Arus pada Tiang' ,1,0,'C',true ); //Inspection of current leakage on the pole
 
             // table 0 header # 1/2 bare span table header # 1 end
             $fpdf->Ln();
@@ -338,27 +328,27 @@ class TiangLKSController extends Controller
 
            // table # 2 header 1/2
 
-           $fpdf->Cell(100, 6, "Pole" ,1,0,'C',true);
-           $fpdf->Cell(110, 6, "Line (Main / Service)" ,1,0,'C',true);
-           $fpdf->Cell( 60, 6, "Umbang" ,1,0,'C',true);
+           $fpdf->Cell(100, 6, "Tiang" ,1,0,'C',true);           //Pole
+           $fpdf->Cell(110, 6, "Talian (Utama / Servis)" ,1,0,'C',true);  //Line (Main / Service)
+           $fpdf->Cell( 60, 6, "Umbang" ,1,0,'C',true);     //Umbang
 
            $fpdf->Ln();
            
            // table # 2 header 2/2
-
-           $fpdf->Cell(20, 6, "Cracked" ,1,0,'C',true);             //POLE
-           $fpdf->Cell(20, 6, "Leaning" ,1,0,'C',true);
-           $fpdf->Cell(20, 6, "No. Dim Post" ,1,0,'C',true);
-           $fpdf->Cell(20, 6, "Creepers" ,1,0,'C',true);
-           $fpdf->Cell(20, 6, "Others" ,1,0,'C',true);
-
-           $fpdf->Cell(20, 6, "Joint" ,1,0,'C',true);               // Line (Main / Service)
-           $fpdf->Cell(20, 6, "Need Rentis" ,1,0,'C',true);
-           $fpdf->Cell(50, 6, "Not Comply With Ground Clearance" ,1,0,'C',true);
-           $fpdf->Cell(20, 6, "Others" ,1,0,'C',true);
-
-           $fpdf->Cell(30, 6, "Sagging/Breaking" ,1,0,'C',true);    // Umbang 1/2
-           $fpdf->Cell(30, 6, "Creepers" ,1,0,'C',true);
+                                                                                //POLE
+           $fpdf->Cell(20, 6, "Reput" ,1,0,'C',true);                               //Cracked
+           $fpdf->Cell(20, 6, "Condong" ,1,0,'C',true);                             //Leaning
+           $fpdf->Cell(20, 6, "No Tiang Pudar" ,1,0,'C',true);                      //No. Dim Post
+           $fpdf->Cell(20, 6, "Creepers" ,1,0,'C',true);                            //Creepers  
+           $fpdf->Cell(20, 6, "Lain-lain" ,1,0,'C',true);                           //Others
+                                                                                // Line (Main / Service)
+           $fpdf->Cell(20, 6, "sendi" ,1,0,'C',true);                               //Joint
+           $fpdf->Cell(20, 6, "Perlu Rentis" ,1,0,'C',true);                        //Need Rentis
+           $fpdf->Cell(50, 6, "Tidak Patuh Ground Clearance" ,1,0,'C',true);        //Not Comply With Ground Clearance
+           $fpdf->Cell(20, 6, "Lain-lain" ,1,0,'C',true);                           //Others
+                                                                                // Umbang 1/2 
+           $fpdf->Cell(30, 6, "Kendur/Putus" ,1,0,'C',true);                        //Sagging/Breaking
+           $fpdf->Cell(30, 6, "Ulan (Creepers)" ,1,0,'C',true);                     //Creepers
 
            // table # 2 header 2/2 end
 
@@ -393,28 +383,28 @@ class TiangLKSController extends Controller
 
 
            // tbale # 3 header 1/2 
-           $fpdf->Cell(105, 6, "Umbang" ,1,0,'C',true);
-           $fpdf->Cell(45, 6, "IPC" ,1,0,'C',true);
-           $fpdf->Cell(45, 6, "Black Box" ,1,0,'C',true);
-           $fpdf->Cell(75, 6, "Jumper" ,1,0,'C',true);
+           $fpdf->Cell(105, 6, "Umbang" ,1,0,'C',true);     //Umbang
+           $fpdf->Cell(45, 6, "IPC" ,1,0,'C',true);         //IPC
+           $fpdf->Cell(45, 6, "Black Box" ,1,0,'C',true);   //Black Box
+           $fpdf->Cell(75, 6, "Jumper" ,1,0,'C',true);      //Jumper
 
            $fpdf->Ln();
 
            // tbale # 3 header 2/2 
-
-           $fpdf->Cell(40, 6, "No Stay Insulator/Damaged" ,1,0,'C',true);        // Umbagan
-           $fpdf->Cell(45, 6, "Stay Plate / Base Stay Blocked" ,1,0,'C',true);
-           $fpdf->Cell(20, 6, "Others" ,1,0,'C',true);
-
-           $fpdf->Cell(25, 6, "Burn Effect" ,1,0,'C',true);  //IPC
-           $fpdf->Cell(20, 6, "Others" ,1,0,'C',true);
-
-           $fpdf->Cell(25, 6, "Kesan Bakar" ,1,0,'C',true);  // Black Box
-           $fpdf->Cell(20, 6, "Others" ,1,0,'C',true);
-
-           $fpdf->Cell(30, 6, "No UV Sleeve" ,1,0,'C',true);  // Jumper
-           $fpdf->Cell(25, 6, "Burn Effect" ,1,0,'C',true);
-           $fpdf->Cell(20, 6, "Others" ,1,0,'C',true);
+                                                                                        // Umbagan
+           $fpdf->Cell(40, 6, "Tiada Stay Insulator/Rosak" ,1,0,'C',true);                  //No Stay Insulator/Damaged
+           $fpdf->Cell(45, 6, "Stay Plate/Pangkal Stay Terbongkah" ,1,0,'C',true);          //Stay Plate / Base Stay Blocked
+           $fpdf->Cell(20, 6, "Lain-lain" ,1,0,'C',true);                                   //Others
+                                                                                        //IPC 
+           $fpdf->Cell(25, 6, "Kesan Bakar" ,1,0,'C',true);                                 //Burn Effect
+           $fpdf->Cell(20, 6, "Lain-lain" ,1,0,'C',true);                                   //Others
+                                                                                        // Black Box
+           $fpdf->Cell(25, 6, "Kesan Bakar" ,1,0,'C',true);                                 //Kesan Bakar
+           $fpdf->Cell(20, 6, "Lain-lain" ,1,0,'C',true);                                   //Others
+                                                                                        // Jumper
+           $fpdf->Cell(30, 6, "Tiada UV Sleeve" ,1,0,'C',true);                             //No UV Sleeve
+           $fpdf->Cell(25, 6, "Kesan Bakar" ,1,0,'C',true);                                 //Burn Effect
+           $fpdf->Cell(20, 6, "Lain-lain" ,1,0,'C',true);                                   //Others
 
            // tbale # 3 header 2/2 end 
 
@@ -447,27 +437,27 @@ class TiangLKSController extends Controller
 
            $fpdf->SetFillColor(169, 169, 169);
 
-           $fpdf->Cell(40, 6, "Lightning catcher" ,1,0,'C',true);
-           $fpdf->Cell(95, 6, "Service" ,1,0,'C',true);
-           $fpdf->Cell(60, 6, "Grounding" ,1,0,'C',true);
-           $fpdf->Cell(75, 6, "Signage - OFF Point / Two Way Supply" ,1,0,'C',true);
+           $fpdf->Cell(40, 6, "Penangkap Kilat" ,1,0,'C',true);                             //Lightning catcher
+           $fpdf->Cell(95, 6, "Sesvis" ,1,0,'C',true);                                      //Service
+           $fpdf->Cell(60, 6, "Pembumian" ,1,0,'C',true);                                   //Grounding
+           $fpdf->Cell(75, 6, "Papan Tanda - OFF Point / Bekalan Dua Hala" ,1,0,'C',true);  //Signage - OFF Point / Two Way Supply
 
            $fpdf->Ln();
 
            // table # 4 header 2/2
-
-           $fpdf->Cell(20, 6, "Broken" ,1,0,'C',true);   //Lightning catcher
-           $fpdf->Cell(20, 6, "Others" ,1,0,'C',true);
-
-           $fpdf->Cell(45, 6, "The Service Line Is On The Roof" ,1,0,'C',true); //Service
-           $fpdf->Cell(30, 6, "Won Piece Date" ,1,0,'C',true);
-           $fpdf->Cell(20, 6, "Others" ,1,0,'C',true);
-
-           $fpdf->Cell(40, 6, "No Connection To Neutral" ,1,0,'C',true); //Grounding
-           $fpdf->Cell(20, 6, "Others" ,1,0,'C',true);
-
-           $fpdf->Cell(55, 6, "Faded / Damaged / Missing Signage" ,1,0,'C',true);   //Signage - OFF Point / Two Way Supply
-           $fpdf->Cell(20, 6, "Others" ,1,0,'C',true);
+                                                                                            //Lightning catcher
+           $fpdf->Cell(20, 6, "Rosak" ,1,0,'C',true);                                           //Broken
+           $fpdf->Cell(20, 6, "Lain-lain" ,1,0,'C',true);                                       //Others
+                                                                                            //Service
+           $fpdf->Cell(45, 6, "Talian servis berada di atas bumbung" ,1,0,'C',true);            //The Service Line Is On The Roof             
+           $fpdf->Cell(30, 6, "Won piece Tanggal" ,1,0,'C',true);                               //Won Piece Date
+           $fpdf->Cell(20, 6, "Lain-lain" ,1,0,'C',true);                                       //Others
+                                                                                            //Grounding
+           $fpdf->Cell(40, 6, "Tiada Sambungan ke Neutral" ,1,0,'C',true);                      //No Connection To Neutral
+           $fpdf->Cell(20, 6, "Lain-lain" ,1,0,'C',true);                                       //Others
+                                                                                            //Signage - OFF Point / Two Way Supply
+           $fpdf->Cell(55, 6, "Papan Tanda Pudar / Rosak / Tiada" ,1,0,'C',true);               //Faded / Damaged / Missing Signage
+           $fpdf->Cell(20, 6, "Lain-lain" ,1,0,'C',true);                                       //Others
            // table # 4 header 2/2 end
 
 
@@ -500,28 +490,28 @@ class TiangLKSController extends Controller
            // table # 5 header 1/2
            $fpdf->SetFillColor(169, 169, 169);
 
-           $fpdf->Cell(95, 6, "Main Street" ,1,0,'C',true);
-           $fpdf->Cell(95, 6, "Site Conditions" ,1,0,'C',true);
-           $fpdf->Cell(80, 6, "Area" ,1,0,'C',true);
+           $fpdf->Cell(95, 6, "Sesalur Kaki Lima" ,1,0,'C',true);         //Main Street
+           $fpdf->Cell(95, 6, "Keadaan di Tapak" ,1,0,'C',true);          //Site Conditions  
+           $fpdf->Cell(80, 6, "Kawasan" ,1,0,'C',true);                   //Area
 
 
 
 
            $fpdf->Ln();
            // table # 5 header 1/2
-
-           $fpdf->Cell(30, 6, "Date Wire" ,1,0,'C',true);           // Msin Street
-           $fpdf->Cell(45, 6, "Junction Box Date / Burn Effect" ,1,0,'C',true);
-           $fpdf->Cell(20, 6, "Others" ,1,0,'C',true);
-
-           $fpdf->Cell(35, 6, "Crossing the Road" ,1,0,'C',true);       //Site Conditions
-           $fpdf->Cell(20, 6, "Sidewalk" ,1,0,'C',true);
-           $fpdf->Cell(40, 6, "No vehicle entry area" ,1,0,'C',true);
-
-           $fpdf->Cell(20, 6, "Bend" ,1,0,'C',true);        // Area
-           $fpdf->Cell(20, 6, "Road" ,1,0,'C',true);
-           $fpdf->Cell(20, 6, "Forest" ,1,0,'C',true);
-           $fpdf->Cell(20, 6, "Others" ,1,0,'C',true);
+                                                                                        // Main Street
+           $fpdf->Cell(30, 6, "Wayar Tanggal" ,1,0,'C',true);                               // Date Wire
+           $fpdf->Cell(45, 6, "unction Box Tanggal / Kesan Bakar" ,1,0,'C',true);           //Junction Box Date / Burn Effect
+           $fpdf->Cell(20, 6, "Lain-lain" ,1,0,'C',true);                                   //Others
+                                                                                        //Site Conditions
+           $fpdf->Cell(35, 6, "Melintasi Jalanraya" ,1,0,'C',true);                         //Crossing the Road       
+           $fpdf->Cell(20, 6, "Bahu Jalan" ,1,0,'C',true);                                  //Sidewalk
+           $fpdf->Cell(40, 6, "tidak dimasuki kenderaan" ,1,0,'C',true);                    //No vehicle entry area
+                                                                                        // Area
+           $fpdf->Cell(20, 6, "Bendang" ,1,0,'C',true);                                     //Bend      
+           $fpdf->Cell(20, 6, "Jalanraya" ,1,0,'C',true);                                   //Road
+           $fpdf->Cell(20, 6, "Hutan" ,1,0,'C',true);                                       //Forest
+           $fpdf->Cell(20, 6, "Lain-lain" ,1,0,'C',true);                                   //Others
 
 
 
@@ -650,11 +640,76 @@ class TiangLKSController extends Controller
 
          
         }
-        
-        $pdfFileName = 'TIANG - SAVR  ' . $req->ba . ' LKS ( ' . ($req->from_date ?? 'All') . ' - ' . ($req->to_date ?? 'All') . ' ).pdf';
+         
+        $pdfFileName = $req->ba.' - Tiang - '.$req->visit_date.'.pdf'; 
         header('Content-Type: application/pdf');
         header('Content-Disposition: attachment; filename="' . $pdfFileName . '"');
-        return  $fpdf->output('D', $pdfFileName );
+        $pdfFilePath = public_path('temp/' . $pdfFileName);  
+        $fpdf->output('F', $pdfFilePath);
+
+        return response()->json(['pdfPath' => $pdfFileName]);
+    }
+
+    public function gene(Fpdf $fpdf, Request $req)
+    {
+        if ($req->ajax()) 
+        { 
+
+            $result = Tiang::query();
+        
+            $result = $this->filter($result , 'review_date',$req)->where('qa_status','Accept');
+            $getResultByVisitDate= $result->select('review_date as visit_date',DB::raw("count(*)"))->groupBy('visit_date')->get();  //get total count against visit_date
+             
+            
+            $fpdf->AddPage('L', 'A4');
+            $fpdf->SetFont('Arial', 'B', 22);
+                //add Heading
+            $fpdf->Cell(180, 25, $req->ba .' LKS ( '. ($req->from_date?? ' All ') . ' - ' . ($req->to_date?? ' All ').' )');
+            $fpdf->Ln();   
+            $fpdf->SetFont('Arial', 'B', 16);
+                // visit date table start
+            $fpdf->Cell(100,7,'JUMLAH YANG DICATAT BERHADAPAN TARIKH LAWATAN',0,1);
+    
+            $fpdf->SetFillColor(169, 169, 169);
+            $totalRecords = 0;
+    
+            $visitDates = [];
+            foreach ($getResultByVisitDate as $visit_date) 
+            {
+                $fpdf->SetFont('Arial', 'B', 9);
+                $fpdf->Cell(50,7,$visit_date->visit_date,1,0,'C',true);
+                $fpdf->Cell(50,7,$visit_date->count,1,0,'C');
+                $fpdf->Ln();
+                $totalRecords += $visit_date->count;
+                $visitDates[]=$visit_date->visit_date;
+                
+    
+            }
+            $fpdf->Cell(50,7,'JUMLAH REKOD',1,0,'C',true);
+            $fpdf->Cell(50,7,$totalRecords,1,0,'C');
+            // visit date table end
+            $fpdf->Ln();
+            $fpdf->Ln();
+    
+            $pdfFileName = $req->ba.' - Tiang - Table - Of - Contents - '.$req->from_date.' - '.$req->from_date.'.pdf'; 
+
+            header('Content-Type: application/pdf');
+            header('Content-Disposition: attachment; filename="' . $pdfFileName . '"');
+            $pdfFilePath = public_path('temp/' . $pdfFileName);  
+            $fpdf->output('F', $pdfFilePath);
+            
+    
+     
+            $response = [
+                'pdfPath' => $pdfFileName,
+                'visit_dates'=>$visitDates,
+            ];
+    
+            return response()->json($response);
+        }
+        
+        return view('lks.download-lks',['ba'=>$req->ba,'from_date'=>$req->from_date,'to_date'=>$req->to_date,'url'=>'tiang-talian-vt-and-vr']); 
+        
     }
 }
 

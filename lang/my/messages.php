@@ -214,7 +214,7 @@ return [
              
              'signage_off_point_two_way_supply'=>'Papan Tanda - OFF Point / Bekalan Dua Hala',
                  'faded_damaged_missing_signage'=>'Papan Tanda Pudar / Rosak / Tiada',
-                 'main_street'=>'Sesalur Kaki Lima',
+             'main_street'=>'Sesalur Kaki Lima',
                  'date_wire'=>'Wayar Tanggal',
                  'junction_box_date_burn_effect'=>'Junction Box Tanggal / Kesan Bakar',
      

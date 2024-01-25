@@ -113,8 +113,9 @@ Route::group(
                 Route::get('/get-tiang-edit/{id}', [TiangMapController::class, 'editMap'])->name('get-tiang-edit');
                 Route::post('/tiang-talian-vt-and-vr-map-edit/{id}', [TiangMapController::class, 'editMapStore'])->name('tiang-talian-vt-and-vr-map-edit');
                 Route::get('/tiang-talian-vt-and-vr-update-QA-Status', [TiangContoller::class, 'updateQAStatus'])->name('tiang-talian-vt-and-vr-update-QA-Status');
-                Route::post('/generate-tiang-talian-vt-and-vr-lks', [TiangLKSController::class, 'gene'])->name('generate-tiang-talian-vt-and-vr-lks');
+                Route::any('/generate-tiang-talian-vt-and-vr-lks', [TiangLKSController::class, 'gene'])->name('generate-tiang-talian-vt-and-vr-lks');
                 Route::get('/tiang-talian-vt-and-vr-lks',[TiangLKSController::class,'index'])->name('tiang-talian-vt-and-vr-lks');
+                Route::get('/generate-tiang-talian-vt-and-vr-lks-by-visit-date', [TiangLKSController::class, 'generateByVisitDate'])->name('generate-tiang-talian-vt-and-vr-lks-by-visit-date');
 
 
                 //// Link Box

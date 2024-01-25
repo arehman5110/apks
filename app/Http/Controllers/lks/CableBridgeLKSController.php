@@ -52,8 +52,8 @@ class CableBridgeLKSController extends Controller
             $fpdf->Cell(160, 6, 'SR # : '.$sr_no ,0);
 
             // add substation image 1 and substation image 2
-            $fpdf->Cell(40, 6, 'CABLE BRIDGE IMAGE 1' ,0);
-            $fpdf->Cell(40, 6, 'CABLE BRIDGE IMAGE 2' ,0);
+            $fpdf->Cell(40, 6, 'CABLE BRIDGE Gambar 1' ,0);
+            $fpdf->Cell(40, 6, 'CABLE BRIDGE Gambar 2' ,0);
             $fpdf->Ln();
 
             $fpdf->Cell(165, 6, 'ID : CB-' . $row->id); 
@@ -70,15 +70,15 @@ class CableBridgeLKSController extends Controller
                 $fpdf->Image(public_path($row->cable_bridge_image_2), $fpdf->GetX(), $fpdf->GetY(), 20, 20);
             } 
             $fpdf->Ln();
-            $fpdf->Cell(60, 6, 'VISIT  DATE : ' . $row->visit_date);
+            $fpdf->Cell(60, 6, 'Tarikh Lawatan : ' . $row->visit_date);                         //VISIT  DATE
             $fpdf->Ln();
-            $fpdf->Cell(60, 6, 'VOLTAGE : ' . $row->voltage);
+            $fpdf->Cell(60, 6, 'Voltan : ' . $row->voltage);                                    //VOLTAGE
             $fpdf->Ln();
             $fpdf->Cell(60, 6, 'TO - FROM : ' . $row->end_date . ' - ' . $row->start_date);
             $fpdf->Ln();
-            $fpdf->Cell(60, 6, 'COORDINATE : ' . $row->coordinate);
+            $fpdf->Cell(60, 6, 'Koordinat : ' . $row->coordinate);                              //COORDINATE
             $fpdf->Ln();
-            $fpdf->Cell(60, 6, 'TOTAL DEFECTS : ' . $row->total_defects);
+            $fpdf->Cell(60, 6, 'Bil Janggal : ' . $row->total_defects);                         //TOTAL DEFECTS
             $fpdf->Ln();
 
             $fpdf->SetFont('Arial', 'B', 8);
