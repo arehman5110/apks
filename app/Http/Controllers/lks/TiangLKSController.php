@@ -563,7 +563,7 @@ class TiangLKSController extends Controller
                     $defectName = $value['defect_name'].'_'.$defect;   // name that get from DB::raw(made up name)
                     $defectImage = $value['defect_name'].'_image';     // image name that is in db > image column > json
 
-                    if ($row->{$defectName} == 'Yes' && $row->{$defectImage} != '') // check if defect is 'Yes' and Defect Image column is  not empty 
+                    if ($row->{$defectName} == 'Ya' && $row->{$defectImage} != '') // check if defect is 'Yes' and Defect Image column is  not empty 
                     {
                          
                       $json_dec = json_decode($row->{$defectImage});    // image column is json so decode json
