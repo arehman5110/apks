@@ -283,7 +283,8 @@
         var auth_ba = "{{Auth::user()->ba}}";
 
             //this function just add and remove boundary 
-        function addRemoveBundary(param, paramY, paramX) {
+        function addRemoveBundary(param, paramY, paramX) 
+        {
 
             var q_cql = "ba ILIKE '%" + param + "%' "
             if (from_date != '') {
@@ -363,7 +364,8 @@
 
 
             // add group over layes
-        function addGroupOverLays() {
+        function addGroupOverLays() 
+        {
             if (layerControl != '') {
                 map.removeControl(layerControl);
             }
@@ -382,6 +384,7 @@
                 // groupCheckboxes: true
             }).addTo(map);
         }
+
     </script>
 
 

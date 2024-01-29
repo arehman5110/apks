@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Patroling;
 use App\Traits\Filter;
 use Illuminate\Http\Request;
-use Barryvdh\DomPDF\PDF; 
+use Barryvdh\Snappy\Facades\SnappyPdf;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\File;
 
@@ -24,10 +24,25 @@ class PatrollingLKSController extends Controller
     public function genet(Request $req)
     {
 
+        $from_date = empty($req->from_date)?  date('Y-m-d',   strtotime(Patroling::min('vist_date'))) : $req->from_date;
+        $to_date = empty($req->to_date)?  date('Y-m-d',   strtotime(Patroling::max('vist_date'))) : $req->to_date;
+
+
       
         $result = Patroling::query(); 
-        $result = $this->filter($result , 'visit_date',$req)->whereNotNull('km')->where('km','!=','0');
-        $datas = $result->get(); 
+        $result = $this->filter($result , 'vist_date',$req)->whereNotNull('km')->where('km','!=','0');
+        $datas = $result->select('id','time' ,'vist_date' , 'wp_name','cycle','reading_end','reading_start','image_reading_start','image_reading_end')->get(); 
+        // return view('example', ['data'=>$datas,'ba'=>$req->ba]);
+        $html = View::make('patrolling.lks', ['data'=>$datas,'ba'=>$req->ba , 'from_date' =>$from_date , 'to_date'=>$to_date])->render();
+
+        $pdf = SnappyPdf::loadHTML($html);
+        $pdf->setOption('javascript-delay', 5000);
+        // $pdf->setOption('no-images', false);
+  
+
+        return $pdf->download($req->ba.'-Patroling-'.$req->from_date.' - '.$req->to_date.'.pdf');
+
+
 
         $htmlContent = "<!DOCTYPE html>
         <html>
@@ -103,10 +118,9 @@ class PatrollingLKSController extends Controller
 // return "sad";
          
 
-        $pdf = app(PDF::class);
-        $pdf->loadHTML(View::make('example', ['data'=>$datas]));
-
-        return $pdf->download('document.pdf');
+        // $pdf = app(PDF::class);
+        // $pdf->loadHTML(View::make('example', ['data'=>$datas]));
+       
     }
 
 
