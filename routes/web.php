@@ -225,7 +225,7 @@ Route::group(
 
 
                 Route::get('/remove-generate-lks-by-visit-date', [RemoveLKSController::class, 'removeFiles'])->name('remove-generate-substation-lks-by-visit-date');
-
+                Route::post('/create-zip-lks-and-download', [RemoveLKSController::class, 'createZipAndDownload'])->name('create-zip-lks-and-download');
  
 
 

@@ -15,7 +15,7 @@ class CableBridgeLKSController extends Controller
 
     public function index()
     {
-        return view('lks.generate-lks',['title'=>'link_box' , 'url'=>'cable-bridge']);
+        return view('lks.generate-lks',['title'=>'cable_bridge' , 'url'=>'cable-bridge']);
 
     }
 
@@ -190,7 +190,11 @@ class CableBridgeLKSController extends Controller
         $fpdf->output('F', $pdfFilePath);
  
 
-        return response()->json(['pdfPath'=>'pdfPath']);
+        $response = [
+            'pdfPath' => $pdfFileName,
+        ];
+
+        return response()->json($response);
     }
 
     public function gene(Fpdf $fpdf, Request $req)
@@ -200,7 +204,7 @@ class CableBridgeLKSController extends Controller
 
             $result = CableBridge::query();
         
-            $result = $this->filter($result , 'visit_date',$req)->where('qa_status','Accept');
+            $result = $this->filter($result , 'visit_date',$req)->where('qa_status','Accept')->whereNotNull('visit_date');
             $getResultByVisitDate= $result->select('visit_date',DB::raw("count(*)"))->groupBy('visit_date')->get();  //get total count against visit_date
              
             
@@ -249,6 +253,13 @@ class CableBridgeLKSController extends Controller
             ];
     
             return response()->json($response);
+        }
+        if (empty($req->from_date)) {
+            $req['from_date'] = CableBridge::min('visit_date');
+        }
+
+        if (empty($req->to_date)) {
+            $req['to_date'] = CableBridge::max('visit_date');
         }
         
         return view('lks.download-lks',['ba'=>$req->ba,'from_date'=>$req->from_date,'to_date'=>$req->to_date,'url'=>'cable-bridge']); 

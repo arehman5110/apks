@@ -265,6 +265,13 @@ class FeederPillarLKSController extends Controller
     
             return response()->json($response);
         }
+        if (empty($req->from_date)) {
+            $req['from_date'] = FeederPillar::min('visit_date');
+        }
+
+        if (empty($req->to_date)) {
+            $req['to_date'] = FeederPillar::max('visit_date');
+        }
         
         return view('lks.download-lks',['ba'=>$req->ba,'from_date'=>$req->from_date,'to_date'=>$req->to_date,'url'=>'feeder-pillar']); 
         

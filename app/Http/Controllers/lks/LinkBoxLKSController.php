@@ -322,8 +322,16 @@ class LinkBoxLKSController extends Controller
     
             return response()->json($response);
         }
+
+        if (empty($req->from_date)) {
+            $req['from_date'] = LinkBox::min('visit_date');
+        }
+
+        if (empty($req->to_date)) {
+            $req['to_date'] = LinkBox::max('visit_date');
+        }
         
-        return view('lks.download-lks',['ba'=>$req->ba,'from_date'=>$req->from_date,'to_date'=>$req->to_date,'url'=>'link-box']); 
+        return view('lks.download-lks',['ba'=>$req->ba,'from_date'=>$req->from_date,'to_date'=>$req->to_date,'url'=>'link-box' ]); 
         
     }
 }

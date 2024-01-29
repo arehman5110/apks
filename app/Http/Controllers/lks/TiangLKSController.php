@@ -707,6 +707,15 @@ class TiangLKSController extends Controller
     
             return response()->json($response);
         }
+        if (empty($req->from_date)) {
+            $req['from_date'] = Tiang::min('review_date');
+        }
+
+        if (empty($req->to_date)) {
+            $req['to_date'] = Tiang::max('review_date');
+        }
+        
+       
         
         return view('lks.download-lks',['ba'=>$req->ba,'from_date'=>$req->from_date,'to_date'=>$req->to_date,'url'=>'tiang-talian-vt-and-vr']); 
         

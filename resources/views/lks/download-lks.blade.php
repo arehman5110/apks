@@ -14,6 +14,17 @@
     <p  >Total download complete <span id="download-complete"></span> / <span class="counts"></span></p>
     <p id='handle-request'></p>
 
+    <p id="closing-window"></p>
+
+    <form action="/{{app()->getLocale()}}/create-zip-lks-and-download" method="post" class="d-none" id="download-form">
+    @csrf
+        <input type="hidden" name="name" id="" value="{{$url}}">
+        <input type="hidden" name="fileName" id="fileName" >
+        <input type="hidden" name="ba" id="ba" value="{{$ba}}">
+        <input type="hidden" name="from_date" id="from_date" value="{{$from_date}}">
+        <input type="hidden" name="to_date" id="to_date" value="{{$to_date}}">
+    </form>
+
      
 
     <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
@@ -21,7 +32,8 @@
     <script>
         var ba = "{{ $ba }}";
         var from_date = "{{$from_date}}";
-        var to_date = "{{$to_date}}"
+        var to_date = "{{$to_date}}";
+        var pdfPaths = [];
 
         
 
@@ -34,16 +46,15 @@
                     {
                         
                         $('.counts').html(response.visit_dates.length +1)
-
-                        var pdfPath = response.pdfPath;
+ 
+                        console.log(response.pdfPath);
+                        if (response.pdfPath) 
+                        {
+                            pdfPaths.push(response.pdfPath);
+                        }
                         
-                        const link = document.createElement('a');
-                        link.setAttribute('href', '/temp/' + pdfPath);
-                        link.setAttribute('download', pdfPath); 
-                        link.click();
-                        link.remove();
                 
-                        removeFiles(response.pdfPath , response.visit_dates , -1);
+                        generateFiles(response.visit_dates , 0);
                     },
                     error: function(error) 
                     {
@@ -68,32 +79,47 @@
                         success: function(response) 
                         {
                             // Handle the success response
-                            $('#handle-request').val('downloading ...' + index+1 + ' / ' + dates.length);
+                            $('#handle-request').val('generating ...' + index+1 + ' / ' + dates.length);
 
-                            var pdfPath = response.pdfPath;
+                            if (response.pdfPath) 
+                            {
+                                pdfPaths.push(response.pdfPath);
+                            }
                     
-                            const link = document.createElement('a');
-                            link.setAttribute('href', '/temp/' + pdfPath);
-                            link.setAttribute('download', pdfPath); 
-                            link.click();
-
-                            link.remove();
-
-                            removeFiles(pdfPath ,dates , index);
-                            // generateFiles(dates, index + 1);
+                            generateFiles(dates, index + 1);
                         },
                         error: function(error) 
                         {
+                            alert("Request failed.....");
+                            // window.close()
                             console.error('Error:', error);
                         }
                     });
             } 
             else 
             {
-                $('#handle-request').html('downloading complete ')
-                window.close()
+                $('#handle-request').html('Files Generated Complete Please wait for download....');
+                downloadGeneratedFiles();
+                // window.close()
             }
 
+        }
+
+
+
+        function downloadGeneratedFiles() 
+        {
+            $('#fileName').val(pdfPaths);
+            
+            $('#download-form').submit();
+
+           
+            setTimeout(() => {
+                window.close()
+            }, 2000);
+
+
+       
         }
 
         function removeFiles(pdfPath ,dates ,index)
@@ -113,6 +139,8 @@
                 });
 
         }
+
+
     </script>
 </body>
 

@@ -229,6 +229,8 @@ class SubstationLKSController extends Controller
         { 
 
             $result = Substation::query();
+
+           
         
             $result = $this->filter($result , 'visit_date',$req)->where('qa_status','Accept');
             $getResultByVisitDate= $result->select('visit_date',DB::raw("count(*)"))->groupBy('visit_date')->get();  //get total count against visit_date
@@ -280,8 +282,15 @@ class SubstationLKSController extends Controller
     
             return response()->json($response);
         }
+        if (empty($req->from_date)) {
+            $req['from_date'] = Substation::min('visit_date');
+        }
+
+        if (empty($req->to_date)) {
+            $req['to_date'] = Substation::max('visit_date');
+        }
         
-        return view('lks.download-lks',['ba'=>$req->ba,'from_date'=>$req->from_date,'to_date'=>$req->to_date,'url'=>'substation']); 
+        return view('lks.download-lks',['ba'=>$req->ba,'from_date'=>$req->from_date,'to_date'=>$req->to_date,'url'=>'substation' ]); 
         
     }
 
