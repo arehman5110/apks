@@ -201,7 +201,7 @@ Route::group(
                 Route::get('/patrolling-paginate', [PatrollingController::class, 'paginate'])->name('patrolling-paginate');
                 Route::post('/generate-patrolling-excel', [PatrollingExcelController::class, 'generateExcel'])->name('generate-patrolling-excel');
                 Route::get('/patrolling-update-QA-Status', [PatrollingController::class, 'updateQAStatus'])->name('patrolling-update-QA-Status');
-                Route::post('/generate-patrolling-lks', [PatrollingLKSController::class, 'gene'])->name('generate-patrolling-lks');
+                Route::post('/generate-patrolling-lks', [PatrollingLKSController::class, 'genet'])->name('generate-patrolling-lks');
                 Route::get('/patrolling-lks',[PatrollingLKSController::class,'index'])->name('patrolling-lks');
 
 

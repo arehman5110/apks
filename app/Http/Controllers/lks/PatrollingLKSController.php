@@ -21,13 +21,13 @@ class PatrollingLKSController extends Controller
         return view('patrolling.lks');
     }
 
-    public function genet()
+    public function genet(Request $req)
     {
 
+      
         $result = Patroling::query(); 
-        $result->whereNotNull('km')->where('km','!=','0');
-        $datas = $result->get();
-// return view('example',['data'=>$data]);
+        $result = $this->filter($result , 'visit_date',$req)->whereNotNull('km')->where('km','!=','0');
+        $datas = $result->get(); 
 
         $htmlContent = "<!DOCTYPE html>
         <html>
@@ -93,18 +93,18 @@ class PatrollingLKSController extends Controller
         </body>
         </html>
 ";        
-File::put(public_path('assets/html/testing ujsf.html'), $htmlContent);
+// File::put(public_path('assets/html/testing ujsf.html'), $htmlContent);
 
-if (file_exists(public_path('assets/html/testing ujsf.html'))) {
+// if (file_exists(public_path('assets/html/testing ujsf.html'))) {
     
     
-    # code...
-}
-return "sad";
+//     # code...
+// }
+// return "sad";
          
 
         $pdf = app(PDF::class);
-        $pdf->loadHTML(View::make('example', ['data'=>$data]));
+        $pdf->loadHTML(View::make('example', ['data'=>$datas]));
 
         return $pdf->download('document.pdf');
     }
