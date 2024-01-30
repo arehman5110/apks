@@ -32,8 +32,8 @@ class PatrollingLKSController extends Controller
         $result = Patroling::query(); 
         $result = $this->filter($result , 'vist_date',$req)->whereNotNull('km')->where('km','!=','0');
         $datas = $result->select('id','time' ,'vist_date' , 'wp_name','cycle','reading_end','reading_start','image_reading_start','image_reading_end')->get(); 
-        // return view('example', ['data'=>$datas,'ba'=>$req->ba]);
-        $html = View::make('patrolling.lks', ['data'=>$datas,'ba'=>$req->ba , 'from_date' =>$from_date , 'to_date'=>$to_date])->render();
+         
+        $html = View::make('patrolling.pdf-template', ['data'=>$datas,'ba'=>$req->ba , 'from_date' =>$from_date , 'to_date'=>$to_date])->render();
 
         $pdf = SnappyPdf::loadHTML($html);
         $pdf->setOption('javascript-delay', 5000);
