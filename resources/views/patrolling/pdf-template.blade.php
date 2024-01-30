@@ -37,14 +37,14 @@
                         <td>{{$datas->reading_start}} </td>
                         <td>{{$datas->reading_end}} </td>
                         <td>{{$datas->cycle}} </td>
-                        <td>@if (file_exists(public_path($datas->image_reading_start)) && $data->image_reading_start != '') 
+                        <td>@if (file_exists(public_path($datas->image_reading_start)) && $datas->image_reading_start != '') 
                                 <img src="{{ URL::asset($datas->image_reading_start) }}" alt=""
                                     height="70" class="adjust-height ml-5  " > 
                         @else
                         <strong>{{ __('messages.no_image_found') }}</strong>
                         @endif</td>
-                        <td>@if (file_exists(public_path($datas->image_reading_start)) && $data->image_reading_start != '') 
-                                <img src="{{ URL::asset($datas->image_reading_start) }}" alt=""
+                        <td>@if (file_exists(public_path($datas->image_reading_end)) && $datas->image_reading_end != '') 
+                                <img src="{{ URL::asset($datas->image_reading_end) }}" alt=""
                                     height="70" class="adjust-height ml-5  "> 
                         @else
                         <strong>{{ __('messages.no_image_found') }}</strong>
@@ -58,7 +58,10 @@
 
             <script>
                 var id = {{$datas->id}};
-                var map = L.map("map-{{$datas->id}}").setView([3.016603, 101.858382], 5);
+                var x = '{{$datas->firstPatrollingLines}}' != '' ? '{{$datas->firstPatrollingLines->x}}' : '3.016603';
+                var y = '{{$datas->firstPatrollingLines}}' != '' ? '{{$datas->firstPatrollingLines->y}}' : '101.858382';
+
+                var map = L.map("map-{{$datas->id}}").setView([y, x], 14);
                 document.getElementById("map-{{$datas->id}}").style.cursor = "pointer";
             
                 // Add OpenStreetMap as a base layer
@@ -68,7 +71,7 @@
                 var geoServerLayer = L.tileLayer.wms('http://121.121.232.54:7090/geoserver/cite/wms', {
                     layers: 'cite:patroling_lines',
                     format: 'image/png',
-                    cql_filter: "id =" + id,
+                    cql_filter: "patroling_id =" + id,
                     transparent: true
                 }).addTo(map);
             

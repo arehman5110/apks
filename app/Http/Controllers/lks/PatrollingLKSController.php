@@ -7,6 +7,7 @@ use App\Models\Patroling;
 use App\Traits\Filter;
 use Illuminate\Http\Request;
 use Barryvdh\Snappy\Facades\SnappyPdf;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\File;
 
@@ -29,10 +30,37 @@ class PatrollingLKSController extends Controller
 
 
       
-        $result = Patroling::query(); 
-        $result = $this->filter($result , 'vist_date',$req)->whereNotNull('km')->where('km','!=','0');
-        $datas = $result->select('id','time' ,'vist_date' , 'wp_name','cycle','reading_end','reading_start','image_reading_start','image_reading_end')->get(); 
-         
+        $result = Patroling::query();
+        $result = $this->filter($result, 'vist_date', $req)->whereNotNull('km')->where('km', '!=', '0');
+        
+        $datas = $result->with(['firstPatrollingLines' => function ($query) {
+                $query->select(
+                    'patroling_id',
+                    DB::raw('st_x(st_centroid(ST_Envelope(geom))) as x'),
+                    DB::raw('st_y(st_centroid(ST_Envelope(geom))) as y'
+                    )
+                );
+            }])
+            ->select(
+                'id',
+                'time',
+                'vist_date',
+                'wp_name',
+                'cycle',
+                'reading_end',
+                'reading_start',
+                'image_reading_start',
+                'image_reading_end'
+            )
+            ->whereNotNull('km')
+            ->where('km', '!=', '0')
+            ->get();
+        
+        // return $datas;
+        
+        
+        //   $datas = $result->select('id','time' ,'vist_date' , 'wp_name','cycle','reading_end','reading_start','image_reading_start','image_reading_end' ,DB::raw('st_x(st_centroid(ST_Envelope(geom))) as x'),DB::raw('st_y(st_centroid(ST_Envelope(geom))) as y'))->get(); 
+        //   return view('patrolling.pdf-template', ['data'=>$datas,'ba'=>$req->ba , 'from_date' =>$from_date , 'to_date'=>$to_date]);
         $html = View::make('patrolling.pdf-template', ['data'=>$datas,'ba'=>$req->ba , 'from_date' =>$from_date , 'to_date'=>$to_date])->render();
 
         $pdf = SnappyPdf::loadHTML($html);
@@ -124,50 +152,5 @@ class PatrollingLKSController extends Controller
     }
 
 
-    public function gene(Request $request){
 
-    
-        $result = Patroling::query();
-        $request =  $this->filterWithOutAccpet($result , 'vist_date' , $request);
-        $result->whereNotNull('km')->where('km','!=','0');
-        $result = $result->first();
-        return $result;
-
-
-        $htmlContent = '
-        <!DOCTYPE html>
-        <html lang="en">
-            <head>
-                        <!-- App css -->
-                <link href="'.asset("assets/css/config/default/bootstrap.min.css").'" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
-                <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"/>
-                <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
-                <script src="'.asset("map/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js") .'"></script>
-                <style>
-                .table-borderles,
-                .table-borderles tbody,
-               .table-borderles tr,
-               .table-borderles td {
-                    border: none !important;
-                }
-                .service-page {
-                    page-break-before: always;
-                }
-                </style>
-                </head>
-
-            <body>
-                <div class="content-page">
-                    <div class="content">
-                        <div class="row">
-                            <div class="container  col-md-7">
-                                <div class="card p-3 ">
-                                    <h3 class="text-center">Purchase Order</h3>
-                                    <div class="col-6 p-3">
-                                    </div>
-';
-
-File::put(public_path('assets/PurhaseOrderPDF/html/tesing.html'), $htmlContent);
-
-    }
 }
