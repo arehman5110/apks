@@ -66,10 +66,7 @@
             </div>
         </div>
     </section>
-
-    {{-- <input type="text" name="" id="" class="typeahead"> --}}
-    {{-- <div id="search-results"></div> --}}
-    {{-- <div class="dwcontent" id="content-main" title="Main content" data-settings="unwrap: true; template:moduleonly.html"></div> --}}
+ 
     <div class=" ">
 
         <div class="container">
@@ -325,27 +322,8 @@
                                 </div>
 
                             </div>
-                            <div class="row">
-                                <div class="col-md-4"><label for="image_grass">{{ __('messages.image_grass') }}</label>
-                                </div>
-                                <div class="col-md-4">
-                                    <input type="file" name="image_grass" id="image_grass" accept="image/*"
-                                        class="form-control">
-                                    <input type="file" name="image_grass_2" id="image_grass_2" accept="image/*"
-                                        class="form-control">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4"><label
-                                        for="image_tree_branches">{{ __('messages.image_tree_branches') }}</label></div>
-                                <div class="col-md-4">
-                                    <input type="file" name="image_tree_branches" id="image_tree_branches"
-                                        class="form-control" accept="image/*">
-                                    <input type="file" name="image_tree_branches_2" id="image_tree_branches_2"
-                                        class="form-control" accept="image/*">
 
-                                </div>
-                            </div>
+
                             <div class="row">
                                 <div class="col-md-4"><label
                                         for="images_gate_after_lock">{{ __('messages.images_gate_after_lock') }}</label>
@@ -357,6 +335,33 @@
                                         accept="image/*" class="form-control">
                                 </div>
                             </div>
+
+
+
+                            <div class="row">
+                                <div class="col-md-4"><label for="image_grass">{{ __('messages.image_grass') }}</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="file" name="image_grass" id="image_grass" accept="image/*"
+                                        class="form-control">
+                                    <input type="file" name="image_grass_2" id="image_grass_2" accept="image/*"
+                                        class="form-control">
+                                </div>
+                            </div>
+
+                            
+                            <div class="row">
+                                <div class="col-md-4"><label
+                                        for="image_tree_branches">{{ __('messages.image_tree_branches') }}</label></div>
+                                <div class="col-md-4">
+                                    <input type="file" name="image_tree_branches" id="image_tree_branches"
+                                        class="form-control" accept="image/*">
+                                    <input type="file" name="image_tree_branches_2" id="image_tree_branches_2"
+                                        class="form-control" accept="image/*">
+
+                                </div>
+                            </div>
+                           
 
 
 

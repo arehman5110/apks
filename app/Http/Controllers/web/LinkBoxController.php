@@ -67,7 +67,7 @@ class LinkBoxController extends Controller
 
         try {
             $defects = [];
-            $defects =['leaning_status','vandalism_status','advertise_poster_status','rust_status','bushes_status' ,'cover_status'];
+            $defects =['leaning_status','vandalism_status','advertise_poster_status','rust_status','bushes_status' ,'cover_status' ,'paint_status'];
             $total_defects = 0;
 
             $data = new LinkBox();
@@ -163,7 +163,7 @@ class LinkBoxController extends Controller
         try {
 
             $defects = [];
-            $defects =['leaning_status','vandalism_status','advertise_poster_status','rust_status','bushes_status' ,'cover_status'];
+            $defects =['leaning_status','vandalism_status','advertise_poster_status','rust_status','bushes_status' ,'cover_status' , 'paint_status'];
             $total_defects = 0;
             $data = LinkBox::find($id);
             $data->zone = $request->zone;

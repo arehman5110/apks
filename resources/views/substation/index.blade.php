@@ -81,15 +81,7 @@
     <section class="content-">
         <div class="container-fluid">
 
-
-
             @include('components.message')
-
-
-
-
-
-
 
             <div class="row">
                 @include('components.qr-filter', ['url' => 'generate-substation-excel'])

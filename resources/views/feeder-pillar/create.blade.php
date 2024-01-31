@@ -248,6 +248,30 @@
                                     </select>
                                 </div>
                             </div>
+
+                            <div class="row">
+                                <div class="col-md-4"><label for="fp_gaurd">{{ __('messages.fp_gaurd') }}</label></div>
+                                <div class="col-md-4">
+                                    <select name="guard_status" id="fp_gaurd" class="form-control" required>
+                                        <option value="" hidden>select status</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4"><label for="paint_status">{{ __('messages.paint_faded') }}</label></div>
+                                <div class="col-md-4">
+                                    <select name="paint_status" id="paint_status" class="form-control" required>
+                                        <option value="" hidden>select status</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            
                             <div class="row">
                                 <div class="col-md-4"><label
                                         for="advertise_poster_status">{{ __('messages.cleaning_illegal_ads_banners') }}</label>
@@ -262,6 +286,9 @@
                                 </div>
                             </div>
 
+
+                            
+
                             <div class="row">
                                 <div class="col-md-4">
                                     <label for="feeder_pillar_image">{{ __('messages.feeder_pillar') }}
@@ -272,6 +299,18 @@
                                         accept="image/*" class="form-control" required>
                                     <input type="file" name="feeder_pillar_image_2" id="feeder_pillar_image_2"
                                         accept="image/*" class="form-control" required>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="image_name_plate">{{ __('messages.name_plate') }}
+                                        {{ __('messages.images') }} </label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="file" name="image_name_plate" id="image_name_plate"
+                                        accept="image/*" class="form-control" required>
+                                     
                                 </div>
                             </div>
 

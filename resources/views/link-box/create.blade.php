@@ -221,6 +221,16 @@
                                 </div>
                             </div>
                             <div class="row">
+                                <div class="col-md-4"><label for="paint_status">{{ __('messages.paint_faded') }}</label></div>
+                                <div class="col-md-4">
+                                    <select name="paint_status" id="paint_status" class="form-control" required>
+                                        <option value="" hidden>select status</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-md-4"><label for="advertise_poster_status">{{__("messages.cleaning_illegal_ads_banners")}}</label>
                                 </div>
                                 <div class="col-md-4">
