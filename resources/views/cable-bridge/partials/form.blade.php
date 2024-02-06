@@ -208,6 +208,16 @@
         </div>
     </div>
 
+
+     {{-- VANDALISM IMAGE 1 & 2 --}}
+     <div class="row">
+        <div class="col-md-4"><label for="image_vandalism">{{__("messages.image_vandalism")}}</label></div>
+        <div class="col-md-8 row">
+            {!!  viewAndUpdateImage($data->image_vandalism , 'image_vandalism' , $disabled )  !!}
+            {!!  viewAndUpdateImage($data->image_vandalism_2 , 'image_vandalism_2' , $disabled )  !!}
+        </div>
+    </div>
+
     {{-- PIPE IMAGE 1 & 2 --}}
     <div class="row">
         <div class="col-md-4"><label for="image_pipe">{{__("messages.image_pipe")}}</label></div>
@@ -217,31 +227,7 @@
         </div>
     </div>
 
-    {{-- VANDALISM IMAGE 1 & 2 --}}
-    <div class="row">
-        <div class="col-md-4"><label for="image_vandalism">{{__("messages.image_vandalism")}}</label></div>
-        <div class="col-md-8 row">
-            {!!  viewAndUpdateImage($data->image_vandalism , 'image_vandalism' , $disabled )  !!}
-            {!!  viewAndUpdateImage($data->image_vandalism_2 , 'image_vandalism_2' , $disabled )  !!}
-        </div>
-    </div>
-
-     {{-- DANGER SIGN --}}
-     <div class="row">
-        <div class="col-md-4"><label for="danger_sign_img">{{__("messages.danger_sign")}} {{__("messages.image")}}</label></div>
-        <div class="col-md-8 row">
-            {!!  viewAndUpdateImage($data->image_vandalism , 'image_vandalism' , $disabled )  !!}
-        </div>
-    </div>
-
-    {{-- ANTI CROSSING DECIVE --}}
-    <div class="row">
-        <div class="col-md-4"><label for="anti_cross_device_img">{{__("messages.anti_crossing_device")}} {{__("messages.image")}}</label></div>
-        <div class="col-md-8 row">
-            {!!  viewAndUpdateImage($data->anti_cross_device_img , 'anti_cross_device_img' , $disabled )  !!}
-        </div>
-    </div>
-
+   
     {{-- COLLAPSED IMAGE 1 & 2 --}}
     <div class="row">
         <div class="col-md-4"><label for="image_collapsed">{{__("messages.image_collapsed")}}</label></div>
@@ -259,6 +245,23 @@
             {!!  viewAndUpdateImage($data->image_rust_2 , 'image_rust_2' , $disabled )  !!}
         </div>
     </div>
+     {{-- DANGER SIGN --}}
+     <div class="row">
+        <div class="col-md-4"><label for="danger_sign_img">{{__("messages.danger_sign")}} {{__("messages.image")}}</label></div>
+        <div class="col-md-8 row">
+            {!!  viewAndUpdateImage($data->image_vandalism , 'image_vandalism' , $disabled )  !!}
+        </div>
+    </div>
+
+    {{-- ANTI CROSSING DECIVE --}}
+    <div class="row">
+        <div class="col-md-4"><label for="anti_cross_device_img">{{__("messages.anti_crossing_device")}} {{__("messages.image")}}</label></div>
+        <div class="col-md-8 row">
+            {!!  viewAndUpdateImage($data->anti_cross_device_img , 'anti_cross_device_img' , $disabled )  !!}
+        </div>
+    </div>
+
+    
 
     {{-- BUSHES IMAGE 1 & 2 --}}
     <div class="row">

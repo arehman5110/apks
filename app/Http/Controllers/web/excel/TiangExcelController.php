@@ -95,7 +95,7 @@ class TiangExcelController extends Controller
                     $query->where('review_date', '<=', $req->to_date);
                 }
 
-           $roadStatistics = $query->groupBy('fp_road' )->get();
+                $roadStatistics = $query->groupBy('fp_road' )->get();
 
          //  return $roadStatistics;
 
