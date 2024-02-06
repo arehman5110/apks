@@ -24,14 +24,12 @@ class FPController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->ajax()) {
-
-
+        if ($request->ajax()) 
+        {
             $result = FeederPillar::query();
-
             $result = $this->filter($result,'visit_date',$request);
-
-            $result->when(true, function ($query) {
+            $result->when(true, function ($query) 
+            {
                 return $query->select(
                     'id',
                     'ba', 
@@ -49,8 +47,8 @@ class FPController extends Controller
                 );
             }); 
 
-            return datatables()->of($result->get())->addColumn('feeder_pillar_id', function ($row) {
-                    
+            return datatables()->of($result->get())->addColumn('feeder_pillar_id', function ($row) 
+            {        
                 return "FP-" .$row->id;
             })->make(true);
         }
@@ -77,12 +75,9 @@ class FPController extends Controller
      */
     public function store(Request $request , FeederPillarRepo $feederPillar)
     {
-       
-
-        try {
-
-            $data = new FeederPillar();
-           
+        try 
+        {
+            $data = new FeederPillar();      
             $data->coordinate = $request->coordinate;
             $user = Auth::user()->id;
 
@@ -91,15 +86,13 @@ class FPController extends Controller
             $data->geom = DB::raw("ST_GeomFromText('POINT(" . $request->log . ' ' . $request->lat . ")',4326)");
             $feederPillar->store($data,$request);
             $data->save();
-
-        Session::flash('success', 'Request Success');
-
-        } catch (\Throwable $th) {
+            Session::flash('success', 'Request Success');
+        } 
+        catch (\Throwable $th) 
+        {
             Session::flash('failed', 'Request Failed');
         }
-
         return redirect()->route('feeder-pillar.index', app()->getLocale());
-           
     }
 
     /**
@@ -111,15 +104,12 @@ class FPController extends Controller
     public function show($language,$id)
     {
         $data = FeederPillar::find($id);
-        if ($data) {
+        if ($data) 
+        {
             $data->gate_status = json_decode($data->gate_status);
-
-
             return view('feeder-pillar.show', ['data' => $data ,'disabled'=>true]);
         }
         return abort('404');
-
-
     }
 
     /**
@@ -131,15 +121,12 @@ class FPController extends Controller
     public function edit($language,$id)
     {
         $data = FeederPillar::find($id);
-        if ($data) {
-            $data->gate_status = json_decode($data->gate_status);
-            
-
+        if ($data) 
+        {
+            $data->gate_status = json_decode($data->gate_status);    
             return view('feeder-pillar.edit', ['data' => $data , 'disabled'=>false]);
         }
         return abort('404');
-
-
     }
 
     /**
@@ -151,23 +138,20 @@ class FPController extends Controller
      */
     public function update(Request $request,$language,$id , FeederPillarRepo $feederPillar)
     {
-        try {
-
+        try 
+        {
             $data = FeederPillar::find($id);
             $user = Auth::user()->id;
-
             $data->updated_by = $user;
             $feederPillar->store($data,$request);
             $data->update();
-
-        Session::flash('success', 'Request Success');
-
-        } catch (\Throwable $th) {
+            Session::flash('success', 'Request Success');
+        } 
+        catch (\Throwable $th) 
+        {
             Session::flash('failed', 'Request Failed');
         }
-
-        return redirect()->route('feeder-pillar.index', app()->getLocale());
-           
+        return redirect()->route('feeder-pillar.index', app()->getLocale());  
     }
 
     /**
@@ -178,15 +162,15 @@ class FPController extends Controller
      */
     public function destroy($language,$id)
     {
-        try {
+        try 
+        {
             FeederPillar::find($id)->delete();
-
             Session::flash('success', 'Request Success');
-
-        } catch (\Throwable $th) {
+        } 
+        catch (\Throwable $th) 
+        {
             Session::flash('failed', 'Request Failed');
         }
-
         return redirect()->route('feeder-pillar.index', app()->getLocale());
     }
 
@@ -194,19 +178,23 @@ class FPController extends Controller
 
     public function updateQAStatus(Request $req)
     {
-        try {
+        try 
+        {
             $qa_data = FeederPillar::find($req->id);
             $qa_data->qa_status = $req->status;
-            if ($req->status == 'Reject') {
+            if ($req->status == 'Reject') 
+            {
                 $qa_data->reject_remarks = $req->reject_remakrs;
             }
             $user = Auth::user()->id;
-
+            
             $qa_data->updated_by = $user;
             $qa_data->update();
 
             return redirect()->back();
-        } catch (\Throwable $th) {
+        } 
+        catch (\Throwable $th) 
+        {
             return response()->json(['status' => 'Request failed']);
         }
     }

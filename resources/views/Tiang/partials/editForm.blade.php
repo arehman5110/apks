@@ -344,7 +344,7 @@
                                         </thead>
                                         {{-- POLE --}}
                                         <tr>
-                                            <th rowspan="5">{{ __('messages.pole') }}</th>
+                                            <th rowspan="6">{{ __('messages.pole') }}</th>
 
                                             {!! getImage2('cracked', $data->tiang_defect, 'tiang_defect', $data->tiang_defect_image, 'cracked') !!}
 
@@ -357,18 +357,19 @@
 
                                         <tr>
                                             {!! getImage2('dim', $data->tiang_defect, 'tiang_defect', $data->tiang_defect_image, 'no_dim_post_none') !!}
-
                                         </tr>
 
                                         <tr>
                                             {!! getImage2('creepers', $data->tiang_defect, 'tiang_defect', $data->tiang_defect_image, 'creepers') !!}
+                                        </tr>
 
+                                        <tr>
+                                            {!! getImage2('current_leakage', $data->tiang_defect, 'tiang_defect', $data->tiang_defect_image, 'current_leakage') !!}
                                         </tr>
 
 
                                         <tr>
                                             {!! getImage2('other', $data->tiang_defect, 'tiang_defect', $data->tiang_defect_image, 'others') !!}
-
                                         </tr>
 
                                         {{-- Line (Main / Service) --}}
@@ -406,7 +407,7 @@
                                         {{-- Umbang --}}
 
                                         <tr>
-                                            <th rowspan="5">{{ __('messages.Umbang') }}</th>
+                                            <th rowspan="6">{{ __('messages.Umbang') }}</th>
                                             {!! getImage2('breaking', $data->umbang_defect, 'umbang_defect', $data->umbang_defect_image, 'Sagging_Breaking') !!}
 
                                         </tr>
@@ -416,27 +417,17 @@
                                         </tr>
 
                                         <tr>
-                                            {!! getImage2(
-                                                'cracked',
-                                                $data->umbang_defect,
-                                                'umbang_defect',
-                                                $data->umbang_defect_image,
-                                                'No_Stay_Insulator_Damaged',
-                                            ) !!}
+                                            {!! getImage2( 'cracked', $data->umbang_defect, 'umbang_defect', $data->umbang_defect_image, 'No_Stay_Insulator_Damaged') !!}
 
                                         </tr>
 
                                         <tr>
-                                            {!! getImage2(
-                                                'stay_palte',
-                                                $data->umbang_defect,
-                                                'umbang_defect',
-                                                $data->umbang_defect_image,
-                                                'Stay_Plate_Base_Stay_Blocked',
-                                            ) !!}
+                                            {!! getImage2( 'stay_palte', $data->umbang_defect, 'umbang_defect', $data->umbang_defect_image, 'Stay_Plate_Base_Stay_Blocked') !!}
 
                                         </tr>
-
+                                        <tr>
+                                            {!! getImage2('current_leakage', $data->umbang_defect, 'umbang_defect', $data->umbang_defect_image, 'current_leakage') !!}
+                                        </tr>
                                         <tr>
                                             {!! getImage2('other', $data->umbang_defect, 'umbang_defect', $data->umbang_defect_image, 'others') !!}
 

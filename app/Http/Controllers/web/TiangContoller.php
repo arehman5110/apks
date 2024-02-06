@@ -99,9 +99,9 @@ class TiangContoller extends Controller
             $data->talian_utama_connection = $request->talian_utama_connection;
 
             $defectsKeys = [];
-            $defectsKeys['tiang_defect'] = ['cracked', 'leaning', 'dim', 'creepers', 'other'];
+            $defectsKeys['tiang_defect'] = ['cracked', 'leaning', 'dim', 'creepers', 'other', 'current_leakage'];
             $defectsKeys['talian_defect'] = ['joint', 'need_rentis', 'ground', 'other'];
-            $defectsKeys['umbang_defect'] = ['breaking', 'creepers', 'cracked', 'stay_palte', 'other'];
+            $defectsKeys['umbang_defect'] = ['breaking', 'creepers', 'cracked', 'stay_palte', 'other','current_leakage'];
 
             $defectsKeys['ipc_defect'] = ['burn', 'other'];
             $defectsKeys['blackbox_defect'] = ['cracked', 'other'];
@@ -288,19 +288,19 @@ class TiangContoller extends Controller
             $data->bare_span = $request->has('bare_span') ? json_encode($request->bare_span) : null;
 
             $defectsKeys = [];
-            $defectsKeys['tiang_defect'] = ['cracked', 'leaning', 'dim', 'creepers', 'other'];
-            $defectsKeys['talian_defect'] = ['joint', 'need_rentis', 'ground', 'other'];
-            $defectsKeys['umbang_defect'] = ['breaking', 'creepers', 'cracked', 'stay_palte', 'other'];
-            $defectsKeys['ipc_defect'] = ['burn', 'other'];
-            $defectsKeys['blackbox_defect'] = ['cracked', 'other'];
-            $defectsKeys['jumper'] = ['sleeve', 'burn', 'other'];
-            $defectsKeys['kilat_defect'] = ['broken', 'other'];
-            $defectsKeys['servis_defect'] = ['roof', 'won_piece', 'other'];
-            $defectsKeys['pembumian_defect'] = ['netural', 'other'];
-            $defectsKeys['bekalan_dua_defect'] = ['damage', 'other'];
-            $defectsKeys['kaki_lima_defect'] = ['date_wire', 'burn', 'other'];
-            $defectsKeys['tapak_condition'] = ['road', 'side_walk', 'vehicle_entry'];
-            $defectsKeys['kawasan'] = ['road', 'bend', 'forest', 'other'];
+            $defectsKeys['tiang_defect']        = ['cracked', 'leaning', 'dim', 'creepers', 'other','current_leakage'];
+            $defectsKeys['talian_defect']       = ['joint', 'need_rentis', 'ground', 'other'];
+            $defectsKeys['umbang_defect']       = ['breaking', 'creepers', 'cracked', 'stay_palte', 'other','current_leakage'];
+            $defectsKeys['ipc_defect']          = ['burn', 'other'];
+            $defectsKeys['blackbox_defect']     = ['cracked', 'other'];
+            $defectsKeys['jumper']              = ['sleeve', 'burn', 'other'];
+            $defectsKeys['kilat_defect']        = ['broken', 'other'];
+            $defectsKeys['servis_defect']       = ['roof', 'won_piece', 'other'];
+            $defectsKeys['pembumian_defect']    = ['netural', 'other'];
+            $defectsKeys['bekalan_dua_defect']  = ['damage', 'other'];
+            $defectsKeys['kaki_lima_defect']    = ['date_wire', 'burn', 'other'];
+            $defectsKeys['tapak_condition']     = ['road', 'side_walk', 'vehicle_entry'];
+            $defectsKeys['kawasan']             = ['road', 'bend', 'forest', 'other'];
 
             $total_defects = 0;
             foreach ($defectsKeys as $key => $defect) {

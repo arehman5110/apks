@@ -5,11 +5,14 @@ namespace App\Http\Controllers\web;
 use App\Http\Controllers\Controller;
 use App\Models\CableBridge;
 use App\Models\Team;
+use App\Repositories\CableBridgeRepo;
 use App\Traits\Filter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+
 
 class CableBridgeController extends Controller
 {
@@ -68,8 +71,6 @@ class CableBridgeController extends Controller
      */
     public function create()
     {
-        //
-
         $team_id = auth()->user()->id_team;
         $team = Team::find($team_id)->team_name;
         return view('cable-bridge.create', ['team' => $team]);
@@ -81,65 +82,26 @@ class CableBridgeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request , CableBridgeRepo $cableBridge)
     {
-        try {
-            $defects = [];
-            $defects = ['pipe_staus', 'vandalism_status', 'collapsed_status', 'rust_status', 'bushes_status'];
-
-            $currentDate = Carbon::now()->toDateString();
-            $combinedDateTime = $currentDate . ' ' . $request->patrol_time;
-            $total_defects = 0;
-
+        try 
+        {
             $data = new CableBridge();
-            $data->zone = $request->zone;
-            $data->ba = $request->ba;
-            $data->team = $request->team;
-            $data->visit_date = $request->visit_date;
-            $data->patrol_time = $combinedDateTime;
-            $data->feeder_involved = $request->feeder_involved;
-
-            $data->start_date = $request->start_date;
-            $data->end_date = $request->end_date;
-            $data->qa_status = 'pending';
+            $data->coords = $request->coordinate;
             $user = Auth::user()->id;
 
             $data->created_by = $user;
-            $data->voltage = $request->voltage;
-            $data->coordinate = $request->coordinate;
-
-            foreach ($defects as $value) {
-                $data->{$value} = $request->{$value};
-                $request->has($value) && $request->{$value} == 'Yes' ? $total_defects++ : '';
-            }
-            $data->total_defects = $total_defects;
-
-            $destinationPath = 'assets/images/cable-bridge/';
-
-            foreach ($request->all() as $key => $file) {
-                // Check if the input is a file and it is valid
-                if ($request->hasFile($key) && $request->file($key)->isValid()) {
-                    $uploadedFile = $request->file($key);
-                    $img_ext = $uploadedFile->getClientOriginalExtension();
-                    $filename = $key . '-' . strtotime(now()).rand(10,100)  . '.' . $img_ext;
-                    $uploadedFile->move($destinationPath, $filename);
-                    $data->{$key} = $destinationPath . $filename;
-                }
-            }
-
+            $data->qa_status = 'pending';
             $data->geom = DB::raw("ST_GeomFromText('POINT(" . $request->log . ' ' . $request->lat . ")',4326)");
-
+            $cableBridge->store($data,$request);
             $data->save();
-
-            return redirect()
-                ->route('cable-bridge.index', app()->getLocale())
-                ->with('success', 'Form Intserted');
-        } catch (\Throwable $th) {
-            return $th->getMessage();
-            return redirect()
-                ->route('cable-bridge.index', app()->getLocale())
-                ->with('failed', 'Form Intserted Failed');
+            Session::flash('success', 'Request Success');
+        } 
+        catch (\Throwable $th) 
+        {
+            Session::flash('failed', 'Request Failed');
         }
+        return redirect()->route('cable-bridge.index', app()->getLocale());
     }
 
     /**
@@ -175,59 +137,24 @@ class CableBridgeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $language, $id)
+    public function update(Request $request, $language, $id , CableBridgeRepo $cableBridge)
     {
-        //
-
-        try {
-            $defects = [];
-            $defects = ['pipe_staus', 'vandalism_status', 'collapsed_status', 'rust_status', 'bushes_status'];
-            $total_defects = 0;
-            $currentDate = Carbon::now()->toDateString();
-            $combinedDateTime = $currentDate . ' ' . $request->patrol_time;
-
+        try 
+        {
             $data = CableBridge::find($id);
-            $data->zone = $request->zone;
-            $data->ba = $request->ba;
             $user = Auth::user()->id;
-            if ($data->qa_status == '') {
-                $data->qa_status = 'pending';
-            }
+
             $data->updated_by = $user;
-            $data->visit_date = $request->visit_date;
-            $data->patrol_time = $combinedDateTime;
-            $data->feeder_involved = $request->feeder_involved;
-            $data->start_date = $request->start_date;
-            $data->end_date = $request->end_date;
-            $data->voltage = $request->voltage;
-            foreach ($defects as $value) {
-                $data->{$value} = $request->{$value};
-                $request->has($value) && $request->{$value} == 'Yes' ? $total_defects++ : '';
-            }
-            $data->total_defects = $total_defects;
-            $destinationPath = 'assets/images/cable-bridge/';
-            foreach ($request->all() as $key => $file) {
-                // Check if the input is a file and it is valid
-                if ($request->hasFile($key) && $request->file($key)->isValid()) {
-                    $uploadedFile = $request->file($key);
-                    $img_ext = $uploadedFile->getClientOriginalExtension();
-                    $filename = $key . '-' . strtotime(now()).rand(10,100)  . '.' . $img_ext;
-                    $uploadedFile->move($destinationPath, $filename);
-                    $data->{$key} = $destinationPath . $filename;
-                }
-            }
-
-            $data->save();
-
-            return redirect()
-                ->route('cable-bridge.index', app()->getLocale())
-                ->with('success', 'Form Update');
-        } catch (\Throwable $th) {
-            return $th->getMessage();
-            return redirect()
-                ->route('cable-bridge.index', app()->getLocale())
-                ->with('failed', 'Form Intserted Failed');
+            $cableBridge->store($data,$request);
+            $data->update();
+            Session::flash('success', 'Request Success');
+        } 
+        catch (\Throwable $th) 
+        {
+            Session::flash('failed', 'Request Failed');
         }
+        return redirect()->route('cable-bridge.index', app()->getLocale());
+
     }
 
     /**
@@ -238,18 +165,16 @@ class CableBridgeController extends Controller
      */
     public function destroy($language, $id)
     {
-        try {
+        try 
+        {
             CableBridge::find($id)->delete();
-
-            return redirect()
-                ->route('cable-bridge.index', app()->getLocale())
-                ->with('success', 'Recored Removed');
-        } catch (\Throwable $th) {
-            // return $th->getMessage();
-            return redirect()
-                ->route('cable-bridge.index', app()->getLocale())
-                ->with('failed', 'Request Failed');
+            Session::flash('success', 'Request Success');
+        } 
+        catch (\Throwable $th) 
+        {
+            Session::flash('failed', 'Request Failed');
         }
+        return redirect()->route('feeder-pillar.index', app()->getLocale());
     }
 
     public function updateQAStatus(Request $req)

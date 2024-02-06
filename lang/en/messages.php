@@ -39,6 +39,16 @@ return [
     'link_box_pelbagai_voltan' => 'Link Box Pelbagai Voltan',
     'cable_bridge' => 'Cable Bridge',
 
+
+    // ************************CABLE BRIDGE */
+
+    'danger_sign'=>'Danger Sign',
+    'anti_crossing_device'=>'Anti Crossing Device',
+    'trespass'=>'Trespass',
+    'cleanliness'=>'Cleanliness',
+    'image'=>'Image',
+
+
     /**************************end side-bar and dashboard */
 
     //*************************end dashboard */
@@ -186,6 +196,7 @@ return [
     'leaning' => 'Condong',
     'no_dim_post_none' => 'No. Tiang Pudar / Tiada',
     'creepers' => 'Creepers',
+    'current_leakage'=>'Current Leakage',
 
     'line_main_service' => 'Talian (Utama / Servis)',
     'joint' => 'Penggunaan IPC/Maruku Joint Bagi sambungan tengah',

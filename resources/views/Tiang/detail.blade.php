@@ -362,7 +362,7 @@
                                         </thead>
                                         {{-- POLE --}}
                                         <tr>
-                                            <th rowspan="5">{{ __('messages.pole') }}</th>
+                                            <th rowspan="6">{{ __('messages.pole') }}</th>
 
                                             {!! getImageShow('cracked', $data->tiang_defect, 'tiang_defect', $data->tiang_defect_image, 'cracked') !!}
 
@@ -381,6 +381,9 @@
                                         <tr>
                                             {!! getImageShow('creepers', $data->tiang_defect, 'tiang_defect', $data->tiang_defect_image, 'creepers') !!}
 
+                                        </tr>
+                                        <tr>
+                                            {!! getImageShow('current_leakage', $data->tiang_defect, 'tiang_defect', $data->tiang_defect_image, 'current_leakage') !!}
                                         </tr>
 
 
@@ -430,7 +433,7 @@
                                         {{-- Umbang --}}
 
                                         <tr>
-                                            <th rowspan="5">{{ __('messages.Umbang') }}</th>
+                                            <th rowspan="6">{{ __('messages.Umbang') }}</th>
                                             {!! getImageShow(
                                                 'breaking',
                                                 $data->umbang_defect,
@@ -465,6 +468,9 @@
                                                 'Stay_Plate_Base_Stay_Blocked',
                                             ) !!}
 
+                                        </tr>
+                                        <tr>
+                                            {!! getImageShow('current_leakage', $data->umbang_defect, 'umbang_defect', $data->umbang_defect_image, 'current_leakage') !!}
                                         </tr>
 
                                         <tr>

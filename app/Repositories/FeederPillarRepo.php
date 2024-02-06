@@ -67,7 +67,7 @@ class FeederPillarRepo
                 if ($request->hasFile($key) && $request->file($key)->isValid()) {
                     $uploadedFile = $request->file($key);
                     $img_ext = $uploadedFile->getClientOriginalExtension();
-                    $filename = $key . '-' . strtotime(now()).rand(10,100)  . '.' . $img_ext;
+                    $filename = $key . '-' . strtotime(now()).rand(10,1000)  . '.' . $img_ext;
                     $uploadedFile->move($destinationPath, $filename);
                     $data->{$key} = $destinationPath . $filename;
                 }
