@@ -315,3 +315,18 @@ function tiangSpanRadio($value , $key , $subkey , $status)
     }
 
 //  for show and update images end
+
+
+
+
+
+
+    function getImageForPdfHelper($imagePaht  )
+    {
+        $html = '';
+        if ($imagePaht != '' && file_exists(public_path($imagePaht)))
+        {
+            $html.= '<img src="data:image/png;base64,'.base64_encode(file_get_contents(public_path($imagePaht))).'" height="70" alt="" srcset="">' ;
+        }
+        return $html;
+    }

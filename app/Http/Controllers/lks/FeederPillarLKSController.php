@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 use App\Traits\Filter;
 use Codedge\Fpdf\Fpdf\Fpdf;
 use Illuminate\Support\Facades\DB;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+use PDF;
+use Illuminate\Support\Facades\File;
+
 
 class FeederPillarLKSController extends Controller
 {
@@ -25,7 +30,30 @@ class FeederPillarLKSController extends Controller
 
         $result = FeederPillar::where('ba',$req->ba)->where('visit_date', $req->visit_date)->where('qa_status','Accept');
 
-        $data = $result->select('id', 'ba','feeder_pillar_image_1','feeder_pillar_image_2', DB::raw("CASE WHEN (gate_status->>'unlocked')::text='true' THEN 'Ya' ELSE 'Tidak' END as unlocked"), DB::raw("CASE WHEN (gate_status->>'demaged')::text='true' THEN 'Ya' ELSE 'Tidak' END as demaged"), DB::raw("CASE WHEN (gate_status->>'other')::text='true' THEN 'Ya' ELSE 'Tidak' END as other_gate"), 'vandalism_status', 'leaning_staus', 'rust_status', 'advertise_poster_status', 'visit_date', 'size', 'coordinate', 'image_gate', 'image_gate_2', 'total_defects', 'image_vandalism', 'image_vandalism_2', 'image_leaning', 'image_leaning_2', 'image_rust', 'image_rust_2', 'images_advertise_poster', 'images_advertise_poster_2')->get();
+        $data = $result->select('id','guard_status','image_advertisement_after_1', 'ba','feeder_pillar_image_1','feeder_pillar_image_2', DB::raw("CASE WHEN (gate_status->>'unlocked')::text='true' THEN 'Ya' ELSE 'Tidak' END as unlocked"), DB::raw("CASE WHEN (gate_status->>'demaged')::text='true' THEN 'Ya' ELSE 'Tidak' END as demaged"), DB::raw("CASE WHEN (gate_status->>'other')::text='true' THEN 'Ya' ELSE 'Tidak' END as other_gate"), 'vandalism_status', 'leaning_staus', 'rust_status', 'advertise_poster_status', 'visit_date', 'size', 'coordinate', 'image_gate', 'image_gate_2', 'total_defects', 'image_vandalism', 'image_vandalism_2', 'image_leaning', 'image_leaning_2', 'image_rust', 'image_rust_2', 'images_advertise_poster', 'images_advertise_poster_2')->get();
+
+
+        $pdf = PDF::loadView('feeder-pillar.lks-feeder-pillar-template',['datas'=>$data,'ba'=>$req->ba , 'visit_date'=>$req->visit_date]);
+        $pdf->setPaper('A4', 'landscape');
+        $pdfFileName = $req->ba.' - Feeder-pillar - '.$req->visit_date.'.pdf'; 
+        $pdfFilePath = public_path('temp/' . $pdfFileName);     
+        if (file_exists($pdfFilePath)) {
+            File::delete($pdfFilePath);
+        }    
+        $pdf->save($pdfFilePath);
+
+        $response = [
+            'pdfPath' => $pdfFileName,
+        ];
+
+        return response()->json($response);
+
+
+        //  Need to reomve
+
+
+
+
 
         $fpdf->AddPage('L', 'A4');
         $fpdf->SetFont('Arial', 'B', 22);
