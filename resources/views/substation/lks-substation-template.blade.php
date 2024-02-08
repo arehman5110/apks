@@ -63,7 +63,7 @@
                     <th colspan="2" class="">Compound PE</th>
                     <th colspan="4" class="text-center">BANGUNAN ROSAK</th>
                     <th rowspan="2"> Iklan Haram / Banner</th>
-                    <th rowspan="3">Pembresihan iklan Haram/Banner & Menutup Pintu Pencawang atau Pintu Pagar</th>
+                    <th rowspan="3">Pembersihan iklan Haram/Banner & Menutup Pintu Pencawang atau Pintu Pagar</th>
                 </tr>
                 <tr>
                     <th>DIBUKA</th>

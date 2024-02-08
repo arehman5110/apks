@@ -80,7 +80,7 @@
                     <th colspan="3" class="text-center" >Pintu Pagar</th>
                     <th colspan="5" class="text-center">STATUS LAIN</th> 
                     <th rowspan="2"> Iklan Haram / Banner</th>
-                    <th rowspan="3">Pembresihan iklan Haram/Banner & <br> Menutup Pintu Pencawang atau Pintu Pagar</th>
+                    <th rowspan="3">Pembersihan iklan Haram/Banner & <br> Menutup Pintu Pencawang atau Pintu Pagar</th>
                 </tr>
                 <tr>
                     <th>DIBUKA</th>
