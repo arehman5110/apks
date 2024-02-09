@@ -54,7 +54,7 @@ class SubstationExcelController extends Controller
                     $worksheet->setCellValue('H' . $i, $rec->voltage);
                     $worksheet->setCellValue('I' . $i, $rec->name);
                     $worksheet->setCellValue('J' . $i, $rec->type);
-                    $worksheet->setCellValue('K' . $i, number_format( $rec->y, 2) .",". number_format( $rec->x , 2));
+                    $worksheet->setCellValue('K' . $i, number_format( $rec->y, 5) .",". number_format( $rec->x , 5));
                     if ($rec->gate_status) {
                         $gate_status = json_decode($rec->gate_status);
                         $worksheet->setCellValue('L' . $i, substaionCheckBox('unlocked', $gate_status ) == 'checked' ? 'yes' : 'no' );
