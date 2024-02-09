@@ -26,12 +26,12 @@ class SubstationExcelController extends Controller
 
 //  return $req;
             $result = Substation::query();
-
+// return $req;
             $result = $this->filter($result , 'visit_date',$req);
 
 
 
-            $result = $result->whereNotNull('visit_date')->select('*', DB::raw('ST_X(geom) as x'), DB::raw('ST_Y(geom) as y'))->get();
+           $result = $result->whereNotNull('visit_date')->select('*', DB::raw('ST_X(geom) as x'), DB::raw('ST_Y(geom) as y'))->get();
 
                 // return $result;
             if ($result) {

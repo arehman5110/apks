@@ -49,20 +49,25 @@ trait Filter
 
         // if request has status
         if ($request->filled('status')) {
+            // dd("ASdasd");
+            // return "ASdasd";
             if ($request->status == 'unsurveyed') {
                 $model->whereNull($column)->whereNull($request->image);
             } elseif ($request->status == 'surveyed_with_defects') {
+            //    dd($column);
                 $model
                     ->whereNotNull($column)
                     ->where('total_defects', '!=', '0')
-                    ->where($request->image, '!=', '');
+                    ->whereNotNull($request->image);
+                    // dd("Asdasdasd");
             } elseif ($request->status == 'surveyed_without_defects') {
                 $model
                     ->whereNotNull($column)
                     ->where('total_defects', '0')
-                    ->where($request->image, '!=', '');
+                    ->whereNotNull($request->image);
             }
         }
+        // dd("ASdasdasdasdasdasdasd");
 
         // for accept and reject
         if ($request->filled('qa_status')) {
@@ -70,6 +75,7 @@ trait Filter
                 $model->where('qa_status', $request->qa_status);
             }
         }
+        // dd("ASDasd");
         return $model;
     }
 
