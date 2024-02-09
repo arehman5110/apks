@@ -156,12 +156,12 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-4"></div>
+                                    <div class="col-md-4"><label for="fp_road"> {{ __('messages.Feeder_Name') }} / {{ __('messages.Street_Name') }}</label></div>
                                     <div class="col-md-4">
-                                        <input type="text" name="fp_name" id="fp_name" class="form-control" required>
+                                        <input type="text" name="fp_road"  id="fp_road" class="form-control" required>
                                     </div>
                                 </div>
-
+                                 
                                 <div class="row">
                                     <div class="col-md-4"><label for="">{{ __('messages.Section') }} </label></div>
                                 </div>

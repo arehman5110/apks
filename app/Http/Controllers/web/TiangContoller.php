@@ -175,6 +175,7 @@ class TiangContoller extends Controller
 
             if ($request->lat != '' && $request->log != '') {
                 $data->geom = DB::raw("ST_GeomFromText('POINT(" . $request->log . ' ' . $request->lat . ")',4326)");
+                $data->coords = number_format( $request->log , 5 )  .' , ' . number_format( $request->lat , 5);
             }
             // return "Sds";
             $data->save();
