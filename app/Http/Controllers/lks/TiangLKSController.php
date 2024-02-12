@@ -184,8 +184,8 @@ class TiangLKSController extends Controller
             $fpdf->Cell(160, 6, 'SR # : '.$sr_no ,0);
 
             // add substation image 1 and substation image 2
-            $fpdf->Cell(40, 6, 'TINAG Gambar 1' ,0);
-            $fpdf->Cell(40, 6, 'TIANG Gambar 2' ,0);
+            $fpdf->Cell(40, 6, 'Tiang Gambar 1' ,0);
+            $fpdf->Cell(40, 6, 'Tiang Gambar 2' ,0);
             $fpdf->Ln();
  
     
@@ -438,7 +438,7 @@ class TiangLKSController extends Controller
            $fpdf->SetFillColor(169, 169, 169);
 
            $fpdf->Cell(40, 6, "Penangkap Kilat" ,1,0,'C',true);                             //Lightning catcher
-           $fpdf->Cell(95, 6, "Sesvis" ,1,0,'C',true);                                      //Service
+           $fpdf->Cell(95, 6, "Servis" ,1,0,'C',true);                                      //Service
            $fpdf->Cell(60, 6, "Pembumian" ,1,0,'C',true);                                   //Grounding
            $fpdf->Cell(75, 6, "Papan Tanda - OFF Point / Bekalan Dua Hala" ,1,0,'C',true);  //Signage - OFF Point / Two Way Supply
 

@@ -29,8 +29,8 @@
             <tr>
                 <th>SR # : </th>
                 <td>{{ $loop->index + 1 }}</td>
-                <th class="px-3">Pencawang Gambar 1</th>
-                <th class="px-3" >Pencawang Gambar 1</th>
+                <th class="px-3">Feeder Pillar Gambar 1</th>
+                <th class="px-3" >Feeder Pillar Gambar 1</th>
                 <th class="px-3">FP Plate</th>
             </tr>
             <tr>

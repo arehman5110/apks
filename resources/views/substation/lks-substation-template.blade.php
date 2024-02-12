@@ -86,7 +86,7 @@
                     <td>{{$item->broken_roof}} </td>
                     <td>{{$item->broken_gutter}} </td>
                     <td>{{$item->broken_base}} </td>
-                    <td>{{$item->building_other}} </td>
+                    <td>{{$item->building_other == 'Ya' ?$item->building_status_other_value : '' }} </td>
                     <td>{{$item->advertise_poster_status=='Yes' ?'Ya' : 'Tidak'}} </td>
                 </tr>
                 <tr>
