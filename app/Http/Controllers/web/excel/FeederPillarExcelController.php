@@ -58,6 +58,23 @@ class FeederPillarExcelController extends Controller
                     $worksheet->setCellValue('R' . $i, $rec->rust_status);
                     $worksheet->setCellValue('S' . $i, $rec->paint_status);
                     $worksheet->setCellValue('T' . $i, $rec->advertise_poster_status);
+
+                    $worksheet->setCellValue('U' . $i, 'http://121.121.232.53:8090/'.$rec->feeder_pillar_image_1
+                    .' , http://121.121.232.53:8090/'.$rec->feeder_pillar_image_2
+                    .' , http://121.121.232.53:8090/'.$rec->image_name_plate
+                    .' , http://121.121.232.53:8090/'.$rec->image_gate
+                    .' , http://121.121.232.53:8090/'.$rec->image_gate_2
+                    .' , http://121.121.232.53:8090/'.$rec->image_vandalism
+                    .' , http://121.121.232.53:8090/'.$rec->image_vandalism_2
+                    .' , http://121.121.232.53:8090/'.$rec->image_leaning
+                    .' , http://121.121.232.53:8090/'.$rec->image_leaning_2
+                    .' , http://121.121.232.53:8090/'.$rec->image_rust
+                    .' , http://121.121.232.53:8090/'.$rec->image_rust_2
+                    .' , http://121.121.232.53:8090/'.$rec->images_advertise_poster
+                    .' , http://121.121.232.53:8090/'.$rec->images_advertise_poster_2
+                    .' , http://121.121.232.53:8090/'.$rec->image_advertisement_after_1
+                    .' , http://121.121.232.53:8090/'.$rec->image_advertisement_after_2
+                    .' , http://121.121.232.53:8090/'.$rec->other_image);
                     
                     $i++;
                 }

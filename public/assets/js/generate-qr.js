@@ -158,7 +158,7 @@ $(function(){
 
 
     function collapseFilter() {
-    $('#collapseQr').collapse('hide');
+    // $('#collapseQr').collapse('hide');
     }
 
 

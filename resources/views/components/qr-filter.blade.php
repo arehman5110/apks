@@ -7,7 +7,7 @@
 <div class="col-12">
     <div class="collapse" id="collapseQr">
         <div class="card card-body">
-            <form action="{{ isset($url) ? route($url, app()->getLocale()) : '#' }}"
+            <form action="{{ isset($url) ? route($url, app()->getLocale()) : '#' }}" target="_blank"
                 onsubmit="collapseFilter()" method="post">
                 @csrf
                 <div class="row form-input ">
