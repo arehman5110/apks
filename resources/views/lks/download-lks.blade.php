@@ -114,9 +114,9 @@
             $('#download-form').submit();
 
            
-            setTimeout(() => {
-                window.close()
-            }, 2000);
+            // setTimeout(() => {
+            //     window.close()
+            // }, 2000);
 
 
        

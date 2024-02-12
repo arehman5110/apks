@@ -458,7 +458,7 @@
                 }
 
                 lb_pending = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-                    layers: 'cite:sub_reject',
+                    layers: 'cite:lb_pending',
                     format: 'image/png',
                     cql_filter: q_cql,
                     maxZoom: 21,

@@ -83,7 +83,7 @@
                     <th rowspan="3">Pembersihan iklan Haram/Banner & <br> Menutup Pintu Pencawang atau Pintu Pagar</th>
                 </tr>
                 <tr>
-                    <th>DIBUKA</th>
+                    <th>Kunci</th>
                     <th>Rosak</th>
                     <th>Lain</th>
                     <th>Vandalism</th>
@@ -96,7 +96,7 @@
                 <tr>
                     <td>{{$item->unlocked}}</td>
                     <td>{{$item->demaged}}</td>
-                    <td>{{$item->other_gate}} </td>
+                    <td>{{$item->other_gate == 'Ya' ?$item->gate_other_value : '' }} </td>
                     <td>{{$item->vandalism_status=='Yes' ?'Ya' : 'Tidak'}} </td>
                     <td>{{$item->leaning_staus=='Yes' ?'Ya' : 'Tidak'}} </td>
                     <td>{{$item->rust_status=='Yes' ?'Ya' : 'Tidak'}} </td>

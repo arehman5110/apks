@@ -30,7 +30,7 @@
                 <th  >SR # : </th>
                 <td  >{{ $loop->index + 1 }}</td>
                 <th  >Pencawang Gambar 1</th>
-                <th  >Pencawang Gambar 1</th>
+                <th  >Pencawang Gambar 2</th>
             </tr>
             <tr>
                 <th >NAMA</th>
@@ -61,12 +61,12 @@
                 <tr>
                     <th colspan="3" class="text-center" >Pintu Pagar</th>
                     <th colspan="2" class="">Compound PE</th>
-                    <th colspan="4" class="text-center">BANGUNAN ROSAK</th>
+                    <th colspan="4" class="text-center">Bangunan Rosak</th>
                     <th rowspan="2"> Iklan Haram / Banner</th>
                     <th rowspan="3">Pembersihan iklan Haram/Banner & Menutup Pintu Pencawang atau Pintu Pagar</th>
                 </tr>
                 <tr>
-                    <th>DIBUKA</th>
+                    <th>kunci</th>
                     <th>Rosak</th>
                     <th>Lain</th>
                     <th>Bersemak/Rumput Panjang</th>
@@ -80,7 +80,7 @@
                 <tr>
                     <td>{{$item->unlocked}}</td>
                     <td>{{$item->demaged}}</td>
-                    <td>{{$item->other_gate}} </td>
+                    <td>{{$item->other_gate == 'Ya' ?$item->gate_other_value : '' }} </td>
                     <td>{{$item->grass_status=='Yes' ?'Ya' : 'Tidak'}} </td>
                     <td>{{$item->tree_branches_status =='Yes' ?'Ya' : 'Tidak'}} </td>
                     <td>{{$item->broken_roof}} </td>
