@@ -29,10 +29,10 @@ class RemoveLKSController extends Controller
                 if ($zip->open(public_path($zipFileName), ZipArchive::CREATE) === TRUE) 
                 {
             
-                    $destinaation = public_path('/temp');
+                    $destination = public_path('temp/'.$req->folder_name);
                     foreach ($paths as $file) 
                     {
-                        $filePath = $destinaation.'/'.$file;
+                        $filePath = $destination.'/'.$file;
                         if (file_exists($filePath)) 
                         {
                             $zip->addFile($filePath, basename($filePath));
@@ -41,11 +41,9 @@ class RemoveLKSController extends Controller
 
                     $zip->close();
 
-                    foreach ($paths as $file) 
-                    {
-                        $filePath = $destinaation.'/'.$file;
-                        File::delete($filePath);
-                    }
+
+                        File::deleteDirectory($destination);
+                    
 
                     return response()->download(public_path($zipFileName))->deleteFileAfterSend(true);
                 } 

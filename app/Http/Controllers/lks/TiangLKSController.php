@@ -8,7 +8,10 @@ use Illuminate\Http\Request;
 
 use App\Traits\Filter;
 use Codedge\Fpdf\Fpdf\Fpdf;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+
 
 class TiangLKSController extends Controller
 {
@@ -644,7 +647,8 @@ class TiangLKSController extends Controller
         $pdfFileName = $req->ba.' - Tiang - '.$req->visit_date.'.pdf'; 
         header('Content-Type: application/pdf');
         header('Content-Disposition: attachment; filename="' . $pdfFileName . '"');
-        $pdfFilePath = public_path('temp/' . $pdfFileName);  
+        $folderPath = 'temp/'.$req->folder_name .'/'. $pdfFileName;
+        $pdfFilePath = public_path( $folderPath); 
         $fpdf->output('F', $pdfFilePath);
 
         return response()->json(['pdfPath' => $pdfFileName]);
@@ -695,7 +699,16 @@ class TiangLKSController extends Controller
 
             header('Content-Type: application/pdf');
             header('Content-Disposition: attachment; filename="' . $pdfFileName . '"');
-            $pdfFilePath = public_path('temp/' . $pdfFileName);  
+            $userID = Auth::user()->id;
+            $folderName = 'temporary-tiang-folder-'.$userID;
+            $folderPath = public_path('temp/'.$folderName);
+
+            if (!File::exists($folderPath)) {
+                File::makeDirectory($folderPath, 0777, true, true);
+            }
+
+            $pdfFilePath = $folderPath.'/'. $pdfFileName;  
+
             $fpdf->output('F', $pdfFilePath);
             
     
@@ -703,6 +716,8 @@ class TiangLKSController extends Controller
             $response = [
                 'pdfPath' => $pdfFileName,
                 'visit_dates'=>$visitDates,
+                'folder_name'=>$folderName
+
             ];
     
             return response()->json($response);

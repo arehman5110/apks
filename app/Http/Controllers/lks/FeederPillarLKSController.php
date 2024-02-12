@@ -10,6 +10,7 @@ use Codedge\Fpdf\Fpdf\Fpdf;
 use Illuminate\Support\Facades\DB;
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use Illuminate\Support\Facades\Auth;
 use PDF;
 use Illuminate\Support\Facades\File;
 
@@ -35,8 +36,9 @@ class FeederPillarLKSController extends Controller
 
         $pdf = PDF::loadView('feeder-pillar.lks-feeder-pillar-template',['datas'=>$data,'ba'=>$req->ba , 'visit_date'=>$req->visit_date]);
         $pdf->setPaper('A4', 'landscape');
-        $pdfFileName = $req->ba.' - Feeder-pillar - '.$req->visit_date.'.pdf'; 
-        $pdfFilePath = public_path('temp/' . $pdfFileName);     
+        $pdfFileName = $req->ba.' - Feeder-pillar - '.$req->visit_date.'.pdf';    
+        $folderPath = 'temp/'.$req->folder_name .'/'. $pdfFileName;
+        $pdfFilePath = public_path( $folderPath); 
         if (file_exists($pdfFilePath)) {
             File::delete($pdfFilePath);
         }    
@@ -49,190 +51,6 @@ class FeederPillarLKSController extends Controller
         return response()->json($response);
 
 
-        //  Need to reomve
-
-
-
-
-
-        $fpdf->AddPage('L', 'A4');
-        $fpdf->SetFont('Arial', 'B', 22);
-
- 
-        $fpdf->Cell(180, 25, $req->ba .' ' .$req->visit_date );
-        $fpdf->Ln();  
-
-        $fpdf->SetFont('Arial', 'B', 16);
-
-        $fpdf->Cell(50,7,'Jumlah Rekod',1);
-        $fpdf->Cell(20,7,sizeof($data),1);
-
-        $fpdf->Ln();
-        $fpdf->Ln();
-
-        $imagePath = public_path('assets/web-images/main-logo.png');
-        $fpdf->Image($imagePath, 190, 20, 57, 0);
-        $fpdf->SetFont('Arial', 'B', 9);
-        $sr_no= 0;
-
-        foreach ($data as $row) {
-            $sr_no++;
-            $fpdf->Cell(160, 6, 'SR # : '.$sr_no ,0);
-
-            // add feeder pilar images  Header 
-            $fpdf->Cell(45, 6, 'FEEDER PILLAR Gambar 1' ,0);
-            $fpdf->Cell(40, 6, 'FEEDER PILLAR Gambar 2' ,0);
-            $fpdf->Ln();
-
-            $fpdf->Cell(165, 6, 'ID : FP-' . $row->id);
- 
-            // add feeder pillar images
-            if ($row->feeder_pillar_image_1 != '' && file_exists(public_path($row->feeder_pillar_image_1))) 
-            {
-
-                $fpdf->Image(public_path($row->feeder_pillar_image_1), $fpdf->GetX(), $fpdf->GetY(), 20, 20);
-            } 
-            $fpdf->Cell(45,6);
-            // $fpdf->Ln();
-
-
-            if ($row->feeder_pillar_image_2 != '' && file_exists(public_path($row->feeder_pillar_image_2))) 
-            {
-                $fpdf->Image(public_path($row->feeder_pillar_image_2), $fpdf->GetX(), $fpdf->GetY(), 20, 20);
-            }
-            $fpdf->Ln(); 
-            $fpdf->Cell(60, 6, 'Tarikh Lawatan : ' . $row->visit_date);     //VISIT  DATE
-            $fpdf->Ln();
-            $fpdf->Cell(60, 6, 'Saiz : ' . $row->size);                     //SIZE
-            $fpdf->Ln();
-            $fpdf->Cell(60, 6, 'Koordinat : ' . $row->coordinate);          //COORDINATE
-            $fpdf->Ln();
-            $fpdf->Cell(60, 6, 'Bil Janggal : ' . $row->total_defects);     //TOTAL DEFECTS
-            $fpdf->Ln();
-
-            $fpdf->SetFont('Arial', 'B', 8);
-
-            $fpdf->SetFillColor(169, 169, 169);
-
-            $fpdf->Cell(58, 7, 'Pintu Pagar', 1, 0, 'C', true);  //GATE
-            $fpdf->Cell(216, 7, 'STATUS LAIN', 1, 0, 'C', true);  // OTHERS STATUS
-
-            $fpdf->Ln();
-
-            $fpdf->Cell(20, 7, 'DIBUKA', 1,0,'L',true);   //unlocked
-            $fpdf->Cell(19, 7, 'Rosak', 1,0,'L',true);    //damaged
-            $fpdf->Cell(19, 7, 'Lain', 1,0,'L',true);      //other
-
-            $fpdf->Cell(54, 7, 'Vandalism', 1, 0, 'L', true); //Vandalism
-            $fpdf->Cell(54, 7, 'Condong', 1, 0, 'L', true);   //Leaning
-            $fpdf->Cell(54, 7, 'Berkarat', 1, 0, 'L', true);  //Rusty
-            $fpdf->Cell(54, 7, 'Iklan Poster', 1, 0, 'L', true); //ADVERTISE POSTER
-            $fpdf->SetFillColor(255, 255, 255);
-            $fpdf->Ln();
-            $fpdf->Cell(20, 7, $row->unlocked, 1);
-            $fpdf->Cell(19, 7, $row->demaged, 1);
-            $fpdf->Cell(19, 7, $row->other_gate, 1);
-            $fpdf->Cell(54, 7, $row->vandalism_status=='Yes' ?'Ya' : 'Tidak', 1);
-
-            $fpdf->Cell(54, 7, $row->leaning_staus=='Yes' ?'Ya' : 'Tidak', 1);
-
-            $fpdf->Cell(54, 7, $row->rust_status=='Yes' ?'Ya' : 'Tidak', 1);
-            $fpdf->Cell(54, 7, $row->advertise_poster_status=='Yes' ?'Ya' : 'Tidak', 1);
-
-            $fpdf->Ln();
-
-            if ($row->image_gate != '' && file_exists(public_path($row->image_gate))) {
-                $fpdf->Image(public_path($row->image_gate), $fpdf->GetX(), $fpdf->GetY(), 29, 30);
-                $fpdf->Cell(29);
-            } else {
-                $fpdf->Cell(29, 7, '');
-            }
-
-            // $fpdf->Ln();
-
-            if ($row->image_gate_2 != '' && file_exists(public_path($row->image_gate_2))) {
-                $fpdf->Image(public_path($row->image_gate_2), $fpdf->GetX(), $fpdf->GetY(), 29, 30);
-                $fpdf->Cell(29);
-            } else {
-                $fpdf->Cell(29, 7, '');
-            }
-
-            if ($row->image_vandalism != '' && file_exists(public_path($row->image_vandalism))) {
-                $fpdf->Image(public_path($row->image_vandalism), $fpdf->GetX(), $fpdf->GetY(), 27, 30);
-                $fpdf->Cell(27);
-            } else {
-                $fpdf->Cell(27, 7, '');
-            }
-
-            if ($row->image_vandalism_2 != '' && file_exists(public_path($row->image_vandalism_2))) {
-                $fpdf->Image(public_path($row->image_vandalism_2), $fpdf->GetX(), $fpdf->GetY(), 27, 30);
-                $fpdf->Cell(27);
-            } else {
-                $fpdf->Cell(27, 7, '');
-            }
-
-            if ($row->image_leaning != '' && file_exists(public_path($row->image_leaning))) {
-                $fpdf->Image(public_path($row->image_leaning), $fpdf->GetX(), $fpdf->GetY(), 27, 30);
-                $fpdf->Cell(27);
-            } else {
-                $fpdf->Cell(27, 7, '');
-            }
-
-            if ($row->image_leaning_2 != '' && file_exists(public_path($row->image_leaning_2))) {
-                $fpdf->Image(public_path($row->image_leaning_2), $fpdf->GetX(), $fpdf->GetY(), 27, 30);
-                $fpdf->Cell(27);
-            } else {
-                $fpdf->Cell(27, 7, '');
-            }
-
-            if ($row->image_rust != '' && file_exists(public_path($row->image_rust))) {
-                $fpdf->Image(public_path($row->image_rust), $fpdf->GetX(), $fpdf->GetY(), 27, 30);
-                $fpdf->Cell(27);
-            } else {
-                $fpdf->Cell(27, 7, '');
-            }
-
-            if ($row->image_rust_2 != '' && file_exists(public_path($row->image_rust_2))) {
-                $fpdf->Image(public_path($row->image_rust_2), $fpdf->GetX(), $fpdf->GetY(), 27, 30);
-                $fpdf->Cell(27);
-            } else {
-                $fpdf->Cell(27, 7, '');
-            }
-
-            if ($row->images_advertise_poster != '' && file_exists(public_path($row->images_advertise_poster))) {
-                $fpdf->Image(public_path($row->images_advertise_poster), $fpdf->GetX(), $fpdf->GetY(), 27, 30);
-                $fpdf->Cell(27);
-            } else {
-                $fpdf->Cell(27, 7, '');
-            }
-
-            if ($row->images_advertise_poster_2 != '' && file_exists(public_path($row->images_advertise_poster_2))) {
-                $fpdf->Image(public_path($row->images_advertise_poster_2), $fpdf->GetX(), $fpdf->GetY(), 27, 30);
-                $fpdf->Cell(27);
-            } else {
-                $fpdf->Cell(27, 7, '');
-            }
-
-            $fpdf->Ln();
-            $fpdf->Ln();
-            $fpdf->Ln();
-            $fpdf->Ln();
-            $fpdf->Ln();
-
-            // Move to the next line for the next row
-        }
-
-        $pdfFileName = $req->ba.' - Feeder-pillar - '.$req->visit_date.'.pdf'; 
-        header('Content-Type: application/pdf');
-        header('Content-Disposition: attachment; filename="' . $pdfFileName . '"');
-        $pdfFilePath = public_path('temp/' . $pdfFileName);  
-        $fpdf->output('F', $pdfFilePath);
- 
-        $response = [
-            'pdfPath' => $pdfFileName,
-        ];
-
-        return response()->json($response);
     }
 
 
@@ -281,7 +99,16 @@ class FeederPillarLKSController extends Controller
 
             header('Content-Type: application/pdf');
             header('Content-Disposition: attachment; filename="' . $pdfFileName . '"');
-            $pdfFilePath = public_path('temp/' . $pdfFileName);  
+            $userID = Auth::user()->id;
+            $folderName = 'temporary-feeder-pillar-folder-'.$userID;
+            $folderPath = public_path('temp/'.$folderName);
+
+            if (!File::exists($folderPath)) {
+                File::makeDirectory($folderPath, 0777, true, true);
+            }
+
+            $pdfFilePath = $folderPath.'/'. $pdfFileName;  
+
             $fpdf->output('F', $pdfFilePath);
             
     
@@ -289,6 +116,8 @@ class FeederPillarLKSController extends Controller
             $response = [
                 'pdfPath' => $pdfFileName,
                 'visit_dates'=>$visitDates,
+                'folder_name'=>$folderName
+
             ];
     
             return response()->json($response);

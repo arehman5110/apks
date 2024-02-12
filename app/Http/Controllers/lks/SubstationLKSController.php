@@ -10,6 +10,7 @@ use Codedge\Fpdf\Fpdf\Fpdf;
 use Illuminate\Support\Facades\DB;
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use Illuminate\Support\Facades\Auth;
 use PDF;
 use Illuminate\Support\Facades\File;
 
@@ -57,7 +58,8 @@ class SubstationLKSController extends Controller
         $pdf = PDF::loadView('substation.lks-substation-template',['datas'=>$data,'ba'=>$req->ba , 'visit_date'=>$req->visit_date]);
         $pdf->setPaper('A4', 'landscape');
         $pdfFileName = $req->ba.' - Pencawang - '.$req->visit_date.'.pdf'; 
-        $pdfFilePath = public_path('temp/' . $pdfFileName); 
+        $folderPath = 'temp/'.$req->folder_name .'/'. $pdfFileName;
+        $pdfFilePath = public_path( $folderPath); 
         if (file_exists($pdfFilePath)) {
             File::delete($pdfFilePath);
         }            
@@ -121,7 +123,17 @@ class SubstationLKSController extends Controller
 
             header('Content-Type: application/pdf');
             header('Content-Disposition: attachment; filename="' . $pdfFileName . '"');
-            $pdfFilePath = public_path('temp/' . $pdfFileName);  
+
+            $userID = Auth::user()->id;
+            $folderName = 'temporary-substation-folder-'.$userID;
+            $folderPath = public_path('temp/'.$folderName);
+
+            if (!File::exists($folderPath)) {
+                File::makeDirectory($folderPath, 0777, true, true);
+            }
+
+            $pdfFilePath = $folderPath.'/'. $pdfFileName;  
+
             $fpdf->output('F', $pdfFilePath);
             
     
@@ -129,6 +141,7 @@ class SubstationLKSController extends Controller
             $response = [
                 'pdfPath' => $pdfFileName,
                 'visit_dates'=>$visitDates,
+                'folder_name'=>$folderName
             ];
     
             return response()->json($response);

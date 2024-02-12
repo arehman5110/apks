@@ -21,7 +21,9 @@
         <input type="hidden" name="name" id="" value="{{$url}}">
         <input type="hidden" name="fileName" id="fileName" >
         <input type="hidden" name="ba" id="ba" value="{{$ba}}">
+        <input type="hidden" name="folder_name" id="folder_name">
         <input type="hidden" name="from_date" id="from_date" value="{{$from_date}}">
+
         <input type="hidden" name="to_date" id="to_date" value="{{$to_date}}">
     </form>
 
@@ -34,6 +36,7 @@
         var from_date = "{{$from_date}}";
         var to_date = "{{$to_date}}";
         var pdfPaths = [];
+        var folderName = '';
 
         
 
@@ -51,9 +54,9 @@
                         if (response.pdfPath) 
                         {
                             pdfPaths.push(response.pdfPath);
+                            folderName = response.folder_name;
                         }
                         
-                
                         generateFiles(response.visit_dates , 0);
                     },
                     error: function(error) 
@@ -74,7 +77,7 @@
 
                 $.ajax(
                     {
-                        url: '/{{app()->getLocale()}}/generate-{{$url}}-lks-by-visit-date?ba=' + ba + '&visit_date=' + dates[index],
+                        url: '/{{app()->getLocale()}}/generate-{{$url}}-lks-by-visit-date?ba=' + ba + '&visit_date=' + dates[index]+'&folder_name='+folderName,
                         method: 'GET',
                         success: function(response) 
                         {
@@ -109,8 +112,10 @@
 
         function downloadGeneratedFiles() 
         {
+            // on top create form and set values and submit through javascript
+
             $('#fileName').val(pdfPaths);
-            
+            $('#folder_name').val(folderName);
             $('#download-form').submit();
 
            
@@ -126,7 +131,7 @@
         {
             $.ajax(
                 {
-                    url: '/{{app()->getLocale()}}/remove-generate-lks-by-visit-date?fileName='+pdfPath,
+                    url: '/{{app()->getLocale()}}/remove-generate-lks-by-visit-date?fileName='+pdfPath+'&folder_name='+folderName,
                     method: 'GET',
                     success: function(response) 
                     { 

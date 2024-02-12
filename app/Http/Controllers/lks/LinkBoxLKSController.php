@@ -7,7 +7,10 @@ use App\Models\LinkBox;
 use App\Traits\Filter;
 use Illuminate\Http\Request;
 use Codedge\Fpdf\Fpdf\Fpdf;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+
 
 class LinkBoxLKSController extends Controller
 {
@@ -254,7 +257,8 @@ class LinkBoxLKSController extends Controller
         $pdfFileName = $req->ba.' - Link-Box - '.$req->visit_date.'.pdf'; 
         header('Content-Type: application/pdf');
         header('Content-Disposition: attachment; filename="' . $pdfFileName . '"');
-        $pdfFilePath = public_path('temp/' . $pdfFileName);  
+        $folderPath = 'temp/'.$req->folder_name .'/'. $pdfFileName;
+        $pdfFilePath = public_path( $folderPath); 
         $fpdf->output('F', $pdfFilePath);
  
         $response = [
@@ -310,7 +314,16 @@ class LinkBoxLKSController extends Controller
 
             header('Content-Type: application/pdf');
             header('Content-Disposition: attachment; filename="' . $pdfFileName . '"');
-            $pdfFilePath = public_path('temp/' . $pdfFileName);  
+            $userID = Auth::user()->id;
+            $folderName = 'temporary-link-boc-folder-'.$userID;
+            $folderPath = public_path('temp/'.$folderName);
+
+            if (!File::exists($folderPath)) {
+                File::makeDirectory($folderPath, 0777, true, true);
+            }
+
+            $pdfFilePath = $folderPath.'/'. $pdfFileName;  
+
             $fpdf->output('F', $pdfFilePath);
             
     
@@ -318,6 +331,7 @@ class LinkBoxLKSController extends Controller
             $response = [
                 'pdfPath' => $pdfFileName,
                 'visit_dates'=>$visitDates,
+                'folder_name'=>$folderName
             ];
     
             return response()->json($response);
