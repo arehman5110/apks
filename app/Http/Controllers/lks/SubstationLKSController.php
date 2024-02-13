@@ -160,16 +160,16 @@ class SubstationLKSController extends Controller
             $fpdf->Cell(19, 7, $row->demaged, 1);
             $fpdf->Cell(19, 7, $row->other_gate == 'Ya' ? $row->gate_other_value : '', 1);
 
-            $fpdf->Cell(30, 7, $row->tree_branches_status =='Yes' ?'Ya' : 'Tidak', 1);
-            $fpdf->Cell(20, 7, $row->tree_branches_status =='Yes' ?'Ya' : 'Tidak', 1);
+            $fpdf->Cell(40, 7, $row->grass_status =='Yes' ?'Ya' : 'Tidak', 1);
+            $fpdf->Cell(30, 7, $row->grass_status =='Yes' ?'Ya' : 'Tidak', 1);
 
             $fpdf->Cell(18, 7, $row->broken_roof, 1);
             $fpdf->Cell(18, 7, $row->broken_gutter, 1);
             $fpdf->Cell(18, 7, $row->broken_base, 1);
             $fpdf->Cell(18, 7, $row->building_other == 'Ya' ? $row->building_status_other_value : '' , 1);
 
-            $fpdf->Cell(25, 7, $row->advertise_poster_status=='Yes' ?'Ya' : 'Tidak', 1);
-            $fpdf->Cell(25, 7, $row->grass_status=='Yes' ?'Ya' : 'Tidak', 1);
+            $fpdf->Cell(30, 7, $row->advertise_poster_status=='Yes' ?'Ya' : 'Tidak', 1);
+          
 
             $fpdf->SetFillColor(169, 169, 169);
             $fpdf->Cell(50,7,' Pintu Pagar','RBL', 0,'C',true); //GRASS
