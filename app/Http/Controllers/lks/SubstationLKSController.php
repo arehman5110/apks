@@ -182,7 +182,7 @@ class SubstationLKSController extends Controller
             if ($row->image_gate != '' && file_exists(public_path($row->image_gate))) 
             {
                 $fpdf->Cell(7, 30);
-                $fpdf->Image(public_path($row->image_gate), $fpdf->GetX(), $fpdf->GetY(), 29, 30);
+                $fpdf->Image(public_path($row->image_gate), $fpdf->GetX(), $fpdf->GetY(), 20, 29);
             } 
             $fpdf->Cell(51, 30);
 
