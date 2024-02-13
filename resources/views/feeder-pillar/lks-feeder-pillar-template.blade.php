@@ -30,7 +30,7 @@
                 <th>SR # : </th>
                 <td>{{ $loop->index + 1 }}</td>
                 <th class="px-3">Feeder Pillar Gambar 1</th>
-                <th class="px-3" >Feeder Pillar Gambar 1</th>
+                <th class="px-3" >Feeder Pillar Gambar 2</th>
                 <th class="px-3">FP Plate</th>
             </tr>
             <tr>
@@ -41,7 +41,7 @@
                 <th >NAMA</th>
                 <td>{{$item->name}}</td>
                 <td rowspan="4" class="text-center">  
-                    @if ($item->substation_image_1 != '' && file_exists(public_path($item->feeder_pillar_image_1)))
+                    @if ($item->feeder_pillar_image_1 != '' && file_exists(public_path($item->feeder_pillar_image_1)))
                         <img src="data:image/png;base64,{{base64_encode(file_get_contents(public_path($item->feeder_pillar_image_1)))}}" height="70" alt="" srcset="">
                     @endif
                 </td>
