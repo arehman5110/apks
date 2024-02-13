@@ -55,21 +55,223 @@ class SubstationLKSController extends Controller
     
         // return view ('substation.lks-pdf-template',['datas'=>$data , 'ba'=>$req->ba, 'visit_date'=>$req->from_date]);
 
-        $pdf = PDF::loadView('substation.lks-substation-template',['datas'=>$data,'ba'=>$req->ba , 'visit_date'=>$req->visit_date]);
-        $pdf->setPaper('A4', 'landscape');
+        // $pdf = PDF::loadView('substation.lks-substation-template',['datas'=>$data,'ba'=>$req->ba , 'visit_date'=>$req->visit_date]);
+        // $pdf->setPaper('A4', 'landscape');
+        // $pdfFileName = $req->ba.' - Pencawang - '.$req->visit_date.'.pdf'; 
+        // $folderPath = 'temp/'.$req->folder_name .'/'. $pdfFileName;
+        // $pdfFilePath = public_path( $folderPath); 
+        // if (file_exists($pdfFilePath)) {
+        //     File::delete($pdfFilePath);
+        // }            
+        // $pdf->save($pdfFilePath);
+
+        // $response = [
+        //     'pdfPath' => $pdfFileName,
+        // ];
+
+        // return response()->json($response);
+
+        $fpdf->AddPage('L', 'A4');
+        $fpdf->SetFont('Arial', 'B', 22); 
+
+        $fpdf->Cell(180, 25, $req->ba .' ' .$req->visit_date );
+        $fpdf->Ln();   
+        $fpdf->SetFont('Arial', 'B', 16);
+
+        $fpdf->Cell(50,7,'Jumlah Rekod',1);
+        $fpdf->Cell(20,7,sizeof($data),1);
+      
+
+        $fpdf->Ln();
+        $fpdf->Ln();
+
+
+        $imagePath = public_path('assets/web-images/main-logo.png');  
+        $fpdf->Image($imagePath, 200, 10, 47, 0);
+        $fpdf->SetFont('Arial', 'B', 9);
+
+        $sr_no= 0;
+        foreach ($data as $row) 
+        {  
+            $sr_no++;
+            $fpdf->Cell(160, 6, 'SR # : '.$sr_no ,0);
+
+            // add substation image 1 and substation image 2
+            $fpdf->Cell(40, 6, 'Pencawang Gambar 1' ,0);
+            $fpdf->Cell(40, 6, 'Pencawang Gambar 2' ,0);
+            $fpdf->Ln();
+
+
+           
+
+            $fpdf->Cell(165, 6, 'Nama : '.$row->name,0);
+            if ($row->substation_image_1 != '' && file_exists(public_path($row->substation_image_1))) 
+            {
+                $fpdf->Image(public_path($row->substation_image_1), $fpdf->GetX(), $fpdf->GetY(), 20, 20);
+            } 
+            $fpdf->Cell(40,6);
+            // $fpdf->Ln();
+
+
+            if ($row->substation_image_2 != '' && file_exists(public_path($row->substation_image_2))) 
+            {
+                $fpdf->Image(public_path($row->substation_image_2), $fpdf->GetX(), $fpdf->GetY(), 20, 20);
+            }
+            $fpdf->Ln();
+            $fpdf->Cell(60, 6, 'Tarikh Lawatan : '.$row->visit_date,0,1);          //VISIT  DATE
+            $fpdf->Cell(60, 6, 'Bil Janggal : ' .$row->total_defects,0,1);         // total defects
+
+
+       
+
+            $fpdf->SetFont('Arial', 'B', 8);
+
+            $fpdf->SetFillColor(169, 169, 169);
+
+            $fpdf->Cell(58,7,'Pintu Pagar',1,0,'C',true); // gate
+            $fpdf->Cell(70,7,'Compound PE',1,0,'C',true);     // tree
+            $fpdf->Cell(72,7,'BANGUNAN ROSAK',1,0,'C',true); //BUILDING BROKEN
+            $fpdf->Cell(30,7,'Iklan Haram ','LTR', 0,'C',true);    // POSTER
+            $fpdf->Cell(50,7,'Pembersihan iklan Haram/Banner','LTR', 0,'C',true); //GRASS
+
+
+            $fpdf->Ln();
+
+            $fpdf->Cell(20, 7, 'DIBUKA', 1,0,'L',true);   //unlocked
+            $fpdf->Cell(19, 7, 'Rosak', 1,0,'L',true);    //damaged
+            $fpdf->Cell(19, 7, 'Lain', 1,0,'L',true);      //other
+
+            $fpdf->Cell(40, 7, 'Bersemak/Rumput Panjang', 1,0,'L',true);    //branches in p.e
+            $fpdf->Cell(30, 7, 'Dahan Pokok', 1,0,'L',true);    //branches in p.e
+
+            $fpdf->Cell(18, 7, 'Bumbung', 1,0,'L',true);   //roof
+            $fpdf->Cell(18, 7, 'Gutter', 1,0,'L',true); //gutter
+            $fpdf->Cell(18, 7, 'Base', 1,0,'L',true);   //base
+            $fpdf->Cell(18, 7, 'Lain', 1,0,'L',true);  //other
+
+            $fpdf->Cell(30, 7, '/ Banner', 'RBL', 0,'C',true); //advertisement
+
+            $fpdf->Cell(50, 7, '& Menutup Pintu Pencawang atau','RL', 0,'C',true); //GRASS
+
+
+            $fpdf->SetFillColor(255, 255, 255);
+            $fpdf->Ln();
+            $fpdf->Cell(20, 7, $row->unlocked, 1);
+            $fpdf->Cell(19, 7, $row->demaged, 1);
+            $fpdf->Cell(19, 7, $row->other_gate == 'Ya' ? $row->gate_other_value : '', 1);
+
+            $fpdf->Cell(30, 7, $row->tree_branches_status =='Yes' ?'Ya' : 'Tidak', 1);
+            $fpdf->Cell(20, 7, $row->tree_branches_status =='Yes' ?'Ya' : 'Tidak', 1);
+
+            $fpdf->Cell(18, 7, $row->broken_roof, 1);
+            $fpdf->Cell(18, 7, $row->broken_gutter, 1);
+            $fpdf->Cell(18, 7, $row->broken_base, 1);
+            $fpdf->Cell(18, 7, $row->building_other == 'Ya' ? $row->building_status_other_value : '' , 1);
+
+            $fpdf->Cell(25, 7, $row->advertise_poster_status=='Yes' ?'Ya' : 'Tidak', 1);
+            $fpdf->Cell(25, 7, $row->grass_status=='Yes' ?'Ya' : 'Tidak', 1);
+
+            $fpdf->SetFillColor(169, 169, 169);
+            $fpdf->Cell(50,7,' Pintu Pagar','RBL', 0,'C',true); //GRASS
+
+            $fpdf->Ln();
+             
+
+   
+            
+            if ($row->image_gate != '' && file_exists(public_path($row->image_gate))) 
+            {
+                $fpdf->Cell(7, 30);
+                $fpdf->Image(public_path($row->image_gate), $fpdf->GetX(), $fpdf->GetY(), 29, 30);
+            } 
+            $fpdf->Cell(51, 30);
+
+
+         
+            // if ($row->image_gate_2 != '' && file_exists(public_path($row->image_gate_2))) 
+            // {
+            //     $fpdf->Image(public_path($row->image_gate_2), $fpdf->GetX(), $fpdf->GetY(), 29, 30);
+            // }
+            // $fpdf->Cell(29, 30);
+
+    
+        
+            $fpdf->Cell(4, 30);
+            if ($row->image_grass != '' && file_exists(public_path($row->image_grass))) 
+            {
+                $fpdf->Image(public_path($row->image_grass), $fpdf->GetX(), $fpdf->GetY(), 25, 30);
+            } 
+            $fpdf->Cell(36, 30);
+
+
+            $fpdf->Cell(4, 30);
+            if ($row->image_tree_branches !='' && file_exists(public_path($row->image_tree_branches))) 
+            {
+                $fpdf->Image(public_path($row->image_tree_branches), $fpdf->GetX(), $fpdf->GetY(), 25, 30);
+            } 
+            $fpdf->Cell(26, 30);
+
+
+            $fpdf->Cell(20, 30);
+            if ($row->image_building !='' && file_exists(public_path($row->image_building))) 
+            {
+                $fpdf->Image(public_path($row->image_building), $fpdf->GetX(), $fpdf->GetY(), 36, 30);
+            }
+            $fpdf->Cell(50, 30);
+
+
+            
+
+
+            $fpdf->Cell(4, 30);
+            if ($row->image_advertisement_before_1 != '' && file_exists(public_path($row->image_advertisement_before_1))) 
+            {
+                $fpdf->Image(public_path($row->image_advertisement_before_1), $fpdf->GetX(), $fpdf->GetY(), 25, 30);
+            }
+            $fpdf->Cell(26, 30);
+
+
+            
+            if ($row->images_gate_after_lock != '' && file_exists(public_path($row->images_gate_after_lock))) 
+            {
+                $fpdf->Image(public_path($row->images_gate_after_lock), $fpdf->GetX(), $fpdf->GetY(), 25, 30);
+            }
+            $fpdf->Cell(25, 30);
+
+            
+            if ($row->image_advertisement_after_1 != '' && file_exists(public_path($row->image_advertisement_after_1))) 
+            {
+                $fpdf->Image(public_path($row->image_advertisement_after_1), $fpdf->GetX(), $fpdf->GetY(), 25, 30);
+            }
+            $fpdf->Cell(25, 30);
+            
+
+           
+
+            $fpdf->Ln();
+
+            
+        }
+        Carbon::now();
         $pdfFileName = $req->ba.' - Pencawang - '.$req->visit_date.'.pdf'; 
+
+        header('Content-Type: application/pdf');
+        header('Content-Disposition: attachment; filename="' . $pdfFileName . '"');
         $folderPath = 'temp/'.$req->folder_name .'/'. $pdfFileName;
         $pdfFilePath = public_path( $folderPath); 
         if (file_exists($pdfFilePath)) {
             File::delete($pdfFilePath);
-        }            
-        $pdf->save($pdfFilePath);
+        }  
+        $fpdf->output('F', $pdfFilePath);
+        
 
+ 
         $response = [
             'pdfPath' => $pdfFileName,
         ];
 
         return response()->json($response);
+        
         
     }
 
