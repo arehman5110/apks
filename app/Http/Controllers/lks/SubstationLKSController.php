@@ -199,7 +199,7 @@ class SubstationLKSController extends Controller
             $fpdf->Cell(4, 30);
             if ($row->image_grass != '' && file_exists(public_path($row->image_grass))) 
             {
-                $fpdf->Image(public_path($row->image_grass), $fpdf->GetX(), $fpdf->GetY(), 25, 30);
+                $fpdf->Image(public_path($row->image_grass), $fpdf->GetX(), $fpdf->GetY(), 20, 20);
             } 
             $fpdf->Cell(36, 30);
 
@@ -207,7 +207,7 @@ class SubstationLKSController extends Controller
             $fpdf->Cell(4, 30);
             if ($row->image_tree_branches !='' && file_exists(public_path($row->image_tree_branches))) 
             {
-                $fpdf->Image(public_path($row->image_tree_branches), $fpdf->GetX(), $fpdf->GetY(), 25, 30);
+                $fpdf->Image(public_path($row->image_tree_branches), $fpdf->GetX(), $fpdf->GetY(), 20, 20);
             } 
             $fpdf->Cell(26, 30);
 
@@ -215,7 +215,7 @@ class SubstationLKSController extends Controller
             $fpdf->Cell(20, 30);
             if ($row->image_building !='' && file_exists(public_path($row->image_building))) 
             {
-                $fpdf->Image(public_path($row->image_building), $fpdf->GetX(), $fpdf->GetY(), 36, 30);
+                $fpdf->Image(public_path($row->image_building), $fpdf->GetX(), $fpdf->GetY(), 20, 20);
             }
             $fpdf->Cell(50, 30);
 
@@ -226,7 +226,7 @@ class SubstationLKSController extends Controller
             $fpdf->Cell(4, 30);
             if ($row->image_advertisement_before_1 != '' && file_exists(public_path($row->image_advertisement_before_1))) 
             {
-                $fpdf->Image(public_path($row->image_advertisement_before_1), $fpdf->GetX(), $fpdf->GetY(), 25, 30);
+                $fpdf->Image(public_path($row->image_advertisement_before_1), $fpdf->GetX(), $fpdf->GetY(), 20, 20);
             }
             $fpdf->Cell(26, 30);
 
@@ -234,14 +234,14 @@ class SubstationLKSController extends Controller
             
             if ($row->images_gate_after_lock != '' && file_exists(public_path($row->images_gate_after_lock))) 
             {
-                $fpdf->Image(public_path($row->images_gate_after_lock), $fpdf->GetX(), $fpdf->GetY(), 25, 30);
+                $fpdf->Image(public_path($row->images_gate_after_lock), $fpdf->GetX(), $fpdf->GetY(), 20, 20);
             }
             $fpdf->Cell(25, 30);
 
             
             if ($row->image_advertisement_after_1 != '' && file_exists(public_path($row->image_advertisement_after_1))) 
             {
-                $fpdf->Image(public_path($row->image_advertisement_after_1), $fpdf->GetX(), $fpdf->GetY(), 25, 30);
+                $fpdf->Image(public_path($row->image_advertisement_after_1), $fpdf->GetX(), $fpdf->GetY(), 20, 20);
             }
             $fpdf->Cell(25, 30);
             
