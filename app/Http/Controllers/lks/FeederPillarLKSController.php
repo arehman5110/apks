@@ -72,15 +72,17 @@ class FeederPillarLKSController extends Controller
         $sr_no= 0;
 
         foreach ($data as $row) {
-            if ($sr_no % 2 == 0 && $sr_no > 0) {
+            if ($sr_no % 2 == 1 && $sr_no > 0) {
                 $fpdf->AddPage(); 
             }
             $sr_no++;
-            $fpdf->Cell(160, 6, 'SR # : '.$sr_no ,0);
+            $fpdf->Cell(115, 6, 'SR # : '.$sr_no ,0);
 
             // add feeder pilar images  Header 
             $fpdf->Cell(45, 6, 'FEEDER PILLAR Gambar 1' ,0);
             $fpdf->Cell(40, 6, 'FEEDER PILLAR Gambar 2' ,0);
+            $fpdf->Cell(40, 6, 'FP Plate' ,0);
+
             $fpdf->Ln();
 
             $fpdf->Cell(125, 6, 'ID : FP-' . $row->id);
@@ -146,7 +148,7 @@ class FeederPillarLKSController extends Controller
             $fpdf->Ln();
             $fpdf->Cell(20, 7, $row->unlocked, 1);
             $fpdf->Cell(20, 7, $row->demaged, 1);
-            $fpdf->Cell(30, 7, $row->other_gate, 1);
+            $fpdf->Cell(30, 7, $row->other_gate == 'Ya' ?$row->gate_other_value : '' , 1);
 
             $fpdf->Cell(30, 7, $row->vandalism_status=='Yes' ?'Ya' : 'Tidak', 1);
             $fpdf->Cell(25, 7, $row->leaning_staus=='Yes' ?'Ya' : 'Tidak', 1);
