@@ -73,7 +73,8 @@ class FeederPillarLKSController extends Controller
 
         foreach ($data as $row) {
             if ($sr_no % 2 == 1 && $sr_no > 0) {
-                $fpdf->AddPage(); 
+                $fpdf->AddPage('L', 'A4');
+ 
             }
             $sr_no++;
             $fpdf->Cell(115, 6, 'SR # : '.$sr_no ,0);
