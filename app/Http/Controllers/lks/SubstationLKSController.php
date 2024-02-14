@@ -87,7 +87,7 @@ class SubstationLKSController extends Controller
 
 
         $imagePath = public_path('assets/web-images/main-logo.png');  
-        $fpdf->Image($imagePath, 200, 10, 47, 0);
+        $fpdf->Image($imagePath, 240, 10, 47, 0);
         $fpdf->SetFont('Arial', 'B', 9);
 
         $sr_no= 0;

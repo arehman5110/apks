@@ -40,57 +40,57 @@ class TiangLKSController extends Controller
                 [
                     'defect_name'=>'tiang_defect',
                     'title'=>'Tiang',
-                    'defects'=>['cracked','leaning','dim','creepers','other']
+                    'defects'=>['cracked','leaning','dim','creepers','other' ,'other2']
                 ],
                 [
                     'defect_name'=>'talian_defect',
                     'title'=>'Line',
-                    'defects'=>['joint','need_rentis','ground','other']
+                    'defects'=>['joint','need_rentis','ground','other','other2']
                 ],
                 [
                     'defect_name'=>'umbang_defect',
                     'title'=>'Umbang',
-                    'defects'=>['breaking','creepers','cracked','stay_palte', 'other']
+                    'defects'=>['breaking','creepers','cracked','stay_palte', 'other','other2']
                 ],
                 [
                     'defect_name'=>'ipc_defect',
                     'title'=>'IPC',
-                    'defects'=>['burn','other']
+                    'defects'=>['burn','other','other2']
                 ],
                 [
                     'defect_name'=>'blackbox_defect',
                     'title'=>'Blackbox',
-                    'defects'=>['cracked','other']
+                    'defects'=>['cracked','other','other2']
                 ],
                 [
                     'defect_name'=>'jumper',
                     'title'=>'Jumper',
-                    'defects'=>['sleeve','burn','other']
+                    'defects'=>['sleeve','burn','other','other2']
                 ],
                 [
                     'defect_name'=>'kilat_defect',
                     'title'=>'Kilat',
-                    'defects'=>['broken','other']
+                    'defects'=>['broken','other','other2']
                 ],
                 [
                     'defect_name'=>'servis_defect',
                     'title'=>'Sesvis',
-                    'defects'=>['roof','won_piece','other']
+                    'defects'=>['roof','won_piece','other','other2']
                 ],
                 [
                     'defect_name'=>'pembumian_defect',
                     'title'=>'Pembumian',
-                    'defects'=>['netural','other']
+                    'defects'=>['netural','other','other2']
                 ],
                 [
                     'defect_name'=>'bekalan_dua_defect',
                     'title'=>'Papan tanda',
-                    'defects'=>['damage','other']
+                    'defects'=>['damage','other','other2']
                 ],
                 [
                     'defect_name'=>'kaki_lima_defect',
                     'title'=>'Sesalur Kaki Lima',
-                    'defects'=>['date_wire','burn','other']
+                    'defects'=>['date_wire','burn','other','other2']
                 ],
             ];
 
@@ -122,41 +122,65 @@ class TiangLKSController extends Controller
             DB::raw("CASE WHEN (tiang_defect->>'dim')::text='true' THEN 'Ya' ELSE 'Tidak' END as tiang_defect_dim"),
             DB::raw("CASE WHEN (tiang_defect->>'creepers')::text='true' THEN 'Ya' ELSE 'Tidak' END as tiang_defect_creepers"),
             DB::raw("CASE WHEN (tiang_defect->>'other')::text='true' THEN 'Ya' ELSE 'Tidak' END as tiang_defect_other"),
+            DB::raw("tiang_defect->>'other_input' as tiang_defect_other_input"),
+
             DB::raw("CASE WHEN (talian_defect->>'joint')::text='true' THEN 'Ya' ELSE 'Tidak' END as talian_defect_joint"),
             DB::raw("CASE WHEN (talian_defect->>'need_rentis')::text='true' THEN 'Ya' ELSE 'Tidak' END as talian_defect_need_rentis"),
             DB::raw("CASE WHEN (talian_defect->>'ground')::text='true' THEN 'Ya' ELSE 'Tidak' END as talian_defect_ground"),
             DB::raw("CASE WHEN (talian_defect->>'other')::text='true' THEN 'Ya' ELSE 'Tidak' END as talian_defect_other"),
+            DB::raw("talian_defect->>'other_input' as talian_defect_other_input"),
+
             DB::raw("CASE WHEN (umbang_defect->>'breaking')::text='true' THEN 'Ya' ELSE 'Tidak' END as umbang_defect_breaking"),
             DB::raw("CASE WHEN (umbang_defect->>'creepers')::text='true' THEN 'Ya' ELSE 'Tidak' END as umbang_defect_creepers"),
             DB::raw("CASE WHEN (umbang_defect->>'cracked')::text='true' THEN 'Ya' ELSE 'Tidak' END as umbang_defect_cracked"),
             DB::raw("CASE WHEN (umbang_defect->>'stay_palte')::text='true' THEN 'Ya' ELSE 'Tidak' END as umbang_defect_stay_palte"),
             DB::raw("CASE WHEN (umbang_defect->>'other')::text='true' THEN 'Ya' ELSE 'Tidak' END as umbang_defect_other"),
+            DB::raw("umbang_defect->>'other_input' as umbang_defect_other_input"),
+
             DB::raw("CASE WHEN (ipc_defect->>'burn')::text='true' THEN 'Ya' ELSE 'Tidak' END as ipc_defect_burn"),
             DB::raw("CASE WHEN (ipc_defect->>'other')::text='true' THEN 'Ya' ELSE 'Tidak' END as ipc_defect_other"),
+            DB::raw("ipc_defect->>'other_input' as ipc_defect_other_input"),
+
             DB::raw("CASE WHEN (blackbox_defect->>'cracked')::text='true' THEN 'Ya' ELSE 'Tidak' END as blackbox_defect_cracked"),
             DB::raw("CASE WHEN (blackbox_defect->>'other')::text='true' THEN 'Ya' ELSE 'Tidak' END as blackbox_defect_other"),
+            DB::raw("tiang_defect->>'other_input' as tiang_defect_other_input"),
+
             DB::raw("CASE WHEN (jumper->>'sleeve')::text='true' THEN 'Ya' ELSE 'Tidak' END as jumper_sleeve"),
             DB::raw("CASE WHEN (jumper->>'burn')::text='true' THEN 'Ya' ELSE 'Tidak' END as jumper_burn"),
             DB::raw("CASE WHEN (jumper->>'other')::text='true' THEN 'Ya' ELSE 'Tidak' END as jumper_other"),
+            DB::raw("jumper->>'other_input' as jumper_other_input"),
+
             DB::raw("CASE WHEN (kilat_defect->>'broken')::text='true' THEN 'Ya' ELSE 'Tidak' END as kilat_defect_broken"),
             DB::raw("CASE WHEN (kilat_defect->>'other')::text='true' THEN 'Ya' ELSE 'Tidak' END as kilat_defect_other"),
+            DB::raw("kilat_defect->>'other_input' as kilat_defect_other_input"),
+
             DB::raw("CASE WHEN (servis_defect->>'roof')::text='true' THEN 'Ya' ELSE 'Tidak' END as servis_defect_roof"),
             DB::raw("CASE WHEN (servis_defect->>'won_piece')::text='true' THEN 'Ya' ELSE 'Tidak' END as servis_defect_won_piece"),
             DB::raw("CASE WHEN (servis_defect->>'other')::text='true' THEN 'Ya' ELSE 'Tidak' END as servis_defect_other"),
+            DB::raw("servis_defect->>'other_input' as servis_defect_other_input"),
+
             DB::raw("CASE WHEN (pembumian_defect->>'netural')::text='true' THEN 'Ya' ELSE 'Tidak' END as pembumian_defect_netural"),
             DB::raw("CASE WHEN (pembumian_defect->>'other')::text='true' THEN 'Ya' ELSE 'Tidak' END as pembumian_defect_other"),
+            DB::raw("pembumian_defect->>'other_input' as pembumian_defect_other_input"),
+
             DB::raw("CASE WHEN (bekalan_dua_defect->>'damage')::text='true' THEN 'Ya' ELSE 'Tidak' END as bekalan_dua_defect_damage"),
             DB::raw("CASE WHEN (bekalan_dua_defect->>'other')::text='true' THEN 'Ya' ELSE 'Tidak' END as bekalan_dua_defect_other"),
+            DB::raw("bekalan_dua_defect->>'other_input' as bekalan_dua_defect_other_input"),
+
             DB::raw("CASE WHEN (kaki_lima_defect->>'date_wire')::text='true' THEN 'Ya' ELSE 'Tidak' END as kaki_lima_defect_date_wire"),
             DB::raw("CASE WHEN (kaki_lima_defect->>'burn')::text='true' THEN 'Ya' ELSE 'Tidak' END as kaki_lima_defect_burn"),
             DB::raw("CASE WHEN (kaki_lima_defect->>'other')::text='true' THEN 'Ya' ELSE 'Tidak' END as kaki_lima_defect_other"),
+            DB::raw("kaki_lima_defect->>'other_input' as kaki_lima_defect_other_input"),
+
             DB::raw("CASE WHEN (tapak_condition::json->>'road')::text='true' THEN 'Ya' ELSE 'Tidak' END as tapak_condition_road"),
             DB::raw("CASE WHEN (tapak_condition::json->>'side_walk')::text='true' THEN 'Ya' ELSE 'Tidak' END as tapak_condition_side_walk"),
             DB::raw("CASE WHEN (tapak_condition::json->>'vehicle_entry')::text='true' THEN 'Ya' ELSE 'Tidak' END as tapak_condition_vehicle_entry"),
             DB::raw("CASE WHEN (kawasan::json->>'bend')::text='true' THEN 'Ya' ELSE 'Tidak' END as kawasan_bend"),
             DB::raw("CASE WHEN (kawasan::json->>'road')::text='true' THEN 'Ya' ELSE 'Tidak' END as kawasan_road"),
             DB::raw("CASE WHEN (kawasan::json->>'forest')::text='true' THEN 'Ya' ELSE 'Tidak' END as kawasan_forest"),
-            DB::raw("CASE WHEN (kawasan::json->>'other')::text='true' THEN 'Ya' ELSE 'Tidak' END as kawasan_other")
+            DB::raw("CASE WHEN (kawasan::json->>'other')::text='true' THEN 'Ya' ELSE 'Tidak' END as kawasan_other"),
+            DB::raw("kawasan->>'other_input' as kawasan_other_input"),
+
            )
             ->get();
  
@@ -366,12 +390,12 @@ class TiangLKSController extends Controller
            $fpdf->Cell(20, 6, $row->tiang_defect_leaning ,1,0,'C',true);
            $fpdf->Cell(20, 6, $row->tiang_defect_dim ,1,0,'C',true);
            $fpdf->Cell(20, 6, $row->tiang_defect_creepers ,1,0,'C',true);
-           $fpdf->Cell(20, 6, $row->tiang_defect_other ,1,0,'C',true);
+           $fpdf->Cell(20, 6, $row->tiang_defect_other_input ,1,0,'C',true);
 
            $fpdf->Cell(20, 6, $row->talian_defect_joint ,1,0,'C',true);                           // Line (Main / Service) Values
            $fpdf->Cell(20, 6, $row->talian_defect_need_rentis ,1,0,'C',true);
            $fpdf->Cell(50, 6, $row->talian_defect_ground ,1,0,'C',true);
-           $fpdf->Cell(20, 6, $row->talian_defect_other ,1,0,'C',true);
+           $fpdf->Cell(20, 6, $row->talian_defect_other_input ,1,0,'C',true);
 
            $fpdf->Cell(30, 6, $row->umbang_defect_breaking ,1,0,'C',true);    // Umbang 1/2 Values
            $fpdf->Cell(30, 6, $row->umbang_defect_creepers ,1,0,'C',true);
@@ -419,17 +443,17 @@ class TiangLKSController extends Controller
 
            $fpdf->Cell(40, 6, $row->umbang_defect_cracked ,1,0,'C',true);      // Umbagan Vlaues
            $fpdf->Cell(45, 6, $row->umbang_defect_stay_palte ,1,0,'C',true);
-           $fpdf->Cell(20, 6, $row->umbang_defect_other ,1,0,'C',true);
+           $fpdf->Cell(20, 6, $row->umbang_defect_other_input ,1,0,'C',true);
 
            $fpdf->Cell(25, 6, $row->ipc_defect_burn ,1,0,'C',true);             //IPC values
-           $fpdf->Cell(20, 6, $row->ipc_defect_other ,1,0,'C',true);
+           $fpdf->Cell(20, 6, $row->ipc_defect_other_input ,1,0,'C',true);
 
            $fpdf->Cell(25, 6, $row->blackbox_defect_cracked ,1,0,'C',true);   // Black Box values
-           $fpdf->Cell(20, 6, $row->blackbox_defect_other ,1,0,'C',true);
+           $fpdf->Cell(20, 6, $row->blackbox_defect_other_input ,1,0,'C',true);
 
            $fpdf->Cell(30, 6, $row->jumper_sleeve ,1,0,'C',true);        //Jumper values
            $fpdf->Cell(25, 6, $row->jumper_burn ,1,0,'C',true);
-           $fpdf->Cell(20, 6, $row->jumper_other ,1,0,'C',true);
+           $fpdf->Cell(20, 6, $row->jumper_other_input ,1,0,'C',true);
 
            // tbale # 3 body values start  
 
@@ -471,17 +495,17 @@ class TiangLKSController extends Controller
            $fpdf->SetFillColor(255, 255, 255);
 
            $fpdf->Cell(20, 6, $row->kilat_defect_broken ,1,0,'C',true);   //Lightning catcher values
-           $fpdf->Cell(20, 6, $row->kilat_defect_other ,1,0,'C',true);
+           $fpdf->Cell(20, 6, $row->kilat_defect_other_input ,1,0,'C',true);
 
            $fpdf->Cell(45, 6, $row->servis_defect_roof ,1,0,'C',true); //Service values
            $fpdf->Cell(30, 6, $row->servis_defect_won_piece ,1,0,'C',true);
-           $fpdf->Cell(20, 6, $row->servis_defect_other ,1,0,'C',true);
+           $fpdf->Cell(20, 6, $row->servis_defect_other_input ,1,0,'C',true);
 
            $fpdf->Cell(40, 6, $row->pembumian_defect_netural ,1,0,'C',true); //Grounding values
-           $fpdf->Cell(20, 6, $row->pembumian_defect_other ,1,0,'C',true);
+           $fpdf->Cell(20, 6, $row->pembumian_defect_other_input ,1,0,'C',true);
 
            $fpdf->Cell(55, 6, $row->bekalan_dua_defect_damage ,1,0,'C',true);   //Signage - OFF Point / Two Way Supply values
-           $fpdf->Cell(20, 6, $row->bekalan_dua_defect_other ,1,0,'C',true);
+           $fpdf->Cell(20, 6, $row->bekalan_dua_defect_other_input ,1,0,'C',true);
             // table # 4 body values end
 
 
@@ -528,7 +552,7 @@ class TiangLKSController extends Controller
 
            $fpdf->Cell(30, 6, $row->kaki_lima_defect_date_wire ,1,0,'C',true);                           // Main Street Values
            $fpdf->Cell(45, 6, $row->kaki_lima_defect_burn ,1,0,'C',true);
-           $fpdf->Cell(20, 6, $row->kaki_lima_defect_other ,1,0,'C',true);
+           $fpdf->Cell(20, 6, $row->kaki_lima_defect_other_input ,1,0,'C',true);
 
            $fpdf->Cell(35, 6, $row->tapak_condition_road ,1,0,'C',true);       //Site Conditions values
            $fpdf->Cell(20, 6, $row->tapak_condition_side_walk ,1,0,'C',true);
@@ -537,7 +561,7 @@ class TiangLKSController extends Controller
            $fpdf->Cell(20, 6, $row->kawasan_bend ,1,0,'C',true);        // Area values
            $fpdf->Cell(20, 6, $row->kawasan_road ,1,0,'C',true);
            $fpdf->Cell(20, 6, $row->kawasan_forest ,1,0,'C',true);
-           $fpdf->Cell(20, 6, $row->kawasan_other ,1,0,'C',true);
+           $fpdf->Cell(20, 6, $row->kawasan_other_input ,1,0,'C',true);
 
            // table # 5 body end
 
